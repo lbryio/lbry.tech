@@ -6,11 +6,12 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "node server.js",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "express": "^4.16.3",
     "highlight.js": "^9.12.0",
     "node-sass": "^4.7.2",
     "vue": "^2.5.2",
