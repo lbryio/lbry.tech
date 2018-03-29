@@ -1,34 +1,18 @@
 <template>
   <v-app>
 
-    <v-navigation-drawer v-model="drawer" clipped app>
-
-      <v-list dense>
-        <v-list-tile>
-          <v-list-tile-content>
-            <v-list-tile-title>Link 1</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile>
-          <v-list-tile-content>
-            <v-list-tile-title>Link 2</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-
-    </v-navigation-drawer>
-
     <v-toolbar clipped-left app>
 
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title class="mr-5 align-center">
-        <span class="title">LBRY.tech</span>
+        <span class="title"><router-link to="/">LBRY.tech</router-link></span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat>Link One</v-btn>
-        <v-btn flat>Link Two</v-btn>
-        <v-btn flat>Link Three</v-btn>
+        <v-btn flat to="/overview">Overview</v-btn>
+        <v-btn flat to="/documentation">Documentation</v-btn>
+        <v-btn flat to="/contribute">How to Contribute</v-btn>
+        <v-btn flat to="/develop">How to Develop</v-btn>
+        <v-btn flat to="/resources">Resources</v-btn>
       </v-toolbar-items>
 
     </v-toolbar>
@@ -46,9 +30,7 @@
 
 export default {
   data () {
-    return {
-      drawer: true
-    }
+    return {}
   },
   name: 'App'
 }

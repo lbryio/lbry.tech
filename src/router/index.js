@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/pages/Home'
+import Overview from '@/components/pages/Overview'
+import Documentation from '@/components/pages/Documentation'
+import Contribute from '@/components/pages/Contribute'
+import Develop from '@/components/pages/Develop'
+import Resources from '@/components/pages/Resources'
 import Step1 from '@/components/partials/Step1'
 import Step2 from '@/components/partials/Step2'
 import Step3 from '@/components/partials/Step3'
@@ -31,6 +36,30 @@ export default new Router({
         }
       ]
     },
-
+    {
+      path: '/overview',
+      name: 'Overview',
+      component: Overview,
+    },
+    {
+      path: '/documentation',
+      name: 'Documentation',
+      component: Documentation,
+    },
+    {
+      path: '/contribute',
+      name: 'Contribute',
+      component: Contribute,
+    },
+    {
+      path: '/develop',
+      name: 'Develop',
+      component: Develop,
+    },
+    {
+      path: '/resources',
+      name: 'Resources',
+      component: Resources,
+    }
   ]
 })
