@@ -9,7 +9,7 @@ app = express();
 app.use(serveStatic(__dirname + "/dist"));
 
 // enable ssl redirect
-app.use(sslRedirect());
+app.use(sslRedirect(['other','development', 'staging', 'production']));
 
 var port = process.env.PORT || 8080;
 app.listen(port);
