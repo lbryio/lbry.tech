@@ -4,11 +4,11 @@
 
     <hook></hook>
 
-    <v-container fluid grid-list-md>
+    <v-container fluid>
 
       <v-layout row wrap>
 
-        <v-flex xs6>
+        <v-flex xs12 xl6 offset-xl3>
 
           <h1>HTML Ipsum Presents</h1>
 

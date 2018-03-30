@@ -1,9 +1,9 @@
 <template>
   <v-app>
 
-    <v-toolbar clipped-left app>
+    <v-toolbar clipped-left app scroll-off-screen>
 
-      <v-toolbar-title class="mr-5 align-center">
+      <v-toolbar-title class="align-center">
         <span class="title"><router-link to="/">LBRY.tech</router-link></span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -38,9 +38,26 @@ export default {
 
 <style lang="scss">
 
+html {
+  font-size: 16px;
+}
+
 pre {
   text-align: left;
   overflow-x: auto;
+}
+
+img {
+  max-width: 100%;
+}
+
+.toolbar__title {
+  a {
+    text-decoration: none;
+    &:hover {
+      color: black;
+    }
+  }
 }
 
 </style>

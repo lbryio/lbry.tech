@@ -8,7 +8,11 @@ import 'vuetify/dist/vuetify.min.css'
 import VueResource from 'vue-resource'
 import VueHighlightJS from 'vue-highlightjs'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#155b4a'
+  }
+})
 Vue.use(VueResource)
 Vue.use(VueHighlightJS)
 
