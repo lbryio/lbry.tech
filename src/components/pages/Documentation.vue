@@ -19,7 +19,21 @@
 
     </v-navigation-drawer>
 
-    <p>Documentation will be here.</p>
+    <v-container>
+
+      <v-layout row wrap>
+
+        <v-flex xs12 xl6 offset-xl3>
+
+          <h1 class="display-1">
+            <p>Documentation lives here!</p>
+          </h1>
+
+        </v-flex>
+
+      </v-layout>
+
+    </v-container>
 
   </div>
 
