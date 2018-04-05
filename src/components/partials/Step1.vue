@@ -28,7 +28,7 @@
         </v-flex>
         <v-flex xs12 sm3>
           <v-card hover>
-            <v-card-media src="static/itsadisaster.jpg" height="200px" v-on:click="chooseClaim('itsadisaster')">
+            <v-card-media src="https://spee.ch/0654f2e2322ccfefa02a956d252df9ac7611d8b0/placeholder-itsadisaster.jpeg" height="200px" v-on:click="chooseClaim('itsadisaster')">
             </v-card-media>
             <v-card-title v-on:click="chooseClaim('itsadisaster')">
               <div>
@@ -40,7 +40,7 @@
         </v-flex>
         <v-flex xs12 sm3>
           <v-card hover>
-            <v-card-media src="static/unbubbled.png" height="200px" v-on:click="chooseClaim('unbubbled1-1')">
+            <v-card-media src="https://spee.ch/b1bd330e048fc22dc7bf941c33dd8245eef492c1/unbubbled.png" height="200px" v-on:click="chooseClaim('unbubbled1-1')">
             </v-card-media>
             <v-card-title v-on:click="chooseClaim('unbubbled1-1')">
               <div>
@@ -52,7 +52,7 @@
         </v-flex>
         <v-flex xs12 sm3>
           <v-card hover>
-            <v-card-media src="static/fortnite.jpg" height="200px" v-on:click="chooseClaim('fortnite-top-stream-moments-nickatnyte')">
+            <v-card-media src="https://spee.ch/9880947df41af880bc19724ceddd1cce957a07e2/placeholder-fortninte.jpeg" height="200px" v-on:click="chooseClaim('fortnite-top-stream-moments-nickatnyte')">
             </v-card-media>
             <v-card-title v-on:click="chooseClaim('fortnite-top-stream-moments-nickatnyte')">
               <div>
@@ -64,7 +64,7 @@
         </v-flex>
         <v-flex xs12 sm3>
           <v-card hover>
-            <v-card-media src="static/lbrymine.png" height="200px" v-on:click="chooseClaim('six')">
+            <v-card-media src="https://spee.ch/a3b8258478ad88954f42f6ac3427eab380720f60/placeholder-lbrymine.png" height="200px" v-on:click="chooseClaim('six')">
             </v-card-media>
             <v-card-title v-on:click="chooseClaim('six')">
               <div>
