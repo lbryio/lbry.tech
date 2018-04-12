@@ -22,6 +22,8 @@
 
     </v-layout>
 
+    <edit-link url="https://github.com/lbryio/lbry.tech/blob/master/src/components/pages/Resources.vue"></edit-link>
+
   </v-container>
 
   </div>
@@ -30,7 +32,12 @@
 
 <script>
 
+import EditLink from '@/components/partials/EditLink'
+
 export default {
+  components: {
+    'edit-link': EditLink
+  },
   data () {
     return {
     }

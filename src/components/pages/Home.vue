@@ -42,6 +42,8 @@
 
       </v-layout>
 
+      <edit-link url="https://github.com/lbryio/lbry.tech/blob/master/src/components/pages/Home.vue"></edit-link>
+
     </v-container>
 
   </div>
@@ -51,9 +53,11 @@
 <script>
 
 import Hook from '@/components/partials/Hook'
+import EditLink from '@/components/partials/EditLink'
 
 export default {
   components: {
+    'edit-link': EditLink,
     'hook': Hook
   },
   data () {

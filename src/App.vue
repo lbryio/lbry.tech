@@ -19,7 +19,7 @@
 
     <v-content>
 
-      <v-alert type="error" value="true" id="in-development-alert">
+      <v-alert type="error" value="true" id="in-development-alert" class="pt-5 pb-5 ma-0">
         <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.</v-alert>
       </v-alert>
 
@@ -62,11 +62,6 @@ img {
       color: black;
     }
   }
-}
-
-#in-development-alert {
-  margin: 0;
-  padding: 3rem 0;
 }
 
 </style>
