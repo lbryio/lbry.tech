@@ -21,6 +21,11 @@ app.get('/forward', function(req, res) {
 
     // We should whitelist the query parameters here
 
+    // Hardcode the wallet_send amount to be 0.01 always
+    if(req.query.method == "wallet_send") {
+      req.query.amount = 0.01;
+    }
+
     request({
       url: "http://daemon.lbry.tech",
       qs: req.query

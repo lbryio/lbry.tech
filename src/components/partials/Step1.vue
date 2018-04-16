@@ -83,7 +83,7 @@
 export default {
   data () {
     return {
-      address: 'Claim goes here',
+      address: 'Claim URI goes here',
       jsonData: '',
       isLoading: false,
       exampleCode: ''
@@ -94,7 +94,7 @@ export default {
       var component = this;
       component.jsonData = '';
       component.isLoading = true;
-      component.exampleCode = "# Example code using the daemon\ncurl 'http://localhost:5279' --data '{\"method\":\"resolve\",\"params\":{\"uri\":\"" + this.address + "\"}}'";
+      component.exampleCode = '# Example code using the daemon\ncurl \'http://localhost:5279\' --data \'{"method":"resolve","params":{"uri":"' + this.address + '"}}\'';
       this.$http.get('//beta.lbry.tech/forward?method=resolve&uri=' + this.address).then(function(response) {
         component.isLoading = false;
         component.jsonData = JSON.stringify(response.body, null, '  ');
