@@ -64,4 +64,10 @@ img {
   }
 }
 
+#in-development-alert {
+  a {
+    color: white;
+  }
+}
+
 </style>

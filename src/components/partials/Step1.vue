@@ -15,7 +15,7 @@
         <pre v-highlightjs="exampleCode"><code class="bash"></code></pre>
       </v-flex>
       <v-flex xs12 v-if="isLoading">
-        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        <v-progress-circular indeterminate color="white"></v-progress-circular>
       </v-flex>
       <v-flex xs12 v-if="jsonData">
         <p class="subheading">Success! Here is the response for <strong>lbry://{{ address }}</strong>:</p>
@@ -120,7 +120,7 @@ export default {
       height: 9rem;
       h4 {
         text-align: left;
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       .account {
         color: $primary-color;

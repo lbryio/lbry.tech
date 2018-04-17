@@ -41,7 +41,7 @@
         </v-card>
       </v-flex>
       <v-flex xs12 v-if="isLoading">
-        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        <v-progress-circular indeterminate color="white"></v-progress-circular>
       </v-flex>
     </v-layout>
   </v-container>

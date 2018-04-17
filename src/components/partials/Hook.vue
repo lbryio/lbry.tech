@@ -3,19 +3,19 @@
     <v-layout row wrap id="hook-navigation">
       <v-flex xs4>
         <router-link exact to="/">
-          <v-btn color="grey" fab>1</v-btn>
+          <v-btn color="grey lighten-1" fab>1</v-btn>
           Resolve a claim
         </router-link>
       </v-flex>
       <v-flex xs4>
         <router-link to="/step-2">
-          <v-btn color="grey" fab>2</v-btn>
+          <v-btn color="grey lighten-1" fab>2</v-btn>
           Publish content
         </router-link>
       </v-flex>
       <v-flex xs4>
         <router-link to="/step-3">
-          <v-btn color="grey" fab>3</v-btn>
+          <v-btn color="grey lighten-1" fab>3</v-btn>
           Support with LBC
         </router-link>
       </v-flex>
@@ -85,11 +85,24 @@ export default {
 }
 
 #hook {
-  background: lighten(desaturate($primary-color,30%), 50%);
+  background: url(https://lbry.io/img/youtube/hero@2x.jpg) no-repeat center center;
+  background-size: cover;
   color: $text-color;
+  .display-2,
+  .subheading {
+    color: white;
+    text-shadow: 0px 0px 1rem rgba(0,0,0,0.5);
+    a {
+      color: white;
+    }
+  }
+  .flex {
+    margin-bottom: 2rem;
+  }
 }
 
 #hook-navigation {
+  margin-bottom: 1.5rem;
   a {
     text-decoration: none;
     color: $text-color;

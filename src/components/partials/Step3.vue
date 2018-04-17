@@ -4,7 +4,7 @@
       <v-flex xs12>
         <h1 class="display-2">Support your favorite content creators with LBRY</h1>
         <p class="subheading">Send LBRY coins to claim addresses and the owner will receive it in their wallet.</p>
-        <p>To send LBC to someone, you need either their wallet address or claim ID.<br/>
+        <p class="subheading">To send LBC to someone, you need either their wallet address or claim ID.<br/>
         You can get claim ID's by using resolve method in <router-link to="/">the first step</router-link><br/>
         Or you can use the examples below.</p>
       </v-flex>
@@ -24,7 +24,7 @@
         <pre v-highlightjs="exampleCode"><code class="bash"></code></pre>
       </v-flex>
       <v-flex xs12 v-if="isLoading">
-        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+        <v-progress-circular indeterminate color="white"></v-progress-circular>
       </v-flex>
       <v-flex xs12 v-if="jsonData">
         <p class="subheading">Success! Here is the response:</p>
@@ -129,7 +129,7 @@ export default {
       height: 9rem;
       h4 {
         text-align: left;
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       .account {
         color: $primary-color;
