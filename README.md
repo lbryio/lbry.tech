@@ -22,5 +22,5 @@ yarn
 # serve with hot reload at localhost:8080
 vuepress dev
 
-# build for production with minification
-vuepress build
+# build for production with minification & start express server
+yarn start
