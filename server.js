@@ -8,7 +8,7 @@ var request = require('request');
 var cors = require('cors');
 
 app = express();
-app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(__dirname + "/.vuepress/dist"));
 
 app.use(cors());
 

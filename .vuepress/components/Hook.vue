@@ -2,25 +2,27 @@
   <v-container fluid grid-list-md text-xs-center id="hook">
     <v-layout row wrap id="hook-navigation">
       <v-flex xs4>
-        <router-link exact to="/">
+        <a href="#" v-on:click="activeStep = 1" v-bind:class="{active: (activeStep==1)}">
           <v-btn color="grey lighten-1" fab>1</v-btn>
           Resolve a claim
-        </router-link>
+        </a>
       </v-flex>
       <v-flex xs4>
-        <router-link to="/step-2">
+        <a href="#" v-on:click="activeStep = 2" v-bind:class="{active: (activeStep==2)}">
           <v-btn color="grey lighten-1" fab>2</v-btn>
           Publish content
-        </router-link>
+        </a>
       </v-flex>
       <v-flex xs4>
-        <router-link to="/step-3">
+        <a href="#" v-on:click="activeStep = 3" v-bind:class="{active: (activeStep==3)}">
           <v-btn color="grey lighten-1" fab>3</v-btn>
           Support with LBC
-        </router-link>
+        </a>
       </v-flex>
     </v-layout>
-    <router-view></router-view>
+    <Step1 v-if="activeStep == 1"></Step1>
+    <Step2 v-if="activeStep == 2"></Step2>
+    <Step3 v-if="activeStep == 3"></Step3>
     <v-dialog v-model="uploadDialog" hide-overlay persistent width="30rem">
       <v-card>
         <template v-if="confirmed">
@@ -41,14 +43,15 @@
 
 <script>
 
-import EventBus from '@/event-bus';
+import EventBus from '../event-bus';
 
 export default {
   data () {
     return {
       uploadDialog: false,
       txhash: '',
-      confirmed: false
+      confirmed: false,
+      activeStep: 1
     }
   },
   watch: {
@@ -75,9 +78,9 @@ export default {
 
 <style lang="scss">
 
-@import '../../scss/variables';
+@import '../scss/variables';
 
-@import '../../../node_modules/highlight.js/styles/monokai-sublime';
+@import '../../node_modules/highlight.js/styles/monokai-sublime';
 
 .dialog__content {
   align-items: flex-end !important;
@@ -107,7 +110,7 @@ export default {
     text-decoration: none;
     color: $text-color;
   }
-  .router-link-active {
+  .active {
     font-weight: bold;
     .btn {
       background: $primary-color !important;

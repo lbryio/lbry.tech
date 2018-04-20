@@ -121,7 +121,7 @@ export default {
 
 <style lang="scss">
 
-@import '../../scss/variables';
+@import '../scss/variables';
 
 #step3-page {
   .card {

@@ -51,7 +51,7 @@
 import imagesLoaded from 'vue-images-loaded'
 import { ImageUploader } from 'vue-image-upload-resize'
 
-import EventBus from '@/event-bus';
+import EventBus from '../event-bus';
 
 export default {
   directives: {
@@ -139,7 +139,7 @@ export default {
 
 <style lang="scss">
 
-@import '../../scss/variables';
+@import '../scss/variables';
 
 #step2-page {
   #meme-canvas {
