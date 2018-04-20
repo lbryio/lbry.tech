@@ -35,7 +35,7 @@
         
               <Content custom></Content>
 
-              <edit-link></edit-link>
+              <edit-link :path="this.$page.path"></edit-link>
               
             </v-flex>
 
@@ -57,7 +57,7 @@
 
               <Content custom></Content>
 
-              <edit-link></edit-link>
+              <edit-link :path="this.$page.path"></edit-link>
             
             </v-flex>
 
