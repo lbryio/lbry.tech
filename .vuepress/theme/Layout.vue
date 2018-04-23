@@ -100,9 +100,10 @@ export default {
 </script>
 
 <style src="../../node_modules/vuetify/dist/vuetify.min.css"></style>
-<style src="../../node_modules/material-design-icons-iconfont/dist/material-design-icons.css"></style>
 
 <style lang="scss">
+
+@import '../scss/fonts';
 
 html {
   font-size: 16px;
