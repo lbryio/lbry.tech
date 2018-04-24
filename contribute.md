@@ -1,3 +1,7 @@
+---
+title: Contributing
+---
+
 # Contributing to LBRY
 
 Interested in progressing content freedom? Awesome! This guide will get you started.

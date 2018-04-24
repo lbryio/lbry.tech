@@ -1,3 +1,7 @@
+---
+title: Documentation
+---
+
 # Documentation lives here!
 
 ## Second level header

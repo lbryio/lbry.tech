@@ -1,4 +1,8 @@
-# Important Resources #
+---
+title: Resources
+---
+
+# Important Resources
 
 - [Discord](https://discord.gg/YjYbwhS)
 - [Slack](https://chat.lbry.io/)

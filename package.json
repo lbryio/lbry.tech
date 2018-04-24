@@ -21,7 +21,7 @@
     "vue-image-upload-resize": "^1.1.6",
     "vue-images-loaded": "^1.1.2",
     "vue-resource": "^1.5.0",
-    "vuepress": "^0.7.0",
+    "vuepress": "^0.8.3",
     "vuetify": "^1.0.16"
   }
 }

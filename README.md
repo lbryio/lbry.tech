@@ -1,5 +1,6 @@
 ---
 home: true
+title: LBRY.tech
 ---
 
 # LBRY.tech website
