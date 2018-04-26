@@ -12,7 +12,7 @@
         <v-btn flat to="/documentation.html">Documentation</v-btn>
         <v-btn flat to="/contribute.html">How to Contribute</v-btn>
         <v-btn flat to="/develop.html">How to Develop</v-btn>
-        <v-btn flat to="/resources.html">Resources</v-btn>
+        <v-btn flat to="/resources/">Resources</v-btn>
       </v-toolbar-items>
 
     </v-toolbar>
