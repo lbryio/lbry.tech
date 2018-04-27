@@ -105,7 +105,7 @@ export default {
     },
     submit () {
       // TODO: Do the upload
-      EventBus.$emit('file-uploaded', 'txhashhere');
+      EventBus.$emit('HookFileUploaded', 'txhashhere');
     },
     imagesLoaded (instance) {
       var component = this;

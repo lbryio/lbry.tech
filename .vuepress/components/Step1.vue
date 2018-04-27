@@ -20,7 +20,7 @@
       <v-flex xs12 v-if="jsonData">
         <p class="subheading">Success! Here is the response for <strong>lbry://{{ address }}</strong>:</p>
         <pre v-highlightjs="jsonData" class="json-example"><code class="json"></code></pre>
-        <v-btn large v-on:click="$router.push('step-2')" class="mt-3">Go to next step</v-btn>
+        <v-btn large v-on:click="goTo(2)" class="mt-3">Go to next step</v-btn>
       </v-flex>
       <template v-if="!isLoading && !jsonData">
         <v-flex xs12>
@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import EventBus from '../event-bus';
+
 export default {
   data () {
     return {
@@ -104,6 +106,9 @@ export default {
       var component = this;
       component.address = address;
       component.fetchMetadata();
+    },
+    goTo (page) {
+      EventBus.$emit('HookStepUpdate', page);
     }
   },
   name: 'Step1'

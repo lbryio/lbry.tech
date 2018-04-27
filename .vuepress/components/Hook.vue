@@ -67,9 +67,12 @@ export default {
   },
   created () {
     var component = this;
-    EventBus.$on('file-uploaded', function(txhash) {
+    EventBus.$on('HookFileUploaded', function(txhash) {
       component.txhash = txhash;
       component.uploadDialog = true;
+    });
+    EventBus.$on('HookStepUpdate', function(step) {
+      component.activeStep = step;
     });
   },
   name: 'Hook'

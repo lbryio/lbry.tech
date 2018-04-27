@@ -5,7 +5,7 @@
         <h1 class="display-2">Support your favorite content creators with LBRY</h1>
         <p class="subheading">Send LBRY coins to claim addresses and the owner will receive it in their wallet.</p>
         <p class="subheading">To send LBC to someone, you need either their wallet address or claim ID.<br/>
-        You can get claim ID's by using resolve method in <router-link to="/">the first step</router-link><br/>
+        You can get claim ID's by using resolve method in <a href="#" v-on:click.stop="goTo(1)">the first step</a><br/>
         Or you can use the examples below.</p>
       </v-flex>
       <v-flex xs12 sm8>
@@ -88,6 +88,8 @@
 </template>
 
 <script>
+import EventBus from '../event-bus';
+
 export default {
   data () {
     return {
@@ -99,7 +101,7 @@ export default {
     }
   },
   methods: {
-    send: function() {
+    send () {
       var component = this;
       component.jsonData = '';
       component.isLoading = true;
@@ -113,6 +115,9 @@ export default {
       var component = this;
       component.address = address;
       component.send();
+    },
+    goTo (page) {
+      EventBus.$emit('HookStepUpdate', page);
     }
   },
   name: 'Step3'
