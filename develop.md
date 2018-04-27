@@ -2,4 +2,45 @@
 title: Development
 ---
 
-Development resources and guides
+Want to build something on top of LBRY? This is the place to get you started.
+
+At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
+[Overview](/overview) first.
+
+## When to Use LBRY
+
+## When Not to Use LBRY
+
+## How (Ways?) to Build on LBRY
+
+### Web, Desktop, and Mobile Applications (Daemon-based Applications)
+
+Almost all web, desktop, and mobile applications will use the [lbry daemon](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network.
+
+#### Web Applications 
+
+1. Set up a web server.
+1. Install lbry. (Docker images? Other convenient ways of doing this?)
+1. Bridging basics.
+
+### Desktop Applications
+
+1. Desktop applications will typically bundle the [lbry daemon](https://github.com/lbryio/lbry).
+1. lbry-desktop as example
+
+### Android Applications
+
+1. (Whatever magic you have to do to get a daemon running on Android.)
+
+### iOS Applications
+
+It is not currently possible to use LBRY on iOS. [There is a bounty](lbry.io/bounty/ios-daemon) for this.
+
+### Blockchain and Wallet Level (Full Node Applications)
+
+Not all applications will want to use the full LBRY protocol, or some applications may be specifically designed with full blockchain interactions in mind.
+
+1. How to install lbrycrd.
+1. lbrycrd documentation
+
+## Desired Applications
