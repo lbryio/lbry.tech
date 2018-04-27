@@ -2,20 +2,40 @@
 title: Overview
 ---
 
-# Introduction to LBRY protocol #
+# Introduction to LBRY protocol
 
-![Placeholder](https://placehold.it/1200x600?text=Placeholder+Graphic)
+## Mission
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar leo id nisl ullamcorper, non tristique nulla varius. Curabitur urna turpis, porta ac lectus vel, imperdiet semper mi. Integer sollicitudin, urna id imperdiet commodo, quam nunc ultrices dolor, eu laoreet risus ante nec purus. Vivamus eget ornare felis.
+What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?
 
-## Subtitle here ##
+That's the idea behind LBRY. To create a market for accessing and publishing information<sup>1</sup> that is global<sup>2</sup>, decentralized<sup>3</sup>, robust<sup>4</sup>, optimal<sup>5</sup> and complete<sup>6</sup>.
 
-Morbi sed mauris libero. *Mauris blandit* sem vel libero ultrices, non porta elit rhoncus. Proin augue quam, fermentum eu malesuada a, convallis eget ligula. Vestibulum dapibus nisl eu risus blandit mattis. Quisque pretium quam id arcu aliquam imperdiet. Fusce bibendum venenatis ex eget bibendum. Cras dapibus justo vel libero cursus tincidunt. Etiam vel tincidunt augue. Proin venenatis, lorem sit amet posuere porttitor, risus est laoreet ipsum, sed interdum elit augue sed lectus. Cras dignissim odio ut commodo vestibulum.
+That's a fancy sentence, so here's a plainer one: we just thought it'd be really damn cool if there was a system that stored as much of the world's information as possible, but was owned and controlled by no one.
 
-## Subtitle here ##
+<sup>1</sup>In the information theoric sense, i.e. any data. LBRY facilitates distribution of all data, whether it be a video or a spreadsheet.
 
-Morbi sed mauris libero. *Mauris blandit* sem vel libero ultrices, non porta elit rhoncus. Proin augue quam, fermentum eu malesuada a, convallis eget ligula. Vestibulum dapibus nisl eu risus blandit mattis. Quisque pretium quam id arcu aliquam imperdiet. Fusce bibendum venenatis ex eget bibendum. Cras dapibus justo vel libero cursus tincidunt. Etiam vel tincidunt augue. Proin venenatis, lorem sit amet posuere porttitor, risus est laoreet ipsum, sed interdum elit augue sed lectus. Cras dignissim odio ut commodo vestibulum.
+<sup>2</sup>Accessible anywhere in the world on any internet-connected device.
 
-## Subtitle here ##
+<sup>3</sup>Not controlled by any one person, party or authority.
 
-Morbi sed mauris libero. *Mauris blandit* sem vel libero ultrices, non porta elit rhoncus. Proin augue quam, fermentum eu malesuada a, convallis eget ligula. Vestibulum dapibus nisl eu risus blandit mattis. Quisque pretium quam id arcu aliquam imperdiet. Fusce bibendum venenatis ex eget bibendum. Cras dapibus justo vel libero cursus tincidunt. Etiam vel tincidunt augue. Proin venenatis, lorem sit amet posuere porttitor, risus est laoreet ipsum, sed interdum elit augue sed lectus. Cras dignissim odio ut commodo vestibulum.
+<sup>4</sup>Resistant to censorship or attempts to control; impervious to attacks or disruptions. 
+
+<sup>5</sup>In the Pareto sense, with regards to the production and distribution of information (i.e. digital information is both created and distributed in a way that could not be any more efficient from the perspectives of information producers and consumers).
+
+<sup>6</sup>The most complete collection of world’s books, films, art, games, etc. should be available via LBRY.
+
+## LBRY Basics
+
+(Introduction to the three tiers of LBRY)
+
+### Blockchain
+
+### Data Network
+
+### Applications
+
+## What's Next?
+
+- Try LBRY
+- Contribute to things
+- Build things
