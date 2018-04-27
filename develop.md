@@ -9,7 +9,13 @@ At least, it's the place to get started so long as you have some idea of what LB
 
 ## When to Use LBRY
 
+- You want to build an application that contributes to the world's knowledge, or benefits from global, shared discovery (flesh this out).
+- You want to replace an existing centralized service related to digital content distribution with a decentralized/community-controlled one.
+
 ## When Not to Use LBRY
+
+- You want to privately distribute data/information.
+- You want to do illegal things.
 
 ## How (Ways?) to Build on LBRY
 
@@ -23,16 +29,16 @@ Almost all web, desktop, and mobile applications will use the [lbry daemon](http
 1. Install lbry. (Docker images? Other convenient ways of doing this?)
 1. Bridging basics.
 
-### Desktop Applications
+#### Desktop Applications
 
 1. Desktop applications will typically bundle the [lbry daemon](https://github.com/lbryio/lbry).
 1. lbry-desktop as example
 
-### Android Applications
+#### Android Applications
 
 1. (Whatever magic you have to do to get a daemon running on Android.)
 
-### iOS Applications
+#### iOS Applications
 
 It is not currently possible to use LBRY on iOS. [There is a bounty](lbry.io/bounty/ios-daemon) for this.
 
