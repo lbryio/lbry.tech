@@ -1,0 +1,22 @@
+// via //brick.freetls.fastly.net/Karla:400,700,400i (brick.im)
+
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Karla Regular"), url(//brick.freetls.fastly.net/fonts/karla/400.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Karla";
+  font-style: italic;
+  font-weight: 400;
+  src: local("Karla Italic"), url(//brick.freetls.fastly.net/fonts/karla/400i.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Karla Bold"), url(//brick.freetls.fastly.net/fonts/karla/700.woff) format("woff");
+}

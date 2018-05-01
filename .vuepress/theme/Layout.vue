@@ -1,12 +1,14 @@
 <template>
   <v-app>
 
-    <v-toolbar clipped-left app scroll-off-screen>
-
+    <!--/
+    <v-toolbar>
       <v-toolbar-title class="align-center">
         <span class="title"><router-link to="/">LBRY.tech</router-link></span>
       </v-toolbar-title>
+
       <v-spacer></v-spacer>
+
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn flat to="/overview.html">Overview</v-btn>
         <v-btn flat to="/documentation.html">Documentation</v-btn>
@@ -14,65 +16,108 @@
         <v-btn flat to="/develop.html">How to Develop</v-btn>
         <v-btn flat to="/resources/">Resources</v-btn>
       </v-toolbar-items>
-
     </v-toolbar>
+    /-->
+
+    <nav class="navigation">
+      <div class="inner-wrap">
+        <a class="navigation__item" href="/" title="Go back home">LBRY</a>
+        <a class="navigation__item" href="/overview.html" title="TBD">Overview</a>
+        <a class="navigation__item" href="/documentation.html" title="TBD">Documentation</a>
+        <a class="navigation__item" href="/contribute.html" title="TBD">Contribute</a>
+        <a class="navigation__item" href="/develop.html" title="TBD">Develop</a>
+        <a class="navigation__item" href="/resources" title="TBD">Resources</a>
+      </div>
+    </nav>
 
     <v-content>
-
-      <v-alert type="error" value="true" id="in-development-alert" class="pt-4 pb-4 ma-0">
+      <!--/
+      <v-alert type="error" value="true" id="in-development-alert">
         <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.</v-alert>
       </v-alert>
+      /-->
 
       <template v-if="$page.frontmatter.home">
+        <section class="home hero">
+          <!--/ <h1 class="home__heading">LBRY Technology</h1> /-->
+          <div>
+            <h2>
+              LBRY is a free, open, and community-run digital marketplace.<br/>
+              Build the future of content freedom.
+            </h2>
+          </div>
+        </section>
 
-        <hook></hook>
+        <section class="home features">
+          <ul class="home__features">
+            <li class="home__feature">
+              <p class="home__feature__title"><strong>New to LBRY?</strong></p>
+              <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
+              <a class="home__feature__cta" href="">Check it out</a>
+            </li>
 
+            <li class="home__feature">
+              <p class="home__feature__title"><strong>Want to contribute?</strong></p>
+              <p class="home__feature__description">Start exploring our API and help make LBRY better</p>
+              <a class="home__feature__cta" href="">Jump in</a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="home intro">
+          <h3>Intro/Overview</h3>
+          <p>Text and such</p>
+        </section>
+
+        <section class="home docs">
+          <h3>Documentation</h3>
+          <p>Text and such</p>
+        </section>
+
+        <section class="home contribute">
+          <h3>Contribute</h3>
+          <p>Text and such</p>
+        </section>
+
+        <section class="home develop">
+          <h3>Development</h3>
+          <p>Text and such</p>
+        </section>
+
+        <section class="home community">
+          <h3>Community</h3>
+          <p>Text and such</p>
+        </section>
+
+        <!--/ <hook></hook> /-->
+
+        <!--/
         <v-container fluid>
-
           <v-layout row wrap>
-
-            <v-flex xs12 xl6 offset-xl3>
-        
+            <v-flex>
               <Content custom></Content>
-
               <edit-link :path="this.$page.path"></edit-link>
-              
             </v-flex>
-
           </v-layout>
-
         </v-container>
-
+        /-->
       </template>
 
       <template v-else-if="$page.path == '/whitepaper.html'">
-
         <Content custom></Content>
-
       </template>
 
       <template v-else>
-
         <v-container>
-
-          <v-layout row wrap>
-
-            <v-flex xs12 xl6 offset-xl3>
-
+          <v-layout>
+            <v-flex>
               <Sidebar v-if="$page.headers"></Sidebar>
-
               <Content custom></Content>
-
               <edit-link :path="this.$page.path"></edit-link>
-            
             </v-flex>
-
           </v-layout>
-
         </v-container>
-
       </template>
-
     </v-content>
 
   </v-app>
@@ -85,12 +130,7 @@ import Vuetify from 'vuetify'
 import VueResource from 'vue-resource'
 import VueHighlightJS from 'vue-highlightjs'
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#155b4a'
-  }
-});
-
+Vue.use(Vuetify);
 Vue.use(VueResource)
 Vue.use(VueHighlightJS)
 
@@ -149,42 +189,49 @@ function updateMetaTags (meta, current) {
 }
 </script>
 
-<style src="../../node_modules/vuetify/dist/vuetify.min.css"></style>
+<!--/ <style src="../../node_modules/vuetify/dist/vuetify.min.css"></style> /-->
 
 <style lang="scss">
+  @import "../scss/type/karla";
+  @import "../scss/init/colors";
+  @import "../scss/init/base";
+  @import "../scss/init/extends";
+  @import "../scss/init/mixins";
+  @import "../scss/layout";
+  @import "../scss/pages/home";
+  @import "../scss/partials/navigation";
 
-@import '../scss/fonts';
+  /*
+  html {
+    font-size: 16px;
+  }
 
-html {
-  font-size: 16px;
-}
+  pre {
+    text-align: left;
+    overflow-x: auto;
+  }
 
-pre {
-  text-align: left;
-  overflow-x: auto;
-}
+  img {
+    max-width: 100%;
+  }
 
-img {
-  max-width: 100%;
-}
+  .content.custom {
+    display: block;
+  }
 
-.content.custom {
-  display: block;
-}
-
-.toolbar__title {
-  a {
-    text-decoration: none;
-    &:hover {
-      color: black;
+  .toolbar__title {
+    a {
+      text-decoration: none;
+      &:hover {
+        color: black;
+      }
     }
   }
-}
 
-#in-development-alert {
-  a {
-    color: white;
+  #in-development-alert {
+    a {
+      color: white;
+    }
   }
-}
-
+  */
 </style>
