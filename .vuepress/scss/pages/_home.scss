@@ -88,11 +88,37 @@
   &.develop,
   &.community {
     padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-bottom: 3.5rem;
+
+    .inner-wrap {
+      position: relative;
+    }
 
     h3 {
-      @extend .inner-wrap;
-      font-size: 3rem;
+      top: -0.85rem; left: -2rem;
+
+      color: rgba($black, 0.045);
+      font-size: 4rem;
+      letter-spacing: 0.1rem;
+      line-height: 1;
+      position: absolute;
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 1.5rem;
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+
+      &:first-of-type {
+        padding-top: 0.5rem;
+      }
+    }
+
+    .cta {
+      @extend .__button-black;
+      top: 0.5rem;
     }
   }
 
@@ -101,5 +127,69 @@
   &.contribute,
   &.develop {
     border-bottom: 1px solid rgba($black, 0.05);
+  }
+
+  &.docs,
+  &.develop {
+    h3 {
+      // text-align: right;
+    }
+  }
+
+  &.contribute {
+    p {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-top: 1rem;
+
+      &::after {
+        @include clearfix;
+      }
+
+      li {
+        float: left;
+        font-size: 1.5rem;
+        padding-top: 4rem;
+        position: relative;
+        text-align: center;
+        width: calc(100% / 5);
+
+        &::before {
+          width: 100%; height: 100%;
+          top: 0; left: 0;
+
+          background-position: center 0;
+          background-repeat: no-repeat;
+          background-size: 3rem;
+          content: "";
+          position: absolute;
+        }
+
+        &:nth-child(1)::before {
+          background-image: url("../media/svg/flag.svg");
+        }
+
+        &:nth-child(2)::before {
+          background-image: url("../media/svg/keyboard.svg");
+        }
+
+        &:nth-child(3)::before {
+          background-image: url("../media/svg/anchor.svg");
+        }
+
+        &:nth-child(4)::before {
+          background-image: url("../media/svg/chat.svg");
+        }
+
+        &:nth-child(5)::before {
+          background-image: url("../media/svg/monitor.svg");
+        }
+      }
+    }
   }
 }

@@ -65,28 +65,50 @@
         </section>
 
         <section class="home intro">
-          <h3>Intro/Overview</h3>
-          <p>Text and such</p>
+          <div class="inner-wrap">
+            <h3>Intro/Overview</h3>
+            <p>What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?</p>
+
+            <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
+
+            <a class="cta" href="">Learn more</a>
+          </div>
         </section>
 
         <section class="home docs">
-          <h3>Documentation</h3>
-          <p>Text and such</p>
+          <div class="inner-wrap">
+            <h3>Documentation</h3>
+            <p>Text and such</p>
+          </div>
         </section>
 
         <section class="home contribute">
-          <h3>Contribute</h3>
-          <p>Text and such</p>
+          <div class="inner-wrap">
+            <h3>Contribute</h3>
+            <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
+
+            <ul>
+              <li>Raising Issues</li>
+              <li>Coding</li>
+              <li>Creative</li>
+              <li>Translating</li>
+              <li>Testing</li>
+            </ul>
+          </div>
         </section>
 
         <section class="home develop">
-          <h3>Development</h3>
-          <p>Text and such</p>
+          <div class="inner-wrap">
+            <h3>Development</h3>
+            <p>Text and such</p>
+          </div>
         </section>
 
         <section class="home community">
-          <h3>Community</h3>
-          <p>Text and such</p>
+          <div class="inner-wrap">
+            <h3>Community</h3>
+            <p>Text and such</p>
+          </div>
         </section>
 
         <!--/ <hook></hook> /-->
