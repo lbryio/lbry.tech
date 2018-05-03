@@ -39,7 +39,6 @@
 
       <template v-if="$page.frontmatter.home">
         <section class="home hero">
-          <!--/ <h1 class="home__heading">LBRY Technology</h1> /-->
           <div>
             <h2>
               LBRY is a free, open, and community-run digital marketplace.<br/>
@@ -78,7 +77,9 @@
         <section class="home docs">
           <div class="inner-wrap">
             <h3>Documentation</h3>
-            <p>Text and such</p>
+            <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
+
+            <a class="cta" href="">Go deeper</a>
           </div>
         </section>
 
@@ -88,11 +89,11 @@
             <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
 
             <ul>
-              <li>Raising Issues</li>
-              <li>Coding</li>
-              <li>Creative</li>
-              <li>Translating</li>
-              <li>Testing</li>
+              <li><a href="">Raising Issues</a></li>
+              <li><a href="">Coding</a></li>
+              <li><a href="">Creative</a></li>
+              <li><a href="">Translating</a></li>
+              <li><a href="">Testing</a></li>
             </ul>
           </div>
         </section>
@@ -100,29 +101,24 @@
         <section class="home develop">
           <div class="inner-wrap">
             <h3>Development</h3>
-            <p>Text and such</p>
+            <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
+
+            <a class="cta" href="">Learn the LBRY API</a>
           </div>
         </section>
 
         <section class="home community">
           <div class="inner-wrap">
             <h3>Community</h3>
-            <p>Text and such</p>
+            <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
+
+            <ul>
+              <li><a href="//discord.gg/YjYbwhS">Discord</a></li>
+              <li><a href="//www.reddit.com/r/lbry">Reddit</a></li>
+              <li><a href="//chat.lbry.io">Slack</a></li>
+            </ul>
           </div>
         </section>
-
-        <!--/ <hook></hook> /-->
-
-        <!--/
-        <v-container fluid>
-          <v-layout row wrap>
-            <v-flex>
-              <Content custom></Content>
-              <edit-link :path="this.$page.path"></edit-link>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        /-->
       </template>
 
       <template v-else-if="$page.path == '/whitepaper.html'">
@@ -130,18 +126,31 @@
       </template>
 
       <template v-else>
-        <v-container>
-          <v-layout>
-            <v-flex>
-              <Sidebar v-if="$page.headers"></Sidebar>
-              <Content custom></Content>
-              <edit-link :path="this.$page.path"></edit-link>
-            </v-flex>
-          </v-layout>
-        </v-container>
+        <section class="ancillary">
+          <div class="inner-wrap">
+            {{ $page.title }}
+            <Content custom></Content>
+            <edit-link :path="this.$page.path"></edit-link>
+          </div>
+        </section>
       </template>
     </v-content>
 
+    <footer class="footer">
+      <div class="inner-wrap">
+        <ul>
+          <li><a href="">← LBRY.io</a></li>
+
+          <li><a href="">Get</a></li>
+          <li><a href="">Learn</a></li>
+          <li><a href="">News</a></li>
+          <li><a href="">Chat</a></li>
+          <li><a href="">GitHub</a></li>
+
+          <li>MIT Licensed</li>
+        </ul>
+      </div>
+    </footer>
   </v-app>
 </template>
 
@@ -211,8 +220,6 @@ function updateMetaTags (meta, current) {
 }
 </script>
 
-<!--/ <style src="../../node_modules/vuetify/dist/vuetify.min.css"></style> /-->
-
 <style lang="scss">
   @import "../scss/type/karla";
   @import "../scss/init/colors";
@@ -221,39 +228,7 @@ function updateMetaTags (meta, current) {
   @import "../scss/init/mixins";
   @import "../scss/layout";
   @import "../scss/pages/home";
+  @import "../scss/pages/ancillary";
   @import "../scss/partials/navigation";
-
-  /*
-  html {
-    font-size: 16px;
-  }
-
-  pre {
-    text-align: left;
-    overflow-x: auto;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  .content.custom {
-    display: block;
-  }
-
-  .toolbar__title {
-    a {
-      text-decoration: none;
-      &:hover {
-        color: black;
-      }
-    }
-  }
-
-  #in-development-alert {
-    a {
-      color: white;
-    }
-  }
-  */
+  @import "../scss/partials/footer";
 </style>

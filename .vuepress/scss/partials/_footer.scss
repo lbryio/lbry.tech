@@ -1,0 +1,40 @@
+.footer {
+  background-color: $black;
+  color: $white;
+  font-size: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  ul {
+    align-items: stretch;
+    display: flex;
+    flex-flow: row wrap;
+    list-style-type: none;
+
+    li {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+
+      &:first-of-type {
+        flex: 1;
+      }
+
+      &:last-of-type {
+        cursor: default;
+        opacity: 0.3;
+      }
+    }
+  }
+
+  a {
+    transition: color 0.2s;
+
+    &:not(:hover) {
+      color: inherit;
+    }
+
+    &:hover {
+      color: $teal;
+    }
+  }
+}
