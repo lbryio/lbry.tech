@@ -36,6 +36,8 @@
               <Content custom></Content>
 
               <edit-link :path="this.$page.path"></edit-link>
+
+              <router-link to="/sitemap.html">Sitemap</router-link>
               
             </v-flex>
 
@@ -64,6 +66,8 @@
               <Content custom></Content>
 
               <edit-link :path="this.$page.path"></edit-link>
+
+              <router-link to="/sitemap.html">Sitemap</router-link>
             
             </v-flex>
 
