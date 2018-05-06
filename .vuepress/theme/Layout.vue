@@ -119,6 +119,9 @@
             </ul>
           </div>
         </section>
+
+        <edit-link :path="this.$page.path"></edit-link>
+        <router-link to="/sitemap.html">Sitemap</router-link>
       </template>
 
       <template v-else-if="$page.path == '/whitepaper.html'">
@@ -132,6 +135,9 @@
             <Content custom></Content>
             <edit-link :path="this.$page.path"></edit-link>
           </div>
+
+          <edit-link :path="this.$page.path"></edit-link>
+          <router-link to="/sitemap.html">Sitemap</router-link>
         </section>
       </template>
     </v-content>
