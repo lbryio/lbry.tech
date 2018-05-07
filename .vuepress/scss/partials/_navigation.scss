@@ -1,0 +1,54 @@
+.navigation {
+  top: 0; left: 0;
+
+  background-color: $white;
+  box-shadow: 0 1px 5px rgba($black, 0.1);
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+
+  > div:first-of-type {
+    align-items: stretch;
+    display: flex;
+    flex-flow: row wrap;
+  }
+}
+
+.navigation__item {
+  color: inherit;
+  font-size: 1rem;
+  line-height: 4rem;
+  overflow: hidden;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  position: relative;
+
+  &:first-of-type {
+    flex: 1;
+  }
+
+  &:not(:first-of-type) {
+    &::after {
+      width: 100%; height: 3px;
+
+      background-color: $teal;
+      content: "";
+      left: 0;
+      position: absolute;
+      transition: bottom 0.2s;
+    }
+
+    &:not(:hover) {
+      &::after {
+        bottom: -3px;
+      }
+    }
+
+    &:hover,
+    &.active {
+      &::after {
+        bottom: 0;
+      }
+    }
+  }
+}

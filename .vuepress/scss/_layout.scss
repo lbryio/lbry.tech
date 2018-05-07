@@ -1,0 +1,92 @@
+html,
+body {
+  width: 100%; height: 100%;
+}
+
+html {
+  background-color: $white;
+}
+
+body {
+  min-width: 320px; min-height: 100vh;
+
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  @include font-sans;
+  font-size: 12px;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 0;
+}
+
+main {
+  flex: 1;
+  padding-top: 4rem !important; // override Vue
+}
+
+.inner-wrap {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1200px;
+
+  @media (min-width: 901px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  &::after {
+    @include clearfix;
+  }
+}
+
+h1, h2, h3, h4, h5 {
+  .header-anchor {
+    display: none;
+  }
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+.__message {
+  bottom: 4rem; left: 10%;
+
+  animation: close-message linear;
+  animation-delay: 2s;
+  font-size: 0.8rem;
+  line-height: 1.33;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  position: absolute;
+  text-align: center;
+  width: 80%;
+  z-index: 2;
+
+  a {
+    font-weight: 700;
+  }
+
+  &[type="error"] {
+    background-color: $red;
+    color: $white;
+  }
+
+  &[type="warning"] {
+    background-color: $yellow;
+  }
+}
