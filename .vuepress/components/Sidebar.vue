@@ -1,26 +1,12 @@
 <template>
 
-  <v-navigation-drawer clipped app>
+  <div id="sidebar">
 
-    <v-toolbar flat class="transparent">
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-title class="title">
-            {{ this.$page.title }}
-          </v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
+    <h2>{{ this.$page.title }}</h2>
 
-    <v-list dense>
-      <v-list-tile v-for="link in this.$page.headers" v-bind:key="link.title" @click="goTo(link.slug)" v-bind:class="['level-' + link.level]">
-        <v-list-tile-content>
-          <v-list-tile-title>{{ link.title }}</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
+    <a v-for="link in this.$page.headers" v-bind:key="link.title" @click="goTo(link.slug)" v-bind:class="['level-' + link.level]">{{ link.title }}</a>
 
-  </v-navigation-drawer>
+  </div>
 
 </template>
 
