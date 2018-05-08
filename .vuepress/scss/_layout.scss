@@ -8,11 +8,9 @@ html {
 }
 
 body {
-  min-width: 320px; min-height: 100vh;
+  min-width: 320px;
 
   color: $black;
-  display: flex;
-  flex-direction: column;
   @include font-sans;
   font-size: 12px;
   overflow-x: hidden;
@@ -21,8 +19,14 @@ body {
 }
 
 main {
-  flex: 1;
-  padding-top: 4rem !important; // override Vue
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 4rem;
+
+  > div:first-of-type {
+    flex: 1;
+  }
 }
 
 .inner-wrap {

@@ -1,7 +1,5 @@
 <template>
-
   <main>
-
     <nav class="navigation">
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
@@ -14,93 +12,95 @@
     </nav>
 
     <template v-if="$page.frontmatter.home">
-      <section class="home hero">
-        <div>
-          <h2>
-            LBRY is a free, open, and community-run digital marketplace.<br/>
-            Build the future of content freedom.
-          </h2>
-        </div>
-      </section>
+      <div>
+        <section class="home hero">
+          <div>
+            <h2>
+              LBRY is a free, open, and community-run digital marketplace.<br/>
+              Build the future of content freedom.
+            </h2>
+          </div>
+        </section>
 
-      <section class="home alert">
-        <div class="inner-wrap">
-          <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
-        </div>
-      </section>
+        <section class="home alert">
+          <div class="inner-wrap">
+            <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
+          </div>
+        </section>
 
-      <section class="home features">
-        <ul class="home__features">
-          <li class="home__feature">
-            <p class="home__feature__title"><strong>New to LBRY?</strong></p>
-            <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
-            <a class="home__feature__cta" href="">Check it out</a>
-          </li>
+        <section class="home features">
+          <ul class="home__features">
+            <li class="home__feature">
+              <p class="home__feature__title"><strong>New to LBRY?</strong></p>
+              <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
+              <a class="home__feature__cta" href="">Check it out</a>
+            </li>
 
-          <li class="home__feature">
-            <p class="home__feature__title"><strong>Want to contribute?</strong></p>
-            <p class="home__feature__description">Start exploring our API and help make LBRY better</p>
-            <a class="home__feature__cta" href="">Jump in</a>
-          </li>
-        </ul>
-      </section>
-
-      <section class="home intro">
-        <div class="inner-wrap">
-          <h3>Intro/Overview</h3>
-          <p>What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?</p>
-
-          <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
-
-          <a class="cta" href="">Learn more</a>
-        </div>
-      </section>
-
-      <section class="home docs">
-        <div class="inner-wrap">
-          <h3>Documentation</h3>
-          <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
-
-          <a class="cta" href="">Go deeper</a>
-        </div>
-      </section>
-
-      <section class="home contribute">
-        <div class="inner-wrap">
-          <h3>Contribute</h3>
-          <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
-
-          <ul>
-            <li><a href="">Raising Issues</a></li>
-            <li><a href="">Coding</a></li>
-            <li><a href="">Creative</a></li>
-            <li><a href="">Translating</a></li>
-            <li><a href="">Testing</a></li>
+            <li class="home__feature">
+              <p class="home__feature__title"><strong>Want to contribute?</strong></p>
+              <p class="home__feature__description">Start exploring our API and help make LBRY better</p>
+              <a class="home__feature__cta" href="">Jump in</a>
+            </li>
           </ul>
-        </div>
-      </section>
+        </section>
 
-      <section class="home develop">
-        <div class="inner-wrap">
-          <h3>Development</h3>
-          <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
+        <section class="home intro">
+          <div class="inner-wrap">
+            <h3>Intro/Overview</h3>
+            <p>What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?</p>
 
-          <a class="cta" href="">Learn the LBRY API</a>
-        </div>
-      </section>
+            <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
 
-      <section class="home community">
-        <div class="inner-wrap">
-          <h3>Community</h3>
-          <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
+            <a class="cta" href="">Learn more</a>
+          </div>
+        </section>
 
-          <ul>
-            <li><a href="//discord.gg/YjYbwhS">Discord</a></li>
-            <li><a href="//www.reddit.com/r/lbry">Reddit</a></li>
-            <li><a href="//chat.lbry.io">Slack</a></li>
-          </ul>
-        </div>
-      </section>
+        <section class="home docs">
+          <div class="inner-wrap">
+            <h3>Documentation</h3>
+            <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
+
+            <a class="cta" href="">Go deeper</a>
+          </div>
+        </section>
+
+        <section class="home contribute">
+          <div class="inner-wrap">
+            <h3>Contribute</h3>
+            <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
+
+            <ul>
+              <li><a href="">Raising Issues</a></li>
+              <li><a href="">Coding</a></li>
+              <li><a href="">Creative</a></li>
+              <li><a href="">Translating</a></li>
+              <li><a href="">Testing</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="home develop">
+          <div class="inner-wrap">
+            <h3>Development</h3>
+            <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
+
+            <a class="cta" href="">Learn the LBRY API</a>
+          </div>
+        </section>
+
+        <section class="home community">
+          <div class="inner-wrap">
+            <h3>Community</h3>
+            <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
+
+            <ul>
+              <li><a href="//discord.gg/YjYbwhS">Discord</a></li>
+              <li><a href="//www.reddit.com/r/lbry">Reddit</a></li>
+              <li><a href="//chat.lbry.io">Slack</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </template>
 
     <template v-else-if="$page.path == '/whitepaper.html'">
@@ -108,12 +108,14 @@
     </template>
 
     <template v-else>
-      <section class="ancillary">
-        <div class="inner-wrap">
-          {{ $page.title }}
-          <Content custom></Content>
-        </div>
-      </section>
+      <div>
+        <section class="ancillary">
+          <div class="inner-wrap">
+            {{ $page.title }}
+            <Content custom></Content>
+          </div>
+        </section>
+      </div>
     </template>
 
     <footer class="footer">
