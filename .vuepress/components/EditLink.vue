@@ -1,8 +1,5 @@
 <template>
-  <div class="edit-link mt-3">
-    <v-divider></v-divider>
-    <p class="mt-2"><a v-bind:href="githubUrl" target="_blank" class="grey--text text--darken-1">Edit this page on Github</a></p>
-  </div>
+  <a v-bind:href="githubUrl" target="_blank">Edit this page on Github</a>
 </template>
 
 <script>

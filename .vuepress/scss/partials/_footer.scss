@@ -1,6 +1,6 @@
 .footer {
   background-color: $black;
-  color: $white;
+  color: rgba($white, 0.3);
   font-size: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -21,7 +21,6 @@
 
       &:last-of-type {
         cursor: default;
-        opacity: 0.3;
       }
     }
   }
@@ -30,7 +29,7 @@
     transition: color 0.2s;
 
     &:not(:hover) {
-      color: inherit;
+      color: $white;
     }
 
     &:hover {

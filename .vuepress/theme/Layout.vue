@@ -101,9 +101,6 @@
           </ul>
         </div>
       </section>
-
-      <edit-link :path="this.$page.path"></edit-link>
-      <router-link to="/sitemap.html">Sitemap</router-link>
     </template>
 
     <template v-else-if="$page.path == '/whitepaper.html'">
@@ -115,8 +112,6 @@
         <div class="inner-wrap">
           {{ $page.title }}
           <Content custom></Content>
-          <edit-link :path="this.$page.path"></edit-link>
-          <router-link to="/sitemap.html">Sitemap</router-link>
         </div>
       </section>
     </template>
@@ -124,13 +119,17 @@
     <footer class="footer">
       <div class="inner-wrap">
         <ul>
-          <li><a href="">← LBRY.io</a></li>
+          <li>
+            <a href="">← LBRY.io</a> |
+            <edit-link :path="this.$page.path"></edit-link>
+          </li>
 
           <li><a href="">Get</a></li>
           <li><a href="">Learn</a></li>
           <li><a href="">News</a></li>
           <li><a href="">Chat</a></li>
           <li><a href="">GitHub</a></li>
+          <li><a href="/sitemap.html">Sitemap</a></li>
 
           <li>MIT Licensed</li>
         </ul>
