@@ -1,6 +1,6 @@
 .footer {
   background-color: $black;
-  color: rgba($white, 0.3);
+  color: rgba($white, 0.15);
   font-size: 1rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -33,7 +33,7 @@
     }
 
     &:hover {
-      color: $teal;
+      color: mix($black, $teal, 15%);
     }
   }
 }

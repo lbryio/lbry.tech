@@ -109,12 +109,22 @@
 
     <template v-else>
       <div>
-        <section class="ancillary">
-          <div class="inner-wrap">
-            {{ $page.title }}
-            <Content custom></Content>
-          </div>
-        </section>
+        <article class="page" itemtype="http://schema.org/BlogPosting">
+
+          <header class="page__header">
+            <div class="page__header-wrap">
+              <div class="inner-wrap">
+                <h2 class="page__header__title" itemprop="name headline">{{ $page.title }}</h2>
+              </div>
+            </div>
+          </header>
+
+          <section class="page__content" itemprop="articleBody">
+            <div class="inner-wrap">
+              <Content></Content>
+            </div>
+          </section>
+        </article>
       </div>
     </template>
 
@@ -122,7 +132,7 @@
       <div class="inner-wrap">
         <ul>
           <li>
-            <a href="">← LBRY.io</a> |
+            <a href="//lbry.io" title="Rediscover content freedom">← LBRY.io</a> |
             <edit-link :path="this.$page.path"></edit-link>
           </li>
 
@@ -210,7 +220,7 @@ function updateMetaTags (meta, current) {
   @import "../scss/init/mixins";
   @import "../scss/layout";
   @import "../scss/pages/home";
-  @import "../scss/pages/ancillary";
+  @import "../scss/pages/page";
   @import "../scss/partials/navigation";
   @import "../scss/partials/footer";
 </style>
