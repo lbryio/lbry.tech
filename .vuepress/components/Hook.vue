@@ -1,25 +1,25 @@
 <template>
-  <v-container fluid grid-list-md text-xs-center id="hook">
-    <v-layout row wrap id="hook-navigation">
-      <v-flex xs4>
+  <div id="hook">
+    <div id="hook-navigation">
+      <div class="step">
         <a href="#" v-on:click="activeStep = 1" v-bind:class="{active: (activeStep==1)}">
-          <v-btn color="grey lighten-1" fab>1</v-btn>
+          <span class="number">1</span>
           Resolve a claim
         </a>
-      </v-flex>
-      <v-flex xs4>
+      </div>
+      <div class="step">
         <a href="#" v-on:click="activeStep = 2" v-bind:class="{active: (activeStep==2)}">
-          <v-btn color="grey lighten-1" fab>2</v-btn>
+          <span class="number">2</span>
           Publish content
         </a>
-      </v-flex>
-      <v-flex xs4>
+      </div>
+      <div class="step">
         <a href="#" v-on:click="activeStep = 3" v-bind:class="{active: (activeStep==3)}">
-          <v-btn color="grey lighten-1" fab>3</v-btn>
+          <span class="number">3</span>
           Support with LBC
         </a>
-      </v-flex>
-    </v-layout>
+      </div>
+    </div>
     <Step1 v-if="activeStep == 1"></Step1>
     <Step2 v-if="activeStep == 2"></Step2>
     <Step3 v-if="activeStep == 3"></Step3>
@@ -38,7 +38,7 @@
         </template>
       </v-card>
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -81,7 +81,7 @@ export default {
     });
   },
   name: 'Hook'
-}
+};
 </script>
 
 <style lang="scss">
@@ -99,16 +99,49 @@ export default {
   background: url(https://lbry.io/img/youtube/hero@2x.jpg) no-repeat center center;
   background-size: cover;
   color: $text-color;
-  .display-2,
-  .subheading {
+  text-align: center;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
     color: white;
     text-shadow: 0px 0px 1rem rgba(0,0,0,0.5);
     a {
       color: white;
     }
   }
+  input[type='text'] {
+    background: white;
+    padding: 0.5rem 0.5rem;
+  }
+  pre {
+    text-align: left;
+  }
   .flex {
     margin-bottom: 2rem;
+  }
+  .loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  .card {
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    background: white;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,0.2);
+    margin: 0 2.5%;
+    img {
+      width: 100%;
+      height: 6rem;
+      object-fit: cover;
+    }
   }
 }
 
@@ -125,6 +158,11 @@ export default {
       color: white !important;
     }
   }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 </style>
