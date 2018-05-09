@@ -22,12 +22,6 @@
           </div>
         </section>
 
-        <section class="home alert">
-          <div class="inner-wrap">
-            <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
-          </div>
-        </section>
-
         <section class="home features">
           <ul class="home__features">
             <li class="home__feature">
@@ -127,6 +121,12 @@
         </article>
       </div>
     </template>
+
+    <section class="home alert">
+      <div class="inner-wrap">
+        <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="inner-wrap">
