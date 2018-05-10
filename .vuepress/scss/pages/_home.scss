@@ -10,13 +10,16 @@
   }
 
   h2 {
-    font-size: 1.75rem;
     font-weight: 400;
     margin-bottom: 4rem;
-  }
 
-  h3 {
-    font-size: 1.5rem;
+    @media (min-width: 851px) {
+      font-size: 1.75rem;
+    }
+
+    @media (max-width: 850px) {
+      font-size: 1.25rem;
+    }
   }
 
   hr {
@@ -37,6 +40,10 @@
     height: calc(50vh - 4rem);
     justify-content: center;
 
+    @media (max-width: 850px) {
+      background-size: cover;
+    }
+
     h2 {
       background-color: $white;
       border: 1px solid rgba($black, 0.1);
@@ -49,11 +56,18 @@
 
   &.alert {
     background-color: $yellow;
-    font-size: 1rem;
     line-height: 1.33;
     padding-top: 1rem;
     padding-bottom: 1rem;
     text-align: center;
+
+    @media (min-width: 901px) {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 0.8rem;
+    }
 
     a {
       font-weight: 600;
@@ -75,7 +89,22 @@
       position: relative;
       text-align: center;
       vertical-align: top;
-      width: 50%;
+
+      @media (min-width: 651px) {
+        width: 50%;
+      }
+
+      @media (max-width: 650px) {
+        width: 100%;
+
+        &:first-of-type {
+          padding-bottom: 1rem;
+        }
+
+        &:last-of-type {
+          padding-top: 1rem;
+        }
+      }
     }
 
 
@@ -114,21 +143,45 @@
     }
 
     h3 {
-      top: -0.85rem; left: -2rem;
-
-      color: rgba($black, 0.045);
-      font-size: 4rem;
       letter-spacing: 0.1rem;
       line-height: 1;
-      position: absolute;
       text-transform: uppercase;
+
+      @media (min-width: 1301px) {
+        top: -0.85rem; left: -2rem;
+
+        color: rgba($black, 0.045);
+        font-size: 4rem;
+        position: absolute;
+      }
+
+      @media (max-width: 1300px) {
+        color: $black;
+      }
+
+      @media (min-width: 901px) and (max-width: 1300px) {
+        font-size: 3rem;
+      }
+
+      @media (max-width: 900px) {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
     }
 
     p {
-      font-size: 1.5rem;
-      line-height: 1.55;
       margin-bottom: 1.5rem;
       max-width: 1000px;
+
+      @media (min-width: 901px) {
+        font-size: 1.5rem;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 900px) {
+        font-size: 1.25rem;
+        line-height: 1.33;
+      }
 
       &:first-of-type {
         padding-top: 0.5rem;
@@ -148,11 +201,14 @@
     border-bottom: 1px solid rgba($black, 0.05);
   }
 
-  &.community {
+  &.community,
+  &.contribute {
     p {
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
+      @media (min-width: 1301px) {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+      }
     }
 
     ul {
@@ -163,29 +219,43 @@
         @include clearfix;
       }
 
+      @media (min-width: 901px) {
+        font-size: 1.5rem;
+      }
+
+      @media (min-width: 751px) and (max-width: 900px) {
+        font-size: 1.25rem;
+      }
+
+      @media (max-width: 750px) {
+        font-size: 1rem;
+      }
+
       li {
         float: left;
-        font-size: 1.5rem;
-        padding-top: 5rem;
         position: relative;
         text-align: center;
-        width: calc(100% / 3);
 
-        &::before {
-          width: 100%; height: 100%;
-          top: 0; left: 0;
-
-          background-position: center 0;
-          background-repeat: no-repeat;
-          background-size: 5rem;
-          content: "";
-          position: absolute;
+        @media (max-width: 750px) {
+          margin-bottom: 2rem;
+          min-width: 8rem;
         }
 
         a {
           display: block;
           position: relative;
+          padding-top: 4rem;
           transition: color 0.2s;
+
+          &::before {
+            width: 100%; height: 100%;
+
+            background-position: center 0;
+            background-repeat: no-repeat;
+            content: "";
+            left: 0;
+            position: absolute;
+          }
 
           &:not(:hover) {
             color: inherit;
@@ -194,89 +264,78 @@
           &:hover {
             color: $teal;
           }
-        }
-
-        &:nth-child(1)::before {
-          background-image: url("../media/svg/discord.svg");
-        }
-
-        &:nth-child(2)::before {
-          background-image: url("../media/svg/reddit.svg");
-        }
-
-        &:nth-child(3)::before {
-          background-image: url("../media/svg/slack.svg");
         }
       }
     }
   }
 
   &.contribute {
-    p {
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
-    }
-
     ul {
-      list-style-type: none;
-      padding-top: 1rem;
-
-      &::after {
-        @include clearfix;
-      }
-
       li {
-        float: left;
-        font-size: 1.5rem;
-        padding-top: 4rem;
-        position: relative;
-        text-align: center;
         width: calc(100% / 5);
 
-        &::before {
-          width: 100%; height: 100%;
-          top: 0; left: 0;
-
-          background-position: center 0;
-          background-repeat: no-repeat;
-          background-size: 3rem;
-          content: "";
-          position: absolute;
-        }
-
-        a {
-          display: block;
-          position: relative;
-          transition: color 0.2s;
-
-          &:not(:hover) {
-            color: inherit;
+        a::before {
+          @media (min-width: 901px) {
+            background-size: 4rem;
+            top: -1rem;
           }
 
-          &:hover {
-            color: $teal;
+          @media (max-width: 900px) {
+            background-size: 3rem;
+            top: 0;
           }
         }
 
-        &:nth-child(1)::before {
+        &:nth-child(1) a::before {
           background-image: url("../media/svg/flag.svg");
         }
 
-        &:nth-child(2)::before {
+        &:nth-child(2) a::before {
           background-image: url("../media/svg/keyboard.svg");
         }
 
-        &:nth-child(3)::before {
+        &:nth-child(3) a::before {
           background-image: url("../media/svg/anchor.svg");
         }
 
-        &:nth-child(4)::before {
+        &:nth-child(4) a::before {
           background-image: url("../media/svg/chat.svg");
         }
 
-        &:nth-child(5)::before {
+        &:nth-child(5) a::before {
           background-image: url("../media/svg/monitor.svg");
+        }
+      }
+    }
+  }
+
+  &.community {
+    ul {
+      li {
+        width: calc(100% / 3);
+
+        a::before {
+          @media (min-width: 901px) {
+            background-size: 6rem;
+            top: -2rem;
+          }
+
+          @media (max-width: 900px) {
+            background-size: 4rem;
+            top: -0.5rem;
+          }
+        }
+
+        &:nth-child(1) a::before {
+          background-image: url("../media/svg/discord.svg");
+        }
+
+        &:nth-child(2) a::before {
+          background-image: url("../media/svg/reddit.svg");
+        }
+
+        &:nth-child(3) a::before {
+          background-image: url("../media/svg/slack.svg");
         }
       }
     }
