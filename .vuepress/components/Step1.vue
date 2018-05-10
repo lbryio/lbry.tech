@@ -5,7 +5,7 @@
       <p>Let's start by getting the associated metadata for <a href="#">a claim</a>.</p>
     </div>
     <div class="xs12 sm10">
-      <input type="text" v-model="address" prefix="lbry://" />
+      lbry://<input type="text" v-model="address" />
     </div>
     <div class="xs12 sm2">
       <a href="#" class="__button-black" v-on:click="fetchMetadata">Execute</a>

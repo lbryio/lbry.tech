@@ -1,18 +1,18 @@
 <template>
-  <v-container fluid id="step2-page">
-    <v-layout row wrap v-images-loaded="imagesLoaded">
-      <v-flex xs12>
-        <h1 class="display-2">Publish your content on the blockchain</h1>
-        <p class="subheading">Upload an image to the blockchain and you are able to view it on the <a href='http://explorer.lbry.io' target='_blank'>LBRY Blockchain Explorer</a>.</p>
-      </v-flex>
-      <v-flex xs12 sm8>
+  <div id="step2-page">
+    <div v-images-loaded="imagesLoaded">
+      <div class="xs12">
+        <h1>Publish your content on the blockchain</h1>
+        <p>Upload an image to the blockchain and you are able to view it on the <a href='http://explorer.lbry.io' target='_blank'>LBRY Blockchain Explorer</a>.</p>
+      </div>
+      <div class="xs12 sm8">
         <img src="https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png" id="base-image">
         <canvas id="meme-canvas" width="400" height="300">
           Sorry, canvas not supported
         </canvas>
-        <v-flex xs12 sm6 class="mx-auto">
-          <v-card class="pa-3">
-            <p class="subheading">Upload a background image</p>
+        <div class="xs12 sm6">
+          <div class="image-upload-container">
+            <p>Upload a background image</p>
             <image-uploader
               :quality="0.8"
               :autoRotate=true
@@ -22,29 +22,30 @@
               @input="setImage"
               @onComplete="imageUploaded"
             ></image-uploader>
-          </v-card>
-        </v-flex>
-      </v-flex>
-      <v-flex xs12 sm4>
-        <v-card class="pa-3">
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field v-model="topLine" dark solo :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="bottomLine" dark solo :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="title" label="Title" :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="description" label="Description" :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="author" label="Author" :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="language" label="Language" :rules="textFieldRules" required></v-text-field>
-            <v-text-field v-model="license" label="License" :rules="textFieldRules" required></v-text-field>
-            <v-checkbox label="NSFW" v-model="nsfw"></v-checkbox>
-            <v-btn v-on:click="submit" :disabled="!valid">Submit</v-btn>
-          </v-form>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 v-if="isLoading">
-        <v-progress-circular indeterminate color="white"></v-progress-circular>
-      </v-flex>
-    </v-layout>
-  </v-container>
+          </div>
+        </div>
+      </div>
+      <div class="xs12 sm4">
+        <div class="form-container">
+          <form>
+            <input type="text" v-model="topLine" placeholder="Top line" required />
+            <input type="text" v-model="bottomLine" placeholder="Bottom line" required />
+            <input type="text" v-model="title" placeholder="Title" required />
+            <input type="text" v-model="description" placeholder="Description" required />
+            <input type="text" v-model="author" placeholder="Author" required />
+            <input type="text" v-model="language" placeholder="Language" required />
+            <input type="text" v-model="license" placeholder="License" required />
+            <label><input type="checkbox" v-model="nsfw" name="nsfw" />NSFW</label>
+            <input type="submit" class="__button-black" v-on:click="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="xs12" v-if="isLoading">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -134,14 +135,20 @@ export default {
     }
   },
   name: 'Step2'
-}
+};
 </script>
 
 <style lang="scss">
 
-@import '../scss/variables';
-
 #step2-page {
+  .sm8 {
+    float: left;
+    width: 66%;
+  }
+  .sm4 {
+    float: right;
+    width: 30%;
+  }
   #meme-canvas {
     width: 400px;
     height: 300px;
@@ -151,8 +158,35 @@ export default {
     top: -10000px;
     position: absolute;
   }
-  .input-group--text-field {
-    margin-bottom: 0.5rem;
+  .image-upload-container {
+    background: white;
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem auto;
+    p {
+      color: black;
+      text-shadow: none;
+    }
+  }
+  .form-container {
+    input {
+      margin-bottom: 0.5rem;
+      display: block;
+      width: 80%;
+      &[type='checkbox'] {
+        margin: 0;
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        -moz-appearance: checkbox;
+        -webkit-appearance: checkbox;
+      }
+    }
+    label {
+      text-align: left;
+      display: block;
+      line-height: 2rem;
+    }
   }
   #fileInput {
     width: 100%;
