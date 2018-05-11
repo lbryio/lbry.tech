@@ -1,4 +1,7 @@
 .home {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+
   h1, h2 {
     text-align: center;
   }
@@ -37,7 +40,7 @@
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    height: calc(50vh - 4rem);
+    height: calc(50vh - 4rem); min-height: 300px;
     justify-content: center;
 
     @media (max-width: 850px) {

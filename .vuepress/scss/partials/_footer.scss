@@ -2,13 +2,15 @@
   background-color: $black;
   color: rgba($white, 0.15);
   font-size: 1rem;
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
 
   > div:first-of-type {
     @media (max-width: 900px) {
       overflow: auto;
       overflow-scrolling: touch;
       white-space: nowrap;
-      width: 102%;
+      width: 100%;
     }
   }
 

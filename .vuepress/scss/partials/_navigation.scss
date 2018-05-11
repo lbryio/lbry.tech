@@ -3,6 +3,8 @@
 
   background-color: $white;
   box-shadow: 0 1px 5px rgba($black, 0.1);
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
   position: fixed;
   width: 100%;
   z-index: 10;
@@ -20,7 +22,7 @@
       overflow: auto;
       overflow-scrolling: touch;
       white-space: nowrap;
-      width: 102%;
+      width: 100%;
 
       &::before {
         width: 2rem; height: 4rem;
