@@ -27,7 +27,7 @@
             <li class="home__feature">
               <p class="home__feature__title"><strong>New to LBRY?</strong></p>
               <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
-              <a class="home__feature__cta" href="">Check it out</a>
+              <a class="home__feature__cta" href="/hook.html">Check it out</a>
             </li>
 
             <li class="home__feature">
@@ -95,6 +95,10 @@
           </div>
         </section>
       </div>
+    </template>
+
+    <template v-else-if="$page.path == '/hook.html'">
+      <Content></Content>
     </template>
 
     <template v-else-if="$page.path == '/whitepaper.html'">

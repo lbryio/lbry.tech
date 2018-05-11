@@ -73,7 +73,7 @@
     &::after {
       width: 100%; height: 3px;
 
-      background-color: mix($black, $teal, 15%);
+      background-color: $teal;
       content: "";
       left: 0;
       position: absolute;

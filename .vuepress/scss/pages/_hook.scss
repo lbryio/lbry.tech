@@ -1,0 +1,156 @@
+.hook {
+  .loader {
+    width: 4rem; height: 4rem;
+
+    animation: spin 2s linear infinite;
+    border: 6px solid;
+    border-radius: 50%;
+    border-top-color: $teal;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  to { transform: rotate(1turn); }
+}
+
+.hook__navigation {
+  background-color: $black;
+  color: $white;
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.hook__navigation__step {
+  display: inline-block;
+  text-align: center;
+
+  &:not(.active) {
+    span {
+      border-color: rgba($white, 0.1);
+    }
+  }
+
+  &.active {
+    color: $teal;
+
+    span {
+      border-color: rgba($teal, 0.3);
+    }
+  }
+
+  &:not(:last-of-type) {
+    margin-right: 1rem;
+  }
+
+  span {
+    width: 3rem; height: 3rem;
+
+    border: 1px solid;
+    border-radius: 50%;
+    display: block;
+    font-size: 1.25rem;
+    line-height: 3rem;
+    margin: 0 auto 0.5rem;
+  }
+}
+
+
+
+.hook__page {
+  @extend .page__content;
+}
+
+.hook__page__hero {
+  margin-bottom: 2rem; padding-bottom: 3rem;
+  border-bottom: 1px solid rgba($black, 0.05);
+
+  h1, p {
+    text-align: center;
+  }
+}
+
+.hook__page__hero__claim {
+  background-color: $white;
+  border: 1px solid rgba($gray, 0.7);
+  font-size: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 1rem;
+  width: 80%;
+
+  &::after {
+    @include clearfix;
+  }
+
+  input, a {
+    line-height: 3rem;
+  }
+
+  span {
+    color: rgba($black, 0.3);
+  }
+
+  input {
+    width: calc(100% - 10rem);
+  }
+
+  a {
+    border-left: 1px solid rgba($gray, 0.7);
+    color: $white;
+    float: right;
+    position: relative;
+    text-align: center;
+    transition: all 0.2s;
+    width: 6rem;
+
+    &::after {
+      width: calc(100% + 2px); height: calc(100% + 2px);
+      top: -1px; left: -1px;
+
+      border: 1px solid;
+      content: "";
+      position: absolute;
+      transition: inherit;
+    }
+
+    &:not(:hover) {
+      background-color: $black;
+
+      &::after {
+        border-color: $black;
+      }
+    }
+
+    &:hover {
+      background-color: $teal;
+
+      &::after {
+        border-color: $teal;
+      }
+    }
+  }
+}
+
+
+
+.hook__page__content {
+  &::after {
+    @include clearfix;
+  }
+}
+
+.hook__page__content__card {
+  margin-bottom: 1rem; padding: 1rem;
+
+  img {
+    margin-bottom: 0.5rem;
+  }
+
+  float: left;
+  width: 50%;
+}

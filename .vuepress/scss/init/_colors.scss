@@ -5,7 +5,7 @@ $gray:    #a3b7ad;
 $yellow:  #dbdb3e;
 $lime:    #8ddb3e;
 $green:   #3edb3e;
-$teal:    #3edb8d;
+$teal:    mix($black, #3edb8d, 15%); // #3edb8d
 $cyan:    #3edbdb;
 $blue:    #3e8cdb;
 $indigo:  #3e3edb;

@@ -113,8 +113,8 @@
     }
   }
 
-  a {
-    color: mix($black, $teal, 15%);
+  a:not(.button) {
+    color: $teal;
     position: relative;
 
     &::after {
