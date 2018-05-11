@@ -12,21 +12,27 @@
 
 .page__header {
   @include center;
-  width: 100%; height: 100px;
-
   background-image: url("../media/images/background-a.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   color: $white;
   position: relative;
+  width: 100%;
 }
 
 .page__header__title {
-  font-size: 3rem;
   font-weight: 300;
   line-height: 6.5rem;
   text-shadow: 1px 1px 2px rgba($black, 0.3);
+
+  @media (min-width: 901px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 2rem;
+  }
 }
 
 
@@ -62,12 +68,7 @@
     text-transform: uppercase;
   }
 
-  p, ol, ul {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-    position: relative;
-
+  p, ol, ul, table {
     code {
       background-color: $black;
       border-radius: 3px;
@@ -79,7 +80,26 @@
     }
   }
 
-  ol, ul {
+  p, ol, ul {
+    line-height: 1.33;
+    margin-bottom: 2rem;
+    position: relative;
+
+    @media (min-width: 901px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.05rem;
+    }
+  }
+
+  ol {
+    list-style-type: lower-roman;
+    padding-left: 1.6rem;
+  }
+
+  ul {
     padding-left: 1.25rem;
   }
 

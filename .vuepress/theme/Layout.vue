@@ -104,7 +104,6 @@
     <template v-else>
       <div>
         <article class="page" itemtype="http://schema.org/BlogPosting">
-
           <header class="page__header">
             <div class="page__header-wrap">
               <div class="inner-wrap">

@@ -25,7 +25,7 @@ Visit [beta.LBRY.tech](https://beta.lbry.tech) for hosted version for this repos
 
 ## Running from Source
 
-### Prequisities
+### Prerequisities
 
 * [Node](https://nodejs.org/) (version >= 9)
 * [Yarn](https://yarnpkg.com/)

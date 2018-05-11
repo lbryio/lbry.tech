@@ -8,9 +8,30 @@
   z-index: 10;
 
   > div:first-of-type {
-    align-items: stretch;
-    display: flex;
-    flex-flow: row wrap;
+    position: relative;
+
+    @media (min-width: 701px) {
+      align-items: stretch;
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    @media (max-width: 700px) {
+      overflow: auto;
+      overflow-scrolling: touch;
+      white-space: nowrap;
+      width: 102%;
+
+      &::before {
+        width: 2rem; height: 4rem;
+        top: 0; right: 0;
+
+        background-image: linear-gradient(90deg, rgba($white, 0), $white 50%, $white); // iOS Safari cannot handle `transparent`
+        content: "";
+        position: fixed;
+        z-index: 2;
+      }
+    }
   }
 }
 
@@ -19,6 +40,17 @@
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   position: relative;
+
+  @media (max-width: 700px) {
+    display: inline-block;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.2s 0.2s ease, transform 0.4s 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    vertical-align: top;
+
+    &:last-of-type {
+      margin-right: 3rem;
+    }
+  }
 
   &:first-of-type {
     @include hide-text;
