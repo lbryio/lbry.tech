@@ -1,13 +1,22 @@
 .hook {
   .loader {
-    width: 4rem; height: 4rem;
-
     animation: spin 2s linear infinite;
-    border: 6px solid;
     border-radius: 50%;
+    border-style: solid;
     border-top-color: $teal;
-    margin-right: auto;
-    margin-left: auto;
+
+    &:not(.small) {
+      width: 4rem; height: 4rem;
+
+      border-width: 6px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    &.small {
+      width: 2rem; height: 2rem;
+      border-width: 3px;
+    }
   }
 }
 
@@ -82,7 +91,7 @@
 }
 
 .hook__page__hero {
-  margin-bottom: 2rem; padding-bottom: 3rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid rgba($black, 0.05);
 
   h1, p {
@@ -90,11 +99,13 @@
   }
 }
 
-.hook__page__hero__claim {
+.hook__page__hero__claim,
+.hook__page__hero__support {
+  margin-bottom: 3rem; padding-left: 1rem;
+
   background-color: $white;
   border: 1px solid rgba($gray, 0.7);
   font-size: 1rem;
-  padding-left: 1rem;
 
   @media (min-width: 501px) {
     margin-right: auto;
@@ -112,10 +123,6 @@
 
   span {
     color: rgba($black, 0.3);
-  }
-
-  input {
-    width: calc(100% - 10rem);
   }
 
   a {
@@ -152,6 +159,30 @@
         border-color: $teal;
       }
     }
+  }
+}
+
+.hook__page__hero__claim {
+  input {
+    width: calc(100% - 10rem);
+  }
+}
+
+.hook__page__hero__support {
+  input[type=number] {
+    width: 3rem;
+  }
+
+  input[type=text] {
+    width: calc(100% - 11.5rem);
+  }
+
+  span {
+    line-height: 3rem;
+  }
+
+  a {
+    margin-left: 0.5rem;
   }
 }
 

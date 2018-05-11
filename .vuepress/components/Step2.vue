@@ -1,10 +1,14 @@
 <template>
-  <div id="step2-page">
+  <section class="hook__page" id="step2-page">
+
     <div v-images-loaded="imagesLoaded">
-      <div class="xs12">
-        <h1>Publish your content on the blockchain</h1>
-        <p>Upload an image to the blockchain and you are able to view it on the <a href='http://explorer.lbry.io' target='_blank'>LBRY Blockchain Explorer</a>.</p>
-      </div>
+      <header class="hook__page__hero">
+        <div class="inner-wrap">
+          <h1>Publish your content on the blockchain</h1>
+          <p>Upload an image to the blockchain and you are able to view it on the <a href="http://explorer.lbry.io" title="LBRY Blockchain Explorer" target="_blank">LBRY Blockchain Explorer</a>.</p>
+        </div>
+      </header>
+
       <div class="xs12 sm8">
         <img src="https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png" id="base-image">
         <canvas id="meme-canvas" width="400" height="300">
@@ -40,12 +44,13 @@
           </form>
         </div>
       </div>
-      <div class="clear"></div>
+
       <div class="xs12" v-if="isLoading">
         <div class="loader"></div>
       </div>
     </div>
-  </div>
+
+  </section>
 </template>
 
 <script>
