@@ -86,6 +86,7 @@ export default {
   @import "../scss/init/colors";
   @import "../scss/init/extends";
   @import "../scss/init/mixins";
+  @import "../scss/partials/animation";
   @import "../scss/pages/page";
   @import "../scss/pages/hook";
 </style>

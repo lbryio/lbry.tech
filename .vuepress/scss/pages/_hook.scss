@@ -11,10 +11,7 @@
   }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  to { transform: rotate(1turn); }
-}
+
 
 .hook__navigation {
   background-color: $black;
@@ -26,8 +23,36 @@
 }
 
 .hook__navigation__step {
-  display: inline-block;
-  text-align: center;
+  @media (min-width: 501px) {
+    display: inline-block;
+
+    &:not(:last-of-type) {
+      margin-right: 1rem;
+    }
+
+    span {
+      width: 3rem; height: 3rem;
+
+      display: block;
+      font-size: 1.25rem;
+      line-height: 3rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    display: block;
+
+    span {
+      width: 1rem; height: 1rem;
+
+      display: inline-block;
+      font-size: 0.7rem;
+      line-height: 0.9rem;
+      position: relative;
+      top: 2px;
+      vertical-align: top;
+    }
+  }
 
   &:not(.active) {
     span {
@@ -43,18 +68,9 @@
     }
   }
 
-  &:not(:last-of-type) {
-    margin-right: 1rem;
-  }
-
   span {
-    width: 3rem; height: 3rem;
-
     border: 1px solid;
     border-radius: 50%;
-    display: block;
-    font-size: 1.25rem;
-    line-height: 3rem;
     margin: 0 auto 0.5rem;
   }
 }
@@ -78,10 +94,13 @@
   background-color: $white;
   border: 1px solid rgba($gray, 0.7);
   font-size: 1rem;
-  margin-right: auto;
-  margin-left: auto;
   padding-left: 1rem;
-  width: 80%;
+
+  @media (min-width: 501px) {
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+  }
 
   &::after {
     @include clearfix;
@@ -151,6 +170,13 @@
     margin-bottom: 0.5rem;
   }
 
-  float: left;
-  width: 50%;
+  @media (min-width: 501px) {
+    float: left;
+    vertical-align: top;
+    width: 50%;
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 }
