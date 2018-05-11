@@ -11,28 +11,9 @@
           <input type="text" v-model="claimId" placeholder="Claim ID goes here"/>
           <input type="number" v-model="amount" disabled title="You can set this value to any amount of LBC in your wallet, but for demonstration purposes we have hardcoded it to 0.01"><span>LBC</span>
           <a href="#" v-on:click="send" class="button">Execute</a>
-
-          <!--/
-          <span>lbry://</span><input type="text" v-model="address" placeholder=" Claim URI goes here"/>
-          <a href="#" v-on:click="fetchMetadata" class="button">Execute</a>
-          /-->
         </div>
       </div>
     </header>
-
-    <!--/
-    <div class="xs12 sm10">
-      <input type="text" v-model="claimId"/>
-    </div>
-
-    <div class="xs12 sm2">
-      <input type="number" v-model="amount" disabled title="You can set this value to any amount of LBC in your wallet, but for demonstration purposes we have hardcoded it to 0.01">LBC
-    </div>
-
-    <div class="xs12 sm2">
-      <a href="#" class="button" v-on:click="send">Execute</a>
-    </div>
-    /-->
 
     <div class="xs12" v-if="exampleCode != ''">
       <pre v-highlightjs="exampleCode"><code class="bash"></code></pre>
