@@ -9,45 +9,78 @@
         </div>
       </header>
 
-      <div class="xs12 sm8">
-        <img src="https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png" id="base-image">
-        <canvas id="meme-canvas" width="400" height="300">
-          Sorry, canvas not supported
-        </canvas>
-        <div class="xs12 sm6">
-          <div class="image-upload-container">
-            <p>Upload a background image</p>
-            <image-uploader
-              :quality="0.8"
-              :autoRotate=true
-              :maxWidth="400"
-              outputFormat="string"
-              :preview=false
-              @input="setImage"
-              @onComplete="imageUploaded"
-            ></image-uploader>
-          </div>
-        </div>
-      </div>
-      <div class="xs12 sm4">
-        <div class="form-container">
-          <form>
-            <input type="text" v-model="topLine" placeholder="Top line" required />
-            <input type="text" v-model="bottomLine" placeholder="Bottom line" required />
-            <input type="text" v-model="title" placeholder="Title" required />
-            <input type="text" v-model="description" placeholder="Description" required />
-            <input type="text" v-model="author" placeholder="Author" required />
-            <input type="text" v-model="language" placeholder="Language" required />
-            <input type="text" v-model="license" placeholder="License" required />
-            <label><input type="checkbox" v-model="nsfw" name="nsfw" />NSFW</label>
-            <input type="submit" class="__button-black" v-on:click="submit" value="Submit" />
-          </form>
-        </div>
-      </div>
+      <aside class="hook__page__content">
+        <div class="inner-wrap">
 
-      <div class="xs12" v-if="isLoading">
-        <div class="loader"></div>
-      </div>
+          <div class="hook__page__content__meme left">
+            <img src="https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png" id="base-image" alt=""/>
+            <canvas id="meme-canvas" width="400" height="300">Sorry, canvas not supported</canvas>
+
+            <div class="hook__page__content__meme__uploader">
+              Upload an image
+              <image-uploader
+                :quality="0.8"
+                :autoRotate=true
+                :maxWidth="400"
+                outputFormat="string"
+                :preview=false
+                @input="setImage"
+                @onComplete="imageUploaded"
+              ></image-uploader>
+            </div>
+          </div>
+
+          <form class="hook__page__content__meme right">
+            <fieldset>
+              <label for="meme-top-line">Top line</label>
+              <input name="meme-top-line" id="meme-top-line" type="text" v-model="topLine" placeholder="Top line" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-bottom-line">Bottom line</label>
+              <input name="meme-bottom-line" id="meme-bottom-line" type="text" v-model="bottomLine" placeholder="Bottom line" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-title">Title</label>
+              <input name="meme-title" id="meme-title" type="text" v-model="title" placeholder="Title" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-description">Description</label>
+              <input name="meme-description" id="meme-description" type="text" v-model="description" placeholder="Description" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-author">Author</label>
+              <input name="meme-author" id="meme-author" type="text" v-model="author" placeholder="Author" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-language">Language</label>
+              <input name="meme-language" id="meme-language" type="text" v-model="language" placeholder="Language" required/>
+            </fieldset>
+
+            <fieldset>
+              <label for="meme-license">License</label>
+              <input name="meme-license" id="meme-license" type="text" v-model="license" placeholder="License" required/>
+            </fieldset>
+
+            <fieldset>
+              <label><input type="checkbox" v-model="nsfw" name="nsfw"/>NSFW</label>
+            </fieldset>
+
+            <fieldset>
+              <input type="submit" class="__button-black" v-on:click="submit" value="Submit"/>
+            </fieldset>
+          </form>
+
+          <div class="xs12" v-if="isLoading">
+            <div class="loader"></div>
+          </div>
+
+        </div>
+      </aside>
     </div>
 
   </section>
@@ -142,61 +175,3 @@ export default {
   name: 'Step2'
 };
 </script>
-
-<style lang="scss">
-
-#step2-page {
-  .sm8 {
-    float: left;
-    width: 66%;
-  }
-  .sm4 {
-    float: right;
-    width: 30%;
-  }
-  #meme-canvas {
-    width: 400px;
-    height: 300px;
-  }
-  #base-image {
-    left: -10000px;
-    top: -10000px;
-    position: absolute;
-  }
-  .image-upload-container {
-    background: white;
-    width: 80%;
-    padding: 1rem;
-    margin: 1rem auto;
-    p {
-      color: black;
-      text-shadow: none;
-    }
-  }
-  .form-container {
-    input {
-      margin-bottom: 0.5rem;
-      display: block;
-      width: 80%;
-      &[type='checkbox'] {
-        margin: 0;
-        width: 1rem;
-        height: 1rem;
-        display: inline-block;
-        -moz-appearance: checkbox;
-        -webkit-appearance: checkbox;
-      }
-    }
-    label {
-      text-align: left;
-      display: block;
-      line-height: 2rem;
-    }
-  }
-  #fileInput {
-    width: 100%;
-  }
-}
-
-
-</style>
