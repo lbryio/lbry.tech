@@ -29,6 +29,9 @@
       <template v-else-if="event.type == 'PullRequestEvent'">
         {{ event.payload.action }} pull request <a v-bind:href="event.payload.pull_request.url" target="_blank">{{ event.payload.pull_request.title }}</a>
       </template>
+      <template v-else-if="event.type == 'PullRequestReviewCommentEvent'">
+        commented on pull request <a v-bind:href="event.payload.pull_request.url" target="_blank">{{ event.payload.pull_request.title }}</a>
+      </template>
       <template v-else-if="event.type == 'PushEvent'">
         pushed to <span v-html="refToLink(event.payload.ref, event.repo.name)"></span>
       </template>
