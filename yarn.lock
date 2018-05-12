@@ -3492,7 +3492,7 @@ moment-timezone@^0.5.x:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0":
+"moment@>= 2.9.0", moment@^2.11.1:
   version "2.22.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
 
@@ -5851,6 +5851,12 @@ vue-loader@^15.0.0-rc.1:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-moment@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vue-moment/-/vue-moment-3.2.0.tgz#28cd2b313831ae83953f646ac4785a2cc724e412"
+  dependencies:
+    moment "^2.11.1"
 
 vue-resource@^1.5.0:
   version "1.5.0"

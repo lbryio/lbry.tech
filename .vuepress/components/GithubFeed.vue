@@ -21,7 +21,7 @@
         forked <a v-bind:href="event.repo.url" target="_blank">{{ event.repo.name }}</a> to <a v-bind:href="event.payload.forkee.url" target="_blank">{{ event.payload.forkee.name }}</a>
       </template>
       <template v-else-if="event.type == 'IssueCommentEvent'">
-        commented on <template v-if="event.payload.issue.pull_request">pull request</template><template v-else>issue</template> <a v-bind:href="event.payload.issue.url" target="_blank">{{ event.payload.issue.title }}</a>
+        commented on <template v-if="event.payload.issue.pull_request">pull request</template><template v-else>issue</template>&nbsp;<a v-bind:href="event.payload.issue.url" target="_blank">{{ event.payload.issue.title }}</a>
       </template>
       <template v-else-if="event.type == 'IssuesEvent'">
         {{ event.payload.action }} issue <a v-bind:href="event.payload.issue.url" target="_blank">{{ event.payload.issue.title }}</a>
@@ -39,6 +39,7 @@
         starred the repo
       </template>
       in <a v-bind:href="event.repo.url" target="_blank">{{ event.repo.name }}</a>
+      <div class="time-ago">{{ event.created_at | moment('from') }}</div>
     </div>
 
   </div>
@@ -106,6 +107,13 @@ export default {
     border-radius: 1rem;
     vertical-align: middle;
     margin-right: 0.5rem;
+  }
+  .time-ago {
+    color: #777;
+    font-style: italic;
+    font-size: 0.7rem;
+    float: right;
+    padding: 0.7rem 0 0 0;
   }
 }
 

@@ -157,8 +157,10 @@
 
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import VueMoment from 'vue-moment'
 
 Vue.use(VueResource)
+Vue.use(VueMoment)
 
 export default {
   data () {
