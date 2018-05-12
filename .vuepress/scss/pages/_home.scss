@@ -275,7 +275,13 @@
   &.contribute {
     ul {
       li {
-        width: calc(100% / 5);
+        @media (min-width: 701px) {
+          width: calc(100% / 5);
+        }
+
+        @media (max-width: 700px) {
+          width: 50%;
+        }
 
         a::before {
           @media (min-width: 901px) {
@@ -315,7 +321,13 @@
   &.community {
     ul {
       li {
-        width: calc(100% / 3);
+        @media (min-width: 701px) {
+          width: calc(100% / 3);
+        }
+
+        @media (max-width: 700px) {
+          width: 50%;
+        }
 
         a::before {
           @media (min-width: 901px) {
