@@ -98,10 +98,10 @@ export default {
           return event.payload.comment.html_url;
         break;
         case 'repo':
-          return 'https://github.com' + event.repo.name;
+          return 'https://github.com/' + event.repo.name;
         break;
         case 'forkee':
-          return 'https://github.com' + event.payload.forkee.full_name;
+          return 'https://github.com/' + event.payload.forkee.full_name;
         break;
         case 'issue':
           return event.payload.issue.html_url;
@@ -117,17 +117,6 @@ export default {
         break;
 
       }
-
-    },
-    rewriteGithubApiUrl (url) {
-
-      url = url.replace('api.github.com', 'github.com');
-      
-      var urlParts = url.split('/');
-
-      urlParts.push(urlParts.splice(4).join('/'));
-
-      return urlParts[0] + '/' + urlParts[1] + '/' + urlParts[2] + '/' + urlParts[4];
 
     }
   }
