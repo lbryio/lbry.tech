@@ -27,19 +27,16 @@ The vast majority of issues will be filed in either `lbry-app` or `lbry`.
 
 If you're about to raise an issue because you've found a problem with LBRY, or you'd like to request a new feature, or for any other reason, please read this first.
 
-GitHub is the preferred channel for [bug reports](#report-a-bug) and [feature requests](#feature-requests). 
+GitHub is the preferred channel for [bug reports](#report-a-bug) and [feature requests](#feature-requests).
 
 ### Reporting a Bug
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
-
 Guidelines for bug reports:
 
 1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
-
-1. **Use the GitHub issue search** &mdash; check if the issue has already been reported (or fixed). Be sure to include closed tickets in your search.
-
-1. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Please follow it!
+2. **Use the GitHub issue search** &mdash; check if the issue has already been reported (or fixed). Be sure to include closed tickets in your search.
+3. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Please follow it!
 
 Well-specified bug reports save developers lots of time and are extremely appreciated, typically with an LBRY credit tip.
 
@@ -49,9 +46,9 @@ Feature requests are welcome. Before you submit one be sure to:
 
 
 1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview).
-1. **Use the Github Issues search** and check the feature hasn't already been requested. Be sure to include closed tickets.
-2. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
-3. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
+2. **Use the Github Issues search** and check the feature hasn't already been requested. Be sure to include closed tickets.
+3. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
+4. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
 
 ## Coding
 
@@ -79,7 +76,7 @@ If you want to contribute new written copy, such as a blog post or other content
 
 ### Designing
 
-If you're a web designer, you can contribute to either [lbry.io](https://github.com/lbryio/lbry.io) (the website) or [lbry-app](https://github.com/lbryio/lbry-app) (the browser) by opening a pull request. 
+If you're a web designer, you can contribute to either [lbry.io](https://github.com/lbryio/lbry.io) (the website) or [lbry-app](https://github.com/lbryio/lbry-app) (the browser) by opening a pull request.
 
 If you're a graphic designer, creating engaging graphics, GIFs, explainers, HOWTOs, wallpapers, and other related graphical content is a huge help! You can submit or discuss contributions by emailing [Jeremy](mailto:jeremy@lbry.io) or joining the #design channel in our [chat](https://chat.lbry.io).
 

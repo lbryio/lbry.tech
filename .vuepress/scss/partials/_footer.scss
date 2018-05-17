@@ -6,7 +6,7 @@
   padding-left: env(safe-area-inset-left);
 
   > div:first-of-type {
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       overflow: auto;
       overflow-scrolling: touch;
       white-space: nowrap;
@@ -19,7 +19,7 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
 
-    @media (min-width: 901px) {
+    @media (min-width: 981px) {
       align-items: stretch;
       display: flex;
       flex-flow: row wrap;
@@ -30,7 +30,7 @@
       padding-left: 0.5rem;
       vertical-align: bottom;
 
-      @media (max-width: 900px) {
+      @media (max-width: 980px) {
         display: inline-block;
         transform: translate3d(0, 0, 0);
         transition: opacity 0.2s 0.2s ease, transform 0.4s 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
