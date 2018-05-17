@@ -23,7 +23,12 @@ export default {
       if(!this.validateEmail(this.emailAddress)) {
         this.message = 'Your email is not valid!';
       } else {
-        this.$http.post('//api.lbry.io/list/subscribe', {email: this.emailAddress, tag: 'developer'}).then(function(response) {
+        this.$http.post('//api.lbry.io/list/subscribe', {
+          email: this.emailAddress, 
+          tag: 'developer'
+        }, {
+          emulateJSON: true
+        }).then(function(response) {
           component.email = '';
           component.message = 'Thank you for subscribing!';
         });
