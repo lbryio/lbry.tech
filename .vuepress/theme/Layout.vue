@@ -125,6 +125,10 @@
       </div>
     </template>
 
+    <section class="email-subscribe-container">
+      <EmailSubscribe></EmailSubscribe>
+    </section>
+
     <section class="home alert">
       <div class="inner-wrap">
         <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
