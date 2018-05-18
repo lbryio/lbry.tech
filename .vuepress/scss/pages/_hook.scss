@@ -223,14 +223,33 @@
   &.left {
     margin-bottom: 2rem;
 
-    img {
+    #base-image {
       height: 0;
       visibility: hidden;
+    }
+
+    .thumbnail {
+      width: 5rem;
+      height: 5rem;
+      object-fit: cover;
+      margin: 0 1rem 1rem 0;
+      border: 4px solid white;
+      border-radius: 1px;
+      &.selected {
+        border-color: black;
+      }
     }
 
     canvas {
       width: 100%; height: 100%;
       background-color: rgba($teal, 0.3);
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    &.metadata {
+      margin-top: 3rem;
     }
   }
 
@@ -253,7 +272,9 @@
     width: 100%;
   }
 
-  input {
+  input,
+  textarea,
+  select {
     @media (min-width: 901px) {
       &:not([type="checkbox"]):not([type="submit"]) {
         font-size: 1.25rem;
@@ -309,6 +330,10 @@
         color: $teal;
       }
     }
+  }
+  #meme-top-line,
+  #meme-bottom-line {
+    text-transform: uppercase;
   }
 }
 

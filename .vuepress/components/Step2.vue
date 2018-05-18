@@ -13,9 +13,10 @@
         <div class="inner-wrap">
 
           <div class="hook__page__content__meme left">
-            <img src="https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png" id="base-image" alt=""/>
+            <img v-bind:src="backgroundImage" id="base-image" alt="" />
             <canvas id="meme-canvas" width="400" height="300">Sorry, canvas not supported</canvas>
 
+            <!--
             <div class="hook__page__content__meme__uploader">
               Upload an image
               <image-uploader
@@ -28,9 +29,16 @@
                 @onComplete="imageUploaded"
               ></image-uploader>
             </div>
+            -->
+
+            <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="thumbnail" v-bind:class="{'selected': backgroundImage == image.src}" v-bind:alt="image.alt">
+
           </div>
 
           <form class="hook__page__content__meme right">
+
+            <h2>Image Text</h2>
+
             <fieldset>
               <label for="meme-top-line">Top line</label>
               <input name="meme-top-line" id="meme-top-line" type="text" v-model="topLine" placeholder="Top line" required/>
@@ -41,6 +49,8 @@
               <input name="meme-bottom-line" id="meme-bottom-line" type="text" v-model="bottomLine" placeholder="Bottom line" required/>
             </fieldset>
 
+            <h2 class="metadata">Metadata</h2>
+
             <fieldset>
               <label for="meme-title">Title</label>
               <input name="meme-title" id="meme-title" type="text" v-model="title" placeholder="Title" required/>
@@ -48,22 +58,37 @@
 
             <fieldset>
               <label for="meme-description">Description</label>
-              <input name="meme-description" id="meme-description" type="text" v-model="description" placeholder="Description" required/>
-            </fieldset>
-
-            <fieldset>
-              <label for="meme-author">Author</label>
-              <input name="meme-author" id="meme-author" type="text" v-model="author" placeholder="Author" required/>
+              <textarea name="meme-description" id="meme-description" type="text" v-model="description" placeholder="Description" required>{{ description}}</textarea>
             </fieldset>
 
             <fieldset>
               <label for="meme-language">Language</label>
-              <input name="meme-language" id="meme-language" type="text" v-model="language" placeholder="Language" required/>
+              <select name="meme-language" id="meme-language" v-model="language">
+                <option value="EN">English</option>
+                <option value="FR">French</option>
+                <option value="ES">Spanish</option>
+                <option value="DE">German</option>
+                <option value="IT">Italian</option>
+                <option value="ZH">Chinese (Mandarin)</option>
+                <option value="AR">Arabic</option>
+                <option value="RU">Russian</option>
+                <option value="JP">Japanese</option>
+                <option value="">Not specified</option>
+              </select>
             </fieldset>
 
             <fieldset>
               <label for="meme-license">License</label>
-              <input name="meme-license" id="meme-license" type="text" v-model="license" placeholder="License" required/>
+              <select name="meme-license" id="meme-license" v-model="license" required>
+                <option value="Public Domain">Public Domain</option>
+                <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
+                <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
+                <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
+                <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
+                <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
+                <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
+                <option value="None">None</option>
+              </select>
             </fieldset>
 
             <fieldset>
@@ -99,19 +124,35 @@ export default {
   components: {
     ImageUploader
   },
+
   data () {
+    var images = [
+      {
+        src: 'https://spee.ch/4f6b953e605a602434246743fd246d3e1fd4f5fd/carlsagan2.jpeg',
+        alt: 'Carl Sagan'
+      },
+      {
+        src: 'https://spee.ch/2f90f2d91441a4d33d3d4eb82bdfc4c56ec742c7/doge-meme.jpeg',
+        alt: 'Doge'
+      },
+      {
+        src: 'https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png',
+        alt: 'LBRY Logo With Green Background'
+      }
+    ];
     return {
       valid: false,
       isLoading: false,
       topLine: 'This is an example meme',
       bottomLine: 'that I made',
       title: '',
-      description: '',
+      description: 'Check out this image I published to LBRY via lbry.tech',
       author: '',
       language: 'EN',
       license: 'Public Domain',
       nsfw: false,
-      backgroundImage: '',
+      images: images,
+      backgroundImage: images[0].src,
       textFieldRules: [
         v => !!v || 'Field is required'
       ],
@@ -130,11 +171,13 @@ export default {
       ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
 
       ctx.lineWidth = 4;
-      ctx.font = 'bold 28px Coda';
+      ctx.font = 'bold 28px Karla';
       ctx.strokeStyle = 'black';
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
+
+      ctx.lineJoin = 'round';
 
       ctx.strokeText(this.topLine.toUpperCase(), canvasWidth / 2, 20);
       ctx.fillText(this.topLine.toUpperCase(), canvasWidth / 2, 20);
@@ -149,9 +192,14 @@ export default {
     imagesLoaded (instance) {
       var component = this;
       // Make sure the font is loaded
-      document.fonts.load('bold 28px Coda').then(function() {
+      document.fonts.load('bold 28px Karla').then(function() {
         component.updateCanvas();
       });
+    },
+    chooseImage (src) {
+      var component = this;
+      component.backgroundImage = src;
+      component.updateCanvas();
     },
     setImage (file) {
       var component = this;
