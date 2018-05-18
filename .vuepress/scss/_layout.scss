@@ -23,8 +23,27 @@ main {
   min-height: 100vh;
   padding-top: 4rem;
 
-  > div:first-of-type {
-    flex: 1;
+  &:not(.home) {
+    > div:first-of-type {
+      flex: 1;
+    }
+  }
+
+  &.home {
+    @media (min-width: 1001px) {
+      > div:first-of-type {
+        display: grid;
+        grid-gap: 0;
+        grid-template-areas:
+          "header header header"
+          "features features features"
+          "intro intro github"
+          "docs docs github"
+          "contribute contribute contribute"
+          "develop develop develop"
+          "community community community";
+      }
+    }
   }
 }
 

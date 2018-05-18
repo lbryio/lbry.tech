@@ -40,6 +40,7 @@
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
+    grid-area: header;
     height: calc(50vh - 4rem); min-height: 300px;
     justify-content: center;
 
@@ -78,6 +79,8 @@
   }
 
   &.features {
+    grid-area: features;
+
     .home__features {
       align-content: center;
       border-bottom: 1px solid rgba($black, 0.05);
@@ -204,6 +207,21 @@
     border-bottom: 1px solid rgba($black, 0.05);
   }
 
+  &.intro,
+  &.docs {
+    @media (min-width: 1301px) {
+      padding-left: 10%;
+    }
+  }
+
+  &.intro {
+    grid-area: intro;
+  }
+
+  &.docs {
+    grid-area: docs;
+  }
+
   &.community,
   &.contribute {
     p {
@@ -273,6 +291,8 @@
   }
 
   &.contribute {
+    grid-area: contribute;
+
     ul {
       li {
         @media (min-width: 701px) {
@@ -318,7 +338,13 @@
     }
   }
 
+  &.develop {
+    grid-area: develop;
+  }
+
   &.community {
+    grid-area: community;
+
     ul {
       li {
         @media (min-width: 701px) {

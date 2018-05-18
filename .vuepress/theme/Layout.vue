@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main v-bind:class="{'home': $page.frontmatter.home}">
     <nav class="navigation">
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
@@ -59,6 +59,8 @@
           </div>
         </section>
 
+        <GithubFeed></GithubFeed>
+
         <section class="home contribute">
           <div class="inner-wrap">
             <h3>Contribute</h3>
@@ -103,7 +105,7 @@
     </template>
 
     <template v-else-if="$page.path == '/whitepaper.html'">
-      <Content custom></Content>
+      <Content></Content>
     </template>
 
     <template v-else>
