@@ -72,3 +72,25 @@ h1, h2, h3, h4, h5 {
     display: none;
   }
 }
+
+.alert {
+  background-color: $yellow;
+  line-height: 1.33;
+  padding-top: 1rem;
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: 1rem;
+  padding-left: env(safe-area-inset-left);
+  text-align: center;
+
+  @media (min-width: 901px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    font-size: 0.8rem;
+  }
+
+  a {
+    font-weight: 600;
+  }
+}

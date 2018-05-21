@@ -1,5 +1,5 @@
 <template>
-  <main v-bind:class="{'home': $page.frontmatter.home}">
+  <main v-bind:class="{ 'home': $page.frontmatter.home, 'documentation': $page.frontmatter.documentation }">
     <nav class="navigation">
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
@@ -14,7 +14,7 @@
 
     <template v-if="$page.frontmatter.home">
       <div>
-        <section class="home hero">
+        <section class="hero">
           <div>
             <h2>
               LBRY is a free, open, and community-run digital marketplace.<br/>
@@ -23,7 +23,7 @@
           </div>
         </section>
 
-        <section class="home features">
+        <section class="features">
           <ul class="home__features">
             <li class="home__feature">
               <p class="home__feature__title"><strong>New to LBRY?</strong></p>
@@ -39,7 +39,7 @@
           </ul>
         </section>
 
-        <section class="home intro">
+        <section class="intro">
           <div class="inner-wrap">
             <h3>Intro/Overview</h3>
             <p>What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?</p>
@@ -50,7 +50,7 @@
           </div>
         </section>
 
-        <section class="home docs">
+        <section class="docs">
           <div class="inner-wrap">
             <h3>Documentation</h3>
             <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
@@ -61,7 +61,7 @@
 
         <GithubFeed></GithubFeed>
 
-        <section class="home contribute">
+        <section class="contribute">
           <div class="inner-wrap">
             <h3>Contribute</h3>
             <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
@@ -76,7 +76,7 @@
           </div>
         </section>
 
-        <section class="home develop">
+        <section class="develop">
           <div class="inner-wrap">
             <h3>Development</h3>
             <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
@@ -85,7 +85,7 @@
           </div>
         </section>
 
-        <section class="home community">
+        <section class="community">
           <div class="inner-wrap">
             <h3>Community</h3>
             <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
@@ -97,6 +97,25 @@
             </ul>
           </div>
         </section>
+      </div>
+    </template>
+
+    <template v-else-if="$page.frontmatter.documentation">
+      <div>
+        <article class="page" itemtype="http://schema.org/BlogPosting">
+          <header class="page__header">
+            <div class="page__header-wrap">
+              <div class="inner-wrap">
+                <h2 class="page__header__title" itemprop="name headline">{{ $page.title }}</h2>
+              </div>
+            </div>
+          </header>
+
+          <section class="page__content" itemprop="articleBody">
+            <div class="inner-wrap">
+            </div>
+          </section>
+        </article>
       </div>
     </template>
 
@@ -132,7 +151,7 @@
       <EmailSubscribe></EmailSubscribe>
     </section>
 
-    <section class="home alert">
+    <section class="alert">
       <div class="inner-wrap">
         <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
       </div>

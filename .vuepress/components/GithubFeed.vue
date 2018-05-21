@@ -11,61 +11,61 @@
       <p>
         <template v-if="event.type == 'CommitCommentEvent'">
           <strong>{{ event.actor.display_login }}</strong> commented on
-          <a v-bind:href="generateGithubUrl('comment', event)">commit</a>
+          <a v-bind:href="generateGithubUrl('comment', event)">commit</a> in
         </template>
 
         <template v-else-if="event.type == 'CreateEvent'">
           <strong>{{ event.actor.display_login }}</strong> created
-          {{ event.payload.ref_type }} <code>{{ event.payload.ref }}</code>
+          {{ event.payload.ref_type }} <code>{{ event.payload.ref }}</code> in
         </template>
 
         <template v-else-if="event.type == 'DeleteEvent'">
           <strong>{{ event.actor.display_login }}</strong> deleted
-          {{ event.payload.ref_type }} <code>{{ event.payload.ref }}</code>
+          {{ event.payload.ref_type }} <code>{{ event.payload.ref }}</code> in
         </template>
 
         <template v-else-if="event.type == 'ForkEvent'">
           <strong>{{ event.actor.display_login }}</strong> forked
           <strong><a v-bind:href="generateGithubUrl('repo', event)" target="_blank">{{ event.repo.name }}</a></strong> to
-          <strong><a v-bind:href="generateGithubUrl('forkee', event)" target="_blank">{{ event.payload.forkee.name }}</a></strong>
+          <strong><a v-bind:href="generateGithubUrl('forkee', event)" target="_blank">{{ event.payload.forkee.name }}</a></strong> in
         </template>
 
         <template v-else-if="event.type == 'IssueCommentEvent'">
           <strong>{{ event.actor.display_login }}</strong> commented on
           <template v-if="event.payload.issue.pull_request">pull request </template><template v-else>issue </template>
-          <em><a v-bind:href="generateGithubUrl('issue', event)" target="_blank">{{ event.payload.issue.title }}</a></em>
+          <em><a v-bind:href="generateGithubUrl('issue', event)" target="_blank">{{ event.payload.issue.title }}</a></em> in
         </template>
 
         <template v-else-if="event.type == 'IssuesEvent'">
           <strong>{{ event.actor.display_login }}</strong> {{ event.payload.action }} issue
-          <em><a v-bind:href="generateGithubUrl('issue', event)" target="_blank">{{ event.payload.issue.title }}</a></em>
+          <em><a v-bind:href="generateGithubUrl('issue', event)" target="_blank">{{ event.payload.issue.title }}</a></em> in
         </template>
 
         <template v-else-if="event.type == 'PullRequestEvent'">
           <strong>{{ event.actor.display_login }}</strong> {{ event.payload.action }} pull request
-          <em><a v-bind:href="generateGithubUrl('pull_request', event)" target="_blank">{{ event.payload.pull_request.title }}</a></em>
+          <em><a v-bind:href="generateGithubUrl('pull_request', event)" target="_blank">{{ event.payload.pull_request.title }}</a></em> in
         </template>
 
         <template v-else-if="event.type == 'PullRequestReviewCommentEvent'">
           <strong>{{ event.actor.display_login }}</strong> commented on pull request
-          <a v-bind:href="generateGithubUrl('pull_request', event)" target="_blank">{{ event.payload.pull_request.title }}</a>
+          <em><a v-bind:href="generateGithubUrl('pull_request', event)" target="_blank">{{ event.payload.pull_request.title }}</a></em> in
         </template>
 
         <template v-else-if="event.type == 'PushEvent'">
           <strong>{{ event.actor.display_login }}</strong> pushed to
-          <code><a v-bind:href="generateGithubUrl('push', event)" target="_blank">{{ refToBranch(event.payload.ref) }}</a></code>
+          <code><a v-bind:href="generateGithubUrl('push', event)" target="_blank">{{ refToBranch(event.payload.ref) }}</a></code> in
         </template>
 
         <template v-else-if="event.type == 'ReleaseEvent'">
           <strong>{{ event.actor.display_login }}</strong> released
-          <em><a v-bind:href="generateGithubUrl('release', event)" target="_blank">{{ event.payload.release.tag_name }}</a></em>
+          <em><a v-bind:href="generateGithubUrl('release', event)" target="_blank">{{ event.payload.release.tag_name }}</a></em> in
         </template>
 
         <template v-else-if="event.type == 'WatchEvent'">
           <strong>{{ event.actor.display_login }}</strong> starred the repo
         </template>
 
-        in <a v-bind:href="generateGithubUrl('repo', event)" target="_blank"><strong>{{ event.repo.name }}</strong></a>
+        <a v-bind:href="generateGithubUrl('repo', event)" target="_blank"><strong>{{ event.repo.name }}</strong></a>
         <em class="github-feed__event__time">{{ event.created_at | moment('from') }}</em>
       </p>
     </div>
@@ -271,7 +271,9 @@ export default {
     }
 
     > p:first-of-type {
-      box-shadow: 0 2px 5px rgba($black, 0.025);
+      @media (max-width: 700px) {
+        box-shadow: 0 2px 5px rgba($black, 0.025);
+      }
 
       code {
         background-color: $black;

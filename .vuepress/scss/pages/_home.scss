@@ -33,7 +33,7 @@
     margin-bottom: 4rem;
   }
 
-  &.hero {
+  .hero {
     align-items: center;
     background-color: $black;
     background-image: url("../media/svg/text-logo--white.svg");
@@ -58,27 +58,7 @@
     }
   }
 
-  &.alert {
-    background-color: $yellow;
-    line-height: 1.33;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    text-align: center;
-
-    @media (min-width: 901px) {
-      font-size: 1rem;
-    }
-
-    @media (max-width: 900px) {
-      font-size: 0.8rem;
-    }
-
-    a {
-      font-weight: 600;
-    }
-  }
-
-  &.features {
+  .features {
     grid-area: features;
 
     .home__features {
@@ -136,11 +116,11 @@
     }
   }
 
-  &.intro,
-  &.docs,
-  &.contribute,
-  &.develop,
-  &.community {
+  .intro,
+  .docs,
+  .contribute,
+  .develop,
+  .community {
     padding-top: 3rem;
     padding-bottom: 3.5rem;
 
@@ -200,30 +180,30 @@
     }
   }
 
-  &.intro,
-  &.docs,
-  &.contribute,
-  &.develop {
+  .intro,
+  .docs,
+  .contribute,
+  .develop {
     border-bottom: 1px solid rgba($black, 0.05);
   }
 
-  &.intro,
-  &.docs {
+  .intro,
+  .docs {
     @media (min-width: 1301px) {
       padding-left: 10%;
     }
   }
 
-  &.intro {
+  .intro {
     grid-area: intro;
   }
 
-  &.docs {
+  .docs {
     grid-area: docs;
   }
 
-  &.community,
-  &.contribute {
+  .community,
+  .contribute {
     p {
       @media (min-width: 1301px) {
         margin-right: auto;
@@ -290,7 +270,7 @@
     }
   }
 
-  &.contribute {
+  .contribute {
     grid-area: contribute;
 
     ul {
@@ -338,11 +318,11 @@
     }
   }
 
-  &.develop {
+  .develop {
     grid-area: develop;
   }
 
-  &.community {
+  .community {
     grid-area: community;
 
     ul {
