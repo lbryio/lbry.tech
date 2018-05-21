@@ -38,10 +38,10 @@ This document exists to introduce a project to a new visitor. It may also serve 
 
 * This section covers how to run the project from source and/or with the intent of working directly on it.
 * It can have a Prerequisites section for what is required to run from source.
-* It is okay to assume some basic assumptions about what people know about the language or tools the project uses. However, it’s good when possible to assume very little, and provide links to the user for how to get the prerequisites. 
+* It is okay to assume some basic assumptions about what people know about the language or tools the project uses. However, it’s good when possible to assume very little, and provide links to the user for how to get the prerequisites.
 * For prerequisites that it is not safe to assume knowledge of, the project should list the explicit command to add the prerequisite, or link to instructions on how to add the prerequisite.
 * If there are operating system specific instructions, these should be broken out into separate headings for each operating system.
-* It is okay to assume Linux and Unix are "first class citizens". While we want to support all OSes, Windows instructions and considerations can be secondary. 
+* It is okay to assume Linux and Unix are "first class citizens". While we want to support all OSes, Windows instructions and considerations can be secondary.
 * Include a step that explains how to verify you are running from source directly.
 
 ### Contributing
@@ -80,7 +80,7 @@ This document explains anything a visitor would need to know to contribute to th
 
 This document should cover the followin/g:
 
-* First, it should contain a single sentence: "This project follows the global contributing standards for all LBRY projects, to read those go <here>".
+* First, it should contain a single sentence: "This project follows the global contributing standards for all LBRY projects, to read those go < here >".
 * A "Code Overview" section explaining some basic design choices and how to begin stepping through the code. An example would be explaining that Daemon.py is the primary entry point for the daemon code, and one can begin to trace through the code by looking for jsonrpc_xxx, where xxx is one of the api calls listed [here](https://lbry.io/api).
 * A "Testing" section, explaining how to run tests, and that tests are necessary.
 * Information on how to submit pull requests, and what to expect afterwards. (e.g. a link to our [branching doc](https://github.com/lbryio/lbry/wiki/Branching-and-Merging), commands to run before submitting PR, tests must pass, changelog entry, etc). If you find this gets repetitive, it may be best to link to a global doc.
@@ -88,7 +88,7 @@ This document should cover the followin/g:
 
 ## LICENSE
 
-Every repository should have a LICENSE file stating the license. The default license we use is MIT, and we license all code as MIT whenever possible. 
+Every repository should have a LICENSE file stating the license. The default license we use is MIT, and we license all code as MIT whenever possible.
 
 Some code may use external libraries that prevent MIT licensing. If adding a license to a project for the first time that uses 3rd-party code, please ensure it is okay to actually MIT license it.
 
