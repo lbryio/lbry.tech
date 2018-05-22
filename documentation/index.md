@@ -1,4 +1,0 @@
----
-documentation: true
-title: Documentation
----
