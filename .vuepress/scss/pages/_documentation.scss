@@ -1,2 +1,54 @@
 .documentation {
+  ol + h1,
+  ul + h1 {
+    padding-top: 2rem;
+  }
+
+  .blog-post {
+    a {
+      display: inline-block;
+      position: relative;
+
+      &::after {
+        content: "";
+        display: block;
+      }
+    }
+
+    author {
+      &::before {
+        content: "by";
+        left: -1.2rem;
+      }
+    }
+
+    date {
+      margin-right: 1.4rem;
+      margin-left: 3.1rem;
+
+      &::before {
+        content: "posted";
+        left: -3.1rem;
+      }
+    }
+
+    author,
+    date {
+      display: inline-block;
+      position: relative;
+
+      &::before {
+        color: rgba($black, 0.5);
+        font-style: italic;
+        position: absolute;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .blog-post__meta {
+    font-size: 80%;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
 }

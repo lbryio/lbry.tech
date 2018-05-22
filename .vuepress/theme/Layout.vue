@@ -5,7 +5,7 @@
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
 
         <router-link class="navigation__item" to="/overview.html" title="LBRY overview">Overview</router-link>
-        <router-link class="navigation__item" to="/documentation.html" title="View LBRY docs">Documentation</router-link>
+        <router-link class="navigation__item" to="/documentation" title="View LBRY docs">Documentation</router-link>
         <router-link class="navigation__item" to="/contribute.html" title="Contribute to LBRY">Contribute</router-link>
         <router-link class="navigation__item" to="/develop.html" title="Develop with LBRY">Develop</router-link>
         <router-link class="navigation__item" to="/resources" title="View LBRY resources">Resources</router-link>
@@ -113,6 +113,63 @@
 
           <section class="page__content" itemprop="articleBody">
             <div class="inner-wrap">
+              <h1>Whitepaper</h1>
+              <h4>LBRY: A Decentralized Digital Content Marketplace</h4>
+              <p>Some info here about the whitepaper and <a href="/whitepaper.html">a link</a>.</p>
+
+              <h1>API Specification</h1>
+              <h4>All of our APIs, in one place</h4>
+
+              <ul>
+                <li><a href="https://github.com/lbryio/chainquery">chainquery</a></li>
+                <li><a href="https://lbry.io/api">JSON-RPC</a></li>
+                <li><a href="https://lbryio.github.io/lighthouse">Lighthouse</a></li>
+              </ul>
+
+              <h1>The Front Desk</h1>
+              <h4>Latest news and musings from the LBRY team</h4>
+
+              <ul class="blog-posts">
+                <li class="blog-post">
+                  <a href="https://lbry.io/news/we-are-hiring-our-boss">We're Hiring Our Boss</a>
+                  <div class="blog-post__meta">
+                    <date>2018/05/11</date>
+                    <author>Samuel Bryan</author>
+                  </div>
+                </li>
+
+                <li class="blog-post">
+                  <a href="https://lbry.io/news/lbry-development-community-update-apr-2018">Development and Community Update April 2018</a>
+                  <div class="blog-post__meta">
+                    <date>2018/05/04</date>
+                    <author>Samuel Bryan</author>
+                  </div>
+                </li>
+
+                <li class="blog-post">
+                  <a href="https://lbry.io/news/imineblocks">Hey, mine your own business!</a>
+                  <div class="blog-post__meta">
+                    <date>2018/04/05</date>
+                    <author>Reilly Smith</author>
+                  </div>
+                </li>
+
+                <li class="blog-post">
+                  <a href="https://lbry.io/news/lbry-development-community-update-mar-2018">Development and Community Update March 2018</a>
+                  <div class="blog-post__meta">
+                    <date>2018/04/03</date>
+                    <author>Tom Zarebczan</author>
+                  </div>
+                </li>
+
+                <li class="blog-post">
+                  <a href="https://lbry.io/news/if-you-still-havent-found-what-youre-searching-for">If you still haven't found what you're searching for...</a>
+                  <div class="blog-post__meta">
+                    <date>2018/03/22</date>
+                    <author>Brinck Slattery</author>
+                  </div>
+                </li>
+              </ul>
             </div>
           </section>
         </article>
@@ -166,7 +223,7 @@
           </li>
 
           <li><router-link to="/overview.html" title="LBRY overview">Overview</router-link></li>
-          <li><router-link to="/documentation.html" title="View LBRY docs">Documentation</router-link></li>
+          <li><router-link to="/documentation" title="View LBRY docs">Documentation</router-link></li>
           <li><router-link to="/contribute.html" title="Contribute to LBRY">Contribute</router-link></li>
           <li><router-link to="/develop.html" title="Develop with LBRY">Develop</router-link></li>
           <li><router-link to="/resources" title="View LBRY resources">Resources</router-link></li>
@@ -252,6 +309,7 @@ function updateMetaTags (meta, current) {
   @import "../scss/layout";
   @import "../scss/pages/home";
   @import "../scss/pages/page";
+  @import "../scss/pages/documentation";
   @import "../scss/partials/navigation";
   @import "../scss/partials/footer";
 </style>
