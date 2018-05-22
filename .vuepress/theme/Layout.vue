@@ -120,10 +120,28 @@
               <h1>API Specification</h1>
               <h4>All of our APIs, in one place</h4>
 
+              <h2>chainquery</h2>
               <ul>
-                <li><a href="https://github.com/lbryio/chainquery">chainquery</a></li>
-                <li><a href="https://lbry.io/api">JSON-RPC</a></li>
-                <li><a href="https://lbryio.github.io/lighthouse">Lighthouse</a></li>
+                <li><a href="https://github.com/lbryio/chainquery">Codebase</a></li>
+                <li><a href="">OpenAPI signature</a></li>
+              </ul>
+
+              <h2>lbry</h2>
+              <ul>
+                <li><a href="https://lbry.io/api">Codebase</a></li>
+                <li><a href="/open-api/lbry.html">OpenAPI signature</a></li>
+              </ul>
+
+              <h2>lbrycrd</h2>
+              <ul>
+                <li><a href="https://github.com/lbryio/lbrycrd">Codebase</a></li>
+                <li><a href="/open-api/lbrycrd.html">OpenAPI signature</a></li>
+              </ul>
+
+              <h2>Lighthouse</h2>
+              <ul>
+                <li><a href="https://lbryio.github.io/lighthouse">Codebase</a></li>
+                <li><a href="">OpenAPI signature</a></li>
               </ul>
 
               <h1>The Front Desk</h1>
