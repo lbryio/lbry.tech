@@ -18,7 +18,7 @@ That's a fancy sentence, so here's a plainer one: we just thought it'd be really
 
 <sup>3</sup>Not controlled by any one person, party or authority.
 
-<sup>4</sup>Resistant to censorship or attempts to control; impervious to attacks or disruptions. 
+<sup>4</sup>Resistant to censorship or attempts to control; impervious to attacks or disruptions.
 
 <sup>5</sup>In the Pareto sense, with regards to the production and distribution of information (i.e. digital information is both created and distributed in a way that could not be any more efficient from the perspectives of information producers and consumers).
 
