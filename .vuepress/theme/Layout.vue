@@ -4,11 +4,10 @@
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
 
-        <router-link class="navigation__item" to="/overview.html" title="LBRY overview">Overview</router-link>
-        <router-link class="navigation__item" to="/documentation" title="View LBRY docs">Documentation</router-link>
-        <router-link class="navigation__item" to="/contribute.html" title="Contribute to LBRY">Contribute</router-link>
-        <router-link class="navigation__item" to="/develop.html" title="Develop with LBRY">Develop</router-link>
+        <router-link class="navigation__item" to="/overview" title="LBRY overview">Overview</router-link>
         <router-link class="navigation__item" to="/resources" title="View LBRY resources">Resources</router-link>
+        <router-link class="navigation__item" to="/contribute" title="Contribute to LBRY">Contribute</router-link>
+        <router-link class="navigation__item" to="/community" title="Interact with LBRY">Community</router-link>
       </div>
     </nav>
 
@@ -34,7 +33,7 @@
             <li class="home__feature">
               <p class="home__feature__title"><strong>Want to contribute?</strong></p>
               <p class="home__feature__description">Start exploring our API and help make LBRY better</p>
-              <a class="home__feature__cta" href="">Jump in</a>
+              <a class="home__feature__cta" href="/contribute">Jump in</a>
             </li>
           </ul>
         </section>
@@ -129,13 +128,13 @@
               <h2>lbry</h2>
               <ul>
                 <li><a href="https://lbry.io/api">Codebase</a></li>
-                <li><a href="/open-api/lbry.html">OpenAPI signature</a></li>
+                <li><a href="/resources/lbry.html">OpenAPI signature</a></li>
               </ul>
 
               <h2>lbrycrd</h2>
               <ul>
                 <li><a href="https://github.com/lbryio/lbrycrd">Codebase</a></li>
-                <li><a href="/open-api/lbrycrd.html">OpenAPI signature</a></li>
+                <li><a href="/resources/lbrycrd.html">OpenAPI signature</a></li>
               </ul>
 
               <h2>Lighthouse</h2>
@@ -240,11 +239,10 @@
             <edit-link :path="this.$page.path"></edit-link>
           </li>
 
-          <li><router-link to="/overview.html" title="LBRY overview">Overview</router-link></li>
-          <li><router-link to="/documentation" title="View LBRY docs">Documentation</router-link></li>
-          <li><router-link to="/contribute.html" title="Contribute to LBRY">Contribute</router-link></li>
-          <li><router-link to="/develop.html" title="Develop with LBRY">Develop</router-link></li>
+          <li><router-link to="/overview" title="LBRY overview">Overview</router-link></li>
           <li><router-link to="/resources" title="View LBRY resources">Resources</router-link></li>
+          <li><router-link to="/contribute" title="Contribute to LBRY">Contribute</router-link></li>
+          <li><router-link to="/community" title="Interact with LBRY">Community</router-link></li>
           <li><a href="/sitemap.html">Sitemap</a></li>
 
           <li>MIT Licensed</li>

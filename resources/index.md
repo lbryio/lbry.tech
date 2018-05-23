@@ -1,4 +1,4 @@
 ---
 documentation: true
-title: Documentation
+title: Resources
 ---
