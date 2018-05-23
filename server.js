@@ -29,23 +29,38 @@ app.use(sslRedirect(['other','development', 'staging', 'production']));
 
 app.get('/forward', function(req, res) {
 
+  var allowedMethods = ["wallet_send", "resolve", "publish"];
+
   if(typeof req.query.method != "undefined") {
 
-    // We should whitelist the query parameters here
+    if(allowedMethods.includes(req.query.method)) {
 
-    // Hardcode the wallet_send amount to be 0.01 always
-    if(req.query.method == "wallet_send") {
-      req.query.amount = 0.01;
+      // We should whitelist the query parameters here
+
+      if(req.query.method == "wallet_send") {
+
+        // Hardcode the wallet_send amount to be always 0.01 always
+        req.query.amount = 0.01;
+
+        // Whitelist claim ids
+        var allowedClaims = ["fbdcd44a97810522d23d5f1335b8ca04be9d776c", "de7f7fa33e8d879b2bae7238d2bdf827a39f9301", "5b7c7a202201033d99e1be2930d290c127c0f4fe", "a1372cf5523885f5923237bfe522f02f5f054362"];
+
+        if(!allowedClaims.includes(req.query.claim_id)) {
+          res.json({});
+        }
+
+      }
+
+      request({
+        url: "http://daemon.lbry.tech",
+        qs: req.query
+      }, function(error, response, body) {
+        // Should we parse the body before forwarding?
+        res.setHeader('Content-Type', 'application/json');
+        res.send(body);
+      });
+
     }
-
-    request({
-      url: "http://daemon.lbry.tech",
-      qs: req.query
-    }, function(error, response, body) {
-      // Should we parse the body before forwarding?
-      res.setHeader('Content-Type', 'application/json');
-      res.send(body);
-    })
 
   }
 
