@@ -7,6 +7,7 @@
         <router-link class="navigation__item" to="/overview" title="LBRY overview">Overview</router-link>
         <router-link class="navigation__item" to="/resources" title="View LBRY resources">Resources</router-link>
         <router-link class="navigation__item" to="/contribute" title="Contribute to LBRY">Contribute</router-link>
+        <router-link class="navigation__item" to="/build" title="View LBRY resources">Build</router-link>
         <router-link class="navigation__item" to="/community" title="Interact with LBRY">Community</router-link>
       </div>
     </nav>
