@@ -88,6 +88,11 @@
       letter-spacing: 0.05rem;
       padding: 0.3rem 0.5rem;
       vertical-align: middle;
+
+      @media (max-width: 900px) {
+        position: relative;
+        top: -1px;
+      }
     }
   }
 
@@ -96,12 +101,12 @@
 
     @media (min-width: 901px) {
       font-size: 1.25rem;
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     @media (max-width: 900px) {
       font-size: 1.05rem;
-      line-height: 1.33;
+      line-height: 1.55;
     }
   }
 
@@ -201,27 +206,72 @@
   table {
     background-color: $white;
     border: 1px solid rgba($gray, 0.3);
+    border-spacing: 0;
     margin-bottom: 2rem;
+    width: 100%;
+
+    @media (max-width: 1030px) {
+      display: inline-grid;
+
+      thead {
+        display: none;
+      }
+
+      tbody, tr, td {
+        display: block;
+      }
+
+      tbody tr:last-of-type td:not(:last-of-type) {
+        border-bottom: 1px solid rgba($gray, 0.3);
+      }
+    }
+
+    thead {
+      background-color: $black;
+      color: $white;
+      cursor: default;
+      position: relative;
+
+      tr {
+        position: relative;
+        z-index: 1;
+      }
+
+      &::after {
+        width: calc(100% + 2px); height: calc(100% + 2px);
+        top: -1px; left: -1px;
+
+        background-color: $black;
+        content: "";
+        position: absolute;
+        z-index: 0;
+      }
+    }
+
+    tbody {
+      line-height: 1.55;
+    }
+
+    tr:nth-of-type(even) {
+      background-color: rgba($black, 0.025);
+    }
 
     th, td {
-      padding: 1rem;
+      padding: 0.5rem 1rem;
     }
 
     th {
-      border-bottom: 1px solid rgba($gray, 0.3);
       font-size: 0.8rem;
       letter-spacing: 0.1rem;
       text-transform: uppercase;
     }
 
-    td {
-      font-size: 1rem;
+    tbody tr:not(:last-of-type) td {
+      border-bottom: 1px solid rgba($gray, 0.3);
     }
 
-    tbody {
-      tr:not(:last-of-type) td {
-        border-bottom: 1px solid rgba($gray, 0.3);
-      }
+    td {
+      font-size: 1rem;
     }
   }
 }

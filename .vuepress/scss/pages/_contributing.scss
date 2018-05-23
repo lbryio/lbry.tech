@@ -1,0 +1,11 @@
+.contributing {
+  table th {
+    &:first-of-type {
+      width: 30%;
+    }
+
+    &:nth-of-type(2) {
+      width: 20%;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 ---
+contributing: true
 title: Contributing
 ---
 

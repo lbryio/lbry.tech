@@ -1,5 +1,5 @@
 <template>
-  <main v-bind:class="{ 'home': $page.frontmatter.home, 'documentation': $page.frontmatter.documentation }">
+  <main v-bind:class="{ 'home': $page.frontmatter.home, 'documentation': $page.frontmatter.documentation, 'contributing': $page.frontmatter.contributing }">
     <nav class="navigation">
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
@@ -28,13 +28,13 @@
             <li class="home__feature">
               <p class="home__feature__title"><strong>New to LBRY?</strong></p>
               <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
-              <a class="home__feature__cta" href="/hook.html">Check it out</a>
+              <a class="home__feature__cta" href="/hook.html">Try the welcome guide</a>
             </li>
 
             <li class="home__feature">
               <p class="home__feature__title"><strong>Want to contribute?</strong></p>
-              <p class="home__feature__description">Start exploring our API and help make LBRY better</p>
-              <a class="home__feature__cta" href="/contribute">Jump in</a>
+              <p class="home__feature__description">Help make LBRY better!</p>
+              <a class="home__feature__cta" href="/contribute">Explore our repos</a>
             </li>
           </ul>
         </section>
@@ -46,7 +46,7 @@
 
             <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
 
-            <a class="cta" href="">Learn more</a>
+            <a class="cta" href="/overview">Learn more about our mission</a>
           </div>
         </section>
 
@@ -55,7 +55,7 @@
             <h3>Documentation</h3>
             <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
 
-            <a class="cta" href="">Go deeper</a>
+            <a class="cta" href="/resources">Explore our documentation</a>
           </div>
         </section>
 
@@ -326,6 +326,7 @@ function updateMetaTags (meta, current) {
   @import "../scss/layout";
   @import "../scss/pages/home";
   @import "../scss/pages/page";
+  @import "../scss/pages/contributing";
   @import "../scss/pages/documentation";
   @import "../scss/partials/navigation";
   @import "../scss/partials/footer";
