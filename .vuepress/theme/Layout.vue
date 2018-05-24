@@ -226,9 +226,10 @@
       <EmailSubscribe></EmailSubscribe>
     </section>
 
-    <section class="alert">
+    <section class="alert" id="alert-beta">
       <div class="inner-wrap">
-        <strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
+        <p><strong>This website is in beta.</strong> We are actively developing this website to showcase and teach about the LBRY protocol. All things may not work as expected!<br/>This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.</p>
+        <button id="close-alert">&times;</button>
       </div>
     </section>
 
@@ -292,6 +293,21 @@ export default {
     }
     this.$watch('$page', updateMeta)
     updateMeta()
+
+
+
+    // Toggle beta message
+    if (
+      localStorage.getItem("hide lbry alert") &&
+      localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
+    ) {
+      document.querySelector("#alert-beta").style.display = "none";
+    }
+
+    document.querySelector("#close-alert").onclick = function () {
+      localStorage.setItem("hide lbry alert", true);
+      document.querySelector("#alert-beta").style.display = "none";
+    };
   },
   beforeDestroy () {
     updateMetaTags(null, this.currentMetaTags)

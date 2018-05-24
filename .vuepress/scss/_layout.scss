@@ -74,13 +74,21 @@ h1, h2, h3, h4, h5 {
 }
 
 .alert {
+  top: 4rem; left: 0;
+
   background-color: $yellow;
   line-height: 1.33;
   padding-top: 1rem;
   padding-right: env(safe-area-inset-right);
   padding-bottom: 1rem;
   padding-left: env(safe-area-inset-left);
+  position: absolute;
   text-align: center;
+  width: 100%;
+
+  > div:first-of-type {
+    position: relative;
+  }
 
   @media (min-width: 901px) {
     font-size: 1rem;
@@ -90,7 +98,33 @@ h1, h2, h3, h4, h5 {
     font-size: 0.8rem;
   }
 
+  p, button {
+    display: inline-block;
+  }
+
+  p {
+    padding-right: 1rem;
+    width: calc(100% - 2.25rem);
+  }
+
   a {
     font-weight: 600;
+    text-decoration: underline;
+  }
+
+  button {
+    width: 1.25rem; height: 1.25rem;
+    top: 0; right: 0;
+
+    background-color: $white;
+    border-radius: 50%;
+    display: block;
+    font-size: 1rem;
+    line-height: 1;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    padding-left: 1px;
+    position: absolute;
+    text-align: center;
   }
 }
