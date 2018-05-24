@@ -149,42 +149,42 @@
 
               <ul class="blog-posts">
                 <li class="blog-post">
-                  <a href="https://lbry.io/news/we-are-hiring-our-boss">We're Hiring Our Boss</a>
+                  <a class="blog-post__title" href="https://lbry.io/news/we-are-hiring-our-boss">We're Hiring Our Boss</a>
                   <div class="blog-post__meta">
-                    <date>2018/05/11</date>
-                    <author>Samuel Bryan</author>
+                    <span class="blog-post__meta__date">2018/05/11</span>
+                    <span class="blog-post__meta__author">Samuel Bryan</span>
                   </div>
                 </li>
 
                 <li class="blog-post">
-                  <a href="https://lbry.io/news/lbry-development-community-update-apr-2018">Development and Community Update April 2018</a>
+                  <a class="blog-post__title" href="https://lbry.io/news/lbry-development-community-update-apr-2018">Development and Community Update April 2018</a>
                   <div class="blog-post__meta">
-                    <date>2018/05/04</date>
-                    <author>Samuel Bryan</author>
+                    <span class="blog-post__meta__date">2018/05/04</span>
+                    <span class="blog-post__meta__author">Samuel Bryan</span>
                   </div>
                 </li>
 
                 <li class="blog-post">
-                  <a href="https://lbry.io/news/imineblocks">Hey, mine your own business!</a>
+                  <a class="blog-post__title" href="https://lbry.io/news/imineblocks">Hey, mine your own business!</a>
                   <div class="blog-post__meta">
-                    <date>2018/04/05</date>
-                    <author>Reilly Smith</author>
+                    <span class="blog-post__meta__date">2018/04/05</span>
+                    <span class="blog-post__meta__author">Reilly Smith</span>
                   </div>
                 </li>
 
                 <li class="blog-post">
-                  <a href="https://lbry.io/news/lbry-development-community-update-mar-2018">Development and Community Update March 2018</a>
+                  <a class="blog-post__title" href="https://lbry.io/news/lbry-development-community-update-mar-2018">Development and Community Update March 2018</a>
                   <div class="blog-post__meta">
-                    <date>2018/04/03</date>
-                    <author>Tom Zarebczan</author>
+                    <span class="blog-post__meta__date">2018/04/03</span>
+                    <span class="blog-post__meta__author">Tom Zarebczan</span>
                   </div>
                 </li>
 
                 <li class="blog-post">
-                  <a href="https://lbry.io/news/if-you-still-havent-found-what-youre-searching-for">If you still haven't found what you're searching for...</a>
+                  <a class="blog-post__title" href="https://lbry.io/news/if-you-still-havent-found-what-youre-searching-for">If you still haven't found what you're searching for...</a>
                   <div class="blog-post__meta">
-                    <date>2018/03/22</date>
-                    <author>Brinck Slattery</author>
+                    <span class="blog-post__meta__date">2018/03/22</span>
+                    <span class="blog-post__meta__author">Brinck Slattery</span>
                   </div>
                 </li>
               </ul>
@@ -296,8 +296,7 @@ export default {
 
 
 
-    // Toggle beta message
-    if (
+    if ( // Toggle beta message
       localStorage.getItem("hide lbry alert") &&
       localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
     ) {
