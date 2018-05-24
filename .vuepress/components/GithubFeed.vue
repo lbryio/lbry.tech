@@ -246,13 +246,10 @@ export default {
   }
 
   .github-feed__event {
-    @media (min-width: 701px) {
-      line-height: 1.33;
-    }
+    line-height: 1.55;
 
     @media (max-width: 700px) {
       display: inline-block;
-      line-height: 1.55;
       margin-right: 1.25rem;
       vertical-align: top;
       width: 200px;
@@ -282,6 +279,8 @@ export default {
         font-size: 80%;
         letter-spacing: 0.05rem;
         padding: 0.2rem 0.5rem;
+        position: relative;
+        top: -1px;
       }
 
       em:not(.github-feed__event__time) {
