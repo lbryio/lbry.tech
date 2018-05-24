@@ -53,8 +53,15 @@
   padding-left: env(safe-area-inset-left);
 
   h1 {
-    font-size: 2rem;
     margin-bottom: 0.25rem;
+
+    @media (min-width: 901px) {
+      font-size: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 2rem;
+    }
 
     + h2 {
       margin-bottom: 2rem;
@@ -62,7 +69,13 @@
   }
 
   h2 {
-    font-size: 1.5rem;
+    @media (min-width: 901px) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.5rem;
+    }
 
     + h3 {
       margin-bottom: 1rem; padding-top: 0.25rem;
@@ -70,13 +83,34 @@
   }
 
   h3 {
-    font-size: 1.25rem;
+    @media (min-width: 901px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.25rem;
+    }
+
+    + table {
+      top: 0.25rem;
+    }
   }
 
   h4 {
-    font-size: 1rem;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
+
+    @media (min-width: 901px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.15rem;
+    }
+  }
+
+  h5 {
+    font-size: 1rem;
   }
 
   p, ol, ul, table {
@@ -208,6 +242,7 @@
     border: 1px solid rgba($gray, 0.3);
     border-spacing: 0;
     margin-bottom: 2rem;
+    position: relative;
     width: 100%;
 
     @media (max-width: 1030px) {
