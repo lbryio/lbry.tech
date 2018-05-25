@@ -1,7 +1,8 @@
 <template>
-  <div id="email-subscribe">
-    <h3 class="title">Subscribe to our developer newsletter!</h3>
+  <div id="email-subscribe-large">
     <input type="text" class="input" v-model="emailAddress" placeholder="your@email.com">
+    <br/>
+    <br/>
     <a class="__button-black" href="#" v-on:click.prevent="subscribe">Subscribe</a>
     <p v-if="message" class="message">{{ message }}</p>
   </div>
@@ -48,10 +49,7 @@ export default {
 
 <style lang="scss">
 
-#email-subscribe {
-  background: #ddd;
-  padding: 1rem 0;
-  text-align: center;
+#email-subscribe-large {
   .title {
     margin-bottom: 0.5rem;
   }
@@ -61,6 +59,10 @@ export default {
     background: white;
     margin-right: 1rem;
     width: 18rem;
+    font-size: 1.1rem;
+  }
+  .__button-black {
+    font-size: 1.1rem;
   }
   .message {
     margin-top: 1rem;
