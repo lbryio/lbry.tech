@@ -1,0 +1,140 @@
+.overview {
+}
+
+.overview__ecosystem {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-areas: "lbrycard lbryschema lbryumx lbry applications lighthouse chainquery";
+  grid-template-columns: auto 5% 180px auto auto 180px 180px;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+
+
+.overview__ecosystem__module {
+  min-height: 144px;
+
+  &.lbrycard,
+  &.lbryschema,
+  &.lbryumx,
+  &.lbry,
+  &.lighthouse,
+  &.chainquery {
+    @include center;
+
+    .__title {
+      color: $white;
+      font-size: 1rem;
+    }
+  }
+
+
+
+  &.lbrycard {
+    background-color: $black;
+  }
+
+  &.lbryschema {
+    background-color: $red;
+    position: relative;
+
+    .__title {
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+    // top: 150px;
+
+    /*
+    &::before, &::after {
+      width: 0; height: 0;
+
+      content : "";
+      left: 0;
+      position: absolute;
+    }
+
+    &::before {
+      border-bottom: 150px solid $red;
+      border-left: 200px solid transparent;
+      top: -150px;
+    }
+
+    &::after {
+      border-top: 150px solid $red;
+      border-right: 200px solid transparent;
+      bottom: -150px;
+    }
+    */
+  }
+
+
+
+  &.lbryumx,
+  &.lbry {
+  }
+
+  &.lbryumx {
+    background-color: $blue;
+    border-radius: 50%;
+  }
+
+  &.lbry {
+    background-color: $green;
+  }
+
+
+
+  &.applications {
+    background-color: $violet;
+    list-style-type: none;
+    padding-bottom: 1rem;
+    text-align: center;
+
+    > .__title {
+      margin-bottom: 1rem; padding-top: 1rem;
+
+      color: $white;
+      display: block;
+    }
+  }
+
+  &.applications__desktop,
+  &.applications__mobile,
+  &.applications__speech {
+  }
+
+  &.applications__desktop {
+  }
+
+  &.applications__mobile {
+  }
+
+  &.applications__speech {
+  }
+
+
+
+  &.lighthouse {
+    background-color: $pink;
+    border-radius: 50%;
+  }
+
+  &.chainquery {
+    background-color: $orange;
+    border-radius: 50%;
+  }
+}
+
+.overview__ecosystem__module__piece {
+  background-color: $white;
+  left: 10%;
+  line-height: 2;
+  position: relative;
+  width: 80%;
+
+  &:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+}

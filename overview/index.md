@@ -26,9 +26,7 @@ That's a fancy sentence, so here's a plainer one: we just thought it'd be really
 
 ## LBRY Basics
 
-<figure>
-  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/b7dd5fe2/.vuepress/media/images/lbry-overview.png" alt="LBRY Overview"/>
-</figure>
+<Ecosystem></Ecosystem>
 
 ## What's Next?
 
