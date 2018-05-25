@@ -18,19 +18,21 @@
     </div>
 
     <ul class="overview__ecosystem__module applications">
-      <strong class="__title">Applications</strong>
+      <div>
+        <strong class="__title">Applications</strong>
 
-      <li class="overview__ecosystem__module__piece applications__desktop">
-        <strong class="__title">Desktop</strong>
-      </li>
+        <li class="overview__ecosystem__module__piece applications__desktop">
+          <strong class="__title">Desktop</strong>
+        </li>
 
-      <li class="overview__ecosystem__module__piece applications__mobile">
-        <strong class="__title">Mobile</strong>
-      </li>
+        <li class="overview__ecosystem__module__piece applications__mobile">
+          <strong class="__title">Mobile</strong>
+        </li>
 
-      <li class="overview__ecosystem__module__piece applications__speech">
-        <strong class="__title">spee.ch</strong>
-      </li>
+        <li class="overview__ecosystem__module__piece applications__speech">
+          <strong class="__title">spee.ch</strong>
+        </li>
+      </div>
     </ul>
 
     <div class="overview__ecosystem__module lighthouse">
