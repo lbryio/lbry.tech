@@ -41,7 +41,7 @@ git clone https://github.com/lbryio/lbry.tech
 yarn
 
 # serve with hot reload at localhost:8080
-vuepress dev
+yarn dev
 
 # build for production with minification & start express server
 yarn start
