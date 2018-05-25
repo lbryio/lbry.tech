@@ -272,6 +272,12 @@
         z-index: 1;
       }
 
+      &:not(*:root) {
+        &::after {
+          z-index: -1;
+        }
+      }
+
       &::after {
         width: calc(100% + 2px); height: calc(100% + 2px);
         top: -1px; left: -1px;

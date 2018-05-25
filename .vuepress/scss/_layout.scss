@@ -74,7 +74,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .alert {
-  top: 4rem; left: 0;
+  bottom: 0; left: 0;
 
   background-color: $yellow;
   line-height: 1.33;
@@ -82,9 +82,10 @@ h1, h2, h3, h4, h5 {
   padding-right: env(safe-area-inset-right);
   padding-bottom: 1rem;
   padding-left: env(safe-area-inset-left);
-  position: absolute;
+  position: fixed;
   text-align: center;
   width: 100%;
+  z-index: 1;
 
   > div:first-of-type {
     position: relative;
