@@ -8,6 +8,9 @@
     "dev": "./node_modules/vuepress/bin/vuepress.js dev",
     "start": "./node_modules/vuepress/bin/vuepress.js build && node server.js"
   },
+  "engines": {
+    "node": "10.2.x"
+  },
   "license": "ISC",
   "dependencies": {
     "@octokit/rest": "^15.4.0",
