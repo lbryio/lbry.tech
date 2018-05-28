@@ -68,7 +68,7 @@
     }
   }
 
-  h2 {
+  h2:not(.__title) {
     @media (min-width: 901px) {
       font-size: 2rem;
     }
