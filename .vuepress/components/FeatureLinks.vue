@@ -1,7 +1,7 @@
 <template>
 
   <ul class="feature-links">
-    <li v-for="featureLink in this.$page.frontmatter.featureLinks" class="feature-link">
+    <li v-for="featureLink in this.$page.frontmatter.featureLinks" v-on:click="visit(featureLink.href)" class="feature-link">
       <div>
         <a :href="featureLink.href" class="feature-link__title">{{ featureLink.title }}</a>
         <div v-if="featureLink.details" class="feature-link__details">{{ featureLink.details }}</div>
@@ -16,6 +16,19 @@
 </template>
 
 
+
+<script>
+  export default {
+    data () {
+      return {}
+    },
+    methods: {
+      visit (slug) {
+        window.location.href = slug;
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   @import "../scss/init/colors";
