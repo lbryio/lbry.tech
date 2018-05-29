@@ -130,7 +130,7 @@
     }
   }
 
-  p, ol, ul:not(.overview__ecosystem__module) {
+  p, ol, ul:not(.overview__ecosystem__module):not(.feature-links) {
     position: relative;
 
     @media (min-width: 901px) {
@@ -144,7 +144,7 @@
     }
   }
 
-  ol, ul:not(.overview__ecosystem__module) {
+  ol, ul:not(.overview__ecosystem__module):not(.feature-links) {
     padding-top: 0.5rem;
 
     li {
@@ -163,7 +163,7 @@
     padding-left: 1.6rem;
   }
 
-  ul:not(.overview__ecosystem__module) {
+  ul:not(.overview__ecosystem__module):not(.feature-links) {
     padding-left: 1.25rem;
   }
 
