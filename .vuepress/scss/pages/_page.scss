@@ -179,7 +179,7 @@
     }
   }
 
-  a:not(.button) {
+  a:not(.button):not(.feature-link__title) {
     color: $teal;
     position: relative;
 
