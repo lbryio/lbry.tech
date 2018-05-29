@@ -21,6 +21,9 @@
   @import "../scss/init/colors";
 
   .feature-links {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
     list-style-type: none;
     padding-top: 0.5rem;
   }
@@ -32,7 +35,6 @@
     border: 1px solid rgba($black, 0.1);
     border-radius: 3px;
     display: inline-block;
-    margin-bottom: 1rem;
     position: relative;
     transition: box-shadow 0.2s;
     vertical-align: top;
@@ -58,10 +60,6 @@
       .feature-link__title {
         color: $teal;
       }
-    }
-
-    &:not(:last-of-type) {
-      margin-right: 1rem;
     }
   }
 
