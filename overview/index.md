@@ -26,7 +26,7 @@ That's a fancy sentence, so here's a plainer one: we just thought it'd be really
 
 ## LBRY Basics
 
-<Ecosystem></Ecosystem>
+<Ecosystem/>
 
 ## What's Next?
 

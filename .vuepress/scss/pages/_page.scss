@@ -82,7 +82,7 @@
     }
   }
 
-  h3 {
+  h3:not(.__title) {
     @media (min-width: 901px) {
       font-size: 1.5rem;
     }
