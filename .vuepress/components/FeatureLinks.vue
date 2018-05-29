@@ -24,7 +24,7 @@
     },
     methods: {
       visit (slug) {
-        window.location.href = slug;
+        window.open(slug, "_blank");
       }
     }
   }
@@ -47,6 +47,7 @@
     background-color: $white;
     border: 1px solid rgba($black, 0.1);
     border-radius: 3px;
+    cursor: pointer;
     display: inline-block;
     position: relative;
     transition: box-shadow 0.2s;
