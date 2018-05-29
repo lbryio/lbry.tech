@@ -181,7 +181,7 @@
 
       content: "";
       position: absolute;
-      z-index: -1;
+      z-index: 0;
     }
 
     &:not(.active) {
