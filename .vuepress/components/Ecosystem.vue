@@ -250,6 +250,10 @@
         font-size: 1.5rem;
         text-align: center;
 
+        > span {
+          cursor: pointer;
+        }
+
         > div {
           display: none;
         }
@@ -264,6 +268,10 @@
       h2 {
         font-size: 3rem;
         margin-bottom: 1rem;
+
+        > span {
+          cursor: default;
+        }
       }
 
       &::before {
