@@ -12,13 +12,16 @@
     </aside>
 
     <section class="ecosystem__modules">
-      <div class="ecosystem__module lbrycard">
+      <div class="ecosystem__module lbrycrd">
         <h2 class="__title">
-          <span v-on:click="open('lbrycard')">lbrycard</span>
+          <span v-on:click="open('lbrycrd')">
+            Blockchain
+            <em>The blockchain is "lbrycrd"</em>
+          </span>
 
           <div>
-            <span v-on:click="open('lbry')">lbry</span>
-            <span v-on:click="open('applications')">applications</span>
+            <span v-on:click="open('applications')">Applications</span>
+            <span v-on:click="open('lbry')">Data Network</span>
           </div>
         </h2>
 
@@ -27,15 +30,20 @@
 
           <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
         </div>
+
+        <span class="__close" v-on:click="close()">&times;</span>
       </div>
 
       <div class="ecosystem__module lbry">
         <h2 class="__title">
-          <span v-on:click="open('lbry')">lbry</span>
+          <span v-on:click="open('lbry')">
+            Data Network
+            <em>The data network is "lbry"</em>
+          </span>
 
           <div>
-            <span v-on:click="open('lbrycard')">lbrycard</span>
-            <span v-on:click="open('applications')">applications</span>
+            <span v-on:click="open('applications')">Applications</span>
+            <span v-on:click="open('lbrycrd')">Blockchain</span>
           </div>
         </h2>
 
@@ -68,15 +76,20 @@
             </li>
           </ul>
         </div>
+
+        <span class="__close" v-on:click="close()">&times;</span>
       </div>
 
       <div class="ecosystem__module applications">
         <h2 class="__title">
-          <span v-on:click="open('applications')">Applications</span>
+          <span v-on:click="open('applications')">
+            Applications
+            <em>LBRY has a lot of applications</em>
+          </span>
 
           <div>
-            <span v-on:click="open('lbry')">lbry</span>
-            <span v-on:click="open('lbrycard')">lbrycard</span>
+            <span v-on:click="open('lbrycrd')">Blockchain</span>
+            <span v-on:click="open('lbry')">Data Network</span>
           </div>
         </h2>
 
@@ -108,6 +121,8 @@
             </li>
           </ul>
         </div>
+
+        <span class="__close" v-on:click="close()">&times;</span>
       </div>
     </section>
 
@@ -138,7 +153,7 @@
         document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
 
         switch (true) {
-          case (ecosystemComponentClassName === "lbrycard"):
+          case (ecosystemComponentClassName === "lbrycrd"):
             document.getElementsByClassName("chainquery")[0].classList.add("active");
             document.getElementsByClassName("lighthouse")[0].classList.add("active");
             document.getElementsByClassName("wallet")[0].classList.add("active");
@@ -157,6 +172,29 @@
           default:
             break;
         }
+      },
+      close () {
+        document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
+        document.querySelectorAll(".ecosystem__submodule").forEach(n => n.classList.remove("active"));
+
+        /*
+        switch (true) {
+          case (ecosystemComponentClassName === "lbrycrd"):
+            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
+            break;
+
+          case (ecosystemComponentClassName === "lbry"):
+            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
+            break;
+
+          case (ecosystemComponentClassName === "applications"):
+            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
+            break;
+
+          default:
+            break;
+        }
+        */
       }
     }
   }
@@ -181,7 +219,7 @@
   }
 
   .ecosystem__module {
-    padding: 1.9rem 2rem;
+    // padding: 1.9rem 2rem;
     position: relative;
     width: 100%;
 
@@ -197,12 +235,13 @@
         float: right;
         font-size: 1rem;
         padding-top: 1.95rem;
+        padding-right: 3rem;
         position: relative;
         text-align: right;
 
         &::before {
           @include font-serif;
-          top: 1rem; left: 0;
+          top: 0.9rem; right: 3rem;
 
           content: "explore";
           font-size: 80%;
@@ -252,6 +291,14 @@
 
         > span {
           cursor: pointer;
+          display: block;
+          padding: 1.9rem 2rem;
+
+          em {
+            display: block;
+            font-size: 70%;
+            font-weight: normal;
+          }
         }
 
         > div {
@@ -262,26 +309,42 @@
       .ecosystem__module__details {
         display: none;
       }
+
+      .__close {
+        top: 2rem;
+        transform: rotate(45deg);
+        z-index: 0;
+      }
     }
 
     &.active {
+      padding: 1.9rem 2rem;
+
       h2 {
         font-size: 3rem;
         margin-bottom: 1rem;
 
         > span {
           cursor: default;
+
+          em {
+            display: none;
+          }
         }
       }
 
       &::before {
         background-color: $white;
       }
+
+      .__close {
+        top: 2.35rem;
+      }
     }
 
 
 
-    &.lbrycard {
+    &.lbrycrd {
       margin-bottom: 1rem;
 
       &:not(.active) {
@@ -297,6 +360,10 @@
       }
     }
 
+    &.lbry,
+    &.applications {
+    }
+
     &.lbry {
       margin-bottom: 1rem;
 
@@ -309,13 +376,14 @@
           margin-bottom: 0.5rem;
 
           &::after {
-            bottom: -1rem; left: 0;
+            bottom: 1rem; left: 0;
 
             content: "◼︎◼︎";
             font-size: 0.5rem;
             letter-spacing: 0.1rem;
             position: absolute;
             width: 100%;
+            z-index: -1;
           }
         }
       }
@@ -337,7 +405,7 @@
           margin-bottom: 0.5rem;
 
           &::after {
-            bottom: -1rem; left: 0;
+            bottom: 1rem; left: 0;
 
             content: "◼︎◼︎◼︎◼︎◼︎";
             font-size: 0.5rem;
@@ -390,5 +458,15 @@
       border-color: rgba($gray, 0.3);
       color: rgba($gray, 0.3);
     }
+  }
+
+
+
+  .__close {
+    cursor: pointer;
+    font-size: 2rem;
+    position: absolute;
+    right: 2rem;
+    transition: all 0.2s;
   }
 </style>
