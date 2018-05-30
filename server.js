@@ -18,6 +18,8 @@ var octokit = require('@octokit/rest')();
 // Redis
 var redis = require("redis"),
 redisClient = redis.createClient(process.env.REDISCLOUD_URL);
+// Logging
+var logger = require('heroku-logger');
 
 app = express();
 app.use(serveStatic(__dirname + "/.vuepress/dist"));
@@ -58,6 +60,9 @@ app.get('/forward', function(req, res) {
         qs: req.query
       }, function(error, response, body) {
         // Should we parse the body before forwarding?
+        if(typeof body.error != "") {
+          logger.error('Got error from daemon', body);
+        }
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
       });
@@ -87,7 +92,7 @@ app.get('/github-feed', function(req, res) {
 var port = process.env.PORT || 8080;
 app.listen(port);
 
-console.log('server started '+ port);
+logger.info('server started', {port: port});
 
 function updateGithubFeed() {
 
@@ -120,9 +125,13 @@ function updateGithubFeed() {
       // Keep the latest 50 events
       redisClient.zremrangebyrank('events', 0, -51);
 
-      console.log('Updated Github feed');
+      logger.info('Updated Github feed');
 
     });
+
+  }).catch(function({data}) {
+
+    logger.error('Couldn\t update Github feed', data);
 
   });
 
