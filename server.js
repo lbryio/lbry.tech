@@ -61,7 +61,7 @@ app.get('/forward', function(req, res) {
       }, function(error, response, body) {
         // Should we parse the body before forwarding?
         if(typeof body.error != "") {
-          logger.error('Got error from daemon', body);
+          logger.error('Got error from daemon', {error: body.error});
         }
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
@@ -129,9 +129,9 @@ function updateGithubFeed() {
 
     });
 
-  }).catch(function({data}) {
+  }).catch(function(err) {
 
-    logger.error('Couldn\t update Github feed', data);
+    logger.error('Couldn\t update Github feed', {error: error});
 
   });
 
