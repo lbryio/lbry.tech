@@ -2,6 +2,8 @@
 
 // env variables
 require('dotenv').config();
+// fs
+var fs = require('fs');
 // Async
 var async = require("async");
 // Express etc
@@ -81,6 +83,17 @@ app.get('/github-feed', function(req, res) {
     res.json(events);
 
   });
+
+});
+
+app.get('/*', function(req, res) {
+
+  if(fs.existsSync(__dirname + "/.vuepress/dist" + req.path + ".html")) {
+    res.redirect(req.path + ".html");
+  } else {
+    res.status(404);
+    res.send('Not found');
+  }
 
 });
 
