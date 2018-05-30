@@ -13,6 +13,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-.vuepress/dist
+content/.vuepress/dist
 
 .env

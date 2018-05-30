@@ -2,6 +2,8 @@
 
 // env variables
 require('dotenv').config();
+// fs
+var fs = require('fs');
 // Async
 var async = require("async");
 // Express etc
@@ -22,7 +24,7 @@ redisClient = redis.createClient(process.env.REDISCLOUD_URL);
 var logger = require('heroku-logger');
 
 app = express();
-app.use(serveStatic(__dirname + "/.vuepress/dist"));
+app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
 
 app.use(cors());
 
@@ -86,6 +88,17 @@ app.get('/github-feed', function(req, res) {
     res.json(events);
 
   });
+
+});
+
+app.get('/*', function(req, res) {
+
+  if(fs.existsSync(__dirname + "/.vuepress/dist" + req.path + ".html")) {
+    res.redirect(req.path + ".html");
+  } else {
+    res.status(404);
+    res.send('Not found');
+  }
 
 });
 

@@ -5,8 +5,8 @@
   "author": "",
   "private": true,
   "scripts": {
-    "dev": "./node_modules/vuepress/bin/vuepress.js dev",
-    "start": "./node_modules/vuepress/bin/vuepress.js build && node server.js"
+    "dev": "./node_modules/vuepress/bin/vuepress.js dev content",
+    "start": "./node_modules/vuepress/bin/vuepress.js build content && node server.js"
   },
   "engines": {
     "node": "10.2.x"

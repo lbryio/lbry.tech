@@ -1,5 +1,6 @@
 // .vuepress/config.js
 module.exports = {
+  base: '/',
   title: 'LBRY.tech',
   head: [
     ['meta', {name: 'viewport', content: 'initial-scale=1, viewport-fit=cover'}],
