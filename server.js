@@ -20,7 +20,7 @@ var redis = require("redis"),
 redisClient = redis.createClient(process.env.REDISCLOUD_URL);
 
 app = express();
-app.use(serveStatic(__dirname + "/.vuepress/dist"));
+app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
 
 app.use(cors());
 
