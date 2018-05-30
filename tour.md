@@ -1,5 +1,5 @@
 ---
-title: Hook Demo
+title: Tour
 ---
 
 <Hook></Hook>
