@@ -51,6 +51,8 @@ app.get('/forward', function(req, res) {
 
       }
 
+      req.query.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
+
       request({
         url: "http://daemon.lbry.tech",
         qs: req.query
