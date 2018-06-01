@@ -20,8 +20,12 @@ var octokit = require('@octokit/rest')();
 // Redis
 var redis = require("redis"),
 redisClient = redis.createClient(process.env.REDISCLOUD_URL);
-// Logging
-var logger = require('heroku-logger');
+// Slack
+if(typeof process.env.SLACK_WEBHOOK_URL != 'undefined') {
+  var Slack = require('slack-node');
+  var slack = new Slack();
+  slack.setWebhook(process.env.SLACK_WEBHOOK_URL);
+}
 
 app = express();
 app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
@@ -63,7 +67,7 @@ app.get('/forward', function(req, res) {
       }, function(error, response, body) {
         // Should we parse the body before forwarding?
         if(typeof body.error != "") {
-          logger.error('Got error from daemon', {error: body.error});
+          logSlackError('ERROR: Got error from daemon: ' + JSON.stringify(body.error));
         }
         res.setHeader('Content-Type', 'application/json');
         res.send(body);
@@ -105,7 +109,7 @@ app.get('/*', function(req, res) {
 var port = process.env.PORT || 8080;
 app.listen(port);
 
-logger.info('server started', {port: port});
+logSlackError('Server started at port ' + port);
 
 function updateGithubFeed() {
 
@@ -138,15 +142,29 @@ function updateGithubFeed() {
       // Keep the latest 50 events
       redisClient.zremrangebyrank('events', 0, -51);
 
-      logger.info('Updated Github feed');
+      console.log('Updated Github feed');
 
     });
 
   }).catch(function(err) {
 
-    logger.error('Couldn\t update Github feed', {error: error});
+    logSlackError('ERROR: Couldnt update Github feed: ' + JSON.stringify(err));
 
   });
+
+}
+
+function logSlackError(text) {
+
+  if(typeof process.env.SLACK_WEBHOOK_URL != 'undefined') {
+
+    slack.webhook({
+      channel: 'dottech-errors',
+      username: 'lbrytech-bot',
+      text: text
+    });
+
+  }
 
 }
 
