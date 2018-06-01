@@ -16,21 +16,6 @@
             <img v-bind:src="backgroundImage" id="base-image" alt="" />
             <canvas id="meme-canvas" width="400" height="300">Sorry, canvas not supported</canvas>
 
-            <!--
-            <div class="hook__page__content__meme__uploader">
-              Upload an image
-              <image-uploader
-                :quality="0.8"
-                :autoRotate=true
-                :maxWidth="400"
-                outputFormat="string"
-                :preview=false
-                @input="setImage"
-                @onComplete="imageUploaded"
-              ></image-uploader>
-            </div>
-            -->
-
             <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="thumbnail" v-bind:class="{'selected': backgroundImage == image.src}" v-bind:alt="image.alt">
 
           </div>
@@ -113,16 +98,12 @@
 
 <script>
 import imagesLoaded from 'vue-images-loaded'
-import { ImageUploader } from 'vue-image-upload-resize'
 
 import EventBus from '../event-bus';
 
 export default {
   directives: {
     imagesLoaded
-  },
-  components: {
-    ImageUploader
   },
 
   data () {
@@ -206,8 +187,6 @@ export default {
       document.getElementById('base-image').src = file;
       // allow one second to load the image
       setTimeout(component.updateCanvas, 1000);
-    },
-    imageUploaded () {
     }
   },
   created () {
