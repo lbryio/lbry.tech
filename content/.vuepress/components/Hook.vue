@@ -41,11 +41,8 @@
 <script>
 
 import Vue from 'vue'
-import VueHighlightJS from 'vue-highlightjs'
 
 import EventBus from '../event-bus';
-
-Vue.use(VueHighlightJS)
 
 export default {
   data () {

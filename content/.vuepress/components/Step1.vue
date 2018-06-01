@@ -14,7 +14,7 @@
     </header>
 
     <div class="xs12" v-if="exampleCode != ''">
-      <pre v-highlightjs="exampleCode"><code class="bash"></code></pre>
+      <pre><code class="bash"><span v-html="highlight('bash',exampleCode)"></span></code></pre>
     </div>
 
     <div class="xs12" v-if="isLoading">
@@ -23,7 +23,7 @@
 
     <div class="xs12" v-if="jsonData">
       <p>Success! Here is the response for <strong>lbry://{{ address }}</strong>:</p>
-      <pre v-highlightjs="jsonData" class="json-example"><code class="json"></code></pre>
+      <pre class="json-example"><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
       <a href="#" class="__button-black" v-on:click="goTo(2)">Go to next step</a>
     </div>
 
@@ -76,6 +76,7 @@
 
 <script>
 import EventBus from '../event-bus';
+import hljs from 'highlight.js';
 
 export default {
   data () {
@@ -85,6 +86,13 @@ export default {
       isLoading: false,
       exampleCode: ''
     }
+  },
+  mounted () {
+
+    hljs.configure({
+      languages: ['bash', 'json']
+    });
+
   },
   methods: {
     fetchMetadata () {
@@ -104,6 +112,9 @@ export default {
     },
     goTo (page) {
       EventBus.$emit('HookStepUpdate', page);
+    },
+    highlight (language, text) {
+      return hljs.highlight(language, text).value;
     }
   },
   name: 'Step1'
