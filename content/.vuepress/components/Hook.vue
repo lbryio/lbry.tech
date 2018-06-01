@@ -79,7 +79,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../../../node_modules/highlight.js/styles/monokai-sublime";
   @import "../scss/init/colors";
   @import "../scss/init/extends";
   @import "../scss/init/mixins";
