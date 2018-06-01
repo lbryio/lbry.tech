@@ -34,12 +34,13 @@ if(typeof process.env.SLACK_WEBHOOK_URL != 'undefined') {
 }
 
 app = express();
+
+// enable ssl redirect
+app.use(sslRedirect());
+
 app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
 
 app.use(cors());
-
-// enable ssl redirect
-app.use(sslRedirect(['other','development', 'staging', 'production']));
 
 app.get('/forward', function(req, res) {
 
