@@ -156,12 +156,14 @@ function updateGithubFeed() {
 
 function logSlackError(text) {
 
-  if(typeof process.env.SLACK_WEBHOOK_URL != 'undefined') {
+  if(typeof slack != 'undefined') {
 
     slack.webhook({
       channel: 'dottech-errors',
       username: 'lbrytech-bot',
       text: text
+    }, function(err, response) {
+      
     });
 
   }
