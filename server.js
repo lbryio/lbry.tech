@@ -17,6 +17,12 @@ var cors = require('cors');
 var CronJob = require('cron').CronJob;
 // Github API
 var octokit = require('@octokit/rest')();
+if(typeof process.env.GITHUB_OAUTH_TOKEN != 'undefined') {
+  octokit.authenticate({
+    type: 'oauth',
+    token: process.env.GITHUB_OAUTH_TOKEN
+  });
+}
 // Redis
 var redis = require("redis"),
 redisClient = redis.createClient(process.env.REDISCLOUD_URL);

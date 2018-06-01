@@ -25,7 +25,7 @@
 
     <div class="xs12" v-if="jsonData">
       <p>Success! Here is the response:</p>
-      <pre class="json-example"><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
+      <pre><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
     </div>
 
     <template v-if="!isLoading && !jsonData">
@@ -125,7 +125,6 @@ export default {
 
 <style lang="scss">
 
-@import "../../../node_modules/highlight.js/styles/monokai-sublime";
 @import '../scss/variables';
 
 #step3-page {

@@ -23,7 +23,7 @@
 
     <div class="xs12" v-if="jsonData">
       <p>Success! Here is the response for <strong>lbry://{{ address }}</strong>:</p>
-      <pre class="json-example"><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
+      <pre><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
       <a href="#" class="__button-black" v-on:click="goTo(2)">Go to next step</a>
     </div>
 
@@ -122,6 +122,4 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../../../node_modules/highlight.js/styles/monokai-sublime";
-  @import '../scss/variables';
 </style>
