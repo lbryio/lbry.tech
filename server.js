@@ -71,12 +71,12 @@ app.get('/forward', function(req, res) {
         url: "http://daemon.lbry.tech",
         qs: req.query
       }, function(error, response, body) {
-        // Should we parse the body before forwarding?
+        // Should we filter the body parameters before forwarding to user?
+	body = JSON.parse(body);
         if(typeof body.error != "undefined") {
           logSlackError('ERROR: Got error from daemon: ' + JSON.stringify(body.error));
         }
-        res.setHeader('Content-Type', 'application/json');
-        res.send(body);
+        res.json(body);
       });
 
     }
