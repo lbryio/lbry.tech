@@ -219,7 +219,6 @@
   }
 
   .ecosystem__module {
-    // padding: 1.9rem 2rem;
     position: relative;
     width: 100%;
 
@@ -439,7 +438,7 @@
 
 
   .ecosystem__submodules {
-    padding-top: 0.25rem;
+    padding-top: 2.5rem;
   }
 
   .ecosystem__submodule {
