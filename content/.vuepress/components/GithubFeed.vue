@@ -94,7 +94,7 @@ export default {
 
       var component = this;
 
-      component.$http.get('//beta.lbry.tech/github-feed').then(function(response) {
+      component.$http.get('https://beta.lbry.tech/github-feed').then(function(response) {
         component.events = response.body;
       });
 
