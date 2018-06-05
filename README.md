@@ -21,7 +21,7 @@ This project is not designed to be installed directly. Continue reading below to
 
 ## Usage
 
-Visit [beta.LBRY.tech](https://beta.lbry.tech) for hosted version for this repository.
+Visit [LBRY.tech](https://lbry.tech) for hosted version for this repository.
 
 ## Running from Source
 

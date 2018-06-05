@@ -8,7 +8,7 @@ Want to contribute by editing the text content on the site? This is easy, as all
 
 ## Code Overview
 
-This project is a Vuepress-based static documentation website. This includes both the backend and frontend of the website at [beta.lbry.tech](https://beta.lbry.tech). All of this packaged and build with [Yarn](https://yarnpkg.com).
+This project is a Vuepress-based static documentation website. This includes both the backend and frontend of the website at [lbry.tech](https://lbry.tech). All of this packaged and build with [Yarn](https://yarnpkg.com).
 
 ### Backend
 
