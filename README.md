@@ -1,9 +1,6 @@
----
-home: true
-title: LBRY.tech
----
-
 # LBRY.tech Website
+
+[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=master)](https://travis-ci.org/lbryio/lbry.tech)
 
 Technical documentation website for [the LBRY protocol](https://lbry.io/) made with Javascript. 
 
