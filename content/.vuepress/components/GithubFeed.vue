@@ -265,6 +265,7 @@ export default {
       display: inline-block;
       font-weight: 700;
       margin-bottom: 0.5rem;
+      width: 100%;
     }
 
     > p:first-of-type {

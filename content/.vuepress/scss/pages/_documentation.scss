@@ -10,9 +10,28 @@
 
 
 
-  .blog-post__title {
-    display: inline-block;
+  .blog-posts {
+    list-style-type: none;
+  }
+
+  .blog-post {
     position: relative;
+
+    &::before {
+      top: 8px; left: -1.2rem;
+
+      content: "\00B7";
+      font-size: 3.5rem;
+      line-height: 0;
+      position: absolute;
+    }
+  }
+
+
+
+  .blog-post__title {
+    display: inline-block; // position is set elsewhere
+    line-height: 1.33;
 
     &::after {
       content: "";
@@ -29,17 +48,38 @@
   .blog-post__meta__author {
     &::before {
       content: "by";
-      left: -1.2rem;
+
+      @media (min-width: 901px) {
+        left: -1.2rem;
+      }
+
+      @media (max-width: 900px) {
+        left: -1rem;
+      }
     }
   }
 
   .blog-post__meta__date {
-    margin-right: 1.4rem;
-    margin-left: 3.1rem;
+    @media (min-width: 901px) {
+      margin-right: 1.4rem;
+      margin-left: 3.1rem;
+    }
+
+    @media (max-width: 900px) {
+      margin-right: 1.2rem;
+      margin-left: 2.6rem;
+    }
 
     &::before {
       content: "posted";
-      left: -3.1rem;
+
+      @media (min-width: 901px) {
+        left: -3.1rem;
+      }
+
+      @media (max-width: 900px) {
+        left: -2.6rem;
+      }
     }
   }
 
