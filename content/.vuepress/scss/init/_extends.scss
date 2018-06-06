@@ -11,8 +11,10 @@
 
 .__button-basic {
   @extend .__button-base;
-  @extend .__button-padding-vertical;
+}
 
+.__button-plain {
+  @extend .__button-base;
   background-color: transparent;
   border-color: transparent;
 

@@ -1,9 +1,11 @@
 <template>
-  <div id="email-subscribe">
-    <h3 class="title">Subscribe to our developer newsletter!</h3>
-    <input type="text" class="input" v-model="emailAddress" placeholder="your@email.com">
-    <a class="__button-black" href="#" v-on:click.prevent="subscribe">Subscribe</a>
-    <p v-if="message" class="message">{{ message }}</p>
+  <div id="email-subscribe" class="newsletter-cta">
+    <h3 class="newsletter-cta__title">Subscribe to our developer newsletter</h3>
+    <div>
+      <input type="text" class="newsletter-cta__input" v-model="emailAddress" placeholder="you@domain.tld">
+      <a class="newsletter-cta__submit" href="#" v-on:click.prevent="subscribe">Subscribe</a>
+    </div>
+    <p v-if="message" class="newsletter-cta__message">{{ message }}</p>
   </div>
 </template>
 
@@ -24,7 +26,7 @@ export default {
         this.message = 'Your email is not valid!';
       } else {
         this.$http.post('//api.lbry.io/list/subscribe', {
-          email: this.emailAddress, 
+          email: this.emailAddress,
           tag: 'developer'
         }, {
           emulateJSON: true
@@ -47,24 +49,84 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "../scss/init/colors";
+  @import "../scss/init/extends";
+  @import "../scss/init/mixins";
 
-#email-subscribe {
-  background: #ddd;
-  padding: 1rem 0;
-  text-align: center;
-  .title {
-    margin-bottom: 0.5rem;
-  }
-  .input {
-    border: 1px solid black;
-    padding: 0.65rem;
-    background: white;
-    margin-right: 1rem;
-    width: 18rem;
-  }
-  .message {
-    margin-top: 1rem;
-  }
-}
+  .newsletter-cta {
+    background-color: rgba($black, 0.2);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
 
+    > div:first-of-type {
+      margin-right: auto;
+      margin-left: auto;
+      width: 500px;
+    }
+
+    &::after {
+      @include clearfix;
+    }
+  }
+
+  .newsletter-cta__title {
+    font-size: 0.8rem;
+    letter-spacing: 0.05rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .newsletter-cta__input,
+  .newsletter-cta__submit {
+    @extend .__button-padding-horizontal;
+    border-style: solid;
+    border-width: 1px;
+  }
+
+  .newsletter-cta__input {
+    width: calc(100% - 112px); height: 38px;
+
+    background-color: $white;
+    float: left;
+    transition: border 0.2s;
+
+    &:not(:focus) {
+      border-top-color: $black;
+      border-right-color: transparent;
+      border-bottom-color: $black;
+      border-left-color: $black;
+    }
+
+    &:focus {
+      border-top-color: mix($black, $teal, 20%);
+      border-right-color: transparent;
+      border-bottom-color: mix($black, $teal, 20%);
+      border-left-color: mix($black, $teal, 20%);
+    }
+  }
+
+  .newsletter-cta__submit {
+    @extend .__button-basic;
+    @extend .__button-padding-vertical;
+    color: $white;
+    float: right;
+    left: -1px;
+    width: 112px;
+
+    &:not(:hover) {
+      background-color: $black;
+      border-color: $black;
+    }
+
+    &:hover {
+      background-color: $teal;
+      border-color: mix($black, $teal, 20%);
+    }
+  }
+
+  .newsletter-cta__message {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
 </style>
