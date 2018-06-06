@@ -62,7 +62,14 @@ export default {
     > div:first-of-type {
       margin-right: auto;
       margin-left: auto;
-      width: 500px;
+
+      @media (min-width: 551px) {
+        width: 500px;
+      }
+
+      @media (max-width: 550px) {
+        width: 90%;
+      }
     }
 
     &::after {
@@ -82,27 +89,55 @@ export default {
     @extend .__button-padding-horizontal;
     border-style: solid;
     border-width: 1px;
+
+    @media (max-width: 550px) {
+      width: 100%;
+    }
   }
 
   .newsletter-cta__input {
-    width: calc(100% - 112px); height: 38px;
-
     background-color: $white;
-    float: left;
+    font-size: 1rem;
+    height: 38px;
     transition: border 0.2s;
+
+    @media (min-width: 551px) {
+      float: left;
+      width: calc(100% - 112px);
+    }
+
+    @media (max-width: 550px) {
+      text-align: center;
+    }
 
     &:not(:focus) {
       border-top-color: $black;
-      border-right-color: transparent;
-      border-bottom-color: $black;
       border-left-color: $black;
+
+      @media (min-width: 551px) {
+        border-bottom-color: $black;
+        border-right-color: transparent;
+      }
+
+      @media (max-width: 550px) {
+        border-bottom-color: transparent;
+        border-right-color: $black;
+      }
     }
 
     &:focus {
       border-top-color: mix($black, $teal, 20%);
-      border-right-color: transparent;
-      border-bottom-color: mix($black, $teal, 20%);
       border-left-color: mix($black, $teal, 20%);
+
+      @media (min-width: 551px) {
+        border-bottom-color: mix($black, $teal, 20%);
+        border-right-color: transparent;
+      }
+
+      @media (max-width: 550px) {
+        border-bottom-color: transparent;
+        border-right-color: mix($black, $teal, 20%);
+      }
     }
   }
 
@@ -110,9 +145,17 @@ export default {
     @extend .__button-basic;
     @extend .__button-padding-vertical;
     color: $white;
-    float: right;
-    left: -1px;
-    width: 112px;
+
+    @media (min-width: 551px) {
+      float: right;
+      left: -1px;
+      width: 112px;
+    }
+
+    @media (max-width: 550px) {
+      display: block;
+      top: -1px;
+    }
 
     &:not(:hover) {
       background-color: $black;
@@ -126,7 +169,8 @@ export default {
   }
 
   .newsletter-cta__message {
+    @include clearfix;
+    color: $red;
     padding-top: 1rem;
-    padding-bottom: 1rem;
   }
 </style>
