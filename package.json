@@ -29,6 +29,7 @@
     "vue": "^2.5.16",
     "vue-images-loaded": "^1.1.2",
     "vue-moment": "^3.2.0",
+    "vue-multianalytics": "1.9.4",
     "vue-resource": "^1.5.0",
     "vuepress": "0.9.0"
   }

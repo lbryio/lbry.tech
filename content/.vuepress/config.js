@@ -10,6 +10,5 @@ module.exports = {
     repo: 'lbryio/lbry.tech',
     docsBranch: 'master',
     editLinkText: 'Edit this page on Github'
-  },
-  ga: 'UA-60403362-1'
+  }
 }
