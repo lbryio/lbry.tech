@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10.2"
+  - "9"
 before_install:
   - npm i -g npm@latest
   - curl -o- -L https://yarnpkg.com/install.sh | bash
