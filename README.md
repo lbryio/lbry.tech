@@ -27,9 +27,8 @@ Visit [LBRY.tech](https://lbry.tech) for hosted version for this repository.
 
 ### Prerequisities
 
-* [Node](https://nodejs.org/) (version >= 9)
+* [Node](https://nodejs.org/) (version >= 10)
 * [Yarn](https://yarnpkg.com/)
-* [Vuepress](https://vuepress.vuejs.org/)
 
 ### Compiling 
 
