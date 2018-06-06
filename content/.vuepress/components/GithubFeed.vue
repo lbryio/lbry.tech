@@ -262,7 +262,6 @@ export default {
     }
 
     > a:first-of-type {
-      display: inline-block;
       font-weight: 700;
       margin-bottom: 0.5rem;
       width: 100%;
