@@ -179,3 +179,5 @@ function logSlackError(text) {
 
 // Update Github feed every minute
 new CronJob("0 * * * * *", updateGithubFeed, null, true, 'America/Los_Angeles');
+
+module.exports = app;
