@@ -100,7 +100,7 @@ export default {
       component.jsonData = '';
       component.isLoading = true;
       component.exampleCode = '# Example code using the daemon\ncurl \'http://localhost:5279\' --data \'{"method":"resolve","params":{"uri":"' + this.address + '"}}\'';
-      this.$http.get('https://betalbry.tech/forward?method=resolve&uri=' + this.address).then(function(response) {
+      this.$http.get('https://lbry.tech/forward?method=resolve&uri=' + this.address).then(function(response) {
         component.isLoading = false;
         component.jsonData = JSON.stringify(response.body, null, '  ');
       });
