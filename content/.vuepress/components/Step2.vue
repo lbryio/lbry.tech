@@ -12,78 +12,82 @@
       <aside class="hook__page__content">
         <div class="inner-wrap">
 
-          <div class="hook__page__content__meme left">
-            <img v-bind:src="backgroundImage" id="base-image" alt="" />
-            <canvas id="meme-canvas" width="400" height="300">Sorry, canvas not supported</canvas>
+          <template v-if="!isLoading">
 
-            <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="thumbnail" v-bind:class="{'selected': backgroundImage == image.src}" v-bind:alt="image.alt">
+            <div class="hook__page__content__meme left">
+              <img v-bind:src="backgroundImage" id="base-image" alt="" />
+              <canvas id="meme-canvas" width="400" height="300">Sorry, canvas not supported</canvas>
 
-          </div>
+              <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="thumbnail" v-bind:class="{'selected': backgroundImage == image.src}" v-bind:alt="image.alt">
 
-          <form class="hook__page__content__meme right" v-on:submit.prevent="submit">
+            </div>
 
-            <h2>Image Text</h2>
+            <form class="hook__page__content__meme right" v-on:submit.prevent="submit">
 
-            <fieldset>
-              <label for="meme-top-line">Top line</label>
-              <input name="meme-top-line" id="meme-top-line" type="text" v-model="topLine" placeholder="Top line" required/>
-            </fieldset>
+              <h2>Image Text</h2>
 
-            <fieldset>
-              <label for="meme-bottom-line">Bottom line</label>
-              <input name="meme-bottom-line" id="meme-bottom-line" type="text" v-model="bottomLine" placeholder="Bottom line" required/>
-            </fieldset>
+              <fieldset>
+                <label for="meme-top-line">Top line</label>
+                <input name="meme-top-line" id="meme-top-line" type="text" v-model="topLine" placeholder="Top line" required/>
+              </fieldset>
 
-            <h2 class="metadata">Metadata</h2>
+              <fieldset>
+                <label for="meme-bottom-line">Bottom line</label>
+                <input name="meme-bottom-line" id="meme-bottom-line" type="text" v-model="bottomLine" placeholder="Bottom line" required/>
+              </fieldset>
 
-            <fieldset>
-              <label for="meme-title">Title</label>
-              <input name="meme-title" id="meme-title" type="text" v-model="title" placeholder="Title" required/>
-            </fieldset>
+              <h2 class="metadata">Metadata</h2>
 
-            <fieldset>
-              <label for="meme-description">Description</label>
-              <textarea name="meme-description" id="meme-description" type="text" v-model="description" placeholder="Description" required>{{ description}}</textarea>
-            </fieldset>
+              <fieldset>
+                <label for="meme-title">Title</label>
+                <input name="meme-title" id="meme-title" type="text" v-model="title" placeholder="Title" required/>
+              </fieldset>
 
-            <fieldset>
-              <label for="meme-language">Language</label>
-              <select name="meme-language" id="meme-language" v-model="language">
-                <option value="EN">English</option>
-                <option value="FR">French</option>
-                <option value="ES">Spanish</option>
-                <option value="DE">German</option>
-                <option value="IT">Italian</option>
-                <option value="ZH">Chinese (Mandarin)</option>
-                <option value="AR">Arabic</option>
-                <option value="RU">Russian</option>
-                <option value="JP">Japanese</option>
-                <option value="">Not specified</option>
-              </select>
-            </fieldset>
+              <fieldset>
+                <label for="meme-description">Description</label>
+                <textarea name="meme-description" id="meme-description" type="text" v-model="description" placeholder="Description" required>{{ description}}</textarea>
+              </fieldset>
 
-            <fieldset>
-              <label for="meme-license">License</label>
-              <select name="meme-license" id="meme-license" v-model="license" required>
-                <option value="Public Domain">Public Domain</option>
-                <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
-                <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
-                <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
-                <option value="None">None</option>
-              </select>
-            </fieldset>
+              <fieldset>
+                <label for="meme-language">Language</label>
+                <select name="meme-language" id="meme-language" v-model="language">
+                  <option value="EN">English</option>
+                  <option value="FR">French</option>
+                  <option value="ES">Spanish</option>
+                  <option value="DE">German</option>
+                  <option value="IT">Italian</option>
+                  <option value="ZH">Chinese (Mandarin)</option>
+                  <option value="AR">Arabic</option>
+                  <option value="RU">Russian</option>
+                  <option value="JP">Japanese</option>
+                  <option value="">Not specified</option>
+                </select>
+              </fieldset>
 
-            <fieldset>
-              <label><input type="checkbox" v-model="nsfw" name="nsfw"/>NSFW</label>
-            </fieldset>
+              <fieldset>
+                <label for="meme-license">License</label>
+                <select name="meme-license" id="meme-license" v-model="license" required>
+                  <option value="Public Domain">Public Domain</option>
+                  <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
+                  <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
+                  <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
+                  <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
+                  <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
+                  <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
+                  <option value="None">None</option>
+                </select>
+              </fieldset>
 
-            <fieldset>
-              <input type="submit" class="__button-black" value="Submit"/>
-            </fieldset>
-          </form>
+              <fieldset>
+                <label><input type="checkbox" v-model="nsfw" name="nsfw"/>NSFW</label>
+              </fieldset>
+
+              <fieldset>
+                <input type="submit" class="__button-black" value="Submit"/>
+              </fieldset>
+            </form>
+
+          </template>
 
           <div class="xs12" v-if="isLoading">
             <div class="loader"></div>
@@ -124,6 +128,7 @@ export default {
     return {
       valid: false,
       isLoading: false,
+      loadingMessage: '',
       topLine: 'This is an example meme',
       bottomLine: 'that I made',
       title: '',
@@ -169,7 +174,11 @@ export default {
     submit () {
       var component = this;
       component.isLoading = true;
-      component.$http.post('https://lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/jpeg', 0.6)).then(function(response) {
+      component.$http.post('/upload-image', document.getElementById('meme-canvas').toDataURL('image/jpeg', 0.6), {
+        headers: {
+          'Content-Type': 'text/plain'
+        }
+      }).then(function(response) {
         component.isLoading = false;
         console.log(response);
       });
