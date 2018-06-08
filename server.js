@@ -102,6 +102,21 @@ app.get('/github-feed', function(req, res) {
 
 });
 
+app.post('/upload-image', function(req, res) {
+
+  request({
+    method: "PUT",
+    url: "http://daemon.lbry.tech/images.php",
+    qs: {
+      access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
+    },
+    body: req.body,
+  }, function(error, response, body) {
+    res.json(body);
+  });
+
+});
+
 app.get('/*', function(req, res) {
 
   if(fs.existsSync(__dirname + "/.vuepress/dist" + req.path + ".html")) {

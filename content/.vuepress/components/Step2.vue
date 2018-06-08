@@ -20,7 +20,7 @@
 
           </div>
 
-          <form class="hook__page__content__meme right">
+          <form class="hook__page__content__meme right" v-on:submit.prevent="submit">
 
             <h2>Image Text</h2>
 
@@ -81,7 +81,7 @@
             </fieldset>
 
             <fieldset>
-              <input type="submit" class="__button-black" v-on:click="submit" value="Submit"/>
+              <input type="submit" class="__button-black" value="Submit"/>
             </fieldset>
           </form>
 
@@ -167,8 +167,15 @@ export default {
       ctx.fillText(this.bottomLine.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
     },
     submit () {
-      // TODO: Do the upload
-      EventBus.$emit('HookFileUploaded', 'txhashhere');
+      var component = this;
+      component.isLoading = true;
+      component.$http.post('https:/lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/png')).then(function(response) {
+        component.isLoading = false;
+        console.log(response);
+      });
+
+      //EventBus.$emit('HookFileUploaded', 'txhashhere');
+
     },
     imagesLoaded (instance) {
       var component = this;
