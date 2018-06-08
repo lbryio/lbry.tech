@@ -89,8 +89,17 @@
 
           </template>
 
+          <div class="xs12" v-if="exampleCode != ''">
+            <pre><code class="bash"><span v-html="highlight('bash',exampleCode)"></span></code></pre>
+          </div>
+
           <div class="xs12" v-if="isLoading">
             <div class="loader"></div>
+          </div>
+
+          <div class="xs12" v-if="jsonData">
+            <p>Success! Here is the response:</p>
+            <pre><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
           </div>
 
         </div>
@@ -102,6 +111,7 @@
 
 <script>
 import imagesLoaded from 'vue-images-loaded'
+import hljs from 'highlight.js'
 
 import EventBus from '../event-bus';
 
@@ -128,12 +138,13 @@ export default {
     return {
       valid: false,
       isLoading: false,
+      exampleCode: '',
+      jsonData: '',
       loadingMessage: '',
       topLine: 'This is an example meme',
       bottomLine: 'that I made',
       title: '',
       description: 'Check out this image I published to LBRY via lbry.tech',
-      author: '',
       language: 'EN',
       license: 'Public Domain',
       nsfw: false,
@@ -143,6 +154,13 @@ export default {
         v => !!v || 'Field is required'
       ],
     }
+  },
+  mounted () {
+
+    hljs.configure({
+      languages: ['bash', 'json']
+    });
+
   },
   methods: {
     updateCanvas () {
@@ -174,16 +192,23 @@ export default {
     submit () {
       var component = this;
       component.isLoading = true;
-      component.$http.post('/upload-image', document.getElementById('meme-canvas').toDataURL('image/jpeg', 0.6), {
+      component.exampleCode = '# Example code using the daemon\ncurl \'http://localhost:5279\' --data \'{"method":"publish","params":{"name":"' + component.title + '","bid":0.001, "file_path":"/path/to/your/file.jpg","title":"' + component.title + '", "description":"' + component.description + '","language":"' + component.language + '","license":"' + component.license + '","nsfw":' + component.nsfw + '}}\'';
+      component.$http.post('https://lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/jpeg', 0.6), {
         headers: {
           'Content-Type': 'text/plain'
         }
       }).then(function(response) {
-        component.isLoading = false;
-        console.log(response);
+        if(response.status == 'error') {
+          component.isLoading = false;
+          component.exampleCode = '';
+        } else {
+          component.$http.get('https://lbry.tech/forward?method=publish&name=' + component.title + '&bid=0.001&file_path=' + response.filename + '&title=' + component.title + '&description=' + component.description + '&language=' + component.language + '&license=' + component.license + '&nsfw=' + component.nsfw).then(function(response) {
+            component.isLoading = false;
+            component.jsonData = JSON.stringify(response.body, null, '  ');
+            EventBus.$emit('HookFileUploaded', response.body.txid);
+          });
+        }
       });
-
-      //EventBus.$emit('HookFileUploaded', 'txhashhere');
 
     },
     imagesLoaded (instance) {
@@ -203,6 +228,9 @@ export default {
       document.getElementById('base-image').src = file;
       // allow one second to load the image
       setTimeout(component.updateCanvas, 1000);
+    },
+    highlight (language, text) {
+      return hljs.highlight(language, text).value;
     }
   },
   created () {

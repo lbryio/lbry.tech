@@ -71,6 +71,16 @@ app.get('/forward', function(req, res) {
 
       }
 
+      if(req.query.method == "publish") {
+
+        // Hardcode the publish amount to be always 0.001 always
+        req.query.bid = 0.001;
+
+        // Fix the internal image path in daemon
+        req.query.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + req.query.file_path;
+
+      }
+
       req.query.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
 
       request({
