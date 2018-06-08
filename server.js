@@ -117,6 +117,7 @@ app.post('/upload-image', textParser, function(req, res) {
     },
     body: req.body,
   }, function(error, response, body) {
+    console.log(body);
     body = JSON.parse(body);
     res.json(body);
   });
