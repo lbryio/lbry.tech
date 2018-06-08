@@ -112,12 +112,14 @@ app.post('/upload-image', textParser, function(req, res) {
   request({
     method: "PUT",
     url: "http://daemon.lbry.tech/images.php",
+    headers: {
+      'Content-Type': 'text/plain'
+    },
     qs: {
       access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
     },
     body: req.body,
   }, function(error, response, body) {
-    console.log(body);
     body = JSON.parse(body);
     res.json(body);
   });
