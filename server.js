@@ -13,6 +13,7 @@ var path = require('path');
 var serveStatic = require('serve-static');
 var request = require('request');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 // Cron
 var CronJob = require('cron').CronJob;
 // Github API
@@ -41,6 +42,8 @@ app.use(sslRedirect());
 app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
 
 app.use(cors());
+
+app.use(bodyParser.text());
 
 app.get('/forward', function(req, res) {
 

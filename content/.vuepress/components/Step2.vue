@@ -109,15 +109,15 @@ export default {
   data () {
     var images = [
       {
-        src: 'https://spee.ch/4f6b953e605a602434246743fd246d3e1fd4f5fd/carlsagan2.jpeg',
+        src: './carlsagan2.jpg',
         alt: 'Carl Sagan'
       },
       {
-        src: 'https://spee.ch/2f90f2d91441a4d33d3d4eb82bdfc4c56ec742c7/doge-meme.jpeg',
+        src: './doge-meme.jpg',
         alt: 'Doge'
       },
       {
-        src: 'https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png',
+        src: 'lbry-green.png',
         alt: 'LBRY Logo With Green Background'
       }
     ];
@@ -169,6 +169,7 @@ export default {
     submit () {
       var component = this;
       component.isLoading = true;
+      var canvas = document.getElementById('meme-canvas');
       component.$http.post('https:/lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/png')).then(function(response) {
         component.isLoading = false;
         console.log(response);
