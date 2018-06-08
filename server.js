@@ -43,7 +43,9 @@ app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
 
 app.use(cors());
 
-app.use(bodyParser.text());
+var textParser = bodyParser.text({
+  limit: '256kb'
+});
 
 app.get('/forward', function(req, res) {
 
@@ -76,7 +78,7 @@ app.get('/forward', function(req, res) {
         qs: req.query
       }, function(error, response, body) {
         // Should we filter the body parameters before forwarding to user?
-	body = JSON.parse(body);
+        body = JSON.parse(body);
         if(typeof body.error != "undefined") {
           logSlackError('ERROR: Got error from daemon: ' + JSON.stringify(body.error));
         }
@@ -105,7 +107,7 @@ app.get('/github-feed', function(req, res) {
 
 });
 
-app.post('/upload-image', function(req, res) {
+app.post('/upload-image', textParser, function(req, res) {
 
   request({
     method: "PUT",
@@ -115,6 +117,7 @@ app.post('/upload-image', function(req, res) {
     },
     body: req.body,
   }, function(error, response, body) {
+    body = JSON.parse(body);
     res.json(body);
   });
 
