@@ -169,8 +169,7 @@ export default {
     submit () {
       var component = this;
       component.isLoading = true;
-      var canvas = document.getElementById('meme-canvas');
-      component.$http.post('https:/lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/png')).then(function(response) {
+      component.$http.post('https://lbry.tech/upload-image', document.getElementById('meme-canvas').toDataURL('image/png')).then(function(response) {
         component.isLoading = false;
         console.log(response);
       });
