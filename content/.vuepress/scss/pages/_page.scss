@@ -131,6 +131,10 @@
   }
 
   p, ol, ul:not(.overview__ecosystem__module):not(.feature-links) {
+    margin-bottom: 1rem;
+  }
+
+  p, ol, ul:not(.overview__ecosystem__module):not(.feature-links) {
     position: relative;
 
     @media (min-width: 901px) {
@@ -168,14 +172,8 @@
   }
 
   p {
-    margin-bottom: 2rem;
-
     img {
       float: right;
-    }
-
-    + ol, + ul {
-      top: -2rem;
     }
   }
 
