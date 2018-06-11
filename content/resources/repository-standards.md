@@ -77,7 +77,7 @@ This document exists to introduce a project to a new visitor. It may also serve 
 
 This document explains anything a visitor would need to know to contribute to the project.
 
-This document should cover the followin/g:
+This document should cover the following:
 
 * First, it should contain a single sentence: "This project follows the global contributing standards for all LBRY projects, to read those go < here >".
 * A "Code Overview" section explaining some basic design choices and how to begin stepping through the code. An example would be explaining that Daemon.py is the primary entry point for the daemon code, and one can begin to trace through the code by looking for jsonrpc_xxx, where xxx is one of the api calls listed [here](https://lbry.io/api).
