@@ -23,7 +23,6 @@ This document exists to introduce a project to a new visitor. It may also serve 
 * A single header labeled "Install" should be the next header as an h2
 * Installation means installation for users. It should cover how to have the software on their computer in a user-friendly fashion, not how to run from source. E.g. it should link binaries if they exist.
 * If the project is a library only intended to be used in other projects, it should still exist but can be extremely succinct (e.g. pip install lbryschema)
-
 * If the project is not designed to be installed directly or used as a library in other projects, it should state as such, e.g. "This project is not designed to be installed directly. Continue reading below to learn how to use this project."
 
 ### Usage
