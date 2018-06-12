@@ -1,6 +1,6 @@
 <template>
   <div id="email-subscribe" class="newsletter-cta">
-    <h3 class="newsletter-cta__title">Subscribe to our developer newsletter</h3>
+    <h3 class="newsletter-cta__title">Don't Miss A Bit - Subscribe For LBRY Technical Updates</h3>
     <div>
       <input type="text" class="newsletter-cta__input" v-model="emailAddress" placeholder="you@domain.tld">
       <a class="newsletter-cta__submit" href="#" v-on:click.prevent="subscribe">Subscribe</a>

@@ -26,9 +26,36 @@
         </h2>
 
         <div class="ecosystem__module__details">
-          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit semper luctus praesent phasellus egestas lectus, placerat feugiat arcu dis fermentum maecenas in augue mus quisque euismod justo. Posuere senectus fermentum luctus iaculis nascetur congue enim, semper gravida egestas facilisis mus sociosqu dui metus, est augue mollis phasellus quis leo. Montes hendrerit potenti cubilia feugiat dictum vitae tellus, habitant cursus dignissim et leo morbi, aliquet proin bibendum vivamus per mattis.</p>
-
-          <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
+          <p>
+            <em>
+              This section assumes "blockchain" already means something to you. If you're totally new, the key problem solved by blockhain is the ability for distributed, disparate entities to all agree on a rivalrous state of affairs (such as account balances or metadata associated with a URL).
+            </em>
+          </p>
+          <p>
+            The LBRY blockchain is a public and uses proof-of-work consensus. It is the foundation of the protocol stack.
+          </p>
+          <p>
+            The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata.
+            This string of characters forms a LBRY URL, e.g. 
+          </p>
+          <p>
+            The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata.
+          </p>
+          <p>
+            Conventionally, this metadata contains information about the content, such as the title and creator, the price (if any), and a unique signature allowing the actual content to be fetched from the data network, the next level in the LBRY stack.
+          </p>
+          <h3>Additional Resources</h3>
+          <ul>
+            <li>
+              See the [Whitepaper]
+            </li>
+            <li>
+              See [[Naming]] for learning more about LBRY URLs and how they work.
+            </li>
+            <li>
+              See [[Identities]] for learning how the LBRY blockchain handles publisher identities.
+            </li>
+          </ul>
         </div>
 
         <span class="__close" v-on:click="close()">&times;</span>
