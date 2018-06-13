@@ -328,7 +328,8 @@
     ul {
       li {
         @media (min-width: 701px) {
-          width: calc(100% / 3);
+          // width: calc(100% / 3); // https://github.com/lbryio/lbry.tech/issues/104
+          width: 50%; //
         }
 
         @media (max-width: 700px) {

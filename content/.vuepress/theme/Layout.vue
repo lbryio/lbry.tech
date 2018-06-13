@@ -91,9 +91,9 @@
             <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
 
             <ul>
-              <li><a href="//discord.gg/YjYbwhS">Discord</a></li>
+              <li><a href="//chat.lbry.io">Discord</a></li>
               <li><a href="//www.reddit.com/r/lbry">Reddit</a></li>
-              <li><a href="//chat.lbry.io">Slack</a></li>
+              <!--/ <li><a href="//">StackOverflow</a></li> /-->
             </ul>
           </div>
         </section>
