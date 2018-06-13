@@ -4,11 +4,11 @@
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
 
-        <router-link class="navigation__item" to="/overview" title="LBRY overview">Overview</router-link>
-        <router-link class="navigation__item" to="/resources" title="View LBRY resources">Resources</router-link>
-        <router-link class="navigation__item" to="/contribute" title="Contribute to LBRY">Contribute</router-link>
-        <router-link class="navigation__item" to="/build" title="View LBRY resources">Build</router-link>
-        <router-link class="navigation__item" to="/community" title="Interact with LBRY">Community</router-link>
+        <router-link class="navigation__item" to="/overview/" title="LBRY overview">Overview</router-link>
+        <router-link class="navigation__item" to="/resources/" title="View LBRY resources">Resources</router-link>
+        <router-link class="navigation__item" to="/contribute/" title="Contribute to LBRY">Contribute</router-link>
+        <router-link class="navigation__item" to="/build/" title="View LBRY resources">Build</router-link>
+        <router-link class="navigation__item" to="/community/" title="Interact with LBRY">Community</router-link>
       </div>
     </nav>
 
@@ -34,7 +34,7 @@
             <li class="home__feature">
               <p class="home__feature__title"><strong>Want to contribute?</strong></p>
               <p class="home__feature__description">Help make LBRY better!</p>
-              <a class="home__feature__cta" href="/contribute">Explore our repos</a>
+              <a class="home__feature__cta" href="/contribute/">Explore our repos</a>
             </li>
           </ul>
         </section>
@@ -46,7 +46,7 @@
 
             <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
 
-            <a class="cta" href="/overview">Learn more about our mission</a>
+            <a class="cta" href="/overview/">Learn more about our mission</a>
           </div>
         </section>
 
@@ -55,7 +55,7 @@
             <h3>Documentation</h3>
             <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
 
-            <a class="cta" href="/resources">Explore our documentation</a>
+            <a class="cta" href="/resources/">Explore our documentation</a>
           </div>
         </section>
 
@@ -249,10 +249,10 @@
             <edit-link :path="this.$page.path"></edit-link>
           </li>
 
-          <li><router-link to="/overview" title="LBRY overview">Overview</router-link></li>
-          <li><router-link to="/resources" title="View LBRY resources">Resources</router-link></li>
-          <li><router-link to="/contribute" title="Contribute to LBRY">Contribute</router-link></li>
-          <li><router-link to="/community" title="Interact with LBRY">Community</router-link></li>
+          <li><router-link to="/overview/" title="LBRY overview">Overview</router-link></li>
+          <li><router-link to="/resources/" title="View LBRY resources">Resources</router-link></li>
+          <li><router-link to="/contribute/" title="Contribute to LBRY">Contribute</router-link></li>
+          <li><router-link to="/community/" title="Interact with LBRY">Community</router-link></li>
           <li><a href="/sitemap.html">Sitemap</a></li>
 
           <li>MIT Licensed</li>
