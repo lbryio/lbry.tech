@@ -254,8 +254,6 @@
           <li><router-link to="/contribute/" title="Contribute to LBRY">Contribute</router-link></li>
           <li><router-link to="/community/" title="Interact with LBRY">Community</router-link></li>
           <li><a href="/sitemap.html">Sitemap</a></li>
-
-          <li>MIT Licensed</li>
         </ul>
       </div>
     </footer>
