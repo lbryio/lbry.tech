@@ -113,6 +113,21 @@
     font-size: 1rem;
   }
 
+  blockquote {
+    left: 2px;
+    padding-left: 2rem;
+    position: relative;
+
+    &::before {
+      width: 5px; height: 100%;
+      top: 0; left: 0;
+
+      background-color: $teal;
+      content: "";
+      position: absolute;
+    }
+  }
+
   p, ol, ul:not(.overview__ecosystem__module), table {
     code {
       background-color: $black;
