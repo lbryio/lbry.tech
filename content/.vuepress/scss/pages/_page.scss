@@ -115,15 +115,44 @@
 
   blockquote {
     left: 2px;
-    padding-left: 2rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
     position: relative;
 
-    &::before {
-      width: 5px; height: 100%;
-      top: 0; left: 0;
+    @media (min-width: 601px) {
+      margin-left: 15%; padding: 0.5rem 0 0.05rem 2rem;
 
-      background-color: $teal;
-      content: "";
+      font-size: 1.5rem;
+      width: 70%;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1.25rem;
+      padding: 0.5rem 0 0.05rem 0;
+    }
+
+    @media (min-width: 376px) and (max-width: 600px) {
+      margin-left: 5%;
+      width: 90%;
+    }
+
+    @media (max-width: 375px) {
+    }
+
+    p {
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    &::before {
+      @include font-serif;
+      width: 150px; height: 100px;
+      top: 3rem; left: -2rem;
+
+      color: rgba($teal, 0.2);
+      content: "\201C";
+      font-size: 20rem;
+      line-height: 0.5;
       position: absolute;
     }
   }
