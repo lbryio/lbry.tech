@@ -4,10 +4,18 @@
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule chainquery">
         <h3 class="__title">chainquery</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
+          <strong><a href="https://github.com/lbryio/chainquery">→ Source code</a></strong>
+        </div>
       </div>
 
       <div class="ecosystem__submodule wallet">
         <h3 class="__title">wallet server</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
+          <strong><a href="https://github.com/lbryio/lbry-app">→ Source code</a></strong>
+        </div>
       </div>
     </aside>
 
@@ -36,7 +44,7 @@
           </p>
           <p>
             The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata.
-            This string of characters forms a LBRY URL, e.g. 
+            This string of characters forms a LBRY URL, e.g.
           </p>
           <p>
             The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata.
@@ -156,10 +164,18 @@
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule lighthouse">
         <h3 class="__title">lighthouse</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
+          <strong><a href="https://github.com/lbryio/lighthouse">→ Source code</a></strong>
+        </div>
       </div>
 
       <div class="ecosystem__submodule reflector">
         <h3 class="__title">reflector</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
+          <strong><a href="https://github.com/lbryio/reflector.go">→ Source code</a></strong>
+        </div>
       </div>
     </aside>
   </section>
@@ -297,6 +313,10 @@
           }
         }
       }
+    }
+
+    h3 {
+      position: relative;
     }
 
     &::before {
@@ -475,6 +495,8 @@
     border: 2px dashed;
     border-radius: 50%;
     cursor: default;
+    position: relative;
+    z-index: 2;
 
     &:not(:last-of-type) {
       margin-bottom: 1rem;
@@ -484,6 +506,37 @@
       border-color: rgba($gray, 0.3);
       color: rgba($gray, 0.3);
     }
+
+    &:not(:hover) {
+      .ecosystem__submodule__description {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    &.chainquery,
+    &.wallet {
+      .ecosystem__submodule__description {
+        left: -2px;
+      }
+    }
+
+    &.lighthouse,
+    &.reflector {
+      .ecosystem__submodule__description {
+        right: -2px;
+      }
+    }
+  }
+
+  .ecosystem__submodule__description {
+    background-color: $white;
+    border: 2px solid rgba($gray, 0.3);
+    color: $black;
+    padding: 1rem;
+    position: absolute;
+    transition: all 0.2s;
+    width: 350px;
   }
 
 
