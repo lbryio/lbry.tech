@@ -6,7 +6,7 @@
         <h3 class="__title">chainquery</h3>
         <div class="ecosystem__submodule__description">
           <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
-          <strong><a href="https://github.com/lbryio/chainquery">→ Source code</a></strong>
+          <strong><a href="https://github.com/lbryio/chainquery" title="chainquery source code">→ Source code</a></strong>
         </div>
       </div>
 
@@ -14,7 +14,7 @@
         <h3 class="__title">wallet server</h3>
         <div class="ecosystem__submodule__description">
           <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
-          <strong><a href="https://github.com/lbryio/lbry-app">→ Source code</a></strong>
+          <strong><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">→ Source code</a></strong>
         </div>
       </div>
     </aside>
@@ -110,6 +110,16 @@
               </ul>
             </li>
           </ul>
+
+          <h3>Additional Resources</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/lbryio/lbryschema" title="lbryschema source code">lbryschema</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lbryumx" title="lbryumx source code">lbryumx</a>
+            </li>
+          </ul>
         </div>
 
         <span class="__close" v-on:click="close()">&times;</span>
@@ -146,13 +156,32 @@
             </li>
 
             <li>
-              <strong class="__title">Lighthouse</strong>
+              <strong class="__title">lighthouse</strong>
               <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
             </li>
 
             <li>
               <strong class="__title">chainquery</strong>
               <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
+            </li>
+          </ul>
+
+          <h3>Additional Resources</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/lbryio/lbry-app" title="source code for LBRY's desktop apps">Linux, macOS, and Windows apps</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lbry-android" title="LBRY Android app source code">Android app</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/spee.ch" title="spee.ch source code">spee.ch</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">lighthouse</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/chainquery" title="chainquery source code">chainquery</a>
             </li>
           </ul>
         </div>
@@ -166,7 +195,7 @@
         <h3 class="__title">lighthouse</h3>
         <div class="ecosystem__submodule__description">
           <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
-          <strong><a href="https://github.com/lbryio/lighthouse">→ Source code</a></strong>
+          <strong><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">→ Source code</a></strong>
         </div>
       </div>
 
@@ -174,7 +203,7 @@
         <h3 class="__title">reflector</h3>
         <div class="ecosystem__submodule__description">
           <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
-          <strong><a href="https://github.com/lbryio/reflector.go">→ Source code</a></strong>
+          <strong><a href="https://github.com/lbryio/reflector.go" title="reflector source code">→ Source code</a></strong>
         </div>
       </div>
     </aside>
