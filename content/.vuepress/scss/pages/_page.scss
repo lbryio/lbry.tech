@@ -113,6 +113,10 @@
     font-size: 1rem;
   }
 
+  sup {
+    @include font-mono;
+  }
+
   blockquote {
     left: 2px;
     line-height: 1.5;
@@ -134,9 +138,6 @@
     @media (min-width: 376px) and (max-width: 600px) {
       margin-left: 5%;
       width: 90%;
-    }
-
-    @media (max-width: 375px) {
     }
 
     p {
