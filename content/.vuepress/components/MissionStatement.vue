@@ -31,6 +31,7 @@
   }
 
   .component--mission-statement__title {
+    color: $teal;
     display: block;
     letter-spacing: 0.025rem;
     text-transform: uppercase;
