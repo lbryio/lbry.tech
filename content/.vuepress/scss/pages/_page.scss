@@ -113,6 +113,51 @@
     font-size: 1rem;
   }
 
+  sup {
+    @include font-mono;
+  }
+
+  blockquote {
+    left: 2px;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+    position: relative;
+
+    @media (min-width: 601px) {
+      margin-left: 15%; padding: 0.5rem 0 0.05rem 2rem;
+
+      font-size: 1.5rem;
+      width: 70%;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 1.25rem;
+      padding: 0.5rem 0 0.05rem 0;
+    }
+
+    @media (min-width: 376px) and (max-width: 600px) {
+      margin-left: 5%;
+      width: 90%;
+    }
+
+    p {
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    &::before {
+      @include font-serif;
+      width: 150px; height: 100px;
+      top: 3rem; left: -2rem;
+
+      color: rgba($teal, 0.2);
+      content: "\201C";
+      font-size: 20rem;
+      line-height: 0.5;
+      position: absolute;
+    }
+  }
+
   p, ol, ul:not(.overview__ecosystem__module), table {
     code {
       background-color: $black;

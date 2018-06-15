@@ -4,10 +4,18 @@
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule chainquery">
         <h3 class="__title">chainquery</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
+          <strong><a href="https://github.com/lbryio/chainquery" title="chainquery source code">→ Source code</a></strong>
+        </div>
       </div>
 
       <div class="ecosystem__submodule wallet">
         <h3 class="__title">wallet server</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
+          <strong><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">→ Source code</a></strong>
+        </div>
       </div>
     </aside>
 
@@ -36,7 +44,7 @@
           </p>
           <p>
             The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata.
-            This string of characters forms a LBRY URL, e.g. 
+            This string of characters forms a LBRY URL, e.g.
           </p>
           <p>
             The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata.
@@ -102,6 +110,16 @@
               </ul>
             </li>
           </ul>
+
+          <h3>Additional Resources</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/lbryio/lbryschema" title="lbryschema source code">lbryschema</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lbryumx" title="lbryumx source code">lbryumx</a>
+            </li>
+          </ul>
         </div>
 
         <span class="__close" v-on:click="close()">&times;</span>
@@ -138,13 +156,32 @@
             </li>
 
             <li>
-              <strong class="__title">Lighthouse</strong>
+              <strong class="__title">lighthouse</strong>
               <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
             </li>
 
             <li>
               <strong class="__title">chainquery</strong>
               <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
+            </li>
+          </ul>
+
+          <h3>Additional Resources</h3>
+          <ul>
+            <li>
+              <a href="https://github.com/lbryio/lbry-app" title="source code for LBRY's desktop apps">Linux, macOS, and Windows apps</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lbry-android" title="LBRY Android app source code">Android app</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/spee.ch" title="spee.ch source code">spee.ch</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">lighthouse</a>
+            </li>
+            <li>
+              <a href="https://github.com/lbryio/chainquery" title="chainquery source code">chainquery</a>
             </li>
           </ul>
         </div>
@@ -156,10 +193,18 @@
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule lighthouse">
         <h3 class="__title">lighthouse</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
+          <strong><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">→ Source code</a></strong>
+        </div>
       </div>
 
       <div class="ecosystem__submodule reflector">
         <h3 class="__title">reflector</h3>
+        <div class="ecosystem__submodule__description">
+          <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
+          <strong><a href="https://github.com/lbryio/reflector.go" title="reflector source code">→ Source code</a></strong>
+        </div>
       </div>
     </aside>
   </section>
@@ -168,62 +213,57 @@
 
 <script>
   export default {
-    data () {
-      return {
-      }
-    },
     methods: {
       open (ecosystemComponentClassName) {
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
-        document.querySelectorAll(".ecosystem__submodule").forEach(n => n.classList.remove("active"));
-
         document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
 
         switch (true) {
           case (ecosystemComponentClassName === "lbrycrd"):
-            document.getElementsByClassName("chainquery")[0].classList.add("active");
-            document.getElementsByClassName("lighthouse")[0].classList.add("active");
-            document.getElementsByClassName("wallet")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("chainquery")[0].className += " active red";
+            document.getElementsByClassName("lighthouse")[0].className += " active red";
+            document.getElementsByClassName("wallet")[0].className += " active red";
             break;
+
+
 
           case (ecosystemComponentClassName === "lbry"):
-            document.getElementsByClassName("reflector")[0].classList.add("active");
-            document.getElementsByClassName("wallet")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("reflector")[0].className += " active blue";
+            document.getElementsByClassName("wallet")[0].className += " active blue";
             break;
 
+
+
           case (ecosystemComponentClassName === "applications"):
-            document.getElementsByClassName("chainquery")[0].classList.add("active");
-            document.getElementsByClassName("lighthouse")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("chainquery")[0].className += " active green";
+            document.getElementsByClassName("lighthouse")[0].className += " active green";
             break;
+
+
 
           default:
             break;
         }
       },
       close () {
+        resetClasses();
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
-        document.querySelectorAll(".ecosystem__submodule").forEach(n => n.classList.remove("active"));
-
-        /*
-        switch (true) {
-          case (ecosystemComponentClassName === "lbrycrd"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          case (ecosystemComponentClassName === "lbry"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          case (ecosystemComponentClassName === "applications"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          default:
-            break;
-        }
-        */
       }
     }
+  }
+
+
+
+  function resetClasses() {
+    document.querySelectorAll(".ecosystem__submodule").forEach(n => {
+      n.classList.remove("active");
+      n.classList.remove("blue");
+      n.classList.remove("green");
+      n.classList.remove("red");
+    });
   }
 </script>
 
@@ -297,6 +337,10 @@
           }
         }
       }
+    }
+
+    h3 {
+      position: relative;
     }
 
     &::before {
@@ -472,9 +516,12 @@
     @include center;
     width: 144px; height: 144px;
 
-    border: 2px dashed;
     border-radius: 50%;
+    border-width: 2px;
     cursor: default;
+    position: relative;
+    transition: border 0.2s;
+    z-index: 2;
 
     &:not(:last-of-type) {
       margin-bottom: 1rem;
@@ -484,6 +531,62 @@
       border-color: rgba($gray, 0.3);
       color: rgba($gray, 0.3);
     }
+
+    &:not(:hover) {
+      .ecosystem__submodule__description {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    &.chainquery,
+    &.wallet {
+      .ecosystem__submodule__description {
+        left: -2px;
+      }
+    }
+
+    &.lighthouse,
+    &.reflector {
+      .ecosystem__submodule__description {
+        right: -2px;
+      }
+    }
+
+    &:not(.blue):not(.green):not(.red) {
+      border-style: dashed;
+    }
+
+    &.blue,
+    &.green,
+    &.red {
+      border-style: solid;
+    }
+
+    &.blue {
+      background-color: rgba($blue, 0.3);
+      border-color: $blue;
+    }
+
+    &.green {
+      background-color: rgba($green, 0.3);
+      border-color: $green;
+    }
+
+    &.red {
+      background-color: rgba($red, 0.3);
+      border-color: $red;
+    }
+  }
+
+  .ecosystem__submodule__description {
+    background-color: $white;
+    border: 2px solid rgba($gray, 0.3);
+    color: $black;
+    padding: 1rem;
+    position: absolute;
+    transition: all 0.2s;
+    width: 350px;
   }
 
 
