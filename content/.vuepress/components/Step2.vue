@@ -202,7 +202,17 @@ export default {
           component.isLoading = false;
           component.exampleCode = '';
         } else {
-          component.$http.get('https://lbry.tech/forward?method=publish&name=' + component.title + '&bid=0.001&file_path=' + response.filename + '&title=' + component.title + '&description=' + component.description + '&language=' + component.language + '&license=' + component.license + '&nsfw=' + component.nsfw).then(function(response) {
+          component.$http.post('https://lbry.tech/forward', {
+            method: 'publish',
+            name: component.title,
+            bid: 0.001,
+            file_path: response.filename,
+            title: component.title,
+            description: component.description,
+            language: component.language,
+            license: component.license,
+            nsfw: component.nsfw
+          }).then(function(response) {
             component.isLoading = false;
             component.jsonData = JSON.stringify(response.body, null, '  ');
             EventBus.$emit('HookFileUploaded', response.body.txid);

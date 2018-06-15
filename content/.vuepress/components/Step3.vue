@@ -102,7 +102,11 @@ export default {
       component.jsonData = '';
       component.isLoading = true;
       component.exampleCode = '# Example code using the daemon\ncurl \'http://localhost:5279\' --data \'{"method":"wallet_send","params":{"claim_id":"' + this.address + '","amount":' + this.amount + '}}\'';
-      this.$http.get('https://lbry.tech/forward?method=wallet_send&claim_id=' + this.address + '&amount=' + this.amount).then(function(response) {
+      this.$http.post('https://lbry.tech/forward', {
+        method: 'wallet_send',
+        claim_id: this.address,
+        amount: this.amount
+      }).then(function(response) {
         component.isLoading = false;
         component.jsonData = JSON.stringify(response.body, null, '  ');
       });

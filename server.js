@@ -47,7 +47,7 @@ var textParser = bodyParser.text({
   limit: '256kb'
 });
 
-app.get('/forward', function(req, res) {
+app.post('/forward', function(req, res) {
 
   var allowedMethods = ["wallet_send", "resolve", "publish"];
 
