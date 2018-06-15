@@ -47,45 +47,47 @@ var textParser = bodyParser.text({
   limit: '256kb'
 });
 
-app.post('/forward', function(req, res) {
+var jsonParser = bodyParser.json();
+
+app.post('/forward', jsonParser, function(req, res) {
 
   var allowedMethods = ["wallet_send", "resolve", "publish"];
 
-  if(typeof req.query.method != "undefined") {
+  if(typeof req.body.method != "undefined") {
 
-    if(allowedMethods.includes(req.query.method)) {
+    if(allowedMethods.includes(req.body.method)) {
 
       // We should whitelist the query parameters here
 
-      if(req.query.method == "wallet_send") {
+      if(req.body.method == "wallet_send") {
 
         // Hardcode the wallet_send amount to be always 0.01 always
-        req.query.amount = 0.01;
+        req.body.amount = 0.01;
 
         // Whitelist claim ids
         var allowedClaims = ["fbdcd44a97810522d23d5f1335b8ca04be9d776c", "de7f7fa33e8d879b2bae7238d2bdf827a39f9301", "5b7c7a202201033d99e1be2930d290c127c0f4fe", "a1372cf5523885f5923237bfe522f02f5f054362"];
 
-        if(!allowedClaims.includes(req.query.claim_id)) {
+        if(!allowedClaims.includes(req.body.claim_id)) {
           res.json({});
         }
 
       }
 
-      if(req.query.method == "publish") {
+      if(req.body.method == "publish") {
 
         // Hardcode the publish amount to be always 0.001 always
-        req.query.bid = 0.001;
+        req.body.bid = 0.001;
 
         // Fix the internal image path in daemon
-        req.query.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + req.query.file_path;
+        req.body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + req.body.file_path;
 
       }
 
-      req.query.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
+      req.body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
 
       request({
         url: "http://daemon.lbry.tech",
-        qs: req.query
+        qs: req.body
       }, function(error, response, body) {
         // Should we filter the body parameters before forwarding to user?
         body = JSON.parse(body);
