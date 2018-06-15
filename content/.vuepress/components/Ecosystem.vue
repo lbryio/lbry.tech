@@ -213,62 +213,57 @@
 
 <script>
   export default {
-    data () {
-      return {
-      }
-    },
     methods: {
       open (ecosystemComponentClassName) {
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
-        document.querySelectorAll(".ecosystem__submodule").forEach(n => n.classList.remove("active"));
-
         document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
 
         switch (true) {
           case (ecosystemComponentClassName === "lbrycrd"):
-            document.getElementsByClassName("chainquery")[0].classList.add("active");
-            document.getElementsByClassName("lighthouse")[0].classList.add("active");
-            document.getElementsByClassName("wallet")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("chainquery")[0].className += " active red";
+            document.getElementsByClassName("lighthouse")[0].className += " active red";
+            document.getElementsByClassName("wallet")[0].className += " active red";
             break;
+
+
 
           case (ecosystemComponentClassName === "lbry"):
-            document.getElementsByClassName("reflector")[0].classList.add("active");
-            document.getElementsByClassName("wallet")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("reflector")[0].className += " active blue";
+            document.getElementsByClassName("wallet")[0].className += " active blue";
             break;
 
+
+
           case (ecosystemComponentClassName === "applications"):
-            document.getElementsByClassName("chainquery")[0].classList.add("active");
-            document.getElementsByClassName("lighthouse")[0].classList.add("active");
+            resetClasses();
+            document.getElementsByClassName("chainquery")[0].className += " active green";
+            document.getElementsByClassName("lighthouse")[0].className += " active green";
             break;
+
+
 
           default:
             break;
         }
       },
       close () {
+        resetClasses();
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
-        document.querySelectorAll(".ecosystem__submodule").forEach(n => n.classList.remove("active"));
-
-        /*
-        switch (true) {
-          case (ecosystemComponentClassName === "lbrycrd"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          case (ecosystemComponentClassName === "lbry"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          case (ecosystemComponentClassName === "applications"):
-            document.getElementsByClassName(ecosystemComponentClassName)[0].classList.remove("active");
-            break;
-
-          default:
-            break;
-        }
-        */
       }
     }
+  }
+
+
+
+  function resetClasses() {
+    document.querySelectorAll(".ecosystem__submodule").forEach(n => {
+      n.classList.remove("active");
+      n.classList.remove("blue");
+      n.classList.remove("green");
+      n.classList.remove("red");
+    });
   }
 </script>
 
@@ -521,10 +516,11 @@
     @include center;
     width: 144px; height: 144px;
 
-    border: 2px dashed;
     border-radius: 50%;
+    border-width: 2px;
     cursor: default;
     position: relative;
+    transition: border 0.2s;
     z-index: 2;
 
     &:not(:last-of-type) {
@@ -555,6 +551,31 @@
       .ecosystem__submodule__description {
         right: -2px;
       }
+    }
+
+    &:not(.blue):not(.green):not(.red) {
+      border-style: dashed;
+    }
+
+    &.blue,
+    &.green,
+    &.red {
+      border-style: solid;
+    }
+
+    &.blue {
+      background-color: rgba($blue, 0.3);
+      border-color: $blue;
+    }
+
+    &.green {
+      background-color: rgba($green, 0.3);
+      border-color: $green;
+    }
+
+    &.red {
+      background-color: rgba($red, 0.3);
+      border-color: $red;
     }
   }
 
