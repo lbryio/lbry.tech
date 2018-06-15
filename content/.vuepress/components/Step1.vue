@@ -87,6 +87,14 @@ export default {
       exampleCode: ''
     }
   },
+  created () {
+
+    if(typeof this.$route.query.url != 'undefined') {
+      this.address = this.$route.query.url;
+      this.fetchMetadata();
+    }
+
+  },
   mounted () {
 
     hljs.configure({
