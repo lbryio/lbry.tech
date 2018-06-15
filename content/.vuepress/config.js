@@ -11,5 +11,18 @@ module.exports = {
     docsBranch: 'master',
     editLinkText: 'Edit this page on Github'
   },
-  ga: 'UA-60403362-1'
+  ga: 'UA-60403362-1',
+  markdown: {
+    config: md => {
+      var wikilinks = require('markdown-it-wikilinks')({
+        makeAllLinksAbsolute: true,
+        baseURL: '/glossary.html#',
+        uriSuffix: '',
+        htmlAttributes: {
+          class: 'wikilink'
+        }
+      });
+      md.use(wikilinks);
+    }
+  }
 }
