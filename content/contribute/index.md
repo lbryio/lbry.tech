@@ -40,7 +40,7 @@ If you want to contribute to LBRY, the first step is to understand where.
 --- | --- | ---
 | [lbry.tech](https://github.com/lbryio/lbry.tech) | JavaScript (Vue, Vuepress) | You're on it.
 | [lbry.io](https://github.com/lbryio/lbry.io) | PHP (vanilla) | A website for LBRY end-users and creators.
-| [lbry.fund](https://github.com/lbryio/lbry.fund) | HTML | A website for receiving funding from LBRY, Inc.
+| [lbry.fund](https://lbry.fund) | HTML | A website for receiving funding from LBRY, Inc.
 
 ### Auxiliary Services and Applications
 | Domain | Language (Toolset) | What Is It
