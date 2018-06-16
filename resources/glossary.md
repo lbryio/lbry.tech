@@ -1,9 +1,13 @@
 LBRY Glossary
 ================
 
-This glossary will help you understand exact meaning of all LBRY-related terms.
+This glossary will help you understand exact meaning of LBRY and blockchain related terms.
 
-Feel free to submit a PR to add/change definitions. 
+We encourage the submission of changes and additions to this glossary. 
+
+### Blob
+
+A Binary Large OBject (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers. 
 
 ### Block
 
@@ -21,15 +25,22 @@ A sequence number of a block in the blockchain. Height 0 refers to the *genesis 
 
 A public ledger of all confirmed transactions in a form of a tree of all valid *blocks* (including *orphans*). Most of the time, "blockchain" means the *main chain*, a single most *difficult* chain of blocks. Blockchain is updated by *mining* blocks with new transactions. *Unconfirmed transactions* are not part of the blockchain. If some clients disagree on which chain is main or which blocks are valid, a *fork* happens.
 
-### LBC
+### Chainquery
 
-The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
-
+Chainquery provides a SQLized view of the LBRY blockchain. The model of Chainquery at its foundation consists of the fundamental data types found in the block chain. This information is then expounded on with additional columns and tables that make querying the data much easier. Chainquery consists of 4 main parts. The API Server, the Daemon, the Job Scheduler, and the upgrade manager.
+    
 ### Change
 
 Informal name for a portion of a *transaction output* that is returned to a sender as a "change" after spending that output. Since *transaction outputs* cannot be partially spent, one can spend 1 BTC out of 3 BTC output only be creating two new outputs: a "payment" output with 1 BTC sent to a payee address, and a "change" output with remaining 2 BTC (minus *transaction fees*) sent to the payer's addresses. *BitcoinQT* always uses new address from a *key pool* for a better privacy. *Blockchain.info* sends to a default address in the wallet. 
 
 A common mistake when working with a *paper wallet* or a *brain wallet* is to make a change transaction to a different address and then accidentally delete it. E.g. when importing a private key in a temporary BitcoinQT wallet, making a transaction and then deleting the temporary wallet.
+
+### Claim
+A claim (ClaimTrie) is the data structure which LBRY uses to store claims to names. It uses a Trie to efficiently store all claimed names, which can then be hashed the same way a Merkle Tree is hashed. The root hash of the ClaimTrie is stored in the blockheader of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie. [Read more](https://lbry.io/faq/claimtrie-implementation)
+
+### Claim Support
+
+A special type of transaction that includes claim information, a LBC address and a LBC value. Supports to one's own address increase the bid value of a claim and can be revoked anytime. Supports to an outside address also increase the value, but can only be revoked by the receiver (tip mechanism).  
 
 ### Cold Storage
 
@@ -42,6 +53,10 @@ Transaction that has been included in the blockchain. Probability of transaction
 ### Confirmation Number
 
 Confirmation number is a measure of probability that transaction could be rejected from the *main chain*. "Zero confirmations" means that transaction is *unconfirmed* (not in any block yet). One confirmation means that the transaction is included in the latest block in the main chain. Two confirmations means the transaction is included in the block right before the latest one. And so on. Probability of transaction being reversed (*"double spent"*) is diminishing exponentially with more blocks added "on top" of it.
+
+### Dewey
+
+[A library classification system](https://en.wikipedia.org/wiki/Dewey_Decimal_Classification) and also the name of the smallest unit used in transactions. 1 LBRY Credit (LBC) is equal to 100 million deweys.
 
 ### Difficulty
 
@@ -76,8 +91,7 @@ A *node* which implements all of LBRY blockchain and does not require trusting a
 
 ### Genesis Block
 
-A very first block in the blockchain with hard-coded contents and a all-zero reference to a previous block. Genesis block was released on [28 Oct 2015](https://explorer.lbry.io/blocks/0) and the first block mined was on [23 Jun 2016](https://explorer.lbry.io/blocks/1). 
-
+A very first block in the blockchain with hard-coded contents and a all-zero reference to a previous block. The LBRY genesis block was released on [28 Oct 2015](https://explorer.lbry.io/blocks/0) and the first block mined was on [23 Jun 2016](https://explorer.lbry.io/blocks/1). 
 
 ### Hard Fork
 
@@ -85,140 +99,115 @@ Some people use term *hard fork* to stress that changing LBRY protocol requires 
 
 ### Hash Function 
 
-(needs updating for LBRY)
-LBRY protocol mostly uses two cryptographic hash functions: SHA-256 and RIPEMD-160. First one is almost exclusively used in the two round hashing (*Hash256*), while the latter one is only used in computing an *address* (see also *Hash160*). *Scripts* may use not only Hash256 and Hash160, but also SHA-1, SHA-256 and RIPEMD-160.
+LBRY POW calculation uses three cryptographic hash functions: SHA-512, SHA-256 and RIPEMD-160. Click [here](https://lbry.io/faq/proof-algorithm) for more details.
 
 ### Hashrate
 
-A measure of mining hardware performance expressed in hashes per second (GH/s). As of July 27, 2014 the hash rate of all Bitcoin mining nodes combined is around 135 799 000 GH/s. For comparison, AMD Radeon graphics cards produce from 0.2 to 0.8 GH/s depending on model.
-
-
-### Hash Type (hashtype)
-
-A single byte appended to a transaction *signature* in the *transaction input* which describes how the transaction should be hashed in order to verify that signature. There are three types affecting outputs: ALL (default), SINGLE, NONE and one optional modifier ANYONECANPAY affecting the inputs (can be combined with either of the first three). ALL requires all outputs to be hashed (thus, all outputs are signed). SINGLE clears all output scripts but the one with the same index as the input in question. NONE clears all outputs thus allowing changing them at will. ANYONECANPAY removes all inputs except the current one (allows anyone to contribute independently). The actual behavior is more subtle than this overview, you should check the actual source code for more comments.
-
-
-### Height
-
-See *Block Height*.
-
-
-### Input
-
-See *Transaction Input*.
-
+A measure of mining hardware performance expressed in hashes per second (GH/s). Click [here](https://www.tokens24.com/cryptopedia/basics/bitcoin-hash-rate) for more details.
 
 ### Key
 
 Could mean an ECDSA public or private key, or AES symmetric encryption key. AES is not used in the protocol itself (only to encrypt the ECDSA keys and other sensitive data), so usually the word *key* means an ECDSA key. When talking about *keys*, people usually mean private keys as public key can always be derived from a private one. See also *Private Key* and *Public Key*.
 
+### LBC
 
-### Key Pool
+The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
-Some wallet applications that create new *private keys* randomly keep a pool of unused pre-generated keys (BitcoinQT keeps 100 keys by default). When a new key is needed for *change* address or a new payment request, the application provides the oldest key from the pool and replaces it with a fresh one. The purpose of the pool is to ensure that recently used keys are always already backed up on external storage. Without a key pool you could create a new key, receive a payment on its address and then have your hard disk died before backing up this key. A key pool guarantees that this key was already backed up several days before being used. *Deterministic wallets* do not use a key pool because they need to back up a single secret key.
+### LBRY Credits
 
+LBRY Credits (LBC) is the cryptocurrency used to make digital transactions (payments, tips, claims) on the LBRY blockchain. 
 
+## LBRY Daemon
+
+The daemon combines various components to provide a single API across the LBRY ecosystem in order to interact with the blockchain and datanetwork. 
+
+### LBRY Reference Application
+
+For most users, LBRY will be a place where they can find great videos, music, ebooks, and more. A vast digital library that is available on all of your devices. But LBRY is many components working together. The LBRY app is a graphical browser for the decentralized content marketplace provided by the LBRY protocol. It is essentially the lbry daemon bundled with an UI using Electron.
+
+### LBRY Redux
+
+[lbry-redux](https://github.com/lbryio/lbry-redux) is a module which contains common React and redux code shared between lbry-app and lbry-android.
+        
+### LBRY Protocol
+
+LBRY is an open-source protocol providing distribution, discovery, and purchase of digital content (data) via a decentralized network. It utilizes the LBRY blockchain as a global namespace and database of digital content. Blockchain entries contain searchable content metadata, identities, and rights and access rules. LBRY also provides a data network that consists of peers uploading and downloading data from other peers, possibly in exchange for payments, and a distributed hash table, used by peers to discover other peers.
+
+### LBRYCrd
+
+LBRYcrd uses a blockchain similar to bitcoin's to implement an index and payment system for content on the LBRY network. It is a fork of Bitcoin Core.
+
+### LbryumX Server
+
+A LbryumX-server for the LbryumX client. LbryumX is an extension of electrumx that provides the server side of LBRY Electrum Protocol.
+
+### Lighthouse
+
+[Lighthouse](https://github.com/lbryio/lighthouse) is a lightning-fast advanced search engine API for publications on the LBRYcrd with autocomplete capabilities. The official lighthouse instance is live at https://lighthouse.lbry.io
+        
 ### Lightweight client
 
 Comparing to a *full node*, lightweight node does not store the whole blockchain and thus cannot fully verify any transaction. There are two kinds of lightweight nodes: those fully trusting an external service to determine wallet balance and validity of transactions (e.g. *blockchain.info*) and the apps implementing *Simplified Payment Verification* (SPV). SPV clients do not need to trust any particular service, but are more vulnerable to a *51% attack* than full nodes. See *Simplified Payment Verification* for more info.
 
-
-### Lock Time (locktime)
-
-A 32-bit field in a *transaction* that means either a block *height* at which the transaction becomes valid, or a UNIX timestamp. Zero means transaction is valid in any block. A number less than 500000000 is interpreted as a block number (the limit will be hit after year 11000), otherwise a timestamp.
-
-
 ### Mainnet
 
-Main Bitcoin network and its blockchain. The term is mostly used in comparison to *testnet*.
-
+Main LBRY network and its blockchain. The term is mostly used in comparison to *testnet*.
 
 ### Main Chain
 
 A part of the blockchain which a node considers the most difficult (see *difficulty*). All nodes store all valid blocks, including *orphans* and recompute the total difficulty when receiving another block. If the newly arrived block or blocks do not extend existing main chain, but create another one from some previous block, it is called *reorganization*.
 
-
 ### Merkle Tree
 
-Merkle tree is an abstract data structure that organizes a list of data items in a tree of their hashes (like in Git, Mercurial or ZFS). In Bitcoin the merkle tree is used only to organize transactions within a block (the block header contains only one hash of a tree) so that full nodes may prune fully spent transactions to save disk space. *SPV* clients store only block headers and validate transactions if they are provided with a list of all intermediate hashes.
-
+Merkle tree is an abstract data structure that organizes a list of data items in a tree of their hashes (like in Git, Mercurial or ZFS). In LBRY the merkle tree is used only to organize transactions within a block (the block header contains only one hash of a tree) so that full nodes may prune fully spent transactions to save disk space. Click [here](https://en.bitcoin.it/wiki/Protocol_documentation#Merkle_Trees) for more details.
 
 ### Mempool
 
 A technical term for a collection of unconfirmed transactions stored by a node until they either expire or get included in the main chain. When *reorganization* happens, transactions from orphaned blocks either become invalid (if already included in the *main chain*) or moved to a pool of unconfirmed transactions. By default, *bitcoind* nodes throw away unconfirmed transactions after 24 hours.
 
-
 ### Mining
 
 A process of finding valid *hashes* of a block header by iterating millions of variants of block headers (using *nonce* and *extra nonce*) in order to find a hash lower than the *target* (see also *difficulty*). The process needs to determine a single global history of all transactions (grouped in blocks). Mining consumes time and electricity and nowadays the difficulty is so big, that energy-wise it's not even profitable to mine using video graphics cards. Mining is paid for by *transaction fees* and by block *rewards* (newly generated coins, hence the term "mining").
-
 
 ### Mining Pool
 
 A service that allows separate owners of mining hardware to split the reward proportionally to submitted work. Since probability of finding a valid block hash is proportional to miner's *hashrate*, small individual miners may work for months before finding a big per-block reward. Mining pools allow more steady stream of smaller income. Pool owner determines the block contents and distributes ranges of *nonce* values between its workers. Normally, mining pools are centralized. P2Pool is a fully decentralized pool.
 
-
 ### Miner
 
 A person, a software or a hardware that performs *mining*.
-
-
-### Mixing
-
-A process of exchanging coins with other persons in order to increase privacy of one's history. Sometimes it is associated with money laundering, but strictly speaking it is orthogonal to laundering. In traditional banking, a bank protects customer's privacy by hiding transactions from all 3rd parties. In Bitcoin any merchant may do a statistical analysis of one's entire payment history and determine, for instance, how many bitcoins one owns. While it's still possible to implement KYC (Know You Customer) rules on a level of every merchant, mixing allows to to separate information about one's history between the merchants. 
-
-Most important use cases for mixing are: 1) receiving a salary as a single big monthly payment and then spending it in small transactions ("cafe sees thousands of dollars when you pay just $4"); 2) making a single payment and revealing connection of many small private spendings ("car dealer sees how much you are addicted to coffee"). In both cases your employer, a cafe and a car dealer may comply with KYC/AML laws and report your identity and transferred amounts, but neither of them need to know about each other. Mixing bitcoins after receiving a salary and mixing them before making a big payment solves this privacy problem.
-
 
 ### M-of-N Multi-signature Transaction
 
 A transaction that can be spent using M signatures when N public keys are required (M is less or equal to N). Multi-signature transactions that only contain one *OP_CHECKMULTISIG* opcode and N is 3, 2 or 1 are considered *standard*.
 
-
 ### Node
 
 Node, or client, is a computer on the network that speaks Bitcoin message protocol (exchanging transactions and blocks). There are *full nodes* that are capable of validating the entire blockchain and *lightweight nodes*, with reduced functionality. Wallet applications that speak to a server are not considered nodes.
 
-
 ### Nonce
 
 Stands for "number used once". A 32-bit number in a *block header* which is iterated during a search for proof-of-work. Each time the nonce is changed, the *hash* of the block header is recalculated. If nonce overflows before valid proof-of-work is found, an *extra nonce* is incremented and placed in the *coinbase* script. Alternatively, one may change a merkle tree of transactions or a timestamp.
- 
-
-### Non-standard Transaction
-
-Any valid transaction that is not *standard*. Non-standard transactions are not relayed or mined by default *BitcoinQT* nodes (but are relayed and mined on *testnet*). However, if anyone puts such transaction in a block, it will be accepted by all nodes. In practice it means that unusual transactions will take more time to get included in the blockchain. If some kind of non-standard transaction becomes useful and popular, it may get named standard and adopted by users (like it ).  See also *Standard Transaction*.
-
 
 ### Opcode
 
-8-bit code of a *script* operation. Codes from 0x01 to 0x4B (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). See also *Script*.
-
+8-bit code of a *script* operation. Codes from 0x01 to 0x4B (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). LBRY implemented special op codes for storing and updating of claim data. 
 
 ### Orphan, Orphaned Block
 
 A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *51% attack*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*. 
 
+### Peer
 
-### Output
-
-See *Transaction Output*.
-
-
-### P2SH
-
-See *Pay-to-Script Hash*.
-
+A peer is one instance of a client running on a computer on the Internet to which other clients connect and transfer data. Depending on context, "peer" can refer either to any client in the swarm or more specifically to a downloader, a client that has only parts of the file.
 
 ### Pay-to-Script Hash
 
 A type of the *script* and *address* that allows sending bitcoins to arbitrary complex scripts using a compact hash of that script. This allows payer to pay much smaller *transaction fees* and not wait very long for a *non-standard* transaction to get included in the blockchain. Then the actual script matching the hash must be provided by the payee when redeeming the funds. P2SH addresses are encoded in *Base58Check* just like regular public keys and start with number "3".
 
-
 ### Paper Wallet
 
 A form of *cold storage* where a *private key* for Bitcoin *address* is printed on a piece of paper (with or without encryption) and then all traces of the key are removed from the computer where it was generated. To redeem bitcoins, a key must be imported in the wallet application so it can sign a transaction. See also *Casascius Coins*.
-
 
 ### Proof-of-Work (PoW)
 
@@ -228,171 +217,93 @@ Proof-of-work is not the only requirement, but an important one to make sure tha
 
 Note that owning a very large amount of computational power does not override other rules enforced by every client. Ill-formed blocks or blocks containing invalid transactions are rejected no matter how difficult they were to produce.
 
-
 ### Private Key (Privkey)
 
 A 256-bit number used in *ECDSA* algorithm to create transaction *signatures* in order to prove ownership of certain amount of bitcoins. Can also be used in arbitrary *elliptic curve arithmetic* operations. Private keys are stored within *wallet* applications and are usually encrypted with a pass phrase. Private keys may be completely random (see *Key Pool*) or generated from a single secret number ("seed"). See also *Deterministic Wallet*.
-
 
 ### Public Key (Pubkey)
 
 A 2D point on an elliptic curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1) that is produced by multiplying a predefined "generator" point by a *private key*. Usually it is represented by a pair of 256-bit numbers ("uncompressed public key"), but can also be compressed to just one 256-bit number (at the slight expense of CPU time to decode an uncompressed number). A special hash of a public key is called *address*. Typical Bitcoin transactions contain public keys or addresses in the output scripts and *signatures* in the input scripts.
 
+### Reflector
 
-### Reference Implementation
-
-*BitcoinQT* (or *bitcoind*) is the most used *full node* implementation, so it is considered a reference for other implementations. If an alternative implementation is not compatible with BitcoinQT it may be *forked*, that is it will not see the same *main chain* as the rest of the network running *BitcoinQT*.
-
-
-### Relaying Transactions
-
-Connected Bitcoin *nodes* relay new transactions between each other on best effort basis in order to send them to the *mining* nodes. Some transactions may not be relayed by all nodes. E.g. *non-standard* transactions, or transactions without a minimum *fee*. Bitcoin message protocol is not the only way to send the transaction. One may also send it directly to a miner, or mine it yourself, or send it directly to the payee and make them to relay or mine it.
-
+A reflector cluster to accept LBRY content for hosting en masse, rehost the content, and make money on data fees (TODO). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.
 
 ### Reorg, Reorganization
 
 An event in the *node* when one or more blocks in the *main chain* become *orphaned*. Usually, newly received blocks are extending existing main chain. Sometimes (4-6 times a week) a couple of blocks of the same *height* are produced almost simultaneously and for a short period of time some nodes may see one block as a tip of the main chain which will be eventually replaced by a more difficult block(s). Each transaction in the orphaned blocks either becomes invalid (if already included in the main chain block) or becomes *unconfirmed* and moved to the *mempool*. In case of a major bug or a *51% attack*, reorganization may involve reorganizing more than one block.
 
-
 ### Reward
 
-Amount of newly generated bitcoins that a *miner* may claim in a new block. The first transaction in the block allows miner to claim currently allowed reward as well as all *transaction fees* from all transactions in the block. Reward is *halved* every 210 000 blocks, approximately every 4 years. As of July 27, 2014 the reward is 25 BTC (the first halving occurred in December 2012). For security reasons, rewards cannot be *spent* before 100 blocks built on top of the current block.
-
-
-### Satoshi
-
-The first name of the Bitcoin's creator *Satoshi Nakamoto* and also the name of the smallest unit used in transactions. 1 bitcoin (BTC) is equal to 100 million satoshis.
-
-
-### Satoshi Nakamoto
-
-A pseudonym of an author of initial Bitcoin implementation. There are multitude of speculations on who and how many people worked on Bitcoin, of which nationality or age, but no one has any evidence to say anything definitive on that matter.
-
+Amount of newly generated bitcoins that a *miner* may claim in a new block. The first transaction in the block allows miner to claim currently allowed reward as well as all *transaction fees* from all transactions in the block. For security reasons, rewards cannot be *spent* before 100 blocks built on top of the current block.
 
 ### Script
 
 A compact turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change amounts being transferred. Amount is stored in a separate field in a *transaction output*.
 
-
 ### scriptSig
 
 Original name in *bitcoind* for a transaction *input* script. Typically, input scripts contain *signatures* to prove ownership of bitcoins sent by a previous transaction.
-
 
 ### scriptPubKey
 
 Original name in *bitcoind* for a transaction *output* script. Typically, output scripts contain *public keys* (or their hashes; see *Address*) that allow only owner of a corresponding *private key* to redeem the bitcoins in the output.
 
-
-### Sequence
-
-A 32-bit unsigned integer in a transaction input used to replace older version of a transaction by a newer one. Only used when *locktime* is not zero. Transaction is not considered valid until the sequence number is 0xFFFFFFFF. By default, the sequence is 0xFFFFFFFF.
-
-
 ### Signature
 
 A sequence of bytes that proves that a piece of data is acknowledged by a person holding a certain *public key*. Bitcoin uses *ECDSA* for signing transactions. Amounts of bitcoins are sent through a chain of transactions: from one to another. Every transaction must provide a signature matching a public key defined in the previous transaction. This way only a proper owner of a secret *private key* associated with a given public key can spend bitcoins further.
 
-
 ### Simplified Payment Verification (SPV)
 
-A scheme to validate transactions without storing the whole blockchain (only block headers) and without trusting any external service. Every transaction must be present with all its parent and sibling hashes in a *merkle tree* up to the root. SPV client trusts the most *difficult* chain of block headers and can validate if the transaction indeed belongs to a certain block header. Since SPV does not validate all transactions, a *51% attack* may not only cause a *double spend* (like with *full nodes*), but also make a completely invalid payment with bitcoins created from nowhere. However, this kind of attack is very costly and probably more expensive than a product in question. *Bitcoinj* library implements SPV functionality.
-
+A scheme to validate transactions without storing the whole blockchain (only block headers) and without trusting any external service. Every transaction must be present with all its parent and sibling hashes in a *merkle tree* up to the root. SPV client trusts the most *difficult* chain of block headers and can validate if the transaction indeed belongs to a certain block header. Since SPV does not validate all transactions, a *51% attack* may not only cause a *double spend* (like with *full nodes*), but also make a completely invalid payment with bitcoins created from nowhere. However, this kind of attack is very costly and probably more expensive than a product in question.
 
 ### Secret key
 
 Either the *Private Key* or an encryption key used in encrypted *wallets*. Bitcoin protocol does not use encryption anywhere, so *secret key* typically means a *private key* used for signing transactions.
 
-
 ### Soft Fork
 
 Sometimes the *soft fork* refers to an important change of software behavior that is not a *hard fork* (e.g. changing *mining fee* policy). See also *Hard Fork* and *Fork*.
-
 
 ### Spam
 
 Incorrect peer-to-peer messages (like sending invalid transactions) may be considered a denial of service attack (see *DoS*). Valid transactions sending very tiny amounts and/or having low *mining fees* are called *Dust* by some people. The protocol itself does not define which transactions are not worth relaying or mining, it's a decision of every individual node. Any valid transaction in the blockchain must be accepted by the node if it wishes to accept the remaining blocks, so transaction censorship only means increased confirmation delays. Individual payees may also blacklist certain addresses (refuse to accept payments from some addresses), but that's too easy to work around using *mixing*.
 
-
 ### Spent Output
 
 A transaction *output* can be spent only once: when another valid transaction makes a reference to this output from its own input. When another transaction attempts to spend the same output, it will be rejected by the nodes already seeing the first transaction. Blockchain as a *proof-of-work* scheme allows every node to agree on which transaction was indeed the first one. The whole transaction is considered spent when all its outputs are spent.
 
+### Stream
 
-### Split
-
-A split of a blockchain. See *Fork*.
-
-
-### SPV
-
-See *Simplified Payment Verification*.
-
-
-### Standard Transaction
-
-Some transactions are considered *standard*, meaning they are relayed and mined by most *nodes*. More complex transactions could be buggy or cause DoS attacks on the network, so they are considered *non-standard* and not relayed or mined by most nodes. Both standard and non-standard transactions are valid and once included in the blockchain, will be recognized by all nodes. Standard transactions are: 1) sending to a *public key*, 2) sending to an *address*, 3) sending to a *P2SH* address, 4) sending to *M-of-N multi-signature transaction* where N is 3 or less.
-
-
+Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. The verb "to stream" refers to the process of delivering or obtaining media in this manner; the term refers to the delivery method of the medium, rather than the medium itself, and is an alternative to file downloading, a process in which the end-user obtains the entire file for the content before watching or listening to it.
+            
 ### Target
 
 A 256-bit number that puts an upper limit for a block header hash to be valid. The lower the target is, the higher the *difficulty* to find a valid hash. The maximum (easiest) target is 0x00000000FFFF0000000000000000000000000000000000000000000000000000. The difficulty and the target are adjusted every 2016 blocks (approx. 2 weeks) to keep interval between the blocks close to 10 minutes.
 
-
 ### Testnet
 
-A set of parameters used for testing a Bitcoin network. Testnet is like *mainnet*, but has a different genesis block (it was reset several times, the latest testnet is *testnet3*). Testnet uses slightly different *address* format to avoid confusion with main Bitcoin addresses and all nodes are relaying and mining non-standard transactions.
-
-
-### Testnet3
-
-The latest version of *testnet* with another genesis block.
- 
-
-### Timestamp
-
-UNIX timestamp is a standard representation of time as a number of seconds since January 1st 1970 GMT. Usually stored in a 32-bit signed integer.
-
+A set of parameters used for testing a LBRY network. Testnet is like *mainnet*, but has a different genesis block (it was reset several times, the latest testnet is *testnet3*). Testnet uses slightly different *address* format to avoid confusion with main LBRY addresses and all nodes are relaying and mining non-standard transactions.
 
 ### Transaction
 
 A chunk of binary data that describes how bitcoins are moved from one owner to another. Transactions are stored in the *blockchain*. Every transaction (except for *coinbase* transactions) has a reference to one or more previous transactions (*inputs*) and one or more rules on how to spend these bitcoins further (*outputs*). See *Transaction Input* and *Transaction Output* for more info.
 
-
 ### Transaction Fee
 
-Also known as "miners' fee", an amount that an author of transaction pays to a miner who will include the transaction in a block. The fee is expressed as difference between the sum of all *input* amounts and a sum of all *output* amounts. Unlike traditional payment systems, miners do not explicitly require fees and most miners allow free transactions. All miners are competing between each other for the fees and all transactions are competing for a place in a block. There are soft rules encoded in most clients that define minimum fees per kilobyte to relay or mine a transaction (mostly to prevent *DoS* and *spam*). Typically, the fee affects the priority of a transaction. As of July 27, 2014 average fee per block is below 0.1 BTC. See also *Reward*.
-
+Also known as "miners' fee", an amount that an author of transaction pays to a miner who will include the transaction in a block. The fee is expressed as difference between the sum of all *input* amounts and a sum of all *output* amounts. Unlike traditional payment systems, miners do not explicitly require fees and most miners allow free transactions. All miners are competing between each other for the fees and all transactions are competing for a place in a block. There are soft rules encoded in most clients that define minimum fees per kilobyte to relay or mine a transaction (mostly to prevent *DoS* and *spam*). Typically, the fee affects the priority of a transaction.
 
 ### Transaction Input
 
 A part of a transaction that contains a reference to a previous transaction's *output* and a *script* that can prove ownership of that output. The script usually contains a *signature* and thus called *scriptSig*. Inputs spend previous outputs completely. So if one needs to pay only a portion of some previous output, the transaction should include extra *change* output that sends the remaining portion back to its owner (on the same or different address). *Coinbase* transactions contain only one input with a zeroed reference to a previous transaction and an arbitrary data in place of script.
 
-
 ### Transaction Output
 
 An output contains an amount to be sent and a *script* that allows further spending. The script typically contains a *public key* (or an *address*, a hash of a public key) and a signature verification *opcode*. Only an owner of a corresponding *private key* is able to create another transaction that sends that amount further to someone else. In every transaction, the sum of output amounts must be equal or less than a sum of all input amounts. See also *Change*.
 
-
-### Tx
-
-See *Transaction*.
-
-
-### Txin
-
-See *Transaction Input*.
-
-
-### Txout
-
-See *Transaction Output*. 
-
-
 ### Unconfirmed Transaction
 
 Transaction that is not included in any block. Also known as "0-confirmation" transaction. Unconfirmed transactions are *relayed* by the nodes and stay in their *mempools*. Unconfirmed transaction stays in the pool until the node decides to throw it away, finds it in the blockchain, or includes it in the blockchain itself (if it's a miner). See also *Confirmation Number*.
-
 
 ### UTXO Set
 
@@ -402,31 +313,9 @@ Possible technical solutions include more efficient indexing algorithms and a mo
 
 Some people seek social methods to solve the problem. For instance, by refusing to *relay* or *mine* transactions that are considered *dust* (containing outputs smaller than a *transaction fee* required to mine/relay them).
 
-
-### VarInt
-
-This term may cause confusion as it means different formats in different Bitcoin implementations. See *CompactSize* for details.
-
-
 ### Wallet
 
 An application or a service that helps keeping private keys for signing transactions. Wallet does not keep bitcoins themselves (they are recorded in *blockchain*). "Storing bitcoins" usually means storing the keys. 
-
-
-### Web Wallet
-
-A web service providing wallet functionality: ability to store, send and receive bitcoins. User has to trust counter-party to keep their bitcoins securely and ready to redeem at any time. It is very easy to build your own web wallet, so most of them were prone to hacks or outright fraud. The most secure and respected web wallet is *Blockchain.info*. Online exchanges also provide wallet functionality, so they can also be considered web wallets. It is not recommended to store large amounts of bitcoins in a web wallet.
-
-
-### XBT
-
-Informal currency code for 1 Bitcoin (defined as 100 000 000 *Satoshis*). Some people proposed using it for 0.01 Bitcoin to avoid confusion with *BTC*. There were rumors that Bloomberg tests XBT as a ticker for 1 Bitcoin, but currently there is only ticker XBTFUND for SecondMarket's Bitcoin Investment Trust. See also *BTC*.
-
-
-### 0-Confirmation (Zero-Confirmation)
-
-See *Unconfirmed Transaction* and *Confirmation Number*.
-
 
 ### 51% Attack
 
@@ -434,16 +323,7 @@ Also known as >50% attack or a *double spend* attack. An attacker can make a pay
 
 This attack is considered theoretical as owning more than 50% of hashrate might be much more expensive than any gain from a *double spend*. Another variant of an attack is to disrupt the network by mining empty blocks, censoring all transactions. An attack can be mitigated by blacklisting blocks that most of "honest" miners consider abnormal. Under normal conditions, miners and mining pools do not censor blocks and transactions as it may diminish trust in Bitcoin and thus their own investments. 51% attack is also mitigated by using *checkpoints* that prevent *reorganization* past the certain block.
 
-
-
 About
 -----
-
-Glossary is made by Oleg Andreev ([oleganza@gmail.com](mailto:oleganza@gmail.com)). Twitter: [@oleganza](http://twitter.com/oleganza).
-
-Send your thanks here: 1CBtcGivXmHQ8ZqdPgeMfcpQNJrqTrSAcG.
-
-This glossary is released under [WTFPL](http://www.wtfpl.net). Do what you want with it, but I would appreciate if you give full credit in case you republish it.
-
-Please report any mistakes or create pull requests on Github. Contributors will be listed here. Thanks!
+Portions of this glossary originated from: https://github.com/oleganza/bitcoin-papers/blob/master/BitcoinGlossary.md
 
