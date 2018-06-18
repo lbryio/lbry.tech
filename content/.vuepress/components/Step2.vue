@@ -5,7 +5,7 @@
       <header class="hook__page__hero">
         <div class="inner-wrap">
           <h1>Publish your content on the blockchain</h1>
-          <p>Upload an image to the blockchain and you are able to view it on the <a href="http://explorer.lbry.io" title="LBRY Blockchain Explorer" target="_blank">LBRY Blockchain Explorer</a>.</p>
+          <p>Upload an image to the blockchain and you are able to view it on the <a href="http://explorer.lbry.io" title="LBRY Blockchain Explorer" target="_blank" rel="noopener noreferrer">LBRY Blockchain Explorer</a>.</p>
         </div>
       </header>
 

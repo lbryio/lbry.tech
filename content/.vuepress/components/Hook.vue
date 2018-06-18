@@ -26,7 +26,7 @@
     <div class="modal" v-model="uploadDialog" v-if="uploadDialog != false">
       <template v-if="confirmed">
         <h3>Your image has been published!</h3>
-        <p><a v-bind:href="'https://explorer.lbry.io/tx/' + txhash" target="_blank">Check out your content on the LBRY blockchain explorer</a></p>
+        <p><a v-bind:href="'https://explorer.lbry.io/tx/' + txhash" target="_blank" rel="noopener noreferrer">Check out your content on the LBRY blockchain explorer</a></p>
         <a href="#" class="__button-black" v-on:click="uploadDialog = false">Dismiss this dialog</a>
       </template>
 

@@ -3,7 +3,7 @@
     <h3 class="newsletter-cta__title">Don't Miss A Bit - Subscribe For LBRY Technical Updates</h3>
     <div>
       <input type="text" class="newsletter-cta__input" v-model="emailAddress" placeholder="you@domain.tld">
-      <a class="newsletter-cta__submit" href="#" v-on:click.prevent="subscribe">Subscribe</a>
+      <a class="newsletter-cta__submit" href="#" v-on:click.prevent="subscribe" title="Subscribe to our technical newsletter">Subscribe</a>
     </div>
     <p v-if="message" class="newsletter-cta__message">{{ message }}</p>
   </div>

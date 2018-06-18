@@ -23,7 +23,7 @@ At least, it's the place to get started so long as you have some idea of what LB
 
 Almost all web, desktop, and mobile applications will use the [lbry daemon](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network.
 
-#### Web Applications 
+#### Web Applications
 
 1. Set up a web server.
 1. Install lbry. (Docker images? Other convenient ways of doing this?)

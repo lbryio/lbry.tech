@@ -5,12 +5,12 @@
       <div class="inner-wrap">
         <h1>Support your favorite content creators with LBRY</h1>
         <p>Send LBRY coins to claim addresses and the owner will receive it in their wallet.</p>
-        <p>To send LBC to someone, you need either their wallet address or claim ID. You can get claim IDs by using the resolve method in <a href="#" v-on:click.prevent.stop="goTo(1)">the first step</a>, or you can use the examples below.</p>
+        <p>To send LBC to someone, you need either their wallet address or claim ID. You can get claim IDs by using the resolve method in <a href="#" v-on:click.prevent.stop="goTo(1)" title="Go back to step one">the first step</a>, or you can use the examples below.</p>
 
         <div class="hook__page__hero__support">
           <input type="text" v-model="claimId" placeholder="Claim ID goes here"/>
           <input type="number" v-model="amount" disabled title="You can set this value to any amount of LBC in your wallet, but for demonstration purposes we have hardcoded it to 0.01"><span>LBC</span>
-          <a href="#" v-on:click="send" class="button">Execute</a>
+          <a href="#" v-on:click="send" class="button" title="Execute claim">Execute</a>
         </div>
       </div>
     </header>

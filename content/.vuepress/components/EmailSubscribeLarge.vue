@@ -3,7 +3,7 @@
     <input type="text" class="input" v-model="emailAddress" placeholder="your@email.com">
     <br/>
     <br/>
-    <a class="__button-black" href="#" v-on:click.prevent="subscribe">Subscribe</a>
+    <a class="__button-black" href="#" v-on:click.prevent="subscribe" title="Subscribe to our technical newsletter">Subscribe</a>
     <p v-if="message" class="message">{{ message }}</p>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
         this.message = 'Your email is not valid!';
       } else {
         this.$http.post('//api.lbry.io/list/subscribe', {
-          email: this.emailAddress, 
+          email: this.emailAddress,
           tag: 'developer'
         }, {
           emulateJSON: true

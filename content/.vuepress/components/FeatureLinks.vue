@@ -3,7 +3,7 @@
   <ul class="feature-links">
     <li v-for="featureLink in this.$page.frontmatter.featureLinks" v-on:click="visit(featureLink.href)" class="feature-link">
       <div>
-        <a :href="featureLink.href" class="feature-link__title">{{ featureLink.title }}</a>
+        <a :href="featureLink.href" class="feature-link__title" :title="featureLink.title">{{ featureLink.title }}</a>
         <div v-if="featureLink.details" class="feature-link__details">{{ featureLink.details }}</div>
       </div>
 

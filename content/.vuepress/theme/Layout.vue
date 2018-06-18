@@ -16,10 +16,10 @@
       <div>
         <section class="hero">
           <div>
-            <h2>
+            <h1>
               LBRY is a free, open, and community-run digital marketplace.<br/>
               Build the future of content freedom.
-            </h2>
+            </h1>
           </div>
         </section>
 
@@ -106,45 +106,45 @@
           <header class="page__header">
             <div class="page__header-wrap">
               <div class="inner-wrap">
-                <h2 class="page__header__title" itemprop="name headline">{{ $page.title }}</h2>
+                <h1 class="page__header__title" itemprop="name headline">{{ $page.title }}</h1>
               </div>
             </div>
           </header>
 
           <section class="page__content" itemprop="articleBody">
             <div class="inner-wrap">
-              <h1>Whitepaper</h1>
+              <h2>Whitepaper</h2>
               <h4>LBRY: A Decentralized Digital Content Marketplace</h4>
               <p>Some info here about the whitepaper and <a href="/whitepaper.html">a link</a>.</p>
 
-              <h1>API Specification</h1>
+              <h2>API Specification</h2>
               <h4>All of our APIs, in one place</h4>
 
-              <h2>chainquery</h2>
+              <h3>chainquery</h3>
               <ul>
                 <li><a href="https://github.com/lbryio/chainquery">Codebase</a></li>
                 <li><a href="">OpenAPI signature</a></li>
               </ul>
 
-              <h2>lbry</h2>
+              <h3>lbry</h3>
               <ul>
                 <li><a href="https://lbry.io/api">Codebase</a></li>
                 <li><a href="/resources/lbry.html">OpenAPI signature</a></li>
               </ul>
 
-              <h2>lbrycrd</h2>
+              <h3>lbrycrd</h3>
               <ul>
                 <li><a href="https://github.com/lbryio/lbrycrd">Codebase</a></li>
                 <li><a href="/resources/lbrycrd.html">OpenAPI signature</a></li>
               </ul>
 
-              <h2>Lighthouse</h2>
+              <h3>Lighthouse</h3>
               <ul>
                 <li><a href="https://lbryio.github.io/lighthouse">Codebase</a></li>
                 <li><a href="">OpenAPI signature</a></li>
               </ul>
 
-              <h1>The Front Desk</h1>
+              <h2>The Front Desk</h2>
               <h4>Latest news and musings from the LBRY team</h4>
 
               <ul class="blog-posts">
@@ -208,7 +208,7 @@
           <header class="page__header">
             <div class="page__header-wrap">
               <div class="inner-wrap">
-                <h2 class="page__header__title" itemprop="name headline">{{ $page.title }}</h2>
+                <h1 class="page__header__title" itemprop="name headline">{{ $page.title }}</h1>
               </div>
             </div>
           </header>
@@ -232,11 +232,11 @@
           <strong>This website is in beta and under heavy development.</strong>
           All information should be considered incomplete and possibly incorrect and things may not work as expected.
         </p>
-        <p></p>
+
         <p>
-          Please do not share or link this site publicly while this message is here.
-          This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank">contribute to it on Github</a>.
+          Please do not share or link this site publicly while this message is here. This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank" rel="noopener noreferrer">contribute to it on Github</a>.
         </p>
+
         <button id="close-alert">&times;</button>
       </div>
     </section>

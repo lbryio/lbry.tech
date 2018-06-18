@@ -8,7 +8,7 @@
 
         <div class="hook__page__hero__claim">
           <span>lbry://</span><input type="text" v-model="address" placeholder=" Claim URI goes here"/>
-          <a href="#" v-on:click="fetchMetadata" class="button">Execute</a>
+          <a href="#" v-on:click="fetchMetadata" class="button" title="Execute claim">Execute</a>
         </div>
       </div>
     </header>
@@ -24,7 +24,7 @@
     <div class="xs12" v-if="jsonData">
       <p>Success! Here is the response for <strong>lbry://{{ address }}</strong>:</p>
       <pre><code class="json"><span v-html="highlight('json',jsonData)"></span></code></pre>
-      <a href="#" class="__button-black" v-on:click="goTo(2)">Go to next step</a>
+      <a href="#" class="__button-black" v-on:click="goTo(2)" title="Proceed to step two">Go to next step</a>
     </div>
 
     <template v-if="!isLoading && !jsonData">

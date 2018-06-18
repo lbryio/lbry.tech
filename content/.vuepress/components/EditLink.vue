@@ -1,5 +1,5 @@
 <template>
-  <a v-bind:href="githubUrl" target="_blank" title="Edit this page on GitHub">Edit this page on GitHub</a>
+  <a v-bind:href="githubUrl" target="_blank" rel="noopener noreferrer" title="Edit this page on GitHub">Edit this page on GitHub</a>
 </template>
 
 <script>
