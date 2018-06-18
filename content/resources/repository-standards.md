@@ -42,6 +42,7 @@ This document exists to introduce a project to a new visitor. It may also serve 
 * If there are operating system specific instructions, these should be broken out into separate headings for each operating system.
 * It is okay to assume Linux and Unix are "first class citizens". While we want to support all OSes, Windows instructions and considerations can be secondary.
 * Include a step that explains how to verify you are running from source directly.
+* It is okay to point to a INSTALL.md file if the installation steps are relatively lenghty, which should reside in the root folder.
 
 ### Contributing
 
