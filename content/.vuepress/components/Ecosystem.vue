@@ -3,7 +3,11 @@
   <section class="ecosystem">
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule chainquery">
-        <h3 class="__title">chainquery</h3>
+        <h3 class="__title">
+          chainquery
+          <span>Blockchain and Applications</span>
+        </h3>
+
         <div class="ecosystem__submodule__description">
           <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
           <strong><a href="https://github.com/lbryio/chainquery" title="chainquery source code">→ Source code</a></strong>
@@ -11,7 +15,11 @@
       </div>
 
       <div class="ecosystem__submodule wallet">
-        <h3 class="__title">wallet server</h3>
+        <h3 class="__title">
+          wallet server
+          <span>Blockchain and Data Network</span>
+        </h3>
+
         <div class="ecosystem__submodule__description">
           <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
           <strong><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">→ Source code</a></strong>
@@ -192,7 +200,11 @@
 
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule lighthouse">
-        <h3 class="__title">lighthouse</h3>
+        <h3 class="__title">
+          lighthouse
+          <span>Blockchain and Applications</span>
+        </h3>
+
         <div class="ecosystem__submodule__description">
           <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
           <strong><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">→ Source code</a></strong>
@@ -200,7 +212,11 @@
       </div>
 
       <div class="ecosystem__submodule reflector">
-        <h3 class="__title">reflector</h3>
+        <h3 class="__title">
+          reflector
+          <span>Data Network</span>
+        </h3>
+
         <div class="ecosystem__submodule__description">
           <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
           <strong><a href="https://github.com/lbryio/reflector.go" title="reflector source code">→ Source code</a></strong>
@@ -536,6 +552,30 @@
       .ecosystem__submodule__description {
         opacity: 0;
         visibility: hidden;
+      }
+    }
+
+    h3 {
+      position: relative;
+      text-align: center;
+
+      span {
+        @include font-mono;
+        display: block;
+        font-size: 0.8rem;
+        padding-top: 1rem;
+        position: relative;
+        width: 100%;
+
+        &::before {
+          content: "connects to";
+          display: block;
+          font-size: inherit;
+          font-style: italic;
+          position: absolute;
+          top: 0;
+          width: 100%;
+        }
       }
     }
 
