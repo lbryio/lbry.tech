@@ -90,6 +90,7 @@ Stands for *Elliptic Curve Digital Signature Algorithm*. Used to verify transact
 A set of mathematical operations defined on a group of points on a 2D elliptic curve. LBRY, similar to the Bitcoin protocol, uses predefined curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1). Here's the simplest possible explanation of the operations: you can add and subtract points and multiply them by an integer. Dividing by an integer is computationally infeasible (otherwise cryptographic signatures won't work). The private key is a 256-bit integer and the public key is a product of a predefined point G ("generator") by that integer: A = G * a. Associativity law allows implementing interesting cryptographic schemes like Diffie-Hellman key exchange (ECDH): two parties with private keys *a* and *b* may exchange their public keys *A* and *B* to compute a shared secret point C: C = A * b = B * a because (G * a) * b == (G * b) * a. Then this point C can be used as an AES encryption key to protect their communication channel.
 
 ### Fork
+
 Refers either to a fork of a source code or, more often, to a split of the blockchain when two different parts of the network see different main chains. In a sense, fork occurs every time two blocks of the same height are created at the same time. Both blocks always have the different hashes (and therefore different difficulty), so when a node sees both of them, it will always choose the most difficult one. However, before both blocks arrive to a majority of nodes, two parts of the network will see different blocks as tips of the main chain.
 
 ### Full Node
@@ -131,7 +132,6 @@ LBRY Credits (LBC) is the cryptocurrency used to make digital transactions (paym
 ## LBRY Daemon
 
 The daemon combines various components to provide a single API across the LBRY ecosystem in order to interact with the blockchain and datanetwork. 
-
 
 ### LBRY Redux
 
@@ -256,7 +256,6 @@ The initial blob of a stream, which contains encyption information as well as po
 ### Script
 
 A compact turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change amounts being transferred. Amount is stored in a separate field in a *transaction output*.
-
 
 ### Signature
 
