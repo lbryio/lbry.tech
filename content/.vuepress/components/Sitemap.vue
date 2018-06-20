@@ -20,5 +20,5 @@ export default {
     }
   },
   name: 'Sitemap'
-}
+};
 </script>
