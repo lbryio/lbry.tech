@@ -140,7 +140,7 @@ app.post('/upload-image', textParser, function(req, res) {
 
 app.get('/*', function(req, res) {
 
-  if(fs.existsSync(__dirname + "/.vuepress/dist" + req.path + ".html")) {
+  if(fs.existsSync(__dirname + "/content/.vuepress/dist" + req.path + ".html")) {
     res.redirect(req.path + ".html");
   } else {
     res.status(404);
