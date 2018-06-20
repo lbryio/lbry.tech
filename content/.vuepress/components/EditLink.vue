@@ -14,10 +14,10 @@
 
     methods: {
       updateUrl () {
-        this.githubUrl = `https://github.com/${this.$site.themeConfig.repo}/edit/${this.$site.themeConfig.docsBranch}`;
+        this.githubUrl = `https://github.com/${this.$site.themeConfig.repo}/edit`;
 
-        if (this.$page.path === "/") this.githubUrl = `${this.githubUrl}/README.md`;
-        else this.githubUrl = `${this.githubUrl}${this.$page.path.replace(".html", ".md")}`;
+        if (this.$page.path === "/") this.githubUrl = `${this.githubUrl}/master/README.md`;
+        else this.githubUrl = `${this.githubUrl}/${this.$site.themeConfig.docsBranch}/${this.$page.path.replace(".html", ".md")}`;
       }
     },
 
