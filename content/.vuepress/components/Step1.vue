@@ -107,9 +107,9 @@
 curl "http://localhost:5279" --data "{ "method": "resolve", "params": { "uri": "${this.address}" } }"
         `;
 
-        this.$http.post("https://lbry.tech/forward", {
+        component.$http.post("https://lbry.tech/forward", {
           method: "resolve",
-          uri: this.address
+          uri: component.address
         }).then(response => {
           component.isLoading = false;
           component.jsonData = JSON.stringify(response.body, null, "  ");
