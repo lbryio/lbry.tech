@@ -73,77 +73,80 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      events: [],
-      updateInterval: {},
-      lastUpdated: new Date()
-    }
-  },
-  name: 'GithubFeed',
-  mounted () {
-
-    this.updateFeed();
-
-    this.updateInterval = setInterval(this.updateFeed, 60*1000);
-
-  },
-  methods: {
-    updateFeed () {
-
-      var component = this;
-
-      component.$http.get('https://lbry.tech/github-feed').then(function(response) {
-        component.events = response.body;
-      });
-
-      component.lastUpdated = new Date();
-
-    },
-    refToBranch (ref) {
-
-      return ref.replace('refs/heads/','');
-
-    },
-    formatDate (date) {
-
-      return date.toLocaleString('en-US');
-
-    },
-    generateGithubUrl (type, event) {
-
-      switch(type) {
-        case 'actor':
-          return 'https://github.com/' + event.actor.display_login;
-        break;
-        case 'comment':
-          return event.payload.comment.html_url;
-        break;
-        case 'repo':
-          return 'https://github.com/' + event.repo.name;
-        break;
-        case 'forkee':
-          return 'https://github.com/' + event.payload.forkee.full_name;
-        break;
-        case 'issue':
-          return event.payload.issue.html_url;
-        break;
-        case 'pull_request':
-          return event.payload.pull_request.html_url;
-        break;
-        case 'release':
-          return event.payload.release.html_url;
-        break;
-        case 'push':
-          return 'https://github.com/' + event.repo.name + '/tree/' + event.payload.ref.replace('refs/heads/','');
-        break;
-
+  export default {
+    data () {
+      return {
+        events: [],
+        updateInterval: {},
+        lastUpdated: new Date()
       }
+    },
 
-    }
-  }
-};
+    mounted () {
+      this.updateFeed();
+      this.updateInterval = setInterval(this.updateFeed, 60*1000);
+    },
+
+    methods: {
+      updateFeed () {
+        const component = this;
+
+        component.$http.get("https://lbry.tech/github-feed").then(response => {
+          component.events = response.body;
+        }).catch(error => {
+          console.log("Unable to display GitHub feed:\n", error);
+        });
+
+        component.lastUpdated = new Date();
+      },
+
+      refToBranch (ref) {
+        return ref.replace("refs/heads/", "");
+      },
+
+      formatDate (date) {
+        return date.toLocaleString("en-US");
+      },
+
+      generateGithubUrl (type, event) {
+        switch (type) {
+          case "actor":
+            return `https://github.com/${event.actor.display_login}`;
+            break;
+
+          case "comment":
+            return event.payload.comment.html_url;
+            break;
+
+          case "repo":
+            return `https://github.com/${event.repo.name}`;
+            break;
+
+          case "forkee":
+            return `https://github.com/${event.payload.forkee.full_name}`;
+            break;
+
+          case "issue":
+            return event.payload.issue.html_url;
+            break;
+
+          case "pull_request":
+            return event.payload.pull_request.html_url;
+            break;
+
+          case "release":
+            return event.payload.release.html_url;
+            break;
+
+          case "push":
+            return `https://github.com/${event.repo.name}/tree/${event.payload.ref.replace("refs/heads/", "")}`;
+            break;
+        }
+      }
+    },
+
+    name: "GithubFeed"
+  };
 </script>
 
 <style lang="scss">

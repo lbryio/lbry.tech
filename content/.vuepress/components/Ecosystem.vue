@@ -1,5 +1,4 @@
 <template>
-
   <section class="ecosystem">
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule chainquery">
@@ -224,7 +223,6 @@
       </div>
     </aside>
   </section>
-
 </template>
 
 <script>

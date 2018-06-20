@@ -1,0 +1,51 @@
+.modal {
+  @include center;
+  top: 0; left: 0;
+  bottom: 0; right: 0;
+
+  background-color: rgba($black, 0.5);
+  position: fixed;
+  z-index: 10;
+
+  h3 {
+    @media (min-width: 901px) {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  p {
+    margin-bottom: 1rem;
+
+    @media (min-width: 901px) {
+      font-size: 1.15rem;
+      line-height: 1.33;
+    }
+
+    @media (max-width: 900px) {
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+
+    a {
+      color: $teal;
+    }
+  }
+}
+
+.modal-wrap {
+  background-color: $white;
+  padding: 2rem 1.5rem;
+
+  @media (min-width: 501px) {
+    width: 500px;
+  }
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}

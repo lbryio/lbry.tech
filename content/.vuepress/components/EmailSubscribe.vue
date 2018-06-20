@@ -1,51 +1,56 @@
 <template>
   <div id="email-subscribe" class="newsletter-cta">
     <h3 class="newsletter-cta__title">Don't Miss A Bit - Subscribe For LBRY Technical Updates</h3>
+
     <div>
       <input type="text" class="newsletter-cta__input" v-model="emailAddress" placeholder="you@domain.tld">
       <a class="newsletter-cta__submit" href="#" v-on:click.prevent="subscribe" title="Subscribe to our technical newsletter">Subscribe</a>
     </div>
+
     <p v-if="message" class="newsletter-cta__message">{{ message }}</p>
   </div>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      emailAddress: '',
-      message: ''
-    }
-  },
-  name: 'EmailSubscribe',
-  methods: {
-    subscribe () {
-      var component = this;
-      this.message = '';
-      if(!this.validateEmail(this.emailAddress)) {
-        this.message = 'Your email is not valid!';
-      } else {
-        this.$http.post('//api.lbry.io/list/subscribe', {
-          email: this.emailAddress,
-          tag: 'developer'
-        }, {
-          emulateJSON: true
-        }).then(function(response) {
-          component.email = '';
-          component.message = 'Thank you for subscribing!';
-        }, function(response) {
-          if(response.status == 409) {
-            component.message = 'You have already subscribed to our mailing list!';
-          }
-        });
+  export default {
+    data () {
+      return {
+        emailAddress: "",
+        message: ""
       }
     },
-    validateEmail (email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-  }
-};
+
+    methods: {
+      subscribe () {
+        let component = this;
+        component.message = "";
+
+        if (!component.validateEmail(component.emailAddress)) {
+          component.message = "Your email is not valid!";
+          return;
+        }
+
+        component.$http.post("//api.lbry.io/list/subscribe", {
+          email: component.emailAddress,
+          tag: "developer"
+        }, {
+          emulateJSON: true
+        }).then(response => {
+          component.email = "";
+          component.message = "Thank you for subscribing!";
+        }, response => {
+          if (response.status === 409) component.message = "You have already subscribed to our mailing list!";
+        });
+      },
+
+      validateEmail (email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      }
+    },
+
+    name: "EmailSubscribe"
+  };
 </script>
 
 <style lang="scss">

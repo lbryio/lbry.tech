@@ -222,7 +222,7 @@
     }
   }
 
-  a:not(.button):not(.feature-link__title) {
+  a:not(.button):not(.__button-black):not(.feature-link__title):not(.newsletter-standalone__submit) {
     color: $teal;
     position: relative;
 

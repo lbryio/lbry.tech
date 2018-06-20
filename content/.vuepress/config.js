@@ -8,7 +8,7 @@ module.exports = {
   ],
   themeConfig: {
     repo: 'lbryio/lbry.tech',
-    docsBranch: 'master',
+    docsBranch: 'master/content',
     editLinkText: 'Edit this page on Github'
   },
   ga: 'UA-60403362-1',

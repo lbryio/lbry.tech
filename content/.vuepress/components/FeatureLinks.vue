@@ -1,5 +1,4 @@
 <template>
-
   <ul class="feature-links">
     <li v-for="featureLink in this.$page.frontmatter.featureLinks" v-on:click="visit(featureLink.href)" class="feature-link">
       <div>
@@ -12,16 +11,14 @@
       </figure>
     </li>
   </ul>
-
 </template>
-
-
 
 <script>
   export default {
     data () {
       return {}
     },
+
     methods: {
       visit (slug) {
         window.open(slug, "_blank");
