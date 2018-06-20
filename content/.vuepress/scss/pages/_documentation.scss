@@ -18,12 +18,21 @@
     position: relative;
 
     &::before {
-      top: 8px; left: -1.2rem;
-
-      content: "\00B7";
-      font-size: 3.5rem;
+      background-color: $black;
+      border-radius: 50%;
+      content: "";
       line-height: 0;
       position: absolute;
+
+      @media (min-width: 901px) {
+        width: 7px; height: 7px;
+        top: 14px; left: -1.05rem;
+      }
+
+      @media (max-width: 900px) {
+        width: 6px; height: 6px;
+        top: 11px; left: -0.95rem;
+      }
     }
   }
 
