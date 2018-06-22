@@ -27,6 +27,8 @@
     "jquery-ui": "^1.12.1",
     "jquery.tocify": "^1.9.1",
     "lunr": "0.5.7",
+    "markdown-it": "^8.4.1",
+    "markdown-it-container": "^2.0.0",
     "markdown-it-wikilinks": "^1.0.1",
     "node-sass": "^4.9.0",
     "redis": "^2.8.0",

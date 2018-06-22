@@ -1,5 +1,10 @@
 <template>
-  <main v-bind:class="{ 'home': $page.frontmatter.home, 'documentation': $page.frontmatter.documentation, 'contributing': $page.frontmatter.contributing }">
+  <main v-bind:class="{
+    'api': $page.frontmatter.api,
+    'contributing': $page.frontmatter.contributing,
+    'documentation': $page.frontmatter.documentation,
+    'home': $page.frontmatter.home
+  }">
     <nav class="navigation">
       <div class="inner-wrap">
         <router-link class="navigation__item" to="/" title="Go back home">LBRY</router-link>
@@ -194,11 +199,15 @@
       </div>
     </template>
 
-    <template v-else-if="$page.path == '/tour.html'">
+    <template v-else-if="$page.frontmatter.api">
       <Content></Content>
     </template>
 
-    <template v-else-if="$page.path == '/whitepaper.html'">
+    <template v-else-if="$page.path === '/tour.html'">
+      <Content></Content>
+    </template>
+
+    <template v-else-if="$page.path === '/whitepaper.html'">
       <Content></Content>
     </template>
 
@@ -233,6 +242,8 @@
           All information should be considered incomplete and possibly incorrect and things may not work as expected.
         </p>
 
+        <br/>
+
         <p>
           Please do not share or link this site publicly while this message is here. This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank" rel="noopener noreferrer">contribute to it on Github</a>.
         </p>
@@ -261,81 +272,81 @@
 </template>
 
 <script>
+  import Vue from "vue";
+  import VueResource from "vue-resource";
+  import VueMoment from "vue-moment";
 
-import Vue from 'vue'
-import VueResource from 'vue-resource'
-import VueMoment from 'vue-moment'
+  Vue.use(VueResource);
+  Vue.use(VueMoment);
 
-Vue.use(VueResource)
-Vue.use(VueMoment)
+  export default {
+    data () {
+      return {
+      }
+    },
 
-export default {
-  data () {
-    return {
+    created () {
+      if (this.$ssrContext) {
+        this.$ssrContext.title = this.$title
+        this.$ssrContext.lang = this.$lang
+        this.$ssrContext.description = this.$page.description || this.$description
+      }
+    },
+
+    mounted () {
+      // update title / meta tags
+      this.currentMetaTags = [];
+
+      const updateMeta = () => {
+        document.title = this.$title
+        document.documentElement.lang = this.$lang
+
+        const meta = [
+          {
+            name: "description",
+            content: this.$description
+          },
+          ...(this.$page.frontmatter.meta || [])
+        ];
+
+        this.currentMetaTags = updateMetaTags(meta, this.currentMetaTags);
+      };
+
+      this.$watch("$page", updateMeta);
+      updateMeta();
+
+      if ( // Toggle beta message
+        localStorage.getItem("hide lbry alert") &&
+        localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
+      ) document.querySelector("#alert-beta").style.display = "none";
+
+      document.querySelector("#close-alert").onclick = function () {
+        localStorage.setItem("hide lbry alert", true);
+        document.querySelector("#alert-beta").style.display = "none";
+      };
+    },
+
+    beforeDestroy () {
+      updateMetaTags(null, this.currentMetaTags)
     }
-  },
-  created () {
-    if (this.$ssrContext) {
-      this.$ssrContext.title = this.$title
-      this.$ssrContext.lang = this.$lang
-      this.$ssrContext.description = this.$page.description || this.$description
-    }
-
-  },
-  mounted () {
-    // update title / meta tags
-    this.currentMetaTags = []
-    const updateMeta = () => {
-      document.title = this.$title
-      document.documentElement.lang = this.$lang
-      const meta = [
-        {
-          name: 'description',
-          content: this.$description
-        },
-        ...(this.$page.frontmatter.meta || [])
-      ]
-      this.currentMetaTags = updateMetaTags(meta, this.currentMetaTags)
-    }
-    this.$watch('$page', updateMeta)
-    updateMeta()
-
-
-
-    if ( // Toggle beta message
-      localStorage.getItem("hide lbry alert") &&
-      localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
-    ) {
-      document.querySelector("#alert-beta").style.display = "none";
-    }
-
-    document.querySelector("#close-alert").onclick = function () {
-      localStorage.setItem("hide lbry alert", true);
-      document.querySelector("#alert-beta").style.display = "none";
-    };
-  },
-  beforeDestroy () {
-    updateMetaTags(null, this.currentMetaTags)
   }
-}
 
-function updateMetaTags (meta, current) {
-  if (current) {
-    current.forEach(c => {
-      document.head.removeChild(c)
-    })
-  }
-  if (meta) {
-    return meta.map(m => {
-      const tag = document.createElement('meta')
-      Object.keys(m).forEach(key => {
-        tag.setAttribute(key, m[key])
+  function updateMetaTags (meta, current) {
+    if (current) current.forEach(c => document.head.removeChild(c));
+
+    if (meta) {
+      return meta.map(m => {
+        const tag = document.createElement('meta')
+
+        Object.keys(m).forEach(key => {
+          tag.setAttribute(key, m[key])
+        });
+
+        document.head.appendChild(tag);
+        return tag;
       })
-      document.head.appendChild(tag)
-      return tag
-    })
+    }
   }
-}
 </script>
 
 <style lang="scss">
