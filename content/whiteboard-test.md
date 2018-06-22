@@ -1,3 +1,0 @@
-<Whiteboard></Whiteboard>
-
-test

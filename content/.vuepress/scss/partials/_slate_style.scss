@@ -13,7 +13,7 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations
 under the License.
 */
-.whiteboard {
+.slate {
   color: $main-text;
   padding: 0;
   margin: 0;
@@ -342,10 +342,22 @@ under the License.
     table {
       margin-bottom: 1em;
       overflow: auto;
+      width: auto;
       th, td {
         text-align: 1;
         vertical-align: 0;
         line-height: 1.6;
+        &:nth-of-type(1) {
+          text-align: right !important;
+          font-weight: bold;
+        }
+        em {
+          display: block;
+          text-transform: uppercase;
+          color: #e69731;
+          font-size: 0.75rem;
+          font-style: normal;
+        }
       }
       th {
         padding: 5px 10px;
