@@ -2,4 +2,4 @@
 title: Tour
 ---
 
-<Hook></Hook>
+<Hook/>

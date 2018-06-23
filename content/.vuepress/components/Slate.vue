@@ -47,7 +47,7 @@
     .use(require("markdown-it-container"), "api__content__example");
 
   export default {
-    data: () => {
+    data () {
       return {
         content: {},
         htmlContent: "",
