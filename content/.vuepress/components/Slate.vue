@@ -51,7 +51,6 @@
       return {
         content: {},
         htmlContent: "",
-        markdownFile: "",
         searchIndex: {},
         searchResults: {},
         toc: {}
@@ -69,10 +68,11 @@
           highlightOffset: 60,
           ignoreSelector: ".toc-ignore",
           scrollHistory: false,
-          scrollTo: -1,
+          scrollTo: 84,
           selectors: "h2",
           showEffectSpeed: 0,
-          smoothScroll: false,
+          smoothScroll: true,
+          smoothScrollSpeed: 0,
           theme: "none"
         }).data("toc-tocify");
 
@@ -156,7 +156,6 @@
     },
 
     created: function () {
-      console.log(this.markdownFile);
       this.$http.get(this.markdownFile).then(function (response) {
         this.htmlContent = md.render(response.body);
 
