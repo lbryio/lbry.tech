@@ -102,7 +102,7 @@
 
         component.exampleCode = `
 # Example code using the daemon
-curl "http://localhost:5279" --data "{ "method": "wallet_send", "params": { "claim_id": "${this.address}", "amount": "${this.amount}" } }"
+curl "http://localhost:5279" --data "{ 'method': 'wallet_send', 'params': { 'claim_id': '${this.address}', 'amount': '${this.amount}' } }"
         `;
 
         component.$http.post("https://lbry.tech/forward", {

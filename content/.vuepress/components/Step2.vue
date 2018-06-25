@@ -46,15 +46,15 @@
           <fieldset>
             <label for="meme-language">Language</label>
             <select name="meme-language" id="meme-language" v-model="language">
-              <option value="AR">Arabic</option>
-              <option value="ZH">Chinese (Mandarin)</option>
-              <option value="EN">English</option>
-              <option value="FR">French</option>
-              <option value="DE">German</option>
-              <option value="IT">Italian</option>
-              <option value="JP">Japanese</option>
-              <option value="RU">Russian</option>
-              <option value="ES">Spanish</option>
+              <option value="ar">Arabic</option>
+              <option value="zh">Chinese (Mandarin)</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="jp">Japanese</option>
+              <option value="ru">Russian</option>
+              <option value="es">Spanish</option>
               <option value="">Not specified</option>
             </select>
           </fieldset>
@@ -88,7 +88,10 @@
       <div class="loader" v-if="isLoading"></div>
 
       <div v-if="jsonData">
-        <p style="text-align: center;">Success! Here is the response:</p>
+        <p style="text-align: center;">Success!<br/>
+          <a class="__button-black" v-bind:href="'http://explorer.lbry.io/tx/'+txid">See the transaction on explorer.lbry.io</a>
+        </p>
+        <p style="text-align: center;">Here is the raw response:</p>
         <pre><code class="json"><span v-html="highlight('json', jsonData)"></span></code></pre>
       </div>
     </div>
@@ -96,7 +99,6 @@
 </template>
 
 <script>
-  import EventBus from "../event-bus";
   import hljs from "highlight.js";
   import imagesLoaded from "vue-images-loaded";
 
@@ -129,7 +131,7 @@
         images: images,
         isLoading: false,
         jsonData: "",
-        language: "EN",
+        language: "en",
         license: "Public Domain",
         loadingMessage: "",
         nsfw: false,
@@ -139,6 +141,7 @@
         title: "",
         topLine: "This is an example meme",
         valid: false,
+        txid: ""
       }
     },
 
@@ -177,7 +180,7 @@
 
         component.exampleCode = `
 # Example code using the daemon
-curl "http://localhost:5279" --data "{ "method": "publish", "params": { "name": "${component.title}", "bid": 0.001, "file_path": "/path/to/your/file.jpg", "title": "${component.title}", "description": "${component.description}", "language": "${component.language}", "license": "${component.license}", "nsfw": "${component.nsfw}" } }"
+curl "http://localhost:5279" --data "{ 'method': 'publish', 'params': { 'name': '${component.title}', 'bid': 0.001, 'file_path': '/path/to/your/file.jpg', 'title': '${component.title}', 'description': '${component.description}', 'language': '${component.language}', 'license': '${component.license}', 'nsfw': '${component.nsfw}' } }"
         `;
 
         component.$http.post("https://lbry.tech/upload-image", document.getElementById("meme-canvas").toDataURL("image/jpeg", 0.6), {
@@ -185,7 +188,8 @@ curl "http://localhost:5279" --data "{ "method": "publish", "params": { "name": 
             "Content-Type": "text/plain"
           }
         }).then(uploadResponse => {
-          if (uploadResponse.status === "error") {
+
+          if (uploadResponse.body.status === "error") {
             component.isLoading = false;
             component.exampleCode = "";
             return;
@@ -194,7 +198,7 @@ curl "http://localhost:5279" --data "{ "method": "publish", "params": { "name": 
           component.$http.post("https://lbry.tech/forward", {
             bid: 0.001,
             description: component.description,
-            file_path: uploadResponse.filename,
+            file_path: uploadResponse.body.filename,
             language: component.language,
             license: component.license,
             method: "publish",
@@ -204,7 +208,7 @@ curl "http://localhost:5279" --data "{ "method": "publish", "params": { "name": 
           }).then(response => {
             component.isLoading = false;
             component.jsonData = JSON.stringify(response.body, null, "  ");
-            EventBus.$emit("HookFileUploaded", response.body.txid);
+            component.txid = response.body.result.txid;
           }).catch(error => {
             component.isLoading = false;
             component.jsonData = JSON.stringify(error, null, "  ");

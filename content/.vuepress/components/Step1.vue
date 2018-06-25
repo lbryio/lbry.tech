@@ -104,7 +104,7 @@
         component.isLoading = true;
         component.exampleCode = `
 # Example code using the daemon
-curl "http://localhost:5279" --data "{ "method": "resolve", "params": { "uri": "${this.address}" } }"
+curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${this.address}' } }"
         `;
 
         component.$http.post("https://lbry.tech/forward", {

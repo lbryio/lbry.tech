@@ -23,56 +23,22 @@
     <Step2 v-if="activeStep == 2"></Step2>
     <Step3 v-if="activeStep == 3"></Step3>
 
-    <aside class="modal" v-model="uploadDialog" v-if="uploadDialog !== false">
-      <div class="modal-wrap">
-        <template v-if="confirmed">
-          <h3>Your image has been published!</h3>
-          <p>Check out your content on <a v-bind:href="`https://explorer.lbry.io/tx/${txhash}`" target="_blank" rel="noopener noreferrer">the LBRY blockchain explorer</a>.</p>
-          <a href="#" class="__button-black" style="display: inline-block;" v-on:click.prevent="uploadDialog = false">Dismiss this dialog</a>
-        </template>
-
-        <template v-else>
-          <h3><span class="loader tiny" style="display: inline-block;"></span>&nbsp;Waiting for confirmation...</h3>
-          <p>Your image was uploaded to the LBRY network but we are currently waiting for the first confirmation. This should take just a few minutes. In the meantime, go ahead and try the other steps!</p>
-        </template>
-      </div>
-    </aside>
   </div>
 </template>
 
 <script>
-  import EventBus from "../event-bus";
   import Vue from "vue";
+  import EventBus from "../event-bus";
 
   export default {
     data () {
       return {
-        activeStep: 1,
-        confirmed: false,
-        txhash: "",
-        uploadDialog: false
-      }
-    },
-
-    watch: {
-      uploadDialog: function () {
-        const component = this;
-
-        if (this.uploadDialog) {
-          setTimeout(() => {
-            component.confirmed = true; // Simulate confirmation
-          }, 10000);
-        }
+        activeStep: 1
       }
     },
 
     created () {
       const component = this;
-
-      EventBus.$on("HookFileUploaded", txhash => {
-        component.txhash = txhash;
-        component.uploadDialog = true;
-      });
 
       EventBus.$on("HookStepUpdate", step => {
         component.activeStep = step;
