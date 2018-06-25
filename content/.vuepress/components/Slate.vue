@@ -53,7 +53,8 @@
         htmlContent: "",
         searchIndex: {},
         searchResults: {},
-        toc: {}
+        toc: {},
+        markdownFile: ""
       }
     },
 
@@ -154,8 +155,8 @@
       }
     },
 
-    mounted: function () {
-      this.$http.get("/api.md").then(function (response) {
+    created: function () {
+      this.$http.get(this.markdownFile).then(function (response) {
         this.htmlContent = md.render(response.body);
 
         this.$nextTick(function () {

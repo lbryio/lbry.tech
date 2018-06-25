@@ -1,1 +1,3 @@
-<!--/ < Slate markdown-file="/api.md" /> /-->
+<ClientOnly>
+  <Slate markdown-file="/api.md"></Slate>
+</ClientOnly>
