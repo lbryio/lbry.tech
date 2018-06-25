@@ -51,10 +51,10 @@
       return {
         content: {},
         htmlContent: "",
+        markdownFile: "",
         searchIndex: {},
         searchResults: {},
-        toc: {},
-        markdownFile: ""
+        toc: {}
       }
     },
 
@@ -156,6 +156,7 @@
     },
 
     created: function () {
+      console.log(this.markdownFile);
       this.$http.get(this.markdownFile).then(function (response) {
         this.htmlContent = md.render(response.body);
 

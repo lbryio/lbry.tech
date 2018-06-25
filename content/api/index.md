@@ -3,4 +3,6 @@ api: true
 title: API
 ---
 
-<!--/ < Slate /> /-->
+<ClientOnly>
+  <Slate markdown-file="/api.md"/>
+</ClientOnly>
