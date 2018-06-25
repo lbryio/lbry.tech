@@ -187,10 +187,6 @@
   @import "../scss/init/colors";
   @import "../scss/init/mixins";
 
-  // @import "../scss/partials/slate_variables";
-  // @import "../scss/partials/slate_icons";
-  // @import "../scss/partials/slate_style";
-
   .slate {
     width: 100%; height: 100%;
     position: relative;
@@ -234,6 +230,52 @@
     float: right;
     grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
     width: calc(100% - 200px);
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    table {
+      border: 1px solid rgba($white, 0.1);
+      border-radius: 0.3rem;
+      border-spacing: 0;
+      font-size: 0.8rem;
+      line-height: 1.33;
+      width: 100%;
+    }
+
+    thead {
+      display: none;
+    }
+
+    th, td {
+      padding: 0.5rem 1rem 0.5rem 0.5rem;
+    }
+
+    th {
+      border-bottom: 1px solid rgba($white, 0.1);
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba($white, 0.1);
+    }
   }
 
   .api__content__body,
@@ -246,8 +288,18 @@
   }
 
   .api__content__example {
-    background-color: $black;
+    background-color: mix($gray, $black, 10%);
     border-bottom: 1px solid rgba($white, 0.1);
     color: $white;
+
+    pre {
+      margin-bottom: 1rem; padding: 1rem;
+
+      background-color: $black;
+      border-radius: 0.3rem;
+      line-height: 1.33;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
   }
 </style>
