@@ -1,29 +1,13 @@
 <template>
   <div class="slate">
-    <!--/
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <img src="slate-navbar.png">
-      </span>
-    </a>
-    /-->
-
     <aside class="api__toc">
-      <!--/ <img src="slate-logo.png"/> /-->
-
       <div class="api__toc__search">
-        <input type="search" class="search" id="input-search" placeholder="Search"/>
+        <input type="search" class="api__toc__search__field" id="input-search" placeholder="Search"/>
+        <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
         <ul class="api__toc__search__results"></ul>
       </div>
 
       <div id="toc" class="api__toc__items" role="navigation"></div>
-
-      <!--/
-      <ul class="toc-footer">
-        <li>Some footer content here</li>
-      </ul>
-      /-->
     </aside>
 
     <section class="api__content" v-html="htmlContent"></section>
@@ -75,27 +59,12 @@
           smoothScrollSpeed: 0,
           theme: "none"
         }).data("toc-tocify");
-
-        $("#nav-button").click(() => {
-          $(".api__toc").toggleClass("active");
-          $("#nav-button").toggleClass("active");
-
-          return false;
-        });
-
-        $(".api__content").click(this.closeToc);
-        $(".tocify-item").click(this.closeToc);
-      },
-
-      closeToc: () => {
-        $(".api__toc").removeClass("open");
-        $("#nav-button").removeClass("open");
       },
 
       populateSearchIndex: function () {
         const component = this;
 
-        $(".slate .content h2").each(function () {
+        $(".api__content__body h2").each(function () {
           const title = $(this);
           const body = title.nextUntil("h2");
 
@@ -116,29 +85,40 @@
 
       search: function (event) {
         const component = this;
+        const searchCancel = $("#clear-search");
         const searchElement = $("#input-search");
 
         component.unhighlight();
         component.searchResults.addClass("active");
 
         // ESC clears the field
-        if (event.keyCode === 27) searchElement.val("");
+        if (event.keyCode === 27) {
+          searchCancel.removeClass("active");
+          searchElement.val("");
+        }
+
+        searchCancel.on("click", function () {
+          component.unhighlight();
+          component.searchResults.removeClass("active");
+          searchCancel.removeClass("active");
+          searchElement.val("");
+        });
 
         if (searchElement.val()) {
           const results = component.searchIndex.search(searchElement.val()).filter(r => r.score > 0.0001);
+          searchCancel.addClass("active");
 
           if (results.length) {
             component.searchResults.empty();
 
             $.each(results, function (index, result) {
               const elem = document.getElementById(result.ref);
-              component.searchResults.append(`<li><a href="#" ${result.ref}>${$(elem).text()}</a></li>`);
+              component.searchResults.append(`<li><a href="#${result.ref}" title="Visit the '${$(elem).text()}' section in our documentation">${$(elem).text()}</a></li>`);
             });
 
             component.highlight(this);
           } else {
-            component.searchResults.html("<li></li>");
-            $(".api__toc__search__results li").text(`No Results Found for "${searchElement.val()}"`);
+            component.searchResults.html(`<li>No results found for <code>${searchElement.val()}</code></li>`);
           }
         } else {
           component.unhighlight();
@@ -207,19 +187,82 @@
     position: fixed;
     z-index: 3;
 
-    &:not(.active) {
-    }
-
-    &.active {
+    li {
+      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
     }
   }
 
-  .api__toc__search__results {
+  .api__toc__search {
+    position: relative;
+  }
+
+  .api__toc__search__field {
+    border-bottom: 1px solid rgba($gray, 0.3);
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 0.25rem calc(2rem + 4px) 0.25rem 0.5rem;
+    width: 100%;
+  }
+
+  .api__toc__search__clear {
+    width: 1.25rem; height: 1.25rem;
+    top: 0.6rem; right: 0.75rem;
+
+    background-color: $black;
+    border-radius: 50%;
+    color: $white;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.3;
+    position: absolute;
+    text-align: center;
+    transition: opacity 0.2s;
+
     &:not(.active) {
+      opacity: 0;
+      visibility: hidden;
     }
 
     &.active {
+      opacity: 1;
+      visibility: visible;
     }
+  }
+
+
+
+  .api__toc__search__results,
+  .api__toc__items {
+    font-size: 0.8rem;
+    line-height: 1.33;
+  }
+
+  .api__toc__search__results {
+    list-style-type: none;
+
+    &:not(.active) {
+      display: none;
+    }
+
+    &.active {
+      background-color: rgba($gray, 0.3);
+      border-bottom: 1px solid rgba($gray, 0.3);
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+  }
+
+  .api__toc__items {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+
+    ul {
+      list-style-type: none;
+    }
+  }
+
+  .tocify-focus {
+    background-color: rgba($gray, 0.3);
   }
 
 
