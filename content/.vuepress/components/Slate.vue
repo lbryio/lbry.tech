@@ -1,5 +1,5 @@
 <template>
-  <div class="slate">
+  <div class="__slate">
     <aside class="api__toc">
       <div class="api__toc__search">
         <input type="search" class="api__toc__search__field" id="input-search" placeholder="Search"/>
@@ -77,7 +77,7 @@
       },
 
       bindSearchIndex: function () {
-        this.content = $(".slate .content");
+        this.content = $(".api__content");
         this.searchResults = $(".api__toc__search__results");
 
         $("#input-search").on("keyup", this.search);
@@ -118,7 +118,7 @@
 
             component.highlight(this);
           } else {
-            component.searchResults.html(`<li>No results found for <code>${searchElement.val()}</code></li>`);
+            component.searchResults.html(`<li style="padding: 0.25rem 0.5rem 0.25rem 0.75rem;">No results found for <code>${searchElement.val()}</code></li>`);
           }
         } else {
           component.unhighlight();
@@ -166,7 +166,7 @@
   @import "../scss/init/colors";
   @import "../scss/init/mixins";
 
-  .slate {
+  .__slate {
     width: 100%; height: 100%;
     position: relative;
 
@@ -174,6 +174,8 @@
       @include clearfix;
     }
   }
+
+
 
   .api__toc {
     width: 200px; height: calc(100vh - 4rem); // navigation is 4rem tall
@@ -186,10 +188,6 @@
     overflow-y: auto;
     position: fixed;
     z-index: 3;
-
-    li {
-      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
-    }
   }
 
   .api__toc__search {
@@ -250,6 +248,15 @@
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;
     }
+
+    a {
+      display: block;
+      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+
+      &:hover {
+        background-color: rgba($gray, 0.3);
+      }
+    }
   }
 
   .api__toc__items {
@@ -258,6 +265,14 @@
 
     ul {
       list-style-type: none;
+
+      &:hover {
+        background-color: rgba($gray, 0.3);
+      }
+
+      li {
+        padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+      }
     }
   }
 
@@ -288,10 +303,14 @@
       margin-bottom: 0.25rem;
     }
 
-    p {
+    p, ol, ul {
       font-size: 1rem;
       line-height: 1.5;
       margin-bottom: 1rem;
+    }
+
+    ol, ul {
+      padding-left: 1rem;
     }
 
     table {
