@@ -96,7 +96,7 @@ Opening well-specified issues against release candidates or master builds is ext
 
 If you're about to raise an issue because you've found a problem with LBRY, or you'd like to request a new feature, or for any other reason, please read this first.
 
-GitHub is the preferred channel for [bug reports](#report-a-bug) and [feature requests](#feature-requests).
+GitHub is the preferred channel for [bug reports](#reporting-a-bug) and [feature requests](#feature-requests).
 
 ### Reporting a Bug
 
@@ -104,8 +104,8 @@ A bug is a _demonstrable problem_ that is caused by the code in the repository. 
 Guidelines for bug reports:
 
 1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
-2. **Use the GitHub issue search** &mdash; check if the issue has already been reported (or fixed). Be sure to include closed tickets in your search.
-3. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Please follow it!
+2. **Use the GitHub issue search** — check if the issue has already been reported (or fixed). Be sure to include closed tickets in your search.
+3. **Follow the instructions** — When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Please follow it!
 
 Well-specified bug reports save developers lots of time and are extremely appreciated, typically with an LBRY credit tip.
 
