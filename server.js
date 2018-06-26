@@ -9,7 +9,6 @@ var async = require("async");
 // Express etc
 var sslRedirect = require('heroku-ssl-redirect');
 var express = require('express');
-var path = require('path');
 var serveStatic = require('serve-static');
 var request = require('request');
 var cors = require('cors');
@@ -112,7 +111,7 @@ app.get('/github-feed', function(req, res) {
     reply.forEach(function(item) {
       events.push(JSON.parse(item));
     });
-    
+
     res.json(events);
 
   });
@@ -167,7 +166,7 @@ function updateGithubFeed() {
       var eventString = JSON.stringify(item);
 
       redisClient.zrank('events', eventString, function(err, reply) {
-        
+
         if(reply == null) {
 
           redisClient.zadd('events', item.id, eventString, callback);

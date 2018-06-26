@@ -1,13 +1,14 @@
-LBRY Glossary
-================
+---
+title: LBRY Glossary
+---
 
 This glossary will help you understand exact meaning of LBRY and blockchain related terms.
 
-We encourage the submission of changes and additions to this glossary. 
+We encourage the submission of changes and additions to this glossary.
 
 ### Blob
 
-A Binary Large OBject (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers. 
+A Binary Large OBject (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.
 
 ### Block
 
@@ -43,11 +44,11 @@ A claim (ClaimTrie) is the data structure which LBRY uses to store claims to nam
 
 ### Claim Deposit
 
-When creating a channel claim or publishing content onto the LBRY blockchain, a small amount (or more) LBC must be deposited to reserve the name space in the claimtrie. See our [naming documentation](https://lbry.io/faq/naming) for more information. 
+When creating a channel claim or publishing content onto the LBRY blockchain, a small amount (or more) LBC must be deposited to reserve the name space in the claimtrie. See our [naming documentation](https://lbry.io/faq/naming) for more information.
 
 ### Claim Support
 
-A special type of transaction that includes claim information, a LBC address and a LBC value. Supports to one's own address increase the bid value of a claim and can be revoked anytime. Supports to an outside address also increase the value, but can only be revoked by the receiver (tip mechanism).  
+A special type of transaction that includes claim information, a LBC address and a LBC value. Supports to one's own address increase the bid value of a claim and can be revoked anytime. Supports to an outside address also increase the value, but can only be revoked by the receiver (tip mechanism).
 
 ### Cold Storage
 
@@ -99,13 +100,13 @@ A *node* which implements all of LBRY blockchain and does not require trusting a
 
 ### Genesis Block
 
-A very first block in the blockchain with hard-coded contents and a all-zero reference to a previous block. The LBRY genesis block was released on [28 Oct 2015](https://explorer.lbry.io/blocks/0) and the first block mined was on [23 Jun 2016](https://explorer.lbry.io/blocks/1). 
+A very first block in the blockchain with hard-coded contents and a all-zero reference to a previous block. The LBRY genesis block was released on [28 Oct 2015](https://explorer.lbry.io/blocks/0) and the first block mined was on [23 Jun 2016](https://explorer.lbry.io/blocks/1).
 
 ### Hard Fork
 
 Some people use term *hard fork* to stress that changing LBRY protocol requires overwhelming majority to agree with it, or some noticeable part of the economy will continue with original blockchain following the old rules. See *Fork* and *Soft Fork* for further discussion.
 
-### Hash Function 
+### Hash Function
 
 LBRY POW calculation uses three cryptographic hash functions: SHA-512, SHA-256 and RIPEMD-160. Click [here](https://lbry.io/faq/proof-algorithm) for more details.
 
@@ -119,7 +120,7 @@ Could mean an ECDSA public or private key, or AES symmetric encryption key. AES 
 
 ### Key fee
 
-The content price, set by the publisher, in order to download a claim. The key fee is paid once any part of the data is able to be downloaded. 
+The content price, set by the publisher, in order to download a claim. The key fee is paid once any part of the data is able to be downloaded.
 
 ### LBC
 
@@ -127,16 +128,16 @@ The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
 ### LBRY Credits
 
-LBRY Credits (LBC) is the cryptocurrency used to make digital transactions (payments, tips, claims) on the LBRY blockchain. 
+LBRY Credits (LBC) is the cryptocurrency used to make digital transactions (payments, tips, claims) on the LBRY blockchain.
 
 ## LBRY Daemon
 
-The daemon combines various components to provide a single API across the LBRY ecosystem in order to interact with the blockchain and datanetwork. 
+The daemon combines various components to provide a single API across the LBRY ecosystem in order to interact with the blockchain and datanetwork.
 
 ### LBRY Redux
 
 [lbry-redux](https://github.com/lbryio/lbry-redux) is a module which contains common React and redux code shared between lbry-app and lbry-android.
-        
+
 ### LBRY Protocol
 
 LBRY is an open-source protocol providing distribution, discovery, and purchase of digital content (data) via a decentralized network. It utilizes the LBRY blockchain as a global namespace and database of digital content. Blockchain entries contain searchable content metadata, identities, and rights and access rules. LBRY also provides a data network that consists of peers uploading and downloading data from other peers, possibly in exchange for payments, and a distributed hash table, used by peers to discover other peers.
@@ -151,12 +152,12 @@ LBRYcrd uses a blockchain similar to bitcoin's to implement an index and payment
 
 ### LbryumX Server
 
-A LbryumX-server for the LbryumX client. LbryumX is an extension of electrumx that provides the server side of LBRY Electrum Protocol. It sits between the LBRY daemon and LBRYCrd to provide SPV access to/from clients. 
+A LbryumX-server for the LbryumX client. LbryumX is an extension of electrumx that provides the server side of LBRY Electrum Protocol. It sits between the LBRY daemon and LBRYCrd to provide SPV access to/from clients.
 
 ### Lighthouse
 
 [Lighthouse](https://github.com/lbryio/lighthouse) is a lightning-fast advanced search engine API for publications on the LBRYcrd with autocomplete capabilities. The official lighthouse instance is live at https://lighthouse.lbry.io
-        
+
 ### Lightweight client
 
 Comparing to a *full node*, lightweight node does not store the whole blockchain and thus cannot fully verify any transaction. There are two kinds of lightweight nodes: those fully trusting an external service to determine wallet balance and validity of transactions (e.g. *blockchain.info*) and the apps implementing *Simplified Payment Verification* (SPV). SPV clients do not need to trust any particular service, but are more vulnerable to a *51% attack* than full nodes. See *Simplified Payment Verification* for more info.
@@ -203,11 +204,11 @@ Stands for "number used once". A 32-bit number in a *block header* which is iter
 
 ### Opcode
 
-8-bit code of a *script* operation. Codes from 0x01 to 0x4B (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). LBRY implemented special op codes for storing and updating of claim data. 
+8-bit code of a *script* operation. Codes from 0x01 to 0x4B (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). LBRY implemented special op codes for storing and updating of claim data.
 
 ### Orphan, Orphaned Block
 
-A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *51% attack*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*. 
+A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *51% attack*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*.
 
 ### Peer
 
@@ -283,8 +284,8 @@ A transaction *output* can be spent only once: when another valid transaction ma
 
 ### Stream
 
-Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams as associated with claim data in order to provide the capability to download files over a Peer to Peer network. 
-            
+Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams as associated with claim data in order to provide the capability to download files over a Peer to Peer network.
+
 ### Target
 
 A 256-bit number that puts an upper limit for a block header hash to be valid. The lower the target is, the higher the *difficulty* to find a valid hash. The maximum (easiest) target is 0x00000000FFFF0000000000000000000000000000000000000000000000000000. The difficulty and the target are adjusted every 2016 blocks (approx. 2 weeks) to keep interval between the blocks close to 10 minutes.
@@ -319,16 +320,15 @@ Transaction that is not included in any block. Also known as "0-confirmation" tr
 
 ### UTXO Set
 
-A collection of *Unspent Transaction Outputs*. Typically used in discussions on optimizing an ever-growing index of *transaction outputs* that are not yet *spent*. The index is important to efficiently validate newly created transactions. Even if the rate of the new transactions remains constant, the time required to locate and verify unspent outputs grows. 
+A collection of *Unspent Transaction Outputs*. Typically used in discussions on optimizing an ever-growing index of *transaction outputs* that are not yet *spent*. The index is important to efficiently validate newly created transactions. Even if the rate of the new transactions remains constant, the time required to locate and verify unspent outputs grows.
 
 ### Wallet
 
-An application or a service that helps keeping private keys for signing transactions. Wallet does not keep LBRY credits themselves (they are recorded in *blockchain*). "Storing LBC" usually means storing the keys. 
+An application or a service that helps keeping private keys for signing transactions. Wallet does not keep LBRY credits themselves (they are recorded in *blockchain*). "Storing LBC" usually means storing the keys.
 
 ### 51% Attack
 
-Also known as >50% attack or a *double spend* attack. An attacker can make a payment, wait till the merchant accepts some number of *confirmations* and provides the service, then starts mining a parallel chain of blocks starting with a block before the transaction. This parallel blockchain then includes another transaction that spends the same *outputs* on some other address. When the parallel chain becomes more *difficult*, it is considered a *main chain* by all nodes and the original transaction becomes invalid. Having more than a half of total *hashrate* guarantees possibility to overtake chain of any length, hence the name of an attack (strictly speaking, it is "more than 50%", not 51%). Also, even 40% of hashrate allows making a double spend, but the chances are less than 100% and are diminishing exponentially with the number of confirmations that the merchant requires. 
-
+Also known as >50% attack or a *double spend* attack. An attacker can make a payment, wait till the merchant accepts some number of *confirmations* and provides the service, then starts mining a parallel chain of blocks starting with a block before the transaction. This parallel blockchain then includes another transaction that spends the same *outputs* on some other address. When the parallel chain becomes more *difficult*, it is considered a *main chain* by all nodes and the original transaction becomes invalid. Having more than a half of total *hashrate* guarantees possibility to overtake chain of any length, hence the name of an attack (strictly speaking, it is "more than 50%", not 51%). Also, even 40% of hashrate allows making a double spend, but the chances are less than 100% and are diminishing exponentially with the number of confirmations that the merchant requires.
 
 About
 -----

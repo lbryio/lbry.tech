@@ -5,7 +5,7 @@ title: Development
 Want to build something on top of LBRY? This is the place to get you started.
 
 At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
-[Overview](/overview) first.
+[Overview](/overview/) first.
 
 ## When to Use LBRY
 
@@ -50,3 +50,5 @@ Not all applications will want to use the full LBRY protocol, or some applicatio
 1. lbrycrd documentation
 
 ## Desired Applications
+
+TBD

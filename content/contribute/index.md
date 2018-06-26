@@ -7,7 +7,7 @@ title: Contributing
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
 
-This guide is for contributing to the code bases maintained by the LBRY organization. For building on top of the LBRY protocol, see [Build](/build).
+This guide is for contributing to the code bases maintained by the LBRY organization. For building on top of the LBRY protocol, see [Build](/build/).
 
 Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as appreciation.
 
@@ -68,7 +68,7 @@ Additionally, every technical employee of LBRY outside of the founding team star
 
 ## Designing
 
-Web and application designers are requested to be able to work directly on CSS in the project they'd be contributing to. Please follow the [Coding](#Coding) instructions for any website or application you want to improve.
+Web and application designers are requested to be able to work directly on CSS in the project they'd be contributing to. Please follow the [Coding](#coding) instructions for any website or application you want to improve.
 
 ## Writing
 
@@ -86,7 +86,7 @@ A number of our code bases (`lbrycrd`, `lbry`, all applications, more...) go thr
 
 For any projects that you want to be a tester on, "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out.
 
-For even harder-core testing, you can follow the `README` instructions in a project and test against the `master` branch of a project at any time. Additionally, `master` builds for some projects are always available via [releases.lbry.io](http://releases.lbry.io/).
+For even harder-core testing, you can follow the `README` instructions in a project and test against the `master` branch of a project at any time. Additionally, `master` builds for some projects are always available via [releases.lbry.io](http://releases.lbry.io).
 
 Opening well-specified issues against release candidates or master builds is extremely useful in helping us create quality software.
 
