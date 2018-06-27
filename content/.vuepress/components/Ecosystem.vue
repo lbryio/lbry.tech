@@ -1,11 +1,9 @@
 <template>
   <section class="ecosystem">
     <aside class="ecosystem__submodules">
-      <div class="ecosystem__submodule chainquery">
-        <h3 class="__title">
-          chainquery
-          <span>Blockchain and Applications</span>
-        </h3>
+      <div class="ecosystem__submodule chainquery" v-on:click="openSubmodule('chainquery')">
+        <h3 class="__title">chainquery</h3>
+        <!--/ <span>Blockchain and Applications</span> /-->
 
         <div class="ecosystem__submodule__description">
           <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
@@ -13,11 +11,9 @@
         </div>
       </div>
 
-      <div class="ecosystem__submodule wallet">
-        <h3 class="__title">
-          wallet server
-          <span>Blockchain and Data Network</span>
-        </h3>
+      <div class="ecosystem__submodule wallet" v-on:click="openSubmodule('wallet')">
+        <h3 class="__title">wallet server</h3>
+        <!--/ <span>Blockchain and Data Network</span> /-->
 
         <div class="ecosystem__submodule__description">
           <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
@@ -198,11 +194,9 @@
     </section>
 
     <aside class="ecosystem__submodules">
-      <div class="ecosystem__submodule lighthouse">
-        <h3 class="__title">
-          lighthouse
-          <span>Blockchain and Applications</span>
-        </h3>
+      <div class="ecosystem__submodule lighthouse" v-on:click="openSubmodule('lighthouse')">
+        <h3 class="__title">lighthouse</h3>
+        <!--/ <span>Blockchain and Applications</span> /-->
 
         <div class="ecosystem__submodule__description">
           <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
@@ -210,11 +204,9 @@
         </div>
       </div>
 
-      <div class="ecosystem__submodule reflector">
-        <h3 class="__title">
-          reflector
-          <span>Data Network</span>
-        </h3>
+      <div class="ecosystem__submodule reflector" v-on:click="openSubmodule('reflector')">
+        <h3 class="__title">reflector</h3>
+        <!--/ <span>Data Network</span> /-->
 
         <div class="ecosystem__submodule__description">
           <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
@@ -235,25 +227,58 @@
         switch (true) {
           case (ecosystemComponentClassName === "lbrycrd"):
             resetClasses();
-            document.getElementsByClassName("chainquery")[0].className += " active red";
-            document.getElementsByClassName("lighthouse")[0].className += " active red";
-            document.getElementsByClassName("wallet")[0].className += " active red";
+            document.getElementsByClassName("chainquery")[0].className += " on red";
+            document.getElementsByClassName("lighthouse")[0].className += " on red";
+            document.getElementsByClassName("wallet")[0].className += " on red";
             break;
 
 
 
           case (ecosystemComponentClassName === "lbry"):
             resetClasses();
-            document.getElementsByClassName("reflector")[0].className += " active blue";
-            document.getElementsByClassName("wallet")[0].className += " active blue";
+            document.getElementsByClassName("reflector")[0].className += " on blue";
+            document.getElementsByClassName("wallet")[0].className += " on blue";
             break;
 
 
 
           case (ecosystemComponentClassName === "applications"):
             resetClasses();
-            document.getElementsByClassName("chainquery")[0].className += " active green";
-            document.getElementsByClassName("lighthouse")[0].className += " active green";
+            document.getElementsByClassName("chainquery")[0].className += " on green";
+            document.getElementsByClassName("lighthouse")[0].className += " on green";
+            break;
+
+
+
+          default:
+            break;
+        }
+      },
+      openSubmodule (ecosystemComponentClassName) {
+        if (!document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("on")) return; // do not activate unless submodule is `.on`
+
+        resetClasses();
+        document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
+
+        switch (true) {
+          case (ecosystemComponentClassName === "chainquery"):
+            document.getElementsByClassName("ecosystem")[0].className += " expand-left";
+            document.getElementsByClassName("chainquery")[0].className += " active";
+            break;
+
+          case (ecosystemComponentClassName === "wallet"):
+            document.getElementsByClassName("ecosystem")[0].className += " expand-left";
+            document.getElementsByClassName("wallet")[0].className += " active";
+            break;
+
+          case (ecosystemComponentClassName === "lighthouse"):
+            document.getElementsByClassName("ecosystem")[0].className += " expand-right";
+            document.getElementsByClassName("lighthouse")[0].className += " active";
+            break;
+
+          case (ecosystemComponentClassName === "reflector"):
+            document.getElementsByClassName("ecosystem")[0].className += " expand-right";
+            document.getElementsByClassName("reflector")[0].className += " active";
             break;
 
 
@@ -276,8 +301,12 @@
       n.classList.remove("active");
       n.classList.remove("blue");
       n.classList.remove("green");
+      n.classList.remove("on");
       n.classList.remove("red");
     });
+
+    document.getElementsByClassName("ecosystem")[0].classList.remove("expand-left");
+    document.getElementsByClassName("ecosystem")[0].classList.remove("expand-right");
   }
 </script>
 
@@ -291,7 +320,32 @@
     display: grid;
     font-size: 1rem;
     grid-gap: 1rem;
-    grid-template-columns: 144px auto 144px;
+
+    &:not(.expand-left):not(.expand-right) {
+      grid-template-columns: 144px auto 144px;
+
+      .ecosystem__submodules {
+        padding-top: 2.5rem;
+      }
+    }
+
+    &.expand-left {
+      grid-template-columns: 50% auto;
+
+      .ecosystem__submodules:last-of-type,
+      .ecosystem__submodule:not(.active) {
+        display: none;
+      }
+    }
+
+    &.expand-right {
+      grid-template-columns: auto 50%;
+
+      .ecosystem__submodules:first-of-type,
+      .ecosystem__submodule:not(.active) {
+        display: none;
+      }
+    }
   }
 
 
@@ -522,59 +576,49 @@
 
 
 
-  .ecosystem__submodules {
-    padding-top: 2.5rem;
-  }
-
   .ecosystem__submodule {
-    @include center;
-    width: 144px; height: 144px;
-
-    border-radius: 50%;
     border-width: 2px;
     cursor: default;
     position: relative;
-    transition: border 0.2s;
+    transition: border-color 0.2s;
     z-index: 2;
 
     &:not(:last-of-type) {
       margin-bottom: 1rem;
     }
 
-    &:not(.active) {
-      border-color: rgba($gray, 0.3);
-      color: rgba($gray, 0.3);
+    &:not(.on):not(.active) {
+      color: transparent;
     }
 
+    &:not(.active) {
+      @include center;
+      width: 144px; height: 144px;
+
+      border-radius: 50%;
+      border-style: dashed;
+
+      .ecosystem__submodule__description {
+        display: none;
+      }
+    }
+
+    &.active {
+      width: 100%; height: 100%;
+      border-style: solid;
+    }
+
+    /*
     &:not(:hover) {
       .ecosystem__submodule__description {
         opacity: 0;
         visibility: hidden;
       }
     }
+    */
 
     h3 {
-      position: relative;
       text-align: center;
-
-      span {
-        @include font-mono;
-        display: block;
-        font-size: 0.8rem;
-        padding-top: 1rem;
-        position: relative;
-        width: 100%;
-
-        &::before {
-          content: "connects to";
-          display: block;
-          font-size: inherit;
-          font-style: italic;
-          position: absolute;
-          top: 0;
-          width: 100%;
-        }
-      }
     }
 
     &.chainquery,
@@ -592,39 +636,42 @@
     }
 
     &:not(.blue):not(.green):not(.red) {
-      border-style: dashed;
+      // border-style: dashed;
+      border-color: rgba($gray, 0.3);
     }
 
     &.blue,
     &.green,
     &.red {
-      border-style: solid;
+      &:not(.active) {
+        cursor: pointer;
+      }
     }
 
     &.blue {
-      background-color: rgba($blue, 0.3);
+      // background-color: rgba($blue, 0.3);
       border-color: $blue;
     }
 
     &.green {
-      background-color: rgba($green, 0.3);
+      // background-color: rgba($green, 0.3);
       border-color: $green;
     }
 
     &.red {
-      background-color: rgba($red, 0.3);
+      // background-color: rgba($red, 0.3);
       border-color: $red;
     }
   }
 
   .ecosystem__submodule__description {
-    background-color: $white;
-    border: 2px solid rgba($gray, 0.3);
-    color: $black;
-    padding: 1rem;
-    position: absolute;
-    transition: all 0.2s;
-    width: 350px;
+    // background-color: $white;
+    // border: 2px solid rgba($gray, 0.3);
+    // color: $black;
+    // padding: 1rem;
+    // position: absolute;
+    // transition: all 0.2s;
+    // width: 350px;
   }
 
 
