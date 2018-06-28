@@ -82,7 +82,7 @@
     }
   }
 
-  h3:not(.__title) {
+  h3:not(.ecosystem__submodule__title) {
     @media (min-width: 901px) {
       font-size: 1.5rem;
     }
@@ -96,7 +96,7 @@
     }
   }
 
-  h4 {
+  h4:not(.ecosystem__submodule__description__title) {
     letter-spacing: 0.05rem;
     text-transform: uppercase;
 

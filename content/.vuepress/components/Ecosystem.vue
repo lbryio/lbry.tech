@@ -2,22 +2,36 @@
   <section class="ecosystem">
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule chainquery" v-on:click="openSubmodule('chainquery')">
-        <h3 class="__title">chainquery</h3>
-        <!--/ <span>Blockchain and Applications</span> /-->
+        <h3 class="ecosystem__submodule__title">chainquery</h3>
 
         <div class="ecosystem__submodule__description">
-          <strong>chainquery</strong> parses and syncs LBRY blockchain data into structured SQL<br/>
-          <strong><a href="https://github.com/lbryio/chainquery" title="chainquery source code">→ Source code</a></strong>
+          <h4 class="ecosystem__submodule__description__title">Overview</h4>
+          <p>The model of Chainquery at its foundation consist of the fundamental data types found in the block chain. This information is then expounded on with additional columns and tables that make querying the data much easier.</p>
+
+          <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
+          <p class="__connection-details"></p>
+
+          <h4 class="ecosystem__submodule__description__title">Source</h4>
+          <ul>
+            <li><a href="https://github.com/lbryio/chainquery" title="chainquery source code">https://github.com/lbryio/chainquery</a></li>
+          </ul>
         </div>
       </div>
 
       <div class="ecosystem__submodule wallet" v-on:click="openSubmodule('wallet')">
-        <h3 class="__title">wallet server</h3>
-        <!--/ <span>Blockchain and Data Network</span> /-->
+        <h3 class="ecosystem__submodule__title">wallet server</h3>
 
         <div class="ecosystem__submodule__description">
-          <strong>lbry-app</strong> is a browser and wallet for LBRY<br/>
-          <strong><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">→ Source code</a></strong>
+          <h4 class="ecosystem__submodule__description__title">Overview</h4>
+          <p>The LBRY app is a graphical browser for the decentralized content marketplace provided by the <a href="https://lbry.io" title="">LBRY</a> protocol. It is essentially the <a href="https://github.com/lbryio/lbry" title="">lbry daemon</a> bundled with an UI using <a href="http://electron.atom.io" title="">Electron</a>.</p>
+
+          <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
+          <p class="__connection-details"></p>
+
+          <h4 class="ecosystem__submodule__description__title">Source</h4>
+          <ul>
+            <li><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">https://github.com/lbryio/lbry-app</a></li>
+          </ul>
         </div>
       </div>
     </aside>
@@ -195,22 +209,36 @@
 
     <aside class="ecosystem__submodules">
       <div class="ecosystem__submodule lighthouse" v-on:click="openSubmodule('lighthouse')">
-        <h3 class="__title">lighthouse</h3>
-        <!--/ <span>Blockchain and Applications</span> /-->
+        <h3 class="ecosystem__submodule__title">lighthouse</h3>
 
         <div class="ecosystem__submodule__description">
-          <strong>lighthouse</strong> is a lightning fast search for the LBRY blockchain<br/>
-          <strong><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">→ Source code</a></strong>
+          <h4 class="ecosystem__submodule__description__title">Overview</h4>
+          <p>Lighthouse is a lightning-fast advanced search engine API for publications on the lbrycrd with autocomplete capabilities.</p>
+
+          <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
+          <p class="__connection-details"></p>
+
+          <h4 class="ecosystem__submodule__description__title">Source</h4>
+          <ul>
+            <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">https://github.com/lbryio/lighthouse</a></li>
+          </ul>
         </div>
       </div>
 
       <div class="ecosystem__submodule reflector" v-on:click="openSubmodule('reflector')">
-        <h3 class="__title">reflector</h3>
-        <!--/ <span>Data Network</span> /-->
+        <h3 class="ecosystem__submodule__title">reflector</h3>
 
         <div class="ecosystem__submodule__description">
-          <strong>reflector</strong> accepts LBRY content for re/hosting<br/>
-          <strong><a href="https://github.com/lbryio/reflector.go" title="reflector source code">→ Source code</a></strong>
+          <h4 class="ecosystem__submodule__description__title">Overview</h4>
+          <p>A reflector cluster to accept LBRY content for hosting en masse, rehost the content, and make money on data fees (TODO). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.</p>
+
+          <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
+          <p class="__connection-details"></p>
+
+          <h4 class="ecosystem__submodule__description__title">Source</h4>
+          <ul>
+            <li><a href="https://github.com/lbryio/reflector.go" title="reflector source code">https://github.com/lbryio/reflector.go</a></li>
+          </ul>
         </div>
       </div>
     </aside>
@@ -254,31 +282,92 @@
             break;
         }
       },
+
       openSubmodule (ecosystemComponentClassName) {
         if (!document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("on")) return; // do not activate unless submodule is `.on`
 
-        resetClasses();
+        document.querySelectorAll(".ecosystem__submodule").forEach(n => {
+          n.classList.remove("active");
+          n.classList.remove("on");
+        });
+
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
 
         switch (true) {
           case (ecosystemComponentClassName === "chainquery"):
+            setSubmoduleConnectionTitle(ecosystemComponentClassName);
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("green")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of LBRY.
+              `;
+            }
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
+              `;
+            }
+
             document.getElementsByClassName("ecosystem")[0].className += " expand-left";
-            document.getElementsByClassName("chainquery")[0].className += " active";
+            document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
             break;
+
+
 
           case (ecosystemComponentClassName === "wallet"):
+            setSubmoduleConnectionTitle(ecosystemComponentClassName);
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("blue")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY data network.
+              `;
+            }
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
+              `;
+            }
+
             document.getElementsByClassName("ecosystem")[0].className += " expand-left";
-            document.getElementsByClassName("wallet")[0].className += " active";
+            document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
             break;
+
+
 
           case (ecosystemComponentClassName === "lighthouse"):
+            setSubmoduleConnectionTitle(ecosystemComponentClassName);
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("green")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of LBRY.
+              `;
+            }
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
+              `;
+            }
+
             document.getElementsByClassName("ecosystem")[0].className += " expand-right";
-            document.getElementsByClassName("lighthouse")[0].className += " active";
+            document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
             break;
 
+
+
           case (ecosystemComponentClassName === "reflector"):
+            setSubmoduleConnectionTitle(ecosystemComponentClassName);
+
+            if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("blue")) {
+              document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
+                <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY data network.
+              `;
+            }
+
             document.getElementsByClassName("ecosystem")[0].className += " expand-right";
-            document.getElementsByClassName("reflector")[0].className += " active";
+            document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
             break;
 
 
@@ -287,6 +376,7 @@
             break;
         }
       },
+
       close () {
         resetClasses();
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
@@ -295,6 +385,20 @@
   }
 
 
+
+  function setSubmoduleConnectionTitle(submoduleClass) {
+    if (document.getElementsByClassName(submoduleClass)[0].classList.contains("blue")) {
+      document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Data Network";
+    }
+
+    if (document.getElementsByClassName(submoduleClass)[0].classList.contains("green")) {
+      document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Applications";
+    }
+
+    if (document.getElementsByClassName(submoduleClass)[0].classList.contains("red")) {
+      document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Blockchain";
+    }
+  }
 
   function resetClasses() {
     document.querySelectorAll(".ecosystem__submodule").forEach(n => {
@@ -349,9 +453,6 @@
   }
 
 
-
-  .ecosystem__modules {
-  }
 
   .ecosystem__module {
     position: relative;
@@ -485,21 +586,13 @@
     &.lbrycrd {
       margin-bottom: 1rem;
 
-      &:not(.active) {
-        &::before {
-          background-color: $red;
-        }
+      &:not(.active)::before {
+        background-color: $red;
       }
 
-      &.active {
-        &::before {
-          border: 2px solid $red;
-        }
+      &.active::before {
+        border: 2px solid $red;
       }
-    }
-
-    &.lbry,
-    &.applications {
     }
 
     &.lbry {
@@ -526,10 +619,8 @@
         }
       }
 
-      &.active {
-        &::before {
-          border: 2px solid $blue;
-        }
+      &.active::before {
+        border: 2px solid $blue;
       }
     }
 
@@ -554,10 +645,8 @@
         }
       }
 
-      &.active {
-        &::before {
-          border: 2px solid $green;
-        }
+      &.active::before {
+        border: 2px solid $green;
       }
     }
   }
@@ -604,39 +693,28 @@
     }
 
     &.active {
-      width: 100%; height: 100%;
+      width: 100%; height: 100%; max-height: 383px;
+
       border-style: solid;
+      overflow-y: auto;
+      padding: 2rem;
+
+      .ecosystem__submodule__title {
+        margin-bottom: 1rem;
+      }
     }
 
     /*
-    &:not(:hover) {
-      .ecosystem__submodule__description {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-    */
-
-    h3 {
-      text-align: center;
-    }
-
     &.chainquery,
     &.wallet {
-      .ecosystem__submodule__description {
-        left: -2px;
-      }
     }
 
     &.lighthouse,
     &.reflector {
-      .ecosystem__submodule__description {
-        right: -2px;
-      }
     }
+    */
 
     &:not(.blue):not(.green):not(.red) {
-      // border-style: dashed;
       border-color: rgba($gray, 0.3);
     }
 
@@ -649,29 +727,33 @@
     }
 
     &.blue {
-      // background-color: rgba($blue, 0.3);
+      background-color: rgba($blue, 0.025);
       border-color: $blue;
     }
 
     &.green {
-      // background-color: rgba($green, 0.3);
+      background-color: rgba($green, 0.025);
       border-color: $green;
     }
 
     &.red {
-      // background-color: rgba($red, 0.3);
+      background-color: rgba($red, 0.025);
       border-color: $red;
     }
   }
 
+  .ecosystem__submodule__title {
+    text-align: center;
+  }
+
   .ecosystem__submodule__description {
-    // background-color: $white;
-    // border: 2px solid rgba($gray, 0.3);
-    // color: $black;
-    // padding: 1rem;
-    // position: absolute;
-    // transition: all 0.2s;
-    // width: 350px;
+    margin-bottom: 2rem;
+  }
+
+  .ecosystem__submodule__description__title {
+    color: rgba($black, 0.3);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
 
 
