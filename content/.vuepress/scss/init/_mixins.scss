@@ -39,15 +39,34 @@
   white-space: nowrap;
 }
 
-@mixin selection($background, $foreground) {
-  ::selection {
-    background-color: $background;
-    color: $foreground;
+@mixin selection($backgroundColor, $textColor) {
+  &::selection {
+    background-color: $backgroundColor;
+    color: $textColor;
+    text-shadow: none;
   }
 
-  ::-moz-selection {
-    background-color: $background;
-    color: $foreground;
+  &::-moz-selection {
+    background-color: $backgroundColor;
+    color: $textColor;
+    text-shadow: none;
+  }
+}
+
+@mixin underline($textColor: #000, $whitespaceColor: #fff) {
+  @include selection($textColor, $whitespaceColor);
+
+  background-image: linear-gradient($whitespaceColor, $whitespaceColor), linear-gradient($whitespaceColor, $whitespaceColor), linear-gradient($textColor, $textColor);
+  background-position: 0 88%, 100% 88%, 0 88%;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-size: 0.05rem 1px, 0.05rem 1px, 1px 1px;
+  box-decoration-break: clone;
+  display: inline;
+  text-decoration: none;
+  text-shadow: 0.03rem 0 $whitespaceColor, -0.03rem 0 $whitespaceColor, 0 0.03rem $whitespaceColor, 0 -0.03rem $whitespaceColor, 0.06rem 0 $whitespaceColor, -0.06rem 0 $whitespaceColor, 0.09rem 0 $whitespaceColor, -0.09rem 0 $whitespaceColor, 0.12rem 0 $whitespaceColor, -0.12rem 0 $whitespaceColor, 0.15rem 0 $whitespaceColor, -0.15rem 0 $whitespaceColor;
+
+  @-moz-document url-prefix() {
+    background-position: 0 90%, 100% 90%, 0 90%;
   }
 }
 

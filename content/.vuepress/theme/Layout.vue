@@ -242,7 +242,7 @@
           All information should be considered incomplete and possibly incorrect and things may not work as expected.
         </p>
 
-        <br/>
+        <br/><br/>
 
         <p>
           Please do not share or link this site publicly while this message is here. This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank" rel="noopener noreferrer">contribute to it on Github</a>.
