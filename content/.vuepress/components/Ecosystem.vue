@@ -15,6 +15,14 @@
           <ul>
             <li><a href="https://github.com/lbryio/chainquery" title="chainquery source code">https://github.com/lbryio/chainquery</a></li>
           </ul>
+
+          <ul class="__parents">
+            <li class="__parent green" v-on:click="open('applications')">Applications</li>
+            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+          </ul>
+
+          <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
 
@@ -32,6 +40,8 @@
           <ul>
             <li><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">https://github.com/lbryio/lbry-app</a></li>
           </ul>
+
+          <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
     </aside>
@@ -222,6 +232,8 @@
           <ul>
             <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">https://github.com/lbryio/lighthouse</a></li>
           </ul>
+
+          <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
 
@@ -239,6 +251,8 @@
           <ul>
             <li><a href="https://github.com/lbryio/reflector.go" title="reflector source code">https://github.com/lbryio/reflector.go</a></li>
           </ul>
+
+          <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
     </aside>
@@ -250,6 +264,7 @@
     methods: {
       open (ecosystemComponentClassName) {
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
+        document.querySelectorAll(".__parent").forEach(n => n.classList.remove("active"));
         document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
 
         switch (true) {
@@ -389,14 +404,17 @@
   function setSubmoduleConnectionTitle(submoduleClass) {
     if (document.getElementsByClassName(submoduleClass)[0].classList.contains("blue")) {
       document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Data Network";
+      document.querySelector(`.${submoduleClass} .__parent.blue`).className += " active";
     }
 
     if (document.getElementsByClassName(submoduleClass)[0].classList.contains("green")) {
       document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Applications";
+      document.querySelector(`.${submoduleClass} .__parent.green`).className += " active";
     }
 
     if (document.getElementsByClassName(submoduleClass)[0].classList.contains("red")) {
       document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Blockchain";
+      document.querySelector(`.${submoduleClass} .__parent.red`).className += " active";
     }
   }
 
@@ -687,6 +705,10 @@
       border-radius: 50%;
       border-style: dashed;
 
+      .ecosystem__submodule__title {
+        text-align: center;
+      }
+
       .ecosystem__submodule__description {
         display: none;
       }
@@ -703,16 +725,6 @@
         margin-bottom: 1rem;
       }
     }
-
-    /*
-    &.chainquery,
-    &.wallet {
-    }
-
-    &.lighthouse,
-    &.reflector {
-    }
-    */
 
     &:not(.blue):not(.green):not(.red) {
       border-color: rgba($gray, 0.3);
@@ -743,11 +755,16 @@
   }
 
   .ecosystem__submodule__title {
-    text-align: center;
+    font-size: 1.15rem;
+    line-height: 1.33;
   }
 
   .ecosystem__submodule__description {
     margin-bottom: 2rem;
+
+    .__close {
+      top: 1.35rem;
+    }
   }
 
   .ecosystem__submodule__description__title {
@@ -757,6 +774,49 @@
   }
 
 
+
+  .__parents {
+    top: 2rem; right: 4rem;
+
+    font-size: 1.15rem;
+    line-height: 1.33;
+    list-style-type: none;
+    padding-right: 1rem;
+    position: absolute;
+    z-index: 1;
+
+    &::before,
+    &::after {
+      position: absolute;
+    }
+
+    &::before {
+      top: 0.25rem; left: -3.2rem;
+
+      color: rgba($black, 0.3);
+      content: "back to";
+      font-size: 0.8rem;
+      opacity: 0.3;
+    }
+
+    &::after {
+      width: 1px; height: 100%;
+      top: 0; right: 0;
+
+      background-color: rgba($black, 0.3);
+      content: "";
+    }
+  }
+
+  .__parent {
+    &:not(.active) {
+      display: none;
+    }
+
+    &.active {
+      cursor: pointer;
+    }
+  }
 
   .__close {
     cursor: pointer;
