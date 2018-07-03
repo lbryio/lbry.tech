@@ -41,6 +41,12 @@
             <li><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">https://github.com/lbryio/lbry-app</a></li>
           </ul>
 
+          <ul class="__parents">
+            <li class="__parent green" v-on:click="open('applications')">Applications</li>
+            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+          </ul>
+
           <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
@@ -233,6 +239,12 @@
             <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">https://github.com/lbryio/lighthouse</a></li>
           </ul>
 
+          <ul class="__parents">
+            <li class="__parent green" v-on:click="open('applications')">Applications</li>
+            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+          </ul>
+
           <span class="__close" v-on:click="close()">&times;</span>
         </div>
       </div>
@@ -250,6 +262,12 @@
           <h4 class="ecosystem__submodule__description__title">Source</h4>
           <ul>
             <li><a href="https://github.com/lbryio/reflector.go" title="reflector source code">https://github.com/lbryio/reflector.go</a></li>
+          </ul>
+
+          <ul class="__parents">
+            <li class="__parent green" v-on:click="open('applications')">Applications</li>
+            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
           </ul>
 
           <span class="__close" v-on:click="close()">&times;</span>
