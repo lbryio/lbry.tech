@@ -1,8 +1,8 @@
 <template>
   <section class="ecosystem">
     <aside class="ecosystem__submodules">
-      <div class="ecosystem__submodule chainquery" v-on:click="openSubmodule('chainquery')">
-        <h3 class="ecosystem__submodule__title">chainquery</h3>
+      <div class="ecosystem__submodule chainquery" @click.self="openSubmodule('chainquery')">
+        <h3 class="ecosystem__submodule__title" @click.self="openSubmodule('chainquery')">chainquery</h3>
 
         <div class="ecosystem__submodule__description">
           <h4 class="ecosystem__submodule__description__title">Overview</h4>
@@ -17,17 +17,17 @@
           </ul>
 
           <ul class="__parents">
-            <li class="__parent green" v-on:click="open('applications')">Applications</li>
-            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
-            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+            <li class="__parent green" @click="open('applications')">Applications</li>
+            <li class="__parent red" @click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" @click="open('lbry')">Data Network</li>
           </ul>
 
-          <span class="__close" v-on:click="close()">&times;</span>
+          <span class="__close" @click="close()">&times;</span>
         </div>
       </div>
 
-      <div class="ecosystem__submodule wallet" v-on:click="openSubmodule('wallet')">
-        <h3 class="ecosystem__submodule__title">wallet server</h3>
+      <div class="ecosystem__submodule wallet" @click.self="openSubmodule('wallet')">
+        <h3 class="ecosystem__submodule__title" @click.self="openSubmodule('wallet')">wallet server</h3>
 
         <div class="ecosystem__submodule__description">
           <h4 class="ecosystem__submodule__description__title">Overview</h4>
@@ -42,12 +42,12 @@
           </ul>
 
           <ul class="__parents">
-            <li class="__parent green" v-on:click="open('applications')">Applications</li>
-            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
-            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+            <li class="__parent green" @click="open('applications')">Applications</li>
+            <li class="__parent red" @click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" @click="open('lbry')">Data Network</li>
           </ul>
 
-          <span class="__close" v-on:click="close()">&times;</span>
+          <span class="__close" @click="close()">&times;</span>
         </div>
       </div>
     </aside>
@@ -55,14 +55,14 @@
     <section class="ecosystem__modules">
       <div class="ecosystem__module lbrycrd">
         <h2 class="__title">
-          <span v-on:click="open('lbrycrd')">
+          <span @click="open('lbrycrd')">
             Blockchain
             <em>The blockchain is "lbrycrd"</em>
           </span>
 
           <div>
-            <span v-on:click="open('applications')">Applications</span>
-            <span v-on:click="open('lbry')">Data Network</span>
+            <span @click="open('applications')">Applications</span>
+            <span @click="open('lbry')">Data Network</span>
           </div>
         </h2>
 
@@ -99,19 +99,19 @@
           </ul>
         </div>
 
-        <span class="__close" v-on:click="close()">&times;</span>
+        <span class="__close" @click="close()">&times;</span>
       </div>
 
       <div class="ecosystem__module lbry">
         <h2 class="__title">
-          <span v-on:click="open('lbry')">
+          <span @click="open('lbry')">
             Data Network
             <em>The data network is "lbry"</em>
           </span>
 
           <div>
-            <span v-on:click="open('applications')">Applications</span>
-            <span v-on:click="open('lbrycrd')">Blockchain</span>
+            <span @click="open('applications')">Applications</span>
+            <span @click="open('lbrycrd')">Blockchain</span>
           </div>
         </h2>
 
@@ -155,19 +155,19 @@
           </ul>
         </div>
 
-        <span class="__close" v-on:click="close()">&times;</span>
+        <span class="__close" @click="close()">&times;</span>
       </div>
 
       <div class="ecosystem__module applications">
         <h2 class="__title">
-          <span v-on:click="open('applications')">
+          <span @click="open('applications')">
             Applications
             <em>LBRY has a lot of applications</em>
           </span>
 
           <div>
-            <span v-on:click="open('lbrycrd')">Blockchain</span>
-            <span v-on:click="open('lbry')">Data Network</span>
+            <span @click="open('lbrycrd')">Blockchain</span>
+            <span @click="open('lbry')">Data Network</span>
           </div>
         </h2>
 
@@ -219,13 +219,13 @@
           </ul>
         </div>
 
-        <span class="__close" v-on:click="close()">&times;</span>
+        <span class="__close" @click="close()">&times;</span>
       </div>
     </section>
 
     <aside class="ecosystem__submodules">
-      <div class="ecosystem__submodule lighthouse" v-on:click="openSubmodule('lighthouse')">
-        <h3 class="ecosystem__submodule__title">lighthouse</h3>
+      <div class="ecosystem__submodule lighthouse" @click.self="openSubmodule('lighthouse')">
+        <h3 class="ecosystem__submodule__title" @click.self="openSubmodule('lighthouse')">lighthouse</h3>
 
         <div class="ecosystem__submodule__description">
           <h4 class="ecosystem__submodule__description__title">Overview</h4>
@@ -240,17 +240,17 @@
           </ul>
 
           <ul class="__parents">
-            <li class="__parent green" v-on:click="open('applications')">Applications</li>
-            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
-            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+            <li class="__parent green" @click="open('applications')">Applications</li>
+            <li class="__parent red" @click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" @click="open('lbry')">Data Network</li>
           </ul>
 
-          <span class="__close" v-on:click="close()">&times;</span>
+          <span class="__close" @click="close()">&times;</span>
         </div>
       </div>
 
-      <div class="ecosystem__submodule reflector" v-on:click="openSubmodule('reflector')">
-        <h3 class="ecosystem__submodule__title">reflector</h3>
+      <div class="ecosystem__submodule reflector" @click.self="openSubmodule('reflector')">
+        <h3 class="ecosystem__submodule__title" @click.self="openSubmodule('reflector')">reflector</h3>
 
         <div class="ecosystem__submodule__description">
           <h4 class="ecosystem__submodule__description__title">Overview</h4>
@@ -265,12 +265,12 @@
           </ul>
 
           <ul class="__parents">
-            <li class="__parent green" v-on:click="open('applications')">Applications</li>
-            <li class="__parent red" v-on:click="open('lbrycrd')">Blockchain</li>
-            <li class="__parent blue" v-on:click="open('lbry')">Data Network</li>
+            <li class="__parent green" @click="open('applications')">Applications</li>
+            <li class="__parent red" @click="open('lbrycrd')">Blockchain</li>
+            <li class="__parent blue" @click="open('lbry')">Data Network</li>
           </ul>
 
-          <span class="__close" v-on:click="close()">&times;</span>
+          <span class="__close" @click="close()">&times;</span>
         </div>
       </div>
     </aside>
@@ -280,7 +280,7 @@
 <script>
   export default {
     methods: {
-      open (ecosystemComponentClassName) {
+      open(ecosystemComponentClassName) {
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
         document.querySelectorAll(".__parent").forEach(n => n.classList.remove("active"));
         document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
@@ -316,7 +316,7 @@
         }
       },
 
-      openSubmodule (ecosystemComponentClassName) {
+      openSubmodule(ecosystemComponentClassName) {
         if (!document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("on")) return; // do not activate unless submodule is `.on`
 
         document.querySelectorAll(".ecosystem__submodule").forEach(n => {
@@ -410,7 +410,7 @@
         }
       },
 
-      close () {
+      close() {
         resetClasses();
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
       }
@@ -445,8 +445,10 @@
       n.classList.remove("red");
     });
 
-    document.getElementsByClassName("ecosystem")[0].classList.remove("expand-left");
-    document.getElementsByClassName("ecosystem")[0].classList.remove("expand-right");
+    document.querySelectorAll(".ecosystem").forEach(n => {
+      n.classList.remove("expand-left");
+      n.classList.remove("expand-right");
+    });
   }
 </script>
 
