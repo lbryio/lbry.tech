@@ -6,7 +6,7 @@
 
         <div class="ecosystem__submodule__description">
           <h4 class="ecosystem__submodule__description__title">Overview</h4>
-          <p>The model of Chainquery at its foundation consist of the fundamental data types found in the block chain. This information is then expounded on with additional columns and tables that make querying the data much easier.</p>
+          <p>The model of Chainquery at its foundation consists of the fundamental data types found in the blockchain. This information is then expounded on with additional columns and tables that make querying the data much easier.</p>
 
           <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
           <p class="__connection-details"></p>
@@ -281,32 +281,37 @@
   export default {
     methods: {
       open(ecosystemComponentClassName) {
-        document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
-        document.querySelectorAll(".__parent").forEach(n => n.classList.remove("active"));
-        document.getElementsByClassName(ecosystemComponentClassName)[0].classList.add("active");
-
         switch (true) {
           case (ecosystemComponentClassName === "lbrycrd"):
-            resetClasses();
+            resetClassesAndStorage();
+            document.getElementsByClassName("lbrycrd")[0].classList.add("active");
             document.getElementsByClassName("chainquery")[0].className += " on red";
             document.getElementsByClassName("lighthouse")[0].className += " on red";
             document.getElementsByClassName("wallet")[0].className += " on red";
+
+            localStorage.setItem("LBRY Ecosystem Overview • lbrycrd is open", true);
             break;
 
 
 
           case (ecosystemComponentClassName === "lbry"):
-            resetClasses();
+            resetClassesAndStorage();
+            document.getElementsByClassName("lbry")[0].classList.add("active");
             document.getElementsByClassName("reflector")[0].className += " on blue";
             document.getElementsByClassName("wallet")[0].className += " on blue";
+
+            localStorage.setItem("LBRY Ecosystem Overview • lbry is open", true);
             break;
 
 
 
           case (ecosystemComponentClassName === "applications"):
-            resetClasses();
+            resetClassesAndStorage();
+            document.getElementsByClassName("applications")[0].classList.add("active");
             document.getElementsByClassName("chainquery")[0].className += " on green";
             document.getElementsByClassName("lighthouse")[0].className += " on green";
+
+            localStorage.setItem("LBRY Ecosystem Overview • applications is open", true);
             break;
 
 
@@ -323,6 +328,11 @@
           n.classList.remove("active");
           n.classList.remove("on");
         });
+
+        localStorage.removeItem("LBRY Ecosystem Overview • chainquery is open");
+        localStorage.removeItem("LBRY Ecosystem Overview • wallet is open");
+        localStorage.removeItem("LBRY Ecosystem Overview • lighthouse is open");
+        localStorage.removeItem("LBRY Ecosystem Overview • reflector is open");
 
         document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
 
@@ -344,6 +354,8 @@
 
             document.getElementsByClassName("ecosystem")[0].className += " expand-left";
             document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
+
+            localStorage.setItem("LBRY Ecosystem Overview • chainquery is open", true);
             break;
 
 
@@ -365,6 +377,8 @@
 
             document.getElementsByClassName("ecosystem")[0].className += " expand-left";
             document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
+
+            localStorage.setItem("LBRY Ecosystem Overview • wallet is open", true); // uh-oh
             break;
 
 
@@ -386,6 +400,8 @@
 
             document.getElementsByClassName("ecosystem")[0].className += " expand-right";
             document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
+
+            localStorage.setItem("LBRY Ecosystem Overview • lighthouse is open", true);
             break;
 
 
@@ -401,6 +417,8 @@
 
             document.getElementsByClassName("ecosystem")[0].className += " expand-right";
             document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
+
+            localStorage.setItem("LBRY Ecosystem Overview • reflector is open", true);
             break;
 
 
@@ -411,8 +429,36 @@
       },
 
       close() {
-        resetClasses();
-        document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
+        resetClassesAndStorage();
+      }
+    },
+
+    mounted() {
+      const mainModules = [
+        { applications: localStorage.getItem("LBRY Ecosystem Overview • applications is open") },
+        { lbry: localStorage.getItem("LBRY Ecosystem Overview • lbry is open") },
+        { lbrycrd: localStorage.getItem("LBRY Ecosystem Overview • lbrycrd is open") }
+      ];
+
+      const subModules = [
+        { chainquery: localStorage.getItem("LBRY Ecosystem Overview • chainquery is open") },
+        { lighthouse: localStorage.getItem("LBRY Ecosystem Overview • lighthouse is open") },
+        { reflector: localStorage.getItem("LBRY Ecosystem Overview • reflector is open") },
+        { wallet: localStorage.getItem("LBRY Ecosystem Overview • wallet is open") }
+      ];
+
+      for (const module of mainModules) {
+        if (
+          module[Object.keys(module)] === "true" &&
+          document.querySelector(`.ecosystem__module.${Object.keys(module)} h2 span`)
+        ) document.querySelector(`.ecosystem__module.${Object.keys(module)} h2 span`).click();
+      }
+
+      for (const subModule of subModules) {
+        if (
+          subModule[Object.keys(subModule)] === "true" &&
+          document.querySelector(`.ecosystem__submodule.${Object.keys(subModule)}`)
+        ) document.querySelector(`.ecosystem__submodule.${Object.keys(subModule)}`).click();
       }
     }
   }
@@ -436,7 +482,7 @@
     }
   }
 
-  function resetClasses() {
+  function resetClassesAndStorage() {
     document.querySelectorAll(".ecosystem__submodule").forEach(n => {
       n.classList.remove("active");
       n.classList.remove("blue");
@@ -445,10 +491,23 @@
       n.classList.remove("red");
     });
 
+    document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
+
     document.querySelectorAll(".ecosystem").forEach(n => {
       n.classList.remove("expand-left");
       n.classList.remove("expand-right");
     });
+
+    document.querySelectorAll(".__parent").forEach(n => n.classList.remove("active"));
+
+    // Clear localStorage
+    localStorage.removeItem("LBRY Ecosystem Overview • lbrycrd is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • lbry is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • applications is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • chainquery is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • wallet is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • lighthouse is open");
+    localStorage.removeItem("LBRY Ecosystem Overview • reflector is open");
   }
 </script>
 
@@ -616,14 +675,39 @@
 
       .__close {
         top: 2.35rem;
+        z-index: 3;
+      }
+    }
+
+
+
+    &.lbrycrd,
+    &.lbry {
+      margin-bottom: 1rem;
+    }
+
+    &.lbry,
+    &.applications {
+      &:not(.active) {
+        h2 {
+          margin-bottom: 0.5rem;
+
+          &::after {
+            bottom: 1rem; left: 0;
+
+            font-size: 0.5rem;
+            letter-spacing: 0.1rem;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+          }
+        }
       }
     }
 
 
 
     &.lbrycrd {
-      margin-bottom: 1rem;
-
       &:not(.active)::before {
         background-color: $red;
       }
@@ -634,26 +718,13 @@
     }
 
     &.lbry {
-      margin-bottom: 1rem;
-
       &:not(.active) {
         &::before {
           background-color: $blue;
         }
 
-        h2 {
-          margin-bottom: 0.5rem;
-
-          &::after {
-            bottom: 1rem; left: 0;
-
-            content: "◼︎◼︎";
-            font-size: 0.5rem;
-            letter-spacing: 0.1rem;
-            position: absolute;
-            width: 100%;
-            z-index: -1;
-          }
+        h2::after {
+          content: "◼︎◼︎";
         }
       }
 
@@ -668,18 +739,8 @@
           background-color: $green;
         }
 
-        h2 {
-          margin-bottom: 0.5rem;
-
-          &::after {
-            bottom: 1rem; left: 0;
-
-            content: "◼︎◼︎◼︎◼︎◼︎";
-            font-size: 0.5rem;
-            letter-spacing: 0.1rem;
-            position: absolute;
-            width: 100%;
-          }
+        h2::after {
+          content: "◼︎◼︎◼︎◼︎◼︎";
         }
       }
 
@@ -812,11 +873,11 @@
 
     &::before {
       @include font-serif;
-      top: 0.2rem; left: -3.8rem;
+      top: 0.3rem; left: -3.4rem;
 
       color: rgba($black, 0.3);
       content: "back to";
-      font-size: 80%;
+      font-size: 0.8rem;
       font-style: italic;
       font-weight: 700;
     }
@@ -831,6 +892,8 @@
   }
 
   .__parent {
+    font-weight: 700;
+
     &:not(.active) {
       display: none;
     }
