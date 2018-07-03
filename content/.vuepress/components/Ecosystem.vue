@@ -811,16 +811,18 @@
     }
 
     &::before {
-      top: 0.25rem; left: -3.2rem;
+      @include font-serif;
+      top: 0.2rem; left: -3.8rem;
 
       color: rgba($black, 0.3);
       content: "back to";
-      font-size: 0.8rem;
-      opacity: 0.3;
+      font-size: 80%;
+      font-style: italic;
+      font-weight: 700;
     }
 
     &::after {
-      width: 1px; height: 100%;
+      width: 2px; height: 100%;
       top: 0; right: 0;
 
       background-color: rgba($black, 0.3);
