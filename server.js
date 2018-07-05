@@ -1,218 +1,179 @@
-// server.js
+"use strict"; require("dotenv").config();
 
-// env variables
-require('dotenv').config();
-// fs
-var fs = require('fs');
-// Async
-var async = require("async");
-// Express etc
-var sslRedirect = require('heroku-ssl-redirect');
-var express = require('express');
-var serveStatic = require('serve-static');
-var request = require('request');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-// Cron
-var CronJob = require('cron').CronJob;
-// Github API
-var octokit = require('@octokit/rest')();
-if(typeof process.env.GITHUB_OAUTH_TOKEN != 'undefined') {
+
+
+//  P A C K A G E S
+
+const async = require("async");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const CronJob = require("cron").CronJob;
+const express = require("express");
+const fs = require("graceful-fs");
+const octokit = require("@octokit/rest")();
+const redis = require("redis");
+const request = require("request");
+const serveStatic = require("serve-static");
+const sslRedirect = require("heroku-ssl-redirect");
+
+
+
+//  V A R I A B L E S
+
+const app = express();
+const jsonParser = bodyParser.json();
+const port = process.env.PORT || 8080;
+const redisClient = redis.createClient(process.env.REDISCLOUD_URL);
+const textParser = bodyParser.text({ limit: "256kb" });
+
+let Slack;
+let slack;
+
+if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
   octokit.authenticate({
-    type: 'oauth',
+    type: "oauth",
     token: process.env.GITHUB_OAUTH_TOKEN
   });
 }
-// Redis
-var redis = require("redis"),
-redisClient = redis.createClient(process.env.REDISCLOUD_URL);
-// Slack
-if(typeof process.env.SLACK_WEBHOOK_URL != 'undefined') {
-  var Slack = require('slack-node');
-  var slack = new Slack();
+
+if (typeof process.env.SLACK_WEBHOOK_URL !== "undefined") {
+  Slack = require("slack-node");
+  slack = new Slack();
   slack.setWebhook(process.env.SLACK_WEBHOOK_URL);
 }
 
-app = express();
 
-// enable ssl redirect
+
+//  P R O G R A M
+
+app.listen(port);
 app.use(sslRedirect());
-
-app.use(serveStatic(__dirname + "/content/.vuepress/dist"));
-
+app.use(serveStatic(`${__dirname}/content/.vuepress/dist`));
 app.use(cors());
 
-var textParser = bodyParser.text({
-  limit: '256kb'
+
+
+app.get("/github-feed", (req, res) => {
+  redisClient.zrevrange("events", 0, 9, (err, reply) => {
+    const events = [];
+
+    reply.forEach(item => events.push(JSON.parse(item)));
+    res.json(events);
+  });
 });
 
-var jsonParser = bodyParser.json();
+app.get("/*", (req, res) => {
+  if (fs.existsSync(`${__dirname}/content/.vuepress/dist${req.path}.html`)) {
+    res.redirect(`${req.path}.html`);
+  } else {
+    res.status(404);
+    res.send("Not found");
+  }
+});
 
-app.post('/forward', jsonParser, function(req, res) {
 
-  var allowedMethods = ["wallet_send", "resolve", "publish"];
 
-  if(typeof req.body.method != "undefined") {
+app.post("/forward", jsonParser, (req, res) => {
+  const allowedMethods = ["wallet_send", "resolve", "publish"];
 
-    if(allowedMethods.includes(req.body.method)) {
+  if (typeof req.body.method === "undefined") return;
 
-      // We should whitelist the query parameters here
+  if (allowedMethods.includes(req.body.method)) {
+    if (req.body.method === "wallet_send") {
+      req.body.amount = 0.01; // Hardcode the wallet_send amount
 
-      if(req.body.method == "wallet_send") {
+      const allowedClaims = [ // Whitelist claim ids
+        "fbdcd44a97810522d23d5f1335b8ca04be9d776c",
+        "de7f7fa33e8d879b2bae7238d2bdf827a39f9301",
+        "5b7c7a202201033d99e1be2930d290c127c0f4fe",
+        "a1372cf5523885f5923237bfe522f02f5f054362"
+      ];
 
-        // Hardcode the wallet_send amount to be always 0.01 always
-        req.body.amount = 0.01;
-
-        // Whitelist claim ids
-        var allowedClaims = ["fbdcd44a97810522d23d5f1335b8ca04be9d776c", "de7f7fa33e8d879b2bae7238d2bdf827a39f9301", "5b7c7a202201033d99e1be2930d290c127c0f4fe", "a1372cf5523885f5923237bfe522f02f5f054362"];
-
-        if(!allowedClaims.includes(req.body.claim_id)) {
-          res.json({});
-        }
-
-      }
-
-      if(req.body.method == "publish") {
-
-        // Hardcode the publish amount to be always 0.001 always
-        req.body.bid = 0.001;
-
-        // Fix the internal image path in daemon
-        req.body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + req.body.file_path;
-
-      }
-
-      req.body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
-
-      request({
-        url: "http://daemon.lbry.tech",
-        qs: req.body
-      }, function(error, response, body) {
-        // Should we filter the body parameters before forwarding to user?
-        body = JSON.parse(body);
-        if(typeof body.error != "undefined") {
-          logSlackError('ERROR: Got error from daemon: ' + JSON.stringify(body.error));
-        }
-        res.json(body);
-      });
-
+      if (!allowedClaims.includes(req.body.claim_id)) res.json({});
     }
 
-  }
+    if (req.body.method === "publish") {
+      req.body.bid = 0.001; // Hardcode the publish amount
 
-});
+      // Fix the internal image path in daemon
+      req.body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + req.body.file_path;
+    }
 
-app.get('/github-feed', function(req, res) {
+    req.body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
 
-  redisClient.zrevrange('events', 0, 9, function(err, reply) {
-
-    var events = [];
-
-    reply.forEach(function(item) {
-      events.push(JSON.parse(item));
+    request({
+      url: "http://daemon.lbry.tech",
+      qs: req.body
+    }, (error, response, body) => {
+      body = JSON.parse(body);
+      if (typeof body.error !== "undefined") logSlackError("ERROR: Got error from daemon:\n", "```" + JSON.stringify(body.error) + "```");
+      res.json(body);
     });
-
-    res.json(events);
-
-  });
-
+  }
 });
 
-app.post('/upload-image', textParser, function(req, res) {
-
+app.post("/upload-image", textParser, (req, res) => {
   request({
     method: "PUT",
     url: "http://daemon.lbry.tech/images.php",
     headers: {
-      'Content-Type': 'text/plain'
+      "Content-Type": "text/plain"
     },
     qs: {
       access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
     },
     body: req.body,
-  }, function(error, response, body) {
+  }, (error, response, body) => {
     body = JSON.parse(body);
     res.json(body);
   });
-
 });
 
-app.get('/*', function(req, res) {
 
-  if(fs.existsSync(__dirname + "/content/.vuepress/dist" + req.path + ".html")) {
-    res.redirect(req.path + ".html");
-  } else {
-    res.status(404);
-    res.send('Not found');
-  }
 
-});
+//  H E L P E R S
 
-var port = process.env.PORT || 8080;
-app.listen(port);
-
-logSlackError('Server started at port ' + port);
+logSlackError(`Server started at port \`${port}\``);
 
 function updateGithubFeed() {
-
   octokit.activity.getEventsForOrg({
-    org: 'lbryio',
+    org: "lbryio",
     per_page: 20,
     page: 1
-  }).then(function({data}) {
+  }).then(({ data }) => {
+    async.eachSeries(data, (item, callback) => {
+      const eventString = JSON.stringify(item);
 
-    async.eachSeries(data, function(item, callback) {
-
-      var eventString = JSON.stringify(item);
-
-      redisClient.zrank('events', eventString, function(err, reply) {
-
-        if(reply == null) {
-
-          redisClient.zadd('events', item.id, eventString, callback);
-
-        } else {
-
-          callback();
-
-        }
-
+      redisClient.zrank("events", eventString, (err, reply) => {
+        if (reply === null) redisClient.zadd("events", item.id, eventString, callback);
+        else callback();
       });
-
-    }, function() {
-
+    }, () => {
       // Keep the latest 50 events
-      redisClient.zremrangebyrank('events', 0, -51);
-
-      console.log('Updated Github feed');
-
+      redisClient.zremrangebyrank("events", 0, -51);
     });
-
-  }).catch(function(err) {
-
-    logSlackError('ERROR: Couldnt update Github feed: ' + JSON.stringify(err));
-
+  }).catch(err => {
+    logSlackError("ERROR: Unable to update Github feed:\n", "```" + JSON.stringify(err) + "```");
   });
-
 }
 
 function logSlackError(text) {
+  if (typeof slack === "undefined") return;
 
-  if(typeof slack != 'undefined') {
-
-    slack.webhook({
-      channel: 'dottech-errors',
-      username: 'lbrytech-bot',
-      text: text
-    }, function(err, response) {
-
-    });
-
-  }
-
+  slack.webhook({
+    channel: "dottech-errors",
+    username: "lbrytech-bot",
+    text: text
+  }, (err, response) => { // eslint-disable-line
+    // do nothing?
+  });
 }
 
 // Update Github feed every minute
-new CronJob("0 * * * * *", updateGithubFeed, null, true, 'America/Los_Angeles');
+new CronJob("0 * * * * *", updateGithubFeed, null, true, "America/Los_Angeles");
 
-module.exports = app;
+
+
+//  E X P O R T
+
+module.exports = exports = app;
