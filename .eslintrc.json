@@ -5,8 +5,7 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:vue/strongly-recommended"
+    "eslint:recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2017,

@@ -32,6 +32,6 @@ Learn more about how LBRY works from this ecosystem overview.
 
 ## Keep Diving
 
-- Explore live metadata and add your own blockchain entry on [the Tour](/tour.html).
+- Explore live metadata and add your own blockchain entry on [the Tour](/tour/).
 - Read the whitepaper, the API specification and other documentation in [Resources](/resources/).
 - Learn how to [contribute to LBRY](/contribute/) or [build your own application](/build/).
