@@ -110,15 +110,15 @@
     data () {
       const images = [
         {
-          src: "./carlsagan2.jpg",
+          src: "../carlsagan2.jpg",
           alt: "Carl Sagan"
         },
         {
-          src: "./doge-meme.jpg",
+          src: "../doge-meme.jpg",
           alt: "Doge"
         },
         {
-          src: "lbry-green.png",
+          src: "../lbry-green.png",
           alt: "LBRY Logo With Green Background"
         }
       ];

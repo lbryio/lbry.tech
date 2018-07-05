@@ -141,6 +141,9 @@
           case "push":
             return `https://github.com/${event.repo.name}/tree/${event.payload.ref.replace("refs/heads/", "")}`;
             break;
+
+          default:
+            break;
         }
       }
     },

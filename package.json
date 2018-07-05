@@ -1,8 +1,8 @@
 {
   "name": "lbry.tech",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "",
+  "description": "Documentation for the LBRY protocol and associated projects",
+  "author": "LBRY Team",
   "private": true,
   "scripts": {
     "dev": "./node_modules/vuepress/bin/vuepress.js dev content",
@@ -47,6 +47,8 @@
     "chai-cheerio": "^1.0.0",
     "chai-http": "^4.0.0",
     "cheerio": "^1.0.0-rc.2",
+    "eslint": "^5.0.1",
+    "eslint-plugin-vue": "^4.5.0",
     "mocha": "^5.2.0"
   }
 }

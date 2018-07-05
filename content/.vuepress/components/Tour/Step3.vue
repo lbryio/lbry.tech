@@ -74,7 +74,7 @@
 </template>
 
 <script>
-  import EventBus from "../event-bus";
+  import EventBus from "../../event-bus";
   import hljs from "highlight.js";
 
   export default {

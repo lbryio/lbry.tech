@@ -33,7 +33,7 @@
             <li class="home__feature">
               <p class="home__feature__title"><strong>New to LBRY?</strong></p>
               <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
-              <router-link class="home__feature__cta" to="tour.html">Take the Tour</router-link>
+              <router-link class="home__feature__cta" to="/tour/">Take the Tour</router-link>
             </li>
 
             <li class="home__feature">
@@ -64,7 +64,7 @@
           </div>
         </section>
 
-        <GithubFeed></GithubFeed>
+        <GithubFeed/>
 
         <section class="contribute">
           <div class="inner-wrap">
@@ -203,7 +203,7 @@
       <Content></Content>
     </template>
 
-    <template v-else-if="$page.path === '/tour.html'">
+    <template v-else-if="$page.frontmatter.tour">
       <Content></Content>
     </template>
 
@@ -273,11 +273,11 @@
 
 <script>
   import Vue from "vue";
-  import VueResource from "vue-resource";
   import VueMoment from "vue-moment";
+  import VueResource from "vue-resource";
 
-  Vue.use(VueResource);
   Vue.use(VueMoment);
+  Vue.use(VueResource);
 
   export default {
     data () {
@@ -393,4 +393,18 @@
   @import "../scss/pages/documentation";
   @import "../scss/partials/navigation";
   @import "../scss/partials/footer";
+
+  /**
+    Relative links wreak havoc with nested components extending entire CSS
+    files. In this case, `content/.vuepress/components/Tour/Hook.vue`
+    needs the below style rules removed in order to work.
+  */
+
+  .page__header {
+    background-image: url("../media/images/background-a.jpg");
+  }
+
+  .page__content {
+    background-image: url("../media/images/grid.png");
+  }
 </style>

@@ -2,33 +2,32 @@
   <div class="hook" id="hook">
     <nav class="hook__navigation" id="hook-navigation">
       <div class="inner-wrap">
-        <a href="#" v-on:click.prevent="activeStep = 1" class="hook__navigation__step" v-bind:class="{active: (activeStep==1)}">
+        <a href="#" v-on:click.prevent="activeStep = 1" class="hook__navigation__step" v-bind:class="{ active: (activeStep === 1) }">
           <span class="number">1</span>
           Resolve a claim
         </a>
 
-        <a href="#" v-on:click.prevent="activeStep = 2" class="hook__navigation__step" v-bind:class="{active: (activeStep==2)}">
+        <a href="#" v-on:click.prevent="activeStep = 2" class="hook__navigation__step" v-bind:class="{ active: (activeStep === 2) }">
           <span class="number">2</span>
           Publish content
         </a>
 
-        <a href="#" v-on:click.prevent="activeStep = 3" class="hook__navigation__step" v-bind:class="{active: (activeStep==3)}">
+        <a href="#" v-on:click.prevent="activeStep = 3" class="hook__navigation__step" v-bind:class="{ active: (activeStep === 3) }">
           <span class="number">3</span>
           Support with LBC
         </a>
       </div>
     </nav>
 
-    <Step1 v-if="activeStep == 1"></Step1>
-    <Step2 v-if="activeStep == 2"></Step2>
-    <Step3 v-if="activeStep == 3"></Step3>
-
+    <Tour-Step1 v-if="activeStep === 1"/>
+    <Tour-Step2 v-if="activeStep === 2"/>
+    <Tour-Step3 v-if="activeStep === 3"/>
   </div>
 </template>
 
 <script>
+  import EventBus from "../../event-bus";
   import Vue from "vue";
-  import EventBus from "../event-bus";
 
   export default {
     data () {
@@ -39,10 +38,7 @@
 
     created () {
       const component = this;
-
-      EventBus.$on("HookStepUpdate", step => {
-        component.activeStep = step;
-      });
+      EventBus.$on("HookStepUpdate", step => component.activeStep = step);
     },
 
     name: "Hook"
@@ -50,13 +46,13 @@
 </script>
 
 <style lang="scss">
-  @import "../../../node_modules/highlight.js/styles/monokai-sublime";
-  @import "../scss/init/colors";
-  @import "../scss/init/extends";
-  @import "../scss/init/mixins";
-  @import "../scss/partials/animation";
-  @import "../scss/partials/modal";
-  @import "../scss/pages/page";
+  @import "../../../../node_modules/highlight.js/styles/monokai-sublime";
+  @import "../../scss/init/colors";
+  @import "../../scss/init/extends";
+  @import "../../scss/init/mixins";
+  @import "../../scss/partials/animation";
+  @import "../../scss/partials/modal";
+  @import "../../scss/pages/page";
 
   .hook {
     .loader {
@@ -391,7 +387,7 @@
     }
 
     select {
-      background-image: url("../media/svg/down.svg");
+      background-image: url("../../media/svg/down.svg");
       background-position: 99% center;
       background-repeat: no-repeat;
       background-size: 1rem;

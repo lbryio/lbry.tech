@@ -12,7 +12,6 @@
 
 .page__header {
   @include center;
-  background-image: url("../media/images/background-a.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -43,7 +42,6 @@
 
 
 .page__content {
-  background-image: url("../media/images/grid.png");
   background-repeat: repeat;
   background-size: 32px;
   flex: 1;
