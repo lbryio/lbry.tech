@@ -136,7 +136,7 @@ The daemon combines various components to provide a single API across the LBRY e
 
 ### LBRY Redux
 
-[lbry-redux](https://github.com/lbryio/lbry-redux) is a module which contains common React and redux code shared between lbry-app and lbry-android.
+[lbry-redux](https://github.com/lbryio/lbry-redux) is a module which contains common React and redux code shared between lbry-desktop and lbry-android.
 
 ### LBRY Protocol
 
@@ -210,6 +210,10 @@ Stands for "number used once". A 32-bit number in a *block header* which is iter
 
 A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *51% attack*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*.
 
+### Outpoint
+
+An outpoint, as refereenced in API documentation and elsewhere, is the most specific identification for a particular version of a claim (a claim may be updated and will be referenced by a new outpoint). The outpoint is the concatenation of the transaction id and nout (position in the transaction). Outpoint example: f6dea4ad26fd526b77935969a17b081342fc92d68b3a1daf69d4a3378657c2fc:0
+
 ### Peer
 
 A peer is one instance of a client running on a computer on the Internet to which other clients connect and transfer data. Depending on context, "peer" can refer either to any client in the swarm or more specifically to a downloader, a client that has only parts of the file.
@@ -245,6 +249,10 @@ A reflector cluster to accept LBRY content for hosting en masse, rehost the cont
 ### Reorg, Reorganization
 
 An event in the *node* when one or more blocks in the *main chain* become *orphaned*. Usually, newly received blocks are extending existing main chain. Sometimes (4-6 times a week) a couple of blocks of the same *height* are produced almost simultaneously and for a short period of time some nodes may see one block as a tip of the main chain which will be eventually replaced by a more difficult block(s). Each transaction in the orphaned blocks either becomes invalid (if already included in the main chain block) or becomes *unconfirmed* and moved to the *mempool*. In case of a major bug or a *51% attack*, reorganization may involve reorganizing more than one block.
+
+### Resolve
+
+The resolve API command returns all available information about a claim or channel. 
 
 ### Reward
 
