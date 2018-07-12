@@ -10,13 +10,13 @@ Want to contribute by editing the text content on the site? This is easy, as mos
 
 ## Code Overview
 
-This project is a JavaScript-based documentation website and includes both the backend and frontend of the website at [lbry.tech](https://lbry.tech).
+This project is a JavaScript-based documentation website and includes both the back-end and front-end of the website at [lbry.tech](https://lbry.tech).
 
 
 
 ### Back-End
 
-Node.js + [Fastify](https://www.fastify.io) handles the back-end of this site. All back-end functionality is in one file, [server.js](server.js). Additionally, the back-end works as a proxy for some basic LBRY daemon method calls at `daemon.lbry.tech`.
+Node.js + [Fastify](https://www.fastify.io) handle the back-end of this site. All back-end functionality is in one file, [server.js](server.js). Additionally, the back-end works as a proxy for some basic LBRY daemon method calls at `daemon.lbry.tech`.
 
 
 
