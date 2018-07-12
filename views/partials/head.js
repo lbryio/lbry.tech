@@ -43,13 +43,8 @@ function head () {
     html`<link rel="stylesheet" href="/assets/css/style.css"/>`,
 
     html`<script src="/assets/scripts/vendor/zepto.js"></script>`,
-    html`
-      <script>
-        const host = location.origin.replace(/^http/, "ws");
-        const ws = new WebSocket(host);
-        ws.onmessage = msg => console.log(msg.data);
-      </script>
-    `
+    html`<script>const ws = new WebSocket(location.origin.replace(/^http/, "ws"));</script>`,
+    html`<script src="/assets/scripts/sockets.js"></script>`
   ]}`;
 }
 

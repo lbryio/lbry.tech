@@ -15,23 +15,16 @@ body {
   overflow-x: hidden;
   position: relative;
   z-index: 0;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-top: 4rem;
 
   &:not(.home) {
-    > div:first-of-type {
+    main > div:first-of-type {
       flex: 1;
     }
   }
 
   &.home {
     @media (min-width: 1001px) {
-      > div:first-of-type {
+      main > div:first-of-type {
         display: grid;
         grid-gap: 0;
         grid-template-areas:
@@ -45,6 +38,13 @@ main {
       }
     }
   }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 4rem;
 }
 
 .inner-wrap {

@@ -1,4 +1,4 @@
-"use strict"; require("dotenv").config();
+"use strict"; require("dotenv").config(); require("date-format-lite");
 
 
 
@@ -6,9 +6,7 @@
 
 const chalk = require("chalk");
 const cors = require("cors");
-// const local = require("app-root-path").require;
-
-//  V A R I A B L E S
+const dedent = require("dedent");
 
 const fastify = require("fastify")({
   logger: {
@@ -17,14 +15,42 @@ const fastify = require("fastify")({
   }
 });
 
+const octokit = require("@octokit/rest")();
+const redis = require("redis");
+const relativeDate = require("relative-date");
+const local = require("app-root-path").require;
+
+//  V A R I A B L E S
+
+const github = local("/helpers/github");
 const log = console.log; // eslint-disable-line
-// const logSlackError = local("/helpers/slack");
+const logSlackError = local("/helpers/slack");
+let client;
+
+if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
+  octokit.authenticate({
+    type: "oauth",
+    token: process.env.GITHUB_OAUTH_TOKEN
+  });
+}
+
+if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+  client = redis.createClient(process.env.REDISCLOUD_URL);
+
+  client.on("error", redisError => {
+    process.env.NODE_ENV === "development" ?
+      log("Unable to connect to Redis client. You may be missing an .env file") :
+      logSlackError("An error occured with Redis", redisError)
+    ;
+  });
+}
 
 
 
 //  P R O G R A M
 
 fastify.use(cors());
+
 fastify.register(require("fastify-compress"));
 fastify.register(require("fastify-ws"));
 
@@ -44,47 +70,25 @@ fastify.register(require("choo-ssr/fastify"), {
   ]
 });
 
-/*
-fastify.decorate("io", new WebSocket.Server({ server: fastify.server }));
-
-fastify.io.on("connection", (socket, req) => {
-  console.log("connected");
-  socket.url = req.url;
-
-  socket.on("disconnect", () => {
-    console.log("someone left");
-  });
-
-  // On message broadcast to everyone
-  socket.on("message", data => {
-    // Broadcast to everyone else
-    fastify.io.clients.forEach(client => {
-      console.log(socket.url, client.url);
-
-      if (socket.url === client.url && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
-  });
-});
-*/
-
 fastify.ready(err => {
   if (err) throw err;
 
   fastify.ws.on("connection", socket => {
-    // console.log("Client connected.");
-    socket.send("welcome");
+    socket.send(JSON.stringify({ "message": "welcome" }));
 
     socket.on("message", msg => {
       if (msg === "landed on homepage") {
-        //
+        generateGitHubFeed(result => {
+          socket.send(JSON.stringify({
+            "message": "updated html",
+            "html": result,
+            "selector": "#github-feed"
+          }));
+        });
       }
-
-      socket.send(msg); // Creates an echo server
     });
 
-    socket.on("close", () => console.log("Client disconnected."));
+    socket.on("close", () => log("Client disconnected.")); // TODO: Close socket?
   });
 });
 
@@ -100,8 +104,52 @@ const start = async () => {
     process.exit(1);
   }
 
-  log(`\n— ${chalk.green("⚡")} ${fastify.server.address().port}\n`);
-  // logSlackError(`Server started at port \`${fastify.server.address().port}\``);
+  process.env.NODE_ENV === "development" ?
+    log(`\n— ${chalk.green("⚡")} ${fastify.server.address().port}\n`) :
+    logSlackError(`Server started at port \`${fastify.server.address().port}\``)
+  ;
 };
 
 start();
+
+
+
+//  H E L P E R S
+
+function generateGitHubFeed(displayGitHubFeed) {
+  if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+    client.zrevrange("events", 0, 9, (err, reply) => {
+      if (err) return; // TODO: Render a div with nice error message
+
+      const events = [];
+      const renderedEvents = [];
+
+      reply.forEach(item => events.push(JSON.parse(item)));
+
+      for (const event of events) {
+        renderedEvents.push(`
+          <div class='github-feed__event'>
+            <a href="${github.generateUrl("actor", event)}" target="_blank" rel="noopener noreferrer">
+              <img src="${event.actor.avatar_url}" class="github-feed__event__avatar" alt=""/>
+            </a>
+
+            <p>
+              ${github.generateEvent(event)}
+              <a href="${github.generateUrl("repo", event)}" title="View this repo on GitHub" target="_blank" rel="noopener noreferrer"><strong>${event.repo.name}</strong></a>
+              <em class="github-feed__event__time">${relativeDate(new Date(event.created_at))}</em>
+            </p>
+          </div>
+        `);
+      }
+
+      // TODO: Update `.last-updated` every minute
+
+      displayGitHubFeed(dedent`
+        <h3>GitHub</h3>
+        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD at H:mm:ss A").toLowerCase().replace(/-/g, "&middot;")}</h5>
+
+        ${renderedEvents.join("")}
+      `);
+    });
+  }
+}
