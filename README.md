@@ -1,60 +1,56 @@
-# LBRY.tech Website
+# LBRY.tech
+
+Technical documentation website for [the LBRY protocol](https://lbry.io) made with JavaScript.
 
 [![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=master)](https://travis-ci.org/lbryio/lbry.tech)
 
-Technical documentation website for [the LBRY protocol](https://lbry.io/) made with Javascript. 
+
 
 Notable tools used:
 
-* [Vue.js](https://vuejs.org/)
-* [Vuepress](https://vuepress.vuejs.org/)
-* [Highlight.js](https://highlightjs.org/)
+* [choo](https://choo.io)
+* [fastify](https://www.fastify.io)
 
 ![Screenshot of LBRY.tech](https://spee.ch/f/lbry-tech-screenshot.png)
 
+
+
 ## Installation
 
-This project is not designed to be installed directly. Continue reading below to learn how to use this project.
+[Node](https://nodejs.org) (version >= 10) is required, so install that first. Then fork this repo, `cd` into it and run `npm i`.
+
+
+
+## Development
+
+`npm run watch` and visit [localhost:8080](http://localhost:8080)
+
+
 
 ## Usage
 
-Visit [LBRY.tech](https://lbry.tech) for hosted version for this repository.
+Visit [LBRY.tech](https://lbry.tech) to see this repo in production.
 
-## Running from Source
 
-### Prerequisities
-
-* [Node](https://nodejs.org/) (version >= 10)
-* [Yarn](https://yarnpkg.com/)
-
-### Compiling 
-
-``` bash
-# clone git project
-git clone https://github.com/lbryio/lbry.tech
-
-# install dependencies
-yarn
-
-# serve with hot reload at localhost:8080
-yarn dev
-
-# build for production with minification & start express server
-yarn start
-```
 
 ## Contributing
 
-Contributions to this project are welcome, encouraged, and compensated. For more details, see [CONTRIBUTING.md](CONTRIBUTING.md)
+Contributions to this project are welcome, encouraged, and compensated. For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
 
 ## License
 
-This project is MIT licensed. For the full license, see [LICENSE](LICENSE)
+This project is MIT licensed. For the full license, see [LICENSE](LICENSE).
+
+
 
 ## Security
 
 We take security seriously. Please contact [security@lbry.io](mailto:security@lbry.io) regarding any security issues. [Our PGP key is here](https://keybase.io/lbry/key.asc) if you need it.
 
+
+
 ## Contact
 
-The primary contact for this project is [@kauffj](https://github.com/kauffj)
+The primary contact for this project is [@netoperatorwibby](https://github.com/netoperatorwibby)

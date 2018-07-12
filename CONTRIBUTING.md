@@ -16,4 +16,4 @@ Backend is handled by Node.js + Express. Currently all backend functionality is 
 
 ### Frontend
 
-[Vuepress](https://vuepress.vuejs.org/) generates static files based on the .vuepress folder and various markdown files in the root of the project. It automatically compiles JS and SCSS found in Vue components in .vuepress folder. 
+[Vuepress](https://vuepress.vuejs.org/) generates static files based on the .vuepress folder and various markdown files in the root of the project. It automatically compiles JS and SCSS found in Vue components in .vuepress folder.

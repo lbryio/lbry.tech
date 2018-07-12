@@ -1,0 +1,17 @@
+/* TEAM */
+
+Paul Anthony Webb - Creator, Designer, and Developer
+
+
+
+/* THANKS */
+
+IdeasNeverCease - https://inc.sh
+Viewers like you
+
+
+
+/* SITE */
+
+Standards: CSS3, HTML5, JavaScript (ES5, ES6/7)
+Components: Feathers.js, GraphQL, MongoDB, Sass
