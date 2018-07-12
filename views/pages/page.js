@@ -37,7 +37,7 @@ const page = () => async (state, emit) => { // eslint-disable-line
 
         <section class="page__content" itemprop="articleBody">
           <div class="inner-wrap">
-            <p>This page does not exist</p>
+            <p>The page you are looking for does not exist.</p>
           </div>
         </section>
       </article>
