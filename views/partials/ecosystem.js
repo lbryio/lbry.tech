@@ -55,7 +55,7 @@ module.exports = exports = class Ecosystem extends Component {
 
           <h4 class="ecosystem__submodule__description__title">Source</h4>
           <ul>
-            <li><a href="https://github.com/lbryio/lbry-app" title="lbry-app source code">https://github.com/lbryio/lbry-app</a></li>
+            <li><a href="https://github.com/lbryio/lbry-desktop" title="lbry-desktop source code">https://github.com/lbryio/lbry-desktop</a></li>
           </ul>
 
           <ul class="__parents">
@@ -252,7 +252,7 @@ module.exports = exports = class Ecosystem extends Component {
 
           <h3>Additional Resources</h3>
           <ul>
-            <li><a href="https://github.com/lbryio/lbry-app" title="source code for LBRY's desktop apps">Linux, macOS, and Windows apps</a></li>
+            <li><a href="https://github.com/lbryio/lbry-desktop" title="source code for LBRY's desktop apps">Linux, macOS, and Windows apps</a></li>
             <li><a href="https://github.com/lbryio/lbry-android" title="LBRY Android app source code">Android app</a></li>
             <li><a href="https://github.com/lbryio/spee.ch" title="spee.ch source code">spee.ch</a></li>
             <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">lighthouse</a></li>

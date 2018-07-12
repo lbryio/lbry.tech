@@ -2,14 +2,14 @@
 
 Technical documentation website for [the LBRY protocol](https://lbry.io) made with JavaScript.
 
-[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=master)](https://travis-ci.org/lbryio/lbry.tech)
+[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=new)](https://travis-ci.org/lbryio/lbry.tech)
 
 
 
 Notable tools used:
 
 * [choo](https://choo.io)
-* [fastify](https://www.fastify.io)
+* [Fastify](https://www.fastify.io)
 
 ![Screenshot of LBRY.tech](https://spee.ch/f/lbry-tech-screenshot.png)
 
@@ -41,7 +41,7 @@ Contributions to this project are welcome, encouraged, and compensated. For more
 
 ## License
 
-This project is MIT licensed. For the full license, see [LICENSE](LICENSE).
+This project is MIT licensed.
 
 
 
