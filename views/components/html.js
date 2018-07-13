@@ -4,18 +4,18 @@
 
 //  P A C K A G E
 
-const h = require("choo-async/html");
+const html = require("choo-async/html");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-function html(head, body) {
+module.exports = exports = (head, body) => {
   return (state, emit) => {
     const bodyPromise = Promise.resolve(body(state, emit));
     const headPromise = bodyPromise.then(() => head(state, emit)); // resolve `head` once `body` is resolved
 
-    return h`
+    return html`
       <!DOCTYPE html>
       <html lang="en">
         ${headPromise}
@@ -23,10 +23,4 @@ function html(head, body) {
       </html>
     `;
   };
-}
-
-
-
-//  E X P O R T
-
-module.exports = exports = html;
+};

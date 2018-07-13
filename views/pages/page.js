@@ -30,9 +30,9 @@ const raw = require("nanohtml/raw");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-const page = () => async (state, emit) => { // eslint-disable-line
+module.exports = exports = () => async state => {
   const path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
@@ -110,9 +110,3 @@ function partialFinder(markdownBody) {
 
   return dedent(markdownBody); // partials get rendered as code snippets w/o `dedent`
 }
-
-
-
-//  E X P O R T
-
-module.exports = exports = page;

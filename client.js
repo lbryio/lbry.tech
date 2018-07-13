@@ -16,13 +16,12 @@ const ssr = require("choo-ssr");
 const head = require("./views/partials/head");
 const html = require("./views/components/html");
 const layout = require("./views/components/layout");
-const noscript = require("./views/partials/noscript");
 
 
 
 //  P R O G R A M
 
-function main () {
+function main() {
   const app = async(choo());
 
   app.use(ssr());
@@ -39,20 +38,15 @@ function main () {
     ssr.body(
       async.catch(
         layout(content),
-        require("./views/pages/_error")(app)
+        require("./views/pages/error")(app)
       ),
-      noscript(),
-      ssr.state(),
+      ssr.state()
     )
   ));
 
   app.route("/", page(require("./views/pages/home")(app)));
-  // app.route("/github-feed", page(require("./views/pages/github-feed")(app)));
   app.route("/resources", page(require("./views/pages/resources")(app)));
   app.route("/*", page(require("./views/pages/page")(app)));
-
-  // app.route("/:page", page(require("./views/show")(app)));
-  // app.route("*", page(require("./views/pages/_404")(app)));
 
   return app;
 }

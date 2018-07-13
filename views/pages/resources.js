@@ -8,10 +8,9 @@ const html = require("choo-async/html");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-//  eslint-disable-next-line
-const resources = () => async (state, emit) => html`
+module.exports = exports = () => async () => html`
   <article class="page" itemtype="http://schema.org/BlogPosting">
     <header class="page__header">
       <div class="page__header-wrap">
@@ -109,9 +108,3 @@ const resources = () => async (state, emit) => html`
 `;
 
 // TODO: Make blog post section dynamic. It should be grabbing the latest posts automatically
-
-
-
-//  E X P O R T
-
-module.exports = exports = resources;

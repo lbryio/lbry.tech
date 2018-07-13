@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E
+//  P A C K A G E S
 
 const html = require("choo-async/html");
 const local = require("app-root-path").require;
@@ -13,9 +13,9 @@ const config = local("/config");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-const editLink = pagePath => {
+module.exports = exports = pagePath => {
   let githubUrl = `https://github.com/${config.github.repo}/edit/${config.github.branch}`;
 
   switch(pagePath) {
@@ -36,9 +36,3 @@ const editLink = pagePath => {
     <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" title="${config.github.linkText}">${config.github.linkText}</a>
   `;
 };
-
-
-
-//  E X P O R T
-
-module.exports = exports = editLink;

@@ -14,10 +14,9 @@ const emailSubscribe = local("/views/partials/email-subscribe");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-//  eslint-disable-next-line
-const footer = (state, emit) => html`
+module.exports = exports = state => html`
   <section class="email-subscribe-container">
     ${emailSubscribe()}
   </section>
@@ -58,9 +57,3 @@ const footer = (state, emit) => html`
 
   <script src="/assets/scripts/app.js"></script>
 `;
-
-
-
-//  E X P O R T
-
-module.exports = exports = footer;

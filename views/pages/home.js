@@ -8,10 +8,9 @@ const html = require("choo-async/html");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-//  eslint-disable-next-line
-const home = () => async (state, emit) => html`
+module.exports = exports = () => async () => html`
   <div>
     <section class="hero">
       <div>
@@ -121,9 +120,3 @@ const home = () => async (state, emit) => html`
     document.getElementsByTagName("body")[0].classList.add("home"); // TODO: make this happen in components/layout
   </script>
 `;
-
-
-
-//  E X P O R T
-
-module.exports = exports = home;

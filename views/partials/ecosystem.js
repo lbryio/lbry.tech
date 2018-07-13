@@ -10,7 +10,7 @@ const html = require("choo-async/html");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
 module.exports = exports = class Ecosystem extends Component {
   constructor() {

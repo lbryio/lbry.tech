@@ -13,18 +13,17 @@ const navigation = require("../partials/navigation");
 
 
 
-//  P R O G R A M
+//  E X P O R T
 
-const layout = children => (state, emit) => html`
+module.exports = exports = children => (state, emit) => html`
   <main>
+    <noscript>
+      <p>LBRY is quite fancy and relies on a bit of JavaScript to do these fancy things.</p>
+      <p>Please enable it, if you can.</p>
+    </noscript>
+
     ${navigation(state, emit)}
     ${children(state, emit)}
     ${footer(state, emit)}
   </main>
 `;
-
-
-
-//  E X P O R T
-
-module.exports = exports = layout;

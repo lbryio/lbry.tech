@@ -6,16 +6,21 @@ $("[data-action]").on("click", event => {
   event.preventDefault();
   const data = event.currentTarget.dataset;
 
-  if (data.action === "open") {
-    open(data.target);
-  }
+  switch(data.action) {
+    case "open":
+      open(data.target);
+      break;
 
-  if (data.action === "openSubmodule") {
-    openSubmodule(data.target);
-  }
+    case "openSubmodule":
+      openSubmodule(data.target);
+      break;
 
-  if (data.action === "close") {
-    close();
+    case "close":
+      close();
+      break;
+
+    default:
+      break;
   }
 });
 
