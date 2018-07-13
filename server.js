@@ -17,7 +17,6 @@ const fastify = require("fastify")({
 
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
-const relativeDate = require("relative-date");
 const local = require("app-root-path").require;
 
 //  V A R I A B L E S
@@ -25,6 +24,7 @@ const local = require("app-root-path").require;
 const github = local("/helpers/github");
 const log = console.log; // eslint-disable-line
 const logSlackError = local("/helpers/slack");
+const relativeDate = local("/modules/relative-date");
 let client;
 
 if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
