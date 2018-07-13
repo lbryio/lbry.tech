@@ -39,7 +39,7 @@ if (typeof process.env.REDISCLOUD_URL !== "undefined") {
 
   client.on("error", redisError => {
     process.env.NODE_ENV === "development" ?
-      log("Unable to connect to Redis client. You may be missing an .env file") :
+      log(`\n${chalk.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
       logSlackError("An error occured with Redis", redisError)
     ;
   });

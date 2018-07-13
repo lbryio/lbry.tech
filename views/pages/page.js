@@ -79,7 +79,7 @@ function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+\/>/g;
   const partials = markdownBody.match(regexToFindPartials);
 
-  if (!partials) return;
+  if (!partials) return markdownBody;
 
   for (const partial of partials) {
     const filename = decamelize(partial, "-").replace("<", "").replace("/>", "");

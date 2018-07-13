@@ -5,12 +5,6 @@
 //  P A C K A G E
 
 const html = require("choo-async/html");
-// const local = require("app-root-path").require;
-
-
-// const test = local("/views/partials/github-feed");
-// console.log(test());
-// test();
 
 
 
