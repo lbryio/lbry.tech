@@ -16,13 +16,24 @@ const config = local("/config");
 //  P R O G R A M
 
 const editLink = pagePath => {
-  let githubUrl = `https://github.com/${config.github.repo}/edit`;
+  let githubUrl = `https://github.com/${config.github.repo}/edit/${config.github.branch}`;
 
-  if (pagePath === "/") githubUrl = `${githubUrl}/master/README.md`;
-  else githubUrl = `${githubUrl}/${config.github.docsBranch}${pagePath}.md`; // TODO: Update this to match new site structure
+  switch(pagePath) {
+    case "":
+      githubUrl = `${githubUrl}/views/pages/home.js`;
+      break;
+
+    case  "/resources":
+      githubUrl = `${githubUrl}/views/pages/resources.js`;
+      break;
+
+    default:
+      githubUrl = `${githubUrl}/documents${pagePath}.md`;
+      break;
+  }
 
   return html`
-    <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" title="${config.github.editLinkText}">${config.github.editLinkText}</a>
+    <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" title="${config.github.linkText}">${config.github.linkText}</a>
   `;
 };
 

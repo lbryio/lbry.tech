@@ -4,9 +4,9 @@
 
 module.exports = exports = {
   github: {
-    repo: "lbryio/lbry.tech",
-    docsBranch: "master/content",
-    editLinkText: "Edit this page on GitHub"
+    branch: "new",
+    linkText: "Edit this page on GitHub",
+    repo: "lbryio/lbry.tech"
   },
   ga: "UA-60403362-1"
 };
