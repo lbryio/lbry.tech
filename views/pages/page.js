@@ -11,10 +11,21 @@ const fm = require("front-matter");
 const fs = require("graceful-fs");
 const html = require("choo-async/html");
 const local = require("app-root-path").require;
+
 const md = require("markdown-it")({
   html: true,
   typographer: true
-}).use(require("markdown-it-sup"));
+}).use(require("markdown-it-sup"))
+  .use(require("markdown-it-anchor"))
+  .use(require("markdown-it-wikilinks")({
+    makeAllLinksAbsolute: true,
+    baseURL: "/glossary#",
+    uriSuffix: "",
+    htmlAttributes: {
+      class: "wikilink"
+    }
+  }));
+
 const raw = require("nanohtml/raw");
 
 
@@ -24,7 +35,7 @@ const raw = require("nanohtml/raw");
 const page = () => async (state, emit) => { // eslint-disable-line
   const path = state.params.wildcard;
 
-  if (!fs.existsSync(`${__dirname}/${path}.md`)) {
+  if (!fs.existsSync(`./documents/${path}.md`)) {
     return html`
       <article class="page" itemtype="http://schema.org/BlogPosting">
         <header class="page__header">
@@ -44,7 +55,7 @@ const page = () => async (state, emit) => { // eslint-disable-line
     `;
   }
 
-  const markdownFile = fs.readFileSync(`${__dirname}/${path}.md`, "utf-8");
+  const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(partialFinder(markdownFileDetails.body));
 
@@ -86,15 +97,14 @@ function partialFinder(markdownBody) {
     const fileExistsTest = exists(`./views/partials/${filename}.js`); // `local` results in error if used here and file !exist
 
     if (fileExistsTest) {
-      const something = local(`/views/partials/${filename}.js`);
+      const partialFunction = local(`/views/partials/${filename}.js`);
 
       if (filename === "ecosystem") {
-        const Ecosystem = new something;
+        const Ecosystem = new partialFunction;
         markdownBody = markdownBody.replace(partial, Ecosystem.render());
-        // console.log(new something);
       }
 
-      else markdownBody = markdownBody.replace(partial, something);
+      else markdownBody = markdownBody.replace(partial, partialFunction);
     }
   }
 
