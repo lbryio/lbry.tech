@@ -12,7 +12,7 @@ That's the idea behind LBRY.
 
 That's a fancy sentence, so here's a plainer one: we just thought it'd be really damn cool if there was a system that stored as much of the world's information as possible, but was owned and controlled by no one.
 
-<sup>1</sup> In the information theoric sense, i.e. any data. LBRY facilitates distribution of all data, whether it be a video or a spreadsheet.
+<sup>1</sup> In the information-theoretic sense, i.e. any data. LBRY facilitates distribution of all data, whether it be a video or a spreadsheet.
 
 <sup>2</sup> Accessible anywhere in the world on any internet-connected device.
 
