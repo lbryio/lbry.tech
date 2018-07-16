@@ -8,7 +8,6 @@
     "@octokit/rest": "^15.9.4",
     "app-root-path": "^2.1.0",
     "async": "^2.6.1",
-    "chalk": "^2.4.1",
     "choo": "^6.13.0",
     "choo-async": "^0.1.1",
     "choo-bundles": "^0.2.4",
@@ -29,6 +28,7 @@
     "fastify-ws": "^1.0.0",
     "front-matter": "^2.3.0",
     "fs-exists-sync": "^0.1.0",
+    "got": "^8.3.2",
     "graceful-fs": "^4.1.11",
     "heroku-ssl-redirect": "0.0.4",
     "make-promises-safe": "^1.1.0",
@@ -41,6 +41,7 @@
     "request-promise-native": "^1.0.5",
     "slack-node": "^0.2.0",
     "socket.io": "^2.1.1",
+    "turbocolor": "^2.3.0",
     "ws": "^5.2.2"
   },
   "devDependencies": {

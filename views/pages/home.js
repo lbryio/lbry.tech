@@ -57,7 +57,10 @@ module.exports = exports = () => async () => html`
       </div>
     </section>
 
-    <div id="github-feed" class="github-feed"></div>
+    <div id="github-feed" class="github-feed">
+      <h3>GitHub</h3>
+      <h5 class="last-updated">Unable to fetch latest GitHub data</h5>
+    </div>
 
     <section class="contribute">
       <div class="inner-wrap">
@@ -98,24 +101,10 @@ module.exports = exports = () => async () => html`
 
   <script>
     $(function () {
-      send("landed on homepage");
+      send(JSON.stringify({
+        "message": "landed on homepage"
+      }));
     });
-
-    function send(msg) {
-      socketReady(ws, () => ws.send(msg));
-    };
-
-    function socketReady(socket, callback) {
-      setTimeout(() => {
-        if (socket.readyState === 1) {
-          if (callback !== undefined) callback();
-          return;
-        } else {
-          console.log("Waiting for websocket connection to come online");
-          socketReady(socket, callback);
-        }
-      }, 5);
-    };
 
     document.getElementsByTagName("body")[0].classList.add("home"); // TODO: make this happen in components/layout
   </script>

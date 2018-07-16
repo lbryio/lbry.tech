@@ -4,7 +4,7 @@
 
 //  P A C K A G E S
 
-const chalk = require("chalk");
+const color = require("turbocolor");
 const cors = require("cors");
 const dedent = require("dedent");
 
@@ -15,6 +15,8 @@ const fastify = require("fastify")({
   }
 });
 
+const got = require("got");
+const html = require("choo-async/html");
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
 const local = require("app-root-path").require;
@@ -32,18 +34,18 @@ if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
     type: "oauth",
     token: process.env.GITHUB_OAUTH_TOKEN
   });
-}
+} else log(`${color.red("[missing]")} GitHub token`);
 
 if (typeof process.env.REDISCLOUD_URL !== "undefined") {
   client = redis.createClient(process.env.REDISCLOUD_URL);
 
   client.on("error", redisError => {
     process.env.NODE_ENV === "development" ?
-      log(`\n${chalk.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
+      log(`\n${color.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
       logSlackError("An error occured with Redis", redisError)
     ;
   });
-}
+} else log(`${color.red("[missing]")} Redis client URL`);
 
 
 
@@ -76,15 +78,28 @@ fastify.ready(err => {
   fastify.ws.on("connection", socket => {
     socket.send(JSON.stringify({ "message": "welcome" }));
 
-    socket.on("message", msg => {
-      if (msg === "landed on homepage") {
-        generateGitHubFeed(result => {
-          socket.send(JSON.stringify({
-            "message": "updated html",
-            "html": result,
-            "selector": "#github-feed"
-          }));
-        });
+    socket.on("message", data => {
+      data = JSON.parse(data);
+
+      switch(data.message) {
+        case "landed on homepage":
+          generateGitHubFeed(result => {
+            socket.send(JSON.stringify({
+              "message": "updated html",
+              "html": result,
+              "selector": "#github-feed"
+            }));
+          });
+
+          break;
+
+        case "fetch metadata":
+          fetchMetadata(data.claim, data.method);
+          break;
+
+        default:
+          log(data);
+          break;
       }
     });
 
@@ -105,7 +120,7 @@ const start = async () => {
   }
 
   process.env.NODE_ENV === "development" ?
-    log(`\n— ${chalk.green("⚡")} ${fastify.server.address().port}\n`) :
+    log(`\n— ${color.green("⚡")} ${fastify.server.address().port}\n`) :
     logSlackError(`Server started at port \`${fastify.server.address().port}\``)
   ;
 };
@@ -152,4 +167,44 @@ function generateGitHubFeed(displayGitHubFeed) {
       `);
     });
   }
+}
+
+
+
+function fetchMetadata(claimAddress, resolveMethod) {
+  if (!claimAddress || !resolveMethod)  return;
+
+  const allowedMethods = [
+    "publish",
+    "resolve",
+    "wallet_send"
+  ];
+
+  if (!allowedMethods.includes(resolveMethod)) return;
+
+  /*
+  component.$http.post("https://lbry.tech/forward", {
+    method: "resolve",
+    uri: component.address
+  }).then(response => {
+    component.isLoading = false;
+    component.jsonData = JSON.stringify(response.body, null, "  ");
+  }).catch(error => {
+    component.isLoading = false;
+    component.jsonData = JSON.stringify(error, null, "  ");
+    log("Error retrieving metadata for a claim:\n", error);
+  });
+  */
+
+  got.post("https://lbry.tech/forward", {
+
+  });
+
+  return html`
+    <pre><code class="bash">
+      <span v-html="highlight('bash', exampleCode)"></span>
+      # Example code using the daemon
+      curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${claimAddress}' } }"
+    </code></pre>
+  `;
 }

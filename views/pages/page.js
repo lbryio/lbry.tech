@@ -59,8 +59,8 @@ module.exports = exports = () => async state => {
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(partialFinder(markdownFileDetails.body));
 
-  let ecosystemScripts = "";
-  if (path === "overview") ecosystemScripts = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
+  let pageScript = "";
+  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
@@ -75,7 +75,7 @@ module.exports = exports = () => async state => {
       <section class="page__content" itemprop="articleBody">
         <div class="inner-wrap">
           ${raw(renderedMarkdown)}
-          ${raw(ecosystemScripts)}
+          ${raw(pageScript)}
         </div>
       </section>
     </article>
