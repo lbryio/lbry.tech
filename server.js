@@ -76,7 +76,10 @@ fastify.ready(err => {
   if (err) throw err;
 
   fastify.ws.on("connection", socket => {
-    socket.send(JSON.stringify({ "message": "welcome" }));
+    socket.send(JSON.stringify({
+      "message": "notification",
+      "details": "Welcome"
+    }));
 
     socket.on("message", data => {
       data = JSON.parse(data);
@@ -94,7 +97,7 @@ fastify.ready(err => {
           break;
 
         case "fetch metadata":
-          fetchMetadata(data.claim, data.method);
+          fetchMetadata(data.claim, data.method, socket);
           break;
 
         default:
@@ -171,8 +174,15 @@ function generateGitHubFeed(displayGitHubFeed) {
 
 
 
-function fetchMetadata(claimAddress, resolveMethod) {
-  if (!claimAddress || !resolveMethod)  return;
+function fetchMetadata(claimAddress, resolveMethod, socket) {
+  if (!claimAddress || !resolveMethod) return;
+
+  const allowedClaims = [
+    "5b7c7a202201033d99e1be2930d290c127c0f4fe",
+    "a1372cf5523885f5923237bfe522f02f5f054362",
+    "de7f7fa33e8d879b2bae7238d2bdf827a39f9301",
+    "fbdcd44a97810522d23d5f1335b8ca04be9d776c"
+  ];
 
   const allowedMethods = [
     "publish",
@@ -180,7 +190,17 @@ function fetchMetadata(claimAddress, resolveMethod) {
     "wallet_send"
   ];
 
-  if (!allowedMethods.includes(resolveMethod)) return;
+  if (!allowedMethods.includes(resolveMethod)) return socket.send(JSON.stringify({
+    "message": "notification",
+    "type": "error",
+    "details": "Unallowed resolve method for tutorial"
+  }));
+
+  if (!allowedClaims.includes(claimAddress)) return socket.send(JSON.stringify({
+    "message": "notification",
+    "type": "error",
+    "details": "Invalid claim ID for tutorial"
+  }));
 
   /*
   component.$http.post("https://lbry.tech/forward", {
@@ -197,7 +217,7 @@ function fetchMetadata(claimAddress, resolveMethod) {
   */
 
   got.post("https://lbry.tech/forward", {
-
+    //
   });
 
   return html`

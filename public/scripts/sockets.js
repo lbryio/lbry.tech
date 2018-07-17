@@ -14,6 +14,15 @@ ws.onmessage = socket => {
       $(data.selector).html(data.html);
       break;
 
+    case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
+      $("#flash-container").html(`<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`);
+
+      setTimeout(() => {
+        $("#flash-container").html("");
+      }, 2100);
+
+      break;
+
     default:
       log(data);
       break;

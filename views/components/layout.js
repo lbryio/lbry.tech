@@ -23,6 +23,7 @@ module.exports = exports = children => (state, emit) => html`
     </noscript>
 
     ${navigation(state, emit)}
+    <aside class="flashes" id="flash-container"></aside>
     ${children(state, emit)}
     ${footer(state, emit)}
   </main>
