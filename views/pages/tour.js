@@ -59,7 +59,8 @@ function step1() {
       <a href="#" class="__button-black" data-action="go to step 2" title="Proceed to step two">Go to next step</a>
 
     - TODO:
-      Create message for error
+      [✓] Create message for error
+      [ ] Scroll to top of page when selecting a claim
   */
 
   return html`
@@ -78,7 +79,7 @@ function step1() {
 
       <div class="hook__page__content inner-wrap" id="step1-placeholder"></div>
 
-      <div class="hook__page__content inner-wrap" id="step1-selections"> <!--/ Hide when "isLoading" || "jsonData" is active /-->
+      <div class="hook__page__content inner-wrap" id="step1-selections">
         <p style="text-align: center;">&hellip;or select a live example from below</p>
 
         <div class="hook__page__content__card">

@@ -15,11 +15,12 @@ const fastify = require("fastify")({
   }
 });
 
-const got = require("got");
 const html = require("choo-async/html");
+const local = require("app-root-path").require;
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
-const local = require("app-root-path").require;
+const request = require("request-promise-native");
+const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
@@ -181,7 +182,11 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
     "5b7c7a202201033d99e1be2930d290c127c0f4fe",
     "a1372cf5523885f5923237bfe522f02f5f054362",
     "de7f7fa33e8d879b2bae7238d2bdf827a39f9301",
-    "fbdcd44a97810522d23d5f1335b8ca04be9d776c"
+    "fbdcd44a97810522d23d5f1335b8ca04be9d776c",
+    "fortnite-top-stream-moments-nickatnyte",
+    "itsadisaster",
+    "six",
+    "unbubbled1-1"
   ];
 
   const allowedMethods = [
@@ -202,29 +207,48 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
     "details": "Invalid claim ID for tutorial"
   }));
 
-  /*
-  component.$http.post("https://lbry.tech/forward", {
-    method: "resolve",
-    uri: component.address
-  }).then(response => {
-    component.isLoading = false;
-    component.jsonData = JSON.stringify(response.body, null, "  ");
-  }).catch(error => {
-    component.isLoading = false;
-    component.jsonData = JSON.stringify(error, null, "  ");
-    log("Error retrieving metadata for a claim:\n", error);
-  });
-  */
+  const body = {};
 
-  got.post("https://lbry.tech/forward", {
-    //
-  });
+  if (resolveMethod === "publish") {
+    body.bid = 0.001; // Hardcode the publish amount
 
-  return html`
-    <pre><code class="bash">
-      <span v-html="highlight('bash', exampleCode)"></span>
-      # Example code using the daemon
-      curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${claimAddress}' } }"
-    </code></pre>
-  `;
+    // Fix the internal image path in daemon
+    // body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + body.file_path; // TODO: needed for step 2, check for `file_path`
+  }
+
+  body.method = resolveMethod;
+  body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
+  body.uri = claimAddress;
+
+  return new Promise((resolve, reject) => {
+    request({
+      url: "http://daemon.lbry.tech",
+      qs: body
+    }, (error, response, body) => {
+      if (error) {
+        reject(error);
+        logSlackError("[daemon error]\n", "```" + JSON.stringify(error) + "```");
+        return;
+      }
+
+      body = JSON.parse(body);
+
+      if (typeof body.error !== "undefined") {
+        reject(body.error);
+        logSlackError("[daemon error]\n", "```" + JSON.stringify(body.error) + "```");
+        return;
+      }
+
+      socket.send(JSON.stringify({
+        "message": "updated html",
+        "html": html`
+          <p style="text-align: center;">Success! Here is the response for <strong>lbry://${claimAddress}</strong>:</p>
+          <pre><code class="json">${stringifyObject(body, { indent: "  ", singleQuotes: false })}</code></pre>
+          <button data-action="tour, step two" class="__button-black" type="button">Go to next step</button>
+          <script>$('#temp-loader').remove();</script>
+        `,
+        "selector": "#step1-result"
+      }));
+    });
+  });
 }
