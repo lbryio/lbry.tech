@@ -10,6 +10,11 @@ const html = require("choo-async/html");
 
 const navigationItems = [
   {
+    url: "https://lbry.io",
+    name: "LBRY.io",
+    title: "Escape the techno scene"
+  },
+  {
     url: "/overview",
     name: "Overview",
     title: "LBRY overview"

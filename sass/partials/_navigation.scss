@@ -39,8 +39,6 @@
 
 .navigation__item {
   overflow: hidden;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
   position: relative;
 
   @media (max-width: 700px) {
@@ -65,11 +63,7 @@
     top: 0.5rem;
   }
 
-  &:not(:first-of-type) {
-    color: inherit;
-    font-size: 1rem;
-    line-height: 4rem;
-
+  &:not(:first-of-type):not([href="https://lbry.io"]) {
     &::after {
       width: 100%; height: 3px;
 
@@ -91,6 +85,43 @@
       &::after {
         bottom: 0;
       }
+    }
+  }
+
+  &:not(:first-of-type) {
+    color: inherit;
+    font-size: 1rem;
+    line-height: 4rem;
+  }
+
+  &:not([href="https://lbry.io"]) {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  &[href="https://lbry.io"] {
+    color: $white;
+    margin-right: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    &:not(:hover)::after {
+      background-color: $black;
+    }
+
+    &:hover::after {
+      background-color: $teal;
+    }
+
+    &::after {
+      width: 100%; height: 2rem;
+      top: 1rem; left: 0;
+
+      border-radius: 3px;
+      content: "";
+      position: absolute;
+      transition: background-color 0.2s;
+      z-index: -1;
     }
   }
 }

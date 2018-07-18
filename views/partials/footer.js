@@ -17,8 +17,6 @@ const emailSubscribe = local("/views/partials/email-subscribe");
 //  E X P O R T
 
 module.exports = exports = state => html`
-  <a href="//lbry.io" title="Escape the techno scene" class="egress">Escape to<br/>← LBRY.io</a>
-
   <section class="email-subscribe-container">
     ${emailSubscribe()}
   </section>
