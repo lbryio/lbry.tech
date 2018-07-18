@@ -1,0 +1,15 @@
+.egress {
+  bottom: 10rem; right: 1rem;
+
+  background-color: $white;
+  border: 1px solid $gray;
+  font-size: 1rem;
+  padding: 1rem;
+  position: fixed;
+  transition: opacity 0.2s;
+  z-index: 12;
+
+  &:hover {
+    opacity: 0.3;
+  }
+}
