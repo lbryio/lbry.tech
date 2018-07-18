@@ -1,12 +1,13 @@
 /* TEAM */
 
 Paul Anthony Webb - Creator, Designer, and Developer
+…and the rest of the LBRY squad
 
 
 
 /* THANKS */
 
-IdeasNeverCease - https://inc.sh
+LBRY - https://lbry.io
 Viewers like you
 
 
@@ -14,4 +15,4 @@ Viewers like you
 /* SITE */
 
 Standards: CSS3, HTML5, JavaScript (ES5, ES6/7)
-Components: Feathers.js, GraphQL, MongoDB, Sass
+Components: choo, fastify, NodeJS, Sass
