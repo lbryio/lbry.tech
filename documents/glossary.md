@@ -6,6 +6,8 @@ This glossary will help you understand exact meaning of LBRY and blockchain rela
 
 We encourage the submission of changes and additions to this glossary.
 
+<GlossaryToc/>
+
 ### Blob
 
 A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.

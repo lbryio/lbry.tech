@@ -1,0 +1,10 @@
+.component--glossary-toc {
+  width: 150px; height: 80vh;
+  top: calc(10vh + 2rem); left: 2rem;
+
+  background-color: $white;
+  border: 1px solid $gray;
+  border-radius: 3px;
+  position: fixed;
+  z-index: 1;
+}
