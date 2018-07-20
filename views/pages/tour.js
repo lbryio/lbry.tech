@@ -4,7 +4,6 @@
 
 //  P A C K A G E
 
-// const dedent = require("dedent");
 const fs = require("graceful-fs");
 const html = require("choo-async/html");
 const raw = require("nanohtml/raw");

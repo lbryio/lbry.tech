@@ -11,12 +11,27 @@ const fm = require("front-matter");
 const fs = require("graceful-fs");
 const html = require("choo-async/html");
 const local = require("app-root-path").require;
+const numberRegex = /^[0-9]/g;
 
 const md = require("markdown-it")({
   html: true,
   typographer: true
 }).use(require("markdown-it-sup"))
-  .use(require("markdown-it-anchor"))
+  .use(require("markdown-it-anchor"), {
+    slugify: stringToSlugify => {
+      let finalString = stringToSlugify
+        .toLowerCase()
+        .replace(/\s\/\s/g, "-")
+        .replace(/\s/g, "-")
+        .replace(/%/g, "")
+        .replace(/\(/g, "")
+        .replace(/\)/g, "")
+        .replace(/,/g, "");
+
+      if (finalString.match(numberRegex)) finalString = `_${finalString}`;
+      return finalString;
+    }
+  })
   .use(require("markdown-it-wikilinks")({
     makeAllLinksAbsolute: true,
     baseURL: "/glossary#",
@@ -61,6 +76,7 @@ module.exports = exports = () => async state => {
 
   let pageScript = "";
   if (path === "overview") pageScript = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
+  if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./views/partials/glossary-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">

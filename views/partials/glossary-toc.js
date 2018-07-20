@@ -2,10 +2,16 @@
 
 
 
+//  V A R I A B L E S
+
+const headerRegex = /###.+/g;
+const numberRegex = /^[0-9]/g;
+
+
+
 //  E X P O R T
 
 module.exports = exports = (state, emit, markdown) => {
-  const headerRegex = /###.+/g;
   const tocElements = markdown.match(headerRegex);
   const collectionOfTocElements = [];
 
@@ -23,12 +29,16 @@ module.exports = exports = (state, emit, markdown) => {
 //  H E L P E R
 
 function slugify(stringToSlugify) {
-  return stringToSlugify
+  let finalString = stringToSlugify
     .toLowerCase()
-    .replace(/ \/ /g, "-")
+    .replace(/###\s/g, "")
+    .replace(/\s\/\s/g, "-")
     .replace(/\s/g, "-")
+    .replace(/%/g, "")
     .replace(/\(/g, "")
     .replace(/\)/g, "")
-    .replace(/,/g, "")
-    .replace(/###-/g, "#");
+    .replace(/,/g, "");
+
+  if (finalString.match(numberRegex)) finalString = `_${finalString}`;
+  return `#${finalString}`;
 }

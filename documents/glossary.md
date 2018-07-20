@@ -18,7 +18,7 @@ A data structure that consists of a *block header* and a *merkle tree* of transa
 
 ### Block Header
 
-A data structure containing a previous block hash, a hash of a merkle tree of transactions, a timestamp, a *difficulty* and a *nonce*.
+A data structure containing a previous block hash, a hash of a Merkle tree of transactions, a timestamp, a *difficulty* and a *nonce*.
 
 ### Block Height
 
@@ -90,7 +90,7 @@ Stands for *Elliptic Curve Digital Signature Algorithm*. Used to verify transact
 
 ### Elliptic Curve Arithmetic
 
-A set of mathematical operations defined on a group of points on a 2D elliptic curve. LBRY, similar to the Bitcoin protocol, uses predefined curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1). Here's the simplest possible explanation of the operations: you can add and subtract points and multiply them by an integer. Dividing by an integer is computationally infeasible (otherwise cryptographic signatures won't work). The private key is a 256-bit integer and the public key is a product of a predefined point G ("generator") by that integer: A = G * a. Associativity law allows implementing interesting cryptographic schemes like Diffie-Hellman key exchange (ECDH): two parties with private keys *a* and *b* may exchange their public keys *A* and *B* to compute a shared secret point C: C = A * b = B * a because (G * a) * b == (G * b) * a. Then this point C can be used as an AES encryption key to protect their communication channel.
+A set of mathematical operations defined on a group of points on a 2D elliptic curve. LBRY, similar to the Bitcoin protocol, uses predefined curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1). Here's the simplest possible explanation of the operations: you can add and subtract points and multiply them by an integer. Dividing by an integer is computationally infeasible (otherwise cryptographic signatures won't work). The private key is a 256-bit integer and the public key is a product of a predefined point G ("generator") by that integer: A = G * a. Associativity law allows implementing interesting cryptographic schemes like Diffie-Hellman key exchange (ECDH): two parties with private keys *a* and *b* may exchange their public keys *A* and *B* to compute a shared secret point `C: C = A * b = B * a` because `(G * a) * b == (G * b) * a`. Then this point C can be used as an AES encryption key to protect their communication channel.
 
 ### Fork
 
@@ -128,11 +128,15 @@ The content price, set by the publisher, in order to download a claim. The key f
 
 The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
+### LBRYCrd
+
+LBRYcrd uses a blockchain similar to bitcoin's to implement an index and payment system for content on the LBRY network. It is a fork of Core.
+
 ### LBRY Credits
 
 LBRY Credits (LBC) is the cryptocurrency used to make digital transactions (payments, tips, claims) on the LBRY blockchain.
 
-## LBRY Daemon
+### LBRY Daemon
 
 The daemon combines various components to provide a single API across the LBRY ecosystem in order to interact with the blockchain and datanetwork.
 
@@ -148,10 +152,6 @@ LBRY is an open-source protocol providing distribution, discovery, and purchase 
 
 For most users, LBRY will be a place where they can find great videos, music, ebooks, and more. A vast digital library that is available on all of your devices. But LBRY is many components working together. The LBRY app is a graphical browser for the decentralized content marketplace provided by the LBRY protocol. It is essentially the lbry daemon bundled with an UI using Electron.
 
-### LBRYCrd
-
-LBRYcrd uses a blockchain similar to bitcoin's to implement an index and payment system for content on the LBRY network. It is a fork of Core.
-
 ### LbryumX Server
 
 A LbryumX-server for the LbryumX client. LbryumX is an extension of electrumx that provides the server side of LBRY Electrum Protocol. It sits between the LBRY daemon and LBRYCrd to provide SPV access to/from clients.
@@ -163,6 +163,10 @@ A LbryumX-server for the LbryumX client. LbryumX is an extension of electrumx th
 ### Lightweight client
 
 Comparing to a *full node*, lightweight node does not store the whole blockchain and thus cannot fully verify any transaction. There are two kinds of lightweight nodes: those fully trusting an external service to determine wallet balance and validity of transactions (e.g. *blockchain.info*) and the apps implementing *Simplified Payment Verification* (SPV). SPV clients do not need to trust any particular service, but are more vulnerable to a *51% attack* than full nodes. See *Simplified Payment Verification* for more info.
+
+### M-of-N Multi-signature Transaction
+
+A transaction that can be spent using M signatures when N public keys are required (M is less or equal to N). Multi-signature transactions that only contain one *OP_CHECKMULTISIG* opcode and N is 3, 2 or 1 are considered *standard*.
 
 ### Mainnet
 
@@ -180,6 +184,10 @@ Merkle tree is an abstract data structure that organizes a list of data items in
 
 A technical term for a collection of unconfirmed transactions stored by a node until they either expire or get included in the main chain. When *reorganization* happens, transactions from orphaned blocks either become invalid (if already included in the *main chain*) or moved to a pool of unconfirmed transactions. By default, *bitcoind* nodes throw away unconfirmed transactions after 24 hours.
 
+### Miner
+
+A person, a software or a hardware that performs *mining*.
+
 ### Mining
 
 A process of finding valid *hashes* of a block header by iterating millions of variants of block headers (using *nonce* and *extra nonce*) in order to find a hash lower than the *target* (see also *difficulty*). The process needs to determine a single global history of all transactions (grouped in blocks). Mining consumes time and electricity and nowadays the difficulty is so big, that energy-wise it's not even profitable to mine using video graphics cards. Mining is paid for by *transaction fees* and by block *rewards* (newly generated coins, hence the term "mining").
@@ -187,14 +195,6 @@ A process of finding valid *hashes* of a block header by iterating millions of v
 ### Mining Pool
 
 A service that allows separate owners of mining hardware to split the reward proportionally to submitted work. Since probability of finding a valid block hash is proportional to miner's *hashrate*, small individual miners may work for months before finding a big per-block reward. Mining pools allow more steady stream of smaller income. Pool owner determines the block contents and distributes ranges of *nonce* values between its workers. Normally, mining pools are centralized. P2Pool is a fully decentralized pool.
-
-### Miner
-
-A person, a software or a hardware that performs *mining*.
-
-### M-of-N Multi-signature Transaction
-
-A transaction that can be spent using M signatures when N public keys are required (M is less or equal to N). Multi-signature transactions that only contain one *OP_CHECKMULTISIG* opcode and N is 3, 2 or 1 are considered *standard*.
 
 ### Node
 
@@ -206,27 +206,31 @@ Stands for "number used once". A 32-bit number in a *block header* which is iter
 
 ### Opcode
 
-8-bit code of a *script* operation. Codes from 0x01 to 0x4B (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). LBRY implemented special op codes for storing and updating of claim data.
+8-bit code of a *script* operation. Codes from `0x01` to `0x4B` (decimal 75) are interpreted as a length of data to be pushed on the stack of the interpreter (data bytes follow the opcode). Other codes are either do something interesting, or disabled and cause transaction verification to fail, or do nothing (reserved for future use). LBRY implemented special op codes for storing and updating of claim data.
 
 ### Orphan, Orphaned Block
 
-A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *51% attack*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*.
+A valid block that is no longer a part of a *main chain*. Usually happens when two or more blocks of the same *height* are produced at the same time. When one of them becomes a part of the main chain, others are considered "orphaned". Orphans also may happen when the blockchain is *forked* due to an attack (see *[51% attack](#_51-attack)*) or a bug. Then a chain of several blocks may become abandoned. Usually a transaction is included in all blocks of the same height, so its *confirmation* is not delayed and there is no *double spend*. See also *Fork*.
 
 ### Outpoint
 
 An outpoint, as referenced in API documentation and elsewhere, is the most specific identification for a particular version of a claim (a claim may be updated and will be referenced by a new outpoint). The outpoint is the concatenation of the transaction id and nout (position in the transaction). Outpoint example: `f6dea4ad26fd526b77935969a17b081342fc92d68b3a1daf69d4a3378657c2fc:0`
 
-### Peer
+### Paper Wallet
 
-A peer is one instance of a client running on a computer on the Internet to which other clients connect and transfer data. Depending on context, "peer" can refer either to any client in the swarm or more specifically to a downloader, a client that has only parts of the file.
+A form of *cold storage* where a *private key* for LBRY Credits *address* is printed on a piece of paper (with or without encryption) and then all traces of the key are removed from the computer where it was generated. To redeem bitcoins, a key must be imported in the wallet application so it can sign a transaction. See also *Casascius Coins*.
 
 ### Pay-to-Script Hash
 
 A type of the *script* and *address* that allows sending bitcoins to arbitrary complex scripts using a compact hash of that script. This allows payer to pay much smaller *transaction fees* and not wait very long for a *non-standard* transaction to get included in the blockchain. Then the actual script matching the hash must be provided by the payee when redeeming the funds. P2SH addresses are encoded in *Base58Check* just like regular public keys and start with number "3".
 
-### Paper Wallet
+### Peer
 
-A form of *cold storage* where a *private key* for LBRY Credits *address* is printed on a piece of paper (with or without encryption) and then all traces of the key are removed from the computer where it was generated. To redeem bitcoins, a key must be imported in the wallet application so it can sign a transaction. See also *Casascius Coins*.
+A peer is one instance of a client running on a computer on the Internet to which other clients connect and transfer data. Depending on context, "peer" can refer either to any client in the swarm or more specifically to a downloader, a client that has only parts of the file.
+
+### Private Key (Privkey)
+
+A 256-bit number used in *ECDSA* algorithm to create transaction *signatures* in order to prove ownership of certain amount of credits. Can also be used in arbitrary *elliptic curve arithmetic* operations. Private keys are stored within *wallet* applications and are usually encrypted with a pass phrase. Private keys may be completely random (see *Key Pool*) or generated from a single secret number ("seed"). See also *Deterministic Wallet*.
 
 ### Proof-of-Work (PoW)
 
@@ -236,17 +240,13 @@ Proof-of-work is not the only requirement, but an important one to make sure tha
 
 Note that owning a very large amount of computational power does not override other rules enforced by every client. Ill-formed blocks or blocks containing invalid transactions are rejected no matter how difficult they were to produce.
 
-### Private Key (Privkey)
-
-A 256-bit number used in *ECDSA* algorithm to create transaction *signatures* in order to prove ownership of certain amount of credits. Can also be used in arbitrary *elliptic curve arithmetic* operations. Private keys are stored within *wallet* applications and are usually encrypted with a pass phrase. Private keys may be completely random (see *Key Pool*) or generated from a single secret number ("seed"). See also *Deterministic Wallet*.
-
 ### Public Key (Pubkey)
 
 A 2D point on an elliptic curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1) that is produced by multiplying a predefined "generator" point by a *private key*. Usually it is represented by a pair of 256-bit numbers ("uncompressed public key"), but can also be compressed to just one 256-bit number (at the slight expense of CPU time to decode an uncompressed number). A special hash of a public key is called *address*. Typical LBRY transactions contain public keys or addresses in the output scripts and *signatures* in the input scripts.
 
 ### Reflector
 
-A reflector cluster to accept LBRY content for hosting en masse, rehost the content, and make money on data fees (currently disabled). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.
+A reflector cluster to accept LBRY content for hosting en masse, re-host the content, and make money on data fees (currently disabled). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.
 
 ### Reorg, Reorganization
 
@@ -260,13 +260,13 @@ The resolve API command returns all available information about a claim or chann
 
 Amount of newly generated LBRY credits that a *miner* may claim in a new block. The first transaction in the block allows miner to claim currently allowed reward as well as all *transaction fees* from all transactions in the block. For security reasons, rewards cannot be *spent* before 100 blocks built on top of the current block.
 
-### Stream Descriptor (SD) Blob
-
-The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
-
 ### Script
 
 A compact turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change amounts being transferred. Amount is stored in a separate field in a *transaction output*.
+
+### Secret key
+
+Either the *Private Key* or an encryption key used in encrypted *wallets*. LBRY protocol does not use encryption anywhere, so *secret key* typically means a *private key* used for signing transactions.
 
 ### Signature
 
@@ -275,10 +275,6 @@ A sequence of bytes that proves that a piece of data is acknowledged by a person
 ### Simplified Payment Verification (SPV)
 
 A scheme to validate transactions without storing the whole blockchain (only block headers) and without trusting any external service. Every transaction must be present with all its parent and sibling hashes in a *merkle tree* up to the root. SPV client trusts the most *difficult* chain of block headers and can validate if the transaction indeed belongs to a certain block header. Since SPV does not validate all transactions, a *51% attack* may not only cause a *double spend* (like with *full nodes*), but also make a completely invalid payment with credits created from nowhere. However, this kind of attack is very costly and probably more expensive than a product in question.
-
-### Secret key
-
-Either the *Private Key* or an encryption key used in encrypted *wallets*. LBRY protocol does not use encryption anywhere, so *secret key* typically means a *private key* used for signing transactions.
 
 ### Soft Fork
 
@@ -296,13 +292,17 @@ A transaction *output* can be spent only once: when another valid transaction ma
 
 Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams as associated with claim data in order to provide the capability to download files over a Peer to Peer network.
 
-### Target
+### Stream Descriptor (SD) Blob
 
-A 256-bit number that puts an upper limit for a block header hash to be valid. The lower the target is, the higher the *difficulty* to find a valid hash. The maximum (easiest) target is 0x00000000FFFF0000000000000000000000000000000000000000000000000000. The difficulty and the target are adjusted every 2016 blocks (approx. 2 weeks) to keep interval between the blocks close to 10 minutes.
+The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
 
 ### Takeover Period
 
 In order to take over a claim at an existing vanity URL, the bid must be higher and takeover period must pass. In simple terms, the longer the claim is held, the longer the takeover period. For each month held, a day is added to the take over period for a maximum of 7 days. See [Claimtrie Bid States section here](https://lbry.io/faq/claimtrie-implementation) for more information.
+
+### Target
+
+A 256-bit number that puts an upper limit for a block header hash to be valid. The lower the target is, the higher the *difficulty* to find a valid hash. The maximum (easiest) target is `0x00000000FFFF0000000000000000000000000000000000000000000000000000`. The difficulty and the target are adjusted every 2016 blocks (approx. 2 weeks) to keep interval between the blocks close to 10 minutes.
 
 ### Testnet
 
@@ -310,7 +310,7 @@ A set of parameters used for testing a LBRY network. Testnet is like *mainnet*, 
 
 ### Transaction
 
-A chunk of binary data that describes how credits are moved from one owner to another. Transactions are stored in the *blockchain*. Every transaction (except for *coinbase* transactions) has a reference to one or more previous transactions (*inputs*) and one or more rules on how to spend these credits further (*outputs*). See *Transaction Input* and *Transaction Output* for more info.
+A chunk of binary data that describes how credits are moved from one owner to another. Transactions are stored in the *[blockchain](#blockchain)*. Every transaction (except for *coinbase* transactions) has a reference to one or more previous transactions (*inputs*) and one or more rules on how to spend these credits further (*outputs*). See *Transaction Input* and *Transaction Output* for more info.
 
 ### Transaction Fee
 
@@ -340,6 +340,8 @@ An application or a service that helps keeping private keys for signing transact
 
 Also known as >50% attack or a *double spend* attack. An attacker can make a payment, wait till the merchant accepts some number of *confirmations* and provides the service, then starts mining a parallel chain of blocks starting with a block before the transaction. This parallel blockchain then includes another transaction that spends the same *outputs* on some other address. When the parallel chain becomes more *difficult*, it is considered a *main chain* by all nodes and the original transaction becomes invalid. Having more than a half of total *hashrate* guarantees possibility to overtake chain of any length, hence the name of an attack (strictly speaking, it is "more than 50%", not 51%). Also, even 40% of hashrate allows making a double spend, but the chances are less than 100% and are diminishing exponentially with the number of confirmations that the merchant requires.
 
-About
------
+---
+
+## About
+
 Portions of this glossary originated from: [https://github.com/oleganza/bitcoin-papers/blob/master/BitcoinGlossary.md](https://github.com/oleganza/bitcoin-papers/blob/master/BitcoinGlossary.md)
