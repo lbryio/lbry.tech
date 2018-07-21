@@ -179,10 +179,6 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
   if (!claimAddress || !resolveMethod) return;
 
   const allowedClaims = [
-    "5b7c7a202201033d99e1be2930d290c127c0f4fe",
-    "a1372cf5523885f5923237bfe522f02f5f054362",
-    "de7f7fa33e8d879b2bae7238d2bdf827a39f9301",
-    "fbdcd44a97810522d23d5f1335b8ca04be9d776c",
     "fortnite-top-stream-moments-nickatnyte",
     "itsadisaster",
     "six",

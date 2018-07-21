@@ -44,7 +44,7 @@ function fetchMetadata(metadataId) {
 
   $("#step1-placeholder").html(`
 <pre><code class="bash">
-  # Example code using the daemon
+  # The LBRY app must be running on your computer for this example to work
   curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${metadataId}' } }"
 </code></pre>
 
