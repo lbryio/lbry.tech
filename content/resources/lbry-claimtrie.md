@@ -36,7 +36,7 @@ This section describes how bids are processed by the ClaimTrie in order to deter
     * If the bid with the greatest amount does not have the same claimID as the bid which was ‘controlling’ prior to including the current block, change the delay for the name as of the current block to 0, redetermine which bids and supports should be active, and then perform the previous calculation again.
     * At this point, the bid calculated to have the greatest amount behind it is the ‘controlling’ bid as of this block
 5. *Spent*: A transaction has been included in the blockchain which spends the TXout which contains the bid. Must be in the ‘accepted’ state.
-6. *Expired*: All bids ‘expire’ regardless of what state they are in when the current block height exceeds the height of the block at which the bid was accepted plus 52416 blocks, or 91 days ( currently this is set to 262974 blocks, or 456 days, which will be fixed in a future hard fork ). Updated claims will restart the expiration timer at the block height of the update.  
+6. *Expired*: All bids ‘expire’ regardless of what state they are in when the current block height exceeds the height of the block at which the bid was accepted plus 2102400 blocks, or 3650 days or 10 years considering a 2.5 minute block time. ( Prior to block 400155 this was set to 262974 blocks, or 456 days, which was changed with a [hardfork](https://github.com/lbryio/lbrycrd/pull/137). Updated claims will restart the expiration timer at the block height of the update.  
 
 
 ## ClaimTrie Transaction Implementation 
