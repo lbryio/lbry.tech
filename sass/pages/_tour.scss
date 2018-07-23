@@ -331,10 +331,11 @@
   }
 
   select {
-    background-image: url("../../media/svg/down.svg");
+    background-image: url("/assets/media/svg/down.svg");
     background-position: 99% center;
     background-repeat: no-repeat;
     background-size: 1rem;
+    padding-right: 2rem;
   }
 
   textarea {

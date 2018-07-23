@@ -4,7 +4,7 @@
 
 //  P R O G R A M
 
-const relativeDate = (function (undefined) {
+const relativeDate = (undefined => {
   const SECOND = 1000;
   const MINUTE = 60 * SECOND;
   const HOUR = 60 * MINUTE;

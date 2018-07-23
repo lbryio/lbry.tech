@@ -16,17 +16,17 @@ module.exports = exports = () => async () => html`
   <div class="hook" id="hook">
     <nav class="hook__navigation" id="hook-navigation">
       <div class="inner-wrap"> <!--/ TODO: Save tutorial position to localStorage /-->
-        <a href="#" class="hook__navigation__step" data-action="go to step 1">
+        <a href="#" class="hook__navigation__step" data-action="tour, step one">
           <span class="number">1</span>
           Resolve a claim
         </a>
 
-        <a href="#" class="hook__navigation__step" data-action="go to step 2">
+        <a href="#" class="hook__navigation__step" data-action="tour, step two">
           <span class="number">2</span>
           Publish content
         </a>
 
-        <a href="#" class="hook__navigation__step" data-action="go to step 3">
+        <a href="#" class="hook__navigation__step" data-action="tour, step three">
           <span class="number">3</span>
           Support with LBC
         </a>
@@ -126,23 +126,65 @@ function step1() {
 function step2() {
   /**
     Step 2 loading steps:
-    ...
+    - exampleCode !== ''
+      <pre style="clear: both;"><code class="bash"><span v-html="highlight('bash', exampleCode)"></span></code></pre>
+
+    - isLoading
+      <div class="loader"></div>
+
+    - jsonData
+      <p style="text-align: center;">Success!<br/>
+        <a class="__button-black" v-bind:href="'http://explorer.lbry.io/tx/'+txid">See the transaction on explorer.lbry.io</a>
+      </p>
+
+      <p style="text-align: center;">Here is the raw response:</p>
+      <pre><code class="json"><span v-html="highlight('json', jsonData)"></span></code></pre>
+
+    Process after submitting meme:
+    - isLoading appears
+    - exampleCode and jsonData replace `#step2-placeholder` contents
+    - next button should exist
+
+    Issues:
+    - image isn't uploaded to spee.ch
+    - response is blank
+    - response should have link to upload on Blockchain Explorer
+    - NSFW flag should work
   */
 
   const images = [
     {
-      src: "../carlsagan2.jpg",
+      src: "/assets/media/images/carlsagan2.jpg",
       alt: "Carl Sagan"
     },
     {
-      src: "../doge-meme.jpg",
+      src: "/assets/media/images/doge-meme.jpg",
       alt: "Doge"
     },
     {
-      src: "../lbry-green.png",
+      src: "/assets/media/images/lbry-green.png",
       alt: "LBRY Logo With Green Background"
     }
   ];
+
+  const memePlaceholderData = {
+    bottomLine: {
+      placeholder: "Top line",
+      value: "that I made"
+    },
+    description: {
+      placeholder: "Description",
+      value: "Check out this image I published to LBRY via lbry.tech"
+    },
+    topLine: {
+      placeholder: "Top line",
+      value: "This is an example meme"
+    },
+    title: {
+      placeholder: "Title",
+      value: "Dank Meme Supreme da Cheese"
+    }
+  };
 
   const renderedImages = [];
 
@@ -160,92 +202,80 @@ function step2() {
       </header>
 
       <div class="hook__page__content inner-wrap">
-        <template v-if="!isLoading">
-          <div class="hook__page__content__meme left">
-            <img v-bind:src="backgroundImage" id="base-image" style="height: 0; visibility: hidden;" alt="Base image for LBRY meme creator"/>
-            <canvas id="meme-canvas" width="400" height="300">Sorry, canvas is not supported</canvas>
+        <div class="hook__page__content__meme left">
+          <img v-bind:src="backgroundImage" id="base-image" style="height: 0; visibility: hidden;" alt="Base image for LBRY meme creator"/>
+          <canvas id="meme-canvas" width="400" height="300">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
-            <!--/ <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="hook__page__content__meme__thumbnail" v-bind:class="{'selected': backgroundImage === image.src}" v-bind:alt="image.alt"/> /-->
-            ${renderedImages}
-          </div>
-
-          <form class="hook__page__content__meme right"> <!--/ v-on:submit.prevent="submit" /-->
-            <h2>Image Text</h2>
-
-            <fieldset>
-              <label for="meme-top-line">Top line</label>
-              <input name="meme-top-line" id="meme-top-line" type="text" placeholder="Top line" required/> <!--/ v-model="topLine" /-->
-            </fieldset>
-
-            <fieldset>
-              <label for="meme-bottom-line">Bottom line</label>
-              <input name="meme-bottom-line" id="meme-bottom-line" type="text" placeholder="Bottom line" required/> <!--/ v-model="bottomLine" /-->
-            </fieldset>
-
-            <h2 class="__metadata">Metadata</h2>
-
-            <fieldset>
-              <label for="meme-title">Title</label>
-              <input name="meme-title" id="meme-title" type="text" placeholder="Title" required/> <!--/ v-model="title" /-->
-            </fieldset>
-
-            <fieldset>
-              <label for="meme-description">Description</label>
-              <textarea name="meme-description" id="meme-description" type="text" placeholder="Description" spellcheck="false" required>{{ description }}</textarea> <!--/ v-model="description" /-->
-            </fieldset>
-
-            <fieldset>
-              <label for="meme-language">Language</label>
-              <select name="meme-language" id="meme-language"> <!--/ v-model="language" /-->
-                <option value="ar">Arabic</option>
-                <option value="zh">Chinese (Mandarin)</option>
-                <option value="en">English</option>
-                <option value="fr">French</option>
-                <option value="de">German</option>
-                <option value="it">Italian</option>
-                <option value="jp">Japanese</option>
-                <option value="ru">Russian</option>
-                <option value="es">Spanish</option>
-                <option value="">Not specified</option>
-              </select>
-            </fieldset>
-
-            <fieldset>
-              <label for="meme-license">License</label>
-              <select name="meme-license" id="meme-license" required> <!--/ v-model="license" /-->
-                <option value="Public Domain">Public Domain</option>
-                <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
-                <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
-                <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
-                <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
-                <option value="None">None</option>
-              </select>
-            </fieldset>
-
-            <fieldset>
-              <label><input type="checkbox" name="nsfw"/>NSFW</label> <!--/ v-model="nsfw" /-->
-            </fieldset>
-
-            <fieldset>
-              <input type="submit" class="__button-black" value="Submit"/>
-            </fieldset>
-          </form>
-        </template>
-
-        <pre v-if="exampleCode !== ''" style="clear: both;"><code class="bash"><span v-html="highlight('bash', exampleCode)"></span></code></pre>
-
-        <div class="loader" v-if="isLoading"></div>
-
-        <div v-if="jsonData">
-          <p style="text-align: center;">Success!<br/>
-            <a class="__button-black" v-bind:href="'http://explorer.lbry.io/tx/'+txid">See the transaction on explorer.lbry.io</a>
-          </p>
-          <p style="text-align: center;">Here is the raw response:</p>
-          <pre><code class="json"><span v-html="highlight('json', jsonData)"></span></code></pre>
+          <!--/ <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="hook__page__content__meme__thumbnail" v-bind:class="{'selected': backgroundImage === image.src}" v-bind:alt="image.alt"/> /-->
+          ${renderedImages}
         </div>
+
+        <form class="hook__page__content__meme right"> <!--/ v-on:submit.prevent="submit" /-->
+          <h2>Image Text</h2>
+
+          <fieldset>
+            <label for="meme-top-line">Top line</label>
+            <input name="meme-top-line" id="meme-top-line" type="text" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" value="${memePlaceholderData.topLine.value}" required/>
+          </fieldset>
+
+          <fieldset>
+            <label for="meme-bottom-line">Bottom line</label>
+            <input name="meme-bottom-line" id="meme-bottom-line" type="text" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" value="${memePlaceholderData.bottomLine.value}" required/>
+          </fieldset>
+
+          <h2 class="__metadata">Metadata</h2>
+
+          <fieldset>
+            <label for="meme-title">Title</label>
+            <input name="meme-title" id="meme-title" type="text" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" value="${memePlaceholderData.title.value}" required/>
+          </fieldset>
+
+          <fieldset>
+            <label for="meme-description">Description</label>
+            <textarea name="meme-description" id="meme-description" type="text" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" required>${memePlaceholderData.description.value}</textarea>
+          </fieldset>
+
+          <fieldset>
+            <label for="meme-language">Language</label>
+            <select name="meme-language" id="meme-language">
+              <option value="ar">Arabic</option>
+              <option value="zh">Chinese (Mandarin)</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="de">German</option>
+              <option value="it">Italian</option>
+              <option value="jp">Japanese</option>
+              <option value="ru">Russian</option>
+              <option value="es">Spanish</option>
+              <option value="">Not specified</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <label for="meme-license">License</label>
+            <select name="meme-license" id="meme-license" required>
+              <option value="Public Domain">Public Domain</option>
+              <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
+              <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
+              <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
+              <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
+              <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
+              <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
+              <option value="None">None</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <label><input type="checkbox" name="nsfw"/>NSFW</label>
+          </fieldset>
+
+          <fieldset>
+            <input type="submit" class="__button-black" value="Submit"/>
+          </fieldset>
+        </form>
       </div>
+
+      <div class="hook__page__content inner-wrap" id="step2-placeholder"></div>
     </section>
   `;
 }
