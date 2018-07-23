@@ -2,7 +2,13 @@
   <div class="component--mission-statement">
     <strong class="component--mission-statement__title">Mission Statement</strong>
 
-    To create a market for accessing and publishing information<sup>1</sup> that is global<sup>2</sup>, decentralized<sup>3</sup>, robust<sup>4</sup>, optimal<sup>5</sup> and complete<sup>6</sup>.
+    To create a market for accessing and publishing
+    information<a href="#footnote-1"><sup>1</sup></a>
+    that is global<a href="#footnote-2"><sup>2</sup></a>,
+    decentralized<a href="#footnote-3"><sup>3</sup></a>,
+    robust<a href="#footnote-4"><sup>4</sup></a>,
+    optimal<a href="#footnote-5"><sup>5</sup></a> and
+    complete<a href="#footnote-6"><sup>6</sup></a>.
   </div>
 </template>
 
@@ -16,6 +22,10 @@
     border-left: 0.5rem solid $teal;
     line-height: 1.55;
     position: relative;
+
+    a {
+      background-image: none;
+    }
 
     @media (min-width: 901px) {
       font-size: 1.25rem;

@@ -4,25 +4,25 @@ title: Overview
 
 ## Mission
 
-What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked without any centralized authority or point of control?
+What if anyone in the world could publish digital content, anyone else in the world could access it, for free or for payment, and that entire system worked without any centralized authority or point of control?
 
-That's the idea behind LBRY.
+That's the mission of LBRY:
 
 <MissionStatement/>
 
-That's a fancy sentence, so here's a plainer one: we just thought it'd be really damn cool if there was a system that stored as much of the world's information as possible, but was owned and controlled by no one.
+That's a fancy sentence, so here's a plainer one: we just thought it'd be really damn cool if there was a system that made discoverable and distributable as much of the world's information as possible, but was owned and controlled by no one.
 
-<sup>1</sup> In the information-theoretic sense, i.e. any data. LBRY facilitates distribution of all data, whether it be a video or a spreadsheet.
+<sup id="footnote-1">1</sup> In the information theoric sense, i.e. any data. LBRY facilitates distribution of all data, whether a video or a spreadsheet.
 
-<sup>2</sup> Accessible anywhere in the world on any internet-connected device.
+<sup id="footnote-2">2</sup> Accessible anywhere in the world on any internet-connected device.
 
-<sup>3</sup> Not controlled by any one person, party or authority.
+<sup id="footnote-3">3</sup> Not controlled by any one person, party or authority.
 
-<sup>4</sup> Resistant to censorship or attempts to control; impervious to attacks or disruptions.
+<sup id="footnote-4">4</sup> Resistant to censorship or attempts to control; impervious to attacks or disruptions.
 
-<sup>5</sup> In the Pareto sense, with regards to the production and distribution of information (i.e. digital information is both created and distributed in a way that could not be any more efficient from the perspectives of information producers and consumers)
+<sup id="footnote-5">5</sup> In the Pareto sense, with regards to the production and distribution of information (i.e. digital information is both created and distributed in a way that could not be any more efficient from the perspectives of information producers and consumers)
 
-<sup>6</sup> The most complete collection of world’s books, films, art, games, etc. should be available via LBRY.
+<sup id="footnote-6">6</sup> The most complete collection of world’s books, films, art, games, etc. should be available via LBRY.
 
 ## Ecosystem Overview
 
