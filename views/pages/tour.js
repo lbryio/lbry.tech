@@ -203,10 +203,9 @@ function step2() {
 
       <div class="hook__page__content inner-wrap">
         <div class="hook__page__content__meme left">
-          <img v-bind:src="backgroundImage" id="base-image" style="height: 0; visibility: hidden;" alt="Base image for LBRY meme creator"/>
+          <img id="base-image" style="height: 0; visibility: hidden;" alt="Base image for LBRY meme creator"/>
           <canvas id="meme-canvas" width="400" height="300">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
-          <!--/ <img v-for="image in images" v-bind:src="image.src" v-on:click="chooseImage(image.src)" class="hook__page__content__meme__thumbnail" v-bind:class="{'selected': backgroundImage === image.src}" v-bind:alt="image.alt"/> /-->
           ${renderedImages}
         </div>
 

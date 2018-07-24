@@ -3,7 +3,9 @@
 
 
 $("#fetch-claim-uri").val(""); // reset
+
 detectLanguageAndUpdate();
+initCanvas();
 
 
 
@@ -36,6 +38,7 @@ $("body").on("click", "[data-action]", event => {
 
       $("#step1-page").hide();
       $("#step2-page").show();
+      $(".hook__page__content__meme__thumbnail").click();
       $("#step3-page").hide();
       break;
 
@@ -52,6 +55,15 @@ $("body").on("click", "[data-action]", event => {
       break;
   }
 });
+
+$("body").on("click", ".hook__page__content__meme__thumbnail", event => {
+  $(".hook__page__content__meme__thumbnail").removeClass("selected");
+
+  event.currentTarget.className += " selected";
+  updateCanvas(event.currentTarget);
+});
+
+$("#meme-top-line, #meme-bottom-line").on("keyup", () => updateCanvas());
 
 
 
@@ -88,7 +100,7 @@ function fetchMetadata(metadataId) {
   /**
     TODO:
     [ ] Style code with highlightjs
-    [ ] Add copy to explain that the lbry app has to be running in order to follow example
+    [✓] Add copy to explain that the lbry app has to be running in order to follow example
   */
 
   $("#step1-placeholder").html(`
@@ -104,6 +116,63 @@ function fetchMetadata(metadataId) {
   $("#step1-selections").hide();
 }
 
-send(JSON.stringify({
+function clearCanvas(canvas) {
+  const ctx = canvas.getContext("2d");
+
+  ctx.save();
+  ctx.globalCompositeOperation = "copy";
+  ctx.strokeStyle = "transparent";
+  ctx.beginPath();
+  ctx.lineTo(0, 0);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function initCanvas() {
+  const canvas = document.getElementById("meme-canvas");
+  const canvasWidth = 400;
+  const canvasHeight = 300;
+  const ctx = canvas.getContext("2d");
+  const img = document.getElementById("base-image");
+
+  clearCanvas(canvas);
+
+  ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+  ctx.fillStyle = "white";
+  ctx.font = "bold 28px Karla";
+  ctx.lineJoin = "round";
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = "black";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  ctx.strokeText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
+  ctx.strokeText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  ctx.fillText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
+  ctx.fillText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+}
+
+function updateCanvas(imageSource) {
+  const canvas = document.getElementById("meme-canvas");
+  const canvasWidth = 400;
+  const canvasHeight = 300;
+  const ctx = canvas.getContext("2d");
+  const img = document.getElementById("base-image");
+
+  clearCanvas(canvas);
+
+  if (imageSource) {
+    ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+    img.src = imageSource.src;
+  } ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+
+  ctx.strokeText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
+  ctx.strokeText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  ctx.fillText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
+  ctx.fillText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+}
+
+
+
+send(JSON.stringify({ // TODO: Remove this
   "message": "Landed on Tour"
 }));
