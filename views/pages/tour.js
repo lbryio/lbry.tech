@@ -16,20 +16,20 @@ module.exports = exports = () => async () => html`
   <div class="hook" id="hook">
     <nav class="hook__navigation" id="hook-navigation">
       <div class="inner-wrap"> <!--/ TODO: Save tutorial position to localStorage /-->
-        <a href="#" class="hook__navigation__step" data-action="tour, step one">
+        <button class="hook__navigation__step" data-action="tour, step 1" type="button">
           <span class="number">1</span>
           Resolve a claim
-        </a>
+        </button>
 
-        <a href="#" class="hook__navigation__step" data-action="tour, step two">
+        <button class="hook__navigation__step" data-action="tour, step 2" type="button">
           <span class="number">2</span>
           Publish content
-        </a>
+        </button>
 
-        <a href="#" class="hook__navigation__step" data-action="tour, step three">
+        <button class="hook__navigation__step" data-action="tour, step 3" type="button">
           <span class="number">3</span>
           Support with LBC
-        </a>
+        </button>
       </div>
     </nav>
 
@@ -70,8 +70,8 @@ function step1() {
           <p>Let's start by getting the associated metadata for a claim.</p>
 
           <div class="hook__page__hero__claim">
-            <span>lbry://</span><input id="fetch-claim-uri" type="text" placeholder="&thinsp;Claim URI goes here"/>
-            <button data-action="fetch metadata" class="button" title="Execute claim" type="button">Execute</button>
+            <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Claim URI goes here" type="text"/>
+            <button class="button" data-action="execute claim" type="button">Execute</button>
           </div>
         </div>
       </header>
@@ -82,7 +82,7 @@ function step1() {
         <p style="text-align: center;">&hellip;or select a live example from below</p>
 
         <div class="hook__page__content__card">
-          <img src="https://spee.ch/0654f2e2322ccfefa02a956d252df9ac7611d8b0/placeholder-itsadisaster.jpeg" data-action="choose claim" data-claim-id="itsadisaster">
+          <img data-action="choose claim" data-claim-id="itsadisaster" src="https://spee.ch/0654f2e2322ccfefa02a956d252df9ac7611d8b0/placeholder-itsadisaster.jpeg">
 
           <div data-action="choose claim" data-claim-id="itsadisaster">
             <h4>It's a Disaster</h4>
@@ -91,7 +91,7 @@ function step1() {
         </div>
 
         <div class="hook__page__content__card">
-          <img src="https://spee.ch/b1bd330e048fc22dc7bf941c33dd8245eef492c1/unbubbled.png" data-action="choose claim" data-claim-id="unbubbled1-1">
+          <img data-action="choose claim" data-claim-id="unbubbled1-1" src="https://spee.ch/b1bd330e048fc22dc7bf941c33dd8245eef492c1/unbubbled.png">
 
           <div data-action="choose claim" data-claim-id="unbubbled1-1">
             <h4>Unbubbled with Jamie King, Ep1.1 &mdash; Bitcoin, Boom or Bust</h4>
@@ -100,7 +100,7 @@ function step1() {
         </div>
 
         <div class="hook__page__content__card">
-          <img src="https://spee.ch/9880947df41af880bc19724ceddd1cce957a07e2/placeholder-fortninte.jpeg" data-action="choose claim" data-claim-id="fortnite-top-stream-moments-nickatnyte">
+          <img data-action="choose claim" data-claim-id="fortnite-top-stream-moments-nickatnyte" src="https://spee.ch/9880947df41af880bc19724ceddd1cce957a07e2/placeholder-fortninte.jpeg">
 
           <div data-action="choose claim" data-claim-id="fortnite-top-stream-moments-nickatnyte">
             <h4>FORTNITE TOP STREAM MOMENTS &mdash; Nickatnyte &amp; GamingwithMolt</h4>
@@ -109,7 +109,7 @@ function step1() {
         </div>
 
         <div class="hook__page__content__card">
-          <img src="https://spee.ch/a3b8258478ad88954f42f6ac3427eab380720f60/placeholder-lbrymine.png" data-action="choose claim" data-claim-id="six">
+          <img data-action="choose claim" data-claim-id="six" src="https://spee.ch/a3b8258478ad88954f42f6ac3427eab380720f60/placeholder-lbrymine.png">
 
           <div data-action="choose claim" data-claim-id="six">
             <h4>LBRY Coin (LBC) GPU Miner for AMD and NVIDIA</h4>
@@ -140,6 +140,25 @@ function step2() {
       <p style="text-align: center;">Here is the raw response:</p>
       <pre><code class="json"><span v-html="highlight('json', jsonData)"></span></code></pre>
 
+    Meme submission process:
+    - `PUT` request to `http://daemon.lbry.tech/images.php`:
+      - headers: "Content-Type": "text/plain"
+      - qs: access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
+      - body: document.getElementById("meme-canvas").toDataURL("image/jpeg", 0.6)
+      - response should be parsed as JSON
+      - //
+      - socket emit "fetch metadata":
+        - bid: 0.001, // hard-coded on the back-end
+        - description: component.description,
+        - file_path: uploadResponse.body.filename,
+        - language: component.language,
+        - license: component.license,
+        - method: "publish",
+        - name: component.title,
+        - nsfw: component.nsfw,
+        - title: component.title
+        - socket emit error from back-end if any field is missing
+
     Process after submitting meme:
     - isLoading appears
     - exampleCode and jsonData replace `#step2-placeholder` contents
@@ -154,16 +173,16 @@ function step2() {
 
   const images = [
     {
-      src: "/assets/media/images/carlsagan2.jpg",
-      alt: "Carl Sagan"
+      alt: "Carl Sagan",
+      src: "/assets/media/images/carlsagan2.jpg"
     },
     {
-      src: "/assets/media/images/doge-meme.jpg",
-      alt: "Doge"
+      alt: "Doge",
+      src: "/assets/media/images/doge-meme.jpg"
     },
     {
-      src: "/assets/media/images/lbry-green.png",
-      alt: "LBRY Logo With Green Background"
+      alt: "LBRY Logo With Green Background",
+      src: "/assets/media/images/lbry-green.png"
     }
   ];
 
@@ -189,54 +208,54 @@ function step2() {
   const renderedImages = [];
 
   for (const image of images) {
-    renderedImages.push(`<img src="${image.src}" class="hook__page__content__meme__thumbnail" alt="${image.alt}"/>`);
+    renderedImages.push(`<img alt="${image.alt}" class="hook__page__content__meme__thumbnail" src="${image.src}"/>`);
   }
 
   return html`
-    <section class="hook__page" id="step2-page" style="display: none;"> <!--/ v-images-loaded="imagesLoaded" /-->
+    <section class="hook__page" id="step2-page" style="display: none;">
       <header class="hook__page__hero">
         <div class="inner-wrap">
           <h1>Publish your content on the blockchain</h1>
-          <p>Upload an image to the blockchain and you are able to view it on the <a href="http://explorer.lbry.io" title="LBRY Blockchain Explorer" target="_blank" rel="noopener noreferrer">LBRY Blockchain Explorer</a>.</p>
+          <p>Upload an image to the blockchain and you are able to view it on the <a href="http://explorer.lbry.io" rel="noopener noreferrer" target="_blank" title="LBRY Blockchain Explorer">LBRY Blockchain Explorer</a>.</p>
         </div>
       </header>
 
       <div class="hook__page__content inner-wrap">
         <div class="hook__page__content__meme left">
-          <img id="base-image" style="height: 0; visibility: hidden;" alt="Base image for LBRY meme creator"/>
-          <canvas id="meme-canvas" width="400" height="300">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
+          <img alt="Base image for LBRY meme creator" id="base-image" style="height: 0; visibility: hidden;"/>
+          <canvas id="meme-canvas" height="300" width="400">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
           ${renderedImages}
         </div>
 
-        <form class="hook__page__content__meme right"> <!--/ v-on:submit.prevent="submit" /-->
+        <form class="hook__page__content__meme right">
           <h2>Image Text</h2>
 
           <fieldset>
             <label for="meme-top-line">Top line</label>
-            <input name="meme-top-line" id="meme-top-line" type="text" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" value="${memePlaceholderData.topLine.value}" required/>
+            <input id="meme-top-line" name="meme-top-line" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.topLine.value}" required/>
           </fieldset>
 
           <fieldset>
             <label for="meme-bottom-line">Bottom line</label>
-            <input name="meme-bottom-line" id="meme-bottom-line" type="text" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" value="${memePlaceholderData.bottomLine.value}" required/>
+            <input id="meme-bottom-line" name="meme-bottom-line" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.bottomLine.value}" required/>
           </fieldset>
 
           <h2 class="__metadata">Metadata</h2>
 
           <fieldset>
             <label for="meme-title">Title</label>
-            <input name="meme-title" id="meme-title" type="text" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" value="${memePlaceholderData.title.value}" required/>
+            <input id="meme-title" name="meme-title" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.title.value}" required/>
           </fieldset>
 
           <fieldset>
             <label for="meme-description">Description</label>
-            <textarea name="meme-description" id="meme-description" type="text" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" required>${memePlaceholderData.description.value}</textarea>
+            <textarea id="meme-description" name="meme-description" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" type="text" required>${memePlaceholderData.description.value}</textarea>
           </fieldset>
 
           <fieldset>
             <label for="meme-language">Language</label>
-            <select name="meme-language" id="meme-language">
+            <select id="meme-language" name="meme-language">
               <option value="ar">Arabic</option>
               <option value="zh">Chinese (Mandarin)</option>
               <option value="en">English</option>
@@ -252,7 +271,7 @@ function step2() {
 
           <fieldset>
             <label for="meme-license">License</label>
-            <select name="meme-license" id="meme-license" required>
+            <select id="meme-license" name="meme-license" required>
               <option value="Public Domain">Public Domain</option>
               <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
               <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
@@ -265,11 +284,11 @@ function step2() {
           </fieldset>
 
           <fieldset>
-            <label><input type="checkbox" name="nsfw"/>NSFW</label>
+            <label><input id="meme-nsfw-flag" name="nsfw" type="checkbox"/>NSFW</label>
           </fieldset>
 
           <fieldset>
-            <input type="submit" class="__button-black" value="Submit"/>
+            <button data-action="upload image" class="__button-black" type="button">Submit</button>
           </fieldset>
         </form>
       </div>

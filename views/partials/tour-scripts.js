@@ -14,16 +14,16 @@ $("body").on("click", "[data-action]", event => {
   const data = event.currentTarget.dataset;
 
   switch(data.action) {
-    case "fetch metadata":
-      if (!$("#fetch-claim-uri").val()) return;
-      fetchMetadata($("#fetch-claim-uri").val());
-      break;
-
     case "choose claim":
-      fetchMetadata(data.claimId);
+      fetchMetadata(1, data.claimId);
       break;
 
-    case "tour, step one":
+    case "execute claim":
+      if (!$("#fetch-claim-uri").val()) return;
+      fetchMetadata(1, $("#fetch-claim-uri").val());
+      break;
+
+    case "tour, step 1":
       $(".hook__navigation__step").removeClass("active");
       $(".hook__navigation__step:nth-child(1)").addClass("active");
 
@@ -32,23 +32,27 @@ $("body").on("click", "[data-action]", event => {
       $("#step3-page").hide();
       break;
 
-    case "tour, step two":
+    case "tour, step 2":
       $(".hook__navigation__step").removeClass("active");
       $(".hook__navigation__step:nth-child(2)").addClass("active");
 
       $("#step1-page").hide();
       $("#step2-page").show();
-      $(".hook__page__content__meme__thumbnail").click();
+      $(".hook__page__content__meme__thumbnail").click(); // preload canvas
       $("#step3-page").hide();
       break;
 
-    case "tour, step three":
+    case "tour, step 3":
       $(".hook__navigation__step").removeClass("active");
       $(".hook__navigation__step:nth-child(3)").addClass("active");
 
       $("#step1-page").hide();
       $("#step2-page").hide();
       $("#step3-page").show();
+      break;
+
+    case "upload image":
+      fetchMetadata(2, getMemeInfo());
       break;
 
     default:
@@ -88,33 +92,79 @@ function detectLanguageAndUpdate() {
   ) $("#meme-language").children(`option[value="${compare(memeLocales, userLocales)[0]}"]`).attr("selected", true);
 }
 
-function fetchMetadata(metadataId) {
-  send(JSON.stringify({
-    "claim": metadataId,
-    "message": "fetch metadata",
-    "method": "resolve"
-  }));
 
-  if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(metadataId);
 
+function fetchMetadata(stepNumber, data) {
   /**
     TODO:
-    [ ] Style code with highlightjs
-    [✓] Add copy to explain that the lbry app has to be running in order to follow example
+    - Style code with highlightjs
   */
 
-  $("#step1-placeholder").html(`
+  console.log(typeof data);
+  if (!stepNumber) return;
+
+  switch(stepNumber) {
+    case 1:
+      send(JSON.stringify({
+        "claim": data,
+        "message": "fetch metadata",
+        "method": "resolve",
+        "step": stepNumber
+      }));
+
+      if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(data);
+
+      $("#step1-placeholder").html(`
 <pre><code class="bash">
   # The LBRY app must be running on your computer for this example to work
-  curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${metadataId}' } }"
+  curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${data}' } }"
 </code></pre>
 
 <div class="loader" id="temp-loader"></div>
 <div id="step1-result"></div>
-  `);
+      `);
 
-  $("#step1-selections").hide();
+      $("#step1-selections").hide();
+      break;
+
+    case 2:
+      console.log(stepNumber, data);
+      break;
+
+    default:
+      break;
+  }
 }
+
+function getMemeInfo() {
+  /*
+  - description: component.description,
+  - file_path: uploadResponse.body.filename,
+  - language: component.language,
+  - license: component.license,
+  - name: component.title,
+  - nsfw: component.nsfw,
+  - title: component.title
+
+  // Set on back-end
+  - bid: 0.001,
+  - method: "publish"
+  */
+
+  const info = {};
+
+  info.description = $("#meme-description").val();
+  info.file_path = $("#meme-canvas")[0].toDataURL("image/jpeg", 0.6);
+  info.language = $("#meme-language").val();
+  info.license = $("#meme-license").val();
+  info.name = $("#meme-title").val();
+  info.nsfw = $("#meme-nsfw-flag").val();
+  info.title = $("#meme-title").val();
+
+  return info;
+}
+
+
 
 function clearCanvas(canvas) {
   const ctx = canvas.getContext("2d");

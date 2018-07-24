@@ -37,6 +37,8 @@
 }
 
 .hook__navigation__step {
+  background-color: transparent;
+
   @media (min-width: 501px) {
     display: inline-block;
 
@@ -69,6 +71,8 @@
   }
 
   &:not(.active) {
+    color: $white;
+
     span {
       border-color: rgba($white, 0.1);
     }

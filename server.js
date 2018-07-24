@@ -77,7 +77,7 @@ fastify.ready(err => {
   if (err) throw err;
 
   fastify.ws.on("connection", socket => {
-    socket.send(JSON.stringify({
+    socket.send(JSON.stringify({ // TODO: Remove this
       "message": "notification",
       "details": "Welcome"
     }));
@@ -89,8 +89,8 @@ fastify.ready(err => {
         case "landed on homepage":
           generateGitHubFeed(result => {
             socket.send(JSON.stringify({
-              "message": "updated html",
               "html": result,
+              "message": "updated html",
               "selector": "#github-feed"
             }));
           });
@@ -98,7 +98,7 @@ fastify.ready(err => {
           break;
 
         case "fetch metadata":
-          fetchMetadata(data.claim, data.method, socket);
+          fetchMetadata(data, socket);
           break;
 
         default:
@@ -175,8 +175,16 @@ function generateGitHubFeed(displayGitHubFeed) {
 
 
 
-function fetchMetadata(claimAddress, resolveMethod, socket) {
-  if (!claimAddress || !resolveMethod) return;
+function uploadImage(imageSource, callback) {
+  // return upload response
+}
+
+// TODO: Data parameter should include which step of tour is requesting metadata
+function fetchMetadata(data, socket) {
+  if (data.step === 1 && !data.claim || !data.method) return;
+
+  const claimAddress = data.claim;
+  const resolveMethod = data.method;
 
   const allowedClaims = [
     "fortnite-top-stream-moments-nickatnyte",
@@ -192,15 +200,15 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
   ];
 
   if (!allowedMethods.includes(resolveMethod)) return socket.send(JSON.stringify({
+    "details": "Unallowed resolve method for tutorial",
     "message": "notification",
-    "type": "error",
-    "details": "Unallowed resolve method for tutorial"
+    "type": "error"
   }));
 
   if (!allowedClaims.includes(claimAddress)) return socket.send(JSON.stringify({
+    "details": "Invalid claim ID for tutorial",
     "message": "notification",
-    "type": "error",
-    "details": "Invalid claim ID for tutorial"
+    "type": "error"
   }));
 
   const body = {};
@@ -212,8 +220,8 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
     // body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + body.file_path; // TODO: needed for step 2, check for `file_path`
   }
 
-  body.method = resolveMethod;
   body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
+  body.method = resolveMethod;
   body.uri = claimAddress;
 
   return new Promise((resolve, reject) => {
@@ -236,13 +244,13 @@ function fetchMetadata(claimAddress, resolveMethod, socket) {
       }
 
       socket.send(JSON.stringify({
-        "message": "updated html",
         "html": html`
           <p style="text-align: center;">Success! Here is the response for <strong>lbry://${claimAddress}</strong>:</p>
           <pre><code class="json">${stringifyObject(body, { indent: "  ", singleQuotes: false })}</code></pre>
-          <button data-action="tour, step two" class="__button-black" type="button">Go to next step</button>
+          <button class="__button-black" data-action="tour, step 2" type="button">Go to next step</button>
           <script>$('#temp-loader').remove();</script>
         `,
+        "message": "updated html",
         "selector": "#step1-result"
       }));
     });

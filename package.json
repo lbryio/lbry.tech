@@ -20,7 +20,7 @@
     "decamelize": "^2.0.0",
     "dedent": "^0.7.0",
     "dotenv": "^6.0.0",
-    "fastify": "^1.8.0",
+    "fastify": "^1.9.0",
     "fastify-compress": "^0.6.0",
     "fastify-helmet": "^1.0.3",
     "fastify-plugin": "^1.2.0",
@@ -41,8 +41,8 @@
     "slack-node": "^0.1.8",
     "socket.io": "^2.1.1",
     "stringify-object": "^3.2.2",
-    "turbocolor": "^2.3.3",
-    "ws": "^5.2.2"
+    "turbocolor": "^2.4.1",
+    "ws": "^6.0.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
@@ -53,7 +53,7 @@
     "sass": "^1.10.0",
     "snazzy": "^7.1.1",
     "standardx": "^2.1.0",
-    "updates": "^4.0.0"
+    "updates": "^4.1.0"
   },
   "peerDependencies": {
     "request": "^2.87.0"
