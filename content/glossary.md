@@ -88,7 +88,7 @@ Stands for *Elliptic Curve Digital Signature Algorithm*. Used to verify transact
 
 ### Effective Amount
 
-The total amount assigned to the claim, including supports.
+The total LBC amount assigned to a claim, including the original bid and any tips/supports. During a vanity URL takeover, the effective amount is shown as 0. 
 
 ### Elliptic Curve Arithmetic
 
@@ -297,6 +297,10 @@ A transaction *output* can be spent only once: when another valid transaction ma
 ### Stream
 
 Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams as associated with claim data in order to provide the capability to download files over a Peer to Peer network.
+
+### Support (Claim Support)
+
+A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of suppot that is sent from one wallet to another, so that the receiver can spend it to their own wallet. 
 
 ### Target
 
