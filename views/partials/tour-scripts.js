@@ -100,7 +100,6 @@ function fetchMetadata(stepNumber, data) {
     - Style code with highlightjs
   */
 
-  console.log(typeof data);
   if (!stepNumber) return;
 
   switch(stepNumber) {
@@ -128,7 +127,13 @@ function fetchMetadata(stepNumber, data) {
       break;
 
     case 2:
-      console.log(stepNumber, data);
+      send(JSON.stringify({
+        "data": data,
+        "message": "fetch metadata",
+        "method": "publish",
+        "step": stepNumber
+      }));
+
       break;
 
     default:
@@ -136,21 +141,7 @@ function fetchMetadata(stepNumber, data) {
   }
 }
 
-function getMemeInfo() {
-  /*
-  - description: component.description,
-  - file_path: uploadResponse.body.filename,
-  - language: component.language,
-  - license: component.license,
-  - name: component.title,
-  - nsfw: component.nsfw,
-  - title: component.title
-
-  // Set on back-end
-  - bid: 0.001,
-  - method: "publish"
-  */
-
+function getMemeInfo() { // TODO: Error handling
   const info = {};
 
   info.description = $("#meme-description").val();
@@ -158,7 +149,7 @@ function getMemeInfo() {
   info.language = $("#meme-language").val();
   info.license = $("#meme-license").val();
   info.name = $("#meme-title").val();
-  info.nsfw = $("#meme-nsfw-flag").val();
+  info.nsfw = $("#meme-nsfw-flag")[0].checked;
   info.title = $("#meme-title").val();
 
   return info;
@@ -220,9 +211,3 @@ function updateCanvas(imageSource) {
   ctx.fillText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
   ctx.fillText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
 }
-
-
-
-send(JSON.stringify({ // TODO: Remove this
-  "message": "Landed on Tour"
-}));
