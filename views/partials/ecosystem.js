@@ -127,29 +127,29 @@ module.exports = exports = class Ecosystem extends Component {
         <h2 class="__title">
           <span data-action="open" data-target="lbrycrd">
             Blockchain
-            <em>The blockchain is "lbrycrd"</em>
+            <em>The foundation of the LBRY protocol</em>
           </span>
 
           <div>
-            <span data-action="open" data-target="applications">Applications</span>
-            <span data-action="open" data-target="lbry">Data Network</span>
+            <span><a href="https://github.com/lbryio/lbrycrd" title="lbrycrd repo">lbrycrd</a></span>
           </div>
         </h2>
 
         <div class="ecosystem__module__details">
-          <p><em>This section assumes "blockchain" already means something to you. If you're totally new, the key problem solved by blockhain is the ability for distributed, disparate entities to all agree on a rivalrous state of affairs (such as account balances or metadata associated with a URL).</em></p>
+          <p><em>This section assumes "blockchain" already means something to you. If you're totally new, the key problem solved by blockhain is the ability for distributed, disparate entities to all agree on a rivalrous state of affairs. For a more comprehensive introduction to blockchain, try starting [here]</em></p>
 
-          <p>The LBRY blockchain is a public and uses proof-of-work consensus. It is the foundation of the protocol stack.</p>
+          <p>The LBRY blockchain is a public, proof-of-work of work blockchain consensus. It is the foundation of the protocol stack.</p>
 
-          <p>The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata. This string of characters forms a LBRY URL, e.g.</p>
+          <p>The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata. This string of characters forms a LBRY URL, e.g. <a href="/tour?url=lbry://hellolbry"><code>lbry://hellolbry</code></a></p>
 
-          <p>The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata.</p>
+          <p>The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata. This allows LBRY URLs to be trustfully resolved even without a full copy of the blockchain.</p>
 
           <p>Conventionally, this metadata contains information about the content, such as the title and creator, the price (if any), and a unique signature allowing the actual content to be fetched from the data network, the next level in the LBRY stack.</p>
 
           <h3>Additional Resources</h3>
           <ul>
-            <li>See the [Whitepaper]</li>
+            <li>See the [[Whitepaper]] for a more comprehensive introduction to the LBRY blockchain.</li>
+            <li>See the [[Resources]] for documentation about the LBRY blockchain, including its API.</li>
             <li>See [[Naming]] for learning more about LBRY URLs and how they work.</li>
             <li>See [[Identities]] for learning how the LBRY blockchain handles publisher identities.</li>
           </ul>
@@ -164,47 +164,34 @@ module.exports = exports = class Ecosystem extends Component {
         <h2 class="__title">
           <span data-action="open" data-target="lbry">
             Data Network
-            <em>The data network is "lbry"</em>
+            <em>The "nuts and bolts" (fix this) of the LBRY protocol</em>
           </span>
 
           <div>
-            <span data-action="open" data-target="applications">Applications</span>
-            <span data-action="open" data-target="lbrycrd">Blockchain</span>
+            <span><a href="https://github.com/lbryio/lbry" title="lbry repo">lbry</a></span>
+            <span><a href="https://github.com/lbryio/lbryschema" title="lbryschema repo">lbryschema</a></span>
+            <span><a href="https://github.com/lbryio/torba" title="torba repo">torba</a></span>
           </div>
         </h2>
 
         <div class="ecosystem__module__details">
+          <p>While blockchain is the innovation that makes LBRY possible, the Data Network is the layer that actually makes the blockchain <em>useful</em>.</p>
+          <p>The primary component for this level is <a href="https://github.com/lbryio/lbry">lbry</a>, a daemon that:</p>
+
           <ul>
-            <li>
-              <strong class="__title">lbryschema</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                <li>Himenaeos purus facilisi litora suspendisse molestie, cubilia maecenas faucibus vivamus.</li>
-                <li>Nisi sociosqu interdum augue condimentum vivamus, ac leo feugiat.</li>
-                <li>Justo eu neque aenean nec sagittis, cubilia magnis arcu.</li>
-              </ul>
-            </li>
-            <li>
-              <strong class="__title">lbryumx</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                <li>Himenaeos purus facilisi litora suspendisse molestie, cubilia maecenas faucibus vivamus.</li>
-                <li>Nisi sociosqu interdum augue condimentum vivamus, ac leo feugiat.</li>
-                <li>Justo eu neque aenean nec sagittis, cubilia magnis arcu.</li>
-              </ul>
-            </li>
+            <li>Interprets and validates metadata in the LBRY blockchain via [lbryschema].</li>
+            <li>Accesses and distributes the data referenced by metadata in the LBRY blockchain via a peer-to-peer network.</li>
+            <li>Provides wallet functionality via an [[SPV]] wallet ([torba]).</li>
+            <li>Facilitates building applications by being easily bundable and providing a simple, clean <a href="https://lbry.io/api">API</a> for the LBRY protocol.</li>
           </ul>
+          <p>Unless choosing to re-implement aspects of the LBRY protocol by hand, most applications that interact with the LBRY network will bundle lbry.</p>
 
           <h3>Additional Resources</h3>
           <ul>
-            <li>
-              <a href="https://github.com/lbryio/lbryschema" title="lbryschema source code">lbryschema</a>
-            </li>
-            <li>
-              <a href="https://github.com/lbryio/lbryumx" title="lbryumx source code">lbryumx</a>
-            </li>
+            <li>See the [[Whitepaper]] for a more comprehensive introduction to the LBRY data network.</li>
+            <li>See [[Resources]] for documentation of the LBRY APIs.</li>
+            <li>See [[Whatever]] for learning more about LBRY distributes data.</li>
+            <li>See [[Build]] for learning how to use the daemon to solve your own problem or build your own app!</li>
           </ul>
         </div>
       </div>
@@ -217,46 +204,33 @@ module.exports = exports = class Ecosystem extends Component {
         <h2 class="__title">
           <span data-action="open" data-target="applications">
             Applications
-            <em>LBRY has a lot of applications</em>
+            <em>Browsers, spee.ch, and ∞</em>
           </span>
 
           <div>
-            <span data-action="open" data-target="lbrycrd">Blockchain</span>
-            <span data-action="open" data-target="lbry">Data Network</span>
+            <span><a href="https://github.com/lbryio/lbry-android" title="Android app repo">android</a></span>
+            <span><a href="https://github.com/lbryio/lbry-desktop" title="Desktop app repo">desktop</a></span>
+            <span><a href="https://github.com/lbryio/spee.ch" title="spee.ch repo">spee.ch</a></span>
           </div>
         </h2>
 
         <div class="ecosystem__module__details">
+          <p>Applications are the final level of the LBRY stack, and they represent how most people will actually use LBRY.</p>
+          <p>LBRY Inc. currently releases and maintains three applications:</p>
+
           <ul>
-            <li>
-              <strong class="__title">Desktop</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-              </li>
-            <li>
-              <strong class="__title">Mobile</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-            </li>
-            <li>
-              <strong class="__title">spee.ch</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-            </li>
-            <li>
-              <strong class="__title">lighthouse</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-            </li>
-            <li>
-              <strong class="__title">chainquery</strong>
-              <p>Vel nisi hendrerit id tristique congue tortor nisl luctus, vulputate sem ridiculus inceptos et at torquent feugiat, mus cursus lobortis aenean senectus posuere odio. Imperdiet nascetur dapibus eget convallis ante donec iaculis dictumst mi est, venenatis quisque integer etiam justo id aliquet non diam semper erat, blandit quis lectus ac aptent magna cubilia augue laoreet. Mollis luctus pharetra nisl auctor potenti magna penatibus cras, justo lobortis iaculis porta a vel habitasse vulputate, taciti sociis arcu facilisis duis orci aliquam.</p>
-            </li>
+            <li><a href="https://github.com/lbryio/lbry-desktop">lbry-desktop</a>, a desktop browser for the LBRY network based in React and Electron.</li>
+            <li><a href="https://github.com/lbryio/lbry-android">lbry-android</a>, an Android browser for the LBRY network in React Native.</li>
+            <li><a href="https://github.com/lbryio/spee.ch">spee.ch</a>, a web-based viewer and link dump for free LBRY content.</li>
           </ul>
+
+          <p>However, the very idea of LBRY is that there's <em>not</em> just one way to interact with the network. Anyone can build on top of LBRY in a permissionless manner. These applications exist to show what's possible and to give new users a user-friendly way to use LBRY.</p>
 
           <h3>Additional Resources</h3>
           <ul>
-            <li><a href="https://github.com/lbryio/lbry-desktop" title="source code for LBRY's desktop apps">Linux, macOS, and Windows apps</a></li>
-            <li><a href="https://github.com/lbryio/lbry-android" title="LBRY Android app source code">Android app</a></li>
-            <li><a href="https://github.com/lbryio/spee.ch" title="spee.ch source code">spee.ch</a></li>
-            <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">lighthouse</a></li>
-            <li><a href="https://github.com/lbryio/chainquery" title="chainquery source code">chainquery</a></li>
+            <li>See [[Contribute]] for learning how to contribute to existing LBRY apps.</li>
+            <li>See [[Something]] for how to set up your own custom instance of spee.ch.</li>
+            <li>See [[Build]] for learning how to build your own app!</li>
           </ul>
         </div>
       </div>

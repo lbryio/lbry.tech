@@ -33,7 +33,6 @@
     "make-promises-safe": "^1.1.0",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
-    "markdown-it-sup": "^1.0.0",
     "markdown-it-wikilinks": "^1.0.1",
     "nanohtml": "^1.2.4",
     "redis": "^2.8.0",

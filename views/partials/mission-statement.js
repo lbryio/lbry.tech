@@ -12,6 +12,12 @@ const html = require("choo-async/html");
 
 module.exports = exports = () => html`
   <div class="component--mission-statement">
-    <strong class="component--mission-statement__title">Mission Statement</strong> To create a market for accessing and publishing information<sup>1</sup> that is global<sup>2</sup>, decentralized<sup>3</sup>, robust<sup>4</sup>, optimal<sup>5</sup> and complete<sup>6</sup>.
+    <strong class="component--mission-statement__title">Mission Statement</strong>
+    To create a market for accessing and publishing information<sup><a class="__plain" href="#footnote-1" title="First footnote of our mission statement">1</a></sup>
+    that is global<sup><a class="__plain" href="#footnote-2" title="Second footnote of our mission statement">2</a></sup>,
+    decentralized<sup><a class="__plain" href="#footnote-3" title="Third footnote of our mission statement">3</a></sup>,
+    robust<sup><a class="__plain" href="#footnote-4" title="Fourth footnote of our mission statement">4</a></sup>,
+    optimal<sup><a class="__plain" href="#footnote-5" title="Fifth footnote of our mission statement">5</a></sup>
+    and complete<sup><a class="__plain" href="#footnote-6" title="Sixth footnote of our mission statement">6</a></sup>.
   </div>
 `;

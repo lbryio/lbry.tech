@@ -16,7 +16,7 @@ const numberRegex = /^[0-9]/g;
 const md = require("markdown-it")({
   html: true,
   typographer: true
-}).use(require("markdown-it-sup"))
+}).use(local("modules/markdown-it-sup"))
   .use(require("markdown-it-anchor"), {
     slugify: stringToSlugify => {
       let finalString = stringToSlugify
