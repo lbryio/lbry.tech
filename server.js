@@ -192,7 +192,9 @@ function fetchMetadata(data, socket) {
       body.file_path = uploadResponse.filename;
       body.method = resolveMethod;
 
-      // console.log(body);
+      // Reference:
+      // https://github.com/lbryio/lbry.tech/blob/master/content/.vuepress/components/Tour/Step2.vue
+      // https://github.com/lbryio/lbry.tech/blob/master/server.js
 
       return new Promise((resolve, reject) => {
         request({
@@ -201,6 +203,7 @@ function fetchMetadata(data, socket) {
         }, (error, response, body) => {
           if (error) reject(error);
           body = JSON.parse(body);
+          console.log(body);
           resolve(body);
         });
       });

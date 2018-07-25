@@ -301,5 +301,76 @@ function step2() {
 
 
 function step3() {
-  //
+  /**
+    Step 2 loading steps:
+    - exampleCode !== ''
+      <pre><code class="bash"><span v-html="highlight('bash', exampleCode)"></span></code></pre>
+
+    - isLoading
+      <div class="loader"></div>
+
+    - jsonData
+      <p style="text-align: center;">Success! Here is the response:</p>
+      <pre><code class="json"><span v-html="highlight('json', jsonData)"></span></code></pre>
+  */
+
+  return html`
+    <section class="hook__page" id="step3-page" style="display: none;">
+      <header class="hook__page__hero">
+        <div class="inner-wrap">
+          <h1>Support your favorite content creators with LBRY</h1>
+          <p>Send LBRY coins to claim addresses and the owner will receive it in their wallet.</p>
+          <p>To send LBC to someone, you need either their wallet address or claim ID. You can get claim IDs by using the resolve method in <a href="#" v-on:click.prevent.stop="goTo(1)" title="Go back to step one">the first step</a>, or you can use the examples below.</p>
+
+          <div class="hook__page__hero__support">
+            <input type="text" v-model="claimId" placeholder="Claim ID goes here"/>
+            <input type="number" v-model="amount" disabled title="You can set this value to any amount of LBC in your wallet, but for demonstration purposes we have hardcoded it to 0.01"/><span>LBC</span>
+            <a href="#" v-on:click.prevent="send" class="button" title="Execute claim">Execute</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="hook__page__content inner-wrap" id="step3-placeholder"></div>
+
+      <div class="hook__page__content inner-wrap" id="step3-selections">
+        <p style="text-align: center;">Click on any of the claims below to support them!</p>
+
+        <div class="hook__page__content__card"> <!--/ fbdcd44a97810522d23d5f1335b8ca04be9d776c /-->
+          <img data-action="choose claim" data-claim-id="itsadisaster" src="https://spee.ch/0654f2e2322ccfefa02a956d252df9ac7611d8b0/placeholder-itsadisaster.jpeg">
+
+          <div data-action="choose claim" data-claim-id="itsadisaster">
+            <h4>It's a Disaster</h4>
+            <p class="account">Anonymous</p>
+          </div>
+        </div>
+
+        <div class="hook__page__content__card"> <!--/ de7f7fa33e8d879b2bae7238d2bdf827a39f9301 /-->
+          <img data-action="choose claim" data-claim-id="unbubbled1-1" src="https://spee.ch/b1bd330e048fc22dc7bf941c33dd8245eef492c1/unbubbled.png">
+
+          <div data-action="choose claim" data-claim-id="unbubbled1-1">
+            <h4>Unbubbled with Jamie King, Ep1.1 &mdash; Bitcoin, Boom or Bust</h4>
+            <p class="account">@Unbubbled</p>
+          </div>
+        </div>
+
+        <div class="hook__page__content__card"> <!--/ 5b7c7a202201033d99e1be2930d290c127c0f4fe /-->
+          <img data-action="choose claim" data-claim-id="fortnite-top-stream-moments-nickatnyte" src="https://spee.ch/9880947df41af880bc19724ceddd1cce957a07e2/placeholder-fortninte.jpeg">
+
+          <div data-action="choose claim" data-claim-id="fortnite-top-stream-moments-nickatnyte">
+            <h4>FORTNITE TOP STREAM MOMENTS &mdash; Nickatnyte &amp; GamingwithMolt</h4>
+            <p class="account">@nickatnyte</p>
+          </div>
+        </div>
+
+        <div class="hook__page__content__card"> <!--/ a1372cf5523885f5923237bfe522f02f5f054362 /-->
+          <img data-action="choose claim" data-claim-id="six" src="https://spee.ch/a3b8258478ad88954f42f6ac3427eab380720f60/placeholder-lbrymine.png">
+
+          <div data-action="choose claim" data-claim-id="six">
+            <h4>LBRY Coin (LBC) GPU Miner for AMD and NVIDIA</h4>
+            <p class="account">Anonymous</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
 }

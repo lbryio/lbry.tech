@@ -2,10 +2,7 @@
 
 
 
-$("#fetch-claim-uri").val(""); // reset
-
-detectLanguageAndUpdate();
-initCanvas();
+initializeTour();
 
 
 
@@ -90,6 +87,14 @@ function detectLanguageAndUpdate() {
     userLocales.length &&
     compare(memeLocales, userLocales).length
   ) $("#meme-language").children(`option[value="${compare(memeLocales, userLocales)[0]}"]`).attr("selected", true);
+}
+
+function initializeTour() {
+  $("#fetch-claim-uri").val(""); // reset
+  $(".hook__navigation__step:nth-child(1)").addClass("active");
+
+  detectLanguageAndUpdate();
+  initCanvas();
 }
 
 
