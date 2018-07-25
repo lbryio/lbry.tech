@@ -302,7 +302,7 @@ function step2() {
 
 function step3() {
   /**
-    Step 2 loading steps:
+    Step 3 loading steps:
     - exampleCode !== ''
       <pre><code class="bash"><span v-html="highlight('bash', exampleCode)"></span></code></pre>
 
