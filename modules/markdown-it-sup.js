@@ -58,7 +58,7 @@ function superscript(state, silent) {
   token.markup  = "^";
 
   if (content.match(regexForIds)) {
-    const theLink = supText.match(regexForIds)[0].replace("(", "").replace(")", "");
+    const theLink = supText.match(regexForIds)[0].replace("(#", "").replace(")", "");
     token.attrPush([ "id", theLink ]);
   }
 
