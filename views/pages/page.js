@@ -73,6 +73,8 @@ module.exports = exports = () => async state => {
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(partialFinder(markdownFileDetails.body));
+  let newMetadata = "";
+  if (markdownFileDetails.attributes.meta) newMetadata = markdownFileDetails.attributes.meta;
 
   let pageScript = "";
   if (path === "overview") pageScript = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
@@ -92,6 +94,7 @@ module.exports = exports = () => async state => {
         <div class="inner-wrap">
           ${raw(renderedMarkdown)}
           ${raw(pageScript)}
+          ${newMetadata.length ? raw(updateMetadata(newMetadata)) : ""}
         </div>
       </section>
     </article>
@@ -100,7 +103,28 @@ module.exports = exports = () => async state => {
 
 
 
-//  H E L P E R
+//  H E L P E R S
+
+function createMetaTags(metaObject) {
+  /**
+    NOTE:
+    For Markdown files, the custom yaml should look like this:
+
+    meta:
+      - description: Description goes here
+
+    This does not currently work with parameters like "og:image"
+    // https://github.com/lbryio/lbry.tech/issues/30
+  */
+
+  let html = "";
+
+  for (const metaProperty in metaObject) {
+    html += `document.getElementsByTagName("meta")["${metaProperty}"].content = "${metaObject[metaProperty]}";\n`;
+  }
+
+  return html;
+}
 
 function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+\/>/g;
@@ -125,4 +149,18 @@ function partialFinder(markdownBody) {
   }
 
   return dedent(markdownBody); // partials get rendered as code snippets w/o `dedent`
+}
+
+function updateMetadata(metadataDetails) {
+  const generatedMetadata = [];
+
+  for (const metadataDetail of metadataDetails) {
+    generatedMetadata.push(createMetaTags(metadataDetail));
+  }
+
+  return dedent`
+    <script>
+      ${generatedMetadata.join("")}
+    </script>
+  `;
 }

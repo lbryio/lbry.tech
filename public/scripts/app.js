@@ -3,7 +3,6 @@
 
 
 $(function () {
-
   scrollToElementOnLoad();
 
   $("a[href^=http]").each(function () { // Automatically open external links in new tabs
@@ -11,7 +10,6 @@ $(function () {
       $(this).attr("target", "_blank");
     }
   });
-
 });
 
 

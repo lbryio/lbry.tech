@@ -6,6 +6,13 @@ initializeTour();
 
 
 
+if (window.location.href.search && window.location.href.split("?url=")[1]) { // pre-fill Tour if search parameter exists
+  const searchParameter = window.location.href.split("?url=")[1];
+  fetchMetadata(1, searchParameter);
+}
+
+
+
 $("body").on("click", "[data-action]", event => {
   event.preventDefault();
   const data = event.currentTarget.dataset;

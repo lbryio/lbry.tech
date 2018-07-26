@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E S
+//  V A R I A B L E S
 
 const regexForIds = /\(#.*\)/g;
 const regexForTextBeforeLink = /^.*(?=\()/g;
@@ -54,23 +54,23 @@ function superscript(state, silent) {
   state.pos = start + 1;
 
   // Earlier we checked !silent, but this implementation does not need it
-  token         = state.push("sup_open", "sup", 1);
-  token.markup  = "^";
+  token = state.push("sup_open", "sup", 1);
+  token.markup = "^";
 
   if (content.match(regexForIds)) {
     const theLink = supText.match(regexForIds)[0].replace("(#", "").replace(")", "");
     token.attrPush([ "id", theLink ]);
   }
 
-  token         = state.push("text", "", 0);
+  token = state.push("text", "", 0);
 
   if (content.match(regexForIds)) {
     const theText = supText.match(regexForTextBeforeLink)[0];
     token.content = theText;
   } else token.content = supText;
 
-  token         = state.push("sup_close", "sup", -1);
-  token.markup  = "^";
+  token = state.push("sup_close", "sup", -1);
+  token.markup = "^";
 
   state.pos = state.posMax + 1;
   state.posMax = max;

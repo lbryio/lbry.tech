@@ -140,7 +140,7 @@ module.exports = exports = class Ecosystem extends Component {
 
           <p>The LBRY blockchain is a public, proof-of-work of work blockchain consensus. It is the foundation of the protocol stack.</p>
 
-          <p>The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata. This string of characters forms a LBRY URL, e.g. <a class="__plain" href="/tour?url=lbry://hellolbry"><code>lbry://hellolbry</code></a></p>
+          <p>The most salient feature of the LBRY blockchain is the association of a normalized character string with up to 8KB of metadata. This string of characters forms a LBRY URL, e.g. <a class="__plain" href="/tour?url=hellolbry"><code>lbry://hellolbry</code></a></p>
 
           <p>The LBRY blockchain contains two parallel [[Merkle Tree]]s, one for transactions (ala Bitcoin) and one for storing LBRY URLs and metadata. This allows LBRY URLs to be trustfully resolved even without a full copy of the blockchain.</p>
 

@@ -77,11 +77,6 @@ fastify.ready(err => {
   if (err) throw err;
 
   fastify.ws.on("connection", socket => {
-    socket.send(JSON.stringify({ // TODO: Remove this
-      "message": "notification",
-      "details": "Welcome"
-    }));
-
     socket.on("message", data => {
       data = JSON.parse(data);
 
@@ -147,6 +142,7 @@ function fetchMetadata(data, socket) {
 
   const allowedClaims = [
     "fortnite-top-stream-moments-nickatnyte",
+    "hellolbry",
     "itsadisaster",
     "six",
     "unbubbled1-1"
@@ -203,7 +199,7 @@ function fetchMetadata(data, socket) {
         }, (error, response, body) => {
           if (error) reject(error);
           body = JSON.parse(body);
-          console.log(body);
+          // console.log(body);
           resolve(body);
         });
       });
