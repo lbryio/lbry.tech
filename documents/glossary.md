@@ -88,6 +88,10 @@ A transaction output that is smaller than a typically fee required to spend it. 
 
 Stands for *Elliptic Curve Digital Signature Algorithm*. Used to verify transaction ownership when making a transfer of bitcoins. See *Signature*.
 
+### Effective Amount
+
+The total LBC amount assigned to a claim, including the original bid and any tips/supports. During a vanity URL takeover, the effective amount is shown as 0.
+
 ### Elliptic Curve Arithmetic
 
 A set of mathematical operations defined on a group of points on a 2D elliptic curve. LBRY, similar to the Bitcoin protocol, uses predefined curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1). Here's the simplest possible explanation of the operations: you can add and subtract points and multiply them by an integer. Dividing by an integer is computationally infeasible (otherwise cryptographic signatures won't work). The private key is a 256-bit integer and the public key is a product of a predefined point G ("generator") by that integer: A = G * a. Associativity law allows implementing interesting cryptographic schemes like Diffie-Hellman key exchange (ECDH): two parties with private keys *a* and *b* may exchange their public keys *A* and *B* to compute a shared secret point `C: C = A * b = B * a` because `(G * a) * b == (G * b) * a`. Then this point C can be used as an AES encryption key to protect their communication channel.
@@ -295,6 +299,10 @@ Streaming media is multimedia that is constantly received by and presented to an
 ### Stream Descriptor (SD) Blob
 
 The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
+
+### Support (Claim Support)
+
+A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of suppot that is sent from one wallet to another, so that the receiver can spend it to their own wallet.
 
 ### Takeover Period
 
