@@ -40,7 +40,6 @@ function socketReady(socket, callback) {
       if (callback !== undefined) callback();
       return;
     } else {
-      log("Waiting for websocket connection to come online");
       socketReady(socket, callback);
     }
   }, 5);

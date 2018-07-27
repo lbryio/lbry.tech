@@ -110,7 +110,7 @@ fastify.ready(err => {
       }
     });
 
-    socket.on("close", () => log("Client disconnected.")); // TODO: Close socket?
+    socket.on("close", () => socket.terminate());
   });
 });
 
