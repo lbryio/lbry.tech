@@ -116,6 +116,12 @@
 
 .newsletter-cta__message {
   @include clearfix;
-  color: $red;
-  padding-top: 1rem;
+  background-color: $teal;
+  color: $white;
+  font-size: 1rem;
+  text-align: center;
+
+  &:not(:empty) {
+    padding: 1rem;
+  }
 }

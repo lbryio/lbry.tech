@@ -12,6 +12,7 @@ ws.onmessage = socket => {
   switch (true) {
     case data.message === "updated html":
       $(data.selector).html(data.html);
+      $("#emailMessage").val("");
       break;
 
     case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent

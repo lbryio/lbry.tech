@@ -23,16 +23,11 @@ module.exports = exports = state => html`
 
   <section class="alert" id="alert-beta">
     <div class="inner-wrap">
-      <p>
-        <strong>This website is in beta and under heavy development.</strong>
-        All information should be considered incomplete and possibly incorrect and things may not work as expected.
-      </p>
+      <p><strong>This website is in beta and under heavy development.</strong>All information should be considered incomplete and possibly incorrect and things may not work as expected.</p>
 
       <br/><br/>
 
-      <p>
-        Please do not share or link this site publicly while this message is here. This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank" rel="noopener noreferrer">contribute to it on Github</a>.
-      </p>
+      <p>Please do not share or link this site publicly while this message is here. This website is open source and you can <a href="https://github.com/lbryio/lbry.tech" target="_blank" rel="noopener noreferrer">contribute to it on Github</a>.</p>
 
       <button id="close-alert">&times;</button>
     </div>

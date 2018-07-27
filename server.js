@@ -43,7 +43,11 @@ if (typeof process.env.REDISCLOUD_URL !== "undefined") {
   client.on("error", redisError => {
     process.env.NODE_ENV === "development" ?
       log(`\n${color.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
-      logSlackError("An error occured with Redis", redisError)
+      logSlackError(
+        "\n" +
+        "> *REDIS ERROR:* ```" + JSON.parse(JSON.stringify(redisError)) + "```" + "\n" +
+        "> _Cause: Someone is trying to run LBRY.tech locally without environment variables OR Heroku is busted_\n"
+      )
     ;
   });
 } else log(`${color.red("[missing]")} Redis client URL`);
@@ -81,6 +85,10 @@ fastify.ready(err => {
       data = JSON.parse(data);
 
       switch(data.message) {
+        case "fetch metadata":
+          fetchMetadata(data, socket);
+          break;
+
         case "landed on homepage":
           generateGitHubFeed(result => {
             socket.send(JSON.stringify({
@@ -92,8 +100,8 @@ fastify.ready(err => {
 
           break;
 
-        case "fetch metadata":
-          fetchMetadata(data, socket);
+        case "subscribe":
+          newsletterSubscribe(data, socket);
           break;
 
         default:
@@ -213,28 +221,41 @@ function fetchMetadata(data, socket) {
         "type": "error"
       }));
 
-      logSlackError("[daemon error]\n", "```" + JSON.stringify(uploadError) + "```");
+      logSlackError(
+        "\n" +
+        "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(uploadError)) + "```" + "\n" +
+        "> _Cause: Someone attempted to publish a meme via the Tour_\n"
+      );
+
       return;
     });
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { // eslint-disable-line
     request({
       url: "http://daemon.lbry.tech",
       qs: body
     }, (error, response, body) => {
       if (error) {
-        reject(error);
-        logSlackError("[daemon error]\n", "```" + JSON.stringify(error) + "```");
-        return;
+        logSlackError(
+          "\n" +
+          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(error)) + "```" + "\n" +
+          "> _Cause: Someone is going through the Tour_\n"
+        );
+
+        return resolve(error);
       }
 
       body = JSON.parse(body);
 
       if (typeof body.error !== "undefined") {
-        reject(body.error);
-        logSlackError("[daemon error]\n", "```" + JSON.stringify(body.error) + "```");
-        return;
+        logSlackError(
+          "\n" +
+          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
+          "> _Cause: Someone is going through the Tour_\n"
+        );
+
+        return resolve(body.error);
       }
 
       socket.send(JSON.stringify({
@@ -289,6 +310,73 @@ function generateGitHubFeed(displayGitHubFeed) {
   }
 }
 
+function newsletterSubscribe(data, socket) {
+  const email = data.email;
+
+  if (!validateEmail(email)) return socket.send(JSON.stringify({
+    "html": "Your email is invalid",
+    "message": "updated html",
+    "selector": "#emailMessage"
+  }));
+
+  return new Promise((resolve, reject) => {
+    request({
+      method: "POST",
+      url: `https://api.lbry.io/list/subscribe?email=${email}`
+    }).then(body => {
+      if (!body || !JSON.parse(body)) {
+        logSlackError(
+          "\n" +
+          "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
+          `> _Cause: ${email} interacted with the form_\n`
+        );
+
+        return resolve(socket.send(JSON.stringify({
+          "html": "Something is terribly wrong",
+          "message": "updated html",
+          "selector": "#emailMessage"
+        })));
+      }
+
+      body = JSON.parse(body);
+
+      if (!body.success) {
+        logSlackError(
+          "\n" +
+          "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
+          `> _Cause: ${email} interacted with the form_\n`
+        );
+
+        return reject(socket.send(JSON.stringify({
+          "html": body.error,
+          "message": "updated html",
+          "selector": "#emailMessage"
+        })));
+      }
+
+      return resolve(socket.send(JSON.stringify({
+        "html": "Thank you! Please confirm subscription in your inbox.",
+        "message": "updated html",
+        "selector": "#emailMessage"
+      })));
+    }).catch(welp => {
+      if (welp.statusCode === 409) {
+        logSlackError(
+          "\n" +
+          "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(welp.error)) + "```" + "\n" +
+          `> _Cause: ${email} interacted with the form_\n`
+        );
+
+        return resolve(socket.send(JSON.stringify({
+          "html": "You have already subscribed!",
+          "message": "updated html",
+          "selector": "#emailMessage"
+        })));
+      }
+    });
+  });
+}
+
 function uploadImage(imageSource) {
   return new Promise((resolve, reject) => {
     request({
@@ -307,4 +395,9 @@ function uploadImage(imageSource) {
       resolve(body);
     });
   });
+}
+
+function validateEmail(email) {
+  const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+  return re.test(String(email));
 }

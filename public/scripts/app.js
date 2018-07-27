@@ -1,4 +1,4 @@
-/* global $, location, window */ "use strict";
+/* global $, location, send, window */ "use strict";
 
 
 
@@ -24,6 +24,10 @@ document.querySelector("#close-alert").onclick = function () {
   document.querySelector("#alert-beta").style.display = "none";
 };
 
+
+
+//  Smooth scroll
+
 document.querySelectorAll("a[href^='#']").forEach(anchor => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
@@ -38,6 +42,22 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
   });
 });
 
+//  Newsletter
+
+$("[data-action='subscribe to newsletter']").on("click", () => {
+  const email = $("#emailAddress").val();
+  if (!validateEmail(email)) return;
+
+  send(JSON.stringify({
+    "email": email,
+    "message": "subscribe"
+  }));
+});
+
+
+
+//  H E L P E R S
+
 function scrollToElementOnLoad() {
   if (window.location.href.includes("#")) {
     setTimeout(() => { // give page time to breathe
@@ -50,4 +70,9 @@ function scrollToElementOnLoad() {
       }
     }, 150);
   }
+}
+
+function validateEmail(email) {
+  const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+  return re.test(String(email));
 }
