@@ -24,7 +24,7 @@ module.exports = exports = state => html`
 
   <section class="alert" id="alert-beta">
     <div class="inner-wrap">
-      <p><strong>This website is in beta and under heavy development.</strong>All information should be considered incomplete and possibly incorrect and things may not work as expected.</p>
+      <p><strong>This website is in beta and under heavy development.</strong><br/>All information should be considered incomplete and possibly incorrect and things may not work as expected.</p>
 
       <br/><br/>
 
