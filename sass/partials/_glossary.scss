@@ -1,14 +1,30 @@
 .glossary {
-  main {
-    margin-left: 200px;
-    width: calc(100vw - 200px);
+  &:not(.sidebar-closed) {
+    main {
+      margin-left: 250px;
+      width: calc(100vw - 250px);
+    }
+
+    .page__header-wrap,
+    .page__content {
+      .inner-wrap {
+        margin-left: 1rem;
+        max-width: initial;
+      }
+    }
+
+    .component--glossary-toc-toggle {
+      left: calc(250px - 25px);
+    }
   }
 
-  .page__header-wrap,
-  .page__content {
-    .inner-wrap {
-      margin-left: 1rem;
-      max-width: initial;
+  &.sidebar-closed {
+    .component--glossary-toc {
+      left: -250px;
+    }
+
+    .component--glossary-toc-toggle {
+      left: 0;
     }
   }
 }
@@ -16,7 +32,7 @@
 
 
 .component--glossary-toc {
-  width: 200px; height: calc(100vh - 4rem);
+  width: 250px; height: calc(100vh - 4rem);
   top: 4rem; left: 0;
 
   background-color: $white;
@@ -31,4 +47,16 @@
   li:last-of-type {
     margin-bottom: 1rem;
   }
+}
+
+.component--glossary-toc-toggle {
+  width: 25px; height: 104px;
+
+  font-size: 0.7rem;
+  position: absolute;
+  text-orientation: upright;
+  text-transform: uppercase;
+  top: 4rem;
+  writing-mode: vertical-rl;
+  z-index: 1;
 }
