@@ -2,7 +2,7 @@
 
 Technical documentation website for [the LBRY protocol](https://lbry.io) made with JavaScript.
 
-[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=new)](https://travis-ci.org/lbryio/lbry.tech)
+[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=master)](https://travis-ci.org/lbryio/lbry.tech)
 
 
 
