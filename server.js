@@ -303,7 +303,7 @@ function generateGitHubFeed(displayGitHubFeed) {
 
       displayGitHubFeed(dedent`
         <h3>GitHub</h3>
-        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD").toLowerCase().replace(/-/g, "&middot;")} at ${new Date().add(-4, "hours").format("UTC:H:mm:ss A")} EST</h5>
+        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD").replace(/-/g, "&middot;")} at ${new Date().add(-4, "hours").format("UTC:H:mm:ss A").toLowerCase()} EST</h5>
 
         ${renderedEvents.join("")}
       `);
