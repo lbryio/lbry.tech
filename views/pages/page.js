@@ -48,7 +48,10 @@ const raw = require("nanohtml/raw");
 //  E X P O R T
 
 module.exports = exports = () => async state => {
-  const path = state.params.wildcard;
+  let path;
+
+  if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
+  else path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
     return html`
