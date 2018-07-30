@@ -4,6 +4,7 @@
 
 //  P A C K A G E S
 
+const async = require("async");
 const color = require("turbocolor");
 const cors = require("cors");
 const dedent = require("dedent");
@@ -298,7 +299,7 @@ function generateGitHubFeed(displayGitHubFeed) {
         `);
       }
 
-      // TODO: Update `.last-updated` every minute
+      updateGithubFeed(); // TODO: Update `.last-updated` every minute
 
       displayGitHubFeed(dedent`
         <h3>GitHub</h3>
@@ -374,6 +375,29 @@ function newsletterSubscribe(data, socket) {
         })));
       }
     });
+  });
+}
+
+function updateGithubFeed() {
+  octokit.activity.getEventsForOrg({
+    org: "lbryio",
+    per_page: 20,
+    page: 1
+  }).then(({ data }) => {
+    async.eachSeries(data, (item, callback) => {
+      const eventString = JSON.stringify(item);
+
+      client.zrank("events", eventString, (err, reply) => {
+        if (reply === null) client.zadd("events", item.id, eventString, callback);
+        else callback();
+      });
+    }, () => client.zremrangebyrank("events", 0, -51)); // Keep the latest 50 events
+  }).catch(err => {
+    logSlackError(
+      "\n" +
+      "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
+      "> _Cause: GitHub feed refresh_\n"
+    );
   });
 }
 
