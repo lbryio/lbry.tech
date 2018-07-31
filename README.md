@@ -11,7 +11,7 @@ Notable tools used:
 * [choo](https://choo.io)
 * [Fastify](https://www.fastify.io)
 
-![Screenshot of LBRY.tech](https://spee.ch/f/lbry-tech-screenshot.png)
+![Screenshot of LBRY.tech](https://spee.ch/fe0f379ffd13f90fb023dec19316f08b94f9d6bc/lbrytech-site-preview.png)
 
 
 
