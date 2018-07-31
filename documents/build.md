@@ -40,7 +40,7 @@ Almost all web, desktop, and mobile applications will use the [lbry daemon](http
 
 #### iOS Applications
 
-It is not currently possible to use LBRY on iOS. [There is a bounty](https://lbry.io/bounty/ios-daemon) for this.
+It is not currently possible to use LBRY on iOS.
 
 ### Blockchain and Wallet Level (Full Node Applications)
 
