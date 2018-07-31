@@ -30,6 +30,7 @@
     "fs-exists-sync": "^0.1.0",
     "graceful-fs": "^4.1.11",
     "heroku-ssl-redirect": "0.0.4",
+    "make-fetch-happen": "^4.0.1",
     "make-promises-safe": "^1.1.0",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",

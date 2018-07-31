@@ -21,6 +21,8 @@ module.exports = exports = () => async (state) => {
   if (state.route && state.route !== "/" && state.route !== "*") pageTitle = state.route.charAt(0).toUpperCase() + state.route.slice(1);
   if (state.params.wildcard) pageTitle = state.params.wildcard.charAt(0).toUpperCase() + state.params.wildcard.slice(1);
 
+  if (pageTitle === "Api") pageTitle = "API";
+
   return html`${[
     html`<meta charset="utf-8"/>`,
     html`<title>${pageTitle.length ? pageTitle + " | " : ""}${config.meta.title} &middot; ${config.meta.tagline}</title>`,
