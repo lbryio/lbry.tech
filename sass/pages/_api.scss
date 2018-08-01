@@ -131,8 +131,11 @@
   }
 
   h3 {
-    font-size: 1.15rem;
+    // border-bottom: 1px solid rgba($gray, 0.3);
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
     margin-bottom: 0.25rem;
+    text-transform: uppercase;
   }
 
   p, ol, ul {
@@ -142,7 +145,7 @@
   }
 
   ol, ul {
-    padding-left: 1rem;
+    // padding-left: 1rem;
   }
 
   table {
@@ -169,6 +172,61 @@
   tr:nth-child(even) {
     background-color: rgba($white, 0.1);
   }
+
+  pre {
+    margin-bottom: 2rem; padding: 1rem;
+
+    background-color: $black;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    line-height: 1.33;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+.api__content__body__arguments {
+  border: 1px solid rgba($gray, 0.3);
+  border-radius: 3px;
+  list-style-type: none;
+}
+
+.api__content__body__argument {
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba($gray, 0.3);
+  }
+
+  &:nth-child(even) {
+    background-color: rgba($gray, 0.1);
+  }
+
+  .left,
+  .right {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .left {
+    border-right: 1px solid rgba($gray, 0.3);
+    width: 30%;
+    word-wrap: break-word;
+
+    span {
+      color: $gray;
+      font-size: 0.8rem;
+
+      &:not(:first-of-type) {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  .right {
+    width: 70%;
+  }
+
+  &::after {
+    @include clearfix;
+  }
 }
 
 .api__content__body,
@@ -178,20 +236,14 @@
 
 .api__content__body {
   border-bottom: 1px solid rgba($gray, 0.3);
+
+  pre {
+    color: $white;
+  }
 }
 
 .api__content__example {
   background-color: mix($gray, $black, 10%);
   border-bottom: 1px solid rgba($white, 0.1);
   color: $white;
-
-  pre {
-    margin-bottom: 1rem; padding: 1rem;
-
-    background-color: $black;
-    border-radius: 0.3rem;
-    line-height: 1.33;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
 }

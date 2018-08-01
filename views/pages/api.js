@@ -54,8 +54,7 @@ function createApiContent(apiDetails) {
         <h3>Returns</h3>
         <pre><code>${dedent(apiDetailsReturns)}</code></pre>
 
-        <h3>Arguments</h3>
-        <ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>
+        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
       </div>
 
       <div class="api__content__example">
@@ -95,14 +94,12 @@ function renderArguments(args) {
   for (const arg of args) {
     argumentContent.push(`
       <li class="api__content__body__argument">
-        <div class="__left">
+        <div class="left">
           <strong>${arg.name}</strong><br/>
           ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
         </div>
 
-        <div class="__right">
-          <p>${arg.description}</p>
-        </div>
+        <div class="right">${arg.description}</div>
       </li>
     `);
   }
