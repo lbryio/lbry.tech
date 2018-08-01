@@ -6,6 +6,7 @@
 
 const dedent = require("dedent");
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
+const fs = require("graceful-fs");
 const html = require("choo-async/html");
 const raw = require("nanohtml/raw");
 
@@ -15,6 +16,8 @@ const apiFileLink = process.env.NODE_ENV === "development" ?
   "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
   "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
 ;
+
+const apiScripts = "<script>" + fs.readFileSync("./views/partials/api-scripts.js", "utf-8") + "</script>";
 
 
 
@@ -34,6 +37,8 @@ module.exports = exports = () => async () => parseApiFile().then(response => htm
 
     <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
   </div>
+
+  ${raw(apiScripts)}
 `);
 
 
@@ -46,9 +51,9 @@ function createApiContent(apiDetails) {
   for (const apiDetail of apiDetails) {
     const apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
-    /* if (apiDetail.name !== "settings_set") */ apiContent.push(`
+    apiContent.push(`
       <div class="api__content__body">
-        <h2 id="#${apiDetail.name}">${apiDetail.name}</h2>
+        <h2 id="${apiDetail.name}">${apiDetail.name}</h2>
         <p>${apiDetail.description}</p>
 
         <h3>Returns</h3>

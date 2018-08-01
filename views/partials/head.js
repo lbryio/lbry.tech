@@ -55,6 +55,7 @@ module.exports = exports = () => async (state) => {
     html`<link rel="stylesheet" href="/assets/css/style.css"/>`,
 
     html`<script src="/assets/scripts/vendor/zepto.js"></script>`,
+    pageTitle === "API" ? html`<script src="/assets/scripts/plugins/jets.js"></script>` : "",
     html`<script>const ws = new WebSocket(location.origin.replace(/^http/, "ws"));</script>`,
     html`<script src="/assets/scripts/sockets.js"></script>`
   ]}`;
