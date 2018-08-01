@@ -46,7 +46,7 @@ function createApiContent(apiDetails) {
   for (const apiDetail of apiDetails) {
     const apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
-    apiContent.push(`
+    /* if (apiDetail.name !== "settings_set") */ apiContent.push(`
       <div class="api__content__body">
         <h2 id="#${apiDetail.name}">${apiDetail.name}</h2>
         <p>${apiDetail.description}</p>
@@ -54,7 +54,7 @@ function createApiContent(apiDetails) {
         <h3>Returns</h3>
         <pre><code>${dedent(apiDetailsReturns)}</code></pre>
 
-        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
+        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}\n
       </div>
 
       <div class="api__content__example">
@@ -99,7 +99,7 @@ function renderArguments(args) {
           ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
         </div>
 
-        <div class="right">${arg.description}</div>
+        <div class="right">${arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
       </li>
     `);
   }

@@ -92,24 +92,20 @@
 }
 
 .api__toc__items {
+  list-style-type: none;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-
-  ul {
-    list-style-type: none;
-
-    &:hover {
-      background-color: rgba($gray, 0.3);
-    }
-
-    li {
-      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
-    }
-  }
 }
 
-.tocify-focus {
-  background-color: rgba($gray, 0.3);
+.api__toc__item {
+  &:hover {
+    background-color: rgba($gray, 0.3);
+  }
+
+  a {
+    display: block;
+    padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+  }
 }
 
 
