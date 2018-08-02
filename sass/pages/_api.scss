@@ -92,7 +92,7 @@
   }
 
   h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
 
@@ -137,12 +137,20 @@
   pre {
     margin-bottom: 2rem; padding: 1rem;
 
-    background-color: $black;
     border-radius: 0.3rem;
     font-size: 0.8rem;
     line-height: 1.33;
     overflow-x: auto;
     overflow-y: hidden;
+  }
+}
+
+.api__content__body {
+  border-bottom: 1px solid rgba($gray, 0.3);
+  padding: 2rem;
+
+  pre {
+    border: 1px solid rgba($gray, 0.3);
   }
 }
 
@@ -190,21 +198,15 @@
   }
 }
 
-.api__content__body,
-.api__content__example {
-  padding: 2rem;
-}
 
-.api__content__body {
-  border-bottom: 1px solid rgba($gray, 0.3);
-
-  pre {
-    color: $white;
-  }
-}
 
 .api__content__example {
   background-color: mix($gray, $black, 10%);
   border-bottom: 1px solid rgba($white, 0.1);
   color: $white;
+  padding: 2rem;
+
+  pre {
+    background-color: $black;
+  }
 }

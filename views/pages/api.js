@@ -56,10 +56,10 @@ function createApiContent(apiDetails) {
         <h2 id="${apiDetail.name}">${apiDetail.name}</h2>
         <p>${apiDetail.description}</p>
 
+        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
+
         <h3>Returns</h3>
         <pre><code>${dedent(apiDetailsReturns)}</code></pre>
-
-        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}\n
       </div>
 
       <div class="api__content__example">
