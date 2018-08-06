@@ -48,7 +48,6 @@ function main() {
   app.route("/api", page(require("./views/pages/api")(app)));
   app.route("/resources", page(require("./views/pages/resources")(app)));
   app.route("/resources/*", page(require("./views/pages/page")(app)));
-  app.route("/tour", page(require("./views/pages/tour")(app)));
   app.route("/*", page(require("./views/pages/page")(app)));
 
   return app;

@@ -53,4 +53,4 @@ We take security seriously. Please contact [security@lbry.io](mailto:security@lb
 
 ## Contact
 
-The primary contact for this project is [@netoperatorwibby](https://github.com/netoperatorwibby).
+The primary contact for this project is [@netoperatorwibby](https://github.com/netoperatorwibby)(paul@lbry.io).

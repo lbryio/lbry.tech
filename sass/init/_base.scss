@@ -17,14 +17,13 @@ html {
 
 a,
 area,
-button,
-[role="button"],
+button, [role="button"],
 input,
 label,
 select,
 summary,
-textarea { // Remove touch delay on supported devices
-  touch-action: manipulation;
+textarea {
+  touch-action: manipulation; // Remove touch delay on supported devices
 }
 
 a {
@@ -49,10 +48,6 @@ textarea {
 button {
   &:not(:disabled) {
     cursor: pointer;
-  }
-
-  &:active {
-    // top: 2px;
   }
 }
 
@@ -79,7 +74,8 @@ textarea {
   background-color: transparent;
 }
 
-input[type=submit] {
+[type=button],
+[type=submit] {
   cursor: pointer;
 }
 

@@ -195,7 +195,7 @@
   }
 
   ol,
-  ul:not(.feature-links):not(.overview__ecosystem__module):not(.__parents) {
+  ul:not(.feature-links):not(.overview__ecosystem__module):not(.__parents):not(.tour__sidebar) {
     padding-top: 0.5rem;
 
     li {
@@ -214,7 +214,7 @@
     padding-left: 1.6rem;
   }
 
-  ul:not(.feature-links):not(.overview__ecosystem__module):not(.__parents) {
+  ul:not(.feature-links):not(.overview__ecosystem__module):not(.__parents):not(.tour__sidebar) {
     padding-left: 1.25rem;
   }
 
