@@ -1,6 +1,3 @@
-// https://api.lbry.io/file/list_homepage
-// https://api.lbry.io/file/list_trending
-
 "use strict";
 
 
@@ -15,15 +12,12 @@ const raw = require("nanohtml/raw");
 
 //  E X P O R T
 
-module.exports = exports = () => html`
+module.exports = exports = () => dedent`
   <section class="tour">
     <ul class="tour__sidebar">
       ${raw(sidebar())}
     </ul>
-
-    <section class="tour__content">
-      ${raw(content())}
-    </section>
+    <section class="tour__content">${raw(step1())}</section>
   </section>
 `;
 
@@ -48,8 +42,15 @@ function sidebar() { // TODO: Save tutorial position to localStorage // "active"
   `;
 }
 
-function content() {
+
+
+function step1() {
   return html`
-    <p>Some content here</p>
+    <div class="tour__content__urlbar">
+      <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Claim URI goes here" type="text"/>
+      <button class="button" data-action="execute claim" type="button">Execute</button>
+    </div>
+
+    <div class="tour__content__trends" id="tour-loader"></div>
   `;
 }

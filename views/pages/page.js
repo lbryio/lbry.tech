@@ -80,8 +80,9 @@ module.exports = exports = () => async state => {
   if (markdownFileDetails.attributes.meta) newMetadata = markdownFileDetails.attributes.meta;
 
   let pageScript = "";
-  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
   if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./views/partials/glossary-scripts.js", "utf-8") + "</script>";
+  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
+  if (path === "tour") pageScript = "<script>" + fs.readFileSync("./views/partials/tour-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">

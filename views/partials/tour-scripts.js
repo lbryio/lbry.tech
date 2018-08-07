@@ -100,6 +100,10 @@ function initializeTour() {
   $("#fetch-claim-uri").val(""); // reset
   $(".hook__navigation__step:nth-child(1)").addClass("active");
 
+  send(JSON.stringify({
+    "message": "landed on tour"
+  }));
+
   detectLanguageAndUpdate();
   initCanvas();
 }

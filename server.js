@@ -16,15 +16,14 @@ const fastify = require("fastify")({
   }
 });
 
-const html = require("choo-async/html");
 const local = require("app-root-path").require;
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
 const request = require("request-promise-native");
-const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
+const fetchMetadata = local("/helpers/fetch-metadata");
 const github = local("/helpers/github");
 const log = console.log; // eslint-disable-line
 const logSlackError = local("/helpers/slack");
@@ -101,6 +100,17 @@ fastify.ready(err => {
 
           break;
 
+        case "landed on tour":
+          generateStep1OfTour(result => {
+            socket.send(JSON.stringify({
+              "html": result,
+              "message": "updated html",
+              "selector": "#tour-loader"
+            }));
+          });
+
+          break;
+
         case "subscribe":
           newsletterSubscribe(data, socket);
           break;
@@ -138,140 +148,6 @@ start();
 
 
 //  H E L P E R S
-
-function fetchMetadata(data, socket) {
-  let dataDetails = "";
-
-  if (data.step === 1 && !data.claim || !data.method) return;
-  if (data.step === 2 && !data.data) return;
-  if (data.step === 2) dataDetails = data.data;
-
-  const claimAddress = data.claim;
-  const resolveMethod = data.method;
-
-  const allowedClaims = [
-    "fortnite-top-stream-moments-nickatnyte",
-    "hellolbry",
-    "itsadisaster",
-    "six",
-    "unbubbled1-1"
-  ];
-
-  const allowedMethods = [
-    "publish",
-    "resolve",
-    "wallet_send"
-  ];
-
-  if (allowedMethods.indexOf(resolveMethod) < 0) return socket.send(JSON.stringify({
-    "details": "Unallowed resolve method for tutorial",
-    "message": "notification",
-    "type": "error"
-  }));
-
-  if (data.step === 1 && allowedClaims.indexOf(claimAddress) < 0) return socket.send(JSON.stringify({
-    "details": "Invalid claim ID for tutorial",
-    "message": "notification",
-    "type": "error"
-  }));
-
-  const body = {};
-
-  body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
-  body.method = resolveMethod;
-  if (data.step === 1) body.uri = claimAddress;
-
-  if (resolveMethod === "publish") {
-    body.bid = 0.001; // Hardcoded publish amount
-    body.description = dataDetails.description;
-    body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + dataDetails.file_path; // TODO: Fix the internal image path in daemon (original comment, check to see if still true)
-    body.language = dataDetails.language;
-    body.license = dataDetails.license;
-    body.name = dataDetails.name;
-    body.nsfw = dataDetails.nsfw;
-    body.title = dataDetails.title;
-
-    return uploadImage(body.file_path).then(uploadResponse => {
-      if (uploadResponse.status !== "ok") return;
-
-      body.file_path = uploadResponse.filename;
-      body.method = resolveMethod;
-
-      // Reference:
-      // https://github.com/lbryio/lbry.tech/blob/master/content/.vuepress/components/Tour/Step2.vue
-      // https://github.com/lbryio/lbry.tech/blob/master/server.js
-
-      return new Promise((resolve, reject) => {
-        request({
-          qs: body,
-          url: "http://daemon.lbry.tech/images.php"
-        }, (error, response, body) => {
-          if (error) reject(error);
-          body = JSON.parse(body);
-          // console.log(body);
-          resolve(body);
-        });
-      });
-    }).catch(uploadError => {
-      // component.isLoading = false;
-      // component.jsonData = JSON.stringify(uploadError, null, "  ");
-
-      socket.send(JSON.stringify({
-        "details": "Image upload failed",
-        "message": "notification",
-        "type": "error"
-      }));
-
-      logSlackError(
-        "\n" +
-        "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(uploadError)) + "```" + "\n" +
-        "> _Cause: Someone attempted to publish a meme via the Tour_\n"
-      );
-
-      return;
-    });
-  }
-
-  return new Promise((resolve, reject) => { // eslint-disable-line
-    request({
-      url: "http://daemon.lbry.tech",
-      qs: body
-    }, (error, response, body) => {
-      if (error) {
-        logSlackError(
-          "\n" +
-          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(error)) + "```" + "\n" +
-          "> _Cause: Someone is going through the Tour_\n"
-        );
-
-        return resolve(error);
-      }
-
-      body = JSON.parse(body);
-
-      if (typeof body.error !== "undefined") {
-        logSlackError(
-          "\n" +
-          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
-          "> _Cause: Someone is going through the Tour_\n"
-        );
-
-        return resolve(body.error);
-      }
-
-      socket.send(JSON.stringify({
-        "html": html`
-          <p style="text-align: center;">Success! Here is the response for <strong>lbry://${claimAddress}</strong>:</p>
-          <pre><code class="json">${stringifyObject(body, { indent: "  ", singleQuotes: false })}</code></pre>
-          <button class="__button-black" data-action="tour, step 2" type="button">Go to next step</button>
-          <script>$('#temp-loader').remove();</script>
-        `,
-        "message": "updated html",
-        "selector": "#step1-result"
-      }));
-    });
-  });
-}
 
 function generateGitHubFeed(displayGitHubFeed) {
   if (typeof process.env.REDISCLOUD_URL !== "undefined") {
@@ -401,27 +277,51 @@ function updateGithubFeed() {
   });
 }
 
-function uploadImage(imageSource) {
+function validateEmail(email) {
+  const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+  return re.test(String(email));
+}
+
+
+
+
+function generateStep1OfTour(displayTrendingContent) {
+  return getTrendingContent().then(response => {
+    if (!response || !response.success || response.success !== true || !response.data) return "";
+    const trendingContentData = response.data;
+
+    const rawContentCollection = [];
+    const renderedContentCollection = [];
+    for (const data of trendingContentData) rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", step: 1 }));
+
+    Promise.all(rawContentCollection).then(collection => {
+      for (const part of collection) {
+        renderedContentCollection.push(`
+          <figure class="tour__content__trend">
+            <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+
+            <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
+              ${part.value.stream.metadata.title}
+              <span>${part.channel_name}</span>
+            </figcaption>
+          </figure>
+        `);
+      }
+
+      displayTrendingContent(renderedContentCollection.join(""));
+    });
+  });
+}
+
+function getTrendingContent() {
   return new Promise((resolve, reject) => {
     request({
-      body: imageSource,
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      method: "PUT",
-      qs: {
-        access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
-      },
-      url: "http://daemon.lbry.tech/images.php"
+      method: "GET",
+      url: "https://api.lbry.io/file/list_trending"
     }, (error, response, body) => {
       if (error) reject(error);
       body = JSON.parse(body);
       resolve(body);
     });
   });
-}
-
-function validateEmail(email) {
-  const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
-  return re.test(String(email));
 }
