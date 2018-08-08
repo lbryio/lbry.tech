@@ -1,0 +1,20 @@
+.token {
+  &.comment,
+  &.operator,
+  &.punctuation {
+    color: #6c6c87;
+  }
+
+  &.boolean,
+  &.null {
+    color: #86c2f7;
+  }
+
+  &.number {
+    color: #f2ac5f;
+  }
+
+  &.string {
+    color: #fae079;
+  }
+}

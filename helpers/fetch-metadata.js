@@ -4,15 +4,19 @@
 
 //  P A C K A G E S
 
-const html = require("choo-async/html");
 const local = require("app-root-path").require;
+const prism = require("prismjs");
+const raw = require("nanohtml/raw");
 const request = require("request-promise-native");
 const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
+const loadLanguages = require("prismjs/components/");
 const logSlackError = local("/helpers/slack");
 const uploadImage = local("/helpers/upload-image");
+
+loadLanguages(["json"]);
 
 
 
@@ -143,13 +147,13 @@ module.exports = exports = (data, socket) => {
       }
 
       if (socket) {
+        const renderedCode = prism.highlight(stringifyObject(body, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
+
         return socket.send(JSON.stringify({
-          "html": html`
-            <p style="text-align: center;">Success! Here is the response for <strong>lbry://${claimAddress}</strong>:</p>
-            <pre><code class="json">${stringifyObject(body, { indent: "  ", singleQuotes: false })}</code></pre>
-            <button class="__button-black" data-action="tour, step 2" type="button">Go to next step</button>
-            <script>$('#temp-loader').remove();</script>
-          `,
+          "html": raw(`
+            <h3>Response</h3>
+            <pre><code class="language-json">${renderedCode}</code></pre>
+          `),
           "message": "updated html",
           "selector": "#step1-result"
         }));

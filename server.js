@@ -284,7 +284,6 @@ function validateEmail(email) {
 
 
 
-
 function generateStep1OfTour(displayTrendingContent) {
   return getTrendingContent().then(response => {
     if (!response || !response.success || response.success !== true || !response.data) return "";
@@ -296,16 +295,18 @@ function generateStep1OfTour(displayTrendingContent) {
 
     Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
-        renderedContentCollection.push(`
-          <figure class="tour__content__trend">
-            <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+        if (part.value.stream.metadata.thumbnail) {
+          renderedContentCollection.push(`
+            <figure class="tour__content__trend">
+              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
 
-            <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
-              ${part.value.stream.metadata.title}
-              <span>${part.channel_name}</span>
-            </figcaption>
-          </figure>
-        `);
+              <figcaption data-action="choose claim" data-claim-id="${part.name}">
+                ${part.value.stream.metadata.title}
+                <span>${part.channel_name}</span>
+              </figcaption>
+            </figure>
+          `);
+        }
       }
 
       displayTrendingContent(renderedContentCollection.join(""));

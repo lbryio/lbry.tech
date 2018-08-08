@@ -28,31 +28,40 @@ $("body").on("click", "[data-action]", event => {
       break;
 
     case "tour, step 1":
-      $(".hook__navigation__step").removeClass("active");
-      $(".hook__navigation__step:nth-child(1)").addClass("active");
+      $(".tour__sidebar__step").removeClass("active");
+      $(".tour__sidebar__step:nth-child(1)").addClass("active");
 
+      $("#tour-loader").show();
+      $("#tour-results").hide();
+
+      /*
       $("#step1-page").show();
       $("#step2-page").hide();
       $("#step3-page").hide();
+      */
       break;
 
     case "tour, step 2":
-      $(".hook__navigation__step").removeClass("active");
-      $(".hook__navigation__step:nth-child(2)").addClass("active");
+      $(".tour__sidebar__step").removeClass("active");
+      $(".tour__sidebar__step:nth-child(2)").addClass("active");
 
+      /*
       $("#step1-page").hide();
       $("#step2-page").show();
       $(".hook__page__content__meme__thumbnail").click(); // preload canvas
       $("#step3-page").hide();
+      */
       break;
 
     case "tour, step 3":
-      $(".hook__navigation__step").removeClass("active");
-      $(".hook__navigation__step:nth-child(3)").addClass("active");
+      $(".tour__sidebar__step").removeClass("active");
+      $(".tour__sidebar__step:nth-child(3)").addClass("active");
 
+      /*
       $("#step1-page").hide();
       $("#step2-page").hide();
       $("#step3-page").show();
+      */
       break;
 
     case "upload image":
@@ -98,24 +107,24 @@ function detectLanguageAndUpdate() {
 
 function initializeTour() {
   $("#fetch-claim-uri").val(""); // reset
-  $(".hook__navigation__step:nth-child(1)").addClass("active");
+  $(".tour__sidebar__step:nth-child(1)").addClass("active");
 
   send(JSON.stringify({
     "message": "landed on tour"
   }));
 
-  detectLanguageAndUpdate();
-  initCanvas();
+  /*
+    TODO:
+    - Account for someone wanting to make multiple resolves
+  */
+
+  // detectLanguageAndUpdate();
+  // initCanvas();
 }
 
 
 
 function fetchMetadata(stepNumber, data) {
-  /**
-    TODO:
-    - Style code with highlightjs
-  */
-
   if (!stepNumber) return;
 
   switch(stepNumber) {
@@ -129,17 +138,17 @@ function fetchMetadata(stepNumber, data) {
 
       if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(data);
 
-      $("#step1-placeholder").html(`
-<pre><code class="bash">
-  # The LBRY app must be running on your computer for this example to work
-  curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${data}' } }"
-</code></pre>
+      $("#tour-results").html(`
+        <pre><code class="language-bash">
+<span class="token comment"># If you have the LBRY desktop app, you can run this in your Terminal</span>
+curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${data}' } }"
+        </code></pre>
 
-<div class="loader" id="temp-loader"></div>
-<div id="step1-result"></div>
+        <div class="loader" id="temp-loader"></div>
+        <div id="step1-result"></div>
       `);
 
-      $("#step1-selections").hide();
+      $("#tour-loader").hide();
       break;
 
     case 2:
