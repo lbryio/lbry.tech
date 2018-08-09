@@ -25,7 +25,7 @@ module.exports = exports = () => async () => html`
       <ul class="home__features">
         <li class="home__feature">
           <p class="home__feature__title"><strong>New to LBRY?</strong></p>
-          <p class="home__feature__description">Learn how LBRY works in 3 easy steps</p>
+          <p class="home__feature__description">Learn how LBRY works with 3 easy examples</p>
           <a class="home__feature__cta" href="/tour">Take the Tour</a>
         </li>
 

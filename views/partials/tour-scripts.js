@@ -80,6 +80,11 @@ $("body").on("click", ".hook__page__content__meme__thumbnail", event => {
   updateCanvas(event.currentTarget);
 });
 
+$("#fetch-claim-uri").on("keyup", function (e) {
+  const key = e.keyCode ? e.keyCode : e.which;
+  if (key === 13 && $("#fetch-claim-uri").val()) fetchMetadata(1, $("#fetch-claim-uri").val());
+});
+
 $("#meme-top-line, #meme-bottom-line").on("keyup", () => updateCanvas());
 
 
@@ -106,7 +111,7 @@ function detectLanguageAndUpdate() {
 }
 
 function initializeTour() {
-  $("#fetch-claim-uri").val(""); // reset
+  $("#fetch-claim-uri").val("").focus(); // reset
   $(".tour__sidebar__step:nth-child(1)").addClass("active");
 
   send(JSON.stringify({

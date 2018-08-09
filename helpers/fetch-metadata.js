@@ -29,24 +29,15 @@ module.exports = exports = (data, socket) => {
   if (data.step === 2 && !data.data) return;
   if (data.step === 2) dataDetails = data.data; // file upload
 
-  const claimAddress = data.claim;
-  const resolveMethod = data.method;
-
-  /*
-  const allowedClaims = [
-    "fortnite-top-stream-moments-nickatnyte",
-    "hellolbry",
-    "itsadisaster",
-    "six",
-    "unbubbled1-1"
-  ];
-  */
-
   const allowedMethods = [
     "publish",
     "resolve",
     "wallet_send"
   ];
+
+  const body = {};
+  const claimAddress = data.claim;
+  const resolveMethod = data.method;
 
   if (allowedMethods.indexOf(resolveMethod) < 0) return socket.send(JSON.stringify({
     "details": "Unallowed resolve method for tutorial",
@@ -54,15 +45,7 @@ module.exports = exports = (data, socket) => {
     "type": "error"
   }));
 
-  /*
-  if (data.step === 1 && allowedClaims.indexOf(claimAddress) < 0) return socket.send(JSON.stringify({
-    "details": "Invalid claim ID for tutorial",
-    "message": "notification",
-    "type": "error"
-  }));
-  */
 
-  const body = {};
 
   body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
   body.method = resolveMethod;

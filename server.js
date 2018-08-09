@@ -295,7 +295,7 @@ function generateStep1OfTour(displayTrendingContent) {
 
     Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
-        if (part.value.stream.metadata.thumbnail) {
+        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail) {
           renderedContentCollection.push(`
             <figure class="tour__content__trend">
               <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
