@@ -25,9 +25,10 @@ loadLanguages(["json"]);
 module.exports = exports = (data, socket) => {
   let dataDetails = "";
 
-  if (data.step === 1 && !data.claim || !data.method) return;
-  if (data.step === 2 && !data.data) return;
-  if (data.step === 2) dataDetails = data.data; // file upload
+  if (data.example === 1 && !data.claim || !data.method) return;
+  if (data.example === 2 && !data.data) return;
+  if (data.example === 2) dataDetails = data.data; // file upload
+  if (data.example === 3 && !data.claim || !data.method) return;
 
   const allowedMethods = [
     "publish",
@@ -49,10 +50,9 @@ module.exports = exports = (data, socket) => {
 
   body.access_token = process.env.LBRY_DAEMON_ACCESS_TOKEN;
   body.method = resolveMethod;
-  if (data.step === 1) body.uri = claimAddress;
 
   if (resolveMethod === "publish") {
-    body.bid = 0.001; // Hardcoded publish amount
+    // body.bid = 0.001; // Hardcoded publish amount
     body.description = dataDetails.description;
     body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + dataDetails.file_path; // TODO: Fix the internal image path in daemon (original comment, check to see if still true)
     body.language = dataDetails.language;
@@ -102,6 +102,15 @@ module.exports = exports = (data, socket) => {
     });
   }
 
+  if (resolveMethod === "resolve") {
+    body.uri = claimAddress;
+  }
+
+  if (resolveMethod === "wallet_send") {
+    body.amount = "0.001"; // Hardcoded tip amount
+    body.claim_id = claimAddress;
+  }
+
   return new Promise((resolve, reject) => { // eslint-disable-line
     request({
       url: "http://daemon.lbry.tech",
@@ -122,8 +131,8 @@ module.exports = exports = (data, socket) => {
       if (body.error && typeof body.error !== "undefined") {
         logSlackError(
           "\n" +
-          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
-          "> _Cause: Someone is going through the Tour_\n"
+          "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error.message)) + "```" + "\n" +
+          "> _Cause: Someone is going through the Tour after a response has been parsed_\n"
         );
 
         return resolve(body.error);
@@ -138,7 +147,7 @@ module.exports = exports = (data, socket) => {
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
           "message": "updated html",
-          "selector": "#step1-result"
+          "selector": `#example${data.example}-result`
         }));
       }
 

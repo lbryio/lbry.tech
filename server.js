@@ -100,8 +100,8 @@ fastify.ready(err => {
 
           break;
 
-        case "landed on tour":
-          generateStep1OfTour(result => {
+        case "landed on tour" || "request for tour, example 1":
+          generateTrendingContent(1, result => {
             socket.send(JSON.stringify({
               "html": result,
               "message": "updated html",
@@ -110,6 +110,19 @@ fastify.ready(err => {
           });
 
           break;
+
+        /*
+        case "request for tour, example 3":
+          generateTrendingContent(3, result => {
+            socket.send(JSON.stringify({
+              "html": result,
+              "message": "updated html",
+              "selector": "#tour-loader"
+            }));
+          });
+
+          break;
+        */
 
         case "subscribe":
           newsletterSubscribe(data, socket);
@@ -121,7 +134,10 @@ fastify.ready(err => {
       }
     });
 
-    socket.on("close", () => socket.terminate());
+    socket.on("close", () => {
+      // console.log(socket);
+      return socket.terminate();
+    });
   });
 });
 
@@ -185,6 +201,62 @@ function generateGitHubFeed(displayGitHubFeed) {
       `);
     });
   }
+}
+
+function generateTrendingContent(exampleNumber, displayTrendingContent) {
+  return getTrendingContent().then(response => {
+    if (!response || !response.success || response.success !== true || !response.data) return "";
+
+    const rawContentCollection = [];
+    const renderedContentCollection = [];
+    const trendingContentData = response.data;
+
+    for (const data of trendingContentData) {
+      rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
+
+      /*
+      if (exampleNumber === 1) {
+        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
+      }
+
+      if (exampleNumber === 3) {
+        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "wallet_send", example: exampleNumber }));
+      }
+      */
+    }
+
+    Promise.all(rawContentCollection).then(collection => {
+      for (const part of collection) {
+        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail) {
+          renderedContentCollection.push(`
+            <figure class="tour__content__trend">
+              <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+
+              <figcaption data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}">
+                ${part.value.stream.metadata.title}
+                <span>${part.channel_name}</span>
+              </figcaption>
+            </figure>
+          `);
+        }
+      }
+
+      displayTrendingContent(renderedContentCollection.join(""));
+    });
+  });
+}
+
+function getTrendingContent() {
+  return new Promise((resolve, reject) => {
+    request({
+      method: "GET",
+      url: "https://api.lbry.io/file/list_trending"
+    }, (error, response, body) => {
+      if (error) reject(error);
+      body = JSON.parse(body);
+      resolve(body);
+    });
+  });
 }
 
 function newsletterSubscribe(data, socket) {
@@ -280,49 +352,4 @@ function updateGithubFeed() {
 function validateEmail(email) {
   const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
   return re.test(String(email));
-}
-
-
-
-function generateStep1OfTour(displayTrendingContent) {
-  return getTrendingContent().then(response => {
-    if (!response || !response.success || response.success !== true || !response.data) return "";
-    const trendingContentData = response.data;
-
-    const rawContentCollection = [];
-    const renderedContentCollection = [];
-    for (const data of trendingContentData) rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", step: 1 }));
-
-    Promise.all(rawContentCollection).then(collection => {
-      for (const part of collection) {
-        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail) {
-          renderedContentCollection.push(`
-            <figure class="tour__content__trend">
-              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
-
-              <figcaption data-action="choose claim" data-claim-id="${part.name}">
-                ${part.value.stream.metadata.title}
-                <span>${part.channel_name}</span>
-              </figcaption>
-            </figure>
-          `);
-        }
-      }
-
-      displayTrendingContent(renderedContentCollection.join(""));
-    });
-  });
-}
-
-function getTrendingContent() {
-  return new Promise((resolve, reject) => {
-    request({
-      method: "GET",
-      url: "https://api.lbry.io/file/list_trending"
-    }, (error, response, body) => {
-      if (error) reject(error);
-      body = JSON.parse(body);
-      resolve(body);
-    });
-  });
 }

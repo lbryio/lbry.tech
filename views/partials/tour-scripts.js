@@ -15,57 +15,63 @@ if (window.location.href.search && window.location.href.split("?url=")[1]) { // 
 
 $("body").on("click", "[data-action]", event => {
   event.preventDefault();
+
+  let exampleNumber;
   const data = event.currentTarget.dataset;
+
+  if (!parseInt($(".tour__sidebar__example.active")[0].dataset.example)) return;
+  exampleNumber = parseInt($(".tour__sidebar__example.active")[0].dataset.example);
 
   switch(data.action) {
     case "choose claim":
-      fetchMetadata(1, data.claimId);
+      fetchMetadata(exampleNumber, data.claimId);
       break;
 
     case "execute claim":
       if (!$("#fetch-claim-uri").val()) return;
-      fetchMetadata(1, $("#fetch-claim-uri").val());
+      fetchMetadata(exampleNumber, $("#fetch-claim-uri").val());
       break;
 
-    case "tour, step 1":
-      $(".tour__sidebar__step").removeClass("active");
-      $(".tour__sidebar__step:nth-child(1)").addClass("active");
+    case "tour, example 1":
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
-      $("#tour-loader").show();
-      $("#tour-results").hide();
+      $("#tour-loader").html("");
+      $("#tour-results").html("");
 
-      /*
-      $("#step1-page").show();
-      $("#step2-page").hide();
-      $("#step3-page").hide();
-      */
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
       break;
 
-    case "tour, step 2":
-      $(".tour__sidebar__step").removeClass("active");
-      $(".tour__sidebar__step:nth-child(2)").addClass("active");
+    case "tour, example 2":
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(2)").addClass("active");
 
       /*
-      $("#step1-page").hide();
-      $("#step2-page").show();
+      $("#example1-page").hide();
+      $("#example2-page").show();
       $(".hook__page__content__meme__thumbnail").click(); // preload canvas
-      $("#step3-page").hide();
+      $("#example3-page").hide();
       */
       break;
 
-    case "tour, step 3":
-      $(".tour__sidebar__step").removeClass("active");
-      $(".tour__sidebar__step:nth-child(3)").addClass("active");
+    case "tour, example 3":
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(3)").addClass("active");
 
-      /*
-      $("#step1-page").hide();
-      $("#step2-page").hide();
-      $("#step3-page").show();
-      */
+      $("#tour-loader").html("");
+      $("#tour-results").html("");
+
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
       break;
 
     case "upload image":
-      fetchMetadata(2, getMemeInfo());
+      fetchMetadata(exampleNumber, getMemeInfo());
       break;
 
     default:
@@ -112,7 +118,7 @@ function detectLanguageAndUpdate() {
 
 function initializeTour() {
   $("#fetch-claim-uri").val("").focus(); // reset
-  $(".tour__sidebar__step:nth-child(1)").addClass("active");
+  $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
   send(JSON.stringify({
     "message": "landed on tour"
@@ -129,19 +135,19 @@ function initializeTour() {
 
 
 
-function fetchMetadata(stepNumber, data) {
-  if (!stepNumber) return;
+function fetchMetadata(exampleNumber, data) {
+  if (!exampleNumber) return;
 
-  switch(stepNumber) {
+  switch(exampleNumber) {
     case 1:
       send(JSON.stringify({
         "claim": data,
         "message": "fetch metadata",
         "method": "resolve",
-        "step": stepNumber
+        "example": exampleNumber
       }));
 
-      if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(data);
+      $("#fetch-claim-uri").val(data); // if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(data);
 
       $("#tour-results").html(`
         <pre><code class="language-bash">
@@ -150,7 +156,7 @@ curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
-        <div id="step1-result"></div>
+        <div id="example1-result"></div>
       `);
 
       $("#tour-loader").hide();
@@ -161,9 +167,32 @@ curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '
         "data": data,
         "message": "fetch metadata",
         "method": "publish",
-        "step": stepNumber
+        "example": exampleNumber
       }));
 
+      break;
+
+    case 3:
+      send(JSON.stringify({
+        "claim": data,
+        "message": "fetch metadata",
+        "method": "wallet_send",
+        "example": exampleNumber
+      }));
+
+      $("#fetch-claim-uri").val(data);
+
+      $("#tour-results").html(`
+        <pre><code class="language-bash">
+<span class="token comment"># If you have the LBRY desktop app, you can run this in your Terminal</span>
+curl "http://localhost:5279" --data "{ 'method': 'wallet_send', 'params': { 'claim_id': '${data}', 'amount': '0.01' } }"
+        </code></pre>
+
+        <div class="loader" id="temp-loader"></div>
+        <div id="example3-result"></div>
+      `);
+
+      $("#tour-loader").hide();
       break;
 
     default:
@@ -172,8 +201,17 @@ curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '
 }
 
 function getMemeInfo() { // TODO: Error handling
-  const info = {};
+  const info = {
+    description: $("#meme-description").val(),
+    file_path: $("#meme-canvas")[0].toDataURL("image/jpeg", 0.6),
+    language: $("#meme-language").val(),
+    license: $("#meme-license").val(),
+    name: $("#meme-title").val(),
+    nsfw: $("#meme-nsfw-flag")[0].checked,
+    title: $("#meme-title").val()
+  };
 
+  /*
   info.description = $("#meme-description").val();
   info.file_path = $("#meme-canvas")[0].toDataURL("image/jpeg", 0.6);
   info.language = $("#meme-language").val();
@@ -181,6 +219,7 @@ function getMemeInfo() { // TODO: Error handling
   info.name = $("#meme-title").val();
   info.nsfw = $("#meme-nsfw-flag")[0].checked;
   info.title = $("#meme-title").val();
+  */
 
   return info;
 }
