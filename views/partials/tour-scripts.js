@@ -6,7 +6,7 @@ initializeTour();
 
 
 
-if (window.location.href.search && window.location.href.split("?url=")[1]) { // pre-fill Tour if search parameter exists
+if (window.location.href.search && window.location.href.split("?url=")[1]) { // pre-fill example one if search parameter exists
   const searchParameter = window.location.href.split("?url=")[1];
   fetchMetadata(1, searchParameter);
 }
@@ -33,6 +33,12 @@ $("body").on("click", "[data-action]", event => {
       break;
 
     case "tour, example 1":
+      if ($("#tour-loader").hasClass("tour__content__meme")) {
+        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      }
+
+      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
@@ -46,18 +52,31 @@ $("body").on("click", "[data-action]", event => {
       break;
 
     case "tour, example 2":
+      if ($("#tour-loader").hasClass("tour__content__trends")) {
+        $("#tour-loader").removeClass("tour__content__trends").addClass("tour__content__meme");
+      }
+
+      $("#tour-url").hide();
+
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(2)").addClass("active");
 
-      /*
-      $("#example1-page").hide();
-      $("#example2-page").show();
-      $(".hook__page__content__meme__thumbnail").click(); // preload canvas
-      $("#example3-page").hide();
-      */
+      $("#tour-loader").html("");
+      $("#tour-results").html("");
+
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
       break;
 
     case "tour, example 3":
+      if ($("#tour-loader").hasClass("tour__content__meme")) {
+        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      }
+
+      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(3)").addClass("active");
 
@@ -79,8 +98,8 @@ $("body").on("click", "[data-action]", event => {
   }
 });
 
-$("body").on("click", ".hook__page__content__meme__thumbnail", event => {
-  $(".hook__page__content__meme__thumbnail").removeClass("selected");
+$("body").on("click", ".tour__content__meme__canvas__thumbnail", event => {
+  $(".tour__content__meme__canvas__thumbnail").removeClass("selected");
 
   event.currentTarget.className += " selected";
   updateCanvas(event.currentTarget);
@@ -91,13 +110,13 @@ $("#fetch-claim-uri").on("keyup", function (e) {
   if (key === 13 && $("#fetch-claim-uri").val()) fetchMetadata(1, $("#fetch-claim-uri").val());
 });
 
-$("#meme-top-line, #meme-bottom-line").on("keyup", () => updateCanvas());
+$("body").on("keyup", "#meme-top-line, #meme-bottom-line", () => updateCanvas());
 
 
 
 //  H E L P E R S
 
-function detectLanguageAndUpdate() {
+function detectLanguageAndUpdate() { // eslint-disable-line
   const compare = (array1, array2) => array2.filter(value => array2.indexOf(value)); // compare two arrays and get match(es)
   const memeLocaleObject = $("#meme-language").children();
   const memeLocales = [];
@@ -128,9 +147,6 @@ function initializeTour() {
     TODO:
     - Account for someone wanting to make multiple resolves
   */
-
-  // detectLanguageAndUpdate();
-  // initCanvas();
 }
 
 
@@ -147,7 +163,7 @@ function fetchMetadata(exampleNumber, data) {
         "example": exampleNumber
       }));
 
-      $("#fetch-claim-uri").val(data); // if (!$("#fetch-claim-uri").val()) $("#fetch-claim-uri").val(data);
+      $("#fetch-claim-uri").val(data);
 
       $("#tour-results").html(`
         <pre><code class="language-bash">
@@ -238,7 +254,7 @@ function clearCanvas(canvas) {
   ctx.restore();
 }
 
-function initCanvas() {
+function initCanvas() { // eslint-disable-line
   const canvas = document.getElementById("meme-canvas");
   const canvasWidth = 400;
   const canvasHeight = 300;

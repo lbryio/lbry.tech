@@ -46,7 +46,7 @@ function sidebar() { // TODO: Save tutorial position to localStorage
 
 function example1() {
   return html`
-    <div class="tour__content__urlbar">
+    <div class="tour__content__urlbar" id="tour-url">
       <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Enter a LBRY address or select an example below" type="text"/>
       <button class="button" data-action="execute claim" type="button">Resolve</button>
     </div>

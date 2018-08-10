@@ -12,6 +12,7 @@ const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
+const randomString = local("/helpers/random-string");
 const loadLanguages = require("prismjs/components/");
 const logSlackError = local("/helpers/slack");
 const uploadImage = local("/helpers/upload-image");
@@ -52,36 +53,26 @@ module.exports = exports = (data, socket) => {
   body.method = resolveMethod;
 
   if (resolveMethod === "publish") {
-    // body.bid = 0.001; // Hardcoded publish amount
+    body.bid = 0.001; // Hardcoded publish amount
     body.description = dataDetails.description;
     body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + dataDetails.file_path; // TODO: Fix the internal image path in daemon (original comment, check to see if still true)
     body.language = dataDetails.language;
     body.license = dataDetails.license;
-    body.name = dataDetails.name;
+    body.name = dataDetails.name.replace(/\s/g, "") + randomString(10);
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
+
+    // TODO: Forget all this and upload to spee.ch
 
     return uploadImage(body.file_path).then(uploadResponse => {
       if (uploadResponse.status !== "ok") return;
 
       body.file_path = uploadResponse.filename;
-      body.method = resolveMethod;
+      body.filename = uploadResponse.filename;
 
       // Reference:
       // https://github.com/lbryio/lbry.tech/blob/legacy/content/.vuepress/components/Tour/Step2.vue
       // https://github.com/lbryio/lbry.tech/blob/legacy/server.js
-
-      return new Promise((resolve, reject) => {
-        request({
-          qs: body,
-          url: "http://daemon.lbry.tech/images.php"
-        }, (error, response, body) => {
-          if (error) reject(error);
-          body = JSON.parse(body);
-          // console.log(body);
-          resolve(body);
-        });
-      });
     }).catch(uploadError => {
       // component.isLoading = false;
       // component.jsonData = JSON.stringify(uploadError, null, "  ");
@@ -102,9 +93,7 @@ module.exports = exports = (data, socket) => {
     });
   }
 
-  if (resolveMethod === "resolve") {
-    body.uri = claimAddress;
-  }
+  if (resolveMethod === "resolve") body.uri = claimAddress;
 
   if (resolveMethod === "wallet_send") {
     body.amount = "0.001"; // Hardcoded tip amount

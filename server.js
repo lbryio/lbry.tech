@@ -16,6 +16,7 @@ const fastify = require("fastify")({
   }
 });
 
+const html = require("choo-async/html");
 const local = require("app-root-path").require;
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
@@ -100,7 +101,7 @@ fastify.ready(err => {
 
           break;
 
-        case "landed on tour" || "request for tour, example 1":
+        case "landed on tour":
           generateTrendingContent(1, result => {
             socket.send(JSON.stringify({
               "html": result,
@@ -109,6 +110,21 @@ fastify.ready(err => {
             }));
           });
 
+          break;
+
+        case "request for tour, example 1":
+          generateTrendingContent(1, result => {
+            socket.send(JSON.stringify({
+              "html": result,
+              "message": "updated html",
+              "selector": "#tour-loader"
+            }));
+          });
+
+          break;
+
+        case "request for tour, example 2":
+          generateMemeCreator(socket);
           break;
 
         /*
@@ -203,6 +219,136 @@ function generateGitHubFeed(displayGitHubFeed) {
   }
 }
 
+function generateMemeCreator(socket) {
+  const images = [
+    {
+      alt: "Carl Sagan",
+      src: "/assets/media/images/carlsagan2.jpg"
+    },
+    {
+      alt: "Doge",
+      src: "/assets/media/images/doge-meme.jpg"
+    },
+    {
+      alt: "LBRY Logo With Green Background",
+      src: "/assets/media/images/lbry-green.png"
+    }
+  ];
+
+  const memePlaceholderData = {
+    bottomLine: {
+      placeholder: "Top line",
+      value: "that I made"
+    },
+    description: {
+      placeholder: "Description",
+      value: "Check out this image I published to LBRY via lbry.tech"
+    },
+    topLine: {
+      placeholder: "Top line",
+      value: "This is an example meme"
+    },
+    title: {
+      placeholder: "Title",
+      value: "Dank Meme Supreme da Cheese"
+    }
+  };
+
+  const renderedImages = [];
+
+  for (const image of images) {
+    renderedImages.push(`<img alt="${image.alt}" class="tour__content__meme__canvas__thumbnail" src="${image.src}"/>`);
+  }
+
+  const memeCreator = html`
+    <div class="tour__content__meme__canvas">
+      <img alt="Base image for LBRY meme creator" id="base-image" style="height: 0; visibility: hidden;"/>
+      <canvas id="meme-canvas" height="300" width="400">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
+
+      ${renderedImages}
+    </div>
+
+    <form class="tour__content__meme__editor">
+      <h2>Image Text</h2>
+
+      <fieldset>
+        <label for="meme-top-line">Top line</label>
+        <input id="meme-top-line" name="meme-top-line" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.topLine.value}" required/>
+      </fieldset>
+
+      <fieldset>
+        <label for="meme-bottom-line">Bottom line</label>
+        <input id="meme-bottom-line" name="meme-bottom-line" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.bottomLine.value}" required/>
+      </fieldset>
+
+      <h2 class="__metadata">Metadata</h2>
+
+      <fieldset>
+        <label for="meme-title">Title</label>
+        <input id="meme-title" name="meme-title" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.title.value}" required/>
+      </fieldset>
+
+      <fieldset>
+        <label for="meme-description">Description</label>
+        <textarea id="meme-description" name="meme-description" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" type="text" required>${memePlaceholderData.description.value}</textarea>
+      </fieldset>
+
+      <fieldset>
+        <label for="meme-language">Language</label>
+        <select id="meme-language" name="meme-language">
+          <option value="ar">Arabic</option>
+          <option value="zh">Chinese (Mandarin)</option>
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="jp">Japanese</option>
+          <option value="ru">Russian</option>
+          <option value="es">Spanish</option>
+          <option value="">Not specified</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <label for="meme-license">License</label>
+        <select id="meme-license" name="meme-license" required>
+          <option value="Public Domain">Public Domain</option>
+          <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
+          <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
+          <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
+          <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
+          <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
+          <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
+          <option value="None">None</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <label><input id="meme-nsfw-flag" name="nsfw" type="checkbox"/>NSFW</label>
+      </fieldset>
+
+      <fieldset>
+        <button data-action="upload image" class="__button-black" type="button">Submit</button>
+      </fieldset>
+    </form>
+
+    <script>
+      detectLanguageAndUpdate();
+      initCanvas();
+
+      setTimeout(() => {
+        $(".tour__content__meme__canvas__thumbnail").click();
+      }, 100);
+    </script>
+  `;
+
+  return socket.send(JSON.stringify({
+    "html": memeCreator,
+    "message": "updated html",
+    "selector": "#tour-loader"
+  }));
+}
+
 function generateTrendingContent(exampleNumber, displayTrendingContent) {
   return getTrendingContent().then(response => {
     if (!response || !response.success || response.success !== true || !response.data) return "";
@@ -213,16 +359,6 @@ function generateTrendingContent(exampleNumber, displayTrendingContent) {
 
     for (const data of trendingContentData) {
       rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
-
-      /*
-      if (exampleNumber === 1) {
-        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
-      }
-
-      if (exampleNumber === 3) {
-        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "wallet_send", example: exampleNumber }));
-      }
-      */
     }
 
     Promise.all(rawContentCollection).then(collection => {
@@ -247,12 +383,12 @@ function generateTrendingContent(exampleNumber, displayTrendingContent) {
 }
 
 function getTrendingContent() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { // eslint-disable-line
     request({
       method: "GET",
       url: "https://api.lbry.io/file/list_trending"
     }, (error, response, body) => {
-      if (error) reject(error);
+      if (error || !JSON.parse(body)) resolve("Issue fetching content"); // error
       body = JSON.parse(body);
       resolve(body);
     });
