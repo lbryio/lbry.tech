@@ -167,8 +167,8 @@ function fetchMetadata(exampleNumber, data) {
 
       $("#tour-results").html(`
         <pre><code class="language-bash">
-<span class="token comment"># If you have the LBRY desktop app, you can run this in your Terminal</span>
-curl "http://localhost:5279" --data "{ 'method': 'resolve', 'params': { 'uri': '${data}' } }"
+<span class="token comment"># With the LBRY daemon running locally, you can use this in your Terminal</span>
+curl --header "Content-Type: application/json" --data '{ "method": "resolve", "params": { "uri": "${data}" }}' http://localhost:5279
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
