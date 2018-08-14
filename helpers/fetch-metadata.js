@@ -115,9 +115,7 @@ module.exports = exports = (data, socket) => {
       body: body,
       json: true,
       method: apiRequestMethod,
-      url: `${process.env.NODE_ENV === "development" ?
-        `http://localhost:5200/${resolveMethod}` :
-        `http://daemon.lbry.tech/${resolveMethod}`}`
+      url: `${process.env.NODE_ENV === "development" ? `http://localhost:5200/${resolveMethod}` : `https://daemon.lbry.tech/${resolveMethod}`}`
     }, (error, response, body) => {
       if (error) {
         if (process.env.NODE_ENV !== "development") {
@@ -143,7 +141,10 @@ module.exports = exports = (data, socket) => {
         return resolve(body.error);
       }
 
-      if (body.result.txid) explorerNotice = `
+      if (
+        body.result &&
+        body.result.txid
+      ) explorerNotice = `
         <p>If you want proof of the tip you just gave, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
       `;
 
