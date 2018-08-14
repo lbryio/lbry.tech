@@ -127,7 +127,6 @@ fastify.ready(err => {
           generateMemeCreator(socket);
           break;
 
-        /*
         case "request for tour, example 3":
           generateTrendingContent(3, result => {
             socket.send(JSON.stringify({
@@ -138,7 +137,6 @@ fastify.ready(err => {
           });
 
           break;
-        */
 
         case "subscribe":
           newsletterSubscribe(data, socket);
@@ -220,6 +218,19 @@ function generateGitHubFeed(displayGitHubFeed) {
 }
 
 function generateMemeCreator(socket) {
+  /*
+  request({
+    body: { authorization: "hi" },
+    json: true,
+    method: "GET",
+    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200" : "http://daemon.lbry.tech"}`
+  }).then(body => {
+    console.log(body);
+  }).catch(welp => {
+    console.log(welp);
+  });
+  */
+
   const images = [
     {
       alt: "Carl Sagan",

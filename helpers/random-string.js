@@ -1,8 +1,14 @@
 "use strict";
 
+
+
+//  P A C K A G E
+
 const crypto = require("crypto");
 
 
+
+//  E X P O R T
 
 module.exports = exports = len => {
   if (!Number.isFinite(len)) throw new TypeError("Expected a finite number");

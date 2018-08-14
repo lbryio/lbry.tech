@@ -37,13 +37,14 @@ $("body").on("click", "[data-action]", event => {
         $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
       }
 
+      $("#fetch-claim-uri").val(""); // reset URL bar
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
-      $("#tour-loader").html("");
-      $("#tour-results").html("");
+      $("#tour-loader").empty().show(); // .html("");
+      $("#tour-results").empty().show(); // .html("");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -56,13 +57,14 @@ $("body").on("click", "[data-action]", event => {
         $("#tour-loader").removeClass("tour__content__trends").addClass("tour__content__meme");
       }
 
+      $("#fetch-claim-uri").val(""); // reset URL bar
       $("#tour-url").hide();
 
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(2)").addClass("active");
 
-      $("#tour-loader").html("");
-      $("#tour-results").html("");
+      $("#tour-loader").empty().show(); // .html("");
+      $("#tour-results").empty().show(); // .html("");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -75,13 +77,14 @@ $("body").on("click", "[data-action]", event => {
         $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
       }
 
+      $("#fetch-claim-uri").val(""); // reset URL bar
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(3)").addClass("active");
 
-      $("#tour-loader").html("");
-      $("#tour-results").html("");
+      $("#tour-loader").empty().show(); // .html("");
+      $("#tour-results").empty().show(); // .html("");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -167,8 +170,8 @@ function fetchMetadata(exampleNumber, data) {
 
       $("#tour-results").html(`
         <pre><code class="language-bash">
-<span class="token comment"># With the LBRY daemon running locally, you can use this in your Terminal</span>
-curl --header "Content-Type: application/json" --data '{ "method": "resolve", "params": { "uri": "${data}" }}' http://localhost:5279
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
@@ -200,8 +203,8 @@ curl --header "Content-Type: application/json" --data '{ "method": "resolve", "p
 
       $("#tour-results").html(`
         <pre><code class="language-bash">
-<span class="token comment"># If you have the LBRY desktop app, you can run this in your Terminal</span>
-curl "http://localhost:5279" --data "{ 'method': 'wallet_send', 'params': { 'claim_id': '${data}', 'amount': '0.01' } }"
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>

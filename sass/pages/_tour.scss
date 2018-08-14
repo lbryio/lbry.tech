@@ -156,10 +156,8 @@
 
 
 
-.tour__content__meme {
-  &::after {
-    @include clearfix;
-  }
+.tour__content__meme::after {
+  @include clearfix;
 }
 
 .tour__content__meme__canvas {

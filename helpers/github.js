@@ -125,7 +125,7 @@ function refToBranch(ref) {
 
 
 
-//  E X P O R T
+//  E X P O R T S
 
 module.exports = exports = {
   generateEvent,
