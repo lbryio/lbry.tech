@@ -181,3 +181,32 @@
     direction: ltr;
   }
 }
+
+
+
+.__loading {
+  width: 100%; height: 10rem;
+  position: relative;
+
+  &::before {
+    width: 4rem; height: 4rem;
+    top: 2rem; left: calc(50% - 2rem);
+
+    animation: spin 2s linear infinite;
+    border-radius: 50%;
+    border-style: solid;
+    border-top-color: $teal;
+    border-width: 6px;
+    content: "";
+    position: absolute;
+  }
+
+  &::after {
+    top: 7rem; left: 0;
+
+    font-size: 1rem;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+}

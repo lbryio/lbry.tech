@@ -156,6 +156,7 @@ module.exports = exports = (data, socket) => {
             <h3>Response</h3>
             ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
+            <script>$("#temp-loader").hide();</script>
           `),
           "message": "updated html",
           "selector": `#example${data.example}-result`

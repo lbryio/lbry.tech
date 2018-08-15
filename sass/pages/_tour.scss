@@ -71,6 +71,14 @@
   float: right;
   padding: 1rem 0 1rem 1rem;
   vertical-align: top;
+
+  .loader {
+    @extend .__loading;
+
+    &::after {
+      content: "Processing request";
+    }
+  }
 }
 
 .tour__content__urlbar {
@@ -317,29 +325,10 @@
   grid-template-columns: 32% 32% 32%;
 
   &:empty {
-    width: 100%; height: 10rem;;
-
-    &::before {
-      width: 4rem; height: 4rem;
-      top: 2rem; left: calc(50% - 2rem);
-
-      animation: spin 2s linear infinite;
-      border-radius: 50%;
-      border-style: solid;
-      border-top-color: $teal;
-      border-width: 6px;
-      content: "";
-      position: absolute;
-    }
+    @extend .__loading;
 
     &::after {
-      top: 7rem; left: 0;
-
       content: "Fetching trending content from LBRY";
-      font-size: 1rem;
-      position: absolute;
-      text-align: center;
-      width: 100%;
     }
   }
 }
