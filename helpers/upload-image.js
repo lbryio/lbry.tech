@@ -10,19 +10,17 @@ const request = require("request-promise-native");
 
 //  E X P O R T
 
-module.exports = exports = imageSource => new Promise((resolve, reject) => {
-  request({
-    body: imageSource,
-    headers: {
-      "Content-Type": "text/plain"
+module.exports = exports = imageSource => new Promise((resolve, reject) => { // eslint-disable-line
+  return request({
+    body: {
+      authorization: process.env.LBRY_DAEMON_ACCESS_TOKEN,
+      image: imageSource
     },
-    method: "PUT",
-    qs: {
-      access_token: process.env.LBRY_DAEMON_ACCESS_TOKEN
-    },
-    url: "http://daemon.lbry.tech/images.php"
+    json: true,
+    method: "POST",
+    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/image" : "https://daemon.lbry.tech/image" }`
   }, (error, response, body) => {
-    if (error) reject(error);
+    if (error) resolve(error);
     body = JSON.parse(body);
     resolve(body);
   });

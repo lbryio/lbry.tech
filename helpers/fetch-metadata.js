@@ -58,17 +58,17 @@ module.exports = exports = (data, socket) => {
 
     body.bid = 0.001; // Hardcoded publish amount
     body.description = dataDetails.description;
-    body.file_path = process.env.LBRY_DAEMON_IMAGES_PATH + dataDetails.file_path; // TODO: Fix the internal image path in daemon (original comment, check to see if still true)
+    body.file_path = dataDetails.file_path; // just base64 string
     body.language = dataDetails.language;
     body.license = dataDetails.license;
     body.name = dataDetails.name.replace(/\s/g, "") + randomString(10);
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
 
-    // TODO: Forget all this and upload to spee.ch
-
     return uploadImage(body.file_path).then(uploadResponse => {
-      if (uploadResponse.status !== "ok") return;
+      // if (uploadResponse.status !== "ok") return;
+      // console.log("————— RESPONSE");
+      // console.log(uploadResponse);
 
       body.file_path = uploadResponse.filename;
       body.filename = uploadResponse.filename;
@@ -77,8 +77,8 @@ module.exports = exports = (data, socket) => {
       // https://github.com/lbryio/lbry.tech/blob/legacy/content/.vuepress/components/Tour/Step2.vue
       // https://github.com/lbryio/lbry.tech/blob/legacy/server.js
     }).catch(uploadError => {
-      // component.isLoading = false;
-      // component.jsonData = JSON.stringify(uploadError, null, "  ");
+      // console.log("————— ERROR");
+      // console.log(uploadError);
 
       socket.send(JSON.stringify({
         "details": "Image upload failed",

@@ -28,7 +28,7 @@ module.exports = exports = pagePath => {
       break;
 
     case "/tour":
-      githubUrl = `${githubUrl}/views/pages/tour.js`;
+      githubUrl = `${githubUrl}/views/partials/tour.js`;
       break;
 
     default:

@@ -223,7 +223,7 @@ function generateMemeCreator(socket) {
     body: { authorization: "hi" },
     json: true,
     method: "GET",
-    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200" : "http://daemon.lbry.tech"}`
+    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200" : "https://daemon.lbry.tech"}`
   }).then(body => {
     console.log(body);
   }).catch(welp => {

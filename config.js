@@ -5,7 +5,7 @@
 module.exports = exports = {
   ga: "UA-60403362-1",
   github: {
-    branch: "new",
+    branch: "master",
     linkText: "Edit this page on GitHub",
     repo: "lbryio/lbry.tech"
   },
