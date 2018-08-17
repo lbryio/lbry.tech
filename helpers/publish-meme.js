@@ -10,15 +10,15 @@ const request = require("request-promise-native");
 
 //  E X P O R T
 
-module.exports = exports = imageSource => new Promise((resolve, reject) => { // eslint-disable-line
+module.exports = exports = publishMetadata => new Promise((resolve, reject) => { // eslint-disable-line
   return request({
     body: {
       authorization: process.env.LBRY_DAEMON_ACCESS_TOKEN,
-      image: imageSource
+      metadata: publishMetadata
     },
     json: true,
-    method: "POST",
-    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/image" : "https://daemon.lbry.tech/image" }`
+    method: "PUT",
+    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/publish" : "https://daemon.lbry.tech/publish" }`
   }, (error, response, body) => {
     if (error) resolve(error);
     resolve(body);

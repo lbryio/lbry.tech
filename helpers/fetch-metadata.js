@@ -15,6 +15,7 @@ const stringifyObject = require("stringify-object");
 const randomString = local("/helpers/random-string");
 const loadLanguages = require("prismjs/components/");
 const logSlackError = local("/helpers/slack");
+const publishMeme = local("/helpers/publish-meme");
 const uploadImage = local("/helpers/upload-image");
 
 loadLanguages(["json"]);
@@ -56,43 +57,81 @@ module.exports = exports = (data, socket) => {
   if (resolveMethod === "publish") {
     apiRequestMethod = "PUT";
 
-    body.bid = 0.001; // Hardcoded publish amount
+    // Required for publishing
+    body.author = "lbry.tech";
+    body.bid = 0.0001; // Hardcoded publish amount
     body.description = dataDetails.description;
-    body.file_path = dataDetails.file_path; // just base64 string
     body.language = dataDetails.language;
     body.license = dataDetails.license;
-    body.name = dataDetails.name.replace(/\s/g, "") + randomString(10);
+    body.name = dataDetails.name.replace(/\s/g, "-") + randomString(10); // underscores are not allowed?
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
 
+    // Gotta let the blockchain know what to save
+    body.file_path = dataDetails.file_path; // just base64 string
+
     return uploadImage(body.file_path).then(uploadResponse => {
-      // if (uploadResponse.status !== "ok") return;
-      // console.log("————— RESPONSE");
-      // console.log(uploadResponse);
+      if (!uploadResponse.status || uploadResponse.status !== "ok") {
+        socket.send(JSON.stringify({
+          "details": "Image upload failed",
+          "message": "notification",
+          "type": "error"
+        }));
+
+        if (process.env.NODE_ENV !== "development") {
+          logSlackError(
+            "\n" +
+            "> *DAEMON ERROR:*\n" +
+            "> _Cause: Someone attempted to upload a meme to the web daemon_\n"
+          );
+        }
+
+        return;
+      }
 
       body.file_path = uploadResponse.filename;
-      body.filename = uploadResponse.filename;
 
-      // Reference:
-      // https://github.com/lbryio/lbry.tech/blob/legacy/content/.vuepress/components/Tour/Step2.vue
-      // https://github.com/lbryio/lbry.tech/blob/legacy/server.js
-    }).catch(uploadError => {
-      // console.log("————— ERROR");
-      // console.log(uploadError);
+      return publishMeme(body).then(publishResponse => {
+        let explorerNotice = "";
 
-      socket.send(JSON.stringify({
-        "details": "Image upload failed",
-        "message": "notification",
-        "type": "error"
-      }));
+        if (publishResponse.error) {
+          socket.send(JSON.stringify({
+            "details": "Meme publish failed",
+            "message": "notification",
+            "type": "error"
+          }));
 
-      logSlackError(
-        "\n" +
-        "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(uploadError)) + "```" + "\n" +
-        "> _Cause: Someone attempted to publish a meme via the Tour_\n"
-      );
+          if (process.env.NODE_ENV !== "development") {
+            logSlackError(
+              "\n" +
+              "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(publishResponse.error)) + "```" + "\n" +
+              "> _Cause: Someone is going through the Tour after a response has been parsed_\n"
+            );
+          }
 
-      return;
+          return;
+        }
+
+        if (
+          publishResponse.result &&
+          publishResponse.result.txid
+        ) explorerNotice = `
+          <p>If you want proof of the tip you just gave, <a href="https://explorer.lbry.io/tx/${publishResponse.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
+        `;
+
+        const renderedCode = prism.highlight(stringifyObject(publishResponse, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
+
+        return socket.send(JSON.stringify({
+          "html": raw(`
+            <h3>Response</h3>
+            ${explorerNotice}
+            <pre><code class="language-json">${renderedCode}</code></pre>
+            <script>$("#temp-loader").hide();</script>
+          `),
+          "message": "updated html",
+          "selector": `#example${data.example}-result`
+        }));
+      });
     });
   }
 

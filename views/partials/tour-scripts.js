@@ -43,8 +43,8 @@ $("body").on("click", "[data-action]", event => {
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
-      $("#tour-loader").empty().show(); // .html("");
-      $("#tour-results").empty().show(); // .html("");
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -63,8 +63,8 @@ $("body").on("click", "[data-action]", event => {
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(2)").addClass("active");
 
-      $("#tour-loader").empty().show(); // .html("");
-      $("#tour-results").empty().show(); // .html("");
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -83,8 +83,8 @@ $("body").on("click", "[data-action]", event => {
       $(".tour__sidebar__example").removeClass("active");
       $(".tour__sidebar__example:nth-child(3)").addClass("active");
 
-      $("#tour-loader").empty().show(); // .html("");
-      $("#tour-results").empty().show(); // .html("");
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -108,8 +108,8 @@ $("body").on("click", ".tour__content__meme__canvas__thumbnail", event => {
   updateCanvas(event.currentTarget);
 });
 
-$("#fetch-claim-uri").on("keyup", function (e) {
-  const key = e.keyCode ? e.keyCode : e.which;
+$("#fetch-claim-uri").on("keyup", event => {
+  const key = event.keyCode ? event.keyCode : event.which;
   if (key === 13 && $("#fetch-claim-uri").val()) fetchMetadata(1, $("#fetch-claim-uri").val());
 });
 
@@ -189,6 +189,16 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         "example": exampleNumber
       }));
 
+      $("#tour-results").html(`
+        <pre><code class="language-bash">
+<span class="token comment"># This will be updated soon</span>
+        </code></pre>
+
+        <div class="loader" id="temp-loader"></div>
+        <div id="example2-result"></div>
+      `);
+
+      $("#tour-loader").hide();
       break;
 
     case 3:
@@ -229,16 +239,6 @@ function getMemeInfo() { // TODO: Error handling
     nsfw: $("#meme-nsfw-flag")[0].checked,
     title: $("#meme-title").val()
   };
-
-  /*
-  info.description = $("#meme-description").val();
-  info.file_path = $("#meme-canvas")[0].toDataURL("image/jpeg", 0.6);
-  info.language = $("#meme-language").val();
-  info.license = $("#meme-license").val();
-  info.name = $("#meme-title").val();
-  info.nsfw = $("#meme-nsfw-flag")[0].checked;
-  info.title = $("#meme-title").val();
-  */
 
   return info;
 }
