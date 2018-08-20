@@ -218,19 +218,6 @@ function generateGitHubFeed(displayGitHubFeed) {
 }
 
 function generateMemeCreator(socket) {
-  /*
-  request({
-    body: { authorization: "hi" },
-    json: true,
-    method: "GET",
-    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200" : "https://daemon.lbry.tech"}`
-  }).then(body => {
-    console.log(body);
-  }).catch(welp => {
-    console.log(welp);
-  });
-  */
-
   const images = [
     {
       alt: "Carl Sagan",
@@ -374,7 +361,7 @@ function generateTrendingContent(exampleNumber, displayTrendingContent) {
 
     Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
-        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail) {
+        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail && part.channel_name) {
           renderedContentCollection.push(`
             <figure class="tour__content__trend">
               <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
