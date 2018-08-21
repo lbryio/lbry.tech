@@ -1,9 +1,11 @@
 {
-  "name": "lbry.tech",
-  "description": "Documentation for the LBRY protocol and associated projects",
   "author": "LBRY Team",
-  "version": "0.0.0",
-  "private": true,
+  "babel": {
+    "presets": [
+      "env",
+      "stage-2"
+    ]
+  },
   "dependencies": {
     "@octokit/rest": "^15.10.0",
     "app-root-path": "^2.1.0",
@@ -38,12 +40,14 @@
     "nanohtml": "^1.2.4",
     "prismjs": "^1.15.0",
     "redis": "^2.8.0",
+    "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "slack-node": "^0.1.8",
     "socket.io": "^2.1.1",
     "stringify-object": "^3.2.2",
     "turbocolor": "^2.6.1"
   },
+  "description": "Documentation for the LBRY protocol and associated projects",
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -55,23 +59,11 @@
     "standardx": "^2.1.0",
     "updates": "^4.1.2"
   },
-  "peerDependencies": {
-    "request": "^2.88.0"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "stage-2"
-    ]
-  },
   "engines": {
     "node": "10.2.x"
   },
-  "standardx": {
-    "ignore": [
-      "public"
-    ]
-  },
+  "name": "lbry.tech",
+  "private": true,
   "scripts": {
     "lint": "standardx --verbose | snazzy",
     "start": "NODE_ENV=production node server",
@@ -81,5 +73,11 @@
     "watch": "run-p watch:*",
     "watch:sass": "sass --watch sass:public/css --style compressed",
     "watch:server": "NODE_ENV=development nodemon index.js --ignore 'public/'"
-  }
+  },
+  "standardx": {
+    "ignore": [
+      "public"
+    ]
+  },
+  "version": "0.0.0"
 }

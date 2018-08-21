@@ -12,10 +12,12 @@ const numberRegex = /^[0-9]/g;
 //  E X P O R T
 
 module.exports = exports = (state, emit, markdown) => {
-  const tocElements = markdown.match(headerRegex);
   const collectionOfTocElements = [];
+  const tocElements = markdown.match(headerRegex);
 
-  for (const item of tocElements) collectionOfTocElements.push(`<li><a href="${slugify(item)}" title="">${item.replace(/### /g, "")}</a></li>`);
+  for (const item of tocElements) collectionOfTocElements.push(`
+    <li><a href="${slugify(item)}" title="Go to '${item.replace(/### /g, "")}'">${item.replace(/### /g, "")}</a></li>
+  `);
 
   return `
     <ul class="component--glossary-toc">
