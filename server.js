@@ -102,7 +102,7 @@ fastify.ready(err => {
           break;
 
         case "landed on tour":
-          generateTrendingContent(1, result => {
+          generateContent(1, result => {
             socket.send(JSON.stringify({
               "html": result,
               "message": "updated html",
@@ -113,7 +113,7 @@ fastify.ready(err => {
           break;
 
         case "request for tour, example 1":
-          generateTrendingContent(1, result => {
+          generateContent(1, result => {
             socket.send(JSON.stringify({
               "html": result,
               "message": "updated html",
@@ -128,7 +128,7 @@ fastify.ready(err => {
           break;
 
         case "request for tour, example 3":
-          generateTrendingContent(3, result => {
+          generateContent(3, result => {
             socket.send(JSON.stringify({
               "html": result,
               "message": "updated html",
@@ -347,21 +347,73 @@ function generateMemeCreator(socket) {
   }));
 }
 
-function generateTrendingContent(exampleNumber, displayTrendingContent) {
-  return getTrendingContent().then(response => {
-    if (!response || !response.success || response.success !== true || !response.data) return "";
+function generateContent(exampleNumber, displayTrendingContent) {
+  if (exampleNumber === 1) {
+    return getTrendingContent().then(response => {
+      if (!response || !response.success || response.success !== true || !response.data) return "";
+
+      const rawContentCollection = [];
+      const renderedContentCollection = [];
+      const trendingContentData = response.data;
+
+      for (const data of trendingContentData) {
+        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
+      }
+
+      Promise.all(rawContentCollection).then(collection => {
+        for (const part of collection) {
+          if (
+            !part.value.stream.metadata.nsfw &&
+            part.value.stream.metadata.thumbnail &&
+            part.channel_name
+          ) {
+            renderedContentCollection.push(`
+              <figure class="tour__content__trend">
+                <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+
+                <figcaption data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}">
+                  ${part.value.stream.metadata.title}
+                  <span>${part.channel_name}</span>
+                </figcaption>
+              </figure>
+            `);
+          }
+        }
+
+        displayTrendingContent(renderedContentCollection.join(""));
+      });
+    });
+  }
+
+  if (exampleNumber === 3) {
+    const approvedUrls = [
+      "LBRY#3db81c073f82fd1bb670c65f526faea3b8546720",
+      "correlation-can-imply-causation#173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
+      "thanos-is-the-protagonist-how-infinity#2a7f5db2678177435b1dee6c9e38e035ead450b6nyte",
+      "epic-arcade-mode-duos-nickatnyte-molt#d81bac6d49b1f92e58c37a5f633a27a45b43405e",
+      "political-correctness-a-force-for-good-a#b4668c0bd096317b44c40738c099b6618095e75f",
+      "10-secrets-hidden-inside-famous-logos#007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
+      "ever-wonder-how-bitcoin-and-other#1ac47b8b3def40a25850dc726a09ce23d09e7009",
+      "bankrupt-pan-am#784b3c215a6f06b663fc1aa292bcb19f29c489bb",
+      "minecraft-in-real-life-iron-man#758dd6497cdfc401ae1f25984738d024d47b50af",
+      "ethan-shows-kyle-warframe-skyvault#8a7401b88d5ed0376d98f16808194d4dcb05b284"
+    ];
 
     const rawContentCollection = [];
     const renderedContentCollection = [];
-    const trendingContentData = response.data;
 
-    for (const data of trendingContentData) {
-      rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
+    for (const url of approvedUrls) {
+      rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: exampleNumber }));
     }
 
     Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
-        if (!part.value.stream.metadata.nsfw && part.value.stream.metadata.thumbnail && part.channel_name) {
+        if (
+          part &&
+          part.value &&
+          part.value.stream.metadata.thumbnail &&
+          part.channel_name
+        ) {
           renderedContentCollection.push(`
             <figure class="tour__content__trend">
               <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
@@ -377,7 +429,7 @@ function generateTrendingContent(exampleNumber, displayTrendingContent) {
 
       displayTrendingContent(renderedContentCollection.join(""));
     });
-  });
+  }
 }
 
 function getTrendingContent() {

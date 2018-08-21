@@ -16,89 +16,12 @@ if (window.location.href.search && window.location.href.split("?url=")[1]) { // 
 $("body").on("click", "[data-action]", event => {
   event.preventDefault();
 
-  let exampleNumber;
-  const data = event.currentTarget.dataset;
+  $(".tour").addClass("waiting");
 
-  if (!parseInt($(".tour__sidebar__example.active")[0].dataset.example)) return;
-  exampleNumber = parseInt($(".tour__sidebar__example.active")[0].dataset.example);
-
-  switch(data.action) {
-    case "choose claim":
-      fetchMetadata(exampleNumber, data.claimId);
-      break;
-
-    case "execute claim":
-      if (!$("#fetch-claim-uri").val()) return;
-      fetchMetadata(exampleNumber, $("#fetch-claim-uri").val());
-      break;
-
-    case "tour, example 1":
-      if ($("#tour-loader").hasClass("tour__content__meme")) {
-        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
-      }
-
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
-
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(1)").addClass("active");
-
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
-
-      send(JSON.stringify({
-        "message": `request for ${data.action}`
-      }));
-
-      break;
-
-    case "tour, example 2":
-      if ($("#tour-loader").hasClass("tour__content__trends")) {
-        $("#tour-loader").removeClass("tour__content__trends").addClass("tour__content__meme");
-      }
-
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      $("#tour-url").hide();
-
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(2)").addClass("active");
-
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
-
-      send(JSON.stringify({
-        "message": `request for ${data.action}`
-      }));
-
-      break;
-
-    case "tour, example 3":
-      if ($("#tour-loader").hasClass("tour__content__meme")) {
-        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
-      }
-
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
-
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(3)").addClass("active");
-
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
-
-      send(JSON.stringify({
-        "message": `request for ${data.action}`
-      }));
-
-      break;
-
-    case "upload image":
-      fetchMetadata(exampleNumber, getMemeInfo());
-      break;
-
-    default:
-      break;
-  }
+  setTimeout(() => {
+    handleExamples(event);
+    $(".tour").removeClass("waiting");
+  }, 1500); // "rate-limit" to allow example divs time to populate
 });
 
 $("body").on("click", ".tour__content__meme__canvas__thumbnail", event => {
@@ -119,6 +42,18 @@ $("body").on("keyup", "#meme-top-line, #meme-bottom-line", () => updateCanvas())
 
 //  H E L P E R S
 
+function clearCanvas(canvas) {
+  const ctx = canvas.getContext("2d");
+
+  ctx.save();
+  ctx.globalCompositeOperation = "copy";
+  ctx.strokeStyle = "transparent";
+  ctx.beginPath();
+  ctx.lineTo(0, 0);
+  ctx.stroke();
+  ctx.restore();
+}
+
 function detectLanguageAndUpdate() { // eslint-disable-line
   const compare = (array1, array2) => array2.filter(value => array2.indexOf(value)); // compare two arrays and get match(es)
   const memeLocaleObject = $("#meme-language").children();
@@ -138,7 +73,28 @@ function detectLanguageAndUpdate() { // eslint-disable-line
   ) $("#meme-language").children(`option[value="${compare(memeLocales, userLocales)[0]}"]`).attr("selected", true);
 }
 
+function debounce(func, wait, immediate) {
+  let timeout;
+
+  return function () {
+    const context = this;
+    const args = arguments;
+
+    const later = () => {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
 function initializeTour() {
+  $(".tour").addClass("waiting");
   $("#fetch-claim-uri").val("").focus(); // reset
   $(".tour__sidebar__example:nth-child(1)").addClass("active");
 
@@ -146,10 +102,9 @@ function initializeTour() {
     "message": "landed on tour"
   }));
 
-  /*
-    TODO:
-    - Account for someone wanting to make multiple resolves
-  */
+  setTimeout(() => {
+    $(".tour").removeClass("waiting");
+  }, 2000);
 }
 
 
@@ -243,19 +198,91 @@ function getMemeInfo() { // TODO: Error handling
   return info;
 }
 
+const handleExamples = debounce(event => {
+  let exampleNumber;
+  const data = event.currentTarget.dataset;
 
+  if (!parseInt($(".tour__sidebar__example.active")[0].dataset.example)) return;
+  exampleNumber = parseInt($(".tour__sidebar__example.active")[0].dataset.example);
 
-function clearCanvas(canvas) {
-  const ctx = canvas.getContext("2d");
+  switch(data.action) {
+    case "choose claim":
+      fetchMetadata(exampleNumber, data.claimId);
+      break;
 
-  ctx.save();
-  ctx.globalCompositeOperation = "copy";
-  ctx.strokeStyle = "transparent";
-  ctx.beginPath();
-  ctx.lineTo(0, 0);
-  ctx.stroke();
-  ctx.restore();
-}
+    case "execute claim":
+      if (!$("#fetch-claim-uri").val()) return;
+      fetchMetadata(exampleNumber, $("#fetch-claim-uri").val());
+      break;
+
+    case "tour, example 1":
+      if ($("#tour-loader").hasClass("tour__content__meme")) {
+        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      }
+
+      $("#fetch-claim-uri").val(""); // reset URL bar
+      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(1)").addClass("active");
+
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
+
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
+      break;
+
+    case "tour, example 2":
+      if ($("#tour-loader").hasClass("tour__content__trends")) {
+        $("#tour-loader").removeClass("tour__content__trends").addClass("tour__content__meme");
+      }
+
+      $("#fetch-claim-uri").val(""); // reset URL bar
+      $("#tour-url").hide();
+
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(2)").addClass("active");
+
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
+
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
+      break;
+
+    case "tour, example 3":
+      if ($("#tour-loader").hasClass("tour__content__meme")) {
+        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      }
+
+      $("#fetch-claim-uri").val(""); // reset URL bar
+      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+
+      $(".tour__sidebar__example").removeClass("active");
+      $(".tour__sidebar__example:nth-child(3)").addClass("active");
+
+      $("#tour-loader").empty().show();
+      $("#tour-results").empty().show();
+
+      send(JSON.stringify({
+        "message": `request for ${data.action}`
+      }));
+
+      break;
+
+    case "upload image":
+      fetchMetadata(exampleNumber, getMemeInfo());
+      break;
+
+    default:
+      break;
+  }
+}, 10);
 
 function initCanvas() { // eslint-disable-line
   const canvas = document.getElementById("meme-canvas");

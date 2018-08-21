@@ -3,6 +3,17 @@
   position: relative;
   top: 1rem;
 
+  &.waiting::before {
+    top: 0; right: 0;
+    bottom: 0; left: 0;
+
+    background-color: rgba($white, 0.7);
+    content: "";
+    cursor: url("/assets/media/svg/watch--green.svg"), auto;
+    position: absolute;
+    z-index: 5;
+  }
+
   &::after {
     @include clearfix;
   }
