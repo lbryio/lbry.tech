@@ -1,5 +1,25 @@
-
-//  B U T T O N S
+/**
+ * Button
+ *
+ * @class .__button-base
+ * @class .__button-basic
+ *
+ * @class .__button-plain
+ * @selector {::after}
+ * @state {:hover}
+ *
+ * @class .__button-black
+ * @state {:hover}
+ *
+ * @class .__button-white
+ * @state {:hover}
+ *
+ * @class .__button-gray
+ * @state {:hover}
+ *
+ * @class .__button-padding-horizontal
+ * @class .__button-padding-vertical
+ */
 
 .__button-base {
   border: 1px solid;
@@ -95,94 +115,25 @@
   }
 }
 
-.__button-padding-vertical {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .__button-padding-horizontal {
   padding-right: 1rem;
   padding-left: 1rem;
 }
 
-
-
-//  G R I D
-
-.__grid {
-  &:first-of-type {
-    cursor: default;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-  }
-
-  &:not(:first-of-type) {
-    border-left: 1px solid $gray;
-
-    .col {
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-
-      &:last-of-type {
-        border-right-style: solid;
-        border-right-width: 1px;
-      }
-
-      &:not(.red):not(.orange):not(.yellow):not(.green) {
-        border-color: $gray;
-      }
-    }
-  }
-
-  @media (min-width: 600px) {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-
-    .col {
-      display: table-cell;
-    }
-  }
-}
-
-.col {
-  padding: 0.5rem 1rem;
-  width: 100%;
-
-  &:not(:first-of-type) {
-    text-align: right;
-  }
-}
-
-// Padded columns
-.grid-padded {
-  @media (min-width: 600px) {
-    margin-right: -1rem;
-    margin-left: -1rem;
-
-    .grid {
-      border-spacing: 1rem 0;
-    }
-  }
-}
-
-// Vertically center grid content
-// Requires content within the column to be inline/inline-block
-.grid-align-middle .col {
-  vertical-align: middle;
-}
-
-.grid-reverse {
-  direction: rtl;
-
-  .col {
-    direction: ltr;
-  }
+.__button-padding-vertical {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 
+
+/**
+ * Loader
+ *
+ * @class .__loading
+ * @selector {::before}
+ * @selector {::after}
+ */
 
 .__loading {
   width: 100%; height: 10rem;

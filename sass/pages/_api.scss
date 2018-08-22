@@ -1,3 +1,10 @@
+/**
+ * API Wrapper
+ *
+ * @class .__slate
+ * @selector {::after}
+ */
+
 .__slate {
   width: 100%; height: 100%;
   position: relative;
@@ -8,6 +15,22 @@
 }
 
 
+
+/**
+ * API | Table of Contents
+ *
+ * @class .api__toc
+ * @class .api__toc__search
+ * @class .api__toc__search__field
+ *
+ * @class .api__toc__search__clear
+ * @state {.active}
+ *
+ * @class .api__toc__items
+ *
+ * @class .api__toc__item
+ * @state {:hover}
+ */
 
 .api__toc {
   width: 200px; height: calc(100vh - 4rem); // navigation is 4rem tall
@@ -79,6 +102,21 @@
 }
 
 
+
+/**
+ * API | Main Content
+ *
+ * @class .api__content
+ * @class .api__content__body
+ * @class .api__content__body__arguments
+ *
+ * @class .api__content__body__argument
+ * @selector {::after}
+ * @selector {:last-of-type}
+ * @selector {:nth-child}
+ *
+ * @class .api__content__example
+ */
 
 .api__content {
   display: grid;
@@ -197,8 +235,6 @@
     @include clearfix;
   }
 }
-
-
 
 .api__content__example {
   background-color: mix($gray, $black, 10%);
