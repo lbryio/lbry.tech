@@ -1,8 +1,8 @@
 /**
  * API Wrapper
  *
- * @class .__slate
- * @selector {::after}
+ * @class     .__slate
+ * @selector  {::after}
  */
 
 .__slate {
@@ -19,17 +19,17 @@
 /**
  * API | Table of Contents
  *
- * @class .api__toc
- * @class .api__toc__search
- * @class .api__toc__search__field
+ * @class     .api__toc
+ * @class     .api__toc__search
+ * @class     .api__toc__search__field
  *
- * @class .api__toc__search__clear
- * @state {.active}
+ * @class     .api__toc__search__clear
+ * @state     {.active}
  *
- * @class .api__toc__items
+ * @class     .api__toc__items
  *
- * @class .api__toc__item
- * @state {:hover}
+ * @class     .api__toc__item
+ * @state     {:hover}
  */
 
 .api__toc {
@@ -106,16 +106,16 @@
 /**
  * API | Main Content
  *
- * @class .api__content
- * @class .api__content__body
- * @class .api__content__body__arguments
+ * @class     .api__content
+ * @class     .api__content__body
+ * @class     .api__content__body__arguments
  *
- * @class .api__content__body__argument
- * @selector {::after}
- * @selector {:last-of-type}
- * @selector {:nth-child}
+ * @class     .api__content__body__argument
+ * @selector  {::after}
+ * @selector  {:last-of-type}
+ * @selector  {:nth-child}
  *
- * @class .api__content__example
+ * @class     .api__content__example
  */
 
 .api__content {

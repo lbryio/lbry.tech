@@ -1,10 +1,10 @@
 /**
  * Tour | Wrapper
  *
- * @class .tour
- * @selector {::before}
- * @selector {::after}
- * @state {.waiting}
+ * @class     .tour
+ * @selector  {::before}
+ * @selector  {::after}
+ * @state     {.waiting}
  */
 
 .tour {
@@ -33,12 +33,12 @@
 /**
  * Tour | Sidebar
  *
- * @class .tour__sidebar
+ * @class     .tour__sidebar
  *
- * @class .tour__sidebar__example
- * @selector {:last-of-type}
- * @state {.active}
- * @state {:hover}
+ * @class     .tour__sidebar__example
+ * @selector  {:last-of-type}
+ * @state     {.active}
+ * @state     {:hover}
  */
 
 .tour__sidebar {
@@ -98,25 +98,25 @@
 /**
  * Tour | Content
  *
- * @class .tour__content
+ * @class     .tour__content
  *
- * @class .tour__content__meme
- * @selector {::after}
+ * @class     .tour__content__meme
+ * @selector  {::after}
  *
- * @class .tour__content__meme__canvas
+ * @class     .tour__content__meme__canvas
  *
- * @class .tour__content__meme__canvas__thumbnail
- * @selector {:last-of-type}
- * @state {.selected}
+ * @class     .tour__content__meme__canvas__thumbnail
+ * @selector  {:last-of-type}
+ * @state     {.selected}
  *
- * @class .tour__content__meme__editor
+ * @class     .tour__content__meme__editor
  *
- * @class .tour__content__trends
- * @selector {::after}
- * @state {:empty}
+ * @class     .tour__content__trends
+ * @selector  {::after}
+ * @state     {:empty}
  *
- * @class .tour__content__trend
- * @class .tour__content__urlbar
+ * @class     .tour__content__trend
+ * @class     .tour__content__urlbar
  */
 
 .tour__content {
