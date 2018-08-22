@@ -2,13 +2,25 @@
 
 
 
+/**
+ * Add page-specific styling
+ */
+
 document.getElementsByTagName("body")[0].classList.add("glossary");
 
-$("[data-action='toggle glossary sidebar']").on("click", () => { // Toggle sidebar
+/**
+ * Toggle sidebar
+ */
+
+$("[data-action='toggle glossary sidebar']").on("click", () => {
   $("body").toggleClass("sidebar-closed");
 });
 
-$(".component--glossary-toc li a").on("click", event => { // Add hash to URL bar
+/**
+ * Add hash to URL bar when sidebar links are clicked
+ */
+
+$(".component--glossary-toc li a").on("click", event => {
   const hash = event.currentTarget.href.split("#")[1];
   history.replaceState({}, "", `#${hash}`);
 });
