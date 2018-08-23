@@ -1,4 +1,4 @@
-### Signing a claim
+# Signing a claim
 
 Reilly wants to publish _Terror on the Midway_ to the channel he claimed `lbry://@FleischerSuperman`. He picks the name "terroronthemidway", and fills in the information for the claim:
 

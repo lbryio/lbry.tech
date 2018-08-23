@@ -1,3 +1,5 @@
+# Schema
+
 ## [Claim](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/claim.proto)
 Claims have the encompassing schema:
 

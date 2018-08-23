@@ -1,3 +1,5 @@
+# Regtest Setup
+
 ## Why use a regtest server
 A regtest server provides for a way to instantly generate blocks so that transactions can be instantaneous, so ultimately no waiting for confirmations from the blockchain. Also, no problem if you accidentally corrupt your wallet, since no real funds are lost! Delete the files and setup a new one.
 

@@ -82,7 +82,7 @@ module.exports = exports = () => async () => html`
         <h3>Development</h3>
         <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
 
-        <a class="cta" href="/api" title="Learn the LBRY API">Learn the LBRY API</a>
+        <a class="cta" href="/api/blockchain" title="Learn the LBRY API">Learn the LBRY API</a>
       </div>
     </section>
 

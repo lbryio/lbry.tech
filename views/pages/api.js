@@ -12,18 +12,13 @@ const raw = require("nanohtml/raw");
 
 //  V A R I A B L E
 
-const apiFileLink = process.env.NODE_ENV === "development" ?
-  "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
-  "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
-;
-
 const apiScripts = "<script>" + fs.readFileSync("./views/partials/api-scripts.js", "utf-8") + "</script>";
 
 
 
 //  E X P O R T
 
-module.exports = exports = () => async () => parseApiFile().then(response => html`
+module.exports = exports = () => async state => parseApiFile(state.params.wildcard).then(response => html`
   <div class="__slate">
     <aside class="api__toc">
       <div class="api__toc__search">
@@ -49,6 +44,8 @@ function createApiContent(apiDetails) {
   const apiContent = [];
 
   for (const apiDetail of apiDetails) {
+    // console.log(apiDetail);
+    // console.log("—————");
     const apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
@@ -87,7 +84,21 @@ function createApiSidebar(apiDetails) {
   return apiSidebar;
 }
 
-function parseApiFile() {
+function parseApiFile(urlSlug) {
+  let apiFileLink;
+
+  if (urlSlug === "blockchain") apiFileLink = process.env.NODE_ENV === "development" ?
+    "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
+    "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
+  ;
+
+  if (urlSlug === "daemon") apiFileLink = process.env.NODE_ENV === "development" ?
+    "https://rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json" :
+    "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json"
+  ;
+
+  if (!apiFileLink) return; // TODO: Error handling
+
   return fetch(apiFileLink).then(() => fetch(apiFileLink, {
     cache: "no-cache" // forces a conditional request
   })).then(res => res.json().then(body => body)); // res.status 304 = cache validated

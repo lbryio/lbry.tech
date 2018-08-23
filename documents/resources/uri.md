@@ -1,9 +1,8 @@
-//this doc has been moved to lbry.tech repo, will clean up later.
 # URI
 
 ## Regex
 
-If you are a robot and prefer regexes to English, here's the full regex for lbry:// URIs:
+If you are a robot and prefer regexes to English, here's the full regex for `lbry://` URIs:
 
 ```
 (?P<uri>
@@ -32,12 +31,12 @@ The LBRY protocol is called `lbry`. URIs using the protocol must start with `lbr
 
 ## Reserved characters
 
-- CHANNEL_CHAR = '@'
-- CLAIM_ID_CHAR = '#'
-- CLAIM_SEQUENCE_CHAR = ':'
-- BID_POSITION_CHAR = '$'
-- PATH_CHAR = '/'
-- QUERY_CHAR = '?'
+- CHANNEL_CHAR = `@`
+- CLAIM_ID_CHAR = `#`
+- CLAIM_SEQUENCE_CHAR = `:`
+- BID_POSITION_CHAR = `$`
+- PATH_CHAR = `/`
+- QUERY_CHAR = `?`
 
 ## Names
 

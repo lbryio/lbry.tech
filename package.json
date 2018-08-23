@@ -14,6 +14,7 @@
     "choo-async": "^0.1.1",
     "choo-bundles": "^0.2.4",
     "choo-data": "^0.1.1",
+    "choo-redirect": "^2.0.0",
     "choo-ssr": "^0.2.1",
     "choo-websocket": "^2.0.0",
     "cors": "^2.8.4",

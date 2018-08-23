@@ -9,6 +9,7 @@ const bundles = require("choo-bundles");
 const choo = require("choo");
 const data = require("choo-data");
 const devtools = require("choo-devtools");
+const redirect = require("choo-redirect");
 const ssr = require("choo-ssr");
 
 //  V A R I A B L E S
@@ -45,9 +46,8 @@ function main() {
   ));
 
   app.route("/", page(require("./views/pages/home")(app)));
-  app.route("/api", page(require("./views/pages/api")(app)));
-  app.route("/resources", page(require("./views/pages/resources")(app)));
-  app.route("/resources/*", page(require("./views/pages/page")(app)));
+  app.route("/api", redirect("/api/blockchain")); // This doesn't seem to work...
+  app.route("/api/*", page(require("./views/pages/api")(app)));
   app.route("/*", page(require("./views/pages/page")(app)));
 
   return app;

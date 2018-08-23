@@ -1,4 +1,4 @@
-## Introduction
+# LBRY Claimtrie
 
 This document describes the implementation detail of the ClaimTrie in LBRY. The ClaimTrie is the data structure which LBRY uses to store claims to names. It uses a [Trie](https://en.wikipedia.org/wiki/Trie) to efficiently store all claimed names, which can then be hashed the same way a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree) is hashed. The root hash of the ClaimTrie is stored in the blockheader of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie.
 
@@ -13,7 +13,7 @@ There are also three different bid types: claim, update, and support.
 
 1. *Claim*: A claim represent new bids for a name. If a user wants to make a claim to a brand new name, or submit a competing claim to an existing name, this bid type is used.
 2. *Support*: A support adds to the total quantity of credits assigned to any bid by referring to a bid's Claim Id. A support bid can be made by anyone on any bid. It does not have its own Value or its own Claim Id, but it does contain the Claim Id of the bid that it is supporting.
-3. *Update*:  An update can modify the value and the quantity for a pre-existing claim without changing the Claim Id or the name that it is bidding on. Since the Claim Id of the original bid is not changed, an updated bid will still retain all the supports attached to the original bid.
+3. *Update*: An update can modify the value and the quantity for a pre-existing claim without changing the Claim Id or the name that it is bidding on. Since the Claim Id of the original bid is not changed, an updated bid will still retain all the supports attached to the original bid.
 
 
 ## ClaimTrie Bid States

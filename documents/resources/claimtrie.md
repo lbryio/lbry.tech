@@ -1,5 +1,4 @@
-The Merkle Claim Trie
-==============
+# The Merkle Claim Trie
 
 How the data structure that organizes claims by names works, how proofs are generated/verified and how consensus on the state of the trie is represented.
 

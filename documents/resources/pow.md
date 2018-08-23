@@ -1,4 +1,4 @@
-## The LBRY Proof of Work (POW) Algorithm
+# The LBRY Proof of Work (POW) Algorithm
 
 LBRY uses [proof of work](https://en.bitcoin.it/wiki/Proof_of_work) the same way that Bitcoin does. The
 only difference is the hash function. LBRY uses a slightly different algorithm that achieves the same ends but slightly delayed the development of a GPU miner and gave early adopters a chance to mine without specialized hardware.
