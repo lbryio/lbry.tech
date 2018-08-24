@@ -44,9 +44,8 @@ function createApiContent(apiDetails) {
   const apiContent = [];
 
   for (const apiDetail of apiDetails) {
-    // console.log(apiDetail);
-    // console.log("—————");
-    const apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
+    let apiDetailsReturns = "";
+    if (apiDetail.returns) apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
       <div class="api__content__body">
@@ -87,12 +86,12 @@ function createApiSidebar(apiDetails) {
 function parseApiFile(urlSlug) {
   let apiFileLink;
 
-  if (urlSlug === "protocol") apiFileLink = process.env.NODE_ENV === "development" ?
+  if (!urlSlug || urlSlug === "protocol") apiFileLink = process.env.NODE_ENV === "development" ?
     "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
     "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
   ;
 
-  if (urlSlug === "daemon") apiFileLink = process.env.NODE_ENV === "development" ?
+  if (urlSlug === "blockchain") apiFileLink = process.env.NODE_ENV === "development" ?
     "https://rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json" :
     "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json"
   ;
@@ -115,7 +114,7 @@ function renderArguments(args) {
           ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
         </div>
 
-        <div class="right">${arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+        <div class="right">${typeof arg.description === "string" ? arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}</div>
       </li>
     `);
   }

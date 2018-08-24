@@ -5,8 +5,8 @@ title: Resources
 ## Showcase
 
 - [Whitepaper](https://lbry-whitepaper.herokuapp.com)
-- [Blockchain API](/api/protocol)
-- [Daemon API](/api/daemon)
+- [Blockchain API](/api/blockchain)
+- [Protocol API](/api/protocol)
 
 ## Additional Resources
 

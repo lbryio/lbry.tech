@@ -4,6 +4,8 @@ title: Sitemap
 
 - [/](/)
 - [/api](/api)
+  - [/blockchain](/api/blockchain)
+  - [/protocol](/api/protocol)
 - [/build](/build)
 - [/community](/community)
 - [/contribute](/contribute)
