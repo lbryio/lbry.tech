@@ -2,15 +2,9 @@
 
 
 
-//  P A C K A G E
-
-const html = require("choo/html");
-
-
-
 //  E X P O R T
 
-module.exports = exports = () => html`
+module.exports = exports = () => `
   <div class="ecosystem__module applications">
     <span class="__close" data-action="close">&times;</span>
 

@@ -2,10 +2,9 @@
 
 
 
-//  P A C K A G E S
+//  P A C K A G E
 
 const Component = require("choo/component");
-const html = require("choo/html");
 
 //  V A R I A B L E S
 
@@ -19,12 +18,12 @@ const WALLET = require("./ecosystem/submodule-wallet");
 
 
 
-//  E X P O R T
+//  P R O G R A M
 
 Ecosystem.prototype = Object.create(Component.prototype);
 
 Ecosystem.prototype.createElement = () => {
-  return html`
+  return `
     <section class="ecosystem">
       <aside class="ecosystem__submodules">
         ${CHAINQUERY()}
@@ -45,29 +44,7 @@ Ecosystem.prototype.createElement = () => {
   `;
 };
 
-/*
-module.exports = exports = (state, emit) => { // eslint-disable-line
-  return html`
-    <section class="ecosystem">
-      <aside class="ecosystem__submodules">
-        ${CHAINQUERY}
-        ${WALLET}
-      </aside>
-
-      <section class="ecosystem__modules">
-        ${LBRYCRD}
-        ${LBRY}
-        ${APPLICATIONS}
-      </section>
-
-      <aside class="ecosystem__submodules">
-        ${LIGHTHOUSE}
-        ${REFLECTOR}
-      </aside>
-    </section>
-  `;
-};
-*/
+//  H E L P E R S
 
 function Ecosystem() {
   if (!(this instanceof Ecosystem)) return new Ecosystem();

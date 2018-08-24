@@ -115,7 +115,7 @@ function createMetaTags(metaObject) {
     For Markdown files, the custom yaml should look like this:
 
     meta:
-      - description: Description goes here
+    - description: Description goes here
 
     This does not currently work with parameters like "og:image"
     // https://github.com/lbryio/lbry.tech/issues/30
@@ -143,9 +143,9 @@ function partialFinder(markdownBody) {
     if (fileExistsTest) {
       const partialFunction = local(`/views/partials/${filename}.js`);
 
-      if (filename === "ecosystem") {
-        const Ecosystem = new partialFunction;
-        markdownBody = markdownBody.replace(partial, Ecosystem.render());
+      if (filename === "ecosystem" || filename === "feature-links") {
+        const neatPartial = new partialFunction;
+        markdownBody = markdownBody.replace(partial, neatPartial.render());
       }
 
       else markdownBody = markdownBody.replace(partial, partialFunction);
