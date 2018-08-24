@@ -22,9 +22,9 @@
     "decamelize": "^2.0.0",
     "dedent": "^0.7.0",
     "dotenv": "^6.0.0",
-    "fastify": "^1.9.0",
+    "fastify": "^1.10.0",
     "fastify-compress": "^0.6.0",
-    "fastify-helmet": "^1.0.3",
+    "fastify-helmet": "^2.1.0",
     "fastify-plugin": "^1.2.0",
     "fastify-static": "^0.14.0",
     "fastify-ws": "^1.0.0",
@@ -57,7 +57,7 @@
     "sass": "^1.13.0",
     "snazzy": "^7.1.1",
     "standardx": "^2.1.0",
-    "updates": "^4.1.2"
+    "updates": "^4.2.0"
   },
   "engines": {
     "node": "10.2.x"
