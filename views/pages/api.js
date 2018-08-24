@@ -87,7 +87,7 @@ function createApiSidebar(apiDetails) {
 function parseApiFile(urlSlug) {
   let apiFileLink;
 
-  if (urlSlug === "blockchain") apiFileLink = process.env.NODE_ENV === "development" ?
+  if (urlSlug === "protocol") apiFileLink = process.env.NODE_ENV === "development" ?
     "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
     "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
   ;
