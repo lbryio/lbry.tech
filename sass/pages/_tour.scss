@@ -36,6 +36,7 @@
  * @class     .tour__sidebar
  *
  * @class     .tour__sidebar__example
+ * @selector  {::before}
  * @selector  {:last-of-type}
  * @state     {.active}
  * @state     {:hover}
@@ -53,12 +54,27 @@
 
 .tour__sidebar__example {
   cursor: pointer;
+  position: relative;
+
+  &::before {
+    width: 1rem; height: 1rem;
+    top: 0.5rem; left: 0;
+
+    border: 1px solid;
+    border-radius: 50%;
+    content: attr(data-example);
+    font-size: 0.8rem;
+    line-height: 1.1;
+    position: absolute;
+    text-align: center;
+  }
 
   &:not(:last-of-type) {
     margin-bottom: 1.5rem;
   }
 
   &:not(.active) {
+    &::before,
     button,
     span {
       color: rgba($black, 0.3);
@@ -71,11 +87,13 @@
       color: $teal;
     }
 
+    &::before,
     span {
       color: $black;
     }
   }
 
+  &::before,
   button,
   span {
     transition: color 0.2s;
@@ -85,6 +103,7 @@
     background-color: transparent;
     font-size: 1.25rem;
     font-weight: 600;
+    padding-left: 1.3rem;
   }
 
   span {
