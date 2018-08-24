@@ -5,7 +5,6 @@
 //  P A C K A G E S
 
 const decamelize = require("decamelize");
-const dedent = require("dedent");
 const exists = require("fs-exists-sync");
 const fm = require("front-matter");
 const fs = require("graceful-fs");
@@ -75,7 +74,8 @@ module.exports = exports = () => async state => {
 
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
   const markdownFileDetails = fm(markdownFile);
-  const renderedMarkdown = md.render(partialFinder(markdownFileDetails.body));
+  const renderedMarkdown = md.render(markdownFileDetails.body);
+  const updatedMarkdown = partialFinder(renderedMarkdown);
   let newMetadata = "";
   if (markdownFileDetails.attributes.meta) newMetadata = markdownFileDetails.attributes.meta;
 
@@ -96,7 +96,7 @@ module.exports = exports = () => async state => {
 
       <section class="page__content" itemprop="articleBody">
         <div class="inner-wrap">
-          ${raw(renderedMarkdown)}
+          ${raw(updatedMarkdown)}
           ${raw(pageScript)}
           ${newMetadata.length ? raw(updateMetadata(newMetadata)) : ""}
         </div>
@@ -152,7 +152,7 @@ function partialFinder(markdownBody) {
     }
   }
 
-  return dedent(markdownBody); // partials get rendered as code snippets w/o `dedent`
+  return markdownBody;
 }
 
 function updateMetadata(metadataDetails) {
@@ -162,9 +162,7 @@ function updateMetadata(metadataDetails) {
     generatedMetadata.push(createMetaTags(metadataDetail));
   }
 
-  return dedent`
-    <script>
-      ${generatedMetadata.join("")}
-    </script>
+  return html`
+    <script>${generatedMetadata.join("")}</script>
   `;
 }

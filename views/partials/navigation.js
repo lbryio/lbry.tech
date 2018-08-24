@@ -4,7 +4,7 @@
 
 //  P A C K A G E
 
-const html = require("choo-async/html");
+const html = require("choo/html");
 
 //  V A R I A B L E
 
