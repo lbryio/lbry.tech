@@ -5,7 +5,7 @@
 //  P A C K A G E S
 
 const async = require("async");
-const color = require("turbocolor");
+const color = require("colorette");
 const cors = require("cors");
 const dedent = require("dedent");
 
@@ -16,7 +16,7 @@ const fastify = require("fastify")({
   }
 });
 
-const html = require("choo-async/html");
+const html = require("choo/html");
 const local = require("app-root-path").require;
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
@@ -24,11 +24,11 @@ const request = require("request-promise-native");
 
 //  V A R I A B L E S
 
-const fetchMetadata = local("/helpers/fetch-metadata");
-const github = local("/helpers/github");
+const fetchMetadata = local("app/helpers/fetch-metadata");
+const github = local("app/helpers/github");
 const log = console.log; // eslint-disable-line
-const logSlackError = local("/helpers/slack");
-const relativeDate = local("/modules/relative-date");
+const logSlackError = local("app/helpers/slack");
+const relativeDate = local("app/modules/relative-date");
 let client;
 
 if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
@@ -67,15 +67,12 @@ fastify.register(require("fastify-helmet"), {
 });
 
 fastify.register(require("fastify-static"), {
-  root: `${__dirname}/public/`,
-  prefix: "/assets/"
+  prefix: "/assets/",
+  root: `${__dirname}/app/dist/`
 });
 
 fastify.register(require("choo-ssr/fastify"), {
-  app: require("./client"),
-  plugins: [
-    [ require("choo-bundles/ssr"), {} ]
-  ]
+  app: require("./app")
 });
 
 fastify.ready(err => {

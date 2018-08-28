@@ -1,0 +1,368 @@
+.home {
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
+
+  h2 {
+    font-weight: normal;
+    margin-bottom: 4rem;
+    text-align: center;
+
+    @media (min-width: 851px) {
+      font-size: 1.75rem;
+    }
+
+    @media (max-width: 850px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  hr {
+    width: 100%; height: 1px;
+
+    background-color: rgba($black, 0.1);
+    border: none;
+    margin-bottom: 4rem;
+  }
+
+  .hero {
+    align-items: center;
+    background-color: $black;
+    // background-image: url("/assets/media/svg/text-logo--white.svg");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 300' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath fill='%23fcfcfc' d='M567.328, 43.44l72.864, 130.464l0, 82.656l46.944, 0l0, -82.656l72.576, -130.464l-50.688, 0l-44.64, 84.672l-44.64, -84.672l-52.416, 0Z'/%3E %3Cpath fill='%23fcfcfc' d='M520.672, 173.616c22.464, -10.656 34.848, -31.968 34.848, -61.056c0, -44.64 -26.496, -68.832 -81.216, -69.12l-82.368, 0l0, 213.12l46.656, 0l0, -75.168l35.136, 0l31.392, 75.168l52.416, 0l-36.864, -82.944Zm-46.656, -32.544l-35.424, 0l0, -56.448l35.712, 0c23.904, 0 31.968, 12.96 31.968, 27.936c0, 15.264 -8.352, 28.512 -32.256, 28.512Z'/%3E %3Cpath fill='%23fcfcfc' d='M328.864, 150.576c15.552, -7.2 28.512, -23.04 28.512, -48.096c0, -34.848 -25.344, -58.464 -67.104, -58.464l-43.776, 0l-46.368, 0l0, 212.544l89.568, 0c42.048, 0 70.272, -19.584 70.272, -55.872c0, -26.784 -14.976, -42.048 -31.104, -50.112Zm-43.776, -67.104c19.008, 0 25.92, 14.112 25.92, 25.344c0, 11.808 -7.2, 24.768 -25.92, 24.768l-38.592, 0l0, -50.112l38.592, 0Zm2.592, 133.632l-41.184, 0l0, -49.248l41.184, 0c15.264, 0 26.208, 10.08 26.208, 25.056c0, 14.976 -10.656, 24.192 -26.208, 24.192Z'/%3E %3Cpath fill='%23fcfcfc' d='M87.52, 214.8l0, -171.36l-47.232, 0l0, 213.12l130.752, 0l0, -41.76l-83.52, 0Z'/%3E %3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    grid-area: header;
+    height: calc(50vh - 4rem); min-height: 300px;
+    justify-content: center;
+
+    @media (max-width: 850px) {
+      background-size: cover;
+    }
+
+    h1 {
+      background-color: $white;
+      border: 1px solid rgba($black, 0.1);
+      box-decoration-break: clone;
+      display: inline;
+      font-weight: normal;
+      line-height: 2;
+      padding: 0.4rem 1rem;
+
+      -webkit-box-decoration-break: clone; // Safari
+
+      @media (min-width: 851px) {
+        font-size: 1.75rem;
+      }
+
+      @media (max-width: 850px) {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .features {
+    grid-area: features;
+
+    .home__features {
+      align-content: center;
+      border-bottom: 1px solid rgba($black, 0.05);
+      display: flex;
+      flex-flow: row wrap;
+      list-style-type: none;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .home__feature {
+      position: relative;
+      text-align: center;
+      vertical-align: top;
+
+      @media (min-width: 651px) {
+        width: 50%;
+      }
+
+      @media (max-width: 650px) {
+        width: 100%;
+
+        &:first-of-type {
+          padding-bottom: 1rem;
+        }
+
+        &:last-of-type {
+          padding-top: 1rem;
+        }
+      }
+    }
+
+
+
+    .home__feature__title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .home__feature__description {
+      font-size: 1rem;
+      left: 10%;
+      margin-bottom: 1rem;
+      position: relative;
+      width: 80%;
+    }
+
+    .home__feature__cta {
+      @extend .__button-black;
+      display: inline-block;
+      font-size: 1rem;
+      position: relative;
+    }
+  }
+
+  .intro,
+  .docs,
+  .contribute,
+  .develop,
+  .community {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+
+    .inner-wrap {
+      position: relative;
+    }
+
+    h3 {
+      letter-spacing: 0.1rem;
+      line-height: 1;
+      text-transform: uppercase;
+
+      @media (min-width: 1301px) {
+        top: -0.85rem; left: -2rem;
+
+        color: rgba($black, 0.045);
+        font-size: 4rem;
+        position: absolute;
+      }
+
+      @media (max-width: 1300px) {
+        color: $black;
+      }
+
+      @media (min-width: 901px) and (max-width: 1300px) {
+        font-size: 3rem;
+      }
+
+      @media (max-width: 900px) {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+
+      @media (min-width: 901px) {
+        font-size: 1.5rem;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 900px) {
+        font-size: 1.25rem;
+        line-height: 1.33;
+      }
+
+      &:first-of-type {
+        padding-top: 0.5rem;
+      }
+    }
+
+    .cta {
+      @extend .__button-black;
+      top: 0.5rem;
+    }
+  }
+
+  .intro,
+  .docs,
+  .contribute,
+  .develop {
+    border-bottom: 1px solid rgba($black, 0.05);
+  }
+
+  .intro,
+  .docs {
+    @media (min-width: 1301px) {
+      padding-left: 10%;
+    }
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .docs {
+    grid-area: docs;
+  }
+
+  .community,
+  .contribute {
+    p {
+      @media (min-width: 1301px) {
+        margin-right: auto;
+        margin-left: auto;
+        text-align: center;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      padding-top: 1rem;
+
+      &::after {
+        @include clearfix;
+      }
+
+      @media (min-width: 901px) {
+        font-size: 1.5rem;
+      }
+
+      @media (min-width: 751px) and (max-width: 900px) {
+        font-size: 1.25rem;
+      }
+
+      @media (max-width: 750px) {
+        font-size: 1rem;
+      }
+
+      li {
+        float: left;
+        position: relative;
+        text-align: center;
+
+        @media (max-width: 750px) {
+          margin-bottom: 2rem;
+          min-width: 8rem;
+        }
+
+        a {
+          display: block;
+          position: relative;
+          padding-top: 4rem;
+          transition: color 0.2s;
+
+          &::before {
+            width: 100%; height: 100%;
+
+            background-position: center 0;
+            background-repeat: no-repeat;
+            content: "";
+            left: 0;
+            position: absolute;
+          }
+
+          &:not(:hover) {
+            color: inherit;
+          }
+
+          &:hover {
+            color: $teal;
+          }
+        }
+      }
+    }
+  }
+
+  .contribute {
+    grid-area: contribute;
+
+    ul {
+      li {
+        @media (min-width: 701px) {
+          width: calc(100% / 5);
+        }
+
+        @media (max-width: 700px) {
+          width: 50%;
+        }
+
+        a::before {
+          @media (min-width: 901px) {
+            background-size: 4rem;
+            top: -1rem;
+          }
+
+          @media (max-width: 900px) {
+            background-size: 3rem;
+            top: 0;
+          }
+        }
+
+        &:nth-child(1) a::before {
+          background-image: url("/assets/media/svg/flag.svg");
+        }
+
+        &:nth-child(2) a::before {
+          background-image: url("/assets/media/svg/keyboard.svg");
+        }
+
+        &:nth-child(3) a::before {
+          background-image: url("/assets/media/svg/anchor.svg");
+        }
+
+        &:nth-child(4) a::before {
+          background-image: url("/assets/media/svg/chat.svg");
+        }
+
+        &:nth-child(5) a::before {
+          background-image: url("/assets/media/svg/monitor.svg");
+        }
+      }
+    }
+  }
+
+  .develop {
+    grid-area: develop;
+  }
+
+  .community {
+    grid-area: community;
+
+    ul {
+      li {
+        @media (min-width: 701px) {
+          // width: calc(100% / 3); // https://github.com/lbryio/lbry.tech/issues/104
+          width: 50%; //
+        }
+
+        @media (max-width: 700px) {
+          width: 50%;
+        }
+
+        a::before {
+          @media (min-width: 901px) {
+            background-size: 6rem;
+            top: -2rem;
+          }
+
+          @media (max-width: 900px) {
+            background-size: 4rem;
+            top: -0.5rem;
+          }
+        }
+
+        &:nth-child(1) a::before {
+          background-image: url("/assets/media/svg/discord.svg");
+        }
+
+        &:nth-child(2) a::before {
+          background-image: url("/assets/media/svg/reddit.svg");
+        }
+
+        &:nth-child(3) a::before {
+          background-image: url("/assets/media/svg/slack.svg");
+        }
+      }
+    }
+  }
+}
