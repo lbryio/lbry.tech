@@ -4,131 +4,42 @@
 
 //  P A C K A G E S
 
+import asyncHtml from "choo-async/html";
 import dedent from "dedent";
 import fs from "graceful-fs";
-import html from "choo/html";
 import raw from "choo/html/raw";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
 
 //  V A R I A B L E
 
+// state.route === "api" || state.route === "api/*" ? <script src="/assets/scripts/plugins/jets.js"></script> : ""
 const apiScripts = "<script>" + fs.readFileSync("./app/views/partials/api-scripts.js", "utf-8") + "</script>";
 
 
 
 //  E X P O R T
 
-module.exports = exports = state => {
-  return generate(state.params.wildcard).then(response => {
-    // console.log(response);
-    return html`${response}`;
-  });
-  // generate(state.params.wildcard, response => html`${response}`);
-};
-
-
-
-/*
-module.exports = exports = () => state => {
-  console.log(state);
-  parseApiFile(state.params.wildcard).then(response => {
-    return html`
-      <div class="__slate">
-        <aside class="api__toc">
-          <div class="api__toc__search">
-            <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-            <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-            <ul class="api__toc__search__results"></ul>
-          </div>
-
-          <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
-        </aside>
-
-        <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
+module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => asyncHtml`
+  <div class="__slate">
+    <aside class="api__toc">
+      <div class="api__toc__search">
+        <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
+        <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
+        <ul class="api__toc__search__results"></ul>
       </div>
 
-      ${raw(apiScripts)}
-    `;
-  });
-};
-*/
+      <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
+    </aside>
 
-function generate(stuff, callback) {
-  /*
-  parseApiFile(stuff).then(response => {
-    const test = `
-      <div class="__slate">
-        <aside class="api__toc">
-          <div class="api__toc__search">
-            <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-            <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-            <ul class="api__toc__search__results"></ul>
-          </div>
+    <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
+  </div>
 
-          <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
-        </aside>
+  <script src="/assets/scripts/plugins/jets.js"></script>
+  ${raw(apiScripts)}
+`);
 
-        <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
-      </div>
 
-      ${raw(apiScripts)}
-    `;
-
-    return callback(test);
-  });
-  */
-
-  return new Promise((resolve, reject) => { // eslint-disable-line
-    parseApiFile(stuff).then(response => {
-      const test = `
-        <div class="__slate">
-          <aside class="api__toc">
-            <div class="api__toc__search">
-              <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-              <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-              <ul class="api__toc__search__results"></ul>
-            </div>
-
-            <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
-          </aside>
-
-          <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
-        </div>
-
-        ${raw(apiScripts)}
-      `;
-
-      return resolve(test);
-    });
-  });
-
-  /*
-  Promise.all([parseApiFile(stuff)]).then(response => {
-    response = response[0];
-
-    const test = `
-      <div class="__slate">
-        <aside class="api__toc">
-          <div class="api__toc__search">
-            <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-            <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-            <ul class="api__toc__search__results"></ul>
-          </div>
-
-          <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
-        </aside>
-
-        <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
-      </div>
-
-      ${raw(apiScripts)}
-    `;
-
-    return callback(test);
-  });
-  */
-}
 
 //  H E L P E R S
 

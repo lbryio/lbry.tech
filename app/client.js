@@ -4,8 +4,9 @@
 
 //  P A C K A G E S
 
+import async from "choo-async";
+import asyncHtml from "choo-async/html";
 import choo from "choo";
-import html from "choo/html";
 import devtools from "choo-devtools";
 import ssr from "choo-ssr";
 
@@ -19,7 +20,8 @@ import wrapper from "./components/wrapper";
 //  P R O G R A M
 
 function main() {
-  const app = choo();
+  const app = async(choo());
+
   if (process.env.NODE_ENV !== "production") app.use(devtools());
 
   const page = view => (
@@ -39,13 +41,12 @@ function main() {
   app.route("/api/*", page(require("./views/api")));
   app.route("/*", page(require("./views/redirect")));
 
+  app.mount("html");
+
   return app;
 }
 
-if (typeof window !== "undefined") {
-  const app = main();
-  app.mount("html");
-}
+if (typeof window !== "undefined") main();
 
 
 
@@ -59,14 +60,14 @@ module.exports = exports = main;
 
 function shell (head, body) {
   return (state, emit) => {
-    const bodyRender = body(state, emit);
-    const headRender = head(state, emit);
+    const bodyPromise = Promise.resolve(body(state, emit));
+    const headPromise = bodyPromise.then(() => head(state, emit)); // resolve `head` once `body` is resolved
 
-    return html`
+    return asyncHtml`
       <!DOCTYPE html>
       <html lang="en">
-        ${headRender}
-        ${bodyRender}
+        ${headPromise}
+        ${bodyPromise}
       </html>
     `;
   };
