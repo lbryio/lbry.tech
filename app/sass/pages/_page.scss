@@ -227,6 +227,11 @@
   a:not(.__button-black):not(.button):not(.feature-link__title):not(.header-anchor):not(.newsletter-standalone__submit):not(.__plain) {
     @include underline($teal, $white);
     color: $teal;
+
+    code {
+      background-color: $teal;
+      text-shadow: none;
+    }
   }
 
   pre {
