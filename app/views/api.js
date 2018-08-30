@@ -13,8 +13,7 @@ const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" })
 
 //  V A R I A B L E
 
-// state.route === "api" || state.route === "api/*" ? <script src="/assets/scripts/plugins/jets.js"></script> : ""
-const apiScripts = "<script>" + fs.readFileSync("./app/views/partials/api-scripts.js", "utf-8") + "</script>";
+const apiScripts = "<script>" + fs.readFileSync("./app/components/client/api-scripts.js", "utf-8") + "</script>";
 
 
 

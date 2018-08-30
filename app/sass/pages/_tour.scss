@@ -324,7 +324,7 @@
     @extend .__loading;
 
     &::after {
-      content: "Fetching trending content from LBRY";
+      content: "Fetching content from LBRY";
     }
   }
 }

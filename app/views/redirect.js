@@ -9,6 +9,7 @@ import exists from "fs-exists-sync";
 import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
+import path from "path";
 import { require as local } from "app-root-path";
 import raw from "choo/html/raw";
 
@@ -82,9 +83,9 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   if (markdownFileDetails.attributes.meta) newMetadata = markdownFileDetails.attributes.meta;
 
   let pageScript = "";
-  if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/views/partials/glossary-scripts.js", "utf-8") + "</script>";
-  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./app/views/partials/ecosystem-scripts.js", "utf-8") + "</script>";
-  if (path === "tour") pageScript = "<script>" + fs.readFileSync("./app/views/partials/tour-scripts.js", "utf-8") + "</script>";
+  if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
+  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
+  if (path === "tour") pageScript = "<script>" + fs.readFileSync("./app/components/client/tour-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
@@ -140,17 +141,19 @@ function partialFinder(markdownBody) {
 
   for (const partial of partials) {
     const filename = decamelize(partial, "-").replace("<", "").replace("/>", "");
-    const fileExistsTest = exists(`./app/views/partials/${filename}.js`); // `local` results in error if used here and file !exist
+    const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
     if (fileExistsTest) {
-      const partialFunction = local(`/app/views/partials/${filename}.js`);
+      const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
       if (filename === "ecosystem" || filename === "feature-links") {
         const neatPartial = new partialFunction;
         markdownBody = markdownBody.replace(partial, neatPartial.render());
       }
 
-      else markdownBody = markdownBody.replace(partial, partialFunction);
+      else if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
+
+      else markdownBody = markdownBody.replace(partial, partialFunction.default());
     }
   }
 

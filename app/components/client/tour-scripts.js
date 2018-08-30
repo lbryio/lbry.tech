@@ -21,7 +21,7 @@ $("body").on("click", "[data-action]", event => {
   setTimeout(() => {
     handleExamples(event);
     $(".tour").removeClass("waiting");
-  }, 1500); // "rate-limit" to allow example divs time to populate
+  }, 2500); // "rate-limit" to allow example divs time to populate
 });
 
 $("body").on("click", ".tour__content__meme__canvas__thumbnail", event => {
@@ -104,7 +104,7 @@ function initializeTour() {
 
   setTimeout(() => {
     $(".tour").removeClass("waiting");
-  }, 2000);
+  }, 2500);
 }
 
 
@@ -221,6 +221,7 @@ const handleExamples = debounce(event => {
       }
 
       $("#fetch-claim-uri").val(""); // reset URL bar
+      $("#tour-url button").text("Resolve");
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
       $(".tour__sidebar__example").removeClass("active");
@@ -261,6 +262,8 @@ const handleExamples = debounce(event => {
       }
 
       $("#fetch-claim-uri").val(""); // reset URL bar
+      $("#tour-url button").text("Tip");
+      // $("#tour-url").after("<p>In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead.</p>");
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
       $(".tour__sidebar__example").removeClass("active");

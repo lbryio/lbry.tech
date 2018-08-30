@@ -4,7 +4,7 @@
 
 //  P A C K A G E
 
-const Component = require("choo/component");
+import Component from "choo/component";
 
 //  V A R I A B L E
 
@@ -65,6 +65,14 @@ FeaturedLinks.prototype.createElement = () => {
   `;
 };
 
+
+
+//  E X P O R T
+
+module.exports = exports = FeaturedLinks;
+
+
+
 //  H E L P E R S
 
 function FeaturedLinks() {
@@ -85,9 +93,3 @@ function returnLinkTemplate(url, title, image) {
     </li>
   `;
 }
-
-
-
-//  E X P O R T
-
-module.exports = exports = FeaturedLinks;

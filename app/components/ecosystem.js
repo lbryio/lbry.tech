@@ -4,7 +4,7 @@
 
 //  P A C K A G E
 
-const Component = require("choo/component");
+import Component from "choo/component";
 
 //  V A R I A B L E S
 
@@ -44,15 +44,17 @@ Ecosystem.prototype.createElement = () => {
   `;
 };
 
+
+
+//  E X P O R T
+
+module.exports = exports = Ecosystem;
+
+
+
 //  H E L P E R S
 
 function Ecosystem() {
   if (!(this instanceof Ecosystem)) return new Ecosystem();
   Component.call(this);
 }
-
-
-
-//  E X P O R T
-
-module.exports = exports = Ecosystem;

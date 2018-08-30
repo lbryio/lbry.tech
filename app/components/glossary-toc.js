@@ -4,8 +4,10 @@
 
 //  V A R I A B L E S
 
-const headerRegex = /###.+/g;
+const idRegex = /(".*")/g;
 const numberRegex = /^[0-9]/g;
+const renderedHeaderRegex = /(<h\d\sid.*h\d>)/g;
+const titleRegex = /(>.*<)/g;
 
 
 
@@ -13,11 +15,16 @@ const numberRegex = /^[0-9]/g;
 
 module.exports = exports = (state, emit, markdown) => {
   const collectionOfTocElements = [];
-  const tocElements = markdown.match(headerRegex);
+  const tocElements = markdown.match(renderedHeaderRegex);
 
-  for (const item of tocElements) collectionOfTocElements.push(`
-    <li><a href="${slugify(item)}" title="Go to '${item.replace(/### /g, "")}'">${item.replace(/### /g, "")}</a></li>
-  `);
+  for (const item of tocElements) {
+    const id = item.match(idRegex)[0].replace(/"/g, "");
+    const title = item.match(titleRegex)[0].replace(">", "").replace("<", "");
+
+    collectionOfTocElements.push(`
+      <li><a href="${slugify(id)}" title="Go to '${title}'">${title}</a></li>
+    `);
+  }
 
   return `
     <ul class="component--glossary-toc">

@@ -184,7 +184,7 @@ module.exports = exports = (data, socket) => {
         body.result &&
         body.result.txid
       ) explorerNotice = `
-        <p>If you want proof of the tip you just gave, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
+        <p>If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
       `;
 
       if (socket) {
