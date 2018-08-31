@@ -9,11 +9,11 @@
 </div>
 
 <div align="center">
-  <a href="https://travis-ci.org/lbryio/lbry.tech"><img src="https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square"/></a>
+  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2a16aa55/preview.png" title="Screenshot of lbry.tech"/>
 </div>
 
 <div align="center">
-  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2a16aa55/preview.png" title="Screenshot of lbry.tech"/>
+  <a href="https://travis-ci.org/lbryio/lbry.tech"><img src="https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square"/></a>
 </div>
 
 
