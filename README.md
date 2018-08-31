@@ -5,21 +5,21 @@
 </div>
 
 <div align="center">
-  Technical documentation website for [the LBRY protocol](https://lbry.io).
+  Technical documentation website for <a href="https://lbry.io">the LBRY protocol</a>.
 </div>
 
 <div align="center">
-  [![Build Status](https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square)](https://travis-ci.org/lbryio/lbry.tech)
+  <a href="https://travis-ci.org/lbryio/lbry.tech"><img src="https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square"/></a>
 </div>
 
 <div align="center">
-  ![Screenshot of lbry.tech](./preview.png)
+  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2a16aa55/preview.png" title="Screenshot of lbry.tech"/>
 </div>
 
 
 
 ## Notes
-- Requires our private `web-daemon` to be running locally, in development.
+- Requires our private `web-daemon` to be running locally (in development) when interacting with the Tour.
 
 ## Prerequisites
 - [Node](https://nodejs.org) (version >= 10)
