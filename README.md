@@ -25,7 +25,7 @@
 - [Node](https://nodejs.org) (version >= 10)
 
 ## Installation
-`npm i`.
+`npm i`
 
 ## Development
 `npm run watch` and visit [localhost:8080](http://localhost:8080)
