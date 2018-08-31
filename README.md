@@ -1,12 +1,20 @@
-# LBRY.tech
-Technical documentation website for [the LBRY protocol](https://lbry.io).
-[![Build Status](https://travis-ci.org/lbryio/lbry.tech.svg?branch=master)](https://travis-ci.org/lbryio/lbry.tech)
+<h1 align="center">lbry.tech</h1>
 
-Notable tools used:
-* [choo](https://choo.io)
-* [Fastify](https://www.fastify.io)
+<div align="center">
+  <strong>We came from the future to help you save the Internet</strong>
+</div>
 
-![Screenshot of lbry.tech](https://spee.ch/fe0f379ffd13f90fb023dec19316f08b94f9d6bc/lbrytech-site-preview.png)
+<div align="center">
+  Technical documentation website for [the LBRY protocol](https://lbry.io).
+</div>
+
+<div align="center">
+  [![Build Status](https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square)](https://travis-ci.org/lbryio/lbry.tech)
+</div>
+
+<div align="center">
+  ![Screenshot of lbry.tech](./preview.png)
+</div>
 
 
 
