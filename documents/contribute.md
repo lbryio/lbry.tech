@@ -22,8 +22,8 @@ If you want to contribute to LBRY, the first step is to understand where.
 --- | --- | ---
 | [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle `lbrycrd` directly.
 | [lbry](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that implements the LBRY protocol. Bundled with and/or used by most LBRY applications.
-| [lbryum](https://github.com/lbryio/lbryum) | Python | The Simple Payment Verification (SPV) wallet bundled with `lbry`.
-| [lbryum-server](https://github.com/lbryio/lbryschema) | Protobuf, Python |  The wallet server for the `lbryum` SPV wallet.
+| [torba](https://github.com/lbryio/torba) | Python | The Simple Payment Verification (SPV) wallet bundled with `lbry`.
+| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server for the `lbryum` SPV wallet.
 | [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | The structure of the metadata stored in the LBRY blockchain.
 
 ### Official Applications
