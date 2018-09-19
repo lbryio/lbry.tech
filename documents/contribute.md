@@ -85,7 +85,7 @@ A number of our code bases (`lbrycrd`, `lbry`, all applications, more...) go thr
 
 For any projects that you want to be a tester on, "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out.
 
-For even harder-core testing, you can follow the `README` instructions in a project and test against the `master` branch of a project at any time. Additionally, `master` builds for some projects are always available via [releases.lbry.io](http://releases.lbry.io).
+For even harder-core testing, you can follow the `README` instructions in a project and test against the `master` branch of a project at any time. Additionally, `master` builds for some projects are always available via [build.lbry.io](http://build.lbry.io).
 
 Opening well-specified issues against release candidates or master builds is extremely useful in helping us create quality software.
 
