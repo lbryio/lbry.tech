@@ -2,6 +2,9 @@
 .DS_Store
 .env
 *.log
+.sass-cache
+app/dist/bundle.css
+app/dist/bundle.css.map
 
 # Directories
 cache/*
