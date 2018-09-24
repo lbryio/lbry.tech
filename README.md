@@ -18,10 +18,8 @@
 
 
 
-## Notes
-- Requires our private `web-daemon` to be running locally (in development) when interacting with the Tour.
-
 ## Prerequisites
+- [lbry/web-daemon](https://github.com/lbryio/web-daemon)
 - [Node](https://nodejs.org) (version >= 10)
 
 ## Installation

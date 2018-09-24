@@ -158,7 +158,11 @@ fastify.ready(err => {
 
 const start = async () => {
   try {
-    await fastify.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0");
+    await fastify.listen(
+      process.env.NODE_ENV === "development" ?
+        8080 :
+        process.env.PORT
+    );
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
