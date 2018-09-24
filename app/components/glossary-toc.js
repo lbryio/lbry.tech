@@ -30,8 +30,6 @@ module.exports = exports = (state, emit, markdown) => {
     <ul class="component--glossary-toc">
       ${collectionOfTocElements.join("")}
     </ul>
-    <button class="component--glossary-toc-toggle" data-action="toggle glossary sidebar" type="button">Toggle</button>
-  `;
 };
 
 
