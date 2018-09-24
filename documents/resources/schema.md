@@ -1,8 +1,15 @@
 # Schema
 
+The schema defines the structure of the data that is stored in claims in the LBRY blockchain. It has several goals:
+
+- **Extensibility**. The schema could grow to encompass thousands of fields for dozens of types of content. It should be easy to modify the schema while maintaining backward compatibility. Blockchain data is permanent and cannot be migrated, so any selected data structure will have to be maintained forever.
+- **Compactness**. Blockchain space is expensive. Data should be stored as compactly  as possible.
+- **Cross-language Interop**. These definitions will be used by many projects written in different languages.
+
+
 ## [Claim](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/claim.proto)
 
-A `Claim` is the toplevel schema for everything that is published to the LBRY blockchain.
+A `Claim` is the toplevel schema for everything that is published to the blockchain.
 
 ```protobuf
 message Claim {
