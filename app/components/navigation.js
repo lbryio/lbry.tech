@@ -30,6 +30,11 @@ export default class Navigation extends Nanocomponent {
           url: "/overview"
         },
         {
+          name: "Tour",
+          title: "Take a Tour",
+          url: "/tour"
+        },
+        {
           name: "Resources",
           title: "View LBRY resources",
           url: "/resources"
