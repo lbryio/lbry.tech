@@ -20,7 +20,7 @@ export default function (pagePath) {
 
   switch(pagePath) {
     case "":
-      githubUrl = `${githubUrl}/views/pages/home.js`;
+      githubUrl = `${githubUrl}/app/views/home.js`;
       break;
 
     case "/resources":
@@ -28,7 +28,7 @@ export default function (pagePath) {
       break;
 
     case "/tour":
-      githubUrl = `${githubUrl}/views/partials/tour.js`;
+      githubUrl = `${githubUrl}/app/components/tour.js`;
       break;
 
     default:
