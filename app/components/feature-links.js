@@ -11,32 +11,32 @@ import Component from "choo/component";
 const links = [ // TODO: Update images
   {
     href: "https://chat.lbry.io",
-    image: "//static.simpledesktops.com/static/images/sd-bg.png",
+    image: "http://static.simpledesktops.com/static/images/sd-bg.png",
     title: "Join us in chat"
   },
   {
     href: "https://lbry.io/developer",
-    image: "//static.simpledesktops.com/uploads/desktops/2017/02/28/GeoShapes_2880x1800.png",
+    image: "http://static.simpledesktops.com/uploads/desktops/2017/02/28/GeoShapes_2880x1800.png",
     title: "Join the developer email list"
   },
   {
     href: "https://lbry.io/meet",
-    image: "//static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png",
+    image: "http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png",
     title: "Host a meet-up"
   },
   {
     href: "https://www.reddit.com/r/lbry",
-    image: "//static.simpledesktops.com/uploads/desktops/2016/08/28/Wind-Vector-resize.png",
+    image: "http://static.simpledesktops.com/uploads/desktops/2016/08/28/Wind-Vector-resize.png",
     title: "Reddit"
   },
   {
     href: "https://lbry.fund",
-    image: "//static.simpledesktops.com/uploads/desktops/2015/08/20/Sunset_by_Banned.png",
+    image: "http://static.simpledesktops.com/uploads/desktops/2015/08/20/Sunset_by_Banned.png",
     title: "Get funding for a project"
   },
   {
     href: "https://lbry.io/join-us",
-    image: "//static.simpledesktops.com/uploads/desktops/2015/09/25/Siri.png",
+    image: "http://static.simpledesktops.com/uploads/desktops/2015/09/25/Siri.png",
     title: "Get a job"
   },
   {
