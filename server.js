@@ -454,7 +454,7 @@ function newsletterSubscribe(data, socket) {
   return new Promise((resolve, reject) => {
     request({
       method: "POST",
-      url: `https://api.lbry.io/list/subscribe?email=${email}`
+      url: `https://api.lbry.io/list/subscribe?email=${email}&tag=developer`
     }).then(body => {
       if (!body || !JSON.parse(body)) {
         logSlackError(
