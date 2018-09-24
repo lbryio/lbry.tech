@@ -113,20 +113,18 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
 //  H E L P E R S
 
 function partialFinder(markdownBody) {
-  const regexToFindPartials = /<\w+\/>/g;
+  const regexToFindPartials = /<\w+ ?\/>/g;
   const partials = markdownBody.match(regexToFindPartials);
 
   if (!partials) return markdownBody;
 
   for (const partial of partials) {
-    const filename = decamelize(partial, "-").replace("<", "").replace("/>", "");
+    const filename = decamelize(partial, "-").replace("<", "").replace("/>", "").trim();
     const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
     if (!fileExistsTest) {
       markdownBody = markdownBody.replace(partial, "");
-    }
-
-    else {
+    } else {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
       if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);

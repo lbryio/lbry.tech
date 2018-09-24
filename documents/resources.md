@@ -2,11 +2,7 @@
 title: Resources
 ---
 
-## Showcase
-
-- [Whitepaper](https://lbry-whitepaper.herokuapp.com)
-- [Blockchain API](/api/blockchain)
-- [Protocol API](/api/protocol)
+<ResourcesLinkGrid />
 
 ## Additional Resources
 
