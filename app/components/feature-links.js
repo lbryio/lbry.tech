@@ -1,11 +1,5 @@
 "use strict";
 
-
-
-//  P A C K A G E
-
-import Component from "choo/component";
-
 //  V A R I A B L E
 
 const links = [ // TODO: Update images
@@ -45,13 +39,7 @@ const links = [ // TODO: Update images
   }
 ];
 
-
-
-//  P R O G R A M
-
-FeaturedLinks.prototype = Object.create(Component.prototype);
-
-FeaturedLinks.prototype.createElement = () => {
+export default function () {
   const renderedLinks = [];
   let imageLink = "";
 
@@ -64,21 +52,6 @@ FeaturedLinks.prototype.createElement = () => {
     <ul class="feature-links">${renderedLinks.join("")}</ul>
   `;
 };
-
-
-
-//  E X P O R T
-
-module.exports = exports = FeaturedLinks;
-
-
-
-//  H E L P E R S
-
-function FeaturedLinks() {
-  if (!(this instanceof FeaturedLinks)) return new FeaturedLinks();
-  Component.call(this);
-}
 
 function returnLinkTemplate(url, title, image) {
   return `
