@@ -36,9 +36,9 @@ Chainquery provides a SQLized view of the LBRY blockchain. The model of Chainque
 
 Informal name for a portion of a *transaction output* that is returned to a sender as a "change" after spending that output. Since *transaction outputs* cannot be partially spent, one can spend 1 BTC out of 3 BTC output only be creating two new outputs: a "payment" output with 1 BTC sent to a payee address, and a "change" output with remaining 2 BTC (minus *transaction fees*) sent to the payer's addresses.
 
-### Channel Claim / Signature
+### Channel Claim Signature
 
-Creating a channel claim certificate allows you to group and identify claims based on an identity. A certificate is used to sign the claims and ensure uniqueness along with the claim ID. See [channel signing](https://github.com/lbryio/lbryschema/blob/master/docs/signing.md) for more information
+Creating a channel claim certificate allows you to group and identify claims based on an identity. A certificate is used to sign the claims and ensure uniqueness along with the claim ID. See [channel signing](https://lbry.tech/resources/signing-claim) for more information
 
 ### Claim
 
@@ -47,6 +47,10 @@ A claim (ClaimTrie) is the data structure which LBRY uses to store claims to nam
 ### Claim Deposit
 
 When creating a channel claim or publishing content onto the LBRY blockchain, a small amount (or more) LBC must be deposited to reserve the name space in the claimtrie. See our [naming documentation](https://lbry.io/faq/naming) for more information.
+
+### Claim Sequence
+
+The claim sequence provides a way to tell which order a claim was created at a particular claim name and enables claim resolutions via this modifier. If someone had the first claim at lbry://one, you could always reference your claim as lbry://one:1. See [URI documentation](https://lbry.tech/resources/uri) for more details.
 
 ### Claim Support
 
