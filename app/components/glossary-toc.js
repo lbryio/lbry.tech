@@ -30,6 +30,7 @@ module.exports = exports = (state, emit, markdown) => {
     <ul class="component--glossary-toc">
       ${collectionOfTocElements.join("")}
     </ul>
+ `;
 };
 
 
