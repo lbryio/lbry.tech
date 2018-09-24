@@ -26,8 +26,9 @@ message Claim {
 ```
 
 
+## Content
 
-## [Stream](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/stream.proto)
+### [Stream](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/stream.proto)
 
 All content claims have a Stream field, which includes the content-specific information (e.g. a description of the content, instructions for downloading the content, etc).
 
@@ -44,7 +45,7 @@ message Stream {
 }
 ```
 
-## [Metadata](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/metadata.proto)
+### [Metadata](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/metadata.proto)
 
 `Metadata` provides information about a piece of content, such as the title, description, and price.
 
@@ -79,7 +80,7 @@ message Metadata {
 }
 ```
 
-## [Fee](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/fee.proto)
+### [Fee](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/fee.proto)
 
 A `Fee` defines the prices for accessing a piece of content.
 
@@ -104,7 +105,7 @@ message Fee {
 }
 ```
 
-## [Source](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/source.proto)
+### [Source](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/source.proto)
 
 A `Source` contains information on how to download a stream. Only the LBRY data network is supported at the moment, but other sources may be added in the future.
 
@@ -129,7 +130,7 @@ message Source {
 
 ## Channels
 
-Channels are constructed out of Certificates and Signatures. Both utilize a KeyType:
+Channels are the identity mechanism in LBRY. They are constructed out of Certificates and Signatures. Both utilize a KeyType:
 
 ```protobuf
 enum KeyType {
