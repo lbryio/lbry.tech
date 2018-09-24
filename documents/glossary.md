@@ -50,7 +50,7 @@ When creating a channel claim or publishing content onto the LBRY blockchain, a 
 
 ### Claim Sequence
 
-The claim sequence provides a way to tell which order a claim was created at a particular claim name and enables claim resolutions via this modifier. If someone had the first claim at lbry://one, you could always reference your claim as lbry://one:1. See [URI documentation](https://lbry.tech/resources/uri) for more details.
+The claim sequence provides a way to determine which order a claim was created at a particular claim name and enables claim resolution via this modifier. If someone had the first claim at lbry://one, anyone could reference that claim as `lbry://one:1`. See [URI documentation](https://lbry.tech/resources/uri) for more details.
 
 ### Claim Support
 
