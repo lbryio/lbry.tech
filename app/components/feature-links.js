@@ -10,7 +10,7 @@ import Component from "choo/component";
 
 const links = [ // TODO: Update images
   {
-    href: "https://discord.gg/YjYbwhS",
+    href: "https://chat.lbry.io",
     image: "http://static.simpledesktops.com/static/images/sd-bg.png",
     title: "Join us in chat"
   },
@@ -40,7 +40,7 @@ const links = [ // TODO: Update images
     title: "Get a job"
   },
   {
-    href: "https://lbry.io/twitter",
+    href: "https://twitter.com/lbryio",
     title: "Twitter"
   }
 ];
