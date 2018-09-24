@@ -1,4 +1,4 @@
-.home__features {
+.link-grid {
   align-content: center;
   border-bottom: 1px solid rgba($black, 0.05);
   display: flex;
@@ -8,7 +8,7 @@
   padding-bottom: 2rem;
 }
 
-.home__feature {
+.link-grid__link {
   position: relative;
   text-align: center;
   vertical-align: top;
@@ -32,12 +32,12 @@
 
 
 
-.home__feature__title {
+.link-grid__title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
-.home__feature__description {
+.link-grid__description {
   font-size: 1rem;
   left: 10%;
   margin-bottom: 1rem;
@@ -45,7 +45,7 @@
   width: 80%;
 }
 
-.home__feature__cta {
+.link-grid__cta {
   @extend .__button-black;
   display: inline-block;
   font-size: 1rem;
