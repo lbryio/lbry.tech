@@ -18,7 +18,7 @@ module.exports = exports = imageSource => new Promise((resolve, reject) => { // 
     },
     json: true,
     method: "POST",
-    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/image" : "https://daemon.lbry.tech/image" }`
+    url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/image" : `https://${process.env.DAEMON_URL}/image` }`
   }, (error, response, body) => {
     if (error) resolve(error);
     resolve(body);

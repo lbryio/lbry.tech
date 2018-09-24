@@ -17,7 +17,7 @@ module.exports = exports = publishMetadata => new Promise((resolve, reject) => r
   },
   json: true,
   method: "PUT",
-  url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/publish" : "https://daemon.lbry.tech/publish" }`
+  url: `${process.env.NODE_ENV === "development" ? "http://localhost:5200/publish" : `https://${process.env.DAEMON_URL}/publish` }`
 }, (error, response, body) => {
   if (error) resolve(error);
   resolve(body);

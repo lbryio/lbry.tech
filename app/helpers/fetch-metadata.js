@@ -154,7 +154,7 @@ module.exports = exports = (data, socket) => {
       body: body,
       json: true,
       method: apiRequestMethod,
-      url: `${process.env.NODE_ENV === "development" ? `http://localhost:5200/${resolveMethod}` : `https://daemon.lbry.tech/${resolveMethod}`}`
+      url: `${process.env.NODE_ENV === "development" ? `http://localhost:5200/${resolveMethod}` : `https://${process.env.DAEMON_URL}/${resolveMethod}`}`
     }, (error, response, body) => {
       if (error) {
         if (process.env.NODE_ENV !== "development") {
