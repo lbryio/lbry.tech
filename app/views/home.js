@@ -5,7 +5,7 @@
 //  P A C K A G E
 
 import html from "choo/html";
-
+import linkGrid from "../components/link-grid";
 
 
 //  E X P O R T
@@ -22,19 +22,17 @@ module.exports = exports = () => html`
     </section>
 
     <section class="features">
-      <ul class="home__features">
-        <li class="home__feature">
-          <p class="home__feature__title"><strong>New to LBRY?</strong></p>
-          <p class="home__feature__description">Learn how LBRY works with 3 easy examples</p>
-          <a class="home__feature__cta" href="/tour">Take the Tour</a>
-        </li>
-
-        <li class="home__feature">
-          <p class="home__feature__title"><strong>Want to contribute?</strong></p>
-          <p class="home__feature__description">Help make LBRY better!</p>
-          <a class="home__feature__cta" href="/contribute">Explore our repos</a>
-        </li>
-      </ul>
+      ${linkGrid([{
+        title: "New to LBRY?",
+        description: "Learn how LBRY works with 3 easy examples",
+        destination: "/tour",
+        label: "Take the Tour"
+      }, {
+        title: "New to LBRY?",
+        description: "Learn how LBRY works with 3 easy examples",
+        destination: "/tour",
+        label: "Take the Tour"
+      }])}
     </section>
 
     <section class="intro">

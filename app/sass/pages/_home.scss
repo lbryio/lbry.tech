@@ -63,60 +63,6 @@
 
   .features {
     grid-area: features;
-
-    .home__features {
-      align-content: center;
-      border-bottom: 1px solid rgba($black, 0.05);
-      display: flex;
-      flex-flow: row wrap;
-      list-style-type: none;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-    }
-
-    .home__feature {
-      position: relative;
-      text-align: center;
-      vertical-align: top;
-
-      @media (min-width: 651px) {
-        width: 50%;
-      }
-
-      @media (max-width: 650px) {
-        width: 100%;
-
-        &:first-of-type {
-          padding-bottom: 1rem;
-        }
-
-        &:last-of-type {
-          padding-top: 1rem;
-        }
-      }
-    }
-
-
-
-    .home__feature__title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .home__feature__description {
-      font-size: 1rem;
-      left: 10%;
-      margin-bottom: 1rem;
-      position: relative;
-      width: 80%;
-    }
-
-    .home__feature__cta {
-      @extend .__button-black;
-      display: inline-block;
-      font-size: 1rem;
-      position: relative;
-    }
   }
 
   .intro,
