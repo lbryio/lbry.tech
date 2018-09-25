@@ -66,7 +66,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
           </div>
         </header>
 
-        <section class="page__content" itemprop="articleBody">
+        <section class="page__content page__markup" itemprop="articleBody">
           <div class="inner-wrap">
             <p>The page you are looking for does not exist.</p>
           </div>
@@ -99,7 +99,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
 
       <section class="page__content" itemprop="articleBody">
         <div class="inner-wrap">
-          ${raw(updatedMarkdown)}
+          <div class="page__markup">${raw(updatedMarkdown)}</div>
           ${raw(pageScript)}
           ${newMetadata.length ? raw(updateMetadata(newMetadata)) : ""}
         </div>
@@ -145,10 +145,8 @@ function partialFinder(markdownBody) {
 
     if (fileExistsTest) {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
-      
-      if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
-
-      else markdownBody = markdownBody.replace(partial, partialFunction.default());
+      const markdownHtml = filename === "glossary-toc" ? partialFunction : partialFunction.default(); //kill special case
+      markdownBody = markdownBody.replace(partial, '</div>' +  markdownHtml + '<div class="page__markup">');
     }
   }
 
