@@ -253,6 +253,10 @@
   }
 }
 
+.ecosystem__module__details, .ecosystem__submodule__markdown {
+  @extend %markdown;
+}
+
 .ecosystem__module__piece {
   background-color: $white;
   left: 10%;
