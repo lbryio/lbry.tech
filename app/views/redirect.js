@@ -145,13 +145,8 @@ function partialFinder(markdownBody) {
 
     if (fileExistsTest) {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
-
-      if (filename === "ecosystem" || filename === "feature-links") {
-        const neatPartial = new partialFunction;
-        markdownBody = markdownBody.replace(partial, neatPartial.render());
-      }
-
-      else if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
+      
+      if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
 
       else markdownBody = markdownBody.replace(partial, partialFunction.default());
     }
