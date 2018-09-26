@@ -42,6 +42,7 @@ Claim.Stream.Source.source contains the hash of the `sd blob` for the content. W
 
 Check the `Claim.Stream.Metadata.Fee` field. If it exists, then a payment is required to download this content. Get the address, amount, and currency from the Fee, convert the amount to LBC if its not already in LBC, and perform a `sendtoaddress` call to lbrycrd to send the fee amount to the fee address.
 
+Our example claim does not have a fee. If you want to see a claim with a fee, look up claim ID `fbdcd44a97810522d23d5f1335b8ca04be9d776c`.
 
 ## Find Hosts for SD Blob
 
