@@ -20,10 +20,10 @@ For this example, we will use claimID `d9317ac7842f88ba442fee749c4f834353c24206`
 - parsing metadata gets you **sd hash** and fee info
     - if there is a fee, pay it using the blockchain
 - dht gets you **peers** for the sd hash
-- blobEx gets **sd blob** from peers
+- blob exchange gets **sd blob** from peers
 - sd blob is parsed to get **content hashes**
-- dht then blobEx get you the actual **content blobs**
-- blobs are decrypted and assembled to form the **file** you 
+- dht then blob exchange get you the **content blobs**
+- blobs are decrypted and assembled to create the **file**
 
 
 ## Parse the Metadata
