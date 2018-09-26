@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 //  V A R I A B L E
 
 const links = [ // TODO: Update images
@@ -39,6 +41,10 @@ const links = [ // TODO: Update images
   }
 ];
 
+
+
+//  E X P O R T
+
 export default function () {
   const renderedLinks = [];
   let imageLink = "";
@@ -51,7 +57,11 @@ export default function () {
   return `
     <ul class="feature-links">${renderedLinks.join("")}</ul>
   `;
-};
+}
+
+
+
+//  H E L P E R
 
 function returnLinkTemplate(url, title, image) {
   return `

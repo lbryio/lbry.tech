@@ -9,10 +9,7 @@
   ],
   "parserOptions": {
     "ecmaVersion": 2017,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "sourceType": "module"
   },
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],

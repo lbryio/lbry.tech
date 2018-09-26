@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 //  V A R I A B L E S
 
 const APPLICATIONS = require("./ecosystem/module-applications");
@@ -9,6 +11,10 @@ const LBRYCRD = require("./ecosystem/module-lbrycrd");
 const LIGHTHOUSE = require("./ecosystem/submodule-lighthouse");
 const REFLECTOR = require("./ecosystem/submodule-reflector");
 const WALLET = require("./ecosystem/submodule-wallet");
+
+
+
+//  E X P O R T
 
 export default function () {
   return `
@@ -30,4 +36,4 @@ export default function () {
       </aside>
     </section>
   `;
-};
+}

@@ -145,8 +145,8 @@ function partialFinder(markdownBody) {
 
     if (fileExistsTest) {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
-      const markdownHtml = filename === "glossary-toc" ? partialFunction : partialFunction.default(); //kill special case
-      markdownBody = markdownBody.replace(partial, '</div>' +  markdownHtml + '<div class="page__markup">');
+      const markdownHtml = filename === "glossary-toc" ? partialFunction : partialFunction.default(); // kill special case
+      markdownBody = markdownBody.replace(partial, `</div>${markdownHtml}<div class="page__markup">`);
     }
   }
 
