@@ -19,3 +19,5 @@ title: Resources
 - [Schema](/resources/schema)
 - [Signing a claim](/resources/signing-claim)
 - [URI](/resources/uri)
+- [API Wrappers](/resources/api-wrappers)
+- [LBRY Daemon Settings](/resources/daemon-settings)
