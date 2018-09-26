@@ -10,6 +10,7 @@ title: Resources
 
 ## Additional Resources
 
+- [Download Overview](/resources/download-overview)
 - [Lighthouse API](https://lbryio.github.io/lighthouse)
 - [Merkle Claim Trie](/resources/claimtrie)
 - [LBRY Claimtrie](/resources/lbry-claimtrie)
