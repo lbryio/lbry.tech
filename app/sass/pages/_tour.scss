@@ -456,10 +456,22 @@
  */
 
 .tour__description {
-  background-color: rgba($black, 0.05);
   cursor: default;
   font-size: 1rem;
   line-height: 1.33;
   padding: 1rem;
-  text-align: center;
+
+  &:not(.success) {
+    background-color: rgba($black, 0.05);
+    text-align: center;
+  }
+
+  &.success {
+    background-color: rgba($teal, 0.05);
+
+    strong {
+      display: block;
+      text-transform: uppercase;
+    }
+  }
 }

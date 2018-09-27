@@ -30,7 +30,32 @@ function initializeWebSocketConnection() {
         document.querySelector(data.selector).innerHTML = data.html;
         document.getElementById("emailAddress").value = "";
         document.getElementById("emailMessage").innerHTML = "";
-        if (document.getElementById("temp-loader")) document.getElementById("temp-loader").style.display = "none";
+
+        // `data.example` is added when updating HTML.
+        // This is when the results of an example are sent to the client.
+        if (data.example) {
+          if (!document.querySelector(`[data-example="${data.example}"`).classList.contains("completed")) {
+            document.getElementById("tour-example-description").classList.remove("success");
+          }
+
+          document.querySelector(`[data-example="${data.example}"`).classList.add("completed");
+          document.getElementById("tour-example-description").classList.add("success");
+
+          document.getElementById("tour-example-description").innerHTML =
+            document.querySelector(`[data-example="${data.example}"`).dataset.success;
+        }
+
+        // If `data.example` isn't found, reset the description area.
+        else {
+          document.getElementById("tour-example-description").classList.remove("success");
+
+          document.getElementById("tour-example-description").innerHTML =
+            document.querySelector(".tour__navigation__example.active").dataset.description;
+        }
+
+        if (document.getElementById("temp-loader"))
+          document.getElementById("temp-loader").style.display = "none";
+
         document.querySelector(".tour").classList.remove("waiting");
         break;
 

@@ -92,7 +92,7 @@ module.exports = exports = (data, socket) => {
       body.file_path = uploadResponse.filename;
 
       return publishMeme(body).then(publishResponse => {
-        let explorerNotice = "";
+        // let explorerNotice = "";
 
         if (publishResponse.error) {
           socket.send(JSON.stringify({
@@ -112,19 +112,22 @@ module.exports = exports = (data, socket) => {
           return;
         }
 
+        /*
         if (
           publishResponse.result &&
           publishResponse.result.txid
         ) explorerNotice = `
           <p>If you want proof of the tip you just gave, <a href="https://explorer.lbry.io/tx/${publishResponse.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
         `;
+        */
 
         const renderedCode = prism.highlight(stringifyObject(publishResponse, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
 
         return socket.send(JSON.stringify({
+          "example": data.example,
           "html": raw(`
             <h3>Response</h3>
-            ${explorerNotice}
+            <!--/ explorerNotice /-->
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
           "message": "updated html",
@@ -147,7 +150,7 @@ module.exports = exports = (data, socket) => {
   }
 
   return new Promise((resolve, reject) => { // eslint-disable-line
-    let explorerNotice = "";
+    // let explorerNotice = "";
 
     request({
       body: body,
@@ -179,20 +182,23 @@ module.exports = exports = (data, socket) => {
         return resolve(body.error);
       }
 
+      /*
       if (
         body.result &&
         body.result.txid
       ) explorerNotice = `
         <p>If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
       `;
+      */
 
       if (socket) {
         const renderedCode = prism.highlight(stringifyObject(body, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
 
         return socket.send(JSON.stringify({
+          "example": data.example,
           "html": raw(`
             <h3>Response</h3>
-            ${explorerNotice}
+            <!--/ explorerNotice /-->
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
           "message": "updated html",
