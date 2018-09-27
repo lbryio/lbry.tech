@@ -134,6 +134,7 @@ module.exports = exports = (data, socket) => {
     const approvedIds = [
       "3db81c073f82fd1bb670c65f526faea3b8546720",
       "173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
+      "2a7f5db2678177435b1dee6c9e38e035ead450b6",
       "d81bac6d49b1f92e58c37a5f633a27a45b43405e",
       "b4668c0bd096317b44c40738c099b6618095e75f",
       "007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
