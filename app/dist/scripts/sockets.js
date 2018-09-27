@@ -47,16 +47,19 @@ function initializeWebSocketConnection() {
 
         // If `data.example` isn't found, reset the description area.
         else {
-          document.getElementById("tour-example-description").classList.remove("success");
+          if (document.getElementById("tour-example-description")) {
+            document.getElementById("tour-example-description").classList.remove("success");
 
-          document.getElementById("tour-example-description").innerHTML =
-            document.querySelector(".tour__navigation__example.active").dataset.description;
+            document.getElementById("tour-example-description").innerHTML =
+              document.querySelector(".tour__navigation__example.active").dataset.description;
+          }
         }
 
         if (document.getElementById("temp-loader"))
           document.getElementById("temp-loader").style.display = "none";
 
-        document.querySelector(".tour").classList.remove("waiting");
+        if (document.querySelector(".tour"))
+          document.querySelector(".tour").classList.remove("waiting");
         break;
 
       case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
