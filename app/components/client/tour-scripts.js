@@ -144,9 +144,9 @@ function fetchMetadata(exampleNumber, data) {
         "example": exampleNumber
       }));
 
-      $("#fetch-claim-uri").val(data);
+      document.getElementById("fetch-claim-uri").value = data;
 
-      $("#tour-results").html(`
+      document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
@@ -154,9 +154,9 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
         <div class="loader" id="temp-loader"></div>
         <div id="example1-result"></div>
-      `);
+      `;
 
-      $("#tour-loader").hide();
+      document.getElementById("tour-loader").style.display = "none";
       break;
 
     case 2:
@@ -167,16 +167,17 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         "example": exampleNumber
       }));
 
-      $("#tour-results").html(`
+      document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
-<span class="token comment"># This will be updated soon</span>
+  <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+  curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "TITLE_OF_YOUR_CONTENT", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "DESCRIPTION_OF_YOUR_CONTENT", "title": "TITLE_OF_YOUR_CONTENT", "language": "en", "license": "", "nsfw": false }}}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
         <div id="example2-result"></div>
-      `);
+      `;
 
-      $("#tour-loader").hide();
+      document.getElementById("tour-loader").style.display = "none";
       break;
 
     case 3:
@@ -187,19 +188,20 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         "example": exampleNumber
       }));
 
-      $("#fetch-claim-uri").val(data);
+      document.getElementById("fetch-claim-uri").value = data;
+      // $("#fetch-claim-uri").val(data);
 
-      $("#tour-results").html(`
+      document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
+  <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+  curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
         <div id="example3-result"></div>
-      `);
+      `;
 
-      $("#tour-loader").hide();
+      document.getElementById("tour-loader").style.display = "none";
       break;
 
     default:
@@ -209,13 +211,13 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
 function getMemeInfo() { // TODO: Error handling
   const info = {
-    description: $("#meme-description").val(),
-    file_path: $("#meme-canvas")[0].toDataURL("image/jpeg", 0.6),
-    language: $("#meme-language").val(),
-    license: $("#meme-license").val(),
-    name: $("#meme-title").val(),
-    nsfw: $("#meme-nsfw-flag")[0].checked,
-    title: $("#meme-title").val()
+    description: document.getElementById("meme-description").value,
+    file_path: document.getElementById("meme-canvas").toDataURL("image/jpeg", 0.6),
+    language: document.getElementById("meme-language").value,
+    license: document.getElementById("meme-license").value,
+    name: document.getElementById("meme-title").value,
+    nsfw: document.getElementById("meme-nsfw-flag").checked,
+    title: document.getElementById("meme-title").value
   };
 
   return info;
@@ -225,8 +227,8 @@ const handleExamples = debounce(event => {
   let exampleNumber;
   const data = event.dataset;
 
-  if (!parseInt($(".tour__navigation__example.active")[0].dataset.example)) return;
-  exampleNumber = parseInt($(".tour__navigation__example.active")[0].dataset.example);
+  if (!parseInt(document.querySelector(".tour__navigation__example.active").dataset.example)) return;
+  exampleNumber = parseInt(document.querySelector(".tour__navigation__example.active").dataset.example);
 
   switch(data.action) {
     case "choose claim":
@@ -234,24 +236,32 @@ const handleExamples = debounce(event => {
       break;
 
     case "execute claim":
-      if (!$("#fetch-claim-uri").val()) return;
-      fetchMetadata(exampleNumber, $("#fetch-claim-uri").val());
+      if (!document.getElementById("fetch-claim-uri").value.length > 0) return;
+      fetchMetadata(exampleNumber, document.getElementById("fetch-claim-uri").value);
       break;
 
     case "tour, example 1":
-      if ($("#tour-loader").hasClass("tour__content__meme")) {
-        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      if (document.getElementById("tour-loader").classList.contains("tour__content__meme")) {
+        document.getElementById("tour-loader").classList.remove("tour__content__meme");
+        document.getElementById("tour-loader").classList.add("tour__content__trends");
       }
 
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      $("#tour-url button").text("Resolve");
-      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+      document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
+      document.querySelector("#tour-url button").textContent = "Resolve";
 
-      $(".tour__navigation__example").removeClass("active");
-      $(".tour__navigation__example:nth-child(1)").addClass("active");
+      if (document.getElementById("tour-url").style.display === "none")
+        document.getElementById("tour-url").removeAttribute("style");
 
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
+      for (const example of document.querySelectorAll(".tour__navigation__example"))
+        example.classList.remove("active");
+
+      document.querySelector(".tour__navigation__example:nth-child(1)").classList.add("active");
+
+      document.getElementById("tour-loader").innerHTML = "";
+      document.getElementById("tour-results").innerHTML = "";
+
+      document.getElementById("tour-loader").removeAttribute("style");
+      document.getElementById("tour-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -286,7 +296,6 @@ const handleExamples = debounce(event => {
 
       $("#fetch-claim-uri").val(""); // reset URL bar
       $("#tour-url button").text("Tip");
-      // $("#tour-url").after("<p>In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead.</p>");
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
       $(".tour__navigation__example").removeClass("active");

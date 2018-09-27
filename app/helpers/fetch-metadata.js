@@ -195,6 +195,7 @@ module.exports = exports = (data, socket) => {
 
       /*
       if (
+        data.example === 3 &&
         body.result &&
         body.result.txid
       ) explorerNotice = `

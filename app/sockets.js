@@ -39,7 +39,6 @@ module.exports = exports = (socket, action) => {
     case (action.message === "landed on tour"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
-          // "example": 1,
           "html": result,
           "message": "updated html",
           "selector": "#tour-loader"
@@ -50,7 +49,6 @@ module.exports = exports = (socket, action) => {
     case (action.message === "request for tour, example 1"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
-          // "example": 1,
           "html": result,
           "message": "updated html",
           "selector": "#tour-loader"
@@ -65,7 +63,6 @@ module.exports = exports = (socket, action) => {
     case (action.message === "request for tour, example 3"):
       generateContent(3, result => {
         socket.send(JSON.stringify({
-          // "example": 3,
           "html": result,
           "message": "updated html",
           "selector": "#tour-loader"
@@ -298,7 +295,8 @@ function generateMemeCreator(socket) {
       detectLanguageAndUpdate();
       initCanvas();
 
-      document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 2']").dataset.description;
+      document.getElementById("tour-example-description").innerHTML =
+        document.querySelector("[data-action='tour, example 2']").dataset.description;
 
       setTimeout(() => {
         document.querySelector(".tour__content__meme__canvas__thumbnail").click();
@@ -307,7 +305,6 @@ function generateMemeCreator(socket) {
   `;
 
   return socket.send(JSON.stringify({
-    // "example": 2,
     "html": memeCreator,
     "message": "updated html",
     "selector": "#tour-loader"
