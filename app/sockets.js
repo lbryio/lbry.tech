@@ -105,9 +105,9 @@ function generateContent(exampleNumber, displayTrendingContent) {
           try {
             renderedContentCollection.push(`
               <figure class="tour__content__trend">
-                <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+                <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
 
-                <figcaption data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}">
+                <figcaption data-action="choose claim" data-claim-id="${part.name}">
                   ${part.value.stream.metadata.title}
                   <span>${part.channel_name}</span>
                 </figcaption>
@@ -120,7 +120,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
 
         renderedContentCollection.push(`
           <script>
-            document.getElementById("tour-example-description").textContent = document.querySelector("[data-action='tour, example 1']").dataset.description
+            document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 1']").dataset.description
           </script>
         `);
 
@@ -133,7 +133,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
     const approvedUrls = [
       "LBRY#3db81c073f82fd1bb670c65f526faea3b8546720",
       "correlation-can-imply-causation#173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
-      "thanos-is-the-protagonist-how-infinity#2a7f5db2678177435b1dee6c9e38e035ead450b6nyte",
+      "thanos-is-the-protagonist-how-infinity#2a7f5db2678177435b1dee6c9e38e035ead450b6",
       "epic-arcade-mode-duos-nickatnyte-molt#d81bac6d49b1f92e58c37a5f633a27a45b43405e",
       "political-correctness-a-force-for-good-a#b4668c0bd096317b44c40738c099b6618095e75f",
       "10-secrets-hidden-inside-famous-logos#007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
@@ -150,27 +150,29 @@ function generateContent(exampleNumber, displayTrendingContent) {
       rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: exampleNumber }));
     }
 
-    Promise.all(rawContentCollection).then(collection => {
+    return Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
-        try {
+        if (
+          part &&
+          part.value &&
+          part.value.stream.metadata.thumbnail &&
+          part.channel_name
+        ) {
           renderedContentCollection.push(`
             <figure class="tour__content__trend">
-              <img alt="${part.name}" data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
-
-              <figcaption data-action="choose claim" data-claim-id="${exampleNumber === 1 ? part.name : part.claim_id}">
+              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+              <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
                 ${part.value.stream.metadata.title}
                 <span>${part.channel_name}</span>
               </figcaption>
             </figure>
           `);
-        } catch (err) {
-          return; // TODO: Return nice error message
         }
       }
 
       renderedContentCollection.push(`
         <script>
-          document.getElementById("tour-example-description").textContent = document.querySelector("[data-action='tour, example 3']").dataset.description
+          document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 3']").dataset.description
         </script>
       `);
 
@@ -296,7 +298,7 @@ function generateMemeCreator(socket) {
       detectLanguageAndUpdate();
       initCanvas();
 
-      document.getElementById("tour-example-description").textContent = document.querySelector("[data-action='tour, example 2']").dataset.description;
+      document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 2']").dataset.description;
 
       setTimeout(() => {
         document.querySelector(".tour__content__meme__canvas__thumbnail").click();

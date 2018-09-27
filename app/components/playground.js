@@ -73,7 +73,7 @@ function navigation() { // TODO: Save tutorial position to localStorage
       data-action="tour, example 3"
       data-description="In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead."
       data-example="3"
-      data-success="<strong>Kudos</strong> You've just supported a creator with LBC (or, LBRY credits) with our own stash of LBC (you'd use your own IRL). You're basically saying, \"thanks for this great content, please continue!\" and that's awesome. You're awesome."
+      data-success="<strong>Kudos</strong> You've just supported a creator with LBC (or, LBRY credits) with our own stash of LBC (you'd use your own IRL). You're basically saying, 'thanks for this great content, please continue!' and that's awesome. You're awesome."
     >
       <button type="button">Support</button>
       <span>Support creators on LBRY with a tip, on us!</span>

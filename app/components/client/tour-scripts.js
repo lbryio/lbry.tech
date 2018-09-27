@@ -36,10 +36,21 @@ document.querySelector("body").addEventListener("click", event => {
 document.getElementById("fetch-claim-uri").addEventListener("keyup", event => {
   const key = event.keyCode ? event.keyCode : event.which;
 
-  if (
-    key === 13 &&
-    document.getElementById("fetch-claim-uri").value.length > 0
-  ) fetchMetadata(1, document.getElementById("fetch-claim-uri").value);
+  switch(true) {
+    case (document.querySelector("[data-example='1']").classList.contains("active")):
+      if (
+        key === 13 &&
+        document.getElementById("fetch-claim-uri").value.length > 0
+      ) fetchMetadata(1, document.getElementById("fetch-claim-uri").value);
+      break;
+
+    case (document.querySelector("[data-example='3']").classList.contains("active")):
+      if (
+        key === 13 &&
+        document.getElementById("fetch-claim-uri").value.length > 0
+      ) fetchMetadata(3, document.getElementById("fetch-claim-uri").value);
+      break;
+  }
 });
 
 document.querySelector("body").addEventListener("keyup", event => {
