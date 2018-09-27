@@ -179,36 +179,7 @@
   }
 
   pre {
-    margin-bottom: 2rem; padding: 2rem;
-
-    border-radius: 3px;
     font-size: 1rem;
-    line-height: 1.33;
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    &:not([class]),
-    &.language-text {
-      background-color: #27283e;
-      color: $white;
-    }
-
-    &.language-yaml {
-      background-color: #27273f;
-      color: #ffe066;
-
-      .atrule {
-        color: #f083ac;
-      }
-
-      .important {
-        color: #ffa94d;
-      }
-
-      .punctuation {
-        color: $white;
-      }
-    }
   }
 
   h2, h3, h4, h5 {

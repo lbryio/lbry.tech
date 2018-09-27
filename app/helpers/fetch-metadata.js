@@ -12,11 +12,11 @@ const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
-const randomString = local("/app/helpers/random-string");
+const randomString = local("app/helpers/random-string");
 const loadLanguages = require("prismjs/components/");
-const logSlackError = local("/app/helpers/slack");
-const publishMeme = local("/app/helpers/publish-meme");
-const uploadImage = local("/app/helpers/upload-image");
+const logSlackError = local("app/helpers/slack");
+const publishMeme = local("app/helpers/publish-meme");
+const uploadImage = local("app/helpers/upload-image");
 
 loadLanguages(["json"]);
 
@@ -126,7 +126,6 @@ module.exports = exports = (data, socket) => {
             <h3>Response</h3>
             ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
-            <script>$("#temp-loader").hide();</script>
           `),
           "message": "updated html",
           "selector": `#example${data.example}-result`
@@ -195,7 +194,6 @@ module.exports = exports = (data, socket) => {
             <h3>Response</h3>
             ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
-            <script>$("#temp-loader").hide();</script>
           `),
           "message": "updated html",
           "selector": `#example${data.example}-result`

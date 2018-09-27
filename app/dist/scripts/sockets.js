@@ -1,34 +1,60 @@
-/* global $, log, ws */ "use strict";
+"use strict";
 
 
 
-// const log = console.log; // eslint-disable-line
+document.addEventListener("DOMContentLoaded", () => {
+  initializeWebSocketConnection();
+  setInterval(checkWebSocketConnection, 5000);
+});
 
 
 
-ws.onmessage = socket => {
-  const data = JSON.parse(socket.data);
+let ws = null;
 
-  switch (true) {
-    case data.message === "updated html":
-      $(data.selector).html(data.html);
-      $("#emailMessage").val("");
-      break;
+function checkWebSocketConnection() {
+  if (!ws || ws.readyState === 3) initializeWebSocketConnection();
+}
 
-    case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
-      $("#flash-container").html(`<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`);
+function initializeWebSocketConnection() {
+  ws = new WebSocket(location.origin.replace(/^http/, "ws"));
 
-      setTimeout(() => {
-        $("#flash-container").html("");
-      }, 2100);
+  ws.onopen = () => {
+    console.log("WebSocket connection established"); // eslint-disable-line
+  };
 
-      break;
+  ws.onmessage = socket => {
+    const data = JSON.parse(socket.data);
 
-    default:
-      log(data);
-      break;
-  }
-};
+    switch (true) {
+      case data.message === "updated html":
+        document.querySelector(data.selector).innerHTML = data.html;
+        document.getElementById("emailAddress").value = "";
+        document.getElementById("emailMessage").innerHTML = "";
+        if (document.getElementById("temp-loader")) document.getElementById("temp-loader").style.display = "none";
+        document.querySelector(".tour").classList.remove("waiting");
+        break;
+
+      case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
+        document.getElementById("flash-container").innerHTML =
+          `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;
+
+        setTimeout(() => {
+          document.getElementById("flash-container").innerHTML = "";
+        }, 2100);
+
+        break;
+
+      default:
+        console.log(data); // eslint-disable-line
+        break;
+    }
+  };
+
+  ws.onclose = () => {
+    console.log("WebSocket connection lost"); // eslint-disable-line
+    checkWebSocketConnection(); // reconnect now
+  };
+}
 
 function send(msg) { // eslint-disable-line
   socketReady(ws, () => ws.send(msg));
@@ -36,11 +62,11 @@ function send(msg) { // eslint-disable-line
 
 function socketReady(socket, callback) {
   setTimeout(() => {
-    if (socket.readyState === 1) {
+    if (socket && socket.readyState === 1) {
       if (callback !== undefined) callback();
       return;
-    } else {
-      socketReady(socket, callback);
     }
+
+    return socketReady(socket, callback);
   }, 5);
 }

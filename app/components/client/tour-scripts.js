@@ -13,30 +13,41 @@ if (window.location.href.search && window.location.href.split("?url=")[1]) { // 
 
 
 
-$("body").on("click", "[data-action]", event => {
-  event.preventDefault();
+document.querySelector("body").addEventListener("click", event => {
+  if (event.target.dataset.action) {
+    event.preventDefault();
+    document.querySelector(".tour").classList.add("waiting");
+    handleExamples(event.target);
+  }
 
-  $(".tour").addClass("waiting");
+  if (
+    event.explicitOriginalTarget.classList &&
+    event.explicitOriginalTarget.classList[0] === "tour__content__meme__canvas__thumbnail"
+  ) {
+    for (const thumbnail of document.querySelectorAll(".tour__content__meme__canvas__thumbnail")) {
+      thumbnail.classList.remove("selected");
+    }
 
-  setTimeout(() => {
-    handleExamples(event);
-    $(".tour").removeClass("waiting");
-  }, 2500); // "rate-limit" to allow example divs time to populate
+    event.explicitOriginalTarget.classList.add("selected");
+    updateCanvas(event.explicitOriginalTarget);
+  }
 });
 
-$("body").on("click", ".tour__content__meme__canvas__thumbnail", event => {
-  $(".tour__content__meme__canvas__thumbnail").removeClass("selected");
-
-  event.currentTarget.className += " selected";
-  updateCanvas(event.currentTarget);
-});
-
-$("#fetch-claim-uri").on("keyup", event => {
+document.getElementById("fetch-claim-uri").addEventListener("keyup", event => {
   const key = event.keyCode ? event.keyCode : event.which;
-  if (key === 13 && $("#fetch-claim-uri").val()) fetchMetadata(1, $("#fetch-claim-uri").val());
+
+  if (
+    key === 13 &&
+    document.getElementById("fetch-claim-uri").value.length > 0
+  ) fetchMetadata(1, document.getElementById("fetch-claim-uri").value);
 });
 
-$("body").on("keyup", "#meme-top-line, #meme-bottom-line", () => updateCanvas());
+document.querySelector("body").addEventListener("keyup", event => {
+  if (
+    event.target.id === "meme-top-line" ||
+    event.target.id === "meme-bottom-line"
+  ) updateCanvas();
+});
 
 
 
@@ -94,17 +105,18 @@ function debounce(func, wait, immediate) {
 }
 
 function initializeTour() {
-  $(".tour").addClass("waiting");
-  $("#fetch-claim-uri").val("").focus(); // reset
-  $(".tour__sidebar__example:nth-child(1)").addClass("active");
+  document.querySelector(".tour").classList.add("waiting");
+  document.querySelector("#fetch-claim-uri").value = "";
+  document.querySelector("#fetch-claim-uri").focus();
+  document.querySelector(".tour__navigation__example:nth-child(1)").classList.add("active");
 
   send(JSON.stringify({
     "message": "landed on tour"
   }));
 
   setTimeout(() => {
-    $(".tour").removeClass("waiting");
-  }, 2500);
+    document.querySelector(".tour__navigation__example:nth-child(1)").click();
+  }, 300);
 }
 
 
@@ -200,10 +212,10 @@ function getMemeInfo() { // TODO: Error handling
 
 const handleExamples = debounce(event => {
   let exampleNumber;
-  const data = event.currentTarget.dataset;
+  const data = event.dataset;
 
-  if (!parseInt($(".tour__sidebar__example.active")[0].dataset.example)) return;
-  exampleNumber = parseInt($(".tour__sidebar__example.active")[0].dataset.example);
+  if (!parseInt($(".tour__navigation__example.active")[0].dataset.example)) return;
+  exampleNumber = parseInt($(".tour__navigation__example.active")[0].dataset.example);
 
   switch(data.action) {
     case "choose claim":
@@ -224,8 +236,8 @@ const handleExamples = debounce(event => {
       $("#tour-url button").text("Resolve");
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(1)").addClass("active");
+      $(".tour__navigation__example").removeClass("active");
+      $(".tour__navigation__example:nth-child(1)").addClass("active");
 
       $("#tour-loader").empty().show();
       $("#tour-results").empty().show();
@@ -244,8 +256,8 @@ const handleExamples = debounce(event => {
       $("#fetch-claim-uri").val(""); // reset URL bar
       $("#tour-url").hide();
 
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(2)").addClass("active");
+      $(".tour__navigation__example").removeClass("active");
+      $(".tour__navigation__example:nth-child(2)").addClass("active");
 
       $("#tour-loader").empty().show();
       $("#tour-results").empty().show();
@@ -266,8 +278,8 @@ const handleExamples = debounce(event => {
       // $("#tour-url").after("<p>In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead.</p>");
       if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
 
-      $(".tour__sidebar__example").removeClass("active");
-      $(".tour__sidebar__example:nth-child(3)").addClass("active");
+      $(".tour__navigation__example").removeClass("active");
+      $(".tour__navigation__example:nth-child(3)").addClass("active");
 
       $("#tour-loader").empty().show();
       $("#tour-results").empty().show();
