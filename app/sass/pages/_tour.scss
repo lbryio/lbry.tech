@@ -31,46 +31,47 @@
 
 
 /**
- * Tour | Sidebar
+ * Tour | Navigation
  *
- * @class     .tour__sidebar
+ * @class     .tour__navigation
  *
- * @class     .tour__sidebar__example
+ * @class     .tour__navigation__example
  * @selector  {::before}
  * @selector  {:last-of-type}
  * @state     {.active}
  * @state     {:hover}
  */
 
-.tour__sidebar {
-  width: 250px; height: 100%;
+.tour__navigation {
+  width: 100%;
 
-  float: left;
   list-style-type: none;
-  padding-top: 1rem;
-  padding-right: 1rem;
-  vertical-align: top;
+  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+
+  &::after {
+    @include clearfix;
+  }
 }
 
-.tour__sidebar__example {
+.tour__navigation__example {
   cursor: pointer;
+  float: left;
   position: relative;
+  text-align: center;
+  width: 33.333333%;
 
   &::before {
-    width: 1rem; height: 1rem;
-    top: 0.5rem; left: 0;
+    width: 100%; height: 2.5rem;
+    top: -0.6rem; left: 0;
 
-    border: 1px solid;
-    border-radius: 50%;
-    content: attr(data-example);
-    font-size: 0.8rem;
+    content: "example " attr(data-example);
+    font-size: 0.6rem;
+    font-style: italic;
     line-height: 1.1;
     position: absolute;
     text-align: center;
-  }
-
-  &:not(:last-of-type) {
-    margin-bottom: 1.5rem;
+    text-transform: uppercase;
   }
 
   &:not(.active) {
@@ -93,6 +94,20 @@
     }
   }
 
+  &.completed {
+    &::after {
+      width: 100%; height: 100%;
+      top: 0; left: 0;
+
+      background-color: rgba($white, 0.7);
+      content: "✓";
+      font-size: 3rem;
+      line-height: 0.85;
+      position: absolute;
+      z-index: 10;
+    }
+  }
+
   &::before,
   button,
   span {
@@ -103,7 +118,6 @@
     background-color: transparent;
     font-size: 1.25rem;
     font-weight: 600;
-    padding-left: 1.3rem;
   }
 
   span {
@@ -139,12 +153,10 @@
  */
 
 .tour__content {
-  width: calc(100% - 250px); height: 100%; min-height: 500px;
-
-  border-left: 1px solid rgba($black, 0.05);
-  float: right;
-  padding: 1rem 0 1rem 1rem;
-  vertical-align: top;
+  border-top: 1px solid rgba($black, 0.05);
+  overflow-y: visible;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 
   .loader {
     @extend .__loading;
@@ -152,6 +164,15 @@
     &::after {
       content: "Processing request";
     }
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  pre {
+    font-size: 1rem;
   }
 }
 
@@ -167,6 +188,7 @@
 .tour__content__meme__canvas {
   float: left;
   margin-right: 2%;
+  position: relative;
   width: 48%;
 
   canvas {
@@ -202,7 +224,7 @@
 
 .tour__content__meme__editor {
   float: right;
-  width: 48%;
+  width: 50%;
 
   h2.__metadata {
     margin-top: 3rem;
@@ -315,10 +337,11 @@
 }
 
 .tour__content__trends {
+  min-width: 0; min-height: 0;
+
   display: grid;
-  grid-gap: 2%;
-  grid-template-columns: 32% 32% 32%;
-  overflow-y: auto;
+  grid-gap: 1rem;
+  grid-template: repeat(1, 1fr) / repeat(3, 1fr);
   position: relative;
 
   &:empty {
@@ -332,7 +355,7 @@
 
 .tour__content__trend {
   img {
-    width: 100%; height: 175px;
+    width: 100%; height: 213px;
 
     cursor: pointer;
     display: block;
@@ -426,5 +449,34 @@
     font-size: 1rem;
     text-align: right;
     width: 3.5rem;
+  }
+}
+
+
+
+/**
+ * Tour | Description
+ *
+ * @class .tour__description
+ */
+
+.tour__description {
+  cursor: default;
+  font-size: 1rem;
+  line-height: 1.33;
+  padding: 1rem;
+
+  &:not(.success) {
+    background-color: rgba($black, 0.05);
+    text-align: center;
+  }
+
+  &.success {
+    background-color: rgba($teal, 0.05);
+
+    strong {
+      display: block;
+      text-transform: uppercase;
+    }
   }
 }

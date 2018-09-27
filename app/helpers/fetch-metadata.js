@@ -12,11 +12,11 @@ const stringifyObject = require("stringify-object");
 
 //  V A R I A B L E S
 
-const randomString = local("/app/helpers/random-string");
+const randomString = local("app/helpers/random-string");
 const loadLanguages = require("prismjs/components/");
-const logSlackError = local("/app/helpers/slack");
-const publishMeme = local("/app/helpers/publish-meme");
-const uploadImage = local("/app/helpers/upload-image");
+const logSlackError = local("app/helpers/slack");
+const publishMeme = local("app/helpers/publish-meme");
+const uploadImage = local("app/helpers/upload-image");
 
 loadLanguages(["json"]);
 
@@ -92,8 +92,6 @@ module.exports = exports = (data, socket) => {
       body.file_path = uploadResponse.filename;
 
       return publishMeme(body).then(publishResponse => {
-        let explorerNotice = "";
-
         if (publishResponse.error) {
           socket.send(JSON.stringify({
             "details": "Meme publish failed",
@@ -112,21 +110,13 @@ module.exports = exports = (data, socket) => {
           return;
         }
 
-        if (
-          publishResponse.result &&
-          publishResponse.result.txid
-        ) explorerNotice = `
-          <p>If you want proof of the tip you just gave, <a href="https://explorer.lbry.io/tx/${publishResponse.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
-        `;
-
         const renderedCode = prism.highlight(stringifyObject(publishResponse, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
 
         return socket.send(JSON.stringify({
+          "example": data.example,
           "html": raw(`
             <h3>Response</h3>
-            ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
-            <script>$("#temp-loader").hide();</script>
           `),
           "message": "updated html",
           "selector": `#example${data.example}-result`
@@ -141,6 +131,30 @@ module.exports = exports = (data, socket) => {
   }
 
   if (resolveMethod === "wallet_send") {
+    const approvedIds = [
+      "3db81c073f82fd1bb670c65f526faea3b8546720",
+      "173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
+      "d81bac6d49b1f92e58c37a5f633a27a45b43405e",
+      "b4668c0bd096317b44c40738c099b6618095e75f",
+      "007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
+      "1ac47b8b3def40a25850dc726a09ce23d09e7009",
+      "784b3c215a6f06b663fc1aa292bcb19f29c489bb",
+      "758dd6497cdfc401ae1f25984738d024d47b50af",
+      "8a7401b88d5ed0376d98f16808194d4dcb05b284"
+    ];
+
+    if (!approvedIds.includes(claimAddress)) {
+      return socket.send(JSON.stringify({
+        "example": data.example,
+        "html": raw(`
+          <h3>Response</h3>
+          <pre><code class="language-text">Tipping creators not in the whitelist for this example is not allowed.</code></pre>
+        `),
+        "message": "updated html",
+        "selector": `#example${data.example}-result`
+      }));
+    }
+
     apiRequestMethod = "POST";
 
     body.amount = "0.01"; // Hardcoded tip amount
@@ -148,8 +162,6 @@ module.exports = exports = (data, socket) => {
   }
 
   return new Promise((resolve, reject) => { // eslint-disable-line
-    let explorerNotice = "";
-
     request({
       body: body,
       json: true,
@@ -180,22 +192,23 @@ module.exports = exports = (data, socket) => {
         return resolve(body.error);
       }
 
+      /*
       if (
         body.result &&
         body.result.txid
       ) explorerNotice = `
         <p>If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
       `;
+      */
 
       if (socket) {
         const renderedCode = prism.highlight(stringifyObject(body, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
 
         return socket.send(JSON.stringify({
+          "example": data.example,
           "html": raw(`
             <h3>Response</h3>
-            ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
-            <script>$("#temp-loader").hide();</script>
           `),
           "message": "updated html",
           "selector": `#example${data.example}-result`

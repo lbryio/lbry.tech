@@ -85,7 +85,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   let pageScript = "";
   if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
   if (path === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
-  if (path === "tour") pageScript = "<script>" + fs.readFileSync("./app/components/client/tour-scripts.js", "utf-8") + "</script>";
+  if (path === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/tour-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">

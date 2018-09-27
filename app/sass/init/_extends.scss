@@ -137,6 +137,8 @@
 
 .__loading {
   width: 100%; height: 10rem;
+
+  cursor: wait;
   position: relative;
 
   &::before {
@@ -149,12 +151,14 @@
     border-top-color: $teal;
     border-width: 6px;
     content: "";
+    cursor: wait;
     position: absolute;
   }
 
   &::after {
     top: 7rem; left: 0;
 
+    cursor: wait;
     font-size: 1rem;
     position: absolute;
     text-align: center;

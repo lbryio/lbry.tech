@@ -2,6 +2,46 @@
 
 
 
+//  P A C K A G E S
+
+const async = require("async");
+const color = require("colorette");
+const local = require("app-root-path").require;
+const octokit = require("@octokit/rest")();
+const redis = require("redis");
+
+//  V A R I A B L E S
+
+const logSlackError = local("app/helpers/slack");
+const relativeDate = local("app/modules/relative-date");
+let client;
+
+//  R E D I S
+
+if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
+  octokit.authenticate({
+    type: "oauth",
+    token: process.env.GITHUB_OAUTH_TOKEN
+  });
+} else process.stdout.write(`${color.red("[missing]")} GitHub token`);
+
+if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+  client = redis.createClient(process.env.REDISCLOUD_URL);
+
+  client.on("error", redisError => {
+    process.env.NODE_ENV === "development" ?
+      process.stdout.write(`\n${color.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
+      logSlackError(
+        "\n" +
+        "> *REDIS ERROR:* ```" + JSON.parse(JSON.stringify(redisError)) + "```" + "\n" +
+        "> _Cause: Someone is trying to run LBRY.tech locally without environment variables OR Heroku is busted_\n"
+      )
+    ;
+  });
+} else process.stdout.write(`${color.red("[missing]")} Redis client URL`);
+
+
+
 //  P R O G R A M
 
 function generateEvent(event) {
@@ -84,6 +124,44 @@ function generateEvent(event) {
   }
 }
 
+function generateGitHubFeed(displayGitHubFeed) {
+  if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+    client.zrevrange("events", 0, 9, (err, reply) => {
+      if (err) return; // TODO: Render a div with nice error message
+
+      const events = [];
+      const renderedEvents = [];
+
+      reply.forEach(item => events.push(JSON.parse(item)));
+
+      for (const event of events) {
+        renderedEvents.push(`
+          <div class='github-feed__event'>
+            <a href="${generateUrl("actor", event)}" target="_blank" rel="noopener noreferrer">
+              <img src="${event.actor.avatar_url}" class="github-feed__event__avatar" alt=""/>
+            </a>
+
+            <p>
+              ${generateEvent(event)}
+              <a href="${generateUrl("repo", event)}" title="View this repo on GitHub" target="_blank" rel="noopener noreferrer"><strong>${event.repo.name}</strong></a>
+              <em class="github-feed__event__time">${relativeDate(new Date(event.created_at))}</em>
+            </p>
+          </div>
+        `);
+      }
+
+      updateGithubFeed(); // TODO: Update `.last-updated` every minute
+
+      displayGitHubFeed(`
+        <h3>GitHub</h3>
+        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD").replace(/-/g, "&middot;")} at ${new Date().add(-4, "hours").format("UTC:H:mm:ss A").toLowerCase()} EST</h5>
+
+        ${renderedEvents.join("")}
+      `);
+    });
+  }
+}
+
 function generateUrl(type, event) {
   switch (type) {
     case "actor":
@@ -115,6 +193,29 @@ function generateUrl(type, event) {
   }
 }
 
+function updateGithubFeed() {
+  octokit.activity.getEventsForOrg({
+    org: "lbryio",
+    per_page: 20,
+    page: 1
+  }).then(({ data }) => {
+    async.eachSeries(data, (item, callback) => {
+      const eventString = JSON.stringify(item);
+
+      client.zrank("events", eventString, (err, reply) => {
+        if (reply === null) client.zadd("events", item.id, eventString, callback);
+        else callback();
+      });
+    }, () => client.zremrangebyrank("events", 0, -51)); // Keep the latest 50 events
+  }).catch(err => {
+    logSlackError(
+      "\n" +
+      "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
+      "> _Cause: GitHub feed refresh_\n"
+    );
+  });
+}
+
 
 
 //  H E L P E R
@@ -129,5 +230,7 @@ function refToBranch(ref) {
 
 module.exports = exports = {
   generateEvent,
-  generateUrl
+  generateGitHubFeed,
+  generateUrl,
+  updateGithubFeed
 };

@@ -39,30 +39,29 @@ module.exports = exports = (state, emit) => {
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <!--/ Open Graph /-->
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="${config.meta.title}"/>
-    <meta property="og:url" content="https://lbry.tech${state.href}"/>
-    <meta property="og:site_name" content="${config.meta.title}"/>
-    <meta property="og:image" content="/assets/images/apple-touch-icon.png"/>
+    <meta property="og:image" content="/assets/media/images/og-image.png"/>
+    <meta property="og:image:height" content="720"/>
+    <meta property="og:image:width" content="1280"/>
     <meta property="og:locale" content="en_US"/>
+    <meta property="og:site_name" content="${config.meta.title}"/>
+    <meta property="og:title" content="${title}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://lbry.tech${state.href}"/>
 
     <!--/ Social/App Stuff /-->
     <meta name="apple-mobile-web-app-title" content="${config.meta.title}"/>
     <meta name="application-name" content="${config.meta.title}"/>
     <meta name="msapplication-TileColor" content="${config.meta.color}"/>
-    <meta name="msapplication-TileImage" content="/assets/images/apple-touch-icon.png"/>
+    <meta name="msapplication-TileImage" content="/assets/apple-touch-icon.png"/>
     <meta name="theme-color" content="${config.meta.color}"/>
 
-    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png"/>
-    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml"/>
-    <link rel="mask-icon" href="/assets/images/favicon.svg" color="${config.meta.color}"/>
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
+    <link rel="mask-icon" href="/assets/favicon.svg" color="${config.meta.color}"/>
     <link rel="shortcut icon" href="/assets/favicon.ico"/>
-
-    <link href="/assets/bundle.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/bundle.css"/>
 
     <script src="/assets/scripts/vendor/zepto.js"></script>
-
-    <script>const ws = new WebSocket(location.origin.replace(/^http/, "ws"));</script>
     <script src="/assets/scripts/sockets.js"></script>
   `;
 };

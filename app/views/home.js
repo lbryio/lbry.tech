@@ -17,8 +17,8 @@ import linkGrid from "../components/link-grid";
 const featureLinks = linkGrid([
   {
     description: "Learn how LBRY works with 3 easy examples",
-    destination: "/tour",
-    label: "Take the Tour",
+    destination: "/playground",
+    label: "Jump into Playground",
     title: "New to LBRY?"
   },
   {
