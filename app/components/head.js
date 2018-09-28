@@ -24,27 +24,25 @@ module.exports = exports = (state, emit) => {
   if (state.title !== title) emit(state.events.DOMTITLECHANGE, title);
   state.page = state.page || { };
 
-  // TODO:
-  // - Support custom metadata (descriptions and whatnot)
+  const newMetadata = state.lbry;
 
   return html`
     <meta charset="utf-8"/>
-    <title>${title}</title>
+    <title>${newMetadata && newMetadata.title ? newMetadata.title : title}</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="author" content="${config.meta.title}"/>
-    <meta name="description" content="${config.meta.description}"/>
-    <meta name="keywords" content=""/>
+    <meta name="description" content="${newMetadata && newMetadata.description ? newMetadata.description : config.meta.description}"/>
     <meta name="title" content="${config.meta.title}"/>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <!--/ Open Graph /-->
-    <meta property="og:image" content="/assets/media/images/og-image.png"/>
-    <meta property="og:image:height" content="720"/>
-    <meta property="og:image:width" content="1280"/>
+    <meta property="og:image" content="${newMetadata && newMetadata["og:image"] ? newMetadata["og:image"] : "/assets/media/images/og-image.png"}"/>
+    <meta property="og:image:height" content="${newMetadata && newMetadata["og:image:height"] ? newMetadata["og:image:height"] : 720}"/>
+    <meta property="og:image:width" content="${newMetadata && newMetadata["og:image:width"] ? newMetadata["og:image:width"] : 1280}"/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:site_name" content="${config.meta.title}"/>
-    <meta property="og:title" content="${title}"/>
+    <meta property="og:title" content="${newMetadata && newMetadata.title ? newMetadata.title : title}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://lbry.tech${state.href}"/>
 

@@ -79,8 +79,19 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(markdownFileDetails.body);
   const updatedMarkdown = partialFinder(renderedMarkdown);
-  let newMetadata = "";
-  if (markdownFileDetails.attributes.meta) newMetadata = markdownFileDetails.attributes.meta;
+
+  if (markdownFileDetails.attributes.meta) {
+    const customMetadata = {};
+
+    for (const key in markdownFileDetails.attributes.meta) {
+      if (markdownFileDetails.attributes.meta.hasOwnProperty(key)) {
+        customMetadata[Object.keys(markdownFileDetails.attributes.meta[key])[0]] =
+          markdownFileDetails.attributes.meta[key][Object.keys(markdownFileDetails.attributes.meta[key])[0]];
+      }
+    }
+
+    state.lbry = customMetadata;
+  }
 
   let pageScript = "";
   if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
@@ -101,7 +112,6 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
         <div class="inner-wrap">
           <div class="page__markup">${raw(updatedMarkdown)}</div>
           ${raw(pageScript)}
-          ${newMetadata.length ? raw(updateMetadata(newMetadata)) : ""}
         </div>
       </section>
     </article>
@@ -111,27 +121,6 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
 
 
 //  H E L P E R S
-
-function createMetaTags(metaObject) {
-  /**
-    NOTE:
-    For Markdown files, the custom yaml should look like this:
-
-    meta:
-    - description: Description goes here
-
-    This does not currently work with parameters like "og:image"
-    // https://github.com/lbryio/lbry.tech/issues/30
-  */
-
-  let html = "";
-
-  for (const metaProperty in metaObject) {
-    html += `document.getElementsByTagName("meta")["${metaProperty}"].content = "${metaObject[metaProperty]}";\n`;
-  }
-
-  return html;
-}
 
 function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+\/>/g;
@@ -156,15 +145,4 @@ function partialFinder(markdownBody) {
   }
 
   return markdownBody;
-}
-
-function updateMetadata(metadataDetails) {
-  const generatedMetadata = [];
-
-  for (const metadataDetail of metadataDetails)
-    generatedMetadata.push(createMetaTags(metadataDetail));
-
-  return html`
-    <script>${generatedMetadata.join("")}</script>
-  `;
 }
