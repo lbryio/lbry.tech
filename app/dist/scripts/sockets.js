@@ -25,34 +25,48 @@ function initializeWebSocketConnection() {
   ws.onmessage = socket => {
     const data = JSON.parse(socket.data);
 
-    switch (true) {
+    switch(true) {
+      case data.message === "show result":
+        if (!data.example) return;
+
+        document.querySelector(data.selector).innerHTML = data.html;
+
+        if (!document.querySelector(`[data-example="${data.example}"`).classList.contains("completed"))
+          document.getElementById("tour-example-description").classList.remove("success");
+
+        document.querySelector(`[data-example="${data.example}"`).classList.add("completed");
+        document.getElementById("tour-example-description").classList.add("success");
+
+        document.getElementById("tour-example-description").innerHTML =
+          document.querySelector(`[data-example="${data.example}"`).dataset.success;
+
+        if (document.getElementById("temp-loader"))
+          document.getElementById("temp-loader").style.display = "none";
+
+        if (document.querySelector(".tour"))
+          document.querySelector(".tour").classList.remove("waiting");
+
+        break;
+
       case data.message === "updated html":
         document.querySelector(data.selector).innerHTML = data.html;
         document.getElementById("emailAddress").value = "";
         document.getElementById("emailMessage").innerHTML = "";
 
-        // `data.example` is added when updating HTML.
-        // This is when the results of an example are sent to the client.
-        if (data.example) {
-          if (!document.querySelector(`[data-example="${data.example}"`).classList.contains("completed")) {
-            document.getElementById("tour-example-description").classList.remove("success");
-          }
+        if (data.example === 2) {
+          detectLanguageAndUpdate(); // eslint-disable-line
+          initCanvas(); // eslint-disable-line
 
-          document.querySelector(`[data-example="${data.example}"`).classList.add("completed");
-          document.getElementById("tour-example-description").classList.add("success");
-
-          document.getElementById("tour-example-description").innerHTML =
-            document.querySelector(`[data-example="${data.example}"`).dataset.success;
+          setTimeout(() => {
+            document.querySelector(".tour__content__meme__canvas__thumbnail").click();
+          }, 100);
         }
 
-        // If `data.example` isn't found, reset the description area.
-        else {
-          if (document.getElementById("tour-example-description")) {
-            document.getElementById("tour-example-description").classList.remove("success");
+        if (document.getElementById("tour-example-description")) {
+          document.getElementById("tour-example-description").classList.remove("success");
 
-            document.getElementById("tour-example-description").innerHTML =
-              document.querySelector(".tour__navigation__example.active").dataset.description;
-          }
+          document.getElementById("tour-example-description").innerHTML =
+            document.querySelector(".tour__navigation__example.active").dataset.description;
         }
 
         if (document.getElementById("temp-loader"))
@@ -60,6 +74,7 @@ function initializeWebSocketConnection() {
 
         if (document.querySelector(".tour"))
           document.querySelector(".tour").classList.remove("waiting");
+
         break;
 
       case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
