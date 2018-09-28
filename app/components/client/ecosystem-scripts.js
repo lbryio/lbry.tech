@@ -27,7 +27,7 @@ $("[data-action]").on("click", event => {
 
 
 function open(ecosystemComponentClassName) {
-  switch (true) {
+  switch(true) {
     case (ecosystemComponentClassName === "lbrycrd"):
       resetClassesAndStorage();
       document.getElementsByClassName("lbrycrd")[0].classList.add("active");
@@ -82,7 +82,7 @@ function openSubmodule(ecosystemComponentClassName) {
 
   document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
 
-  switch (true) {
+  switch(true) {
     case (ecosystemComponentClassName === "chainquery"):
       setSubmoduleConnectionTitle(ecosystemComponentClassName);
 

@@ -45,78 +45,200 @@ if (typeof process.env.REDISCLOUD_URL !== "undefined") {
 //  P R O G R A M
 
 function generateEvent(event) {
-  switch (event.type) {
+  switch(event.type) {
     case "CommitCommentEvent":
       return `
-        <strong>${event.actor.display_login}</strong> commented on
-        <a href="${generateUrl("comment", event)}" title="View this comment on GitHub">commit</a> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> commented on
+
+        <a
+          href="${generateUrl("comment", event)}"
+          target="_blank"
+          title="View this comment on GitHub"
+          rel="noopener noreferrer"
+        >commit</a> in
       `;
 
     case "CreateEvent":
       return `
-        <strong>${event.actor.display_login}</strong> created
-        ${event.payload.ref_type} <code>${event.payload.ref}</code> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> created ${event.payload.ref_type}
+
+        <code><a
+          href="${generateUrl("create", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this branch on GitHub"
+        >${refToBranch(event.payload.ref)}</a></code> in
       `;
 
     case "DeleteEvent":
       return `
-        <strong>${event.actor.display_login}</strong> deleted
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> deleted
+
         ${event.payload.ref_type} <code>${event.payload.ref}</code> in
       `;
 
     case "ForkEvent":
       return `
-        <strong>${event.actor.display_login}</strong> forked
-        <strong><a href="${generateUrl("repo", event)}" title="View this repo on GitHub" target="_blank" rel="noopener noreferrer">${event.repo.name}</a></strong> to
-        <strong><a href="${generateUrl("forkee", event)}" title="View this repo fork on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.forkee.name}</a></strong> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> forked
+
+        <strong><a
+          href="${generateUrl("repo", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this repo on GitHub"
+        >${event.repo.name}</a></strong> to
+
+        <strong><a
+          href="${generateUrl("forkee", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this repo fork on GitHub"
+        >${event.payload.forkee.full_name}</a></strong>
       `;
 
     case "IssueCommentEvent":
       if (event.payload.issue.pull_request) {
         return `
-          <strong>${event.actor.display_login}</strong> commented on pull request
-          <em><a href="${generateUrl("issue", event)}" title="View this comment on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.issue.title}</a></em> in
+          <strong><a
+            href="${generateUrl("actor", event)}"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Visit ${event.actor.login}'s profile on GitHub"
+          >${event.actor.display_login}</a></strong> commented on pull request
+
+          <em><a
+            href="${generateUrl("issue", event)}"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="View this comment on GitHub"
+          >${event.payload.issue.title}</a></em> in
         `;
       } else {
         return `
           <strong>${event.actor.display_login}</strong> commented on issue
-          <em><a href="${generateUrl("issue", event)}" title="View this comment on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.issue.title}</a></em> in
+
+          <em><a
+            href="${generateUrl("issue", event)}"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="View this comment on GitHub"
+          >${event.payload.issue.title}</a></em> in
         `;
       }
 
     case "IssuesEvent":
       return `
-        <strong>${event.actor.display_login}</strong> ${event.payload.action} issue
-        <em><a href="${generateUrl("issue", event)}" title="View this issue on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.issue.title}</a></em> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> ${event.payload.action} issue
+
+        <em><a
+          href="${generateUrl("issue", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this issue on GitHub"
+        >${event.payload.issue.title}</a></em> in
       `;
 
     case "PullRequestEvent":
       return `
-        <strong>${event.actor.display_login}</strong> ${event.payload.action} pull request
-        <em><a href="${generateUrl("pull_request", event)}" title="View this pull request on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.pull_request.title}</a></em> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> pull request
+
+        <em><a
+          href="${generateUrl("pull_request", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this pull request on GitHub"
+        >${event.payload.pull_request.title}</a></em> in
       `;
 
     case "PullRequestReviewCommentEvent":
       return `
-        <strong>${event.actor.display_login}</strong> commented on pull request
-        <em><a href="${generateUrl("pull_request", event)}" title="View this comment on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.pull_request.title}</a></em> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> commented on pull request
+
+        <em><a
+          href="${generateUrl("pull_request", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this comment on GitHub"
+        >${event.payload.pull_request.title}</a></em> in
       `;
 
     case "PushEvent":
       return `
-        <strong>${event.actor.display_login}</strong> pushed to
-        <code><a href="${generateUrl("push", event)}" title="View this branch on GitHub" target="_blank" rel="noopener noreferrer">${refToBranch(event.payload.ref)}</a></code> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> pushed to
+
+        <code><a
+          href="${generateUrl("push", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this branch on GitHub"
+        >${refToBranch(event.payload.ref)}</a></code> in
       `;
 
     case "ReleaseEvent":
       return `
-        <strong>${event.actor.display_login}</strong> released
-        <em><a href="${generateUrl("release", event)}" title="View this release on GitHub" target="_blank" rel="noopener noreferrer">${event.payload.release.tag_name}</a></em> in
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> released
+
+        <em><a
+          href="${generateUrl("release", event)}"
+          title="View this release on GitHub"
+          target="_blank"
+          rel="noopener noreferrer"
+        >${event.payload.release.tag_name}</a></em> in
       `;
 
     case "WatchEvent":
       return `
-        <strong>${event.actor.display_login}</strong> starred the repo
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> starred the repo
       `;
 
     default:
@@ -135,15 +257,19 @@ function generateGitHubFeed(displayGitHubFeed) {
       reply.forEach(item => events.push(JSON.parse(item)));
 
       for (const event of events) {
+        const repoName = `
+          <a href="${generateUrl("repo", event)}" title="View this repo on GitHub" target="_blank" rel="noopener noreferrer"><strong>${event.repo.name}</strong></a>
+        `;
+
         renderedEvents.push(`
           <div class='github-feed__event'>
             <a href="${generateUrl("actor", event)}" target="_blank" rel="noopener noreferrer">
-              <img src="${event.actor.avatar_url}" class="github-feed__event__avatar" alt=""/>
+              <img src="${event.actor.avatar_url}" class="github-feed__event__avatar" alt="${event.actor.login}'s avatar"/>
             </a>
 
             <p>
               ${generateEvent(event)}
-              <a href="${generateUrl("repo", event)}" title="View this repo on GitHub" target="_blank" rel="noopener noreferrer"><strong>${event.repo.name}</strong></a>
+              ${event.type !== "ForkEvent" ? repoName : ""}
               <em class="github-feed__event__time">${relativeDate(new Date(event.created_at))}</em>
             </p>
           </div>
@@ -163,15 +289,15 @@ function generateGitHubFeed(displayGitHubFeed) {
 }
 
 function generateUrl(type, event) {
-  switch (type) {
+  switch(type) {
     case "actor":
       return `https://github.com/${event.actor.display_login}`;
 
     case "comment":
       return event.payload.comment.html_url;
 
-    case "repo":
-      return `https://github.com/${event.repo.name}`;
+    case "create":
+      return `https://github.com/${event.repo.name}/tree/${event.payload.ref}`;
 
     case "forkee":
       return `https://github.com/${event.payload.forkee.full_name}`;
@@ -182,11 +308,14 @@ function generateUrl(type, event) {
     case "pull_request":
       return event.payload.pull_request.html_url;
 
+    case "push":
+      return `https://github.com/${event.repo.name}/tree/${event.payload.ref.replace("refs/heads/", "")}`;
+
     case "release":
       return event.payload.release.html_url;
 
-    case "push":
-      return `https://github.com/${event.repo.name}/tree/${event.payload.ref.replace("refs/heads/", "")}`;
+    case "repo":
+      return `https://github.com/${event.repo.name}`;
 
     default:
       break;
