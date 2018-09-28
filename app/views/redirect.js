@@ -143,7 +143,11 @@ function partialFinder(markdownBody) {
     const filename = decamelize(partial, "-").replace("<", "").replace("/>", "");
     const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
-    if (fileExistsTest) {
+    if (!fileExistsTest) {
+      markdownBody = markdownBody.replace(partial, "");
+    }
+
+    else {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
       if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
@@ -157,9 +161,8 @@ function partialFinder(markdownBody) {
 function updateMetadata(metadataDetails) {
   const generatedMetadata = [];
 
-  for (const metadataDetail of metadataDetails) {
+  for (const metadataDetail of metadataDetails)
     generatedMetadata.push(createMetaTags(metadataDetail));
-  }
 
   return html`
     <script>${generatedMetadata.join("")}</script>
