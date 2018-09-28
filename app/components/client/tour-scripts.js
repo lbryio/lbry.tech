@@ -24,9 +24,8 @@ document.querySelector("body").addEventListener("click", event => {
     event.explicitOriginalTarget.classList &&
     event.explicitOriginalTarget.classList[0] === "tour__content__meme__canvas__thumbnail"
   ) {
-    for (const thumbnail of document.querySelectorAll(".tour__content__meme__canvas__thumbnail")) {
+    for (const thumbnail of document.querySelectorAll(".tour__content__meme__canvas__thumbnail"))
       thumbnail.classList.remove("selected");
-    }
 
     event.explicitOriginalTarget.classList.add("selected");
     updateCanvas(event.explicitOriginalTarget);
@@ -49,6 +48,9 @@ document.getElementById("fetch-claim-uri").addEventListener("keyup", event => {
         key === 13 &&
         document.getElementById("fetch-claim-uri").value.length > 0
       ) fetchMetadata(3, document.getElementById("fetch-claim-uri").value);
+      break;
+
+    default:
       break;
   }
 });
@@ -85,7 +87,8 @@ function detectLanguageAndUpdate() { // eslint-disable-line
   for (const language of navigator.languages) userLocales.push(language);
 
   for (const key in memeLocaleObject) {
-    if (memeLocaleObject[key] && memeLocaleObject[key].value) memeLocales.push(memeLocaleObject[key].value);
+    if (memeLocaleObject[key] && memeLocaleObject[key].value)
+      memeLocales.push(memeLocaleObject[key].value);
   }
 
   if (
@@ -169,8 +172,8 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
       document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
-  <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-  curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "TITLE_OF_YOUR_CONTENT", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "DESCRIPTION_OF_YOUR_CONTENT", "title": "TITLE_OF_YOUR_CONTENT", "language": "en", "license": "", "nsfw": false }}}'</span> <span class="token url">http://localhost:5279    </span>
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "TITLE_OF_YOUR_CONTENT", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "DESCRIPTION_OF_YOUR_CONTENT", "title": "TITLE_OF_YOUR_CONTENT", "language": "en", "license": "", "nsfw": false }}}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
@@ -189,12 +192,11 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
       }));
 
       document.getElementById("fetch-claim-uri").value = data;
-      // $("#fetch-claim-uri").val(data);
 
       document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
-  <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-  curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>
@@ -270,18 +272,24 @@ const handleExamples = debounce(event => {
       break;
 
     case "tour, example 2":
-      if ($("#tour-loader").hasClass("tour__content__trends")) {
-        $("#tour-loader").removeClass("tour__content__trends").addClass("tour__content__meme");
+      if (document.getElementById("tour-loader").classList.contains("tour__content__trends")) {
+        document.getElementById("tour-loader").classList.remove("tour__content__trends");
+        document.getElementById("tour-loader").classList.add("tour__content__meme");
       }
 
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      $("#tour-url").hide();
+      document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
+      document.getElementById("tour-url").style.display = "none";
 
-      $(".tour__navigation__example").removeClass("active");
-      $(".tour__navigation__example:nth-child(2)").addClass("active");
+      for (const example of document.querySelectorAll(".tour__navigation__example"))
+        example.classList.remove("active");
 
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
+      document.querySelector(".tour__navigation__example:nth-child(2)").classList.add("active");
+
+      document.getElementById("tour-loader").innerHTML = "";
+      document.getElementById("tour-results").innerHTML = "";
+
+      document.getElementById("tour-loader").removeAttribute("style");
+      document.getElementById("tour-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -290,19 +298,27 @@ const handleExamples = debounce(event => {
       break;
 
     case "tour, example 3":
-      if ($("#tour-loader").hasClass("tour__content__meme")) {
-        $("#tour-loader").removeClass("tour__content__meme").addClass("tour__content__trends");
+      if (document.getElementById("tour-loader").classList.contains("tour__content__meme")) {
+        document.getElementById("tour-loader").classList.remove("tour__content__meme");
+        document.getElementById("tour-loader").classList.add("tour__content__trends");
       }
 
-      $("#fetch-claim-uri").val(""); // reset URL bar
-      $("#tour-url button").text("Tip");
-      if ($("#tour-url")[0].style.display === "none") $("#tour-url").show();
+      document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
+      document.querySelector("#tour-url button").textContent = "Tip";
 
-      $(".tour__navigation__example").removeClass("active");
-      $(".tour__navigation__example:nth-child(3)").addClass("active");
+      if (document.getElementById("tour-url").style.display === "none")
+        document.getElementById("tour-url").removeAttribute("style");
 
-      $("#tour-loader").empty().show();
-      $("#tour-results").empty().show();
+      for (const example of document.querySelectorAll(".tour__navigation__example"))
+        example.classList.remove("active");
+
+      document.querySelector(".tour__navigation__example:nth-child(3)").classList.add("active");
+
+      document.getElementById("tour-loader").innerHTML = "";
+      document.getElementById("tour-results").innerHTML = "";
+
+      document.getElementById("tour-loader").removeAttribute("style");
+      document.getElementById("tour-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -321,8 +337,8 @@ const handleExamples = debounce(event => {
 
 function initCanvas() { // eslint-disable-line
   const canvas = document.getElementById("meme-canvas");
-  const canvasWidth = 400;
   const canvasHeight = 300;
+  const canvasWidth = 400;
   const ctx = canvas.getContext("2d");
   const img = document.getElementById("base-image");
 
@@ -336,16 +352,18 @@ function initCanvas() { // eslint-disable-line
   ctx.strokeStyle = "black";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.strokeText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
-  ctx.strokeText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
-  ctx.fillText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
-  ctx.fillText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+
+  ctx.strokeText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
+  ctx.fillText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
+
+  ctx.strokeText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  ctx.fillText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
 }
 
 function updateCanvas(imageSource) {
   const canvas = document.getElementById("meme-canvas");
-  const canvasWidth = 400;
   const canvasHeight = 300;
+  const canvasWidth = 400;
   const ctx = canvas.getContext("2d");
   const img = document.getElementById("base-image");
 
@@ -356,8 +374,9 @@ function updateCanvas(imageSource) {
     img.src = imageSource.src;
   } ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
 
-  ctx.strokeText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
-  ctx.strokeText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
-  ctx.fillText($("#meme-top-line").val().toUpperCase(), canvasWidth / 2, 20);
-  ctx.fillText($("#meme-bottom-line").val().toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  ctx.strokeText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
+  ctx.fillText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
+
+  ctx.strokeText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  ctx.fillText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
 }

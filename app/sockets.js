@@ -143,9 +143,8 @@ function generateContent(exampleNumber, displayTrendingContent) {
     const rawContentCollection = [];
     const renderedContentCollection = [];
 
-    for (const url of approvedUrls) {
+    for (const url of approvedUrls)
       rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: exampleNumber }));
-    }
 
     return Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
@@ -215,9 +214,8 @@ function generateMemeCreator(socket) {
 
   const renderedImages = [];
 
-  for (const image of images) {
+  for (const image of images)
     renderedImages.push(`<img alt="${image.alt}" class="tour__content__meme__canvas__thumbnail" src="${image.src}"/>`);
-  }
 
   const memeCreator = html`
     <div class="tour__content__meme__canvas">
@@ -290,21 +288,10 @@ function generateMemeCreator(socket) {
         <button data-action="upload image" class="__button-black" type="button">Submit</button>
       </fieldset>
     </form>
-
-    <script>
-      detectLanguageAndUpdate();
-      initCanvas();
-
-      document.getElementById("tour-example-description").innerHTML =
-        document.querySelector("[data-action='tour, example 2']").dataset.description;
-
-      setTimeout(() => {
-        document.querySelector(".tour__content__meme__canvas__thumbnail").click();
-      }, 100);
-    </script>
   `;
 
   return socket.send(JSON.stringify({
+    "example": 2,
     "html": memeCreator,
     "message": "updated html",
     "selector": "#tour-loader"

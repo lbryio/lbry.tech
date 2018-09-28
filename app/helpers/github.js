@@ -45,7 +45,7 @@ if (typeof process.env.REDISCLOUD_URL !== "undefined") {
 //  P R O G R A M
 
 function generateEvent(event) {
-  switch (event.type) {
+  switch(event.type) {
     case "CommitCommentEvent":
       return `
         <strong><a
@@ -289,7 +289,7 @@ function generateGitHubFeed(displayGitHubFeed) {
 }
 
 function generateUrl(type, event) {
-  switch (type) {
+  switch(type) {
     case "actor":
       return `https://github.com/${event.actor.display_login}`;
 

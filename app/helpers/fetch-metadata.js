@@ -63,7 +63,7 @@ module.exports = exports = (data, socket) => {
     body.description = dataDetails.description;
     body.language = dataDetails.language;
     body.license = dataDetails.license;
-    body.name = dataDetails.name.replace(/\s/g, "-") + randomString(10); // underscores are not allowed?
+    body.name = dataDetails.name + randomString(10); // underscores are not allowed?
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
 
@@ -110,15 +110,29 @@ module.exports = exports = (data, socket) => {
           return;
         }
 
-        const renderedCode = prism.highlight(stringifyObject(publishResponse, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
+        const renderedCode = prism.highlight(
+          stringifyObject(publishResponse, { indent: "  ", singleQuotes: false }),
+          prism.languages.json,
+          "json"
+        );
+
+        let explorerNotice = "";
+
+        if (
+          publishResponse.result &&
+          publishResponse.result.claim_address
+        ) explorerNotice = `
+          <p class="tour__description success">To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
+        `;
 
         return socket.send(JSON.stringify({
           "example": data.example,
           "html": raw(`
             <h3>Response</h3>
+            ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
-          "message": "updated html",
+          "message": "show result",
           "selector": `#example${data.example}-result`
         }));
       });
@@ -151,7 +165,7 @@ module.exports = exports = (data, socket) => {
           <h3>Response</h3>
           <pre><code class="language-text">Tipping creators not in the whitelist for this example is not allowed.</code></pre>
         `),
-        "message": "updated html",
+        "message": "show result",
         "selector": `#example${data.example}-result`
       }));
     }
@@ -161,6 +175,8 @@ module.exports = exports = (data, socket) => {
     body.amount = "0.01"; // Hardcoded tip amount
     body.claim_id = claimAddress;
   }
+
+
 
   return new Promise((resolve, reject) => { // eslint-disable-line
     request({
@@ -193,26 +209,31 @@ module.exports = exports = (data, socket) => {
         return resolve(body.error);
       }
 
-      /*
+      let explorerNotice = "";
+
       if (
         data.example === 3 &&
         body.result &&
         body.result.txid
       ) explorerNotice = `
-        <p>If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" target="_blank" title="Your tip, on our blockchain explorer" rel="noopener noreferrer">check it out</a> on our blockchain explorer!</p>
+        <p class="tour__description success">If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
       `;
-      */
 
       if (socket) {
-        const renderedCode = prism.highlight(stringifyObject(body, { indent: "  ", singleQuotes: false }), prism.languages.json, "json");
+        const renderedCode = prism.highlight(
+          stringifyObject(body, { indent: "  ", singleQuotes: false }),
+          prism.languages.json,
+          "json"
+        );
 
         return socket.send(JSON.stringify({
           "example": data.example,
           "html": raw(`
             <h3>Response</h3>
+            ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
-          "message": "updated html",
+          "message": "show result",
           "selector": `#example${data.example}-result`
         }));
       }
