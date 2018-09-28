@@ -220,7 +220,7 @@ function generateMemeCreator(socket) {
   const memeCreator = html`
     <div class="tour__content__meme__canvas">
       <img alt="Base image for LBRY meme creator" id="base-image" style="height: 0; position: absolute; visibility: hidden;"/>
-      <canvas id="meme-canvas" height="300" width="400">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
+      <canvas id="meme-canvas" height="600" width="800">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
       ${renderedImages}
     </div>

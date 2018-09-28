@@ -337,8 +337,8 @@ const handleExamples = debounce(event => {
 
 function initCanvas() { // eslint-disable-line
   const canvas = document.getElementById("meme-canvas");
-  const canvasHeight = 300;
-  const canvasWidth = 400;
+  const canvasHeight = 600;
+  const canvasWidth = 800;
   const ctx = canvas.getContext("2d");
   const img = document.getElementById("base-image");
 
@@ -346,37 +346,41 @@ function initCanvas() { // eslint-disable-line
 
   ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
   ctx.fillStyle = "white";
-  ctx.font = "bold 28px Karla";
+  ctx.font = "bold 56px Karla";
   ctx.lineJoin = "round";
   ctx.lineWidth = 4;
   ctx.strokeStyle = "black";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
 
-  ctx.strokeText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
-  ctx.fillText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
+  positionCanvasText(ctx, canvasHeight, canvasWidth);
+}
 
-  ctx.strokeText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
-  ctx.fillText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+function positionCanvasText(canvas, height, width) {
+  canvas.strokeText(document.getElementById("meme-top-line").value.toUpperCase(), width / 2, 40);
+  canvas.fillText(document.getElementById("meme-top-line").value.toUpperCase(), width / 2, 40);
+
+  canvas.strokeText(document.getElementById("meme-bottom-line").value.toUpperCase(), width / 2, (height - 80));
+  canvas.fillText(document.getElementById("meme-bottom-line").value.toUpperCase(), width / 2, (height - 80));
 }
 
 function updateCanvas(imageSource) {
   const canvas = document.getElementById("meme-canvas");
-  const canvasHeight = 300;
-  const canvasWidth = 400;
+  const canvasHeight = 600;
+  const canvasWidth = 800;
   const ctx = canvas.getContext("2d");
   const img = document.getElementById("base-image");
 
   clearCanvas(canvas);
 
   if (imageSource) {
-    ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+    ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
+    // ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
     img.src = imageSource.src;
-  } ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+  } else {
+    ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
+    // ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
+  }
 
-  ctx.strokeText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
-  ctx.fillText(document.getElementById("meme-top-line").value.toUpperCase(), canvasWidth / 2, 20);
-
-  ctx.strokeText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
-  ctx.fillText(document.getElementById("meme-bottom-line").value.toUpperCase(), canvasWidth / 2, (canvasHeight - 40));
+  positionCanvasText(ctx, canvasHeight, canvasWidth);
 }
