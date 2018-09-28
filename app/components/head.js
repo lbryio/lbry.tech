@@ -17,9 +17,19 @@ let title = "";
 //  E X P O R T
 
 module.exports = exports = (state, emit) => {
-  if (state.route !== "/" && state.params.wildcard) title = `${state.params.wildcard.capitalize()} ∙ LBRY ∙ ${config.meta.tagline}`;
-  else if (state.route === "api") title = `API ∙ LBRY ∙ ${config.meta.tagline}`;
-  else title = `LBRY ∙ ${config.meta.tagline}`;
+  switch(true) {
+    case (state.route !== "/" && state.params.wildcard):
+      title = `${state.params.wildcard.capitalize()} ∙ LBRY ∙ ${config.meta.tagline}`;
+      break;
+
+    case (state.route === "api"):
+      title = `API ∙ LBRY ∙ ${config.meta.tagline}`;
+      break;
+
+    default:
+      title = `LBRY ∙ ${config.meta.tagline}`;
+      break;
+  }
 
   if (state.title !== title) emit(state.events.DOMTITLECHANGE, title);
   state.page = state.page || { };

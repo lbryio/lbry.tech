@@ -19,24 +19,35 @@ const apiScripts = "<script>" + fs.readFileSync("./app/components/client/api-scr
 
 //  E X P O R T
 
-module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => asyncHtml`
-  <div class="__slate">
-    <aside class="api__toc">
-      <div class="api__toc__search">
-        <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-        <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-        <ul class="api__toc__search__results"></ul>
-      </div>
+module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => {
+  /*
+  state.lbry = {
+    description: "This is the API page for LBRY.tech",
+    "og:image": "/assets/media/images/carlsagan2.jpg",
+    "og:image:height": 300,
+    "og:image:width": 400
+  };
+  */
 
-      <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
-    </aside>
+  return asyncHtml`
+    <div class="__slate">
+      <aside class="api__toc">
+        <div class="api__toc__search">
+          <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
+          <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
+          <ul class="api__toc__search__results"></ul>
+        </div>
 
-    <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
-  </div>
+        <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
+      </aside>
 
-  <script src="/assets/scripts/plugins/jets.js"></script>
-  ${raw(apiScripts)}
-`);
+      <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
+    </div>
+
+    <script src="/assets/scripts/plugins/jets.js"></script>
+    ${raw(apiScripts)}
+  `;
+});
 
 
 
