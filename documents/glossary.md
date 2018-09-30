@@ -136,9 +136,15 @@ The content price, set by the publisher, in order to download a claim. The key f
 
 The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
-### LBRYCrd
+### lbrycrd
 
-LBRYcrd uses a blockchain similar to bitcoin's to implement an index and payment system for content on the LBRY network. It is a fork of Core.
+lbrycrd is the authoritative implementation of the LBRY [[blockchain]] protocol. See [the source code](https://github.com/lbryio/lbrycrd), [the API](/api/blockchain), or [the whitepaper](/whitepaper).
+
+### lbry-sdk
+
+An [[SDK]] for the LBRY protocol that can also be used independently. Distributed as a daemon or bundled directly, it contains a set of convenience methods for developing applications, and bundles an [[SPV]] wallet as well as implementation of the data network.
+
+See [the source code](https://github/lbryio/lbry) or [the API documentation](/api/sdk).
 
 ### LBRY Credits
 
@@ -272,6 +278,10 @@ Amount of newly generated LBRY credits that a *miner* may claim in a new block. 
 
 A compact turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change amounts being transferred. Amount is stored in a separate field in a *transaction output*.
 
+### SDK
+
+An abbreviation for Software Development Kit. [[lbry-sdk]] is an SDK for developing applications that use the LBRY protocol.
+
 ### Secret key
 
 Either the *Private Key* or an encryption key used in encrypted *wallets*. LBRY protocol does not use encryption anywhere, so *secret key* typically means a *private key* used for signing transactions.
@@ -280,9 +290,9 @@ Either the *Private Key* or an encryption key used in encrypted *wallets*. LBRY 
 
 A sequence of bytes that proves that a piece of data is acknowledged by a person holding a certain *public key*. LBRY, like Bitcoin, uses *ECDSA* for signing transactions. Amounts of credits are sent through a chain of transactions: from one to another. Every transaction must provide a signature matching a public key defined in the previous transaction. This way only a proper owner of a secret *private key* associated with a given public key can spend credits further.
 
-### Simplified Payment Verification (SPV)
+### Simplified Payment Verification
 
-A scheme to validate transactions without storing the whole blockchain (only block headers) and without trusting any external service. Every transaction must be present with all its parent and sibling hashes in a *merkle tree* up to the root. SPV client trusts the most *difficult* chain of block headers and can validate if the transaction indeed belongs to a certain block header. Since SPV does not validate all transactions, a *51% attack* may not only cause a *double spend* (like with *full nodes*), but also make a completely invalid payment with credits created from nowhere. However, this kind of attack is very costly and probably more expensive than a product in question.
+A scheme to validate transactions without storing the whole blockchain (only block headers) and without trusting any external service. Every transaction must be present with all its parent and sibling hashes in a *merkle tree* up to the root. SPV client trusts the most *difficult* chain of block headers and can validate if the transaction indeed belongs to a certain block header. Since SPV does not validate all transactions, a *51% attack* may not only cause a *double spend* (like with *full nodes*), but also make a completely invalid payment with credits created from nowhere. However, this kind of attack is very costly and probably more expensive than a product in question. Frequently abbreviated as SPV.
 
 ### Soft Fork
 
@@ -295,6 +305,10 @@ Incorrect peer-to-peer messages (like sending invalid transactions) may be consi
 ### Spent Output
 
 A transaction *output* can be spent only once: when another valid transaction makes a reference to this output from its own input. When another transaction attempts to spend the same output, it will be rejected by the nodes already seeing the first transaction. Blockchain as a *proof-of-work* scheme allows every node to agree on which transaction was indeed the first one. The whole transaction is considered spent when all its outputs are spent.
+
+### SPV
+
+SPV is an abbreviation for [[Simplified Payment Verification]].
 
 ### Stream
 
@@ -319,6 +333,10 @@ A 256-bit number that puts an upper limit for a block header hash to be valid. T
 ### Testnet
 
 A set of parameters used for testing a LBRY network. Testnet is like *mainnet*, but has a different genesis block (it was reset several times, the latest testnet is *testnet3*). Testnet uses slightly different *address* format to avoid confusion with main LBRY addresses and all nodes are relaying and mining non-standard transactions.
+
+### Torba
+
+An [[SPV]] wallet for the LBRY [[blockchain]]. See the [source code](https://github.com/lbryio/torba).
 
 ### Transaction
 

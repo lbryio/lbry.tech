@@ -14,22 +14,22 @@ Contributors that provide accepted pull requests, well-specified issues, or assi
 
 Typical usage of LBRY does not involve a single piece of software, but several interacting components.
 
-If you want to contribute to LBRY, the first step is to understand where.
+If you want to contribute to LBRY, there's definitely something for you! The first step is to figure out what project to work on.
 
 ### Core Protocol Components
 
 | Component | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle `lbrycrd` directly.
-| [lbry](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that implements the LBRY protocol. Bundled with and/or used by most LBRY applications.
-| [torba](https://github.com/lbryio/torba) | Python | The Simple Payment Verification (SPV) wallet bundled with `lbry`.
-| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server for the `lbryum` SPV wallet.
-| [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | The structure of the metadata stored in the LBRY blockchain.
+| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]].
+| [lbry-sdk](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. |
+| [torba](https://github.com/lbryio/torba) | Python | An [[SPV]] (Simple Payment Verification) wallet. Bundled with [[lbry-sdk]]. |
+| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server used by [[torba]].
+| [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | Defines the structure of the metadata stored in the LBRY blockchain.
 
 ### Official Applications
 | Application | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY protocol for Windows, macOS, and Linux. `lbry-desktop` bundles `lbry` and is primarily frontend code.
+| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY protocol for Windows, macOS, and Linux. [[lbry-desktop]] uses the [[lbry-sdk]]
 | [lbry-android](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY protocol for Android. `lbry-android` bundles `lbry` and is primarily frontend code.
 | [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between `lbry-desktop` and `lbry-android`.
 | [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install.
@@ -81,7 +81,7 @@ Most written content at LBRY is checked into source control. To improve content 
 
 If you want to contribute without getting directly into the code, one of the best ways you can contribute is testing.
 
-A number of our code bases (`lbrycrd`, `lbry`, all applications, more...) go through regular release cycles where new versions are shipped every several weeks. Testing pre-release versions is a great way to help us identify issues and ship bug-free code.
+A number of our code bases ([[lbrycrd]], [[lbry-sdk]], all applications, more...) go through regular release cycles where new versions are shipped every several weeks. Testing pre-release versions is a great way to help us identify issues and ship bug-free code.
 
 For any projects that you want to be a tester on, "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out.
 
@@ -117,8 +117,8 @@ Feature requests are welcome. Before you submit one be sure to:
 3. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
 4. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
 
-## Tips
+## Appreciation
 
-We offer LBC as a thank you to anyone who contributes to LBRY. While we think we're fair-to-generous in our tips, tipping is more about recognizing and appreciating what you've given to the community than providing compensation.
+We offer LBC as a gesture of our appreciation to anyone who contributes to LBRY. While we're generous in what we send, it is more about recognizing and appreciating what you've given to the community than providing compensation.
 
 The amount of LBC is not typically specified in advance of a contribution, though if you're particularly motivated by this aspect you are welcome to ask.

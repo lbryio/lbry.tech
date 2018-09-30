@@ -49,9 +49,9 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   else path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
-    const redirectUrl = redirects[path] || redirects["/" + path]
+    const redirectUrl = redirects[path] || redirects["/" + path];
     if (redirectUrl) {
-      redirect(redirectUrl)
+      redirect(redirectUrl);
     } else {
       return Page404();
     }

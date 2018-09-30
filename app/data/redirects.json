@@ -1,5 +1,8 @@
 {
   "/tour" : "/playground",
   "/play" : "/playground",
+  "/api/protocol" : "/api/sdk",
+  "/api/lbry" : "/api/sdk",
+  "/api/lbrycrd" : "/api/blockchain",
   "/whitepaper": "https://whitepaper.lbry.tech"
 }
