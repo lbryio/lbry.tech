@@ -3,14 +3,15 @@
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .link-grid__link {
   position: relative;
   text-align: center;
   vertical-align: top;
+  flex-grow: 1;
 
   @media (min-width: 651px) {
     width: 50%;

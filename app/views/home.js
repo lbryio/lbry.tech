@@ -1,33 +1,7 @@
 "use strict";
 
-
-
-//  P A C K A G E
-
 import html from "choo/html";
-
-//  V A R I A B L E
-
 import linkGrid from "../components/link-grid";
-
-
-
-//  E X P O R T
-
-const featureLinks = linkGrid([
-  {
-    description: "Learn how LBRY works with 3 easy examples",
-    destination: "/playground",
-    label: "Jump into Playground",
-    title: "New to LBRY?"
-  },
-  {
-    description: "Help make LBRY better!",
-    destination: "/contribute",
-    label: "Explore our repos",
-    title: "Want to contribute?"
-  }
-]);
 
 module.exports = exports = () => html`
   <div>
@@ -41,7 +15,20 @@ module.exports = exports = () => html`
     </section>
 
     <section class="features">
-      ${featureLinks}
+      ${linkGrid([
+        {
+          description: "Learn how LBRY works with 3 easy examples",
+          destination: "/tour",
+          label: "Take the Tour",
+          title: "New to LBRY?"
+        },
+        {
+          description: "Help make LBRY better!",
+          destination: "/contribute",
+          label: "Explore our repos",
+          title: "Want to contribute?"
+        }
+      ])}
     </section>
 
     <section class="intro">

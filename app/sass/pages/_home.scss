@@ -1,3 +1,20 @@
+body.home {
+  @media (min-width: 1001px) {
+    main > div:first-of-type {
+      display: grid;
+      grid-gap: 0;
+      grid-template-areas:
+        "header header header"
+        "features features features"
+        "intro intro github"
+        "docs docs github"
+        "contribute contribute contribute"
+        "develop develop develop"
+        "community community community";
+    }
+  }
+}
+
 .home {
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);

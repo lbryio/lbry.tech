@@ -1,4 +1,4 @@
-# Schema
+# LBRY Claim Metadata Schema
 
 The schema defines the structure of the data that is stored in claims in the LBRY blockchain. It has several goals:
 
@@ -25,7 +25,7 @@ message Claim {
         certificateType = 2;
     }
     required ClaimType claimType = 2;
-    
+
     optional Stream stream = 3;
     optional Certificate certificate = 4;
     optional Signature publisherSignature = 5;
@@ -46,7 +46,7 @@ message Stream {
         _0_0_1 = 1;
     }
     required Version version = 1;
-    
+
     required Metadata metadata = 2;
     required Source source = 3;
 }
@@ -72,7 +72,7 @@ message Metadata {
         en = 1;
     }
     required Language language = 2;
-    
+
     required string title = 3;
     required string description = 4;
     required string author = 5;
@@ -80,7 +80,7 @@ message Metadata {
     required bool nsfw = 7;
 
     optional Fee fee = 8;
-    
+
     optional string thumbnail = 9;
     optional string preview = 10;
     optional string licenseUrl = 11;
@@ -159,7 +159,7 @@ message Certificate {
         _0_0_1 = 1;
     }
     required Version version = 1;
-    
+
     required KeyType keyType = 2;
     required bytes publicKey = 4;
 }
@@ -177,7 +177,7 @@ message Signature {
         _0_0_1 = 1;
     }
     required Version version = 1;
-    
+
     required KeyType signatureType = 2;
     required bytes signature = 3;
     required bytes certificateId = 4;
