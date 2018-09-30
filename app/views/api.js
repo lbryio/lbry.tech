@@ -6,7 +6,6 @@
 
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
-import fs from "graceful-fs";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
 
