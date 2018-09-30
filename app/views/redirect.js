@@ -11,6 +11,9 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import { require as local } from "app-root-path";
+import redirects from '../data/redirects.json';
+import redirect from "../modules/redirect";
+import Page404 from "./404.js";
 import raw from "choo/html/raw";
 
 //  V A R I A B L E S
@@ -46,23 +49,12 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   else path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
-    return html`
-      <article class="page" itemtype="http://schema.org/BlogPosting">
-        <header class="page__header">
-          <div class="page__header-wrap">
-            <div class="inner-wrap">
-              <h1 class="page__header__title" itemprop="name headline">404</h1>
-            </div>
-          </div>
-        </header>
-
-        <section class="page__content page__markup" itemprop="articleBody">
-          <div class="inner-wrap">
-            <p>The page you are looking for does not exist.</p>
-          </div>
-        </section>
-      </article>
-    `;
+    const redirectUrl = redirects[path] || redirects["/" + path]
+    if (redirectUrl) {
+      redirect(redirectUrl)
+    } else {
+      return Page404();
+    }
   }
 
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
