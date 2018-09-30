@@ -35,17 +35,7 @@ const md = require("markdown-it")({
       if (finalString.match(numberRegex)) finalString = `_${finalString}`;
       return finalString;
     }
-  })
-  .use(require("markdown-it-wikilinks")({
-    makeAllLinksAbsolute: true,
-    baseURL: "/glossary#",
-    uriSuffix: "",
-    htmlAttributes: {
-      class: "wikilink"
-    }
-  }));
-
-
+  });
 
 //  E X P O R T
 
@@ -78,7 +68,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(markdownFileDetails.body);
-  const updatedMarkdown = partialFinder(renderedMarkdown);
+  const updatedMarkdown = wikiFinder(partialFinder(renderedMarkdown));
 
   if (markdownFileDetails.attributes.meta) {
     const customMetadata = {};
@@ -145,4 +135,17 @@ function partialFinder(markdownBody) {
   }
 
   return markdownBody;
+}
+
+
+function wikiFinder(markdownBody) {
+  return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
+      const label = p1.trim(),
+        href = encodeURI("/glossary#" + label.replace(/\s+/g, '-'));
+
+      return label ?
+        `<a href="${href}" class="link--glossary">${label}</a>` :
+        match.input;
+    }
+  );
 }
