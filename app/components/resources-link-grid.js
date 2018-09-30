@@ -1,6 +1,6 @@
 "use strict";
 
-import linkGrid from "./link-grid"
+import linkGrid from "./link-grid";
 
 export default () => {
   return linkGrid([{
@@ -19,4 +19,4 @@ export default () => {
     destination: "/api/blockchain",
     label: "Blockchain API"
   }]);
-}
+};

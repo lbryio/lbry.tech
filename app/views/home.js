@@ -16,19 +16,19 @@ module.exports = exports = () => html`
 
     <section class="features">
       ${linkGrid([
-        {
-          description: "Learn how LBRY works with 3 easy examples",
-          destination: "/tour",
-          label: "Take the Tour",
-          title: "New to LBRY?"
-        },
-        {
-          description: "Help make LBRY better!",
-          destination: "/contribute",
-          label: "Explore our repos",
-          title: "Want to contribute?"
-        }
-      ])}
+    {
+      description: "Learn how LBRY works with 3 easy examples",
+      destination: "/tour",
+      label: "Take the Tour",
+      title: "New to LBRY?"
+    },
+    {
+      description: "Help make LBRY better!",
+      destination: "/contribute",
+      label: "Explore our repos",
+      title: "Want to contribute?"
+    }
+  ])}
     </section>
 
     <section class="intro">

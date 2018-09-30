@@ -28,8 +28,7 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
 
     <section class="api__content" id="toc-content">${createApiContent(response)}</section>
   </div>
-  <script src="/assets/scripts/plugins/jets.js"></script>
-  <script src="/assets/scripts/api.js"></script>
+
 `);
  */
 
@@ -52,14 +51,14 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
           <ul class="api__toc__search__results"></ul>
         </div>
 
-        <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
+        <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(response)}</ul>
       </aside>
 
-      <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
+      <section class="api__content" id="toc-content">${createApiContent(response)}</section>
     </div>
 
     <script src="/assets/scripts/plugins/jets.js"></script>
-    ${raw(apiScripts)}
+    <script src="/assets/scripts/api.js"></script>
   `;
 });
 

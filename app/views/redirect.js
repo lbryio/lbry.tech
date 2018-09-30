@@ -11,7 +11,7 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import { require as local } from "app-root-path";
-import redirects from '../data/redirects.json';
+import redirects from "../data/redirects.json";
 import redirect from "../modules/redirect";
 import Page404 from "./404.js";
 import raw from "choo/html/raw";
@@ -130,12 +130,12 @@ function partialFinder(markdownBody) {
 
 function wikiFinder(markdownBody) {
   return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
-      const label = p1.trim(),
-        href = encodeURI("/glossary#" + label.replace(/\s+/g, '-'));
+    const label = p1.trim(),
+      href = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
 
-      return label ?
-        `<a href="${href}" class="link--glossary">${label}</a>` :
-        match.input;
-    }
+    return label ?
+      `<a href="${href}" class="link--glossary">${label}</a>` :
+      match.input;
+  }
   );
 }

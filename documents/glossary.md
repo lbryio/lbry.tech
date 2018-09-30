@@ -258,6 +258,10 @@ Note that owning a very large amount of computational power does not override ot
 
 A 2D point on an elliptic curve [secp256k1](https://en.bitcoin.it/wiki/Secp256k1) that is produced by multiplying a predefined "generator" point by a *private key*. Usually it is represented by a pair of 256-bit numbers ("uncompressed public key"), but can also be compressed to just one 256-bit number (at the slight expense of CPU time to decode an uncompressed number). A special hash of a public key is called *address*. Typical LBRY transactions contain public keys or addresses in the output scripts and *signatures* in the input scripts.
 
+### README
+
+A README is a file included in all code repositories that includes basic information about that project. More in (/resources/repository-standards).
+
 ### Reflector
 
 A reflector cluster to accept LBRY content for hosting en masse, re-host the content, and make money on data fees (currently disabled). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.
