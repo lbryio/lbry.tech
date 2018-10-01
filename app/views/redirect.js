@@ -11,6 +11,7 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import { require as local } from "app-root-path";
+import redirectOr404 from "../modules/redirectOr404";
 import raw from "choo/html/raw";
 
 //  V A R I A B L E S
@@ -41,28 +42,11 @@ const md = require("markdown-it")({
 
 module.exports = exports = (state, emit) => { // eslint-disable-line
   let path;
-
   if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
   else path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
-    return html`
-      <article class="page" itemtype="http://schema.org/BlogPosting">
-        <header class="page__header">
-          <div class="page__header-wrap">
-            <div class="inner-wrap">
-              <h1 class="page__header__title" itemprop="name headline">404</h1>
-            </div>
-          </div>
-        </header>
-
-        <section class="page__content page__markup" itemprop="articleBody">
-          <div class="inner-wrap">
-            <p>The page you are looking for does not exist.</p>
-          </div>
-        </section>
-      </article>
-    `;
+    return redirectOr404(state.href);
   }
 
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
@@ -113,20 +97,18 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
 //  H E L P E R S
 
 function partialFinder(markdownBody) {
-  const regexToFindPartials = /<\w+\/>/g;
+  const regexToFindPartials = /<\w+ ?\/>/g;
   const partials = markdownBody.match(regexToFindPartials);
 
   if (!partials) return markdownBody;
 
   for (const partial of partials) {
-    const filename = decamelize(partial, "-").replace("<", "").replace("/>", "");
+    const filename = decamelize(partial, "-").replace("<", "").replace("/>", "").trim();
     const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
     if (!fileExistsTest) {
       markdownBody = markdownBody.replace(partial, "");
-    }
-
-    else {
+    } else {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
       if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
@@ -140,12 +122,12 @@ function partialFinder(markdownBody) {
 
 function wikiFinder(markdownBody) {
   return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
-      const label = p1.trim(),
-        href = encodeURI("/glossary#" + label.replace(/\s+/g, '-'));
+    const label = p1.trim(),
+      href = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
 
-      return label ?
-        `<a href="${href}" class="link--glossary">${label}</a>` :
-        match.input;
-    }
+    return label ?
+      `<a href="${href}" class="link--glossary">${label}</a>` :
+      match.input;
+  }
   );
 }

@@ -2,10 +2,12 @@
 title: Community
 ---
 
-Sometimes we say that the LBRY [[blockchain]] is the foundation of the LBRY protocol, but that's a lie.
+Sometimes we say that the LBRY [[blockchain]] is the foundation of the LBRY protocol, but that's not really true. The foundation of LBRY is the community of people that make it possible.
 
-The foundation of LBRY is the community of people that make it possible. LBRY uses computers to move bits around, but it's people that tell them how.
+Get [upstream of consensus](https://spee.ch/d/consensus.png) by participating in the LBRY community.
 
 ## Commune Yourself
 
 <FeatureLinks/>
+
+<p>And don't forget to sign up for developer-only mailing list, below.</p>

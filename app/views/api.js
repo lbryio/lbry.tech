@@ -1,23 +1,12 @@
 "use strict";
 
-
-
-//  P A C K A G E S
-
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
-import fs from "graceful-fs";
-import raw from "choo/html/raw";
+import redirectOr404 from "../modules/redirectOr404";
+import headerBlockchain from "../components/api/header-blockchain";
+import headerSdk from "../components/api/header-sdk";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
-
-//  V A R I A B L E
-
-const apiScripts = "<script>" + fs.readFileSync("./app/components/client/api-scripts.js", "utf-8") + "</script>";
-
-
-
-//  E X P O R T
 
 module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => {
   /*
@@ -38,20 +27,36 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
           <ul class="api__toc__search__results"></ul>
         </div>
 
-        <ul class="api__toc__items" id="toc" role="navigation">${raw(createApiSidebar(response).join(""))}</ul>
+        <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(response)}</ul>
       </aside>
-
-      <section class="api__content" id="toc-content">${raw(createApiContent(response).join(""))}</section>
+      <section class="api__content">
+        ${createApiHeader(state.params.wildcard)}
+        <div class="api__documentation" id="toc-content">
+          ${createApiContent(response)}
+        </div>
+      </section>
     </div>
 
     <script src="/assets/scripts/plugins/jets.js"></script>
-    ${raw(apiScripts)}
+    <script src="/assets/scripts/api.js"></script>
   `;
+}).catch(() => {
+  redirectOr404(state.href);
 });
 
 
 
+
 //  H E L P E R S
+
+function createApiHeader(slug) {
+  switch (slug) {
+    case "sdk":
+      return headerSdk();
+    case "blockchain":
+      return headerBlockchain();
+  }
+}
 
 function createApiContent(apiDetails) {
   const apiContent = [];
@@ -99,9 +104,10 @@ function createApiSidebar(apiDetails) {
 function parseApiFile(urlSlug) {
   let apiFileLink;
 
-  if (!urlSlug || urlSlug === "api" || urlSlug === "protocol") apiFileLink = process.env.NODE_ENV === "development" ?
+  //checks below are related to rate limits, both URLs should return the same content
+  if (urlSlug === "sdk") apiFileLink = process.env.NODE_ENV === "development" ?
     "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
-    "https://cdn.rawgit.com/lbryio/lbry/5b3103e4/docs/api.json"
+    "https://cdn.rawgit.com/lbryio/lbry/master/docs/api.json"
   ;
 
   if (urlSlug === "blockchain") apiFileLink = process.env.NODE_ENV === "development" ?
@@ -109,7 +115,7 @@ function parseApiFile(urlSlug) {
     "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json"
   ;
 
-  if (!apiFileLink) return; // TODO: Error handling
+  if (!apiFileLink) return Promise.reject(new Error("Failed to fetch API docs")); // TODO: Error handling
 
   return fetch(apiFileLink).then(() => fetch(apiFileLink, {
     cache: "no-cache" // forces a conditional request

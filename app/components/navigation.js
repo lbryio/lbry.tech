@@ -40,16 +40,6 @@ export default class Navigation extends Nanocomponent {
           url: "/resources"
         },
         {
-          name: "Contribute",
-          title: "Contribute to LBRY",
-          url: "/contribute"
-        },
-        {
-          name: "Build",
-          title: "View LBRY resources",
-          url: "/build"
-        },
-        {
           name: "Community",
           title: "Interact with LBRY",
           url: "/community"

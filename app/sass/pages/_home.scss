@@ -1,3 +1,20 @@
+body.home {
+  @media (min-width: 1001px) {
+    main > div:first-of-type {
+      display: grid;
+      grid-gap: 0;
+      grid-template-areas:
+        "header header header"
+        "features features features"
+        "intro intro github"
+        "docs docs github"
+        "contribute contribute contribute"
+        "develop develop develop"
+        "community community community";
+    }
+  }
+}
+
 .home {
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);
@@ -35,6 +52,7 @@
     grid-area: header;
     height: calc(50vh - 4rem); min-height: 300px;
     justify-content: center;
+    margin-bottom: 2rem;
 
     @media (max-width: 850px) {
       background-size: cover;
@@ -63,6 +81,7 @@
 
   .features {
     grid-area: features;
+    border-bottom: 1px solid rgba($black, 0.05);
   }
 
   .intro,
@@ -102,6 +121,10 @@
         font-size: 2rem;
         margin-bottom: 1rem;
       }
+    }
+
+    ol, ul {
+      margin-bottom: 1.5rem;
     }
 
     p {
@@ -225,7 +248,7 @@
     ul {
       li {
         @media (min-width: 701px) {
-          width: calc(100% / 5);
+          width: calc(100% / 4);
         }
 
         @media (max-width: 700px) {
@@ -245,23 +268,19 @@
         }
 
         &:nth-child(1) a::before {
-          background-image: url("/assets/media/svg/flag.svg");
-        }
-
-        &:nth-child(2) a::before {
           background-image: url("/assets/media/svg/keyboard.svg");
         }
 
-        &:nth-child(3) a::before {
+        &:nth-child(2) a::before {
           background-image: url("/assets/media/svg/anchor.svg");
         }
 
-        &:nth-child(4) a::before {
-          background-image: url("/assets/media/svg/chat.svg");
+        &:nth-child(3) a::before {
+          background-image: url("/assets/media/svg/monitor.svg");
         }
 
-        &:nth-child(5) a::before {
-          background-image: url("/assets/media/svg/monitor.svg");
+        &:nth-child(4) a::before {
+          background-image: url("/assets/media/svg/flag.svg");
         }
       }
     }
@@ -277,8 +296,7 @@
     ul {
       li {
         @media (min-width: 701px) {
-          // width: calc(100% / 3); // https://github.com/lbryio/lbry.tech/issues/104
-          width: 50%; //
+          width: calc(100% / 3);
         }
 
         @media (max-width: 700px) {
@@ -302,11 +320,11 @@
         }
 
         &:nth-child(2) a::before {
-          background-image: url("/assets/media/svg/reddit.svg");
+          background-image: url("/assets/media/svg/keyboard.svg");
         }
 
         &:nth-child(3) a::before {
-          background-image: url("/assets/media/svg/slack.svg");
+          background-image: url("/assets/media/svg/reddit.svg");
         }
       }
     }

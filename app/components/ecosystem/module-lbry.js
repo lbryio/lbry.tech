@@ -35,7 +35,7 @@ module.exports = exports = () => `
 
       <h3>Additional Resources</h3>
       <ul>
-        <li>See the <a href="https://lbry-whitepaper.herokuapp.comWhitepaper" title="">Whitepaper</a> for a more comprehensive introduction to the LBRY data network.</li>
+        <li>See the <a href="/whitepaper" title="">Whitepaper</a> for a more comprehensive introduction to the LBRY data network.</li>
         <li>See <a href="/resources" title="">Resources</a> for documentation of the LBRY APIs.</li>
         <li>See [[Whatever]] for learning more about LBRY distributes data.</li>
         <li>See <a href="/build" title="">Build</a> for learning how to use the daemon to solve your own problem or build your own app!</li>

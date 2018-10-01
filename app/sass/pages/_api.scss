@@ -6,7 +6,8 @@
  */
 
 .__slate {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   position: relative;
 
   &::after {
@@ -14,6 +15,10 @@
   }
 }
 
+.api__header
+{
+  padding: 2rem;
+}
 
 
 /**
@@ -34,7 +39,7 @@
 
 .api__toc {
   width: 200px; height: calc(100vh - 4rem); // navigation is 4rem tall
-  top: 4rem; left: 0; bottom: 0;
+  left: 0; bottom: 0;
 
   background-color: $white;
   border-right: 1px solid rgba($gray, 0.3);
@@ -101,28 +106,14 @@
   }
 }
 
-
-
-/**
- * API | Main Content
- *
- * @class     .api__content
- * @class     .api__content__body
- * @class     .api__content__body__arguments
- *
- * @class     .api__content__body__argument
- * @selector  {::after}
- * @selector  {:last-of-type}
- * @selector  {:nth-child}
- *
- * @class     .api__content__example
- */
-
 .api__content {
-  display: grid;
   float: right;
-  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
   width: calc(100% - 200px);
+}
+
+.api__documentation {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 
   h1 {
     font-size: 1.5rem;

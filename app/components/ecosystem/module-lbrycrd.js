@@ -32,7 +32,7 @@ module.exports = exports = () => `
 
       <h3>Additional Resources</h3>
       <ul>
-        <li>See the <a href="https://lbry-whitepaper.herokuapp.com" title="Whitepaper">Whitepaper</a> for a more comprehensive introduction to the LBRY blockchain.</li>
+        <li>See the <a href="/whitepaper" title="Whitepaper">Whitepaper</a> for a more comprehensive introduction to the LBRY blockchain.</li>
         <li>See the <a href="/resources" title="">Resources</a> for documentation about the LBRY blockchain, including its API.</li>
         <li>See [[Naming]] for learning more about LBRY URLs and how they work.</li>
         <li>See [[Identities]] for learning how the LBRY blockchain handles publisher identities.</li>

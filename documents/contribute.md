@@ -1,43 +1,42 @@
 ---
-title: Contributing
+title: Contributor's Guide
 ---
-
-## Contributing to LBRY
+## Welcome to LBRY!
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
 
-This guide is for contributing to the code bases maintained by the LBRY organization. For building on top of the LBRY protocol, see [Build](/build).
+This is a guide for contributing to the code bases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
 
-Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as appreciation.
+Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as [appreciation](#appreciation).
 
 ## Ecosystem Overview
 
 Typical usage of LBRY does not involve a single piece of software, but several interacting components.
 
-If you want to contribute to LBRY, the first step is to understand where.
+If you want to contribute to LBRY, there's definitely something for you! The first step is to figure out what project to work on.
 
 ### Core Protocol Components
 
 | Component | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle `lbrycrd` directly.
-| [lbry](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that implements the LBRY protocol. Bundled with and/or used by most LBRY applications.
-| [torba](https://github.com/lbryio/torba) | Python | The Simple Payment Verification (SPV) wallet bundled with `lbry`.
-| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server for the `lbryum` SPV wallet.
-| [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | The structure of the metadata stored in the LBRY blockchain.
+| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]].
+| [lbry-sdk](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. |
+| [torba](https://github.com/lbryio/torba) | Python | An [[SPV]] (Simple Payment Verification) wallet. Bundled with [[lbry-sdk]]. |
+| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server used by [[torba]].
+| [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | Defines the structure of the metadata stored in the LBRY blockchain.
 
 ### Official Applications
 | Application | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY protocol for Windows, macOS, and Linux. `lbry-desktop` bundles `lbry` and is primarily frontend code.
-| [lbry-android](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY protocol for Android. `lbry-android` bundles `lbry` and is primarily frontend code.
-| [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between `lbry-desktop` and `lbry-android`.
+| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY network for Windows, macOS, and Linux. [[lbry-desktop]] is built with [[lbry-sdk]]. |
+| [lbry-android](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY network for Android. [[lbry-android]] is built with [[lbry-sdk]].
+| [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between [[lbry-desktop]] and [[lbry-android]].
 | [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install.
 
 ### Websites
 | Domain | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbry.tech](https://github.com/lbryio/lbry.tech) | JavaScript (Vue, Vuepress) | You're on it.
+| [lbry.tech](https://github.com/lbryio/lbry.tech) | JavaScript (Node, Choo) | You're on it.
 | [lbry.io](https://github.com/lbryio/lbry.io) | PHP (vanilla) | A website for LBRY end-users and creators.
 | [lbry.fund](https://github.com/lbryio/lbry.fund) | HTML | A website for receiving funding from LBRY, Inc.
 
@@ -48,20 +47,18 @@ If you want to contribute to LBRY, the first step is to understand where.
 | [lighthouse](https://github.com/lbryio/lighthouse) | JavaScript, ElasticSearch | A search service for the LBRY blockchain.
 | [wunderbot](https://github.com/lbryio/lbry-wunderbot) | JavaScript (Node) | A chatbot used by the LBRY discord.
 | [block-explorer](https://github.com/lbryio/block-explorer) | PHP (vanilla) | A blockchain explorer for the LBRY blockchain.
-| Add more? other tipbots... |
 
 ## Coding
 
-Several hundred extremely good-looking, intelligent and popular people, as well as our CTO, have contributed to LBRY. Join us!
-
-Additionally, every technical employee of LBRY outside of the founding team started as a public contributor.
+Several hundred extremely good-looking, wise and moral people, as well as our CTO, have contributed to LBRY. Join us!
 
 ### How To Contribute Code
 
-1. **Identify the component you want to work on**. LBRY has code bases in Python, JavaScript, PHP, and C++. See [Ecosystem Overview](#ecosystem-overview).
-1. **Get set up.** Each repo has a `README.md` with clear instructions on how to get the repo up and running properly. Thanks, [Repository Standards](/repository-standards)!
-1. **Find something to work on**. All actively developed repositories should have issues tagged "Good First Issues" specifically for new contributors. Some projects use a "level: n" tagging system, where lower numbers are simpler and higher numbers are more complex. Of course, you are also welcome to work on something not currently filed if you have your own idea! Additionally, all repositories have contact information for the maintainer if you have trouble finding an issue to work on.
-1. **Abide coding and commit standards**. Any specific information necessary to know in this regard should be in the `README`.
+1. **Join the Community**. By joining our [chat](https://chat.lbry.io) or our [forum](https://discourse.lbry.io), you can interact with other developers when you have questions, ideas, or problems.
+1. **Identify the component you want to work on**. LBRY has code bases that deal with everything from cryptography and distributed systems to end-user graphic user-interfaces. We use Python, JavaScript, C++, Go, and more. See [Ecosystem Overview](#ecosystem-overview) to find the right project.
+1. **Get set up.** Each repo has a [[README]] with clear instructions on how to get the repo up and running properly. Thanks, [Repository Standards](/repository-standards)!
+1. **Find something to work on**. All actively developed repositories should have issues tagged "Good First Issues" specifically for new contributors. You are also welcome to work on something not currently filed if you have your own idea. Additionally, all repositories have contact information for the maintainer if you have trouble finding an issue to work on.
+1. **Abide coding and commit standards**. Any specific information necessary to know in this regard should be in the project [[README]].
 1. **Commit early and ask questions**. Is an issue confusing? Please comment and say so! Not sure if you've got the right approach? Commit your code and we'll give feedback. Certain you're doing everything right? Commit it anyway. Once you commit, open a pull request. We encourage work-in-progress commits to let us know you're working on something and to facilitate feedback.
 1. **Accept feedback and finish**. Most pull requests are reviewed within two business days. Once the repository maintainer has approved your contribution, it will get merged and we'll try really hard to give you LBC even if you say no.
 
@@ -69,33 +66,37 @@ Additionally, every technical employee of LBRY outside of the founding team star
 
 Web and application designers are requested to be able to work directly on CSS in the project they'd be contributing to. Please follow the [Coding](#coding) instructions for any website or application you want to improve.
 
+We're happy to provide assistance if you're used to working in HTMl and CSS but are having trouble getting started. Check out [our chat](https://chat.lbry.io) or [our forum](https://discourse.lbry.io).
+
 ## Writing
 
-Most written content at LBRY is checked into source control. To improve content we've written:
+Most written content, and especially all technical writing, is checked into source control. To improve content we've written or add new content:
 
 1. Identify which website or application it is in (see the [overview])(#ecosystem-overview).
-1. Search for a quoted phrase of the content you want to change.
+1. Search for a quoted phrase of the content you want to change (or use the same technique to identify the folder to create a new document in).
 1. Edit the content via the GitHub interface and submit it as a pull request.
 
 ## Testing
 
 If you want to contribute without getting directly into the code, one of the best ways you can contribute is testing.
 
-A number of our code bases (`lbrycrd`, `lbry`, all applications, more...) go through regular release cycles where new versions are shipped every several weeks. Testing pre-release versions is a great way to help us identify issues and ship bug-free code.
+A number of our code bases ([[lbrycrd]], [[lbry-sdk]], all applications, more...) go through regular release cycles where new versions are shipped every several weeks. Testing pre-release versions is a great way to help us identify issues and ship bug-free code.
 
-For any projects that you want to be a tester on, "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out.
+### Ways to Test
 
-For even harder-core testing, you can follow the `README` instructions in a project and test against the `master` branch of a project at any time. Additionally, `master` builds for some projects are always available via [build.lbry.io](http://build.lbry.io).
+- "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out and you can [raise an issue](#raising-issues).
+- Join the #early-testing channel in our [chat](https://chat.lbry.io).
+- For the hardcore, run master from source and/or the latest builds from [build.lbry.io](http://build.lbry.io).
 
 Opening well-specified issues against release candidates or master builds is extremely useful in helping us create quality software.
 
-**Note: that you perform testing at your own risk! If using release candidates and especially master builds, back up your wallet and be cautious.**
+**Note: Please do not use wallets with substantial sums when testing. If using release candidates and especially master builds, back up your wallet and be cautious. While a substantial bug, like one that caused loss of funds, would merit significant [Appreciation](#appreciation), you perform testing at your own risk.**
 
 ## Raising Issues
 
-If you're about to raise an issue because you've found a problem with LBRY, or you'd like to request a new feature, or for any other reason, please read this first.
+All [bug reports](#reporting-a-bug) and [feature requests](#feature-requests) are managed through GitHub.
 
-GitHub is the preferred channel for [bug reports](#reporting-a-bug) and [feature requests](#feature-requests).
+If you're about to raise an issue because you've found a problem with LBRY, or you'd like to request a new feature, or for any other reason, please read this first.
 
 ### Reporting a Bug
 
@@ -103,10 +104,10 @@ A bug is a _demonstrable problem_ that is caused by the code in the repository. 
 Guidelines for bug reports:
 
 1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
-2. **Use the GitHub issue search** — check if the issue has already been reported (or fixed). Be sure to include closed tickets in your search.
-3. **Follow the instructions** — When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Please follow it!
+2. **Check if the issue exists**. Please do a quick search to see if the issue has been reported (or fixed), including closed tickets.
+3. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Santa _loves_ people who follow it.
 
-Well-specified bug reports save developers lots of time and are extremely appreciated, typically with an LBRY credit tip.
+Well-specified bug reports save developers lots of time and are [appreciated](#appreciation).
 
 ### Feature Requests
 
@@ -117,8 +118,14 @@ Feature requests are welcome. Before you submit one be sure to:
 3. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
 4. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
 
-## Tips
+### Discussion and Help
 
-We offer LBC as a thank you to anyone who contributes to LBRY. While we think we're fair-to-generous in our tips, tipping is more about recognizing and appreciating what you've given to the community than providing compensation.
+Sometimes, you may have a problem but an issue isn't appropriate (or you're not sure if it's a real issue).
+
+Join our [chat](https://chat.lbry.io), our [forum](https://discourse.lbry.io), or another [community](https://lbry.tech/community) and talk to others about it.
+
+## Appreciation
+
+We offer LBC as a gesture of our appreciation to anyone who contributes to LBRY. While we're generous in what we send, it is more about recognizing and appreciating what you've given to the community than providing compensation.
 
 The amount of LBC is not typically specified in advance of a contribution, though if you're particularly motivated by this aspect you are welcome to ask.

@@ -4,6 +4,8 @@ title: Development
 
 Want to build something on top of LBRY? This is the place to get you started.
 
+# THIS IS NOT DONE AT ALL AND IF YOU CONTINUE TO READ IT YOU MENTALLY ASSENT TO COMMITTING AT LEAST ONE CHANGE THAT MAKES IT BETTER
+
 At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
 [Overview](/overview) first.
 
@@ -21,7 +23,7 @@ At least, it's the place to get started so long as you have some idea of what LB
 
 ### Web, Desktop, and Mobile Applications (Daemon-based Applications)
 
-Almost all web, desktop, and mobile applications will use the [lbry daemon](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network.
+Almost all web, desktop, and mobile applications will use the [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network.
 
 #### Web Applications
 
@@ -31,7 +33,7 @@ Almost all web, desktop, and mobile applications will use the [lbry daemon](http
 
 #### Desktop Applications
 
-1. Desktop applications will typically bundle the [lbry daemon](https://github.com/lbryio/lbry).
+1. Desktop applications will typically use the [lbry-sdk](https://github.com/lbryio/lbry).
 1. lbry-desktop as example
 
 #### Android Applications
