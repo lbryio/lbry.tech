@@ -36,8 +36,6 @@ document.querySelector(".api__toc__search__clear").addEventListener("click", () 
 
 //  H E L P E R
 
-// Reinitialize search functionality
-
 function reinitJets() {
   jets = new Jets({
     contentTag: "#toc",

@@ -12,10 +12,10 @@ module.exports = exports = () => `
       <div class="ecosystem__submodule__markdown">
         <h4 class="ecosystem__submodule__description__title">Overview</h4>
         <p>Lighthouse is a lightning-fast advanced search engine API for publications on the lbrycrd with autocomplete capabilities.</p>
-  
+
         <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
         <p class="__connection-details"></p>
-  
+
         <h4 class="ecosystem__submodule__description__title">Source</h4>
         <ul>
           <li><a href="https://github.com/lbryio/lighthouse" title="lighthouse source code">https://github.com/lbryio/lighthouse</a></li>

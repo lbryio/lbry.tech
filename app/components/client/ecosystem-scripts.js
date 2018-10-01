@@ -1,10 +1,12 @@
-/* global $ */ "use strict";
+"use strict";
 
 
 
-$("[data-action]").on("click", event => {
+document.addEventListener("click", event => {
+  if (!event.target.dataset.action) return;
+
   event.preventDefault();
-  const data = event.currentTarget.dataset;
+  const data = event.target.dataset;
 
   switch(data.action) {
     case "open":
@@ -197,14 +199,18 @@ for (const module of mainModules) {
   if (
     module[Object.keys(module)] === "true" &&
     document.querySelector(`.ecosystem__module.${Object.keys(module)} h2 span`)
-  ) document.querySelector(`.ecosystem__module.${Object.keys(module)} h2 span`).click();
+  ) {
+    document.querySelector(`.ecosystem__module.${Object.keys(module)} h2 span`).click();
+  }
 }
 
 for (const subModule of subModules) {
   if (
     subModule[Object.keys(subModule)] === "true" &&
     document.querySelector(`.ecosystem__submodule.${Object.keys(subModule)} h3`)
-  ) document.querySelector(`.ecosystem__submodule.${Object.keys(subModule)} h3`).click();
+  ) {
+    document.querySelector(`.ecosystem__submodule.${Object.keys(subModule)} h3`).click();
+  }
 }
 
 
