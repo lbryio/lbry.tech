@@ -1,9 +1,5 @@
 "use strict";
 
-
-
-//  P A C K A G E S
-
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
 import redirectOr404 from "../modules/redirectOr404";
@@ -11,28 +7,6 @@ import headerBlockchain from "../components/api/header-blockchain";
 import headerSdk from "../components/api/header-sdk";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
-
-/*
-module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => asyncHtml`
-  <div class="api__header">
-      I am a walrus.
-  </div>
-  <div class="__slate">
-    <aside class="api__toc">
-      <div class="api__toc__search">
-        <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-        <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-        <ul class="api__toc__search__results"></ul>
-      </div>
-
-      <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(response)}</ul>
-    </aside>
-
-    <section class="api__content" id="toc-content">${createApiContent(response)}</section>
-  </div>
-
-`);
- */
 
 module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => {
   /*

@@ -1,6 +1,7 @@
 {
   "/tour" : "/playground",
   "/play" : "/playground",
+  "/api" :  "/resources",
   "/api/protocol" : "/api/sdk",
   "/api/lbry" : "/api/sdk",
   "/api/lbrycrd" : "/api/blockchain",
