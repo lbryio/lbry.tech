@@ -5,7 +5,7 @@ title: Contributor's Guide
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
 
-This guide is for contributing to the code bases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
+This is a guide for contributing to the code bases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
 
 Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as [appreciation](#appreciation).
 
@@ -50,7 +50,7 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 
 ## Coding
 
-Several hundred extremely good-looking, intelligent and popular people, as well as our CTO, have contributed to LBRY. Join us!
+Several hundred extremely good-looking, wise and moral people, as well as our CTO, have contributed to LBRY. Join us!
 
 ### How To Contribute Code
 

@@ -123,6 +123,10 @@ body.home {
       }
     }
 
+    ol, ul {
+      margin-bottom: 1.5rem;
+    }
+
     p {
       margin-bottom: 1.5rem;
       max-width: 1000px;
@@ -244,7 +248,7 @@ body.home {
     ul {
       li {
         @media (min-width: 701px) {
-          width: calc(100% / 5);
+          width: calc(100% / 4);
         }
 
         @media (max-width: 700px) {
@@ -264,23 +268,19 @@ body.home {
         }
 
         &:nth-child(1) a::before {
-          background-image: url("/assets/media/svg/flag.svg");
-        }
-
-        &:nth-child(2) a::before {
           background-image: url("/assets/media/svg/keyboard.svg");
         }
 
-        &:nth-child(3) a::before {
+        &:nth-child(2) a::before {
           background-image: url("/assets/media/svg/anchor.svg");
         }
 
-        &:nth-child(4) a::before {
-          background-image: url("/assets/media/svg/chat.svg");
+        &:nth-child(3) a::before {
+          background-image: url("/assets/media/svg/monitor.svg");
         }
 
-        &:nth-child(5) a::before {
-          background-image: url("/assets/media/svg/monitor.svg");
+        &:nth-child(4) a::before {
+          background-image: url("/assets/media/svg/flag.svg");
         }
       }
     }
@@ -296,8 +296,7 @@ body.home {
     ul {
       li {
         @media (min-width: 701px) {
-          // width: calc(100% / 3); // https://github.com/lbryio/lbry.tech/issues/104
-          width: 50%; //
+          width: calc(100% / 3);
         }
 
         @media (max-width: 700px) {
@@ -321,11 +320,11 @@ body.home {
         }
 
         &:nth-child(2) a::before {
-          background-image: url("/assets/media/svg/reddit.svg");
+          background-image: url("/assets/media/svg/keyboard.svg");
         }
 
         &:nth-child(3) a::before {
-          background-image: url("/assets/media/svg/slack.svg");
+          background-image: url("/assets/media/svg/reddit.svg");
         }
       }
     }

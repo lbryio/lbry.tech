@@ -17,37 +17,33 @@ module.exports = exports = () => html`
     <section class="features">
       ${linkGrid([
     {
-      description: "Learn how LBRY works with 3 easy examples",
-      destination: "/tour",
-      label: "Take the Tour",
-      title: "New to LBRY?"
+      description: "Get your head around LBRY with 3 interactive examples.",
+      destination: "/playground",
+      label: "Party in the Playground",
+      title: "Learn By Trying"
     },
     {
-      description: "Help make LBRY better!",
-      destination: "/contribute",
-      label: "Explore our repos",
-      title: "Want to contribute?"
+      description: "Dig into the formal specification of the LBRY protocol.",
+      destination: "/whitepaper",
+      label: "Wisdom of the Whitepaper",
+      title: "Learn By Reading"
     }
   ])}
     </section>
 
     <section class="intro">
       <div class="inner-wrap">
-        <h3>Intro/Overview</h3>
+        <h3>Overview</h3>
         <p>What if anyone in the world could publish a piece of digital content, anyone else in the world could access it, for free or for payment, and that entire system worked end-to-end without any centralized authority or point of control?</p>
-
-        <p>That's the idea behind LBRY. To create a market for accessing and publishing information that is global, decentralized, robust, optimal and complete.</p>
-
-        <a class="cta" href="/overview">Learn more about our mission</a>
+        <a class="cta" href="/overview">Observe the Overview</a>
       </div>
     </section>
 
     <section class="docs">
       <div class="inner-wrap">
-        <h3>Documentation</h3>
-        <p>LBRY has enough moving parts to warrant comprehensive documentation. Whether you are interested in learning the technical details of our technology stack or you want to integrate LBRY into your life, you will find everything you need in our docs.</p>
-
-        <a class="cta" href="/resources">Explore our documentation</a>
+        <h3>Resources</h3>
+        <p>Looking for API documentation, formal specifications, how-tos, resources, or the meaning of life? Find at least some of these things in the resources area.</p>
+        <a class="cta" href="/resources">Roam to Resources</a>
       </div>
     </section>
 
@@ -59,34 +55,28 @@ module.exports = exports = () => html`
     <section class="contribute">
       <div class="inner-wrap">
         <h3>Contribute</h3>
-        <p>Interested in progressing content freedom? Awesome! No matter your experience or skill level, <strong>you</strong> can make a difference.</p>
+        <p>No matter your experience or skill level, <em>you</em> can progress content freedom.</p>
 
         <ul>
-          <li><a href="" title="">Raising Issues</a></li>
           <li><a href="" title="">Coding</a></li>
           <li><a href="" title="">Creative</a></li>
-          <li><a href="" title="">Translating</a></li>
+          <li><a href="" title="">Writing</a></li>
           <li><a href="" title="">Testing</a></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="develop">
-      <div class="inner-wrap">
-        <h3>Development</h3>
-        <p>Like a bit of documentation but would prefer to jump in and make your mark on the blockchain? Perhaps add cats to it?</p>
-
-        <a class="cta" href="/api/protocol" title="Learn the LBRY API">Learn the LBRY API</a>
+        <p>
+         <a class="cta" href="/contribute">Collaborate with Contributors</a>
+        </p>
       </div>
     </section>
 
     <section class="community">
       <div class="inner-wrap">
         <h3>Community</h3>
-        <p>Hang out with us! We have a vibrant community of lbryians and would be <em>delighted</em> if you joined us.</p>
+        <p>There's literally <a href="https://spee.ch/@lbrytech/dozens.mp4">12<sup>n</sup></a> of us.</p>
 
         <ul>
-          <li><a href="//chat.lbry.io" title="LBRY on Discord">Discord</a></li>
+          <li><a href="//chat.lbry.io" title="LBRY on Discord">Chat</a></li>
+          <li><a href="//discourse.lbry.io" title="LBRY on Discourse">Forum</a></li>
           <li><a href="//www.reddit.com/r/lbry" title="LBRY on Reddit">Reddit</a></li>
         </ul>
       </div>
