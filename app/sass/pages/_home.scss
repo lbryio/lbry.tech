@@ -52,6 +52,7 @@ body.home {
     grid-area: header;
     height: calc(50vh - 4rem); min-height: 300px;
     justify-content: center;
+    margin-bottom: 2rem;
 
     @media (max-width: 850px) {
       background-size: cover;

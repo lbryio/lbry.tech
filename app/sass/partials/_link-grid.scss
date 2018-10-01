@@ -3,14 +3,13 @@
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .link-grid__link {
   position: relative;
   text-align: center;
   vertical-align: top;
+  margin-bottom: 2rem;
   flex-grow: 1;
 
   @media (min-width: 651px) {

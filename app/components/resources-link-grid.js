@@ -5,18 +5,23 @@ import linkGrid from "./link-grid";
 export default () => {
   return linkGrid([{
     title: "Whitepaper",
-    description: "It's a white paper",
+    description: "Read the formal specification for LBRY.",
     destination: "/whitepaper",
-    label: "Read"
-  }]) + linkGrid([ {
-    title: "LBRY SDK APIs",
-    description: "The LBRY SDK is the simplest way to start building with LBRY.",
-    destination: "/api/protocol",
-    label: "LBRY SDK API"
+    label: "Study the Paper"
   }, {
-    title: "Blockchain Docs",
-    description: "Learn how to talk to blockchain real good",
+    title: "Contributor's Guide",
+    description: "Can you code, design, write or test? Join us!",
+    destination: "/contribute",
+    label: "Read the Guide"
+  }, {
+    title: "SDK APIs",
+    description: "Method signatures and examples for lbry-sdk, the most common way to build on LBRY.",
+    destination: "/api/sdk",
+    label: "SDK APIs"
+  }, {
+    title: "Blockchain APIs",
+    description: "Method signatures and examples for lbrycrd, the LBRY blockchain.",
     destination: "/api/blockchain",
-    label: "Blockchain API"
+    label: "Blockchain APIs"
   }]);
 };

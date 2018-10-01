@@ -1,14 +1,13 @@
 ---
-title: Contributing
+title: Contributor's Guide
 ---
-
-## Contributing to LBRY
+## Welcome to LBRY!
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
 
-This guide is for contributing to the code bases maintained by the LBRY organization. For building on top of the LBRY protocol, see [Build](/build).
+This guide is for contributing to the code bases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
 
-Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as appreciation.
+Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as [appreciation](#appreciation).
 
 ## Ecosystem Overview
 
