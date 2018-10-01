@@ -11,7 +11,9 @@ import html from "choo/html";
 //  E X P O R T
 
 export default (links) => {
-  const renderedLinks = links.map((link) => returnLinkTemplate(link.title, link.description, link.destination, link.label));
+  const renderedLinks = links.map((link) =>
+    returnLinkTemplate(link.title, link.description, link.destination, link.label));
+
   return html`
     <ul class="link-grid">
       ${renderedLinks}

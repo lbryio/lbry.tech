@@ -1,12 +1,23 @@
 "use strict";
 
+
+
+//  P A C K A G E S
+
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
-import redirectOr404 from "../modules/redirectOr404";
-import headerBlockchain from "../components/api/header-blockchain";
-import headerSdk from "../components/api/header-sdk";
+import { require as local } from "app-root-path";
+
+//  V A R I A B L E S
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
+const headerBlockchain = local("app/components/api/header-blockchain").default;
+const headerSdk = local("app/components/api/header-sdk").default;
+const redirects = local("app/data/redirects.json");
+
+
+
+//  E X P O R T
 
 module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => {
   /*
@@ -41,22 +52,36 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
     <script src="/assets/scripts/api.js"></script>
   `;
 }).catch(() => {
-  redirectOr404(state.href);
+  const redirectUrl = redirects[state.href];
+
+  return asyncHtml`
+    <article class="page" itemtype="http://schema.org/BlogPosting">
+      <header class="page__header">
+        <div class="page__header-wrap">
+          <div class="inner-wrap">
+            <h1 class="page__header__title" itemprop="name headline">404</h1>
+          </div>
+        </div>
+      </header>
+
+      <section class="page__content page__markup" itemprop="articleBody">
+        <div class="inner-wrap">
+          <p>Redirecting you to <strong>${redirectUrl}</strong></p>
+        </div>
+      </section>
+    </article>
+
+    <script>
+      setTimeout(() => {
+        window.location.href = "${redirectUrl}";
+      }, 2000);
+    </script>
+  `;
 });
 
 
 
-
 //  H E L P E R S
-
-function createApiHeader(slug) {
-  switch (slug) {
-    case "sdk":
-      return headerSdk();
-    case "blockchain":
-      return headerBlockchain();
-  }
-}
 
 function createApiContent(apiDetails) {
   const apiContent = [];
@@ -85,6 +110,19 @@ function createApiContent(apiDetails) {
   return apiContent;
 }
 
+function createApiHeader(slug) {
+  switch(slug) {
+    case "blockchain":
+      return headerBlockchain();
+
+    case "sdk":
+      return headerSdk();
+
+    default:
+      break;
+  }
+}
+
 function createApiSidebar(apiDetails) {
   const apiSidebar = [];
 
@@ -104,18 +142,26 @@ function createApiSidebar(apiDetails) {
 function parseApiFile(urlSlug) {
   let apiFileLink;
 
-  //checks below are related to rate limits, both URLs should return the same content
-  if (urlSlug === "sdk") apiFileLink = process.env.NODE_ENV === "development" ?
-    "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
-    "https://cdn.rawgit.com/lbryio/lbry/master/docs/api.json"
-  ;
+  // checks below are related to rate limits, both URLs should return the same content
 
-  if (urlSlug === "blockchain") apiFileLink = process.env.NODE_ENV === "development" ?
-    "https://rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json" :
-    "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json"
-  ;
+  switch(true) {
+    case (urlSlug === "blockchain"):
+      apiFileLink = process.env.NODE_ENV === "development" ?
+        "https://rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json" :
+        "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json";
+      break;
 
-  if (!apiFileLink) return Promise.reject(new Error("Failed to fetch API docs")); // TODO: Error handling
+    case (urlSlug === "sdk"):
+      apiFileLink = process.env.NODE_ENV === "development" ?
+        "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
+        "https://cdn.rawgit.com/lbryio/lbry/master/docs/api.json";
+      break;
+
+    default:
+      break;
+  }
+
+  if (!apiFileLink) return Promise.reject(new Error("Failed to fetch API docs"));
 
   return fetch(apiFileLink).then(() => fetch(apiFileLink, {
     cache: "no-cache" // forces a conditional request

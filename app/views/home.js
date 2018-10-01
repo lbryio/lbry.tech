@@ -1,7 +1,19 @@
 "use strict";
 
+
+
+//  P A C K A G E S
+
 import html from "choo/html";
-import linkGrid from "../components/link-grid";
+import { require as local } from "app-root-path";
+
+//  V A R I A B L E
+
+const linkGrid = local("app/components/link-grid").default;
+
+
+
+//  E X P O R T
 
 module.exports = exports = () => html`
   <div>
