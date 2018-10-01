@@ -14,6 +14,12 @@ $(function () {
 
 
 
+// Browsers not Firefox do not yet support `text-orientation` and/or `writing-mode`
+if (!/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent))
+  document.querySelector(".component--glossary-toc-toggle").classList.add("noncompliant-fix");
+
+
+
 if ( // Toggle beta message
   localStorage.getItem("hide lbry alert") &&
   localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
