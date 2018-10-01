@@ -1,13 +1,15 @@
-/* global $, location, send, window */ "use strict";
+/* global location, send, window */ "use strict";
 
 
 
-$(function () {
+document.addEventListener("DOMContentLoaded", () => {
   scrollToElementOnLoad();
 
-  $("a[href^=http]").each(function () { // Automatically open external links in new tabs
-    if (this.href.indexOf(location.hostname) === -1) {
-      $(this).attr("target", "_blank");
+  // Automatically open external links in new tabs
+  document.querySelectorAll("a[href^=http]").forEach(anchor => {
+    if (anchor.href.indexOf(location.hostname) === -1) {
+      anchor.rel = "noopener noreferrer";
+      anchor.target = "_blank";
     }
   });
 });
@@ -32,33 +34,35 @@ document.querySelector("#close-alert").onclick = function () {
 
 
 
-//  Smooth scroll
-
+// Smooth scroll
 document.querySelectorAll("a[href^='#']").forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
+  anchor.addEventListener("click", event => {
+    event.preventDefault();
 
-    const element = this.href.split("#").pop();
+    const element = event.target.href.split("#").pop();
     let elementOffset;
 
     if (document.getElementById(element)) {
       elementOffset = document.getElementById(element).offsetTop - 74;
       window.scroll({ top: elementOffset, behavior: "smooth" });
     }
+
+    // Add hash to URL bar when sidebar links are clicked
+    if (event.target.parentElement.className === "api__toc__item")
+      history.replaceState({}, "", `#${element}`);
   });
 });
 
-//  Newsletter
-
-$("[data-action='subscribe to newsletter']").on("click", () => {
-  const email = $("#emailAddress").val();
+// Newsletter
+document.querySelector("[data-action='subscribe to newsletter']").onclick = () => {
+  const email = document.getElementById("emailAddress").value;
   if (!validateEmail(email)) return;
 
   send(JSON.stringify({
     "email": email,
     "message": "subscribe"
   }));
-});
+};
 
 
 
@@ -79,6 +83,6 @@ function scrollToElementOnLoad() {
 }
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
-  return re.test(String(email));
+  const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+  return emailRegex.test(String(email));
 }

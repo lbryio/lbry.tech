@@ -96,7 +96,7 @@ module.exports = exports = () => html`
   </div>
 
   <script>
-    $(function () {
+    document.addEventListener("DOMContentLoaded", () => {
       send(JSON.stringify({
         "message": "landed on homepage"
       }));

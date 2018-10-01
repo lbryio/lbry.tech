@@ -1,58 +1,42 @@
-/* global $, Jets */ "use strict";
+/* global Jets */ "use strict";
 
 
 
-/**
- * Initiate search functionality
- */
+// Initiate search functionality
 
 let jets = new Jets({
   contentTag: "#toc",
   searchTag: "#input-search"
 });
 
-/**
- * Reset search on page load
- */
+// Reset search on page load
 
-$("#input-search")[0].value = "";
+document.getElementById("input-search").value = "";
 
-/**
- * Activate search
- */
+// Activate search
 
-$("#input-search").on("keyup", () => {
-  if ($("#input-search").val()) $(".api__toc__search__clear").addClass("active");
-  else $(".api__toc__search__clear").removeClass("active");
+document.getElementById("input-search").addEventListener("keyup", () => {
+  if (document.getElementById("input-search").value)
+    document.querySelector(".api__toc__search__clear").classList.add("active");
+
+  else
+    document.querySelector(".api__toc__search__clear").classList.remove("active");
 });
 
-/**
- * Cancel search
- */
+// Cancel search
 
-$(".api__toc__search__clear").on("click", () => {
-  $("#input-search")[0].value = "";
-  $(".api__toc__search__clear").removeClass("active");
+document.querySelector(".api__toc__search__clear").addEventListener("click", () => {
+  document.getElementById("input-search").value = "";
+  document.querySelector(".api__toc__search__clear").classList.remove("active");
   jets.destroy();
   reinitJets();
-});
-
-/**
- * Add hash to URL bar when sidebar links are clicked
- */
-
-$(".api__toc__item a").on("click", event => {
-  const hash = event.currentTarget.href.split("#")[1];
-  history.replaceState({}, "", `#${hash}`);
 });
 
 
 
 //  H E L P E R
 
-/**
- * Reinitialize search functionality
- */
+// Reinitialize search functionality
 
 function reinitJets() {
   jets = new Jets({
@@ -60,5 +44,5 @@ function reinitJets() {
     searchTag: "#input-search"
   });
 
-  $("#input-search").focus();
+  document.getElementById("input-search").focus();
 }
