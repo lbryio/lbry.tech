@@ -8,12 +8,13 @@ import async from "choo-async";
 import asyncHtml from "choo-async/html";
 import choo from "choo";
 import devtools from "choo-devtools";
+import { require as local } from "app-root-path";
 import ssr from "choo-ssr";
 
 //  V A R I A B L E S
 
-import head from "./components/head";
-import wrapper from "./components/wrapper";
+const head = local("app/components/head");
+const wrapper = local("app/components/wrapper");
 
 
 
@@ -57,7 +58,7 @@ module.exports = exports = main;
 
 //  H E L P E R
 
-function shell (head, body) {
+function shell(head, body) {
   return (state, emit) => {
     const bodyPromise = Promise.resolve(body(state, emit));
     const headPromise = bodyPromise.then(() => head(state, emit)); // resolve `head` once `body` is resolved

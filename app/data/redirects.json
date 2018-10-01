@@ -1,9 +1,9 @@
 {
-  "/tour" : "/playground",
-  "/play" : "/playground",
-  "/api" :  "/resources",
-  "/api/protocol" : "/api/sdk",
-  "/api/lbry" : "/api/sdk",
-  "/api/lbrycrd" : "/api/blockchain",
+  "/api": "/resources",
+  "/api/lbry": "/api/sdk",
+  "/api/lbrycrd": "/api/blockchain",
+  "/api/protocol": "/api/sdk",
+  "/play": "/playground",
+  "/tour": "/playground",
   "/whitepaper": "https://whitepaper.lbry.tech"
 }

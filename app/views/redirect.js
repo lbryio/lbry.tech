@@ -11,12 +11,12 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import { require as local } from "app-root-path";
-import redirectOr404 from "../modules/redirectOr404";
 import raw from "choo/html/raw";
 
 //  V A R I A B L E S
 
 const numberRegex = /^[0-9]/g;
+const redirect404 = local("app/modules/redirect-404");
 
 const md = require("markdown-it")({
   html: true,
@@ -38,6 +38,8 @@ const md = require("markdown-it")({
     }
   });
 
+
+
 //  E X P O R T
 
 module.exports = exports = (state, emit) => { // eslint-disable-line
@@ -45,9 +47,8 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
   else path = state.params.wildcard;
 
-  if (!fs.existsSync(`./documents/${path}.md`)) {
-    return redirectOr404(state.href);
-  }
+  if (!fs.existsSync(`./documents/${path}.md`))
+    return redirect404(state);
 
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
   const markdownFileDetails = fm(markdownFile);
@@ -106,9 +107,10 @@ function partialFinder(markdownBody) {
     const filename = decamelize(partial, "-").replace("<", "").replace("/>", "").trim();
     const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
-    if (!fileExistsTest) {
+    if (!fileExistsTest)
       markdownBody = markdownBody.replace(partial, "");
-    } else {
+
+    else {
       const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
       if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
@@ -119,15 +121,13 @@ function partialFinder(markdownBody) {
   return markdownBody;
 }
 
-
 function wikiFinder(markdownBody) {
   return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
-    const label = p1.trim(),
-      href = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
+    const label = p1.trim();
+    const url = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
 
     return label ?
-      `<a href="${href}" class="link--glossary">${label}</a>` :
+      `<a href="${url}" class="link--glossary">${label}</a>` :
       match.input;
-  }
-  );
+  });
 }
