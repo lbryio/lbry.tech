@@ -7,6 +7,8 @@
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
 import redirectOr404 from "../modules/redirectOr404";
+import headerBlockchain from "../components/api/header-blockchain";
+import headerSdk from "../components/api/header-sdk";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
 
@@ -53,8 +55,12 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
 
         <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(response)}</ul>
       </aside>
-
-      <section class="api__content" id="toc-content">${createApiContent(response)}</section>
+      <section class="api__content">
+        ${createApiHeader(state.params.wildcard)}
+        <div class="api__documentation" id="toc-content">
+          ${createApiContent(response)}
+        </div>
+      </section>
     </div>
 
     <script src="/assets/scripts/plugins/jets.js"></script>
@@ -68,6 +74,15 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
 
 
 //  H E L P E R S
+
+function createApiHeader(slug) {
+  switch (slug) {
+    case "sdk":
+      return headerSdk();
+    case "blockchain":
+      return headerBlockchain();
+  }
+}
 
 function createApiContent(apiDetails) {
   const apiContent = [];

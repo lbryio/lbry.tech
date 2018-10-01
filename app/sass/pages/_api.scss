@@ -17,7 +17,7 @@
 
 .api__header
 {
-  color: red;
+  padding: 2rem;
 }
 
 
@@ -107,27 +107,14 @@
 }
 
 
-
-/**
- * API | Main Content
- *
- * @class     .api__content
- * @class     .api__content__body
- * @class     .api__content__body__arguments
- *
- * @class     .api__content__body__argument
- * @selector  {::after}
- * @selector  {:last-of-type}
- * @selector  {:nth-child}
- *
- * @class     .api__content__example
- */
-
 .api__content {
-  display: grid;
   float: right;
-  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
   width: calc(100% - 200px);
+}
+
+.api__documentation {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
 
   h1 {
     font-size: 1.5rem;
