@@ -140,12 +140,12 @@ function partialFinder(markdownBody) {
 
 function wikiFinder(markdownBody) {
   return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
-      const label = p1.trim(),
-        href = encodeURI("/glossary#" + label.replace(/\s+/g, '-'));
+    const label = p1.trim(),
+      href = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
 
-      return label ?
-        `<a href="${href}" class="link--glossary">${label}</a>` :
-        match.input;
-    }
+    return label ?
+      `<a href="${href}" class="link--glossary">${label}</a>` :
+      match.input;
+  }
   );
 }
