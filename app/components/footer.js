@@ -48,7 +48,6 @@ export default function (state) {
           <li><a href="/resources" title="View LBRY resources">Resources</a></li>
           <li><a href="/contribute" title="Contribute to LBRY">Contribute</a></li>
           <li><a href="/community" title="Interact with LBRY">Community</a></li>
-          <li><a href="/sitemap" title="">Sitemap</a></li>
         </ul>
       </div>
     </footer>
