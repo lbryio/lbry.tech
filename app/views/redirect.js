@@ -11,9 +11,7 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import { require as local } from "app-root-path";
-import redirects from "../data/redirects.json";
-import redirect from "../modules/redirect";
-import Page404 from "./404.js";
+import redirectOr404 from "../modules/redirectOr404";
 import raw from "choo/html/raw";
 
 //  V A R I A B L E S
@@ -44,17 +42,11 @@ const md = require("markdown-it")({
 
 module.exports = exports = (state, emit) => { // eslint-disable-line
   let path;
-
   if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
   else path = state.params.wildcard;
 
   if (!fs.existsSync(`./documents/${path}.md`)) {
-    const redirectUrl = redirects[path] || redirects["/" + path];
-    if (redirectUrl) {
-      redirect(redirectUrl);
-    } else {
-      return Page404();
-    }
+    return redirectOr404(state.href);
   }
 
   const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");

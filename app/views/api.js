@@ -6,6 +6,7 @@
 
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
+import redirectOr404 from "../modules/redirectOr404";
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
 
@@ -59,6 +60,8 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
     <script src="/assets/scripts/plugins/jets.js"></script>
     <script src="/assets/scripts/api.js"></script>
   `;
+}).catch(() => {
+  redirectOr404(state.href);
 });
 
 
