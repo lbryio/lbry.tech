@@ -3,18 +3,15 @@
 
 
 // Initiate search functionality
-
 let jets = new Jets({
   contentTag: "#toc",
   searchTag: "#input-search"
 });
 
 // Reset search on page load
-
 document.getElementById("input-search").value = "";
 
 // Activate search
-
 document.getElementById("input-search").addEventListener("keyup", () => {
   if (document.getElementById("input-search").value)
     document.querySelector(".api__toc__search__clear").classList.add("active");
@@ -24,7 +21,6 @@ document.getElementById("input-search").addEventListener("keyup", () => {
 });
 
 // Cancel search
-
 document.querySelector(".api__toc__search__clear").addEventListener("click", () => {
   document.getElementById("input-search").value = "";
   document.querySelector(".api__toc__search__clear").classList.remove("active");

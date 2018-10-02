@@ -48,8 +48,10 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
     }
 
     // Add hash to URL bar when sidebar links are clicked
-    if (event.target.parentElement.className === "api__toc__item")
-      history.replaceState({}, "", `#${element}`);
+    if (
+      event.target.parentElement.className === "api__toc__item" ||
+      event.target.parentElement.parentElement.className === "component--glossary-toc"
+    ) history.replaceState({}, "", `#${element}`);
   });
 });
 
