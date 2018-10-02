@@ -7,5 +7,5 @@ app/dist/bundle.css
 app/dist/bundle.css.map
 
 # Directories
-cache/*
+cache
 node_modules
