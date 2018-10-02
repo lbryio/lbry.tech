@@ -199,6 +199,7 @@
 
   .left {
     border-right: 1px solid rgba($gray, 0.3);
+    float: left;
     width: 30%;
     word-wrap: break-word;
 
@@ -213,6 +214,7 @@
   }
 
   .right {
+    float: right;
     width: 70%;
   }
 
