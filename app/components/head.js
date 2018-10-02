@@ -69,7 +69,6 @@ module.exports = exports = (state, emit) => {
     <link rel="shortcut icon" href="/assets/favicon.ico"/>
     <link rel="stylesheet" href="/assets/bundle.css"/>
 
-    <script src="/assets/scripts/vendor/zepto.js"></script>
     <script src="/assets/scripts/sockets.js"></script>
   `;
 };

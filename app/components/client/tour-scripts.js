@@ -1,4 +1,4 @@
-/* global $, send */ "use strict";
+/* global send */ "use strict";
 
 
 
@@ -80,11 +80,12 @@ function clearCanvas(canvas) {
 
 function detectLanguageAndUpdate() { // eslint-disable-line
   const compare = (array1, array2) => array2.filter(value => array2.indexOf(value)); // compare two arrays and get match(es)
-  const memeLocaleObject = $("#meme-language").children();
+  const memeLocaleObject = document.getElementById("meme-language").children;
   const memeLocales = [];
   const userLocales = [];
 
-  for (const language of navigator.languages) userLocales.push(language);
+  for (const language of navigator.languages)
+    userLocales.push(language);
 
   for (const key in memeLocaleObject) {
     if (memeLocaleObject[key] && memeLocaleObject[key].value)
@@ -95,7 +96,7 @@ function detectLanguageAndUpdate() { // eslint-disable-line
     memeLocales.length &&
     userLocales.length &&
     compare(memeLocales, userLocales).length
-  ) $("#meme-language").children(`option[value="${compare(memeLocales, userLocales)[0]}"]`).attr("selected", true);
+  ) document.querySelector(`option[value="${compare(memeLocales, userLocales)[0]}"]`).setAttribute("selected", true);
 }
 
 function debounce(func, wait, immediate) {
@@ -212,7 +213,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 }
 
 function getMemeInfo() { // TODO: Error handling
-  const info = {
+  return {
     description: document.getElementById("meme-description").value,
     file_path: document.getElementById("meme-canvas").toDataURL("image/jpeg", 0.6),
     language: document.getElementById("meme-language").value,
@@ -221,8 +222,6 @@ function getMemeInfo() { // TODO: Error handling
     nsfw: document.getElementById("meme-nsfw-flag").checked,
     title: document.getElementById("meme-title").value
   };
-
-  return info;
 }
 
 const handleExamples = debounce(event => {
@@ -375,11 +374,9 @@ function updateCanvas(imageSource) {
 
   if (imageSource) {
     ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
-    // ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
     img.src = imageSource.src;
   } else {
     ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
-    // ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
   }
 
   positionCanvasText(ctx, canvasHeight, canvasWidth);
