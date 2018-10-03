@@ -12,7 +12,7 @@ import raw from "choo/html/raw";
 
 //  E X P O R T
 
-export default function () {
+export default () => {
   return dedent`
     <section class="tour">
       <ul class="tour__navigation">
@@ -22,7 +22,7 @@ export default function () {
       <section class="tour__content">${raw(example1())}</section>
     </section>
   `;
-}
+};
 
 
 
