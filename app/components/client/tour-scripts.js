@@ -192,7 +192,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         "example": exampleNumber
       }));
 
-      document.getElementById("fetch-claim-uri").value = data; // TODO: ...
+      document.getElementById("fetch-claim-uri").value = data;
 
       document.getElementById("tour-results").innerHTML = `
         <pre><code class="language-bash">
