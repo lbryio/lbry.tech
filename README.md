@@ -43,6 +43,7 @@ Visit [LBRY.tech](https://lbry.tech) to see this repo in production.
 
 ## Contributing
 Contributions to this project are welcome, encouraged, and compensated.
+
 For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
@@ -50,6 +51,7 @@ This project is MIT licensed.
 
 ## Security
 We take security seriously. Please contact [security@lbry.io](mailto:security@lbry.io) regarding any security issues.
+
 [Our PGP key is here](https://keybase.io/lbry/key.asc) if you need it.
 
 ## Contact
