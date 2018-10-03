@@ -15,9 +15,18 @@
   }
 }
 
-.api__header
-{
+.api__header {
   padding: 2rem;
+  position: relative;
+
+  &::after {
+    width: 100%; height: 1px;
+    bottom: -1px; left: 0;
+
+    background-color: rgba($gray, 0.3);
+    content: "";
+    position: absolute;
+  }
 }
 
 

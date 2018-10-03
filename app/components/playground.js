@@ -12,17 +12,15 @@ import raw from "choo/html/raw";
 
 //  E X P O R T
 
-export default () => {
-  return dedent`
-    <section class="tour">
-      <ul class="tour__navigation">
-        ${raw(navigation())}
-      </ul>
-      <p class="tour__description" id="tour-example-description"></p>
-      <section class="tour__content">${raw(example1())}</section>
-    </section>
-  `;
-};
+export default () => dedent`
+  <section class="playground">
+    <ul class="playground__navigation">
+      ${raw(navigation())}
+    </ul>
+    <p class="playground__description" id="playground-example-description"></p>
+    <section class="playground__content">${raw(example1())}</section>
+  </section>
+`;
 
 
 
@@ -30,16 +28,16 @@ export default () => {
 
 function example1() {
   return html`
-    <div class="tour__content__urlbar" id="tour-url">
+    <div class="playground__content__urlbar" id="playground-url">
       <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Enter a LBRY address or select a video below" type="text"/>
       <button class="button" data-action="execute claim" type="button">Resolve</button>
     </div>
 
-    <div class="tour__content__trends" id="tour-loader"></div>
-    <div id="tour-results"></div>
+    <div class="playground__content__trends" id="playground-loader"></div>
+    <div id="playground-results"></div>
 
     <script>
-      document.getElementById("tour-example-description").textContent = document.querySelector("[data-action='tour, example 1']").dataset.description
+      document.getElementById("playground-example-description").textContent = document.querySelector("[data-action='playground, example 1']").dataset.description
     </script>
   `;
 }
@@ -47,8 +45,8 @@ function example1() {
 function navigation() { // TODO: Save tutorial position to localStorage
   return dedent`
     <li
-      class="tour__navigation__example"
-      data-action="tour, example 1"
+      class="playground__navigation__example"
+      data-action="playground, example 1"
       data-description="In this example, you can see what runs under the hood when selecting content to view in the LBRY app."
       data-example="1"
       data-success="<strong>Success</strong> You resolved a claim, which is a <em>fancy</em> way of saying you searched for a piece of content and got back all the metadata associated with it (if it exists)."
@@ -58,8 +56,8 @@ function navigation() { // TODO: Save tutorial position to localStorage
     </li>
 
     <li
-      class="tour__navigation__example"
-      data-action="tour, example 2"
+      class="playground__navigation__example"
+      data-action="playground, example 2"
       data-description="Sometimes you want to create content, not just consume it. In this example, you can create a meme and upload it to LBRY!"
       data-example="2"
       data-success="<strong>Meme-a-riffic</strong> You've just contributed to the growing expanse that is the meme industry. Where will your meme go next? YOU DECIDE!"
@@ -69,8 +67,8 @@ function navigation() { // TODO: Save tutorial position to localStorage
     </li>
 
     <li
-      class="tour__navigation__example"
-      data-action="tour, example 3"
+      class="playground__navigation__example"
+      data-action="playground, example 3"
       data-description="In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead."
       data-example="3"
       data-success="<strong>Kudos</strong> You've just supported a creator with LBC (or, LBRY credits) with our own stash of LBC (you'd use your own IRL). You're basically saying, 'thanks for this great content, please continue!' and that's awesome. You're awesome."

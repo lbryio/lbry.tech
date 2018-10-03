@@ -24,7 +24,7 @@ module.exports = exports = () => `
 
       <p>LBRY uses a public, proof-of-work blockchain that is very similar to Bitcoin. The blockchain is the foundation of the protocol stack.</p>
 
-      <p>The most salient feature of the LBRY blockchain is the association of a string of characters (a "name") with a structured set of metadata. This name can be accessed as a LBRY URL, e.g. <a class="__plain" href="/tour?url=hellolbry"><code>lbry://hellolbry</code></a></p>
+      <p>The most salient feature of the LBRY blockchain is the association of a string of characters (a "name") with a structured set of metadata. This name can be accessed as a LBRY URL, e.g. <a class="__plain" href="/playground?url=hellolbry"><code>lbry://hellolbry</code></a></p>
 
       <p>The LBRY blockchain stores names and metadata in a Merkle tree. This allows LBRY URLs to be trustfully resolved even without a full copy of the blockchain.</p>
 

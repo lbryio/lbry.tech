@@ -16,7 +16,7 @@ const WALLET = require("./ecosystem/submodule-wallet");
 
 //  E X P O R T
 
-export default function () {
+export default () => {
   return `
     <section class="ecosystem">
       <aside class="ecosystem__submodules">
@@ -36,4 +36,4 @@ export default function () {
       </aside>
     </section>
   `;
-}
+};

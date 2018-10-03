@@ -15,7 +15,7 @@ const config = local("/config");
 
 //  E X P O R T
 
-export default function (pagePath) {
+export default pagePath => {
   let githubUrl = `https://github.com/${config.github.repo}/edit/${config.github.branch}`;
 
   switch(pagePath) {
@@ -23,12 +23,16 @@ export default function (pagePath) {
       githubUrl = `${githubUrl}/app/views/home.js`;
       break;
 
-    case "/resources":
-      githubUrl = `${githubUrl}/views/pages/resources.js`;
+    case "/api":
+      githubUrl = `${githubUrl}/app/views/api.js`;
       break;
 
-    case "/tour":
-      githubUrl = `${githubUrl}/app/components/tour.js`;
+    case "/api/blockchain":
+      githubUrl = "https://github.com/lbryio/lbrycrd/blob/add_api_docs_scripts/contrib/devtools/generated/api_v1.json";
+      break;
+
+    case "/api/sdk":
+      githubUrl = "https://github.com/lbryio/lbry/blob/master/docs/api.json";
       break;
 
     default:
@@ -39,9 +43,9 @@ export default function (pagePath) {
   return html`
     <a
       href="${githubUrl}"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
       title="${config.github.linkText}"
     >${config.github.linkText}</a>
   `;
-}
+};

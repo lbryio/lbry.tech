@@ -2,7 +2,7 @@
 
 
 
-initializeTour();
+initializePlayground();
 
 
 
@@ -16,15 +16,15 @@ if (window.location.href.search && window.location.href.split("?url=")[1]) { // 
 document.querySelector("body").addEventListener("click", event => {
   if (event.target.dataset.action) {
     event.preventDefault();
-    document.querySelector(".tour").classList.add("waiting");
+    document.querySelector(".playground").classList.add("waiting");
     handleExamples(event.target);
   }
 
   if (
     event.explicitOriginalTarget.classList &&
-    event.explicitOriginalTarget.classList[0] === "tour__content__meme__canvas__thumbnail"
+    event.explicitOriginalTarget.classList[0] === "playground__content__meme__canvas__thumbnail"
   ) {
-    for (const thumbnail of document.querySelectorAll(".tour__content__meme__canvas__thumbnail"))
+    for (const thumbnail of document.querySelectorAll(".playground__content__meme__canvas__thumbnail"))
       thumbnail.classList.remove("selected");
 
     event.explicitOriginalTarget.classList.add("selected");
@@ -119,18 +119,18 @@ function debounce(func, wait, immediate) {
   };
 }
 
-function initializeTour() {
-  document.querySelector(".tour").classList.add("waiting");
+function initializePlayground() {
+  document.querySelector(".playground").classList.add("waiting");
   document.querySelector("#fetch-claim-uri").value = "";
   document.querySelector("#fetch-claim-uri").focus();
-  document.querySelector(".tour__navigation__example:nth-child(1)").classList.add("active");
+  document.querySelector(".playground__navigation__example:nth-child(1)").classList.add("active");
 
   send(JSON.stringify({
-    "message": "landed on tour"
+    "message": "landed on playground"
   }));
 
   setTimeout(() => {
-    document.querySelector(".tour__navigation__example:nth-child(1)").click();
+    document.querySelector(".playground__navigation__example:nth-child(1)").click();
   }, 300);
 }
 
@@ -150,7 +150,7 @@ function fetchMetadata(exampleNumber, data) {
 
       document.getElementById("fetch-claim-uri").value = data;
 
-      document.getElementById("tour-results").innerHTML = `
+      document.getElementById("playground-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
@@ -160,7 +160,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         <div id="example1-result"></div>
       `;
 
-      document.getElementById("tour-loader").style.display = "none";
+      document.getElementById("playground-loader").style.display = "none";
       break;
 
     case 2:
@@ -171,7 +171,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         "example": exampleNumber
       }));
 
-      document.getElementById("tour-results").innerHTML = `
+      document.getElementById("playground-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "TITLE_OF_YOUR_CONTENT", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "DESCRIPTION_OF_YOUR_CONTENT", "title": "TITLE_OF_YOUR_CONTENT", "language": "en", "license": "", "nsfw": false }}}'</span> <span class="token url">http://localhost:5279    </span>
@@ -181,7 +181,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         <div id="example2-result"></div>
       `;
 
-      document.getElementById("tour-loader").style.display = "none";
+      document.getElementById("playground-loader").style.display = "none";
       break;
 
     case 3:
@@ -194,7 +194,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
       document.getElementById("fetch-claim-uri").value = data;
 
-      document.getElementById("tour-results").innerHTML = `
+      document.getElementById("playground-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
@@ -204,7 +204,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         <div id="example3-result"></div>
       `;
 
-      document.getElementById("tour-loader").style.display = "none";
+      document.getElementById("playground-loader").style.display = "none";
       break;
 
     default:
@@ -228,14 +228,14 @@ const handleExamples = debounce(event => {
   let exampleNumber;
   const data = event.dataset;
 
-  if (!parseInt(document.querySelector(".tour__navigation__example.active").dataset.example)) return;
-  exampleNumber = parseInt(document.querySelector(".tour__navigation__example.active").dataset.example);
+  if (!parseInt(document.querySelector(".playground__navigation__example.active").dataset.example)) return;
+  exampleNumber = parseInt(document.querySelector(".playground__navigation__example.active").dataset.example);
 
   switch(data.action) {
     case "choose claim":
       fetchMetadata(exampleNumber, data.claimId);
 
-      if (document.querySelector(".tour__navigation__example:nth-child(3)").classList.contains("active"))
+      if (document.querySelector(".playground__navigation__example:nth-child(3)").classList.contains("active"))
         document.getElementById("fetch-claim-uri").value = event.alt + "#" + event.dataset.claimId;
 
       break;
@@ -245,28 +245,28 @@ const handleExamples = debounce(event => {
       fetchMetadata(exampleNumber, document.getElementById("fetch-claim-uri").value);
       break;
 
-    case "tour, example 1":
-      if (document.getElementById("tour-loader").classList.contains("tour__content__meme")) {
-        document.getElementById("tour-loader").classList.remove("tour__content__meme");
-        document.getElementById("tour-loader").classList.add("tour__content__trends");
+    case "playground, example 1":
+      if (document.getElementById("playground-loader").classList.contains("playground__content__meme")) {
+        document.getElementById("playground-loader").classList.remove("playground__content__meme");
+        document.getElementById("playground-loader").classList.add("playground__content__trends");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
-      document.querySelector("#tour-url button").textContent = "Resolve";
+      document.querySelector("#playground-url button").textContent = "Resolve";
 
-      if (document.getElementById("tour-url").style.display === "none")
-        document.getElementById("tour-url").removeAttribute("style");
+      if (document.getElementById("playground-url").style.display === "none")
+        document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".tour__navigation__example"))
+      for (const example of document.querySelectorAll(".playground__navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".tour__navigation__example:nth-child(1)").classList.add("active");
+      document.querySelector(".playground__navigation__example:nth-child(1)").classList.add("active");
 
-      document.getElementById("tour-loader").innerHTML = "";
-      document.getElementById("tour-results").innerHTML = "";
+      document.getElementById("playground-loader").innerHTML = "";
+      document.getElementById("playground-results").innerHTML = "";
 
-      document.getElementById("tour-loader").removeAttribute("style");
-      document.getElementById("tour-results").removeAttribute("style");
+      document.getElementById("playground-loader").removeAttribute("style");
+      document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -274,25 +274,25 @@ const handleExamples = debounce(event => {
 
       break;
 
-    case "tour, example 2":
-      if (document.getElementById("tour-loader").classList.contains("tour__content__trends")) {
-        document.getElementById("tour-loader").classList.remove("tour__content__trends");
-        document.getElementById("tour-loader").classList.add("tour__content__meme");
+    case "playground, example 2":
+      if (document.getElementById("playground-loader").classList.contains("playground__content__trends")) {
+        document.getElementById("playground-loader").classList.remove("playground__content__trends");
+        document.getElementById("playground-loader").classList.add("playground__content__meme");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
-      document.getElementById("tour-url").style.display = "none";
+      document.getElementById("playground-url").style.display = "none";
 
-      for (const example of document.querySelectorAll(".tour__navigation__example"))
+      for (const example of document.querySelectorAll(".playground__navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".tour__navigation__example:nth-child(2)").classList.add("active");
+      document.querySelector(".playground__navigation__example:nth-child(2)").classList.add("active");
 
-      document.getElementById("tour-loader").innerHTML = "";
-      document.getElementById("tour-results").innerHTML = "";
+      document.getElementById("playground-loader").innerHTML = "";
+      document.getElementById("playground-results").innerHTML = "";
 
-      document.getElementById("tour-loader").removeAttribute("style");
-      document.getElementById("tour-results").removeAttribute("style");
+      document.getElementById("playground-loader").removeAttribute("style");
+      document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`
@@ -300,28 +300,28 @@ const handleExamples = debounce(event => {
 
       break;
 
-    case "tour, example 3":
-      if (document.getElementById("tour-loader").classList.contains("tour__content__meme")) {
-        document.getElementById("tour-loader").classList.remove("tour__content__meme");
-        document.getElementById("tour-loader").classList.add("tour__content__trends");
+    case "playground, example 3":
+      if (document.getElementById("playground-loader").classList.contains("playground__content__meme")) {
+        document.getElementById("playground-loader").classList.remove("playground__content__meme");
+        document.getElementById("playground-loader").classList.add("playground__content__trends");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
-      document.querySelector("#tour-url button").textContent = "Tip";
+      document.querySelector("#playground-url button").textContent = "Tip";
 
-      if (document.getElementById("tour-url").style.display === "none")
-        document.getElementById("tour-url").removeAttribute("style");
+      if (document.getElementById("playground-url").style.display === "none")
+        document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".tour__navigation__example"))
+      for (const example of document.querySelectorAll(".playground__navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".tour__navigation__example:nth-child(3)").classList.add("active");
+      document.querySelector(".playground__navigation__example:nth-child(3)").classList.add("active");
 
-      document.getElementById("tour-loader").innerHTML = "";
-      document.getElementById("tour-results").innerHTML = "";
+      document.getElementById("playground-loader").innerHTML = "";
+      document.getElementById("playground-results").innerHTML = "";
 
-      document.getElementById("tour-loader").removeAttribute("style");
-      document.getElementById("tour-results").removeAttribute("style");
+      document.getElementById("playground-loader").removeAttribute("style");
+      document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
         "message": `request for ${data.action}`

@@ -32,19 +32,19 @@ function initializeWebSocketConnection() {
         document.querySelector(data.selector).innerHTML = data.html;
 
         if (!document.querySelector(`[data-example="${data.example}"`).classList.contains("completed"))
-          document.getElementById("tour-example-description").classList.remove("success");
+          document.getElementById("playground-example-description").classList.remove("success");
 
         document.querySelector(`[data-example="${data.example}"`).classList.add("completed");
-        document.getElementById("tour-example-description").classList.add("success");
+        document.getElementById("playground-example-description").classList.add("success");
 
-        document.getElementById("tour-example-description").innerHTML =
+        document.getElementById("playground-example-description").innerHTML =
           document.querySelector(`[data-example="${data.example}"`).dataset.success;
 
         if (document.getElementById("temp-loader"))
           document.getElementById("temp-loader").style.display = "none";
 
-        if (document.querySelector(".tour"))
-          document.querySelector(".tour").classList.remove("waiting");
+        if (document.querySelector(".playground"))
+          document.querySelector(".playground").classList.remove("waiting");
 
         break;
 
@@ -58,22 +58,22 @@ function initializeWebSocketConnection() {
           initCanvas(); // eslint-disable-line
 
           setTimeout(() => {
-            document.querySelector(".tour__content__meme__canvas__thumbnail").click();
+            document.querySelector(".playground__content__meme__canvas__thumbnail").click();
           }, 500);
         }
 
-        if (document.getElementById("tour-example-description")) {
-          document.getElementById("tour-example-description").classList.remove("success");
+        if (document.getElementById("playground-example-description")) {
+          document.getElementById("playground-example-description").classList.remove("success");
 
-          document.getElementById("tour-example-description").innerHTML =
-            document.querySelector(".tour__navigation__example.active").dataset.description;
+          document.getElementById("playground-example-description").innerHTML =
+            document.querySelector(".playground__navigation__example.active").dataset.description;
         }
 
         if (document.getElementById("temp-loader"))
           document.getElementById("temp-loader").style.display = "none";
 
-        if (document.querySelector(".tour"))
-          document.querySelector(".tour").classList.remove("waiting");
+        if (document.querySelector(".playground"))
+          document.querySelector(".playground").classList.remove("waiting");
 
         break;
 

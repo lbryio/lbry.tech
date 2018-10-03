@@ -41,7 +41,7 @@ const links = [ // TODO: Update images
 
 //  E X P O R T
 
-export default function () {
+export default () => {
   const renderedLinks = [];
   let imageLink = "";
 
@@ -53,7 +53,7 @@ export default function () {
   return `
     <div class="feature-links">${renderedLinks.join("")}</div>
   `;
-}
+};
 
 
 

@@ -36,36 +36,36 @@ module.exports = exports = (socket, action) => {
       });
       break;
 
-    case (action.message === "landed on tour"):
+    case (action.message === "landed on playground"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
           "html": result,
           "message": "updated html",
-          "selector": "#tour-loader"
+          "selector": "#playground-loader"
         }));
       });
       break;
 
-    case (action.message === "request for tour, example 1"):
+    case (action.message === "request for playground, example 1"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
           "html": result,
           "message": "updated html",
-          "selector": "#tour-loader"
+          "selector": "#playground-loader"
         }));
       });
       break;
 
-    case (action.message === "request for tour, example 2"):
+    case (action.message === "request for playground, example 2"):
       generateMemeCreator(socket);
       break;
 
-    case (action.message === "request for tour, example 3"):
+    case (action.message === "request for playground, example 3"):
       generateContent(3, result => {
         socket.send(JSON.stringify({
           "html": result,
           "message": "updated html",
-          "selector": "#tour-loader"
+          "selector": "#playground-loader"
         }));
       });
       break;
@@ -101,7 +101,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
         for (const part of collection) {
           try {
             renderedContentCollection.push(`
-              <figure class="tour__content__trend">
+              <figure class="playground__content__trend">
                 <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
 
                 <figcaption data-action="choose claim" data-claim-id="${part.name}">
@@ -117,7 +117,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
 
         renderedContentCollection.push(`
           <script>
-            document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 1']").dataset.description
+            document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 1']").dataset.description
           </script>
         `);
 
@@ -155,7 +155,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
           part.channel_name
         ) {
           renderedContentCollection.push(`
-            <figure class="tour__content__trend">
+            <figure class="playground__content__trend">
               <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
               <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
                 ${part.value.stream.metadata.title}
@@ -168,7 +168,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
 
       renderedContentCollection.push(`
         <script>
-          document.getElementById("tour-example-description").innerHTML = document.querySelector("[data-action='tour, example 3']").dataset.description
+          document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 3']").dataset.description
         </script>
       `);
 
@@ -215,17 +215,17 @@ function generateMemeCreator(socket) {
   const renderedImages = [];
 
   for (const image of images)
-    renderedImages.push(`<img alt="${image.alt}" class="tour__content__meme__canvas__thumbnail" src="${image.src}"/>`);
+    renderedImages.push(`<img alt="${image.alt}" class="playground__content__meme__canvas__thumbnail" src="${image.src}"/>`);
 
   const memeCreator = html`
-    <div class="tour__content__meme__canvas">
+    <div class="playground__content__meme__canvas">
       <img alt="Base image for LBRY meme creator" id="base-image" style="height: 0; position: absolute; visibility: hidden;"/>
       <canvas id="meme-canvas" height="600" width="800">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
       ${renderedImages}
     </div>
 
-    <form class="tour__content__meme__editor">
+    <form class="playground__content__meme__editor">
       <h2>Image Text</h2>
 
       <fieldset>
@@ -294,7 +294,7 @@ function generateMemeCreator(socket) {
     "example": 2,
     "html": memeCreator,
     "message": "updated html",
-    "selector": "#tour-loader"
+    "selector": "#playground-loader"
   }));
 }
 

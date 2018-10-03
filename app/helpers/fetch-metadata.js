@@ -103,7 +103,7 @@ module.exports = exports = (data, socket) => {
             logSlackError(
               "\n" +
               "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(publishResponse.error)) + "```" + "\n" +
-              "> _Cause: Someone is going through the Tour after a response has been parsed_\n"
+              "> _Cause: Someone is going through the Playground after a response has been parsed_\n"
             );
           }
 
@@ -122,7 +122,7 @@ module.exports = exports = (data, socket) => {
           publishResponse.result &&
           publishResponse.result.claim_address
         ) explorerNotice = `
-          <p class="tour__description success">To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
+          <p class="playground__description success">To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
         `;
 
         return socket.send(JSON.stringify({
@@ -190,7 +190,7 @@ module.exports = exports = (data, socket) => {
           logSlackError(
             "\n" +
             "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(error)) + "```" + "\n" +
-            "> _Cause: Someone is going through the Tour_\n"
+            "> _Cause: Someone is going through the Playground_\n"
           );
         }
 
@@ -202,7 +202,7 @@ module.exports = exports = (data, socket) => {
           logSlackError(
             "\n" +
             "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error.message)) + "```" + "\n" +
-            "> _Cause: Someone is going through the Tour after a response has been parsed_\n"
+            "> _Cause: Someone is going through the Playground after a response has been parsed_\n"
           );
         }
 
@@ -216,7 +216,7 @@ module.exports = exports = (data, socket) => {
         body.result &&
         body.result.txid
       ) explorerNotice = `
-        <p class="tour__description success">If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
+        <p class="playground__description success">If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
       `;
 
       if (socket) {
