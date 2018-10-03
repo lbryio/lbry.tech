@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2a16aa55/preview.png" title="Screenshot of lbry.tech"/>
+  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2cc49032/preview.png" title="Screenshot of lbry.tech"/>
 </div>
 
 <div align="center">
