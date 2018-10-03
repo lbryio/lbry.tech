@@ -5,79 +5,72 @@
 //  P A C K A G E S
 
 import html from "choo/html";
-import Nanocomponent from "nanocomponent";
-import xtend from "xtend";
 
 
 
 //  E X P O R T
 
-export default class Navigation extends Nanocomponent {
-  constructor() {
-    super();
-
-    this.state = {
-      active: true,
-      links: [
-        {
-          name: "LBRY.io",
-          title: "Escape the techno scene",
-          url: "https://lbry.io"
-        },
-        {
-          name: "Overview",
-          title: "LBRY overview",
-          url: "/overview"
-        },
-        {
-          name: "Playground",
-          title: "Experience LBRY",
-          url: "/playground"
-        },
-        {
-          name: "Resources",
-          title: "View LBRY resources",
-          url: "/resources"
-        },
-        {
-          name: "Community",
-          title: "Interact with LBRY",
-          url: "/community"
-        }
-      ]
-    };
-
-    this.renderLink = this.renderLink.bind(this);
-  }
-
-  createElement(props) {
-    this.state = xtend(this.state, props);
-
-    return html`
-      <nav class="navigation">
-        <div class="inner-wrap">
-          <a class="navigation__item logo" href="/" title="LBRY homepage">Home</a>
-          ${this.state.links.map(this.renderLink)}
-        </div>
-      </nav>
-    `;
-  }
-
-  renderLink(props, i, arr) { // eslint-disable-line
-    let activeClass;
-
-    if (this.state.href === "/" && props.url === "/") {
-      activeClass = true;
-    } else if (props.url !== "/" && this.state.href.indexOf(props.url) >= 0) {
-      activeClass = true;
+export default currentUrl => {
+  const links = [
+    {
+      name: "LBRY.io",
+      title: "Escape the techno scene",
+      url: "https://lbry.io"
+    },
+    {
+      name: "Overview",
+      title: "LBRY overview",
+      url: "/overview"
+    },
+    {
+      name: "Playground",
+      title: "Experience LBRY",
+      url: "/playground"
+    },
+    {
+      name: "Resources",
+      title: "View LBRY resources",
+      url: "/resources"
+    },
+    {
+      name: "Community",
+      title: "Interact with LBRY",
+      url: "/community"
     }
+  ];
 
-    return html`
-      <a
-        class="navigation__item${activeClass ? " active" : ""}"
-        href="${props.url}"
-        title="${props.title}"
-      >${props.name}</a>
-    `;
+  return html`
+    <nav class="navigation">
+      <div class="inner-wrap">
+        <a class="navigation__item logo" href="/" title="LBRY homepage">Home</a>
+        ${links.map(link => renderLink(currentUrl, link))}
+      </div>
+    </nav>
+  `;
+};
+
+
+
+//  H E L P E R
+
+function renderLink(href, link) {
+  let activeClass;
+
+  switch(true) {
+    case (link.url !== "/" && href.indexOf(link.url) >= 0):
+      activeClass = true;
+      break;
+
+    default:
+      activeClass = false;
+      break;
   }
+
+  return html`
+    <a
+      class="navigation__item${activeClass ? " active" : ""}"
+      href="${link.url}"
+      title="${link.title}"
+    >${link.name}</a>
+  `;
 }

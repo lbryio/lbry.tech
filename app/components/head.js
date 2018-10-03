@@ -16,7 +16,7 @@ let title = "";
 
 //  E X P O R T
 
-module.exports = exports = (state, emit) => {
+export default (state, emit) => {
   switch(true) {
     case (state.route !== "/" && state.params.wildcard):
       title = `${state.params.wildcard.capitalize()} ∙ LBRY ∙ ${config.meta.tagline}`;

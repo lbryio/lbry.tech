@@ -5,26 +5,25 @@
 //  P A C K A G E
 
 import asyncHtml from "choo-async/html";
+import { require as local } from "app-root-path";
 
 //  V A R I A B L E S
 
-import footer from "./footer";
-import Navigation from "./navigation";
-
-const navigation = new Navigation();
+const footer = local("app/components/footer").default;
+const navigation = local("app/components/navigation").default;
 
 
 
 //  E X P O R T
 
-module.exports = exports = children => (state, emit) => asyncHtml`
+export default children => (state, emit) => asyncHtml`
   <main>
     <noscript>
       <p>LBRY is quite fancy and relies on a bit of JavaScript to do these fancy things.</p>
       <p>Please enable it, if you can.</p>
     </noscript>
 
-    ${navigation.render({ href: state.href || "/" })}
+    ${navigation(state.href)}
     <aside class="flashes" id="flash-container"></aside>
     ${children(state, emit)}
     ${footer(state, emit)}

@@ -13,8 +13,8 @@ import ssr from "choo-ssr";
 
 //  V A R I A B L E S
 
-const head = local("app/components/head");
-const wrapper = local("app/components/wrapper");
+const head = local("app/components/head").default;
+const wrapper = local("app/components/wrapper").default;
 
 
 

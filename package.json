@@ -32,15 +32,13 @@
     "make-promises-safe": "^1.1.0",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
-    "nanocomponent": "^6.5.2",
     "prismjs": "^1.15.0",
     "redis": "^2.8.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "slack-node": "^0.1.8",
     "socket.io": "^2.1.1",
-    "stringify-object": "^3.2.2",
-    "xtend": "^4.0.1"
+    "stringify-object": "^3.2.2"
   },
   "description": "Documentation for the LBRY protocol and associated projects",
   "devDependencies": {
