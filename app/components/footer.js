@@ -18,7 +18,7 @@ const config = local("/config");
 
 //  E X P O R T
 
-export default function (state) {
+export default state => {
   return html`
     <section class="email-subscribe-container">
       ${emailSubscribe()}
@@ -64,4 +64,4 @@ export default function (state) {
        ga("send", "pageview");
     </script>
   `;
-}
+};

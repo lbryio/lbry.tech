@@ -59,7 +59,7 @@ function initializeWebSocketConnection() {
 
           setTimeout(() => {
             document.querySelector(".tour__content__meme__canvas__thumbnail").click();
-          }, 100);
+          }, 500);
         }
 
         if (document.getElementById("tour-example-description")) {

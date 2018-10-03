@@ -234,6 +234,10 @@ const handleExamples = debounce(event => {
   switch(data.action) {
     case "choose claim":
       fetchMetadata(exampleNumber, data.claimId);
+
+      if (document.querySelector(".tour__navigation__example:nth-child(3)").classList.contains("active"))
+        document.getElementById("fetch-claim-uri").value = event.alt + "#" + event.dataset.claimId;
+
       break;
 
     case "execute claim":
