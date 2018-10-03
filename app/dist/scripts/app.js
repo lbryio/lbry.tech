@@ -17,8 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Browsers not Firefox do not yet support `text-orientation` and/or `writing-mode`
-if (!/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent))
-  document.querySelector(".component--glossary-toc-toggle").classList.add("noncompliant-fix");
+if (
+  !/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent) &&
+  document.querySelector(".component--glossary-toc-toggle")
+) document.querySelector(".component--glossary-toc-toggle").classList.add("noncompliant-fix");
 
 
 
