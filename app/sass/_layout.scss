@@ -58,6 +58,10 @@ hr {
   margin-bottom: 1rem;
 }
 
+code {
+  @include font-mono;
+}
+
 .alert {
   bottom: 0; left: 0;
 
