@@ -40,7 +40,7 @@ export default state => {
       <div class="inner-wrap">
         <ul>
           <li>
-            <a href="//lbry.io" title="Rediscover content freedom">← LBRY.io</a> |
+            <a href="//${process.env.NODE_ENV === "development" ? "localhost:8000" : "lbry.io"}" title="Rediscover content freedom">← LBRY.io</a> |
             ${editLink(state.href)}
           </li>
 

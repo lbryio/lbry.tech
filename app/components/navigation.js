@@ -15,7 +15,7 @@ export default currentUrl => {
     {
       name: "LBRY.io",
       title: "Escape the techno scene",
-      url: "https://lbry.io"
+      url: process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://lbry.io"
     },
     {
       name: "Overview",
