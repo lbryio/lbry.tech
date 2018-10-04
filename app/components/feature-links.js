@@ -7,33 +7,38 @@
 const links = [ // TODO: Update images
   {
     href: "https://chat.lbry.io",
-    image: "http://static.simpledesktops.com/uploads/desktops/2016/12/05/Untitled-1-03-01.png",
+    image: "https://spee.ch/242c80dd57367cc3ad570560c177f5f3db5d7d81/Untitled-1-03-01.png",
     title: "Chat (Discord)"
   },
   {
     href: "https://discourse.lbry.io",
-    image: "http://static.simpledesktops.com/uploads/desktops/2017/02/28/GeoShapes_2880x1800.png",
+    image: "https://spee.ch/b10514a5e933d601509ca0cb2d7971e1c73912e2/GeoShapes2880x1800.png",
     title: "Developer Forum"
   },
   {
     href: "https://lbry.fund",
-    image: "http://static.simpledesktops.com/uploads/desktops/2015/08/20/Sunset_by_Banned.png",
+    image: "https://spee.ch/2dd7fb58272741ddaf86df07ead39852f19ea10b/SunsetbyBanned.png",
     title: "lbry.fund (Project Funding)"
   },
   {
     href: "https://www.reddit.com/r/lbry",
-    image: "http://static.simpledesktops.com/uploads/desktops/2016/08/28/Wind-Vector-resize.png",
+    image: "https://spee.ch/d445cab0f31d1b07a16ba7d0a9245feb9f05241e/Wind-Vector-resize.png",
     title: "Reddit"
   },
   {
     href: "https://lbry.io/join-us",
-    image: "http://static.simpledesktops.com/uploads/desktops/2015/09/25/Siri.png",
+    image: "https://spee.ch/15ca6ae72f6361b7cd434e3f960536d652e00a0a/Siri.png",
     title: "Join Our Team"
   },
   {
     href: "https://twitter.com/lbryio",
-    image: "http://static.simpledesktops.com/static/images/sd-bg.png",
+    image: "https://spee.ch/660389650c32e656a1ea8b333a5f4cd228374b4a/sd-bg.png",
     title: "Twitter"
+  },
+   {
+    href: "https://www.facebook.com/lbryio/",
+    image: "https://spee.ch/660389650c32e656a1ea8b333a5f4cd228374b4a/sd-bg.png",
+    title: "Facebook"
   }
 ];
 
