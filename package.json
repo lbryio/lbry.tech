@@ -62,7 +62,7 @@
     "sass": "^1.14.1",
     "snazzy": "^8.0.0",
     "standardx": "^3.0.1",
-    "updates": "^4.3.0"
+    "updates": "^4.5.0"
   },
   "engines": {
     "node": "10.2.x"
