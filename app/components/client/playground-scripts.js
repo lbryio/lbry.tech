@@ -21,14 +21,14 @@ document.querySelector("body").addEventListener("click", event => {
   }
 
   if (
-    event.explicitOriginalTarget.classList &&
-    event.explicitOriginalTarget.classList[0] === "playground__content__meme__canvas__thumbnail"
+    event.target.classList &&
+    event.target.classList[0] === "playground__content__meme__canvas__thumbnail"
   ) {
     for (const thumbnail of document.querySelectorAll(".playground__content__meme__canvas__thumbnail"))
       thumbnail.classList.remove("selected");
 
-    event.explicitOriginalTarget.classList.add("selected");
-    updateCanvas(event.explicitOriginalTarget);
+    event.target.classList.add("selected");
+    updateCanvas(event.target);
   }
 });
 
@@ -377,10 +377,10 @@ function updateCanvas(imageSource) {
   clearCanvas(canvas);
 
   if (imageSource) {
-    ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
+    ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight);
     img.src = imageSource.src;
   } else {
-    ctx.drawImage(imageSource, 0, 0, canvasWidth, 600 * imageSource.height / imageSource.width);
+    ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
   }
 
   positionCanvasText(ctx, canvasHeight, canvasWidth);
