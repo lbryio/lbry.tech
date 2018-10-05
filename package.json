@@ -80,6 +80,7 @@
   "main": "server.js",
   "name": "lbry.tech",
   "private": true,
+  "sasslintConfig": ".sasslintrc",
   "scripts": {
     "css": "sass --update app/sass:app/dist --style compressed",
     "start": "npm run css && NODE_ENV=production node server",
