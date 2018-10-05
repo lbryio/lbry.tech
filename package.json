@@ -64,6 +64,7 @@
     "prettier": "^1.14.3",
     "pretty-quick": "^1.7.0",
     "sass": "^1.14.1",
+    "sass-lint": "^1.12.1",
     "snazzy": "^8.0.0",
     "standardx": "^3.0.1",
     "updates": "^4.5.0"

@@ -1,0 +1,288 @@
+files:
+  include: "**/*.s+(a|c)ss"
+
+options:
+  formatter: stylish
+
+rules:
+  attribute-quotes: 1
+  bem-depth:
+    - 1
+    - max_depth: 2
+  border-zero:
+    - 1
+    - convention: none
+  brace-style:
+    - 1
+    - allow-single-line: false
+    - style: 1tbs
+  class-name-format:
+    - 1
+    - allow-leading-underscore: false
+    - convention: hyphenatedlowercase
+  clean-import-paths: 1
+  declarations-before-nesting: 1
+  empty-args: 1
+  empty-line-between-blocks:
+    - 1
+    - allow-single-line-rulesets: true
+  extends-before-declarations: 1
+  extends-before-mixins: 1
+  final-newline: 1
+  force-attribute-nesting: 1
+  force-element-nesting: 0
+  force-pseudo-nesting: 0
+  function-name-format:
+    - 1
+    - allow-leading-underscore: false
+    - convention: hyphenatedbem
+  hex-length: 1
+  hex-notation: 1
+  id-name-format: 0
+  indentation: 1
+  leading-zero:
+    - 1
+    - include: true
+  max-file-line-count: 0
+  max-line-length: 0
+  mixins-before-declarations: 1
+  mixin-name-format:
+    allow-leading-underscore: false
+    convention: hypenatedbem
+  nesting-depth: 1
+  no-attribute-selectors: 0
+  no-color-hex: 0
+  no-color-keywords: 1
+  no-color-literals: 1
+  no-combinators: 0
+  no-css-comments: 1
+  no-debug: 1
+  no-disallowed-properties: 0
+  no-duplicate-properties: 1
+  no-empty-rulesets: 1
+  no-extends: 1
+  no-ids: 1
+  no-important: 1
+  no-invalid-hex: 1
+  no-mergeable-selectors: 1
+  no-misspelled-properties: 1
+  no-qualifying-elements:
+    - 1
+    - allow-element-with-attribute: true
+    - allow-element-with-class: false
+    - allow-element-with-id: false
+  no-trailing-whitespace: 1
+  no-trailing-zero: 1
+  no-transition-all: 0
+  no-universal-selectors: 0
+  no-url-domains: 1
+  no-url-protocols: 1
+  no-vendor-prefixes:
+    - 1
+    - ignore-non-standard: true
+  no-warn: 1
+  one-declaration-per-line: 1
+  placeholder-in-extend: 1
+  placeholder-name-format:
+    - 1
+    - allow-leading-underscore: false
+    - convention: hyphenatedbem
+  property-sort-order:
+    - 1
+    - order:
+      - width
+      - max-width
+      - min-width
+      - height
+      - max-height
+      - min-height
+      - margin
+      - padding
+      - top
+      - right
+      - bottom
+      - left
+      -
+      - animation
+      - animation-delay
+      - animation-direction
+      - animation-duration
+      - animation-fill-mode
+      - animation-iteration-count
+      - animation-name
+      - animation-play-state
+      - animation-timing-function
+      - appearance
+      - backface-visibility
+      - background
+      - background-attachment
+      - background-clip
+      - background-color
+      - background-image
+      - background-origin
+      - background-position
+      - background-repeat
+      - background-size
+      - border
+      -
+      - border-top
+      - border-right
+      - border-bottom
+      - border-left
+      -
+      - border-top-color
+      - border-right-color
+      - border-bottom-color
+      - border-left-color
+      -
+      - border-top-style
+      - border-right-style
+      - border-bottom-style
+      - border-left-style
+      -
+      - border-top-width
+      - border-right-width
+      - border-bottom-width
+      - border-left-width
+      -
+      - border-top-right-radius
+      - border-bottom-right-radius
+      - border-top-left-radius
+      - border-bottom-left-radius
+      -
+      - border-radius-topright
+      - border-radius-bottomright
+      - border-radius-topleft
+      - border-radius-bottomleft
+      -
+      - border-collapse
+      - border-color
+      - border-image
+      - border-radius
+      - border-spacing
+      - border-style
+      - border-width
+      -
+      - box-align
+      - box-flex
+      - box-orient
+      - box-pack
+      - box-shadow
+      - box-sizing
+      - caption-side
+      - clear
+      - clip
+      - color
+      - content
+      - counter-increment
+      - counter-reset
+      - cursor
+      - direction
+      - display
+      - empty-cells
+      - filter
+      - flex-align
+      - flex-direction
+      - flex-order
+      - flex-pack
+      - float
+      - font
+      - font-family
+      - font-size
+      - font-smoothing
+      - font-style
+      - font-variant
+      - font-weight
+      - hyphens
+      - interpolation-mode
+      - letter-spacing
+      - line-height
+      - list-style
+      - list-style-image
+      - list-style-position
+      - list-style-type
+      - margin-collapse
+      -
+      - margin-top
+      - margin-right
+      - margin-bottom
+      - margin-left
+      -
+      - margin-top-collapse
+      - margin-right-collapse
+      - margin-bottom-collapse
+      - margin-left-collapse
+      -
+      - marks
+      - opacity
+      - osx-font-smoothing
+      - outline
+      - outline-color
+      - outline-offset
+      - outline-style
+      - outline-width
+      - overflow
+      - overflow-x
+      - overflow-y
+      - padding-top
+      - padding-right
+      - padding-bottom
+      - padding-left
+      - page
+      - pointer-events
+      - position
+      - quotes
+      - resize
+      - set-link-source
+      - size
+      - speak
+      - src
+      - table-layout
+      - text-align
+      - text-decoration
+      - text-indent
+      - text-overflow
+      - text-rendering
+      - text-shadow
+      - text-size-adjust
+      - text-transform
+      - transform
+      - transform-origin
+      - transition
+      - transition-delay
+      - transition-duration
+      - transition-property
+      - transition-timing-function
+      - unicode-bidi
+      - user-select
+      - vertical-align
+      - visibility
+      - white-space
+      - word-break
+      - word-spacing
+      - word-wrap
+      - z-index
+      - zoom
+  property-units: 0
+  pseudo-element: 1
+  quotes:
+    - 1
+    - style: double
+  shorthand-values: 1
+  single-line-per-selector: 1
+  space-after-bang: 0
+  space-after-colon: 1
+  space-after-comma: 1
+  space-around-operator: 1
+  space-before-bang: 1
+  space-before-brace: 1
+  space-before-colon: 0
+  space-between-parens: 0
+  trailing-semicolon: 1
+  url-quotes: 1
+  variable-for-property: 0
+  variable-name-format:
+    - 1
+    - allow-leading-underscore: false
+    - convention: hyphenatedbem
+  zero-unit: 0
