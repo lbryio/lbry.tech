@@ -41,14 +41,15 @@
 }
 
 .newsletter-cta__input {
+  height: 38px;
+
   background-color: $white;
   font-size: 1rem;
-  height: 38px;
   transition: border 0.2s;
 
   @media (min-width: 551px) {
-    float: left;
     width: calc(100% - 112px);
+    float: left;
   }
 
   @media (max-width: 550px) {
@@ -60,13 +61,13 @@
     border-left-color: $black;
 
     @media (min-width: 551px) {
-      border-bottom-color: $black;
       border-right-color: transparent;
+      border-bottom-color: $black;
     }
 
     @media (max-width: 550px) {
-      border-bottom-color: transparent;
       border-right-color: $black;
+      border-bottom-color: transparent;
     }
   }
 
@@ -75,13 +76,13 @@
     border-left-color: mix($black, $teal, 20%);
 
     @media (min-width: 551px) {
-      border-bottom-color: mix($black, $teal, 20%);
       border-right-color: transparent;
+      border-bottom-color: mix($black, $teal, 20%);
     }
 
     @media (max-width: 550px) {
-      border-bottom-color: transparent;
       border-right-color: mix($black, $teal, 20%);
+      border-bottom-color: transparent;
     }
   }
 }
@@ -93,14 +94,14 @@
 
   @media (min-width: 551px) {
     width: 112px; height: 38px;
+    left: -1px;
 
     float: right;
-    left: -1px;
   }
 
   @media (max-width: 550px) {
-    display: block;
     top: -1px;
+    display: block;
   }
 
   &:not(:hover) {

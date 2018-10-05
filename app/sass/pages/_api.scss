@@ -1,9 +1,9 @@
-/**
+/*!
  * API Wrapper
  *
  * @class     .__slate
  * @selector  {::after}
- */
+**/
 
 .__slate {
   width: 100%;
@@ -30,7 +30,7 @@
 }
 
 
-/**
+/*!
  * API | Table of Contents
  *
  * @class     .api__toc
@@ -44,11 +44,11 @@
  *
  * @class     .api__toc__item
  * @state     {:hover}
- */
+**/
 
 .api__toc {
   width: 200px; height: calc(100vh - 4rem); // navigation is 4rem tall
-  left: 0; bottom: 0;
+  bottom: 0; left: 0;
 
   background-color: $white;
   border-right: 1px solid rgba($gray, 0.3);
@@ -64,11 +64,12 @@
 }
 
 .api__toc__search__field {
+  width: 100%;
+  padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
+
   border-bottom: 1px solid rgba($gray, 0.3);
   font-size: 0.8rem;
   line-height: 2rem;
-  padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
-  width: 100%;
 }
 
 .api__toc__search__clear {
@@ -110,14 +111,14 @@
   }
 
   a {
-    display: block;
     padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+    display: block;
   }
 }
 
 .api__content {
-  float: right;
   width: calc(100% - 200px);
+  float: right;
 }
 
 .api__documentation {
@@ -141,7 +142,9 @@
     text-transform: uppercase;
   }
 
-  p, ol, ul {
+  p,
+  ol,
+  ul {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
@@ -152,19 +155,21 @@
   }
 
   table {
+    width: 100%;
+
     border: 1px solid rgba($white, 0.1);
     border-radius: 0.3rem;
     border-spacing: 0;
     font-size: 0.8rem;
     line-height: 1.33;
-    width: 100%;
   }
 
   thead {
     display: none;
   }
 
-  th, td {
+  th,
+  td {
     padding: 0.5rem 1rem 0.5rem 0.5rem;
   }
 
@@ -178,8 +183,8 @@
 }
 
 .api__content__body {
-  border-bottom: 1px solid rgba($gray, 0.3);
   padding: 2rem;
+  border-bottom: 1px solid rgba($gray, 0.3);
 
   pre {
     border: 1px solid rgba($gray, 0.3);
@@ -207,9 +212,10 @@
   }
 
   .left {
+    width: 30%;
+
     border-right: 1px solid rgba($gray, 0.3);
     float: left;
-    width: 30%;
     word-wrap: break-word;
 
     span {
@@ -223,8 +229,8 @@
   }
 
   .right {
-    float: right;
     width: 70%;
+    float: right;
   }
 
   &::after {
@@ -233,10 +239,11 @@
 }
 
 .api__content__example {
+  padding: 2rem;
+
   background-color: mix($gray, $black, 10%);
   border-bottom: 1px solid rgba($white, 0.1);
   color: $white;
-  padding: 2rem;
 
   pre {
     background-color: $black;

@@ -9,7 +9,7 @@
   @media (max-width: 980px) {
     &::before {
       width: 3rem; height: 100%;
-      bottom: 0; right: 0;
+      right: 0; bottom: 0;
 
       background-image: linear-gradient(90deg, rgba($black, 0), $black 50%, $black); // iOS Safari cannot handle `transparent`
       content: "";
@@ -20,10 +20,11 @@
 
   > div:first-of-type {
     @media (max-width: 980px) {
-      overflow: auto;
-      overflow-scrolling: touch;
-      white-space: nowrap;
       width: 100%;
+
+      overflow: auto;
+      overflow-scrolling: touch; // sass-lint:disable-line no-misspelled-properties
+      white-space: nowrap;
     }
   }
 

@@ -1,8 +1,9 @@
 .page {
+  height: 100%;
+
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100%;
 }
 
 .page__header-wrap {
@@ -11,6 +12,9 @@
 
 .page__header {
   @include center;
+  width: 100%;
+
+  background-color: $black;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,7 +22,6 @@
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);
   position: relative;
-  width: 100%;
 }
 
 .page__header__title {
@@ -44,16 +47,11 @@
   background-size: 32px;
   flex: 1;
   padding-top: 2rem;
-  padding-bottom: 2rem;
   padding-right: env(safe-area-inset-right);
+  padding-bottom: 2rem;
   padding-left: env(safe-area-inset-left);
 }
 
 .page__markup {
   @extend %markdown;
-}
-
-.page__header {
-  // background-image: url("/assets/media/images/background-a.jpg");
-  background-color: $black;
 }

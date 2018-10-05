@@ -3,10 +3,10 @@ $width-feature-link: 320px;
 .feature-links {
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   list-style-type: none;
-  padding-top: 0.5rem;
   margin-bottom: 2rem;
+  padding-top: 0.5rem;
 }
 
 .feature-link {
@@ -38,23 +38,25 @@ $width-feature-link: 320px;
 }
 
 .feature-link__title {
-  position: relative;
   top: 85px;
-  font-weight: normal;
-  text-align: center;
-  z-index: 1;
+
   font-size: 1rem;
+  font-weight: normal;
+  position: relative;
+  text-align: center;
   transition: color 0.2s;
+  z-index: 1;
 }
 
 .feature-link__title-inner {
-  display: inline-block;
-  padding: .25rem .5rem;
+  padding: 0.25rem 0.5rem;
+
   background-color: $white;
-  border: 1px solid rgba(gray, 0.1);
-  box-shadow: 0 2px 5px rgba($black, 0.025);
+  border: 1px solid rgba($gray, 0.1);
   border-radius: 3px;
   box-decoration-break: clone;
+  box-shadow: 0 2px 5px rgba($black, 0.025);
+  display: inline-block;
 }
 
 .feature-link__background {
@@ -64,9 +66,9 @@ $width-feature-link: 320px;
   background-color: $teal;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
-  transition: filter 0.2s;
   overflow: hidden;
   position: absolute;
+  transition: filter 0.2s;
   z-index: 0;
 
   img {

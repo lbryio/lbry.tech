@@ -1,3 +1,5 @@
+// sass-lint:disable no-important
+
 html {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
@@ -17,7 +19,8 @@ html {
 
 a,
 area,
-button, [role="button"],
+button,
+[role="button"],
 input,
 label,
 select,
@@ -36,12 +39,12 @@ a {
 }
 
 textarea {
-  &[disabled] {
-    resize: none;
+  &:not([disabled]) {
+    resize: vertical;
   }
 
-  &:not[disabled] {
-    resize: vertical;
+  &[disabled] {
+    resize: none;
   }
 }
 
@@ -74,18 +77,18 @@ textarea {
   background-color: transparent;
 }
 
-[type=button],
-[type=submit] {
+[type="button"],
+[type="submit"] {
   cursor: pointer;
 }
 
 iframe {
-  border: 0;
+  border: none;
 }
 
 img {
-  font-size: 0;
   max-width: 100%;
+  font-size: 0;
 
   &::after {
     width: 100%; height: 100%;
@@ -101,29 +104,78 @@ img {
   }
 }
 
-
-
 @media print {
   // Intelligent print styles
-  pre, blockquote { border: 1px solid #999 !important; page-break-inside: avoid !important; }
-  tr, img { page-break-inside: avoid !important; }
-  img { max-width: 100% !important; }
-  @page { margin: 0.5cm !important; }
-  p, h2, h3 { orphans: 3 !important; widows: 3 !important; }
-  h2, h3 { page-break-after: avoid !important; }
-  thead { display: table-header-group !important; }
+  pre,
+  blockquote {
+    border: 1px solid #999 !important;
+    page-break-inside: avoid !important;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid !important;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm !important;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
 
   // Faster, more stable printing
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter: none !important; }
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    filter: none !important;
+    text-shadow: none !important;
+  }
 
-  // Show hypertext data for links and abbreviations
-  p a[href]::after { content: " (" attr(href) ")" !important; }
-  p abbr[title]::after { content: " (" attr(title) ")" !important; }
-  p a[href^="javascript:"]::after, p a[href^="#"]::after { content: "" !important; }
-  p a, p abbr { word-wrap: break-word !important; text-decoration: underline !important; }
+  p {
+    a {
+      &[href]::after { // Show hypertext data for links and abbreviations
+        content: " (" attr(href) ")" !important;
+      }
+
+      &[href^="javascript:"],
+      &[href^="#"] {
+        &::after {
+          content: "" !important;
+        }
+      }
+    }
+
+    abbr {
+      &[title]::after {
+        content: " (" attr(title) ")" !important;
+      }
+    }
+
+    a,
+    abbr {
+      text-decoration: underline !important;
+      word-wrap: break-word !important;
+    }
+  }
 }
-
-
 
 input::-moz-focus-inner,
 button::-moz-focus-inner {

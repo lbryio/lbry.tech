@@ -14,8 +14,8 @@
   }
 
   @media (min-width: 1001px) {
-    padding-bottom: 2rem;
     padding-right: 10%;
+    padding-bottom: 2rem;
     padding-left: 2rem;
   }
 
@@ -40,7 +40,8 @@
     white-space: nowrap;
   }
 
-  h3, h5 {
+  h3,
+  h5 {
     @media (min-width: 1001px) {
       text-align: center;
     }
@@ -52,12 +53,12 @@
     text-transform: uppercase;
 
     @media (min-width: 1301px) {
+      width: calc(100% - (1rem + 5%));
       top: 2.15rem; left: 0;
 
       color: rgba($black, 0.045);
       font-size: 4rem;
       position: absolute;
-      width: calc(100% - (1rem + 5%));
     }
 
     @media (max-width: 1300px) {
@@ -87,9 +88,10 @@
     }
 
     @media (max-width: 900px) {
+      top: -1rem;
+
       margin-bottom: 0.5rem;
       position: relative;
-      top: -1rem;
     }
   }
 }
@@ -99,10 +101,11 @@
   line-height: 1.55;
 
   @media (max-width: 700px) {
+    width: 200px;
+
     display: inline-block;
     margin-right: 1.25rem;
     vertical-align: top;
-    width: 200px;
   }
 
   &:not(:last-of-type) {
@@ -112,9 +115,10 @@
   }
 
   > a:first-of-type {
+    width: 100%;
+
     font-weight: 700;
     margin-bottom: 0.5rem;
-    width: 100%;
   }
 
   > p:first-of-type {
@@ -123,14 +127,15 @@
     }
 
     code {
+      padding: 0.2rem 0.5rem;
+      top: -1px;
+
       background-color: $black;
       border-radius: 3px;
       color: $white;
       font-size: 80%;
       letter-spacing: 0.05rem;
-      padding: 0.2rem 0.5rem;
       position: relative;
-      top: -1px;
     }
 
     em:not(.github-feed__event__time) {
@@ -138,22 +143,22 @@
     }
 
     @media (min-width: 701px) {
+      width: calc(100% - 4.5rem);
+
       display: inline-block;
       margin-left: 0.5rem;
       vertical-align: top;
-      width: calc(100% - 4.5rem);
     }
 
     @media (max-width: 700px) {
+      width: 90%; padding: 1rem;
       top: -3.5rem; left: 5%;
 
       background-color: $white;
       border: 1px solid rgba($gray, 0.1);
       border-radius: 3px;
-      padding: 1rem;
       position: relative;
       white-space: normal;
-      width: 90%;
     }
   }
 }
@@ -161,8 +166,8 @@
 .github-feed__event__avatar {
   border: 1px solid rgba($gray, 0.1);
   border-radius: 3px;
-  object-position: center;
   object-fit: cover;
+  object-position: center;
 
   @media (min-width: 701px) {
     width: 2.5rem; height: 2.5rem;

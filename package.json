@@ -67,14 +67,14 @@
     "sass-lint": "^1.12.1",
     "snazzy": "^8.0.0",
     "standardx": "^3.0.1",
-    "updates": "^4.5.0"
+    "updates": "^4.5.2"
   },
   "engines": {
     "node": "10.2.x"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged && npm run test:sass"
     }
   },
   "main": "server.js",
@@ -87,6 +87,7 @@
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./",
     "test:lint": "standardx --verbose | snazzy",
+    "test:sass": "sass-lint --config .sasslintrc 'app/sass/*.scss, app/sass/**/*.scss' --verbose --no-exit",
     "watch": "run-p watch:*",
     "watch:sass": "sass --watch app/sass:app/dist --style compressed",
     "watch:server": "NODE_ENV=development nodemon server --ignore 'public/'"

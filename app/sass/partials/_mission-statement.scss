@@ -1,9 +1,10 @@
 .component--mission-statement {
-  margin-bottom: 1.5rem; padding: 1rem 1rem 1rem 1.25rem;
+  padding: 1rem 1rem 1rem 1.25rem;
 
   background-color: rgba($teal, 0.1);
   border-left: 0.5rem solid $teal;
   line-height: 1.55;
+  margin-bottom: 1.5rem;
   position: relative;
 
   @media (min-width: 901px) {

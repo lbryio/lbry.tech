@@ -6,11 +6,11 @@
 }
 
 .link-grid__link {
+  flex-grow: 1;
+  margin-bottom: 2rem;
   position: relative;
   text-align: center;
   vertical-align: top;
-  margin-bottom: 2rem;
-  flex-grow: 1;
 
   @media (min-width: 651px) {
     width: 50%;
@@ -29,19 +29,18 @@
   }
 }
 
-
-
 .link-grid__title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .link-grid__description {
-  font-size: 1rem;
+  width: 80%;
   left: 10%;
+
+  font-size: 1rem;
   margin-bottom: 1rem;
   position: relative;
-  width: 80%;
 }
 
 .link-grid__cta {

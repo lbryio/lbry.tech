@@ -1,16 +1,17 @@
-/**
+/*!
  * Playground | Wrapper
  *
  * @class     .playground
  * @selector  {::before}
  * @selector  {::after}
  * @state     {.waiting}
- */
+**/
 
 .playground {
+  top: 1rem;
+
   border-top: 1px solid rgba($black, 0.05);
   position: relative;
-  top: 1rem;
 
   &.waiting::before {
     top: 0; right: 0;
@@ -28,9 +29,7 @@
   }
 }
 
-
-
-/**
+/*!
  * Playground | Navigation
  *
  * @class     .playground__navigation
@@ -40,14 +39,14 @@
  * @selector  {:last-of-type}
  * @state     {.active}
  * @state     {:hover}
- */
+**/
 
 .playground__navigation {
   width: 100%;
 
   list-style-type: none;
-  padding-bottom: 1rem;
   padding-top: 1.5rem;
+  padding-bottom: 1rem;
 
   &::after {
     @include clearfix;
@@ -55,11 +54,12 @@
 }
 
 .playground__navigation__example {
+  width: 33.333333%;
+
   cursor: pointer;
   float: left;
   position: relative;
   text-align: center;
-  width: 33.333333%;
 
   &::before {
     width: 100%; height: 2.5rem;
@@ -126,9 +126,7 @@
   }
 }
 
-
-
-/**
+/*!
  * Playground | Content
  *
  * @class     .playground__content
@@ -150,13 +148,13 @@
  *
  * @class     .playground__content__trend
  * @class     .playground__content__urlbar
- */
+**/
 
 .playground__content {
   border-top: 1px solid rgba($black, 0.05);
   overflow-y: visible;
-  padding-bottom: 1rem;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 
   .loader {
     @extend .__loading;
@@ -186,10 +184,11 @@
 }
 
 .playground__content__meme__canvas {
+  width: 48%;
+
   float: left;
   margin-right: 2%;
   position: relative;
-  width: 48%;
 
   canvas {
     width: 100%; height: 100%;
@@ -199,15 +198,15 @@
   }
 }
 
-.playground__content__meme__canvas__thumbnail {
+.playground__content__meme__canvas__thumbnail { // sass-lint:disable-line bem-depth // TODO: FIX THIS
   width: 5rem; height: 5rem;
 
   border-style: solid;
   border-width: 2px;
+  cursor: pointer;
   margin-bottom: 1rem;
   object-fit: contain;
   object-position: center;
-  cursor: pointer;
 
   &:not(:last-of-type) {
     margin-right: 1rem;
@@ -223,10 +222,10 @@
 }
 
 .playground__content__meme__editor {
-  float: right;
   width: 50%;
+  float: right;
 
-  h2.__metadata {
+  .__metadata { // h2
     margin-top: 3rem;
   }
 
@@ -239,6 +238,8 @@
   }
 
   label {
+    width: 100%;
+
     color: rgba($black, 0.3);
     display: block;
     font-size: 0.8rem;
@@ -246,7 +247,6 @@
     letter-spacing: 0.05rem;
     margin-bottom: 0.025rem;
     text-transform: uppercase;
-    width: 100%;
   }
 
   input:not([type="checkbox"]):not([type="submit"]),
@@ -263,10 +263,11 @@
 
   input {
     &:not([type="checkbox"]):not([type="file"]):not([type="submit"]) {
+      width: 100%;
+
       border-bottom: 2px solid;
       padding-bottom: 0.15rem;
       transition: all 0.2s;
-      width: 100%;
     }
 
     &:not([type="file"]):not([type="submit"]) {
@@ -282,11 +283,11 @@
 
     &[type="checkbox"] {
       width: 1.25rem; height: 1.25rem;
+      top: 0.35rem;
 
       border: 2px solid;
       margin-right: 0.5rem;
       position: relative;
-      top: 0.35rem;
 
       &::after {
         width: 100%; height: 100%;
@@ -309,8 +310,8 @@
 
   select,
   textarea {
-    border-bottom: 2px solid;
     width: 100%;
+    border-bottom: 2px solid;
 
     &:not(:hover):not(:active) {
       border-color: $black;
@@ -398,12 +399,13 @@
   }
 
   button {
+    width: 6rem;
+
     color: $white;
     font-size: 1rem;
     position: relative;
     text-transform: lowercase;
     transition: background-color 0.2s;
-    width: 6rem;
 
     &::after {
       width: calc(100% + 2px); height: calc(100% + 2px);
@@ -433,8 +435,8 @@
   }
 
   input {
-    font-size: 1rem;
     width: calc(100% - 9.5rem);
+    font-size: 1rem;
 
     &::placeholder {
       color: rgba($black, 0.5);
@@ -444,27 +446,27 @@
 
   span {
     @include no-user-select;
+    width: 3.5rem;
+
     color: rgba($black, 0.5);
     cursor: default;
     font-size: 1rem;
     text-align: right;
-    width: 3.5rem;
   }
 }
 
-
-
-/**
+/*!
  * Playground | Description
  *
  * @class .playground__description
- */
+**/
 
 .playground__description {
+  padding: 1rem;
+
   cursor: default;
   font-size: 1rem;
   line-height: 1.33;
-  padding: 1rem;
 
   &:not(.success) {
     background-color: rgba($black, 0.05);

@@ -9,25 +9,33 @@ html {
 
 body {
   @include font-sans;
+  min-width: 320px;
+
   color: $black;
   font-size: 12px;
-  min-width: 320px;
   overflow-x: hidden;
   position: relative;
   z-index: 0;
 }
 
+@supports (font-variation-settings: normal) {
+  body {
+    font-family: "Inter UI Variable", sans-serif;
+  }
+}
+
 main {
+  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   padding-top: 4rem;
 }
 
 .inner-wrap {
+  max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
-  max-width: 1200px;
 
   @media (min-width: 901px) {
     padding-right: 1rem;
@@ -44,7 +52,11 @@ main {
   }
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   .header-anchor {
     display: none;
   }
@@ -63,6 +75,7 @@ code {
 }
 
 .alert {
+  width: 100%;
   bottom: 0; left: 0;
 
   background-color: $yellow;
@@ -73,7 +86,6 @@ code {
   padding-left: env(safe-area-inset-left);
   position: fixed;
   text-align: left;
-  width: 100%;
   z-index: 3;
 
   > div:first-of-type {
@@ -88,13 +100,14 @@ code {
     font-size: 0.8rem;
   }
 
-  p, button {
+  p,
+  button {
     display: inline-block;
   }
 
   p {
-    padding-right: 1rem;
     width: calc(100% - 2.25rem);
+    padding-right: 1rem;
   }
 
   a {

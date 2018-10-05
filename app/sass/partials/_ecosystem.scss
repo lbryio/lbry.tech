@@ -1,9 +1,9 @@
 .ecosystem {
-  margin-bottom: 2rem; padding-top: 1rem;
-
   display: grid;
   font-size: 1rem;
   grid-gap: 1rem;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
 
   &:not(.expand-left):not(.expand-right) {
     grid-template-columns: 144px auto 144px;
@@ -52,19 +52,17 @@
   }
 }
 
-
-
 .ecosystem__module {
-  position: relative;
   width: 100%;
+  position: relative;
 
   > * {
     z-index: 1;
   }
 
   h2 {
-    position: relative;
     width: 100%;
+    position: relative;
 
     > div {
       float: right;
@@ -76,6 +74,7 @@
 
       &::before {
         @include font-serif;
+        width: 100%;
         top: 0.9rem; right: 3rem;
 
         content: "explore";
@@ -84,7 +83,6 @@
         opacity: 0.3;
         position: absolute;
         text-align: right;
-        width: 100%;
       }
 
       span {
@@ -129,9 +127,10 @@
       text-align: center;
 
       > span {
+        padding: 1.9rem 2rem;
+
         cursor: pointer;
         display: block;
-        padding: 1.9rem 2rem;
 
         em {
           display: block;
@@ -182,8 +181,6 @@
     }
   }
 
-
-
   &.lbrycrd,
   &.lbry {
     margin-bottom: 1rem;
@@ -196,19 +193,17 @@
         margin-bottom: 0.5rem;
 
         &::after {
+          width: 100%;
           bottom: 1rem; left: 0;
 
           font-size: 0.5rem;
           letter-spacing: 0.1rem;
           position: absolute;
-          width: 100%;
           z-index: -1;
         }
       }
     }
   }
-
-
 
   &.lbrycrd {
     &:not(.active)::before {
@@ -253,23 +248,22 @@
   }
 }
 
-.ecosystem__module__details, .ecosystem__submodule__markdown {
+.ecosystem__module__details,
+.ecosystem__submodule__markdown {
   @extend %markdown;
 }
 
 .ecosystem__module__piece {
+  width: 80%; left: 10%;
+
   background-color: $white;
-  left: 10%;
   line-height: 2;
   position: relative;
-  width: 80%;
 
   &:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }
 }
-
-
 
 .ecosystem__submodule {
   border-width: 2px;
@@ -307,10 +301,10 @@
 
   &.active {
     width: 100%; height: 100%;
+    padding: 2rem;
 
     border-style: solid;
     overflow-y: auto;
-    padding: 2rem;
 
     .ecosystem__submodule__title {
       line-height: 1.33;
@@ -364,8 +358,6 @@
   text-transform: uppercase;
 }
 
-
-
 .__parents {
   top: 2rem; right: 4rem;
 
@@ -414,9 +406,10 @@
 }
 
 .__close {
+  right: 2rem;
+
   cursor: pointer;
   font-size: 2rem;
   position: absolute;
-  right: 2rem;
   transition: all 0.2s;
 }

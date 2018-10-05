@@ -67,20 +67,21 @@
     position: relative;
 
     @media (min-width: 601px) {
-      margin-left: 15%; padding: 0.5rem 0 0.05rem 2rem;
+      width: 70%;
+      padding: 0.5rem 0 0.05rem 2rem;
 
       font-size: 1.5rem;
-      width: 70%;
+      margin-left: 15%;
     }
 
     @media (max-width: 600px) {
+      padding: 0.5rem 0 0.05rem;
       font-size: 1.25rem;
-      padding: 0.5rem 0 0.05rem 0;
     }
 
     @media (min-width: 376px) and (max-width: 600px) {
-      margin-left: 5%;
       width: 90%;
+      margin-left: 5%;
     }
 
     p {
@@ -106,23 +107,28 @@
   ul,
   table {
     code {
+      padding: 0.3rem 0.5rem;
+
       background-color: $black;
       border-radius: 3px;
       color: $white;
       font-size: 60%;
       letter-spacing: 0.05rem;
-      padding: 0.3rem 0.5rem;
       vertical-align: middle;
 
       @media (max-width: 900px) {
-        position: relative;
         top: -1px;
+        position: relative;
       }
     }
+
     + h2 {
       margin-top: 2rem;
     }
-    + h3, + h4, + h5 {
+
+    + h3,
+    + h4,
+    + h5 {
       margin-top: 1.5rem;
     }
   }
@@ -148,10 +154,8 @@
   ul {
     padding-top: 0.5rem;
 
-    li {
-      &:not(:last-of-type) {
-        margin-bottom: 0.25rem;
-      }
+    li:not(:last-of-type) {
+      margin-bottom: 0.25rem;
     }
   }
 
@@ -166,14 +170,15 @@
 
   img {
     display: block;
-    margin-left: auto;
     margin-right: auto;
     margin-bottom: 1rem;
+    margin-left: auto;
   }
 
   p {
-    margin-left: 2px;
     margin-right: 2px;
+    margin-left: 2px;
+
     img {
       float: right;
     }
@@ -193,19 +198,23 @@
     font-size: 1rem;
   }
 
-  h2, h3, h4, h5 {
+  h2,
+  h3,
+  h4,
+  h5 {
     + table {
       margin-top: 0.5em;
     }
   }
 
   table {
+    width: 100%;
+
     background-color: $white;
     border: 1px solid rgba($gray, 0.3);
     border-spacing: 0;
     margin-bottom: 2rem;
     position: relative;
-    width: 100%;
 
     @media (max-width: 1030px) {
       display: inline-grid;
@@ -214,7 +223,9 @@
         display: none;
       }
 
-      tbody, tr, td {
+      tbody,
+      tr,
+      td {
         display: block;
       }
 
@@ -234,10 +245,8 @@
         z-index: 1;
       }
 
-      &:not(*:root) {
-        &::after {
-          z-index: -1;
-        }
+      &:not(*:root)::after {
+        z-index: -1;
       }
 
       &::after {
@@ -259,7 +268,8 @@
       background-color: rgba($black, 0.025);
     }
 
-    th, td {
+    th,
+    td {
       padding: 0.5rem 1rem;
     }
 

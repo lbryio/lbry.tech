@@ -1,11 +1,27 @@
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  to { transform: rotate(1turn); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 @keyframes slide-down {
-  0%    { transform: translateY(-4rem); }
-  10%   { transform: translateY(2rem); }
-  90%   { transform: translateY(2rem); }
-  100%  { transform: translateY(-4rem); }
+  0% {
+    transform: translateY(-4rem);
+  }
+
+  10% {
+    transform: translateY(2rem);
+  }
+
+  90% {
+    transform: translateY(2rem);
+  }
+
+  100% {
+    transform: translateY(-4rem);
+  }
 }

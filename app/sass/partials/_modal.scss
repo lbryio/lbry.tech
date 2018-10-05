@@ -1,7 +1,7 @@
 .modal {
   @include center;
-  top: 0; left: 0;
-  bottom: 0; right: 0;
+  top: 0; right: 0;
+  bottom: 0; left: 0;
 
   background-color: rgba($black, 0.5);
   position: fixed;
@@ -38,8 +38,8 @@
 }
 
 .modal-wrap {
-  background-color: $white;
   padding: 2rem 1.5rem;
+  background-color: $white;
 
   @media (min-width: 501px) {
     width: 500px;

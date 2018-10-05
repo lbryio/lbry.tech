@@ -1,16 +1,16 @@
-body.home {
+body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
   @media (min-width: 1001px) {
     main > div:first-of-type {
       display: grid;
       grid-gap: 0;
       grid-template-areas:
-        "header header header"
-        "features features features"
-        "intro intro github"
-        "docs docs github"
-        "contribute contribute contribute"
-        "develop develop develop"
-        "community community community";
+      "header header header"
+      "features features features"
+      "intro intro github"
+      "docs docs github"
+      "contribute contribute contribute"
+      "develop develop develop"
+      "community community community";
     }
   }
 }
@@ -42,6 +42,8 @@ body.home {
   }
 
   .hero {
+    height: calc(50vh - 4rem); min-height: 300px;
+
     align-items: center;
     background-color: $black;
     // background-image: url("/assets/media/svg/text-logo--white.svg");
@@ -50,7 +52,6 @@ body.home {
     background-repeat: no-repeat;
     display: flex;
     grid-area: header;
-    height: calc(50vh - 4rem); min-height: 300px;
     justify-content: center;
     margin-bottom: 2rem;
 
@@ -59,13 +60,14 @@ body.home {
     }
 
     h1 {
+      padding: 0.4rem 1rem;
+
       background-color: $white;
       border: 1px solid rgba($black, 0.1);
       box-decoration-break: clone;
       display: inline;
       font-weight: normal;
       line-height: 2;
-      padding: 0.4rem 1rem;
 
       -webkit-box-decoration-break: clone; // Safari
 
@@ -80,8 +82,8 @@ body.home {
   }
 
   .features {
-    grid-area: features;
     border-bottom: 1px solid rgba($black, 0.05);
+    grid-area: features;
   }
 
   .intro,
@@ -123,13 +125,14 @@ body.home {
       }
     }
 
-    ol, ul {
+    ol,
+    ul {
       margin-bottom: 1.5rem;
     }
 
     p {
-      margin-bottom: 1.5rem;
       max-width: 1000px;
+      margin-bottom: 1.5rem;
 
       @media (min-width: 901px) {
         font-size: 1.5rem;
@@ -210,23 +213,23 @@ body.home {
         text-align: center;
 
         @media (max-width: 750px) {
-          margin-bottom: 2rem;
           min-width: 8rem;
+          margin-bottom: 2rem;
         }
 
         a {
           display: block;
-          position: relative;
           padding-top: 4rem;
+          position: relative;
           transition: color 0.2s;
 
           &::before {
             width: 100%; height: 100%;
+            left: 0;
 
             background-position: center 0;
             background-repeat: no-repeat;
             content: "";
-            left: 0;
             position: absolute;
           }
 
@@ -257,13 +260,13 @@ body.home {
 
         a::before {
           @media (min-width: 901px) {
-            background-size: 4rem;
             top: -1rem;
+            background-size: 4rem;
           }
 
           @media (max-width: 900px) {
-            background-size: 3rem;
             top: 0;
+            background-size: 3rem;
           }
         }
 
@@ -305,13 +308,13 @@ body.home {
 
         a::before {
           @media (min-width: 901px) {
-            background-size: 6rem;
             top: -2rem;
+            background-size: 6rem;
           }
 
           @media (max-width: 900px) {
-            background-size: 4rem;
             top: -0.5rem;
+            background-size: 4rem;
           }
         }
 
