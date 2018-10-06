@@ -61,8 +61,6 @@
     "husky": "^1.1.1",
     "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.3",
-    "prettier": "^1.14.3",
-    "pretty-quick": "^1.7.0",
     "sass": "^1.14.1",
     "sass-lint": "^1.12.1",
     "snazzy": "^8.0.0",
@@ -74,7 +72,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && npm run test:sass"
+      "pre-commit": "npm run format && npm run test:sass && git add -A :/"
     }
   },
   "main": "server.js",
@@ -83,6 +81,7 @@
   "sasslintConfig": ".sasslintrc",
   "scripts": {
     "css": "sass --update app/sass:app/dist --style compressed",
+    "format": "eslint '**/*.js' --fix",
     "start": "npm run css && NODE_ENV=production node server",
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./",
