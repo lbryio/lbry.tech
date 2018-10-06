@@ -29,9 +29,9 @@ module.exports = exports = (socket, action) => {
     case (action.message === "landed on homepage"):
       generateGitHubFeed(result => {
         socket.send(JSON.stringify({
-          "html": result,
-          "message": "updated html",
-          "selector": "#github-feed"
+          html: result,
+          message: "updated html",
+          selector: "#github-feed"
         }));
       });
       break;
@@ -39,9 +39,9 @@ module.exports = exports = (socket, action) => {
     case (action.message === "landed on playground"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
-          "html": result,
-          "message": "updated html",
-          "selector": "#playground-loader"
+          html: result,
+          message: "updated html",
+          selector: "#playground-loader"
         }));
       });
       break;
@@ -49,9 +49,9 @@ module.exports = exports = (socket, action) => {
     case (action.message === "request for playground, example 1"):
       generateContent(1, result => {
         socket.send(JSON.stringify({
-          "html": result,
-          "message": "updated html",
-          "selector": "#playground-loader"
+          html: result,
+          message: "updated html",
+          selector: "#playground-loader"
         }));
       });
       break;
@@ -63,9 +63,9 @@ module.exports = exports = (socket, action) => {
     case (action.message === "request for playground, example 3"):
       generateContent(3, result => {
         socket.send(JSON.stringify({
-          "html": result,
-          "message": "updated html",
-          "selector": "#playground-loader"
+          html: result,
+          message: "updated html",
+          selector: "#playground-loader"
         }));
       });
       break;
@@ -291,10 +291,10 @@ function generateMemeCreator(socket) {
   `;
 
   return socket.send(JSON.stringify({
-    "example": 2,
-    "html": memeCreator,
-    "message": "updated html",
-    "selector": "#playground-loader"
+    example: 2,
+    html: memeCreator,
+    message: "updated html",
+    selector: "#playground-loader"
   }));
 }
 
@@ -315,9 +315,9 @@ function newsletterSubscribe(data, socket) {
   const email = data.email;
 
   if (!validateEmail(email)) return socket.send(JSON.stringify({
-    "html": "Your email is invalid",
-    "message": "updated html",
-    "selector": "#emailMessage"
+    html: "Your email is invalid",
+    message: "updated html",
+    selector: "#emailMessage"
   }));
 
   return new Promise((resolve, reject) => {
@@ -333,9 +333,9 @@ function newsletterSubscribe(data, socket) {
         );
 
         return resolve(socket.send(JSON.stringify({
-          "html": "Something is terribly wrong",
-          "message": "updated html",
-          "selector": "#emailMessage"
+          html: "Something is terribly wrong",
+          message: "updated html",
+          selector: "#emailMessage"
         })));
       }
 
@@ -349,36 +349,38 @@ function newsletterSubscribe(data, socket) {
         );
 
         return reject(socket.send(JSON.stringify({
-          "html": body.error,
-          "message": "updated html",
-          "selector": "#emailMessage"
+          html: body.error,
+          message: "updated html",
+          selector: "#emailMessage"
         })));
       }
 
       return resolve(socket.send(JSON.stringify({
-        "html": "Thank you! Please confirm subscription in your inbox.",
-        "message": "updated html",
-        "selector": "#emailMessage"
+        html: "Thank you! Please confirm subscription in your inbox.",
+        message: "updated html",
+        selector: "#emailMessage"
       })));
-    }).catch(welp => {
-      if (welp.statusCode === 409) {
-        logSlackError(
-          "\n" +
+    })
+      .catch(welp => {
+        if (welp.statusCode === 409) {
+          logSlackError(
+            "\n" +
           "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(welp.error)) + "```" + "\n" +
           `> _Cause: ${email} interacted with the form_\n`
-        );
+          );
 
-        return resolve(socket.send(JSON.stringify({
-          "html": "You have already subscribed!",
-          "message": "updated html",
-          "selector": "#emailMessage"
-        })));
-      }
-    });
+          return resolve(socket.send(JSON.stringify({
+            html: "You have already subscribed!",
+            message: "updated html",
+            selector: "#emailMessage"
+          })));
+        }
+      });
   });
 }
 
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+
   return emailRegex.test(String(email));
 }

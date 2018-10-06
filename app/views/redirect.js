@@ -44,6 +44,7 @@ const md = require("markdown-it")({
 
 module.exports = exports = (state, emit) => { // eslint-disable-line
   let path;
+
   if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
   else path = state.params.wildcard;
 
@@ -69,6 +70,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   }
 
   let pageScript = "";
+
   if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
   if (path === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
   if (path === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/playground-scripts.js", "utf-8") + "</script>";
@@ -104,7 +106,9 @@ function partialFinder(markdownBody) {
   if (!partials) return markdownBody;
 
   for (const partial of partials) {
-    const filename = decamelize(partial, "-").replace("<", "").replace("/>", "").trim();
+    const filename = decamelize(partial, "-").replace("<", "")
+      .replace("/>", "")
+      .trim();
     const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
     if (!fileExistsTest)

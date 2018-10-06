@@ -280,7 +280,10 @@ function generateGitHubFeed(displayGitHubFeed) {
 
       displayGitHubFeed(`
         <h3>GitHub</h3>
-        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD").replace(/-/g, "&middot;")} at ${new Date().add(-4, "hours").format("UTC:H:mm:ss A").toLowerCase()} EST</h5>
+        <h5 class="last-updated">Last updated: ${new Date().format("YYYY-MM-DD")
+    .replace(/-/g, "&middot;")} at ${new Date().add(-4, "hours")
+  .format("UTC:H:mm:ss A")
+  .toLowerCase()} EST</h5>
 
         ${renderedEvents.join("")}
       `);
@@ -336,13 +339,14 @@ function updateGithubFeed() {
         else callback();
       });
     }, () => client.zremrangebyrank("events", 0, -51)); // Keep the latest 50 events
-  }).catch(err => {
-    logSlackError(
-      "\n" +
+  })
+    .catch(err => {
+      logSlackError(
+        "\n" +
       "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
       "> _Cause: GitHub feed refresh_\n"
-    );
-  });
+      );
+    });
 }
 
 

@@ -29,7 +29,7 @@ if ( // Toggle beta message
   localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
 ) document.querySelector("#alert-beta").style.display = "none";
 
-document.querySelector("#close-alert").onclick = function () {
+document.querySelector("#close-alert").onclick = function() {
   localStorage.setItem("hide lbry alert", true);
   document.querySelector("#alert-beta").style.display = "none";
 };
@@ -60,11 +60,12 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
 // Newsletter
 document.querySelector("[data-action='subscribe to newsletter']").onclick = () => {
   const email = document.getElementById("emailAddress").value;
+
   if (!validateEmail(email)) return;
 
   send(JSON.stringify({
-    "email": email,
-    "message": "subscribe"
+    email: email,
+    message: "subscribe"
   }));
 };
 
@@ -88,5 +89,6 @@ function scrollToElementOnLoad() {
 
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
+
   return emailRegex.test(String(email));
 }

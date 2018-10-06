@@ -8,6 +8,7 @@ initializePlayground();
 
 if (window.location.href.search && window.location.href.split("?url=")[1]) { // pre-fill example one if search parameter exists
   const searchParameter = window.location.href.split("?url=")[1];
+
   fetchMetadata(1, searchParameter);
 }
 
@@ -102,7 +103,7 @@ function detectLanguageAndUpdate() { // eslint-disable-line
 function debounce(func, wait, immediate) {
   let timeout;
 
-  return function () {
+  return function() {
     const context = this;
     const args = arguments;
 
@@ -112,6 +113,7 @@ function debounce(func, wait, immediate) {
     };
 
     const callNow = immediate && !timeout;
+
     clearTimeout(timeout);
 
     timeout = setTimeout(later, wait);
@@ -126,7 +128,7 @@ function initializePlayground() {
   document.querySelector(".playground__navigation__example:nth-child(1)").classList.add("active");
 
   send(JSON.stringify({
-    "message": "landed on playground"
+    message: "landed on playground"
   }));
 
   setTimeout(() => {
@@ -142,10 +144,10 @@ function fetchMetadata(exampleNumber, data) {
   switch(exampleNumber) {
     case 1:
       send(JSON.stringify({
-        "claim": data,
-        "message": "fetch metadata",
-        "method": "resolve",
-        "example": exampleNumber
+        claim: data,
+        message: "fetch metadata",
+        method: "resolve",
+        example: exampleNumber
       }));
 
       document.getElementById("fetch-claim-uri").value = data;
@@ -165,10 +167,10 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
     case 2:
       send(JSON.stringify({
-        "data": data,
-        "message": "fetch metadata",
-        "method": "publish",
-        "example": exampleNumber
+        data: data,
+        message: "fetch metadata",
+        method: "publish",
+        example: exampleNumber
       }));
 
       document.getElementById("playground-results").innerHTML = `
@@ -186,10 +188,10 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
     case 3:
       send(JSON.stringify({
-        "claim": data,
-        "message": "fetch metadata",
-        "method": "wallet_send",
-        "example": exampleNumber
+        claim: data,
+        message: "fetch metadata",
+        method: "wallet_send",
+        example: exampleNumber
       }));
 
       document.getElementById("fetch-claim-uri").value = data;
@@ -269,7 +271,7 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
-        "message": `request for ${data.action}`
+        message: `request for ${data.action}`
       }));
 
       break;
@@ -295,7 +297,7 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
-        "message": `request for ${data.action}`
+        message: `request for ${data.action}`
       }));
 
       break;
@@ -324,7 +326,7 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-results").removeAttribute("style");
 
       send(JSON.stringify({
-        "message": `request for ${data.action}`
+        message: `request for ${data.action}`
       }));
 
       break;

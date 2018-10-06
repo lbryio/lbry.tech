@@ -44,9 +44,9 @@ module.exports = exports = (data, socket) => {
   let apiRequestMethod = "";
 
   if (allowedMethods.indexOf(resolveMethod) < 0) return socket.send(JSON.stringify({
-    "details": "Unallowed resolve method for tutorial",
-    "message": "notification",
-    "type": "error"
+    details: "Unallowed resolve method for tutorial",
+    message: "notification",
+    type: "error"
   }));
 
 
@@ -73,9 +73,9 @@ module.exports = exports = (data, socket) => {
     return uploadImage(body.file_path).then(uploadResponse => {
       if (!uploadResponse.status || uploadResponse.status !== "ok") {
         socket.send(JSON.stringify({
-          "details": "Image upload failed",
-          "message": "notification",
-          "type": "error"
+          details: "Image upload failed",
+          message: "notification",
+          type: "error"
         }));
 
         if (process.env.NODE_ENV !== "development") {
@@ -94,9 +94,9 @@ module.exports = exports = (data, socket) => {
       return publishMeme(body).then(publishResponse => {
         if (publishResponse.error) {
           socket.send(JSON.stringify({
-            "details": "Meme publish failed",
-            "message": "notification",
-            "type": "error"
+            details: "Meme publish failed",
+            message: "notification",
+            type: "error"
           }));
 
           if (process.env.NODE_ENV !== "development") {
@@ -126,14 +126,14 @@ module.exports = exports = (data, socket) => {
         `;
 
         return socket.send(JSON.stringify({
-          "example": data.example,
-          "html": raw(`
+          example: data.example,
+          html: raw(`
             <h3>Response</h3>
             ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
-          "message": "show result",
-          "selector": `#example${data.example}-result`
+          message: "show result",
+          selector: `#example${data.example}-result`
         }));
       });
     });
@@ -160,13 +160,13 @@ module.exports = exports = (data, socket) => {
 
     if (!approvedIds.includes(claimAddress)) {
       return socket.send(JSON.stringify({
-        "example": data.example,
-        "html": raw(`
+        example: data.example,
+        html: raw(`
           <h3>Response</h3>
           <pre><code class="language-text">Tipping creators not in the whitelist for this example is not allowed.</code></pre>
         `),
-        "message": "show result",
-        "selector": `#example${data.example}-result`
+        message: "show result",
+        selector: `#example${data.example}-result`
       }));
     }
 
@@ -227,14 +227,14 @@ module.exports = exports = (data, socket) => {
         );
 
         return socket.send(JSON.stringify({
-          "example": data.example,
-          "html": raw(`
+          example: data.example,
+          html: raw(`
             <h3>Response</h3>
             ${explorerNotice}
             <pre><code class="language-json">${renderedCode}</code></pre>
           `),
-          "message": "show result",
-          "selector": `#example${data.example}-result`
+          message: "show result",
+          selector: `#example${data.example}-result`
         }));
       }
 

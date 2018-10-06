@@ -51,10 +51,11 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
     <script src="/assets/scripts/plugins/jets.js"></script>
     <script src="/assets/scripts/api.js"></script>
   `;
-}).catch(() => {
-  const redirectUrl = redirects[state.href];
+})
+  .catch(() => {
+    const redirectUrl = redirects[state.href];
 
-  return asyncHtml`
+    return asyncHtml`
     <article class="page" itemtype="http://schema.org/BlogPosting">
       <header class="page__header">
         <div class="page__header-wrap">
@@ -77,7 +78,7 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
       }, 2000);
     </script>
   `;
-});
+  });
 
 
 
@@ -88,6 +89,7 @@ function createApiContent(apiDetails) {
 
   for (const apiDetail of apiDetails) {
     let apiDetailsReturns = "";
+
     if (apiDetail.returns) apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
@@ -165,7 +167,8 @@ function parseApiFile(urlSlug) {
 
   return fetch(apiFileLink).then(() => fetch(apiFileLink, {
     cache: "no-cache" // forces a conditional request
-  })).then(res => res.json().then(body => body)); // res.status 304 = cache validated
+  }))
+    .then(res => res.json().then(body => body)); // res.status 304 = cache validated
 }
 
 function renderArguments(args) {
