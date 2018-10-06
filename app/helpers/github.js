@@ -343,8 +343,8 @@ function updateGithubFeed() {
     .catch(err => {
       logSlackError(
         "\n" +
-      "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
-      "> _Cause: GitHub feed refresh_\n"
+        "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
+        "> _Cause: GitHub feed refresh_\n"
       );
     });
 }
