@@ -4,60 +4,31 @@
 
 //  P A C K A G E S
 
-import decamelize from "decamelize";
-import exists from "fs-exists-sync";
-import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
-import path from "path";
+import fm from "front-matter";
 import { require as local } from "app-root-path";
 import raw from "choo/html/raw";
 
-//  V A R I A B L E
-
-const numberRegex = /^[0-9]/g;
-
 //  U T I L S
 
-const redirect404 = local("app/modules/redirect-404");
-
-const md = require("markdown-it")({
-  html: true,
-  typographer: true
-}).use(local("app/modules/markdown-it-sup"))
-  .use(require("markdown-it-anchor"), {
-    slugify: stringToSlugify => {
-      let finalString = stringToSlugify
-        .toLowerCase()
-        .replace(/\s\/\s/g, "-")
-        .replace(/\s/g, "-")
-        .replace(/%/g, "")
-        .replace(/\(/g, "")
-        .replace(/\)/g, "")
-        .replace(/,/g, "");
-
-      if (finalString.match(numberRegex)) finalString = `_${finalString}`;
-      return finalString;
-    }
-  });
+const markdown = local("/app/components/markdown");
+const redirect404 = local("/app/modules/redirect-404");
 
 
 
 //  E X P O R T
 
 module.exports = exports = (state, emit) => { // eslint-disable-line
-  let path;
+  const partialPath = state.route === "resources/*" ? `resources/${state.params.wildcard}` : state.params.wildcard;
+  const path = `./documents/${partialPath}.md`;
 
-  if (state.route === "resources/*") path = `resources/${state.params.wildcard}`;
-  else path = state.params.wildcard;
-
-  if (!fs.existsSync(`./documents/${path}.md`))
+  if (!fs.existsSync(path)) {
     return redirect404(state);
+  }
 
-  const markdownFile = fs.readFileSync(`./documents/${path}.md`, "utf-8");
+  const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
-  const renderedMarkdown = md.render(markdownFileDetails.body);
-  const updatedMarkdown = wikiFinder(partialFinder(renderedMarkdown));
 
   if (markdownFileDetails.attributes.meta) {
     const customMetadata = {};
@@ -72,11 +43,12 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
     state.lbry = customMetadata;
   }
 
+  // below should be refactored into components
   let pageScript = "";
 
-  if (path === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
-  if (path === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
-  if (path === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/playground-scripts.js", "utf-8") + "</script>";
+  if (partialPath === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
+  if (partialPath === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
+  if (partialPath === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/playground-scripts.js", "utf-8") + "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
@@ -90,51 +62,10 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
 
       <section class="page__content" itemprop="articleBody">
         <div class="inner-wrap">
-          <div class="page__markup">${raw(updatedMarkdown)}</div>
+          ${markdown(path)}
           ${raw(pageScript)}
         </div>
       </section>
     </article>
   `;
 };
-
-
-
-//  H E L P E R S
-
-function partialFinder(markdownBody) {
-  const regexToFindPartials = /<\w+ ?\/>/g;
-  const partials = markdownBody.match(regexToFindPartials);
-
-  if (!partials) return markdownBody;
-
-  for (const partial of partials) {
-    const filename = decamelize(partial, "-").replace("<", "")
-      .replace("/>", "")
-      .trim();
-    const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
-
-    if (!fileExistsTest)
-      markdownBody = markdownBody.replace(partial, "");
-
-    else {
-      const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
-
-      if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
-      else markdownBody = markdownBody.replace(partial, `</div>${partialFunction.default()}<div class="page__markup">`);
-    }
-  }
-
-  return markdownBody;
-}
-
-function wikiFinder(markdownBody) {
-  return markdownBody.replace(/\[\[([\w\s/-]+)\]\]/g, (match, p1) => {
-    const label = p1.trim();
-    const url = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
-
-    return label ?
-      `<a href="${url}" class="link--glossary">${label}</a>` :
-      match.input;
-  });
-}
