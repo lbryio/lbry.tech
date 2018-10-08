@@ -184,7 +184,7 @@
     }
   }
 
-  a:not(.__button-black):not(.button):not(.header-anchor):not(.newsletter-standalone__submit):not(.__plain) {
+  a:not(.__button-black):not(.button) {
     @include underline($teal, $white);
     color: $teal;
 
