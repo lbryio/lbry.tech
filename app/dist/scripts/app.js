@@ -41,7 +41,8 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
   anchor.addEventListener("click", event => {
     event.preventDefault();
 
-    const element = event.target.href.split("#").pop();
+    const element = event.target.href.split("#").pop()
+      .toLowerCase();
     let elementOffset;
 
     if (document.getElementById(element)) {
@@ -76,7 +77,8 @@ document.querySelector("[data-action='subscribe to newsletter']").onclick = () =
 function scrollToElementOnLoad() {
   if (window.location.href.includes("#")) {
     setTimeout(() => { // give page time to breathe
-      const element = window.location.href.split("#").pop();
+      const element = window.location.href.split("#").pop()
+        .toLowerCase();
       let elementOffset;
 
       if (document.getElementById(element)) {
