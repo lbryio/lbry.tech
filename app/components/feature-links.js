@@ -4,7 +4,7 @@
 
 //  V A R I A B L E
 
-const links = [ // TODO: Update images
+const links = [
   {
     href: "https://chat.lbry.io",
     image: "https://spee.ch/b432346bfd641990f3dc3dbceda057b4ededa360/discord-bg.jpg",

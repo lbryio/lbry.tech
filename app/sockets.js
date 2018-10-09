@@ -102,7 +102,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
           try {
             renderedContentCollection.push(`
               <figure class="playground__content__trend">
-                <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${part.value.stream.metadata.thumbnail}"/>
+                <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${makeImageSourceSecure(part.value.stream.metadata.thumbnail)}"/>
 
                 <figcaption data-action="choose claim" data-claim-id="${part.name}">
                   ${part.value.stream.metadata.title}
@@ -156,7 +156,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
         ) {
           renderedContentCollection.push(`
             <figure class="playground__content__trend">
-              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${part.value.stream.metadata.thumbnail}"/>
+              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${makeImageSourceSecure(part.value.stream.metadata.thumbnail)}"/>
               <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
                 ${part.value.stream.metadata.title}
                 <span>${part.channel_name}</span>
@@ -309,6 +309,15 @@ function getTrendingContent() {
       resolve(body);
     });
   });
+}
+
+function makeImageSourceSecure(url) {
+  const originalUrl = new URL(url);
+
+  if (originalUrl.protocol !== "https")
+    return `https://${originalUrl.host}${originalUrl.pathname}`;
+
+  return originalUrl.href;
 }
 
 function newsletterSubscribe(data, socket) {
