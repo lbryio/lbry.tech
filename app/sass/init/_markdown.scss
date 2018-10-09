@@ -135,7 +135,7 @@
 
   p,
   ol,
-  ul {
+  ul:not(.component--glossary-toc) {
     margin-bottom: 1rem;
     position: relative;
 
