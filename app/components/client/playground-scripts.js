@@ -351,7 +351,7 @@ function initCanvas() { // eslint-disable-line
 
   ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
   ctx.fillStyle = "white";
-  ctx.font = "bold 56px Karla";
+  ctx.font = "bold 48px 'Inter UI'";
   ctx.lineJoin = "round";
   ctx.lineWidth = 4;
   ctx.strokeStyle = "black";
