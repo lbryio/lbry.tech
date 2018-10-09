@@ -38,12 +38,3 @@
        url("../assets/type/inter/700i.woff2") format("woff2"),
        url("../assets/type/inter/700i.woff") format("woff");
 }
-
-// Single variable font
-
-@font-face {
-  font-family: "Inter UI Variable";
-  font-weight: 400 900;
-  src: url("../assets/type/inter/variable.woff2") format("woff2-variations"),
-       url("../assets/type/inter/variable.woff2") format("woff2");
-}

@@ -17,7 +17,7 @@
     "date-format-lite": "^17.7.0",
     "decamelize": "^2.0.0",
     "dedent": "^0.7.0",
-    "dotenv": "^6.0.0",
+    "dotenv": "^6.1.0",
     "fastify": "^1.12.1",
     "fastify-compress": "^0.7.0",
     "fastify-helmet": "^2.1.0",
@@ -86,7 +86,7 @@
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./",
     "test:lint": "standardx --verbose | snazzy",
-    "test:sass": "sass-lint --config .sasslintrc 'app/sass/*.scss, app/sass/**/*.scss' --verbose --no-exit",
+    "test:sass": "sass-lint 'app/sass/*.scss, app/sass/**/*.scss' --verbose --no-exit",
     "watch": "run-p watch:*",
     "watch:sass": "sass --watch app/sass:app/dist --style compressed",
     "watch:server": "NODE_ENV=development nodemon server --ignore 'public/'"

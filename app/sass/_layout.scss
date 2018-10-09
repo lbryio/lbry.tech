@@ -18,12 +18,6 @@ body {
   z-index: 0;
 }
 
-@supports (font-variation-settings: normal) {
-  body {
-    font-family: "Inter UI Variable", sans-serif;
-  }
-}
-
 main {
   min-height: 100vh;
 
