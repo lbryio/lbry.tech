@@ -181,15 +181,15 @@ function generateMemeCreator(socket) {
   const images = [
     {
       alt: "Carl Sagan",
-      src: "/assets/media/images/carlsagan2.jpg"
+      src: "https://spee.ch/4f6b953e605a602434246743fd246d3e1fd4f5fd/carlsagan2.jpg"
     },
     {
       alt: "Doge",
-      src: "/assets/media/images/doge-meme.jpg"
+      src: "https://spee.ch/2f90f2d91441a4d33d3d4eb82bdfc4c56ec742c7/doge-meme.jpg"
     },
     {
       alt: "LBRY Logo With Green Background",
-      src: "/assets/media/images/lbry-green.png"
+      src: "https://spee.ch/40ac6818bbac87a208722bf4467653341d460908/lbry-green.png"
     }
   ];
 
