@@ -285,7 +285,7 @@ function generateMemeCreator(socket) {
       </fieldset>
 
       <fieldset>
-        <button data-action="upload image" class="__button-black" type="button">Submit</button>
+        <button data-action="upload image" class="button" type="button">Submit</button>
       </fieldset>
     </form>
   `;
