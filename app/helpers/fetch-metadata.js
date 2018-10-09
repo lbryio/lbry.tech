@@ -63,7 +63,7 @@ module.exports = exports = (data, socket) => {
     body.description = dataDetails.description;
     body.language = dataDetails.language;
     body.license = dataDetails.license;
-    body.name = dataDetails.name + randomString(10); // underscores are not allowed?
+    body.name = dataDetails.name + "-" + randomString(10); // underscores are not allowed?
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
 
@@ -117,9 +117,9 @@ module.exports = exports = (data, socket) => {
           publishResponse.result.claim_address
         ) explorerNotice = `
           <p class="playground__description success">
-            To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+            Nicely done, you've published to <b>lbry://${publishResponse.result.lbrytech_claim_name}</b>! To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
             <br/><br/>
-            You can also check out your meme on <a href="https://open.lbry.io/${publishResponse.result.lbrytech_claim_name}#${publishResponse.result.claim_id}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">LBRY</a> or <a href="https://spee.ch/${publishResponse.result.claim_id}/${publishResponse.result.lbrytech_claim_name}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">Spee.ch</a>!
+            You can also check out your meme (once the transaction is confirmed) on <a href="https://open.lbry.io/${publishResponse.result.lbrytech_claim_name}#${publishResponse.result.claim_id}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">LBRY</a> or <a href="https://spee.ch/${publishResponse.result.claim_id}/${publishResponse.result.lbrytech_claim_name}" rel="noopener noreferrer" target="_blank" title="Your meme, on spee.ch">Spee.ch</a>!
           </p>
 
           <br/>
