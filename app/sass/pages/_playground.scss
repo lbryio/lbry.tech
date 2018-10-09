@@ -225,8 +225,12 @@
   width: 50%;
   float: right;
 
-  .__metadata { // h2
-    margin-top: 3rem;
+  h2 {
+    margin-bottom: 1rem;
+
+    &.__metadata {
+      padding-top: 3rem;
+    }
   }
 
   fieldset {
