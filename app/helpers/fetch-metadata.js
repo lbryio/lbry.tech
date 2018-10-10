@@ -4,19 +4,19 @@
 
 //  P A C K A G E S
 
+const loadLanguages = require("prismjs/components/");
 const local = require("app-root-path").require;
 const prism = require("prismjs");
 const raw = require("choo/html/raw");
 const request = require("request-promise-native");
 const stringifyObject = require("stringify-object");
 
-//  V A R I A B L E S
+//  U T I L S
 
-const randomString = local("app/helpers/random-string");
-const loadLanguages = require("prismjs/components/");
-const logSlackError = local("app/helpers/slack");
-const publishMeme = local("app/helpers/publish-meme");
-const uploadImage = local("app/helpers/upload-image");
+const randomString = local("/app/helpers/random-string");
+const logSlackError = local("/app/helpers/slack");
+const publishMeme = local("/app/helpers/publish-meme");
+const uploadImage = local("/app/helpers/upload-image");
 
 loadLanguages(["json"]);
 

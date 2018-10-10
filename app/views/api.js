@@ -8,7 +8,7 @@ import asyncHtml from "choo-async/html";
 import dedent from "dedent";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E S
+//  U T I L S
 
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
 const headerBlockchain = local("app/components/api/header-blockchain").default;

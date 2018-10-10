@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E S
+//  P A C K A G E
 
 import html from "choo/html";
 

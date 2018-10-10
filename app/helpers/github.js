@@ -10,13 +10,14 @@ const local = require("app-root-path").require;
 const octokit = require("@octokit/rest")();
 const redis = require("redis");
 
-//  V A R I A B L E S
+//  U T I L S
 
-const logSlackError = local("app/helpers/slack");
-const relativeDate = local("app/modules/relative-date");
-let client;
+const logSlackError = local("/app/helpers/slack");
+const relativeDate = local("/app/modules/relative-date");
 
 //  R E D I S
+
+let client;
 
 if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
   octokit.authenticate({

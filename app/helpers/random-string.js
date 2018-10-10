@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E
+//  N A T I V E
 
 const crypto = require("crypto");
 

@@ -6,9 +6,9 @@
 
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E
+//  U T I L
 
-const linkGrid = local("app/components/link-grid").default;
+const linkGrid = local("/app/components/link-grid").default;
 
 
 

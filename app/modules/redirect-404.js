@@ -2,12 +2,12 @@
 
 
 
-//  P A C K A G E
+//  P A C K A G E S
 
 import html from "choo/html";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E S
+//  U T I L S
 
 const page404 = local("app/views/404.js");
 const redirects = local("app/data/redirects.json");

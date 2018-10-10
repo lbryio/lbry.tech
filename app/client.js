@@ -11,7 +11,7 @@ import devtools from "choo-devtools";
 import { require as local } from "app-root-path";
 import ssr from "choo-ssr";
 
-//  V A R I A B L E S
+//  U T I L S
 
 const head = local("app/components/head").default;
 const wrapper = local("app/components/wrapper").default;

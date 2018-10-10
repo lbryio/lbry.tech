@@ -7,12 +7,11 @@
 import html from "choo/html";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E S
-
-import editLink from "./edit-link";
-import emailSubscribe from "./email-subscribe";
+//  U T I L S
 
 const config = local("/config");
+const editLink = local("/app/components/edit-link").default;
+const emailSubscribe = local("/app/components/email-subscribe").default;
 
 
 

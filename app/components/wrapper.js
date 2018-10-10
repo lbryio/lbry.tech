@@ -2,15 +2,15 @@
 
 
 
-//  P A C K A G E
+//  P A C K A G E S
 
 import asyncHtml from "choo-async/html";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E S
+//  U T I L S
 
-const footer = local("app/components/footer").default;
-const navigation = local("app/components/navigation").default;
+const footer = local("/app/components/footer").default;
+const navigation = local("/app/components/navigation").default;
 
 
 

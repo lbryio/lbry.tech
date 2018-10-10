@@ -2,7 +2,7 @@
 
 
 
-//  V A R I A B L E
+//  U T I L
 
 const links = [
   {

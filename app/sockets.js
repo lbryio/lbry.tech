@@ -8,7 +8,7 @@ const html = require("choo/html");
 const local = require("app-root-path").require;
 const request = require("request-promise-native");
 
-//  V A R I A B L E S
+//  U T I L S
 
 const fetchMetadata = local("app/helpers/fetch-metadata");
 const { generateGitHubFeed } = local("app/helpers/github");

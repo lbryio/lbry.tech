@@ -13,9 +13,12 @@ import path from "path";
 import { require as local } from "app-root-path";
 import raw from "choo/html/raw";
 
-//  V A R I A B L E S
+//  V A R I A B L E
 
 const numberRegex = /^[0-9]/g;
+
+//  U T I L S
+
 const redirect404 = local("app/modules/redirect-404");
 
 const md = require("markdown-it")({

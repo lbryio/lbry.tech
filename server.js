@@ -15,7 +15,7 @@ const fastify = require("fastify")({
   }
 });
 
-//  V A R I A B L E S
+//  U T I L S
 
 const handleSocketMessages = local("app/sockets");
 const logSlackError = local("app/helpers/slack");
@@ -24,23 +24,20 @@ const logSlackError = local("app/helpers/slack");
 
 //  P R O G R A M
 
-fastify.use(cors());
-
-fastify.register(require("fastify-compress"));
-fastify.register(require("fastify-ws"));
-
-fastify.register(require("fastify-helmet"), {
-  hidePoweredBy: { setTo: "LBRY" }
-});
-
-fastify.register(require("fastify-static"), {
-  prefix: "/assets/",
-  root: `${__dirname}/app/dist/`
-});
-
-fastify.register(require("choo-ssr/fastify"), {
-  app: require("./app")
-});
+fastify
+  .use(cors())
+  .register(require("fastify-compress"))
+  .register(require("fastify-ws"))
+  .register(require("fastify-helmet"), {
+    hidePoweredBy: { setTo: "LBRY" }
+  })
+  .register(require("fastify-static"), {
+    prefix: "/assets/",
+    root: `${__dirname}/app/dist/`
+  })
+  .register(require("choo-ssr/fastify"), {
+    app: require("./app")
+  });
 
 fastify.ready(err => {
   if (err) throw err;

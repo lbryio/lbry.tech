@@ -7,7 +7,7 @@
 import html from "choo/html";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E S
+//  U T I L S
 
 const config = local("/config");
 let title = "";
