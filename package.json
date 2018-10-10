@@ -2,7 +2,7 @@
   "author": "LBRY Team",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@octokit/rest": "^15.13.0",
+    "@octokit/rest": "^15.13.1",
     "app-root-path": "^2.1.0",
     "async": "^2.6.1",
     "async-es": "^2.6.1",
