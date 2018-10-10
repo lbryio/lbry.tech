@@ -327,68 +327,70 @@ function newsletterSubscribe(data, socket) {
   const email = data.email;
 
   if (!validateEmail(email)) return socket.send(JSON.stringify({
-    html: "Your email is invalid",
+    class: "error",
+    html: "Your email address is invalid",
     message: "updated html",
     selector: "#emailMessage"
   }));
 
-  return new Promise((resolve, reject) => {
-    request({
-      method: "POST",
-      url: `https://api.lbry.io/list/subscribe?email=${email}&tag=developer`
-    }).then(body => {
-      if (!body || !JSON.parse(body)) {
-        logSlackError(
-          "\n" +
-          "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
-          `> _Cause: ${email} interacted with the form_\n`
-        );
-
-        return resolve(socket.send(JSON.stringify({
-          html: "Something is terribly wrong",
-          message: "updated html",
-          selector: "#emailMessage"
-        })));
-      }
-
-      body = JSON.parse(body);
-
-      if (!body.success) {
-        logSlackError(
-          "\n" +
-          "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
-          `> _Cause: ${email} interacted with the form_\n`
-        );
-
-        return reject(socket.send(JSON.stringify({
-          html: body.error,
-          message: "updated html",
-          selector: "#emailMessage"
-        })));
-      }
+  return new Promise((resolve, reject) => request({
+    method: "POST",
+    url: `https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`
+  }).then(body => {
+    if (!body || !JSON.parse(body)) {
+      logSlackError(
+        "\n" +
+        "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
+        `> _Cause: ${email} interacted with the form_\n`
+      );
 
       return resolve(socket.send(JSON.stringify({
-        html: "Thank you! Please confirm subscription in your inbox.",
+        class: "error",
+        html: "Something is terribly wrong",
         message: "updated html",
         selector: "#emailMessage"
       })));
-    })
-      .catch(welp => {
-        if (welp.statusCode === 409) {
-          logSlackError(
-            "\n" +
-          "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(welp.error)) + "```" + "\n" +
-          `> _Cause: ${email} interacted with the form_\n`
-          );
+    }
 
-          return resolve(socket.send(JSON.stringify({
-            html: "You have already subscribed!",
-            message: "updated html",
-            selector: "#emailMessage"
-          })));
-        }
-      });
-  });
+    body = JSON.parse(body);
+
+    if (!body.success) {
+      logSlackError(
+        "\n" +
+        "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
+        `> _Cause: ${email} interacted with the form_\n`
+      );
+
+      return reject(socket.send(JSON.stringify({
+        class: "error",
+        html: body.error,
+        message: "updated html",
+        selector: "#emailMessage"
+      })));
+    }
+
+    return resolve(socket.send(JSON.stringify({
+      html: "Thank you! Please confirm subscription in your inbox.",
+      message: "updated html",
+      selector: "#emailMessage"
+    })));
+  })
+    .catch(welp => {
+      if (welp.statusCode === 409) {
+        logSlackError(
+          "\n" +
+        "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(welp.error)) + "```" + "\n" +
+        `> _Cause: ${email} interacted with the form_\n`
+        );
+
+        return resolve(socket.send(JSON.stringify({
+          class: "error",
+          html: "You have already subscribed!",
+          message: "updated html",
+          selector: "#emailMessage"
+        })));
+      }
+    }));
 }
 
 function validateEmail(email) {

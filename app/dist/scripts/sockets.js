@@ -50,8 +50,14 @@ function initializeWebSocketConnection() {
 
       case data.message === "updated html":
         document.querySelector(data.selector).innerHTML = data.html;
-        document.getElementById("emailAddress").value = "";
-        document.getElementById("emailMessage").innerHTML = "";
+
+        if (data.class)
+          document.querySelector(data.selector).classList.add(data.class);
+
+        if (data.selector !== "#emailMessage") {
+          document.getElementById("emailAddress").value = "";
+          document.getElementById("emailMessage").innerHTML = "";
+        }
 
         if (data.example === 2) {
           detectLanguageAndUpdate(); // eslint-disable-line

@@ -59,10 +59,23 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
 });
 
 // Newsletter
-document.querySelector("[data-action='subscribe to newsletter']").onclick = () => {
-  const email = document.getElementById("emailAddress").value;
+document.getElementById("emailAddress").addEventListener("keyup", event => {
+  const key = event.keyCode ? event.keyCode : event.which;
 
-  if (!validateEmail(email)) return;
+  if (key === 13)
+    document.querySelector("[data-action='subscribe to newsletter']").click();
+});
+
+document.querySelector("[data-action='subscribe to newsletter']").onclick = () => {
+  const email = document.getElementById("emailAddress").value.trim();
+
+  if (!validateEmail(email)) {
+    document.getElementById("emailMessage").classList.add("error");
+    document.getElementById("emailMessage").innerHTML = "Your email address is invalid";
+    return;
+  }
+
+  document.getElementById("emailMessage").classList.remove("error");
 
   send(JSON.stringify({
     email: email,
