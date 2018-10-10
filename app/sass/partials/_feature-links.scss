@@ -1,18 +1,18 @@
 $width-feature-link: 320px;
 
 .feature-links {
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   list-style-type: none;
   margin-bottom: 2rem;
   padding-top: 0.5rem;
+
+  @media (min-width: 1061px) {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 }
 
 .feature-link {
-  width: $width-feature-link;
-  min-height: 135px;
-
   background-color: $white;
   border: 1px solid rgba($black, 0.1);
   border-radius: 3px;
@@ -21,6 +21,30 @@ $width-feature-link: 320px;
   position: relative;
   transition: box-shadow 0.2s;
   vertical-align: top;
+
+  @media (min-width: 1061px) {
+    width: $width-feature-link; min-height: 135px;
+  }
+
+  @media (max-width: 1060px) {
+    min-height: 150px;
+
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 681px) and (max-width: 1060px) {
+    width: calc(50% - 1rem);
+
+    &:nth-of-type(odd) {
+      margin-right: 1rem;
+    }
+  }
+
+  @media (max-width: 680px) {
+    width: 100%;
+  }
 
   &:not(:hover) {
     .feature-link__background {
