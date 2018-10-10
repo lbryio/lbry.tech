@@ -9,7 +9,7 @@
 </div>
 
 <div align="center">
-  <img src="https://cdn.rawgit.com/lbryio/lbry.tech/2cc49032/preview.png" title="Screenshot of lbry.tech"/>
+  <img src="https://spee.ch/f2c2c29f7e6a76d84b341c5f42a832db7589b410/dottech-2018-october.png" title="Screenshot of lbry.tech"/>
 </div>
 
 <div align="center">
