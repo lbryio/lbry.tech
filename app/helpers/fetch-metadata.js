@@ -63,12 +63,12 @@ module.exports = exports = (data, socket) => {
     body.description = dataDetails.description;
     body.language = dataDetails.language;
     body.license = dataDetails.license;
-    body.name = dataDetails.name + "-" + randomString(10); // underscores are not allowed?
+    body.name = dataDetails.name + "-" + randomString(10);
     body.nsfw = dataDetails.nsfw;
     body.title = dataDetails.title;
 
     // Gotta let the blockchain know what to save
-    body.file_path = dataDetails.file_path; // just base64 string
+    body.file_path = dataDetails.file_path;
 
     return uploadImage(body.file_path).then(uploadResponse => {
       if (!uploadResponse.status || uploadResponse.status !== "ok") {

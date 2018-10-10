@@ -176,7 +176,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
       document.getElementById("playground-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "TITLE_OF_YOUR_CONTENT", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "DESCRIPTION_OF_YOUR_CONTENT", "title": "TITLE_OF_YOUR_CONTENT", "language": "en", "license": "", "nsfw": false }}}'</span> <span class="token url">http://localhost:5279    </span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${getMemeInfo().name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${getMemeInfo().description}", "title": "${getMemeInfo().title}", "language": "${getMemeInfo().language}", "license": "${getMemeInfo().license}", "nsfw": ${getMemeInfo().nsfw} }}}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>

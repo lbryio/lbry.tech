@@ -10,9 +10,9 @@ const request = require("request-promise-native");
 
 //  U T I L S
 
-const fetchMetadata = local("app/helpers/fetch-metadata");
-const { generateGitHubFeed } = local("app/helpers/github");
-const logSlackError = local("app/helpers/slack");
+const fetchMetadata = local("/app/helpers/fetch-metadata");
+const { generateGitHubFeed } = local("/app/helpers/github");
+const logSlackError = local("/app/helpers/slack");
 
 
 
