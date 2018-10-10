@@ -222,7 +222,7 @@
 }
 
 .playground__content__meme__editor {
-  width: 50%;
+  width: 50%; min-height: 50vh;
   float: right;
 
   h2 {
@@ -453,6 +453,14 @@
       display: block;
       text-transform: uppercase;
     }
+  }
+
+  code {
+    padding: 2px 5px;
+    background-color: $black;
+    border-radius: 0.2rem;
+    color: $white;
+    font-size: 0.8rem;
   }
 
   a {

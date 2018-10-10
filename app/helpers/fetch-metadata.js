@@ -117,7 +117,9 @@ module.exports = exports = (data, socket) => {
           publishResponse.result.claim_address
         ) explorerNotice = `
           <p class="playground__description success">
-            Nicely done, you've published to <b>lbry://${publishResponse.result.lbrytech_claim_name}</b>! To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+            Nicely done, you've published to <code>lbry://${publishResponse.result.lbrytech_claim_name}</code>.
+            <br/><br/>
+            To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${publishResponse.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
             <br/><br/>
             You can also check out your meme (once the transaction is confirmed) on <a href="https://open.lbry.io/${publishResponse.result.lbrytech_claim_name}#${publishResponse.result.claim_id}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">LBRY</a> or <a href="https://spee.ch/${publishResponse.result.claim_id}/${publishResponse.result.lbrytech_claim_name}" rel="noopener noreferrer" target="_blank" title="Your meme, on spee.ch">Spee.ch</a>!
           </p>
@@ -132,13 +134,6 @@ module.exports = exports = (data, socket) => {
           prism.languages.json,
           "json"
         );
-
-        /*
-        https://open.lbry.io/Yet--another-test-733dd99009#59b368ed4b616108fe27d308fa8e22602acc762f
-        https://open.lbry.io/claim_show#adee1be89febd3d89f51581601bca52d75a710a8
-
-        You are generating the claim name, so you'd know it.  it would be https://open.lbry.io/claim-name#claim_id (claim id comes from the return). You can also run a claim_show with the claim id parameter to get name if that's easier. The spee.ch link would just be https://spee.ch/claimid/claimname
-        */
 
         return socket.send(JSON.stringify({
           example: data.example,
