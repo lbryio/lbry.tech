@@ -9,8 +9,8 @@ import { require as local } from "app-root-path";
 
 //  U T I L S
 
-const page404 = local("app/views/404.js");
-const redirects = local("app/data/redirects.json");
+const page404 = local("/app/views/404.js");
+const redirects = local("/app/data/redirects.json");
 
 
 

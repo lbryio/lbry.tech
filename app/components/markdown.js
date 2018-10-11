@@ -1,19 +1,28 @@
 "use strict";
 
+
+
+//  P A C K A G E S
+
 import decamelize from "decamelize";
 import exists from "fs-exists-sync";
-import fs from "graceful-fs";
 import fm from "front-matter";
+import fs from "graceful-fs";
 import html from "choo/html";
 import path from "path";
 import raw from "choo/html/raw";
 import { require as local } from "app-root-path";
 
+//  V A R I A B L E
+
 const numberRegex = /^[0-9]/g;
+
+//  U T I L
+
 const md = require("markdown-it")({
   html: true,
   typographer: true
-}).use(local("app/modules/markdown-it-sup"))
+}).use(local("/app/modules/markdown-it-sup"))
   .use(require("markdown-it-anchor"), {
     slugify: stringToSlugify => {
       let finalString = stringToSlugify
@@ -32,8 +41,9 @@ const md = require("markdown-it")({
 
 
 
-export default path => {
+//  E X P O R T
 
+export default path => {
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
   const renderedMarkdown = md.render(markdownFileDetails.body);
@@ -43,6 +53,10 @@ export default path => {
     <div class="page__markup">${raw(updatedMarkdown)}</div>
   `;
 };
+
+
+
+//  H E L P E R
 
 function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+ ?\/>/g;
@@ -76,7 +90,7 @@ function wikiFinder(markdownBody) {
     const url = encodeURI("/glossary#" + label.replace(/\s+/g, "-"));
 
     return label ?
-      `<a href="${url}" class="link--glossary">${label}</a>` :
+      `<a class="link--glossary" href="${url}">${label}</a>` :
       match.input;
   });
 }

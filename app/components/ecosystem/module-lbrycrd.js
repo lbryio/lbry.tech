@@ -1,6 +1,16 @@
 "use strict";
 
-import markdown from "../markdown";
+
+
+//  P A C K A G E
+
+import { require as local } from "app-root-path";
+
+//  U T I L
+
+const markdown = local("/app/components/markdown").default;
+
+
 
 //  E X P O R T
 

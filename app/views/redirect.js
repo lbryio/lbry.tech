@@ -12,7 +12,7 @@ import raw from "choo/html/raw";
 
 //  U T I L S
 
-const markdown = local("/app/components/markdown");
+const markdown = local("/app/components/markdown").default;
 const redirect404 = local("/app/modules/redirect-404");
 
 
@@ -23,9 +23,8 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   const partialPath = state.route === "resources/*" ? `resources/${state.params.wildcard}` : state.params.wildcard;
   const path = `./documents/${partialPath}.md`;
 
-  if (!fs.existsSync(path)) {
+  if (!fs.existsSync(path))
     return redirect404(state);
-  }
 
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
@@ -49,7 +48,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   if (partialPath === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
   if (partialPath === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
   if (partialPath === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/playground-scripts.js", "utf-8") + "</script>";
-
+  // console.log(markdown(path));
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
       <header class="page__header">
