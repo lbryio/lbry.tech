@@ -56,7 +56,7 @@ export default path => {
 
 
 
-//  H E L P E R
+//  H E L P E R S
 
 function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+ ?\/>/g;

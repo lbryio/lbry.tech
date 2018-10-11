@@ -4,9 +4,9 @@
 
 //  P A C K A G E S
 
+import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
-import fm from "front-matter";
 import { require as local } from "app-root-path";
 import raw from "choo/html/raw";
 
@@ -39,6 +39,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
       }
     }
 
+    // below seems evil
     state.lbry = customMetadata;
   }
 
@@ -48,7 +49,7 @@ module.exports = exports = (state, emit) => { // eslint-disable-line
   if (partialPath === "glossary") pageScript = "<script>" + fs.readFileSync("./app/components/client/glossary-scripts.js", "utf-8") + "</script>";
   if (partialPath === "overview") pageScript = "<script>" + fs.readFileSync("./app/components/client/ecosystem-scripts.js", "utf-8") + "</script>";
   if (partialPath === "playground") pageScript = "<script>" + fs.readFileSync("./app/components/client/playground-scripts.js", "utf-8") + "</script>";
-  // console.log(markdown(path));
+
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
       <header class="page__header">
