@@ -13,8 +13,8 @@ $width-feature-link: 320px;
 }
 
 .feature-link {
-  background-color: $white;
-  border: 1px solid rgba($black, 0.1);
+  background-color: $lbry-white;
+  border: 1px solid rgba($lbry-black, 0.1);
   border-radius: 3px;
   cursor: pointer;
   display: inline-block;
@@ -53,10 +53,10 @@ $width-feature-link: 320px;
   }
 
   &:hover {
-    box-shadow: 0 0 15px rgba($black, 0.15);
+    box-shadow: 0 0 15px $lbry-gray-1;
 
     .feature-link__title {
-      color: $teal;
+      color: $lbry-teal-3;
     }
   }
 }
@@ -75,11 +75,11 @@ $width-feature-link: 320px;
 .feature-link__title-inner {
   padding: 0.25rem 0.5rem;
 
-  background-color: $white;
-  border: 1px solid rgba($gray, 0.1);
+  background-color: $lbry-white;
+  border: 1px solid $lbry-gray-1;
   border-radius: 3px;
   box-decoration-break: clone;
-  box-shadow: 0 2px 5px rgba($black, 0.025);
+  box-shadow: 0 2px 5px rgba($lbry-gray-5, 0.1);
   display: inline-block;
 }
 
@@ -87,7 +87,7 @@ $width-feature-link: 320px;
   width: calc(100% + 2px); height: 100px;
   top: -1px; left: -1px;
 
-  background-color: $teal;
+  background-color: $lbry-teal-3;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   overflow: hidden;

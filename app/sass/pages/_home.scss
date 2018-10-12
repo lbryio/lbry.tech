@@ -36,7 +36,7 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
   hr {
     width: 100%; height: 1px;
 
-    background-color: rgba($black, 0.1);
+    background-color: rgba($lbry-black, 0.1);
     border: none;
     margin-bottom: 4rem;
   }
@@ -45,7 +45,7 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
     height: calc(50vh - 4rem); min-height: 300px;
 
     align-items: center;
-    background-color: $black;
+    background-color: $lbry-black;
     // background-image: url("/assets/media/svg/text-logo--white.svg");
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 300' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath fill='%23fcfcfc' d='M567.328, 43.44l72.864, 130.464l0, 82.656l46.944, 0l0, -82.656l72.576, -130.464l-50.688, 0l-44.64, 84.672l-44.64, -84.672l-52.416, 0Z'/%3E %3Cpath fill='%23fcfcfc' d='M520.672, 173.616c22.464, -10.656 34.848, -31.968 34.848, -61.056c0, -44.64 -26.496, -68.832 -81.216, -69.12l-82.368, 0l0, 213.12l46.656, 0l0, -75.168l35.136, 0l31.392, 75.168l52.416, 0l-36.864, -82.944Zm-46.656, -32.544l-35.424, 0l0, -56.448l35.712, 0c23.904, 0 31.968, 12.96 31.968, 27.936c0, 15.264 -8.352, 28.512 -32.256, 28.512Z'/%3E %3Cpath fill='%23fcfcfc' d='M328.864, 150.576c15.552, -7.2 28.512, -23.04 28.512, -48.096c0, -34.848 -25.344, -58.464 -67.104, -58.464l-43.776, 0l-46.368, 0l0, 212.544l89.568, 0c42.048, 0 70.272, -19.584 70.272, -55.872c0, -26.784 -14.976, -42.048 -31.104, -50.112Zm-43.776, -67.104c19.008, 0 25.92, 14.112 25.92, 25.344c0, 11.808 -7.2, 24.768 -25.92, 24.768l-38.592, 0l0, -50.112l38.592, 0Zm2.592, 133.632l-41.184, 0l0, -49.248l41.184, 0c15.264, 0 26.208, 10.08 26.208, 25.056c0, 14.976 -10.656, 24.192 -26.208, 24.192Z'/%3E %3Cpath fill='%23fcfcfc' d='M87.52, 214.8l0, -171.36l-47.232, 0l0, 213.12l130.752, 0l0, -41.76l-83.52, 0Z'/%3E %3C/svg%3E");
     background-position: center;
@@ -62,8 +62,8 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
     h1 {
       padding: 0.4rem 1rem;
 
-      background-color: $white;
-      border: 1px solid rgba($black, 0.1);
+      background-color: $lbry-white;
+      border: 1px solid rgba($lbry-black, 0.1);
       box-decoration-break: clone;
       display: inline;
       font-weight: normal;
@@ -82,7 +82,7 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
   }
 
   .features {
-    border-bottom: 1px solid rgba($black, 0.05);
+    border-bottom: 1px solid rgba($lbry-black, 0.05);
     grid-area: features;
   }
 
@@ -106,13 +106,13 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
       @media (min-width: 1301px) {
         top: -0.85rem; left: -2rem;
 
-        color: rgba($black, 0.045);
+        color: rgba($lbry-black, 0.045);
         font-size: 4rem;
         position: absolute;
       }
 
       @media (max-width: 1300px) {
-        color: $black;
+        color: $lbry-black;
       }
 
       @media (min-width: 901px) and (max-width: 1300px) {
@@ -159,7 +159,7 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
   .docs,
   .contribute,
   .develop {
-    border-bottom: 1px solid rgba($black, 0.05);
+    border-bottom: 1px solid rgba($lbry-black, 0.05);
   }
 
   .intro,
@@ -238,7 +238,7 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
           }
 
           &:hover {
-            color: $teal;
+            color: $lbry-teal-3;
           }
         }
       }

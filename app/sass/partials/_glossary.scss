@@ -63,8 +63,8 @@
   width: 250px; height: calc(100vh - 4rem);
   top: 4rem; left: 0;
 
-  background-color: $white;
-  border-right: 1px solid rgba($gray, 0.3);
+  background-color: $lbry-white;
+  border-right: 1px solid $lbry-gray-2;
   font-size: 0.8rem; // TODO: Why was !important here?
   overflow-x: hidden;
   overflow-y: auto;
@@ -78,7 +78,7 @@
 }
 
 .component--glossary-toc-toggle {
-  background-color: mix($gray, $white, 30%);
+  background-color: $lbry-gray-1;
   font-size: 0.7rem;
   position: absolute;
   text-orientation: upright;

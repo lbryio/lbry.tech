@@ -17,8 +17,8 @@
   position: absolute;
 
   &:not(.error):not(.info):not(.warning) {
-    background-color: mix($white, $teal, 90%);
-    border-color: $teal;
+    background-color: $lbry-teal-1;
+    border-color: $lbry-teal-3;
   }
 
   &:not(.active) {
@@ -31,17 +31,17 @@
   }
 
   &.error {
-    background-color: mix($white, $red, 90%);
-    border-color: $red;
+    background-color: $lbry-red-1;
+    border-color: $lbry-red-3;
   }
 
   &.info {
-    background-color: mix($white, $gray, 90%);
-    border-color: $gray;
+    background-color: $lbry-gray-1;
+    border-color: $lbry-gray-3;
   }
 
   &.warning {
-    background-color: mix($white, $yellow, 90%);
-    border-color: $yellow;
+    background-color: $lbry-yellow-1;
+    border-color: $lbry-yellow-3;
   }
 }

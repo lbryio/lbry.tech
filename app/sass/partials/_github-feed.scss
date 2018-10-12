@@ -1,6 +1,6 @@
 .github-feed {
-  border-bottom: 1px solid rgba($black, 0.05);
-  border-left: 1px solid rgba($black, 0.05);
+  border-bottom: 1px solid $lbry-gray-1;
+  border-left: 1px solid $lbry-gray-1;
   font-size: 0.8rem;
   grid-area: github;
   position: relative;
@@ -56,13 +56,13 @@
       width: calc(100% - (1rem + 5%));
       top: 2.15rem; left: 0;
 
-      color: rgba($black, 0.045);
+      color: rgba($lbry-black, 0.045);
       font-size: 4rem;
       position: absolute;
     }
 
     @media (max-width: 1300px) {
-      color: $black;
+      color: $lbry-black;
     }
 
     @media (min-width: 901px) and (max-width: 1300px) {
@@ -123,16 +123,16 @@
 
   > p:first-of-type {
     @media (max-width: 700px) {
-      box-shadow: 0 2px 5px rgba($black, 0.025);
+      box-shadow: 0 2px 5px $lbry-gray-1;
     }
 
     code {
       padding: 0.2rem 0.5rem;
       top: -1px;
 
-      background-color: $black;
+      background-color: $lbry-black;
       border-radius: 3px;
-      color: $white;
+      color: $lbry-white;
       font-size: 80%;
       letter-spacing: 0.05rem;
       position: relative;
@@ -154,8 +154,8 @@
       width: 90%; padding: 1rem;
       top: -3.5rem; left: 5%;
 
-      background-color: $white;
-      border: 1px solid rgba($gray, 0.1);
+      background-color: $lbry-white;
+      border: 1px solid $lbry-gray-1;
       border-radius: 3px;
       position: relative;
       white-space: normal;
@@ -164,7 +164,7 @@
 }
 
 .github-feed__event__avatar {
-  border: 1px solid rgba($gray, 0.1);
+  border: 1px solid $lbry-gray-1;
   border-radius: 3px;
   object-fit: cover;
   object-position: center;
@@ -179,7 +179,7 @@
 }
 
 .github-feed__event__time {
-  color: $gray;
+  color: $lbry-gray-3;
   display: block;
 
   @media (max-width: 700px) {

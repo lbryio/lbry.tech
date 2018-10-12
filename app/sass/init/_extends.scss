@@ -52,7 +52,7 @@
   }
 
   &:hover::after {
-    background-color: $black;
+    background-color: $lbry-black;
   }
 }
 
@@ -62,16 +62,16 @@
   @extend .__button-padding-horizontal;
 
   &:not(:hover) {
-    background-color: $black;
-    border-color: $white;
-    box-shadow: 2px 2px 0 $white;
-    color: $white;
+    background-color: $lbry-black;
+    border-color: $lbry-white;
+    box-shadow: 2px 2px 0 $lbry-white;
+    color: $lbry-white;
   }
 
   &:hover {
-    background-color: $white;
-    border-color: $black;
-    box-shadow: 2px 2px 0 $black;
+    background-color: $lbry-white;
+    border-color: $lbry-black;
+    box-shadow: 2px 2px 0 $lbry-black;
     color: inherit;
   }
 }
@@ -82,17 +82,17 @@
   @extend .__button-padding-horizontal;
 
   &:not(:hover) {
-    background-color: $white;
+    background-color: $lbry-white;
     border-color: transparent;
-    box-shadow: 2px 2px 0 $black;
+    box-shadow: 2px 2px 0 $lbry-black;
     color: inherit;
   }
 
   &:hover {
-    background-color: $black;
-    border-color: $white;
-    box-shadow: 2px 2px 0 $white;
-    color: $white;
+    background-color: $lbry-black;
+    border-color: $lbry-white;
+    box-shadow: 2px 2px 0 $lbry-white;
+    color: $lbry-white;
   }
 }
 
@@ -101,17 +101,17 @@
   @extend .__button-padding-vertical;
   @extend .__button-padding-horizontal;
 
-  background-color: $white;
+  background-color: $lbry-white;
 
   &:not(:hover) {
     border-color: transparent;
-    box-shadow: 2px 2px 0 $black;
+    box-shadow: 2px 2px 0 $lbry-black;
   }
 
   &:hover {
-    border-color: $teal;
-    box-shadow: 2px 2px 0 $teal;
-    color: $teal;
+    border-color: $lbry-teal-3;
+    box-shadow: 2px 2px 0 $lbry-teal-3;
+    color: $lbry-teal-3;
   }
 }
 
@@ -127,7 +127,7 @@
 
 .button {
   @extend .__button-padding-horizontal;
-  color: $white;
+  color: $lbry-white;
   font-size: 1rem;
   line-height: 2rem;
   position: relative;
@@ -144,18 +144,18 @@
   }
 
   &:not(:hover) {
-    background-color: $black;
+    background-color: $lbry-black;
 
     &::after {
-      background-color: $black;
+      background-color: $lbry-black;
     }
   }
 
   &:hover {
-    background-color: $teal;
+    background-color: $lbry-teal-3;
 
     &::after {
-      background-color: $teal;
+      background-color: $lbry-teal-3;
     }
   }
 }
@@ -181,7 +181,7 @@
     top: 2rem; left: calc(50% - 2rem);
 
     animation: spin 2s linear infinite;
-    border-top-color: $teal;
+    border-top-color: $lbry-teal-3;
     border-radius: 50%;
     border-style: solid;
     border-width: 6px;

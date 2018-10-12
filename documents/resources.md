@@ -2,7 +2,7 @@
 title: Resources
 ---
 
-<ResourcesLinkGrid />
+<ResourcesLinkGrid/>
 
 ## Additional Resources
 

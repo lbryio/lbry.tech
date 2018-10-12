@@ -1,5 +1,5 @@
 .newsletter-cta {
-  background-color: rgba($black, 0.2);
+  background-color: $lbry-gray-2;
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: center;
@@ -43,7 +43,7 @@
 .newsletter-cta__input {
   height: 38px;
 
-  background-color: $white;
+  background-color: $lbry-white;
   font-size: 1rem;
   transition: border 0.2s;
 
@@ -57,31 +57,31 @@
   }
 
   &:not(:focus) {
-    border-top-color: $black;
-    border-left-color: $black;
+    border-top-color: $lbry-black;
+    border-left-color: $lbry-black;
 
     @media (min-width: 551px) {
       border-right-color: transparent;
-      border-bottom-color: $black;
+      border-bottom-color: $lbry-black;
     }
 
     @media (max-width: 550px) {
-      border-right-color: $black;
+      border-right-color: $lbry-black;
       border-bottom-color: transparent;
     }
   }
 
   &:focus {
-    border-top-color: mix($black, $teal, 20%);
-    border-left-color: mix($black, $teal, 20%);
+    border-top-color: $lbry-teal-5;
+    border-left-color: $lbry-teal-5;
 
     @media (min-width: 551px) {
       border-right-color: transparent;
-      border-bottom-color: mix($black, $teal, 20%);
+      border-bottom-color: $lbry-teal-5;
     }
 
     @media (max-width: 550px) {
-      border-right-color: mix($black, $teal, 20%);
+      border-right-color: $lbry-teal-5;
       border-bottom-color: transparent;
     }
   }
@@ -90,7 +90,7 @@
 .newsletter-cta__submit {
   @extend .__button-basic;
   @extend .__button-padding-vertical;
-  color: $white;
+  color: $lbry-white;
 
   @media (min-width: 551px) {
     width: 112px; height: 38px;
@@ -105,19 +105,19 @@
   }
 
   &:not(:hover) {
-    background-color: $black;
-    border-color: $black;
+    background-color: $lbry-black;
+    border-color: $lbry-black;
   }
 
   &:hover {
-    background-color: $teal;
-    border-color: mix($black, $teal, 20%);
+    background-color: $lbry-teal-3;
+    border-color: $lbry-teal-5;
   }
 }
 
 .newsletter-cta__message {
   @include clearfix;
-  color: $white;
+  color: $lbry-white;
   cursor: default;
   display: inline-block;
   font-size: 0.8rem;
@@ -128,10 +128,10 @@
   }
 
   &:not(.error) {
-    background-color: $teal;
+    background-color: $lbry-teal-3;
   }
 
   &.error {
-    background-color: $red;
+    background-color: $lbry-red-3;
   }
 }

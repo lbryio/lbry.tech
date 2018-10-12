@@ -14,11 +14,11 @@
   @include center;
   width: 100%;
 
-  background-color: $black;
+  background-color: $lbry-black;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: $white;
+  color: $lbry-white;
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);
   position: relative;
@@ -26,7 +26,7 @@
 
 .page__header__title {
   font-weight: 300;
-  text-shadow: 1px 1px 2px rgba($black, 0.3);
+  text-shadow: 1px 1px 2px rgba($lbry-black, 0.3);
 
   @media (min-width: 901px) {
     font-size: 3rem;

@@ -355,7 +355,7 @@ function updateGithubFeed() {
 //  H E L P E R
 
 function refToBranch(ref) {
-  return ref.replace("refs/heads/", "");
+  if (ref) return ref.replace("refs/heads/", "");
 }
 
 

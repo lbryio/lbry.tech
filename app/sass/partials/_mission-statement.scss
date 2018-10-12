@@ -1,8 +1,8 @@
 .component--mission-statement {
   padding: 1rem 1rem 1rem 1.25rem;
 
-  background-color: rgba($teal, 0.1);
-  border-left: 0.5rem solid $teal;
+  background-color: rgba($lbry-teal-1, 0.3);
+  border-left: 0.5rem solid $lbry-teal-3;
   line-height: 1.55;
   margin-bottom: 1.5rem;
   position: relative;
@@ -17,7 +17,7 @@
 }
 
 .component--mission-statement__title {
-  color: $teal;
+  color: $lbry-teal-3;
   display: block;
   letter-spacing: 0.025rem;
   text-transform: uppercase;

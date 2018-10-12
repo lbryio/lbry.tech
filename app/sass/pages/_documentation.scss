@@ -18,7 +18,7 @@
     position: relative;
 
     &::before {
-      background-color: $black;
+      background-color: $lbry-black;
       border-radius: 50%;
       content: "";
       line-height: 0;
@@ -97,7 +97,7 @@
     position: relative;
 
     &::before {
-      color: rgba($black, 0.5);
+      color: rgba($lbry-black, 0.5);
       font-style: italic;
       position: absolute;
       vertical-align: bottom;

@@ -3,7 +3,7 @@
   top: 0; right: 0;
   bottom: 0; left: 0;
 
-  background-color: rgba($black, 0.5);
+  background-color: rgba($lbry-black, 0.5);
   position: fixed;
   z-index: 10;
 
@@ -32,14 +32,14 @@
     }
 
     a {
-      color: $teal;
+      color: $lbry-teal-3;
     }
   }
 }
 
 .modal-wrap {
   padding: 2rem 1.5rem;
-  background-color: $white;
+  background-color: $lbry-white;
 
   @media (min-width: 501px) {
     width: 500px;

@@ -23,7 +23,7 @@
     width: 100%; height: 1px;
     bottom: -1px; left: 0;
 
-    background-color: rgba($gray, 0.3);
+    background-color: $lbry-gray-2;
     content: "";
     position: absolute;
   }
@@ -50,8 +50,8 @@
   width: 200px; height: calc(100vh - 4rem); // navigation is 4rem tall
   bottom: 0; left: 0;
 
-  background-color: $white;
-  border-right: 1px solid rgba($gray, 0.3);
+  background-color: $lbry-white;
+  border-right: 1px solid $lbry-gray-1;
   float: left;
   overflow-x: hidden;
   overflow-y: auto;
@@ -67,7 +67,7 @@
   width: 100%;
   padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
 
-  border-bottom: 1px solid rgba($gray, 0.3);
+  border-bottom: 1px solid $lbry-gray-1;
   font-size: 0.8rem;
   line-height: 2rem;
 }
@@ -76,9 +76,9 @@
   width: 1.25rem; height: 1.25rem;
   top: 0.6rem; right: 0.75rem;
 
-  background-color: $black;
+  background-color: $lbry-black;
   border-radius: 50%;
-  color: $white;
+  color: $lbry-white;
   cursor: pointer;
   font-size: 1rem;
   line-height: 1.15;
@@ -107,7 +107,7 @@
 
 .api__toc__item {
   &:hover {
-    background-color: rgba($gray, 0.3);
+    background-color: $lbry-gray-2;
   }
 
   a {
@@ -157,7 +157,7 @@
   table {
     width: 100%;
 
-    border: 1px solid rgba($white, 0.1);
+    border: 1px solid rgba($lbry-white, 0.1);
     border-radius: 0.3rem;
     border-spacing: 0;
     font-size: 0.8rem;
@@ -174,36 +174,32 @@
   }
 
   th {
-    border-bottom: 1px solid rgba($white, 0.1);
+    border-bottom: 1px solid rgba($lbry-white, 0.1);
   }
 
   tr:nth-child(even) {
-    background-color: rgba($white, 0.1);
+    background-color: rgba($lbry-white, 0.1);
   }
 }
 
 .api__content__body {
   padding: 2rem;
-  border-bottom: 1px solid rgba($gray, 0.3);
-
-  pre {
-    border: 1px solid rgba($gray, 0.3);
-  }
+  border-bottom: 1px solid $lbry-gray-1; // rgba($lbry-gray-1, 0.3);
 }
 
 .api__content__body__arguments {
-  border: 1px solid rgba($gray, 0.3);
+  border: 1px solid $lbry-gray-2;
   border-radius: 3px;
   list-style-type: none;
 }
 
 .api__content__body__argument {
   &:not(:last-of-type) {
-    border-bottom: 1px solid rgba($gray, 0.3);
+    border-bottom: 1px solid $lbry-gray-2;
   }
 
   &:nth-child(even) {
-    background-color: rgba($gray, 0.1);
+    background-color: rgba($lbry-gray-1, 0.2);
   }
 
   .left,
@@ -214,12 +210,12 @@
   .left {
     width: 30%;
 
-    border-right: 1px solid rgba($gray, 0.3);
+    border-right: 1px solid $lbry-gray-2;
     float: left;
     word-wrap: break-word;
 
     span {
-      color: $gray;
+      color: $lbry-gray-3;
       font-size: 0.8rem;
 
       &:not(:first-of-type) {
@@ -241,11 +237,11 @@
 .api__content__example {
   padding: 2rem;
 
-  background-color: mix($gray, $black, 10%);
-  border-bottom: 1px solid rgba($white, 0.1);
-  color: $white;
+  background-color: rgba($lbry-black, 0.9);
+  border-bottom: 1px solid rgba($lbry-white, 0.1);
+  color: $lbry-white;
 
   pre {
-    background-color: $black;
+    background-color: $lbry-black;
   }
 }

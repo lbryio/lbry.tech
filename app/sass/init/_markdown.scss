@@ -94,7 +94,7 @@
       width: 150px; height: 100px;
       top: 3rem; left: -2rem;
 
-      color: rgba($teal, 0.2);
+      color: rgba($lbry-teal-3, 0.2);
       content: "\201C";
       font-size: 20rem;
       line-height: 0.5;
@@ -109,9 +109,9 @@
     code {
       padding: 0.3rem 0.5rem;
 
-      background-color: $black;
+      background-color: $lbry-black;
       border-radius: 3px;
-      color: $white;
+      color: $lbry-white;
       font-size: 60%;
       letter-spacing: 0.05rem;
       vertical-align: middle;
@@ -185,11 +185,11 @@
   }
 
   a:not(.__button-black):not(.button) {
-    @include underline($teal, $white);
-    color: $teal;
+    @include underline($lbry-teal-3, $lbry-white);
+    color: $lbry-teal-3;
 
     code {
-      background-color: $teal;
+      background-color: $lbry-teal-3;
       text-shadow: none;
     }
   }
@@ -210,8 +210,8 @@
   table {
     width: 100%;
 
-    background-color: $white;
-    border: 1px solid rgba($gray, 0.3);
+    background-color: $lbry-white;
+    border: 1px solid $lbry-gray-1;
     border-spacing: 0;
     margin-bottom: 2rem;
     position: relative;
@@ -230,13 +230,13 @@
       }
 
       tbody tr:last-of-type td:not(:last-of-type) {
-        border-bottom: 1px solid rgba($gray, 0.3);
+        border-bottom: 1px solid $lbry-gray-1;
       }
     }
 
     thead {
-      background-color: $black;
-      color: $white;
+      background-color: $lbry-black;
+      color: $lbry-white;
       cursor: default;
       position: relative;
 
@@ -253,7 +253,7 @@
         width: calc(100% + 2px); height: calc(100% + 2px);
         top: -1px; left: -1px;
 
-        background-color: $black;
+        background-color: $lbry-black;
         content: "";
         position: absolute;
         z-index: 0;
@@ -265,7 +265,7 @@
     }
 
     tr:nth-of-type(even) {
-      background-color: rgba($black, 0.025);
+      background-color: $lbry-gray-1;
     }
 
     th,
@@ -280,7 +280,7 @@
     }
 
     tbody tr:not(:last-of-type) td {
-      border-bottom: 1px solid rgba($gray, 0.3);
+      border-bottom: 1px solid $lbry-gray-1;
     }
 
     td {

@@ -1,6 +1,7 @@
 ---
 title: Contributor's Guide
 ---
+
 ## Welcome to LBRY!
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
