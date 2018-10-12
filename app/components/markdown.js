@@ -50,7 +50,7 @@ export default path => {
   const updatedMarkdown = wikiFinder(partialFinder(renderedMarkdown));
 
   return html`
-    <div class="page__markup">${raw(updatedMarkdown)}</div>
+    ${raw(updatedMarkdown)}
   `;
 };
 
@@ -81,7 +81,7 @@ function partialFinder(markdownBody) {
     }
   }
 
-  return markdownBody;
+  return ("<div class=\"page__markup\">" + markdownBody + "</div>").replace(/<div class="page__markup">\s*<\/div>/, "");
 }
 
 function wikiFinder(markdownBody) {
