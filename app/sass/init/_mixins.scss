@@ -57,17 +57,17 @@
   }
 }
 
-@mixin underline($text-color: #000, $lbry-whitespace-color: #fff) {
-  @include selection($text-color, $lbry-whitespace-color);
+@mixin underline($text-color: $lbry-black, $whitespace-color: #fff) {
+  @include selection($text-color, $whitespace-color);
 
-  background-image: linear-gradient($lbry-whitespace-color, $lbry-whitespace-color), linear-gradient($lbry-whitespace-color, $lbry-whitespace-color), linear-gradient($text-color, $text-color);
+  background-image: linear-gradient($whitespace-color, $whitespace-color), linear-gradient($whitespace-color, $whitespace-color), linear-gradient($text-color, $text-color);
   background-position: 0 88%, 100% 88%, 0 88%;
   background-repeat: no-repeat, no-repeat, repeat-x;
   background-size: 0.05rem 1px, 0.05rem 1px, 1px 1px;
   box-decoration-break: clone;
   display: inline;
   text-decoration: none;
-  text-shadow: 0.03rem 0 $lbry-whitespace-color, -0.03rem 0 $lbry-whitespace-color, 0 0.03rem $lbry-whitespace-color, 0 -0.03rem $lbry-whitespace-color, 0.06rem 0 $lbry-whitespace-color, -0.06rem 0 $lbry-whitespace-color, 0.09rem 0 $lbry-whitespace-color, -0.09rem 0 $lbry-whitespace-color, 0.12rem 0 $lbry-whitespace-color, -0.12rem 0 $lbry-whitespace-color, 0.15rem 0 $lbry-whitespace-color, -0.15rem 0 $lbry-whitespace-color;
+  text-shadow: 0.03rem 0 $whitespace-color, -0.03rem 0 $whitespace-color, 0 0.03rem $whitespace-color, 0 -0.03rem $whitespace-color, 0.06rem 0 $whitespace-color, -0.06rem 0 $whitespace-color, 0.09rem 0 $whitespace-color, -0.09rem 0 $whitespace-color, 0.12rem 0 $whitespace-color, -0.12rem 0 $whitespace-color, 0.15rem 0 $whitespace-color, -0.15rem 0 $whitespace-color;
 
   @-moz-document url-prefix() { // sass-lint:disable-line empty-args
     background-position: 0 90%, 100% 90%, 0 90%;
