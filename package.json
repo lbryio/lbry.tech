@@ -2,7 +2,6 @@
   "author": "LBRY Team",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@lbry/color": "^1.0.1",
     "@octokit/rest": "^15.13.1",
     "app-root-path": "^2.1.0",
     "async": "^2.6.1",
@@ -58,6 +57,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
     "@inc/eslint-config": "^1.0.5",
+    "@lbry/color": "^1.0.1",
     "eslint": "^5.7.0",
     "husky": "^1.1.2",
     "nodemon": "^1.18.4",
