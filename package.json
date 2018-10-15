@@ -81,7 +81,7 @@
   "private": true,
   "sasslintConfig": ".sasslintrc",
   "scripts": {
-    "css": "sass --update app/sass:app/dist --style compressed",
+    "css": "sass --load-path=node_modules --update app/sass:app/dist --style compressed",
     "format": "eslint '**/*.js' --fix",
     "start": "npm run css && NODE_ENV=production node server",
     "test": "run-s test:*",
