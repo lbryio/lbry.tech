@@ -62,22 +62,22 @@ function partialFinder(markdownBody) {
   const regexToFindPartials = /<\w+ ?\/>/g;
   const partials = markdownBody.match(regexToFindPartials);
 
-  if (!partials) return markdownBody;
+  if (partials) {
+    for (const partial of partials) {
+      const filename = decamelize(partial, "-").replace("<", "")
+        .replace("/>", "")
+        .trim();
+      const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
 
-  for (const partial of partials) {
-    const filename = decamelize(partial, "-").replace("<", "")
-      .replace("/>", "")
-      .trim();
-    const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
+      if (!fileExistsTest)
+        markdownBody = markdownBody.replace(partial, "");
 
-    if (!fileExistsTest)
-      markdownBody = markdownBody.replace(partial, "");
+      else {
+        const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
-    else {
-      const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
-
-      if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
-      else markdownBody = markdownBody.replace(partial, `</div>${partialFunction.default()}<div class="page__markup">`);
+        if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
+        else markdownBody = markdownBody.replace(partial, `</div>${partialFunction.default()}<div class="page__markup">`);
+      }
     }
   }
 
