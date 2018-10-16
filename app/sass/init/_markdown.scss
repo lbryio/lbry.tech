@@ -266,6 +266,10 @@
 
     tr:nth-of-type(even) {
       background-color: $lbry-gray-1;
+
+      a:not(.__button-black):not(.button) { // "dirty" override but necessary
+        @include underline($lbry-teal-3, $lbry-gray-1);
+      }
     }
 
     th,
