@@ -4,7 +4,7 @@ This document outlines how to configure daemon settings and what options are ava
 
 ## Daemon settings configuration 
 
-The easiest way to configure the settings is by editing the `daemon_settings.yml` file (may need to be created) that resides in the default [lbrynet directory](https://lbry.io/faq/lbry-directories). These settings can also be configured via the [settings_set](https://lbry.tech/api/protocol#settings_set) API call. The [settings_get](https://lbry.tech/api/protocol#settings_get) API call can be used to retrieve current values. Currently not all settings are made available via the API calls, see [GitHub issue 1374](https://github.com/lbryio/lbry/issues/1374). 
+The easiest way to configure the settings is by editing the `daemon_settings.yml` file (may need to be created) that resides in the default [lbrynet directory](https://lbry.io/faq/lbry-directories). These settings can also be configured via the [settings_set](https://lbry.tech/api/sdk#settings_set) API call. The [settings_get](https://lbry.tech/api/sdk#settings_get) API call can be used to retrieve current values. Currently not all settings are made available via the API calls, see [GitHub issue 1374](https://github.com/lbryio/lbry/issues/1374). 
 
 Sample daemon_settings.yml file:
 ```
