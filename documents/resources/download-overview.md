@@ -1,4 +1,4 @@
-# How To Dowload Content Using the LBRY Protocol
+# How To Download Content Using the LBRY Protocol
 
 ## Getting Started
 
