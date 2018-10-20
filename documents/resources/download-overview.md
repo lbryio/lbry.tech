@@ -1,4 +1,4 @@
-# How To Dowload Content Using the LBRY Protocol
+# How To Download Content Using the LBRY Protocol
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For this example, we will use claimID `d9317ac7842f88ba442fee749c4f834353c24206`
 - dht gets you **peers** for the sd hash
 - blob exchange gets **sd blob** from peers
 - sd blob is parsed to get **content hashes**
-- dht then blob exchange get you the **content blobs**
+- dht and then blob exchange get you the **content blobs**
 - blobs are decrypted and assembled to create the **file**
 
 
@@ -77,7 +77,7 @@ The SD blob is JSON-formatted text. It contains a dictionary with the following 
 }
 ```
 
-All string field are hex-encoded.
+All string fields are hex-encoded.
 
 To download the content blobs, repeat the steps we took for the SD hash, but instead use the `blob_hash` value for each blob. Look up the blob_hash in the DHT to find hosts, then download the blob from those hosts.
 

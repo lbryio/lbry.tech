@@ -9,7 +9,7 @@ The schema defines the structure of the data that is stored in claims in the LBR
 
 ## [Claim](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/claim.proto)
 
-A `Claim` is the toplevel schema for everything that is published to the blockchain.
+A `Claim` is the top level schema for everything that is published to the blockchain.
 
 ```protobuf
 message Claim {
@@ -168,7 +168,7 @@ message Certificate {
 
 ### [Signature](https://github.com/lbryio/lbryschema/blob/master/lbryschema/proto/signature.proto)
 
-Publishing a claim to a channels simply means that the claim is signed using the private key for a channel. This is done by including a Signature field in a Claim:
+Publishing a claim to a channel simply means that the claim is signed using the private key for a channel. This is done by including a Signature field in a Claim:
 
 ```protobuf
 message Signature {

@@ -1,7 +1,7 @@
 # Regtest Setup
 
 ## Why use a regtest server
-A regtest server provides for a way to instantly generate blocks so that transactions can be instantaneous, so ultimately no waiting for confirmations from the blockchain. Also, no problem if you accidentally corrupt your wallet, since no real funds are lost! Delete the files and setup a new one.
+A regtest server provides for a way to instantly generate blocks so that transactions can be instantaneous, which ultimately means no waiting for confirmations from the blockchain. Also, it’s not a problem if you accidentally corrupt your wallet, since no real funds are lost! Delete the files and setup a new one.
 
 ## Setup
 
@@ -20,7 +20,7 @@ To enter the environment, run:
 ### lbrycrd
 
 You need to download a build of `lbrycrd` from [here](https://github.com/lbryio/lbrycrd/releases/), no installation required. To configure `lbrycrd` you need to create a file at `~/.lbrycrd/lbrycrd.conf`,
-containing the following.
+containing the following:
 ```ini
 rpcuser=test
 rpcpassword=test
@@ -35,7 +35,7 @@ discover=0
 
 ### lbryum-server
 
-To install lbryum-server, you first need to install the package `leveldb`. After that, download the source from [here](https://github.com/lbryio/lbryum-server/releases), and run the following _not_ inside the environment.
+To install lbryum-server, you first need to install the package `leveldb`. After that, download the source from [here](https://github.com/lbryio/lbryum-server/releases), and run the following _not_ inside the environment:
 ```bash
 cd lbryum-server
 sudo pip2 install -r requirements.txt
@@ -47,12 +47,12 @@ If you're not running debian/\*buntu or a derivative of those, you need to edit 
 sudo ./configure
 sudo python2 setup.py install
 ```
-The `sudo ./configure` command creates a new user in the system by the name "lbryum", which is the user through which we'll be the running the server. lbryum-server also need W/R access to `/var/lbryum-server`
+The `sudo ./configure` command creates a new user in the system by the name "lbryum", which is the user through which we'll be running the server. lbryum-server also needs W/R access to `/var/lbryum-server`.
 To do that run:
 ```bash
 sudo chown -R lbryum /var/lbryum-server
 ```
-When installed, append/use the following config options to the `/etc/lbryum.conf` file.
+When installed, append/use the following config options to the `/etc/lbryum.conf` file:
 ```ini
 [lbrycrdd]
 lbrycrdd_host = localhost
@@ -67,7 +67,7 @@ type=lbrycrd_regtest
 
 ### lbryum
 
-To install lbryum, first, download the source from [here](https://github.com/lbryio/lbryum/releases). To install it, run the following inside the virtual environment.
+To install lbryum, first download the source from [here](https://github.com/lbryio/lbryum/releases). To install it, run the following inside the virtual environment:
 ```bash
 cd lbryum
 pip2 install -r requirements.txt
@@ -94,7 +94,7 @@ Alternatively, you can create a file `touch ~/.lbryum/config` and paste the foll
 
 ### lbry
 
-Download source from [here](https://github.com/lbryio/lbry/releases), and run the following inside the environment.
+Download source from [here](https://github.com/lbryio/lbry/releases), and run the following inside the environment:
 ```bash
 cd lbry
 pip2 install -r requirements.txt
@@ -103,7 +103,7 @@ mkdir ~/.lbrynet
 touch ~/.lbrynet/daemon_settings.yml
 ```
 
-Append the following in the newly created `~/.lbrynet/daemon_settings.yml` file
+Append the following in the newly created `~/.lbrynet/daemon_settings.yml` file:
 ```yml
 blockchain_name: lbrycrd_regtest
 lbryum_servers:
@@ -124,21 +124,21 @@ This is to ensure that `lbrynet-daemon` uses the correct wallet.
 
 ### Wallet backup
 
-To start off, if you've already used LBRY on your machine, you need to backup the wallet by copying the folders `~/.lbrynet` and `~/.lbryum`, then delete them to start from fresh. Run
+To start off, if you've already used LBRY on your machine, you need to backup the wallet by copying the folders `~/.lbrynet` and `~/.lbryum` and then deleting them to start from fresh. Run
 `mkdir ~/.lbryum`
 
-Now it should be all set-up, just execute the commands in the following order, and the regtest server should be good to go.
+Now it should be all set-up. Just execute the commands in the following order, and the regtest server should be good to go.
 
 ### 1) lbrycrd
 
-To run the `lbrycrd` daemon, run the following in the `lbrycrd` folder.
+To run the `lbrycrd` daemon, run the following in the `lbrycrd` folder:
 `./lbrycrdd`
 
 To generate blocks, run `./lbrycrd-cli generate <num_of_blocks>`
 You'll need to generate some blocks to get the network going. Start off by generating at least 100.
 `./lbrycrd-cli generate 173`
 
-If you'd prefer a more verbose output from lbrycrdd, run lbrycrd using
+If you'd prefer a more verbose output from lbrycrdd, run lbrycrd using:
 `./lbrycrdd -printtoconsole`
 
 ### 2) lbryum-server
@@ -170,7 +170,7 @@ You can now run `lbrynet-daemon`, and it should connect to the `lbryum`. Now you
 To stop the network, run `lbrynet-cli daemon_stop`, `lbryum daemon stop`, and kill the `lbryum-server` process and stop lbrycrd by `lbrycrdd-cli stop`. If you want to use your wallet and the official servers again, backup the new regtest wallet, and replace it with your own.
 
 ## Note 1
-You need to generate a few blocks everytime you make a new transaction in the form of send, receive, claim, update, publish, support, tip etc. for it to show up in the daemon and lbryum etc.
+You need to generate a few blocks every time you make a new transaction in the form of send, receive, claim, update, publish, support, tip, etc. for it to show up in the daemon and lbryum, etc.
 
 ## Note 2
 If something goes wrong and you get a "Block not found" error, remember to delete `/var/lbryum-server` before trying again.
