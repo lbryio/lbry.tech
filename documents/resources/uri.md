@@ -44,7 +44,7 @@ Names may contain English letters (upper and lower case), numbers, and hyphens.
 
 ### Content Name
 
-`content_name` is the name of piece of content.
+`content_name` is the name of a piece of content.
 
 ### Channel Name
 
@@ -60,13 +60,13 @@ Only one modifier is allowed at a time.
 `claim_id` is a hex string identifying a claim.
 A claim id is prefixed with the CLAIM_ID_CHAR.
 Partial claim ids are allowed (same is git hashes), and
-will resolve to the oldest claim who's id starts with the given characters.
+will resolve to the oldest claim whose id starts with the given characters.
 
 ### Claim Sequence
 
 `claim_sequence` is a positive integer (>= 1) that resolves to the Nth claim for a given name.
 A claim sequence is prefixed with the CLAIM_SEQUENCE_CHAR.
-All valid claims are considered, in the order that they appear in the blockchain.
+All valid claims are considered in the order that they appear in the blockchain.
 Nonwinning claims are included.
 
 For example, `lbry://@chan:1` resolves to the oldest valid claim for `@chan`, even if that claim is no longer the winning claim for `@chan`.
@@ -93,7 +93,7 @@ A path is prefixed with PATH_CHAR.
 Only paths one level deep are currently supported.
 Only channel claims may have a path.
 
-For example, `lbry://@chan/snaps_from_last_night` resolves to the claim for `snaps_from_last_night` that is signed by `@chan`
+For example, `lbry://@chan/snaps_from_last_night` resolves to the claim for `snaps_from_last_night` that is signed by `@chan`.
 
 ## Query Params
 

@@ -1,8 +1,8 @@
-# LBRY Claimtrie
+# LBRY ClaimTrie
 
-This document describes the implementation detail of the ClaimTrie in LBRY. The ClaimTrie is the data structure which LBRY uses to store claims to names. It uses a [Trie](https://en.wikipedia.org/wiki/Trie) to efficiently store all claimed names, which can then be hashed the same way a [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree) is hashed. The root hash of the ClaimTrie is stored in the blockheader of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie.
+This document describes the implementation detail of the ClaimTrie in LBRY. The ClaimTrie is the data structure which LBRY uses to store claims to names. It uses a [Trie](https://en.wikipedia.org/wiki/Trie) to efficiently store all claimed names, which can then be hashed the same way a [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree) is hashed. The root hash of the ClaimTrie is stored in the blockheader of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie.
 
-Bids to claim a name must win out against other claims for the same name before they can be inserted into the ClaimTrie. The short summary is that the bid with the most LBRY credits assigned to it will win the right to claim a name, but the implementation detail is more involved and, this is what we aim to cover in this document. Bids to claim a name have four properties tied to it :
+Bids to claim a name must win out against other claims for the same name before they can be inserted into the ClaimTrie. The short summary is that the bid with the most LBRY credits assigned to it will win the right to claim a name, but the implementation detail is more involved and this is what we aim to cover in this document. Bids to claim a name have four properties tied to it :
 
 1. *Name* : The name is a human-readable address and is the property that the bids compete to obtain.
 2. *Value* : The value is the data that is attached to the name.
@@ -11,7 +11,7 @@ Bids to claim a name must win out against other claims for the same name before 
 
 There are also three different bid types: claim, update, and support.
 
-1. *Claim*: A claim represent new bids for a name. If a user wants to make a claim to a brand new name, or submit a competing claim to an existing name, this bid type is used.
+1. *Claim*: A claim represents new bids for a name. If a user wants to make a claim to a brand new name, or submit a competing claim to an existing name, this bid type is used.
 2. *Support*: A support adds to the total quantity of credits assigned to any bid by referring to a bid's Claim Id. A support bid can be made by anyone on any bid. It does not have its own Value or its own Claim Id, but it does contain the Claim Id of the bid that it is supporting.
 3. *Update*: An update can modify the value and the quantity for a pre-existing claim without changing the Claim Id or the name that it is bidding on. Since the Claim Id of the original bid is not changed, an updated bid will still retain all the supports attached to the original bid.
 
@@ -29,7 +29,7 @@ This section describes how bids are processed by the ClaimTrie in order to deter
       * HeightA = the most recent height at which the bid controlling the name changed
       * HeightB = the current height
       * Maximum delay is 7 days of blocks at 2.5 min/block (or 4032 blocks). Thus maximum delay can be reached in 224 (7x32) days.
-  * The bid's Claim Id matches the Claim Id of the bid which was the controlling bid immediately before the block containing this bid was included in the blockchain. In other words, it is either an update to the previous controlling bid or update to update to the previous controlling bid if the bid was updated twice in this block, etc.
+  * The bid's Claim Id matches the Claim Id of the bid which was the controlling bid immediately before the block containing this bid was included in the blockchain. In other words, it is either an update to the previous controlling bid or an update to an update to the previous controlling bid if the bid was updated twice in this block, etc.
 4. *Controlling*: This bid currently controls the name. When clients ask which bid controls the name as of the current block, this is the bid that will be returned. Must be in the "active" state and only one bid for any name may be in this state. A support cannot be in the "controlling" state. To determine which "active" bid is the "controlling" bid for each name:
     * Add the quantity of each 'active' bid to the quantity of all 'active' supports for that bid, and take whichever is greatest. If two bids have the same quantity, older bids take precedence over newer bids.
     * If the bid with the greatest amount does not have the same claimID as the bid which was 'controlling' prior to including the current block, change the delay for the name as of the current block to 0, redetermine which bids and supports should be active, and then perform the previous calculation again.
@@ -47,7 +47,7 @@ OP_CLAIM_NAME <Name> <Value> OP_2DROP OP_DROP [script pubkey]
 OP_UPDATE_CLAIM <Name> <ClaimId> <Value> OP_2DROP OP_2DROP [script pubkey]
 OP_SUPPORT_CLAIM <Name> <ClaimId> OP_2DROP OP_DROP [script pubkey]
 ```
-[script pubkey] can be any valid Bitcoin payout script, thus it can be something like a standard "pay to pubkey" script to a user controlled address. Also note that the zero pushed onto the stack by the ClaimTrie op codes, and the ClaimTrie vectors, are all dropped by the preceding OP_2DROP and OP_DROP. This means that ClaimTrie transactions exist as prefixes to Bitcoin payout scripts and can be spent in the same way as is expected in Bitcoin.
+[script pubkey] can be any valid Bitcoin payout script. Thus it can be something like a standard "pay to pubkey" script to a user controlled address. Also note that the zero pushed onto the stack by the ClaimTrie op codes, and the ClaimTrie vectors, are all dropped by the preceding OP_2DROP and OP_DROP. This means that ClaimTrie transactions exist as prefixes to Bitcoin payout scripts and can be spent in the same way as is expected in Bitcoin.
 
 For example, a claim transaction using a pay to pubkey script will have the below full payout script. Let's also say that this claim is for the name "Fruit" to be set to value "Apple".
 
@@ -61,7 +61,7 @@ Like any standard Bitcoin transaction output script, it will be associated with 
 OP_SUPPORT_CLAIM <Fruit> <X> OP_2DROP OP_DROP OP_DUP OP_HASH160 <LBRY_Address_B> OP_EQUALVERIFY OP_CHECKSIG
 ```
 
-And now let's say we want to update the original claim to change the value to "Banana". An update transaction has a special requirement that it must spend the existing claim that it wishes to update in its redeem script. Otherwise, it will be considered invalid and will not make it into the ClaimTrie. Thus it will have the below redeem script to spend the claim created to set name "Fruit" to "Apple". Note that this is identical to the standard way of redeeming a "pay to pubkey" script in Bitcoin.
+And now let's say we want to update the original claim to change the value to "Banana". An update transaction has a special requirement in that it must spend the existing claim that it wishes to update in its redeem script. Otherwise, it will be considered invalid and will not make it into the ClaimTrie. Thus it will have the below redeem script to spend the claim created to set name "Fruit" to "Apple". Note that this is identical to the standard way of redeeming a "pay to pubkey" script in Bitcoin.
 
 ```python
 <Signature> <Public_key_for_LBRY_Address_A>
