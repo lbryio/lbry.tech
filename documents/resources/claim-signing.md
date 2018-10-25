@@ -122,8 +122,8 @@ Serialized, the signed claim is represented as:
     3d917c000322244b5ad17e7865124db2ed33812ea66c9b0c3f390a65a9e2d452e315e91ae695642847d88e90348ef3c1fa283a36a822142996b9a087c1845640
     2b57cba6085b2a8fcc136d
 
-Now he can put this value in a claim transaction, and broadcast the claim!
+Now he can put this value in a claim transaction and broadcast the claim!
 
-So long as his certificate claim is winning, his publication can be resolved by `lbry://@FleischerSuperman/terroronthemidway`
+As long as his certificate claim is winning, his publication can be resolved by `lbry://@FleischerSuperman/terroronthemidway`
 
 Even if his name is outbid, the publication can be resolved by the channel claim id at the uri: `lbry://@FleischerSuperman#2996b9a087c18456402b57cba6085b2a8fcc136d/terroronthemidway`
