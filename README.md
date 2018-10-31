@@ -41,13 +41,13 @@
 ## Usage
 Visit [LBRY.tech](https://lbry.tech) to see this repo in production.
 
-## Contributing
-Contributions to this project are welcome, encouraged, and compensated.
+## Contributing 
+We :heart: contributions from everyone! We welcome [bug reports](https://github.com/lbryio/lbry.tech/issues/), [bug fixes](https://github.com/lbryio/lbry.tech/pulls) and feedback is always appreciated. For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
+## [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/lbryio/lbry.tech/issues) [![GitHub contributors](https://img.shields.io/github/contributors/lbryio/lbry.tech.svg)](https://GitHub.com/lbryio/lbry.tech/graphs/contributors/)
 
 ## License
-This project is MIT licensed.
+This project is [MIT LICENSE](license)
 
 ## Security
 We take security seriously. Please contact [security@lbry.io](mailto:security@lbry.io) regarding any security issues.
