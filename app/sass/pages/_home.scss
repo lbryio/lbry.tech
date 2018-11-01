@@ -249,16 +249,31 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
     grid-area: contribute;
 
     ul {
+      @media (min-width: 701px) {
+        margin-bottom: 4rem;
+      }
+
+      @media (max-width: 700px) {
+        margin-bottom: 2rem;
+      }
+
       li {
         @media (min-width: 701px) {
-          width: calc(100% / 4);
+          width: calc(100% / 4); height: 6rem;
         }
 
         @media (max-width: 700px) {
-          width: 50%;
+          width: 50%; height: 5rem;
         }
 
-        a::before {
+        &::before {
+          width: 100%; height: 100%;
+
+          background-position: center;
+          background-repeat: no-repeat;
+          content: "";
+          display: block;
+
           @media (min-width: 901px) {
             top: -1rem;
             background-size: 4rem;
@@ -270,19 +285,19 @@ body.home { // sass-lint:disable-line no-qualifying-elements // TODO: FIX THIS
           }
         }
 
-        &:nth-child(1) a::before {
+        &:nth-child(1)::before {
           background-image: url("/assets/media/svg/keyboard.svg");
         }
 
-        &:nth-child(2) a::before {
+        &:nth-child(2)::before {
           background-image: url("/assets/media/svg/anchor.svg");
         }
 
-        &:nth-child(3) a::before {
+        &:nth-child(3)::before {
           background-image: url("/assets/media/svg/monitor.svg");
         }
 
-        &:nth-child(4) a::before {
+        &:nth-child(4)::before {
           background-image: url("/assets/media/svg/flag.svg");
         }
       }

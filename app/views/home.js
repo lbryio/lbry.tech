@@ -70,10 +70,10 @@ module.exports = exports = () => html`
         <p>No matter your experience or skill level, <em>you</em> can progress content freedom.</p>
 
         <ul>
-          <li><a href="" title="">Coding</a></li>
-          <li><a href="" title="">Creative</a></li>
-          <li><a href="" title="">Writing</a></li>
-          <li><a href="" title="">Testing</a></li>
+          <li>Coding</li>
+          <li>Creative</li>
+          <li>Writing</li>
+          <li>Testing</li>
         </ul>
         <p>
          <a class="cta" href="/contribute">Collaborate with Contributors</a>

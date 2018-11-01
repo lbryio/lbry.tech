@@ -47,7 +47,7 @@ Contributions to this project are welcome, encouraged, and compensated.
 For more details, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
-This project is MIT licensed.
+This project is MIT licensed. For the full license, see [LICENSE](LICENSE).
 
 ## Security
 We take security seriously. Please contact [security@lbry.io](mailto:security@lbry.io) regarding any security issues.
