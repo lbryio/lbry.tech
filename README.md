@@ -55,4 +55,4 @@ We take security seriously. Please contact [security@lbry.io](mailto:security@lb
 [Our PGP key is here](https://keybase.io/lbry/key.asc) if you need it.
 
 ## Contact
-The primary contact for this project is [@netoperatorwibby](https://github.com/netoperatorwibby)(paul@lbry.io).
+The primary contact for this project is [@netoperatorwibby](https://github.com/netoperatorwibby) (paul@lbry.io).
