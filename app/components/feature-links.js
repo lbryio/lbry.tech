@@ -39,6 +39,11 @@ const links = [
     href: "https://www.facebook.com/lbryio",
     image: "https://spee.ch/734404b89658e30af920829553b22d1742c0d99a/voice.png",
     title: "Facebook"
+  },
+  {
+    href: "https://t.me/lbryofficial",
+    image: "https://spee.ch/734404b89658e30af920829553b22d1742c0d99a/voice.png",
+    title: "Telegram"
   }
 ];
 
