@@ -1,4 +1,4 @@
-/* global send */ "use strict";
+/* global document, navigator, send, window */ "use strict";
 
 
 
