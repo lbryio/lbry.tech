@@ -327,7 +327,7 @@ function generateUrl(type, event) {
 }
 
 function updateGithubFeed() {
-  octokit.activity.getEventsForOrg({
+  octokit.activity.listPublicEventsForOrg({
     org: "lbryio",
     per_page: 20,
     page: 1
