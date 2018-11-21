@@ -190,7 +190,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
       send(JSON.stringify({
         claim: data,
         message: "fetch metadata",
-        method: "wallet_send",
+        method: "claim_tip",
         example: exampleNumber
       }));
 
@@ -199,7 +199,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
       document.getElementById("playground-results").innerHTML = `
         <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "wallet_send", "params": { "amount": "0.01", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "claim_tip", "params": { "amount": "0.001", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
         </code></pre>
 
         <div class="loader" id="temp-loader"></div>

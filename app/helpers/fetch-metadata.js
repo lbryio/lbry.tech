@@ -35,7 +35,7 @@ module.exports = exports = (data, socket) => {
   const allowedMethods = [
     "publish",
     "resolve",
-    "wallet_send"
+    "claim_tip"
   ];
 
   const body = {};
@@ -59,7 +59,7 @@ module.exports = exports = (data, socket) => {
 
     // Required for publishing
     body.author = "lbry.tech";
-    body.bid = 0.0001; // Hardcoded publish amount
+    body.bid = "0.001"; // Hardcoded publish amount
     body.description = dataDetails.description;
     body.language = dataDetails.language;
     body.license = dataDetails.license;
@@ -154,7 +154,7 @@ module.exports = exports = (data, socket) => {
     body.uri = claimAddress;
   }
 
-  if (resolveMethod === "wallet_send") {
+  if (resolveMethod === "claim_tip") {
     const approvedIds = [
       "3db81c073f82fd1bb670c65f526faea3b8546720",
       "173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
@@ -182,7 +182,7 @@ module.exports = exports = (data, socket) => {
 
     apiRequestMethod = "POST";
 
-    body.amount = "0.01"; // Hardcoded tip amount
+    body.amount = "0.001"; // Hardcoded tip amount
     body.claim_id = claimAddress;
   }
 
