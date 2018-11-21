@@ -4,11 +4,11 @@
 
 //  P A C K A G E S
 
+const got = require("got");
 const loadLanguages = require("prismjs/components/");
 const local = require("app-root-path").require;
 const prism = require("prismjs");
 const raw = require("choo/html/raw");
-const request = require("request-promise-native");
 const stringifyObject = require("stringify-object");
 
 //  U T I L S
@@ -18,13 +18,32 @@ const logSlackError = local("/app/helpers/slack");
 const publishMeme = local("/app/helpers/publish-meme");
 const uploadImage = local("/app/helpers/upload-image");
 
+const allowedQueryMethods = [
+  "publish",
+  "resolve",
+  "claim_tip"
+];
+
+const approvedContentIdsForTipping = [
+  "3db81c073f82fd1bb670c65f526faea3b8546720",
+  "173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
+  "2a7f5db2678177435b1dee6c9e38e035ead450b6",
+  "d81bac6d49b1f92e58c37a5f633a27a45b43405e",
+  "b4668c0bd096317b44c40738c099b6618095e75f",
+  "007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
+  "1ac47b8b3def40a25850dc726a09ce23d09e7009",
+  "784b3c215a6f06b663fc1aa292bcb19f29c489bb",
+  "758dd6497cdfc401ae1f25984738d024d47b50af",
+  "8a7401b88d5ed0376d98f16808194d4dcb05b284"
+];
+
 loadLanguages(["json"]);
 
 
 
 //  E X P O R T
 
-module.exports = exports = (data, socket) => {
+module.exports = exports = async(data, socket) => {
   let dataDetails = "";
 
   if (data.example === 1 && !data.claim || !data.method) return;
@@ -32,27 +51,24 @@ module.exports = exports = (data, socket) => {
   if (data.example === 2) dataDetails = data.data; // file upload
   if (data.example === 3 && !data.claim || !data.method) return;
 
-  const allowedMethods = [
-    "publish",
-    "resolve",
-    "claim_tip"
-  ];
-
   const body = {};
   const claimAddress = data.claim;
   const resolveMethod = data.method;
   let apiRequestMethod = "";
 
-  if (allowedMethods.indexOf(resolveMethod) < 0) return socket.send(JSON.stringify({
+  if (allowedQueryMethods.indexOf(resolveMethod) < 0) return socket.send(JSON.stringify({
     details: "Unallowed resolve method for tutorial",
     message: "notification",
     type: "error"
   }));
 
-
-
   body.authorization = process.env.LBRY_DAEMON_ACCESS_TOKEN; // access_token
   body.method = resolveMethod;
+
+
+
+  //  P U B L I S H
+  //  E X A M P L E
 
   if (resolveMethod === "publish") {
     apiRequestMethod = "PUT";
@@ -149,26 +165,19 @@ module.exports = exports = (data, socket) => {
     });
   }
 
+  //  R E S O L V E
+  //  E X A M P L E
+
   if (resolveMethod === "resolve") {
     apiRequestMethod = "GET";
     body.uri = claimAddress;
   }
 
-  if (resolveMethod === "claim_tip") {
-    const approvedIds = [
-      "3db81c073f82fd1bb670c65f526faea3b8546720",
-      "173412f5b1b7aa63a752e8832406aafd9f1ecb4e",
-      "2a7f5db2678177435b1dee6c9e38e035ead450b6",
-      "d81bac6d49b1f92e58c37a5f633a27a45b43405e",
-      "b4668c0bd096317b44c40738c099b6618095e75f",
-      "007789cc45cbb4255cf02ba77cbf84ca8e3d7561",
-      "1ac47b8b3def40a25850dc726a09ce23d09e7009",
-      "784b3c215a6f06b663fc1aa292bcb19f29c489bb",
-      "758dd6497cdfc401ae1f25984738d024d47b50af",
-      "8a7401b88d5ed0376d98f16808194d4dcb05b284"
-    ];
+  //  T I P
+  //  E X A M P L E
 
-    if (!approvedIds.includes(claimAddress)) {
+  if (resolveMethod === "claim_tip") {
+    if (!approvedContentIdsForTipping.includes(claimAddress)) {
       return socket.send(JSON.stringify({
         example: data.example,
         html: raw(`
@@ -188,67 +197,54 @@ module.exports = exports = (data, socket) => {
 
 
 
-  return new Promise((resolve, reject) => { // eslint-disable-line
-    request({
-      body: body,
-      json: true,
-      method: apiRequestMethod,
-      url: `${process.env.NODE_ENV === "development" ? `http://localhost:5200/${resolveMethod}` : `https://${process.env.DAEMON_URL}/${resolveMethod}`}`
-    }, (error, response, body) => {
-      if (error) {
-        if (process.env.NODE_ENV !== "development") {
-          logSlackError(
-            "\n" +
-            "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(error)) + "```" + "\n" +
-            "> _Cause: Someone is going through the Playground_\n"
-          );
-        }
+  //  Q U E R Y
+  //  D A E M O N
 
-        return resolve(error);
-      }
+  const queryOptions = {
+    body: body,
+    json: true,
+    method: apiRequestMethod
+  };
 
-      if (body.error && typeof body.error !== "undefined") {
-        if (process.env.NODE_ENV !== "development") {
-          logSlackError(
-            "\n" +
-            "> *DAEMON ERROR:* ```" + JSON.parse(JSON.stringify(body.error.message)) + "```" + "\n" +
-            "> _Cause: Someone is going through the Playground after a response has been parsed_\n"
-          );
-        }
+  const queryUrl = `${process.env.NODE_ENV === "development" ? `http://localhost:5200/${resolveMethod}` : `https://${process.env.DAEMON_URL}/${resolveMethod}`}`;
 
-        return resolve(body.error);
-      }
+  try {
+    const response = await got(queryUrl, queryOptions);
+    let explorerNotice = "";
 
-      let explorerNotice = "";
+    if (
+      data.example === 3 &&
+      response.body.result &&
+      response.body.result.txid
+    ) explorerNotice = `
+      <p class="playground__description success">If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${response.body.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
+    `;
 
-      if (
-        data.example === 3 &&
-        body.result &&
-        body.result.txid
-      ) explorerNotice = `
-        <p class="playground__description success">If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${body.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.</p><br/>
-      `;
+    if (socket) {
+      const renderedCode = prism.highlight(
+        stringifyObject(response.body, { indent: "  ", singleQuotes: false }),
+        prism.languages.json,
+        "json"
+      );
 
-      if (socket) {
-        const renderedCode = prism.highlight(
-          stringifyObject(body, { indent: "  ", singleQuotes: false }),
-          prism.languages.json,
-          "json"
-        );
+      return socket.send(JSON.stringify({
+        example: data.example,
+        html: raw(`
+          <h3>Response</h3>
+          ${explorerNotice}
+          <pre><code class="language-json">${renderedCode}</code></pre>
+        `),
+        message: "show result",
+        selector: `#example${data.example}-result`
+      }));
+    }
 
-        return socket.send(JSON.stringify({
-          example: data.example,
-          html: raw(`
-            <h3>Response</h3>
-            ${explorerNotice}
-            <pre><code class="language-json">${renderedCode}</code></pre>
-          `),
-          message: "show result",
-          selector: `#example${data.example}-result`
-        }));
-      }
-
-      return resolve(body.result[Object.keys(body.result)[0]].claim);
-    });
-  });
+    return response.body.result[Object.keys(response.body.result)[0]].claim;
+  } catch (error) {
+    logSlackError(
+      "\n" +
+      "> *DAEMON ERROR:* ```" + error + "```" + "\n" +
+      "> _Cause: Someone is going through the Playground_\n"
+    );
+  }
 };

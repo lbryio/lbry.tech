@@ -4,9 +4,9 @@
 
 //  P A C K A G E S
 
+const got = require("got");
 const html = require("choo/html");
 const local = require("app-root-path").require;
-const request = require("request-promise-native");
 
 //  U T I L S
 
@@ -301,17 +301,13 @@ function generateMemeCreator(socket) {
   }));
 }
 
-function getTrendingContent() {
-  return new Promise((resolve, reject) => { // eslint-disable-line
-    request({
-      method: "GET",
-      url: "https://api.lbry.io/file/list_trending"
-    }, (error, response, body) => {
-      if (error || !JSON.parse(body)) resolve("Issue fetching content"); // error
-      body = JSON.parse(body);
-      resolve(body);
-    });
-  });
+async function getTrendingContent() {
+  try {
+    const response = await got("https://api.lbry.io/file/list_trending");
+    return JSON.parse(response.body); // eslint-disable-line padding-line-between-statements
+  } catch (error) {
+    return error;
+  }
 }
 
 function makeImageSourceSecure(url) {
@@ -323,7 +319,7 @@ function makeImageSourceSecure(url) {
   return originalUrl.href;
 }
 
-function newsletterSubscribe(data, socket) {
+async function newsletterSubscribe(data, socket) {
   const email = data.email;
 
   if (!validateEmail(email)) return socket.send(JSON.stringify({
@@ -333,68 +329,48 @@ function newsletterSubscribe(data, socket) {
     selector: "#emailMessage"
   }));
 
-  return new Promise((resolve, reject) => request({
-    method: "POST",
-    url: `https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`
-  }).then(body => {
-    if (!body || !JSON.parse(body)) {
-      logSlackError(
-        "\n" +
-        "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
-        `> _Cause: ${email} interacted with the form_\n`
-      );
+  try {
+    await got.post(`https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`);
 
-      return resolve(socket.send(JSON.stringify({
-        class: "error",
-        html: "Something is terribly wrong",
-        message: "updated html",
-        selector: "#emailMessage"
-      })));
-    }
-
-    body = JSON.parse(body);
-
-    if (!body.success) {
-      logSlackError(
-        "\n" +
-        "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(body.error)) + "```" + "\n" +
-        `> _Cause: ${email} interacted with the form_\n`
-      );
-
-      return reject(socket.send(JSON.stringify({
-        class: "error",
-        html: body.error,
-        message: "updated html",
-        selector: "#emailMessage"
-      })));
-    }
-
-    return resolve(socket.send(JSON.stringify({
+    return socket.send(JSON.stringify({
       html: "Thank you! Please confirm subscription in your inbox.",
       message: "updated html",
       selector: "#emailMessage"
-    })));
-  })
-    .catch(welp => {
-      if (welp.statusCode === 409) {
-        logSlackError(
-          "\n" +
-        "> *NEWSLETTER ERROR:* ```" + JSON.parse(JSON.stringify(welp.error)) + "```" + "\n" +
-        `> _Cause: ${email} interacted with the form_\n`
-        );
-
-        return resolve(socket.send(JSON.stringify({
-          class: "error",
-          html: "You have already subscribed!",
-          message: "updated html",
-          selector: "#emailMessage"
-        })));
-      }
     }));
+  } catch (error) {
+    const response = JSON.parse(error.body);
+
+    if (!response.success) {
+      logSlackError(
+        "\n" +
+        "> *NEWSLETTER ERROR:* ```" + response.error + "```" + "\n" +
+        `> _Cause: ${email} interacted with the form_\n`
+      );
+
+      return socket.send(JSON.stringify({
+        class: "error",
+        html: response.error,
+        message: "updated html",
+        selector: "#emailMessage"
+      }));
+    }
+
+    logSlackError(
+      "\n" +
+      "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
+      `> _Cause: ${email} interacted with the form_\n`
+    );
+
+    return socket.send(JSON.stringify({
+      class: "error",
+      html: "Something is terribly wrong",
+      message: "updated html",
+      selector: "#emailMessage"
+    }));
+  }
 }
 
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
-
-  return emailRegex.test(String(email));
+  return emailRegex.test(String(email)); // eslint-disable-line padding-line-between-statements
 }

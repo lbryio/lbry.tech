@@ -26,6 +26,7 @@
     "fastify-ws": "^1.0.0",
     "front-matter": "^3.0.1",
     "fs-exists-sync": "^0.1.0",
+    "got": "^9.3.2",
     "graceful-fs": "^4.1.15",
     "heroku-ssl-redirect": "0.0.4",
     "make-fetch-happen": "^4.0.1",
@@ -34,8 +35,6 @@
     "markdown-it-anchor": "^5.0.2",
     "prismjs": "^1.15.0",
     "redis": "^2.8.0",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.5",
     "slack-node": "^0.2.0",
     "socket.io": "^2.1.1",
     "stringify-object": "^3.3.0"
