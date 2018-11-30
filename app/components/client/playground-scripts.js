@@ -1,4 +1,4 @@
-/* global document, navigator, send, window */ "use strict";
+"use strict"; /* global document, navigator, send, window */
 
 
 
@@ -6,10 +6,10 @@ initializePlayground();
 
 
 
-if (window.location.href.search && window.location.href.split("?url=")[1]) { // pre-fill example one if search parameter exists
+// pre-fill example one if search parameter exists
+if (window.location.href.search && window.location.href.split("?url=")[1]) {
   const searchParameter = window.location.href.split("?url=")[1];
-
-  fetchMetadata(1, searchParameter);
+  fetchMetadata(1, searchParameter); // eslint-disable-line padding-line-between-statements
 }
 
 
@@ -34,17 +34,19 @@ document.querySelector("body").addEventListener("click", event => {
 });
 
 document.getElementById("fetch-claim-uri").addEventListener("keyup", event => {
-  const key = event.keyCode ? event.keyCode : event.which;
+  const key = event.keyCode ?
+    event.keyCode :
+    event.which;
 
   switch(true) {
-    case (document.querySelector("[data-example='1']").classList.contains("active")):
+    case document.querySelector("[data-example='1']").classList.contains("active"):
       if (
         key === 13 &&
         document.getElementById("fetch-claim-uri").value.length > 0
       ) fetchMetadata(1, document.getElementById("fetch-claim-uri").value);
       break;
 
-    case (document.querySelector("[data-example='3']").classList.contains("active")):
+    case document.querySelector("[data-example='3']").classList.contains("active"):
       if (
         key === 13 &&
         document.getElementById("fetch-claim-uri").value.length > 0
@@ -79,7 +81,7 @@ function clearCanvas(canvas) {
   ctx.restore();
 }
 
-function detectLanguageAndUpdate() { // eslint-disable-line
+function detectLanguageAndUpdate() { // eslint-disable-line no-unused-vars
   const compare = (array1, array2) => array2.filter(value => array2.indexOf(value)); // compare two arrays and get match(es)
   const memeLocaleObject = document.getElementById("meme-language").children;
   const memeLocales = [];
@@ -115,8 +117,8 @@ function debounce(func, wait, immediate) {
     const callNow = immediate && !timeout;
 
     clearTimeout(timeout);
-
     timeout = setTimeout(later, wait);
+
     if (callNow) func.apply(context, args);
   };
 }
@@ -136,8 +138,6 @@ function initializePlayground() {
   }, 300);
 }
 
-
-
 function fetchMetadata(exampleNumber, data) {
   if (!exampleNumber) return;
 
@@ -151,17 +151,7 @@ function fetchMetadata(exampleNumber, data) {
       }));
 
       document.getElementById("fetch-claim-uri").value = data;
-
-      document.getElementById("playground-results").innerHTML = `
-        <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
-        </code></pre>
-
-        <div class="loader" id="temp-loader"></div>
-        <div id="example1-result"></div>
-      `;
-
+      document.getElementById("playground-results").innerHTML = playgroundResponseForExample1(data);
       document.getElementById("playground-loader").style.display = "none";
       break;
 
@@ -173,16 +163,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
         example: exampleNumber
       }));
 
-      document.getElementById("playground-results").innerHTML = `
-        <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${getMemeInfo().name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${getMemeInfo().description}", "title": "${getMemeInfo().title}", "language": "${getMemeInfo().language}", "license": "${getMemeInfo().license}", "nsfw": ${getMemeInfo().nsfw} }}}'</span> <span class="token url">http://localhost:5279    </span>
-        </code></pre>
-
-        <div class="loader" id="temp-loader"></div>
-        <div id="example2-result"></div>
-      `;
-
+      document.getElementById("playground-results").innerHTML = playgroundResponseForExample2(getMemeInfo());
       document.getElementById("playground-loader").style.display = "none";
       break;
 
@@ -195,17 +176,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
       }));
 
       document.getElementById("fetch-claim-uri").value = data;
-
-      document.getElementById("playground-results").innerHTML = `
-        <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "claim_tip", "params": { "amount": "0.001", "claim_id": "${data}" }}'</span> <span class="token url">http://localhost:5279    </span>
-        </code></pre>
-
-        <div class="loader" id="temp-loader"></div>
-        <div id="example3-result"></div>
-      `;
-
+      document.getElementById("playground-results").innerHTML = playgroundResponseForExample3(data);
       document.getElementById("playground-loader").style.display = "none";
       break;
 
@@ -224,6 +195,42 @@ function getMemeInfo() { // TODO: Error handling
     nsfw: document.getElementById("meme-nsfw-flag").checked,
     title: document.getElementById("meme-title").value
   };
+}
+
+function playgroundResponseForExample1(source) {
+  return `
+    <pre><code class="language-bash">
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
+</code></pre>
+
+    <div class="loader" id="temp-loader"></div>
+    <div id="example1-result"></div>
+  `;
+}
+
+function playgroundResponseForExample2(source) {
+  return `
+    <pre><code class="language-bash">
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${source.name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${source.description}", "title": "${source.title}", "language": "${source.language}", "license": "${source.license}", "nsfw": ${source.nsfw} }}}'</span> <span class="token url">http://localhost:5279    </span>
+    </code></pre>
+
+    <div class="loader" id="temp-loader"></div>
+    <div id="example2-result"></div>
+  `;
+}
+
+function playgroundResponseForExample3(source) {
+  return `
+    <pre><code class="language-bash">
+<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "claim_tip", "params": { "amount": "0.001", "claim_id": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
+    </code></pre>
+
+    <div class="loader" id="temp-loader"></div>
+    <div id="example3-result"></div>
+  `;
 }
 
 const handleExamples = debounce(event => {
@@ -340,7 +347,7 @@ const handleExamples = debounce(event => {
   }
 }, 10);
 
-function initCanvas() { // eslint-disable-line
+function initCanvas() { // eslint-disable-line no-unused-vars
   const canvas = document.getElementById("meme-canvas");
   const canvasHeight = 600;
   const canvasWidth = 800;

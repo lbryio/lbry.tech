@@ -2,16 +2,17 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import html from "choo/html";
 import { require as local } from "app-root-path";
 
 //  U T I L S
 
+import editLink from "./edit-link";
+import emailSubscribe from "./email-subscribe";
+
 const config = local("/config");
-const editLink = local("/app/components/edit-link").default;
-const emailSubscribe = local("/app/components/email-subscribe").default;
 
 
 

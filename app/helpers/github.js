@@ -12,7 +12,7 @@ const redis = require("redis");
 
 //  U T I L S
 
-const logSlackError = local("/app/helpers/slack");
+const messageSlack = local("/app/helpers/slack");
 const relativeDate = local("/app/modules/relative-date");
 
 //  R E D I S
@@ -32,7 +32,7 @@ if (typeof process.env.REDISCLOUD_URL !== "undefined") {
   client.on("error", redisError => {
     process.env.NODE_ENV === "development" ?
       process.stdout.write(`\n${color.yellow("Unable to connect to Redis client.")}\nYou may be missing an .env file or your connection was reset.`) :
-      logSlackError(
+      messageSlack(
         "\n" +
         "> *REDIS ERROR:* ```" + JSON.parse(JSON.stringify(redisError)) + "```" + "\n" +
         "> _Cause: Someone is trying to run LBRY.tech locally without environment variables OR Heroku is busted_\n"
@@ -342,7 +342,7 @@ function updateGithubFeed() {
     }, () => client.zremrangebyrank("events", 0, -51)); // Keep the latest 50 events
   })
     .catch(err => {
-      logSlackError(
+      messageSlack(
         "\n" +
         "> *GITHUB FEED ERROR:* ```" + JSON.parse(JSON.stringify(err)) + "```" + "\n" +
         "> _Cause: GitHub feed refresh_\n"
@@ -362,7 +362,7 @@ function refToBranch(ref) {
 
 //  E X P O R T S
 
-module.exports = exports = {
+export {
   generateEvent,
   generateGitHubFeed,
   generateUrl,

@@ -2,31 +2,30 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
-const got = require("got");
-const html = require("choo/html");
-const local = require("app-root-path").require;
+import got from "got";
+import html from "choo/html";
 
 //  U T I L S
 
-const fetchMetadata = local("/app/helpers/fetch-metadata");
-const { generateGitHubFeed } = local("/app/helpers/github");
-const logSlackError = local("/app/helpers/slack");
+import fetchMetadata from "./helpers/fetch-metadata";
+import { generateGitHubFeed } from "./helpers/github";
+import messageSlack from "./helpers/slack";
 
 
 
 //  P R O G R A M
 
-module.exports = exports = (socket, action) => {
+export default (socket, action) => {
   if (typeof socket !== "object" && typeof action !== "object") return;
 
   switch(true) {
-    case (action.message === "fetch metadata"):
+    case action.message === "fetch metadata":
       fetchMetadata(action, socket);
       break;
 
-    case (action.message === "landed on homepage"):
+    case action.message === "landed on homepage":
       generateGitHubFeed(result => {
         socket.send(JSON.stringify({
           html: result,
@@ -36,7 +35,7 @@ module.exports = exports = (socket, action) => {
       });
       break;
 
-    case (action.message === "landed on playground"):
+    case action.message === "landed on playground":
       generateContent(1, result => {
         socket.send(JSON.stringify({
           html: result,
@@ -46,7 +45,7 @@ module.exports = exports = (socket, action) => {
       });
       break;
 
-    case (action.message === "request for playground, example 1"):
+    case action.message === "request for playground, example 1":
       generateContent(1, result => {
         socket.send(JSON.stringify({
           html: result,
@@ -56,11 +55,11 @@ module.exports = exports = (socket, action) => {
       });
       break;
 
-    case (action.message === "request for playground, example 2"):
+    case action.message === "request for playground, example 2":
       generateMemeCreator(socket);
       break;
 
-    case (action.message === "request for playground, example 3"):
+    case action.message === "request for playground, example 3":
       generateContent(3, result => {
         socket.send(JSON.stringify({
           html: result,
@@ -70,12 +69,11 @@ module.exports = exports = (socket, action) => {
       });
       break;
 
-    case (action.message === "subscribe"):
+    case action.message === "subscribe":
       newsletterSubscribe(action, socket);
       break;
 
     default:
-      console.log(action); // eslint-disable-line
       break;
   }
 };
@@ -341,7 +339,7 @@ async function newsletterSubscribe(data, socket) {
     const response = JSON.parse(error.body);
 
     if (!response.success) {
-      logSlackError(
+      messageSlack(
         "\n" +
         "> *NEWSLETTER ERROR:* ```" + response.error + "```" + "\n" +
         `> _Cause: ${email} interacted with the form_\n`
@@ -355,7 +353,7 @@ async function newsletterSubscribe(data, socket) {
       }));
     }
 
-    logSlackError(
+    messageSlack(
       "\n" +
       "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
       `> _Cause: ${email} interacted with the form_\n`

@@ -4,7 +4,7 @@
 
 //  E X P O R T
 
-module.exports = exports = () => `
+export default () => `
   <div class="ecosystem__submodule chainquery">
     <h3 class="ecosystem__submodule__title" data-action="openSubmodule" data-target="chainquery">chainquery</h3>
 

@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E
+//  I M P O R T
 
 import html from "choo/html";
 
@@ -11,7 +11,7 @@ import html from "choo/html";
 //  E X P O R T
 
 export default links => {
-  const renderedLinks = links.map((link) =>
+  const renderedLinks = links.map(link =>
     returnLinkTemplate(link.title, link.description, link.destination, link.label));
 
   return html`

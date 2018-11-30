@@ -2,19 +2,17 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import async from "choo-async";
 import asyncHtml from "choo-async/html";
 import choo from "choo";
-import devtools from "choo-devtools";
-import { require as local } from "app-root-path";
 import ssr from "choo-ssr";
 
 //  U T I L S
 
-const head = local("/app/components/head").default;
-const wrapper = local("/app/components/wrapper").default;
+import head from "./components/head";
+import wrapper from "./components/wrapper";
 
 
 
@@ -22,8 +20,6 @@ const wrapper = local("/app/components/wrapper").default;
 
 function main() {
   const app = async(choo());
-
-  if (process.env.NODE_ENV !== "production") app.use(devtools());
 
   const page = view => (
     shell(
@@ -53,6 +49,7 @@ if (typeof window !== "undefined") main();
 //  E X P O R T
 
 module.exports = exports = main;
+// export default main();
 
 
 

@@ -4,13 +4,13 @@
 
 //  N A T I V E
 
-const crypto = require("crypto");
+import crypto from "crypto";
 
 
 
 //  E X P O R T
 
-module.exports = exports = len => {
+export default len => {
   if (!Number.isFinite(len)) throw new TypeError("Expected a finite number");
   return crypto.randomBytes(Math.ceil(len / 2)).toString("hex")
     .slice(0, len);

@@ -2,30 +2,31 @@
 
 
 
-//  P A C K A G E
+//  I M P O R T
 
-const got = require("got");
+import got from "got";
 
 //  U T I L
 
-const queryUrl = `${process.env.NODE_ENV === "development" ? "http://localhost:5200/image" : `https://${process.env.DAEMON_URL}/image` }`;
+const queryUrl = process.env.NODE_ENV === "development" ?
+  "http://localhost:5200/image" :
+  `https://${process.env.DAEMON_URL}/image`;
 
 
 
 //  E X P O R T
 
-module.exports = exports = async(imageSource) => {
+export default async(imageSource) => {
   const options = {
     body: {
       authorization: process.env.LBRY_DAEMON_ACCESS_TOKEN,
       image: imageSource
     },
-    json: true,
-    method: "POST"
+    json: true
   };
 
   try {
-    const response = await got(queryUrl, options);
+    const response = await got.post(queryUrl, options);
     return response.body; // eslint-disable-line padding-line-between-statements
   } catch (error) {
     return error;

@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E
+//  I M P O R T
 
 import html from "choo/html";
 
@@ -10,7 +10,7 @@ import html from "choo/html";
 
 //  E X P O R T
 
-module.exports = exports = () => html`
+export default () => html`
   <article class="page" itemtype="http://schema.org/BlogPosting">
     <header class="page__header">
       <div class="page__header-wrap">

@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import dedent from "dedent";
 import html from "choo/html";

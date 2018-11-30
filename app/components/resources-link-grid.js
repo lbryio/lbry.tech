@@ -2,13 +2,9 @@
 
 
 
-//  P A C K A G E
-
-import { require as local } from "app-root-path";
-
 //  U T I L
 
-const linkGrid = local("/app/components/link-grid").default;
+import linkGrid from "./link-grid";
 
 
 

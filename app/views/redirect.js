@@ -2,24 +2,23 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
-import { require as local } from "app-root-path";
 import raw from "choo/html/raw";
 
 //  U T I L S
 
-const markdown = local("/app/components/markdown").default;
-const redirect404 = local("/app/modules/redirect-404");
+import markdown from "../components/markdown";
+import redirect404 from "../modules/redirect-404";
 
 
 
 //  E X P O R T
 
-module.exports = exports = (state, emit) => { // eslint-disable-line
+export default (state, emit) => { // eslint-disable-line
   const partialPath = state.route === "resources/*" ? `resources/${state.params.wildcard}` : state.params.wildcard;
   const path = `./documents/${partialPath}.md`;
 

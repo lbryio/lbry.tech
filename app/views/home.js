@@ -2,20 +2,19 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T
 
 import html from "choo/html";
-import { require as local } from "app-root-path";
 
 //  U T I L
 
-const linkGrid = local("app/components/link-grid").default;
+import linkGrid from "../components/link-grid";
 
 
 
 //  E X P O R T
 
-module.exports = exports = () => html`
+export default () => html`
   <div>
     <section class="hero">
       <div>

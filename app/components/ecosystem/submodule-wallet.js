@@ -4,7 +4,7 @@
 
 //  E X P O R T
 
-module.exports = exports = () => `
+export default () => `
   <div class="ecosystem__submodule wallet">
     <h3 class="ecosystem__submodule__title" data-action="openSubmodule" data-target="wallet">wallet server</h3>
 

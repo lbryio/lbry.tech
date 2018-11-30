@@ -4,7 +4,7 @@
 
 //  E X P O R T
 
-module.exports = exports = () => `
+export default () => `
   <div class="ecosystem__module lbry">
     <span class="__close" data-action="close">&times;</span>
 

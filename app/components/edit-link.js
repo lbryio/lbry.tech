@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import html from "choo/html";
 import { require as local } from "app-root-path";

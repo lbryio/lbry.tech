@@ -2,57 +2,60 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
-import { require as local } from "app-root-path";
 
 //  U T I L S
 
+import headerBlockchain from "../components/api/header-blockchain";
+import headerSdk from "../components/api/header-sdk";
+import redirects from "../data/redirects.json";
+
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
-const headerBlockchain = local("app/components/api/header-blockchain").default;
-const headerSdk = local("app/components/api/header-sdk").default;
-const redirects = local("app/data/redirects.json");
 
 
 
 //  E X P O R T
 
-module.exports = exports = state => parseApiFile(state.params.wildcard).then(response => {
-  /*
-  state.lbry = {
-    description: "This is the API page for LBRY.tech",
-    "og:image": "/assets/media/images/carlsagan2.jpg",
-    "og:image:height": 300,
-    "og:image:width": 400
-  };
-  */
+export default async(state) => {
+  // How to set custom metadata for this page
+  // state.lbry = {
+  //   description: "This is the API page for LBRY.tech",
+  //   "og:image": "/assets/media/images/carlsagan2.jpg",
+  //   "og:image:height": 300,
+  //   "og:image:width": 400
+  // };
 
-  return asyncHtml`
-    <div class="__slate">
-      <aside class="api__toc">
-        <div class="api__toc__search">
-          <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-          <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-          <ul class="api__toc__search__results"></ul>
-        </div>
+  try {
+    const apiResponse = await parseApiFile(state.params.wildcard);
 
-        <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(response)}</ul>
-      </aside>
-      <section class="api__content">
-        ${createApiHeader(state.params.wildcard)}
-        <div class="api__documentation" id="toc-content">
-          ${createApiContent(response)}
-        </div>
-      </section>
-    </div>
+    return asyncHtml`
+      <div class="__slate">
+        <aside class="api__toc">
+          <div class="api__toc__search">
+            <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
+            <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
+            <ul class="api__toc__search__results"></ul>
+          </div>
 
-    <script src="/assets/scripts/plugins/jets.js"></script>
-    <script src="/assets/scripts/api.js"></script>
-  `;
-})
-  .catch(() => {
+          <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(apiResponse)}</ul>
+        </aside>
+        <section class="api__content">
+          ${createApiHeader(state.params.wildcard)}
+          <div class="api__documentation" id="toc-content">
+            ${createApiContent(apiResponse)}
+          </div>
+        </section>
+      </div>
+
+      <script src="/assets/scripts/plugins/jets.js"></script>
+      <script src="/assets/scripts/api.js"></script>
+    `;
+  }
+
+  catch (error) {
     const redirectUrl = redirects[state.href];
 
     return asyncHtml`
@@ -78,7 +81,8 @@ module.exports = exports = state => parseApiFile(state.params.wildcard).then(res
         }, 2000);
       </script>
     `;
-  });
+  }
+};
 
 
 
@@ -90,7 +94,8 @@ function createApiContent(apiDetails) {
   for (const apiDetail of apiDetails) {
     let apiDetailsReturns = "";
 
-    if (apiDetail.returns) apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
+    if (apiDetail.returns)
+      apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
       <div class="api__content__body">

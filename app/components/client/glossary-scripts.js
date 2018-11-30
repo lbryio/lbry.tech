@@ -1,4 +1,4 @@
-/* global document */ "use strict";
+"use strict"; /* global document */
 
 
 

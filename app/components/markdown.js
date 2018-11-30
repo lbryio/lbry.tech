@@ -2,7 +2,7 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T S
 
 import decamelize from "decamelize";
 import exists from "fs-exists-sync";
@@ -13,12 +13,9 @@ import path from "path";
 import raw from "choo/html/raw";
 import { require as local } from "app-root-path";
 
-//  V A R I A B L E
+//  U T I L S
 
 const numberRegex = /^[0-9]/g;
-
-//  U T I L
-
 const md = require("markdown-it")({
   html: true,
   typographer: true
@@ -67,7 +64,7 @@ function partialFinder(markdownBody) {
       const filename = decamelize(partial, "-").replace("<", "")
         .replace("/>", "")
         .trim();
-      const fileExistsTest = exists(`./app/components/${filename}.js`); // `local` results in error if used here and file !exist
+      const fileExistsTest = exists(`./app/components/${filename}.js`);
 
       if (!fileExistsTest)
         markdownBody = markdownBody.replace(partial, "");

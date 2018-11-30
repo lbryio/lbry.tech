@@ -2,30 +2,31 @@
 
 
 
-//  P A C K A G E
+//  I M P O R T
 
-const got = require("got");
+import got from "got";
 
 //  U T I L
 
-const queryUrl = `${process.env.NODE_ENV === "development" ? "http://localhost:5200/publish" : `https://${process.env.DAEMON_URL}/publish`}`;
+const queryUrl = process.env.NODE_ENV === "development" ?
+  "http://localhost:5200/publish" :
+  `https://${process.env.DAEMON_URL}/publish`;
 
 
 
 //  E X P O R T
 
-module.exports = exports = async(publishMetadata) => {
+export default async(publishMetadata) => {
   const options = {
     body: {
       authorization: process.env.LBRY_DAEMON_ACCESS_TOKEN,
       metadata: publishMetadata
     },
-    json: true,
-    method: "PUT"
+    json: true
   };
 
   try {
-    const response = await got(queryUrl, options);
+    const response = await got.put(queryUrl, options);
     return response.body; // eslint-disable-line padding-line-between-statements
   } catch (error) {
     return error;

@@ -28,7 +28,7 @@ That's a fancy sentence, so here's a plainer one: we just thought it'd be really
 
 Learn more about how LBRY works from this ecosystem overview.
 
-<Ecosystem/>
+<Overview/>
 
 ## Keep Diving
 

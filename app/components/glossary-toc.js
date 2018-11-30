@@ -2,7 +2,7 @@
 
 
 
-//  V A R I A B L E S
+//  U T I L S
 
 const idRegex = /(".*")/g;
 const numberRegex = /^[0-9]/g;
@@ -13,7 +13,7 @@ const titleRegex = /(>.*<)/g;
 
 //  E X P O R T
 
-module.exports = exports = (state, emit, markdown) => {
+export default (state, emit, markdown) => {
   const collectionOfTocElements = [];
   const tocElements = markdown.match(renderedHeaderRegex);
 

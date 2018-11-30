@@ -4,7 +4,7 @@
 
 //  E X P O R T
 
-module.exports = exports = () => `
+export default () => `
   <div class="ecosystem__submodule lighthouse">
     <h3 class="ecosystem__submodule__title" data-action="openSubmodule" data-target="lighthouse">lighthouse</h3>
 

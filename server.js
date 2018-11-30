@@ -1,4 +1,4 @@
-"use strict"; require("dotenv").config(); require("date-format-lite");
+"use strict"; require("dotenv").config(); require("date-format-lite"); require("@babel/register"); require("@babel/polyfill");
 
 
 
@@ -17,8 +17,8 @@ const fastify = require("fastify")({
 
 //  U T I L S
 
-const handleSocketMessages = local("app/sockets");
-const logSlackError = local("app/helpers/slack");
+const handleSocketMessages = local("app/sockets").default;
+const messageSlack = local("app/helpers/slack").default;
 
 
 
@@ -66,8 +66,10 @@ const start = async() => {
 
   process.env.NODE_ENV === "development" ?
     process.stdout.write(`\n— ${color.green("⚡")} ${fastify.server.address().port}\n`) :
-    logSlackError(`Server started at port \`${fastify.server.address().port}\``)
-  ;
+    messageSlack({
+      message: `Server started at port \`${fastify.server.address().port}\``,
+      title: "APP BOOT"
+    });
 };
 
 start();
