@@ -2,21 +2,20 @@
 
 
 
-//  P A C K A G E S
+//  I M P O R T
 
 import html from "choo/html";
-import { require as local } from "app-root-path";
 
 //  U T I L S
 
-const page404 = local("/app/views/404.js");
-const redirects = local("/app/data/redirects.json");
+import page404 from "../views/404";
+import redirects from "../data/redirects.json";
 
 
 
 //  E X P O R T
 
-module.exports = exports = state => {
+export default state => {
   const redirectUrl = redirects[state.href];
 
   if (redirectUrl) {
@@ -43,7 +42,7 @@ module.exports = exports = state => {
         }, 2000);
       </script>
     `;
-  } else {
-    return page404();
   }
+
+  return page404();
 };
