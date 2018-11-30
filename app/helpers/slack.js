@@ -23,7 +23,7 @@ const slackWebhook = new IncomingWebhook(slackUrl);
 
 export default ({ message, pretext, title }) => {
   if (!slackUrl) return;
-  pretext = pretext + environmentMessage;
+  pretext = pretext || "" + environmentMessage;
 
   slackWebhook.send({
     attachments: [{
