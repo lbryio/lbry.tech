@@ -72,7 +72,7 @@ function partialFinder(markdownBody) {
       else {
         const partialFunction = require(path.join(__dirname, "..", `./components/${filename}.js`));
 
-        if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction);
+        if (filename === "glossary-toc") markdownBody = markdownBody.replace(partial, partialFunction.default);
         else markdownBody = markdownBody.replace(partial, `</div>${partialFunction.default()}<div class="page__markup">`);
       }
     }

@@ -1,37 +1,32 @@
 @charset "utf-8";
 
-@import
-"@lbry/color/lbry-color",
+@import "@lbry/components/sass/";
+@import "init/markdown";
+@import "init/extends";
 
-"init/base",
-"init/mixins",
-"init/markdown",
-"init/extends",
+@import "type/inter";
 
-"type/inter",
+@import "partials/animation";
+@import "partials/ecosystem";
+@import "partials/email-subscribe";
+@import "partials/feature-links";
+@import "partials/flash";
+@import "partials/footer";
+@import "partials/github-feed";
+@import "partials/glossary";
+@import "partials/link-grid";
+@import "partials/navigation";
+@import "partials/mission-statement";
+@import "partials/modal";
+@import "partials/pre";
 
-"partials/animation",
-"partials/ecosystem",
-"partials/email-subscribe",
-"partials/feature-links",
-"partials/flash",
-"partials/footer",
-"partials/github-feed",
-"partials/glossary",
-"partials/link-grid",
-"partials/navigation",
-"partials/mission-statement",
-"partials/modal",
-"partials/pre",
+@import "layout";
 
-"layout",
+@import "pages/api";
+@import "pages/contributing";
+@import "pages/documentation";
+@import "pages/home";
+@import "pages/page";
+@import "pages/playground";
 
-"pages/api",
-"pages/contributing",
-"pages/documentation",
-"pages/home",
-"pages/page",
-"pages/playground",
-
-"plugins/prism"
-;
+@import "plugins/prism";

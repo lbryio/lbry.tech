@@ -49,7 +49,6 @@ if (typeof window !== "undefined") main();
 //  E X P O R T
 
 module.exports = exports = main;
-// export default main();
 
 
 

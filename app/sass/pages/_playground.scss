@@ -315,7 +315,10 @@
   select,
   textarea {
     width: 100%;
+    border-top: none;
+    border-right: none;
     border-bottom: 2px solid;
+    border-left: none;
 
     &:not(:hover):not(:active) {
       border-color: $lbry-black;
