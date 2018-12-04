@@ -99,14 +99,22 @@ function generateContent(exampleNumber, displayTrendingContent) {
         for (const part of collection) {
           try {
             renderedContentCollection.push(`
-              <figure class="playground__content__trend">
-                <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.name}" src="${makeImageSourceSecure(part.value.stream.metadata.thumbnail)}"/>
+              <section class="playground-content__trend">
+                <figure
+                  class="media__thumb"
+                  data-action="choose claim"
+                  data-claim-id="${part.name}"
+                  style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})">
+                </figure>
 
-                <figcaption data-action="choose claim" data-claim-id="${part.name}">
+                <div class="media__title">
                   ${part.value.stream.metadata.title}
-                  <span>${part.channel_name}</span>
-                </figcaption>
-              </figure>
+                </div>
+
+                <div class="media__subtitle">
+                  ${part.channel_name}
+                </div>
+              </section>
             `);
           } catch (err) {
             return; // TODO: Return nice error message
@@ -153,13 +161,23 @@ function generateContent(exampleNumber, displayTrendingContent) {
           part.channel_name
         ) {
           renderedContentCollection.push(`
-            <figure class="playground__content__trend">
-              <img alt="${part.name}" data-action="choose claim" data-claim-id="${part.claim_id}" src="${makeImageSourceSecure(part.value.stream.metadata.thumbnail)}"/>
-              <figcaption data-action="choose claim" data-claim-id="${part.claim_id}">
+            <section class="playground-content__trend">
+              <figure
+                class="media__thumb"
+                data-action="choose claim"
+                data-claim-id="${part.claim_id}"
+                data-name=${part.name}
+                style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})">
+              </figure>
+
+              <div class="media__title">
                 ${part.value.stream.metadata.title}
-                <span>${part.channel_name}</span>
-              </figcaption>
-            </figure>
+              </div>
+
+              <div class="media__subtitle">
+                ${part.channel_name}
+              </div>
+            </section>
           `);
         }
       }
@@ -216,17 +234,17 @@ function generateMemeCreator(socket) {
   const renderedImages = [];
 
   for (const image of images)
-    renderedImages.push(`<img alt="${image.alt}" class="playground__content__meme__canvas__thumbnail" src="${image.src}"/>`);
+    renderedImages.push(`<img alt="${image.alt}" class="playground-content__meme__canvas__thumbnail" src="${image.src}"/>`);
 
   const memeCreator = html`
-    <div class="playground__content__meme__canvas">
+    <div class="playground-content__meme__canvas">
       <img alt="Base image for LBRY meme creator" id="base-image" style="height: 0; position: absolute; visibility: hidden;"/>
       <canvas id="meme-canvas" height="600" width="800">Unfortunately, it looks like canvas is <strong>not supported</strong> in your browser</canvas>
 
       ${renderedImages}
     </div>
 
-    <form class="playground__content__meme__editor">
+    <form class="playground-content__meme__editor">
       <h2>Image Text</h2>
 
       <fieldset>

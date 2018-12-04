@@ -23,9 +23,9 @@ document.querySelector("body").addEventListener("click", event => {
 
   if (
     event.target.classList &&
-    event.target.classList[0] === "playground__content__meme__canvas__thumbnail"
+    event.target.classList[0] === "playground-content__meme__canvas__thumbnail"
   ) {
-    for (const thumbnail of document.querySelectorAll(".playground__content__meme__canvas__thumbnail"))
+    for (const thumbnail of document.querySelectorAll(".playground-content__meme__canvas__thumbnail"))
       thumbnail.classList.remove("selected");
 
     event.target.classList.add("selected");
@@ -127,14 +127,14 @@ function initializePlayground() {
   document.querySelector(".playground").classList.add("waiting");
   document.querySelector("#fetch-claim-uri").value = "";
   document.querySelector("#fetch-claim-uri").focus();
-  document.querySelector(".playground__navigation__example:nth-child(1)").classList.add("active");
+  document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
   send(JSON.stringify({
     message: "landed on playground"
   }));
 
   setTimeout(() => {
-    document.querySelector(".playground__navigation__example:nth-child(1)").click();
+    document.querySelector(".playground-navigation__example:nth-child(1)").click();
   }, 300);
 }
 
@@ -237,15 +237,15 @@ const handleExamples = debounce(event => {
   let exampleNumber;
   const data = event.dataset;
 
-  if (!parseInt(document.querySelector(".playground__navigation__example.active").dataset.example)) return;
-  exampleNumber = parseInt(document.querySelector(".playground__navigation__example.active").dataset.example);
+  if (!parseInt(document.querySelector(".playground-navigation__example.active").dataset.example)) return;
+  exampleNumber = parseInt(document.querySelector(".playground-navigation__example.active").dataset.example);
 
   switch(data.action) {
     case "choose claim":
       fetchMetadata(exampleNumber, data.claimId);
 
-      if (document.querySelector(".playground__navigation__example:nth-child(3)").classList.contains("active"))
-        document.getElementById("fetch-claim-uri").value = event.alt + "#" + event.dataset.claimId;
+      if (document.querySelector(".playground-navigation__example:nth-child(3)").classList.contains("active"))
+        document.getElementById("fetch-claim-uri").value = event.dataset.name + "#" + event.dataset.claimId;
 
       break;
 
@@ -255,9 +255,9 @@ const handleExamples = debounce(event => {
       break;
 
     case "playground, example 1":
-      if (document.getElementById("playground-loader").classList.contains("playground__content__meme")) {
-        document.getElementById("playground-loader").classList.remove("playground__content__meme");
-        document.getElementById("playground-loader").classList.add("playground__content__trends");
+      if (document.getElementById("playground-loader").classList.contains("playground-content__meme")) {
+        document.getElementById("playground-loader").classList.remove("playground-content__meme");
+        document.getElementById("playground-loader").classList.add("playground-content__trends");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
@@ -266,10 +266,10 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground__navigation__example"))
+      for (const example of document.querySelectorAll(".playground-navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".playground__navigation__example:nth-child(1)").classList.add("active");
+      document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
       document.getElementById("playground-results").innerHTML = "";
@@ -284,18 +284,18 @@ const handleExamples = debounce(event => {
       break;
 
     case "playground, example 2":
-      if (document.getElementById("playground-loader").classList.contains("playground__content__trends")) {
-        document.getElementById("playground-loader").classList.remove("playground__content__trends");
-        document.getElementById("playground-loader").classList.add("playground__content__meme");
+      if (document.getElementById("playground-loader").classList.contains("playground-content__trends")) {
+        document.getElementById("playground-loader").classList.remove("playground-content__trends");
+        document.getElementById("playground-loader").classList.add("playground-content__meme");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
       document.getElementById("playground-url").style.display = "none";
 
-      for (const example of document.querySelectorAll(".playground__navigation__example"))
+      for (const example of document.querySelectorAll(".playground-navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".playground__navigation__example:nth-child(2)").classList.add("active");
+      document.querySelector(".playground-navigation__example:nth-child(2)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
       document.getElementById("playground-results").innerHTML = "";
@@ -310,9 +310,9 @@ const handleExamples = debounce(event => {
       break;
 
     case "playground, example 3":
-      if (document.getElementById("playground-loader").classList.contains("playground__content__meme")) {
-        document.getElementById("playground-loader").classList.remove("playground__content__meme");
-        document.getElementById("playground-loader").classList.add("playground__content__trends");
+      if (document.getElementById("playground-loader").classList.contains("playground-content__meme")) {
+        document.getElementById("playground-loader").classList.remove("playground-content__meme");
+        document.getElementById("playground-loader").classList.add("playground-content__trends");
       }
 
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
@@ -321,10 +321,10 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground__navigation__example"))
+      for (const example of document.querySelectorAll(".playground-navigation__example"))
         example.classList.remove("active");
 
-      document.querySelector(".playground__navigation__example:nth-child(3)").classList.add("active");
+      document.querySelector(".playground-navigation__example:nth-child(3)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
       document.getElementById("playground-results").innerHTML = "";
@@ -358,7 +358,8 @@ function initCanvas() { // eslint-disable-line no-unused-vars
 
   ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight, 0, 0, canvasWidth, canvasHeight);
   ctx.fillStyle = "white";
-  ctx.font = "bold 48px 'Inter UI'";
+  ctx.font = "bold 48px 'Inter UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'";
+  // ctx.font = "bold 48px Arial";
   ctx.lineJoin = "round";
   ctx.lineWidth = 4;
   ctx.strokeStyle = "black";

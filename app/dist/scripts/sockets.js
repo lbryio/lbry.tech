@@ -64,7 +64,7 @@ function initializeWebSocketConnection() {
           initCanvas(); // eslint-disable-line
 
           setTimeout(() => {
-            document.querySelector(".playground__content__meme__canvas__thumbnail").click();
+            document.querySelector(".playground-content__meme__canvas__thumbnail").click();
           }, 500);
         }
 
@@ -72,7 +72,7 @@ function initializeWebSocketConnection() {
           document.getElementById("playground-example-description").classList.remove("success");
 
           document.getElementById("playground-example-description").innerHTML =
-            document.querySelector(".playground__navigation__example.active").dataset.description;
+            document.querySelector(".playground-navigation__example.active").dataset.description;
         }
 
         if (document.getElementById("temp-loader"))

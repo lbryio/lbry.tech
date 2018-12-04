@@ -14,11 +14,11 @@ import raw from "choo/html/raw";
 
 export default () => dedent`
   <section class="playground">
-    <ul class="playground__navigation">
+    <ul class="playground-navigation">
       ${raw(navigation())}
     </ul>
     <p class="playground__description" id="playground-example-description"></p>
-    <section class="playground__content">${raw(example1())}</section>
+    <section class="playground-content">${raw(example1())}</section>
   </section>
 `;
 
@@ -28,12 +28,12 @@ export default () => dedent`
 
 function example1() {
   return html`
-    <div class="playground__content__urlbar" id="playground-url">
+    <div class="playground-content__urlbar" id="playground-url">
       <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Enter a LBRY address or select a video below" type="text"/>
       <button class="button" data-action="execute claim" type="button">Resolve</button>
     </div>
 
-    <div class="playground__content__trends" id="playground-loader"></div>
+    <div class="playground-content__trends" id="playground-loader"></div>
     <div id="playground-results"></div>
 
     <script>
@@ -45,7 +45,7 @@ function example1() {
 function navigation() { // TODO: Save tutorial position to localStorage
   return dedent`
     <li
-      class="playground__navigation__example"
+      class="playground-navigation__example"
       data-action="playground, example 1"
       data-description="In this example, you can see what runs under the hood when selecting content to view in the LBRY app."
       data-example="1"
@@ -56,7 +56,7 @@ function navigation() { // TODO: Save tutorial position to localStorage
     </li>
 
     <li
-      class="playground__navigation__example"
+      class="playground-navigation__example"
       data-action="playground, example 2"
       data-description="Sometimes you want to create content, not just consume it. In this example, you can create a meme and upload it to LBRY!"
       data-example="2"
@@ -67,7 +67,7 @@ function navigation() { // TODO: Save tutorial position to localStorage
     </li>
 
     <li
-      class="playground__navigation__example"
+      class="playground-navigation__example"
       data-action="playground, example 3"
       data-description="In the LBRY app, you can financially support your favorite creators by donating LBRY Coin (LBC). In this example, we are donating LBC in your stead."
       data-example="3"
