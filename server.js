@@ -27,7 +27,7 @@ const messageSlack = local("app/helpers/slack").default;
 fastify
   .use(cors())
   .register(require("fastify-compress"))
-  .register(require("fastify-ws"))
+  .register(require("@inc/fastify-ws"))
   .register(require("fastify-helmet"), {
     hidePoweredBy: { setTo: "LBRY" }
   })
