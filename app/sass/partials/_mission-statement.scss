@@ -6,6 +6,11 @@
   line-height: 1.55;
   margin-bottom: 1.5rem;
   position: relative;
+  user-select: text;
+
+  -ms-user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
 
   @media (min-width: 901px) {
     font-size: 1.25rem;

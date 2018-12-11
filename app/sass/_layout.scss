@@ -1,5 +1,5 @@
-@include font-face(400);
-@include font-face(700);
+@include font-face(400, "./type/inter", "Inter UI");
+@include font-face(700, "./type/inter", "Inter UI");
 
 html,
 body {
