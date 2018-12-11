@@ -59,7 +59,7 @@
     "@inc/eslint-config": "^1.1.2",
     "@inc/sasslint-config": "^1.1.2",
     "@lbry/color": "^1.0.5",
-    "@lbry/components": "^1.6.0",
+    "@lbry/components": "^1.6.2",
     "eslint": "^5.10.0",
     "husky": "^1.2.0",
     "nodemon": "^1.18.8",
