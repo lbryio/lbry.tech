@@ -122,6 +122,7 @@ export default async(data, socket) => {
           const memePublishResponse = await publishMeme(body);
 
           switch(true) {
+            case data.example === 2:
             case memePublishResponse.result:
             case memePublishResponse.result.claim_address:
               explorerNotice = memePublishMessaging(memePublishResponse);
