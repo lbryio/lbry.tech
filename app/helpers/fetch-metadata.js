@@ -123,9 +123,9 @@ export default async(data, socket) => {
 
           switch(true) {
             case data.example === 2:
-            case memePublishResponse.body.result:
-            case memePublishResponse.body.result.claim_address:
-              explorerNotice = memePublishMessaging(memePublishResponse.body);
+            case memePublishResponse.result:
+            case memePublishResponse.result.claim_address:
+              explorerNotice = memePublishMessaging(memePublishResponse);
               break;
 
             default:
