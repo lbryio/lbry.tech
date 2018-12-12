@@ -22,7 +22,9 @@ export default (state, emit, markdown) => {
     const title = item.match(titleRegex)[0].replace(">", "").replace("<", "");
 
     collectionOfTocElements.push(`
-      <li><a href="${slugify(id)}" title="Go to '${title}'">${title}</a></li>
+      <li>
+        <a href="${slugify(id)}" title="Go to '${title}'">${title}</a>
+      </li>
     `);
   }
 
@@ -30,7 +32,6 @@ export default (state, emit, markdown) => {
     <ul class="component--glossary-toc">
       ${collectionOfTocElements.join("")}
     </ul>
-    <button class="component--glossary-toc-toggle" data-action="toggle glossary sidebar" type="button">Toggle</button>
   `;
 };
 

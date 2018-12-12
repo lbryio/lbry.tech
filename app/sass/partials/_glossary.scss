@@ -1,111 +1,53 @@
+// sass-lint:disable no-important
+// Refactor of entire CSS is sorely needed
+
 .glossary {
-  &:not(.sidebar-closed) {
-    main {
-      width: calc(100vw - 250px);
-      margin-left: 250px;
-    }
-
-    .page__header-wrap,
-    .page__content {
-      .inner-wrap {
-        max-width: initial;
-        margin-left: 1rem;
-      }
-    }
-
-    .component--glossary-toc-toggle {
-      &:not(.noncompliant-fix) {
-        left: calc(250px - 25px);
-      }
-
-      &.noncompliant-fix {
-        @media (min-width: 901px) {
-          left: calc(250px - 65px);
-        }
-
-        @media (max-width: 900px) {
-          left: calc(250px - 45px);
-        }
-      }
-    }
+  main {
+    width: calc(100vw - 200px);
+    margin-left: 200px;
   }
 
-  &.sidebar-closed {
-    @media (max-width: 1230px) {
-      .page__header {
-        margin-left: 1rem;
-      }
-    }
-
-    .component--glossary-toc {
-      left: -250px;
-    }
-
-    .component--glossary-toc-toggle {
-      &:not(.noncompliant-fix) {
-        left: 0;
-      }
-
-      &.noncompliant-fix {
-        @media (min-width: 901px) {
-          left: -40px;
-        }
-
-        @media (max-width: 900px) {
-          left: -20px;
-        }
-      }
+  .page__header-wrap,
+  .page__content {
+    .inner-wrap {
+      max-width: initial;
+      margin-left: 1rem;
     }
   }
 }
 
 .component--glossary-toc {
-  width: 250px; height: calc(100vh - 4rem);
-  top: 4rem; left: 0;
+  width: 200px; height: calc(100vh - 4rem);
+  bottom: 0; left: 0;
 
   background-color: $lbry-white;
-  border-right: 1px solid $lbry-gray-2;
-  font-size: 0.8rem; // TODO: Why was !important here?
+  border-right: 1px solid $lbry-gray-1;
+  font-size: 0.8rem;
+  line-height: 1.33;
   overflow-x: hidden;
   overflow-y: auto;
-  padding-top: 1rem; // TODO: Why was !important here?
-  position: fixed; // TODO: Why was !important here?
+  padding-top: 0.25rem !important;
+  padding-left: 0 !important;
+  position: fixed;
   z-index: 1;
 
-  li:last-of-type {
-    margin-bottom: 1rem;
-  }
-}
+  li {
+    list-style-type: none !important;
 
-.component--glossary-toc-toggle {
-  background-color: $lbry-gray-1;
-  font-size: 0.7rem;
-  position: absolute;
-  text-orientation: upright;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  z-index: 1;
-
-  &:not(.noncompliant-fix) {
-    width: 25px; height: 104px;
-    top: 4rem;
-  }
-
-  &.noncompliant-fix {
-    transform: rotate(90deg);
-
-    @media (min-width: 901px) {
-      width: 105px; height: 25px;
-      top: 103px;
-
-      letter-spacing: 2px;
+    &:hover {
+      background-color: $lbry-gray-2;
     }
 
-    @media (max-width: 900px) {
-      width: 65px; height: 25px;
-      top: 83px;
+    &:last-of-type {
+      margin-bottom: 1rem;
+    }
 
-      letter-spacing: 1px;
+    a {
+      padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+      background-image: none !important;
+      color: inherit !important;
+      display: block !important;
+      text-shadow: none !important;
     }
   }
 }
