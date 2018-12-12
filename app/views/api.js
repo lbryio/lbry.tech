@@ -13,7 +13,9 @@ import headerBlockchain from "../components/api/header-blockchain";
 import headerSdk from "../components/api/header-sdk";
 import redirects from "../data/redirects.json";
 
+const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@add_api_docs_scripts/contrib/devtools/generated/api_v1.json";
 const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
+const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
 
 
 
@@ -149,19 +151,13 @@ function createApiSidebar(apiDetails) {
 function parseApiFile(urlSlug) {
   let apiFileLink;
 
-  // checks below are related to rate limits, both URLs should return the same content
-
   switch(true) {
     case (urlSlug === "blockchain"):
-      apiFileLink = process.env.NODE_ENV === "development" ?
-        "https://rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json" :
-        "https://cdn.rawgit.com/lbryio/lbrycrd/add_api_docs_scripts/contrib/devtools/generated/api_v1.json";
+      apiFileLink = blockchainApi;
       break;
 
     case (urlSlug === "sdk"):
-      apiFileLink = process.env.NODE_ENV === "development" ?
-        "https://rawgit.com/lbryio/lbry/master/docs/api.json" :
-        "https://cdn.rawgit.com/lbryio/lbry/master/docs/api.json";
+      apiFileLink = sdkApi;
       break;
 
     default:
@@ -170,10 +166,18 @@ function parseApiFile(urlSlug) {
 
   if (!apiFileLink) return Promise.reject(new Error("Failed to fetch API docs"));
 
-  return fetch(apiFileLink).then(() => fetch(apiFileLink, {
-    cache: "no-cache" // forces a conditional request
-  }))
-    .then(res => res.json().then(body => body)); // res.status 304 = cache validated
+  return fetch(apiFileLink)
+    .then(res => {
+      return res.json();
+    })
+    .then(() => {
+      return fetch(apiFileLink, {
+        cache: "no-cache" // forces a conditional request
+      });
+    })
+    .then(res => {
+      return res.json().then(body => body);
+    });
 }
 
 function renderArguments(args) {
