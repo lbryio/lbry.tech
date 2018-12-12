@@ -10,6 +10,7 @@ title: Resources
 - [LBRY Claim Metadata Schema](/resources/schema)
 - [LBRY Merkle Claim Trie](/resources/claimtrie)
 - [LBRY Consensus Algorithm](/resources/consensus)
+- [LBRY Glossary](/glossary)
 - [Download Overview](/resources/download-overview)
 - [API Wrappers](/resources/api-wrappers)
 - [LBRY SDK Configuration Settings](/resources/daemon-settings)
