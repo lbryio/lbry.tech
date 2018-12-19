@@ -5,7 +5,7 @@
 //  E X P O R T
 
 module.exports = exports = {
-  ga: "UA-60403362-1",
+  ga: "UA-60403362-8",
   github: {
     branch: "master",
     linkText: "Edit this page on GitHub",
