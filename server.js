@@ -41,6 +41,18 @@ fastify
     app: require("./app")
   });
 
+fastify.addHook("preHandler", (request, reply, next) => {
+  if (process.env.NODE_ENV !== "development") {
+    if (request.headers["x-forwarded-proto"] !== "https")
+      reply.redirect(302, "https://" + request.hostname + request.originalUrl);
+
+    else
+      next();
+  }
+
+  next();
+});
+
 fastify.ready(err => {
   if (err) throw err;
 
