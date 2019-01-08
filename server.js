@@ -44,7 +44,7 @@ fastify
 fastify.addHook("preHandler", (request, reply, next) => {
   if (process.env.NODE_ENV !== "development") {
     if (request.headers["x-forwarded-proto"] !== "https")
-      reply.redirect(302, "https://" + request.hostname + request.originalUrl);
+      reply.redirect(302, "https://" + request.raw.hostname + request.raw.originalUrl);
 
     else
       next();
