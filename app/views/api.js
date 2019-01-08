@@ -6,6 +6,7 @@
 
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
+import got from "got";
 
 //  U T I L S
 
@@ -14,7 +15,7 @@ import headerSdk from "../components/api/header-sdk";
 import redirects from "../data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
-const fetch = require("make-fetch-happen").defaults({ cacheManager: "./cache" });
+const cache = new Map();
 const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
 
 
@@ -57,7 +58,7 @@ export default async(state) => {
     `;
   }
 
-  catch (error) {
+  catch(error) {
     const redirectUrl = redirects[state.href];
 
     return asyncHtml`
@@ -148,7 +149,7 @@ function createApiSidebar(apiDetails) {
   return apiSidebar;
 }
 
-function parseApiFile(urlSlug) {
+async function parseApiFile(urlSlug) {
   let apiFileLink;
 
   switch(true) {
@@ -164,20 +165,16 @@ function parseApiFile(urlSlug) {
       break;
   }
 
-  if (!apiFileLink) return Promise.reject(new Error("Failed to fetch API docs"));
+  if (!apiFileLink)
+    return Promise.reject(new Error("Failed to fetch API docs"));
 
-  return fetch(apiFileLink)
-    .then(res => {
-      return res.json();
-    })
-    .then(() => {
-      return fetch(apiFileLink, {
-        cache: "no-cache" // forces a conditional request
-      });
-    })
-    .then(res => {
-      return res.json().then(body => body);
-    });
+  const response = await got(apiFileLink, { cache: cache, json: true });
+
+  try {
+    return response.body;
+  } catch(error) {
+    return "Issue loading API documentation";
+  }
 }
 
 function renderArguments(args) {
