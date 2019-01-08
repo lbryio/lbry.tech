@@ -18,7 +18,7 @@
   </a>
 
   <a href="https://snyk.io/test/github/lbryio/lbry.tech">
-    <img src="https://snyk.io/test/github/lbryio/lbry.tech/badge.svg"/>
+    <img src="https://snyk.io/test/github/lbryio/lbry.tech/badge.svg?style=flat-square"/>
   </a>
 </div>
 
