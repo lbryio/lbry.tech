@@ -13,7 +13,13 @@
 </div>
 
 <div align="center">
-  <a href="https://travis-ci.org/lbryio/lbry.tech"><img src="https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square"/></a>
+  <a href="https://travis-ci.org/lbryio/lbry.tech">
+    <img src="https://img.shields.io/travis/lbryio/lbry.tech/master.svg?style=flat-square"/>
+  </a>
+
+  <a href="https://snyk.io/test/github/lbryio/lbry.tech">
+    <img src="https://snyk.io/test/github/lbryio/lbry.tech/badge.svg"/>
+  </a>
 </div>
 
 

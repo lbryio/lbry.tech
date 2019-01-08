@@ -7,6 +7,7 @@
 const color = require("colorette");
 const cors = require("cors");
 const local = require("app-root-path").require;
+const ssl = require("heroku-ssl-redirect");
 
 const fastify = require("fastify")({
   logger: {
@@ -25,6 +26,7 @@ const messageSlack = local("app/helpers/slack").default;
 //  P R O G R A M
 
 fastify
+  .use(ssl())
   .use(cors())
   .register(require("fastify-compress"))
   .register(require("@inc/fastify-ws"))
