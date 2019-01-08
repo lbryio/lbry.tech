@@ -322,6 +322,10 @@ Streaming media is multimedia that is constantly received by and presented to an
 
 The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
 
+### Stream Hash
+
+A unique hash for a [[Stream]]. It is the sha384 hash of the file.
+
 ### Support (Claim Support)
 
 A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of support that is sent from one wallet to another, so that the receiver can send it to their own wallet.
