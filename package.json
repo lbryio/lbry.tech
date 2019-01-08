@@ -20,7 +20,7 @@
     "decamelize": "^2.0.0",
     "dedent": "^0.7.0",
     "dotenv": "^6.2.0",
-    "fastify": "^2.0.0-rc.1",
+    "fastify": "~1.13.3",
     "fastify-compress": "^0.7.1",
     "fastify-helmet": "^3.0.0",
     "fastify-static": "^1.1.0",
