@@ -7,7 +7,6 @@
 const color = require("colorette");
 const cors = require("cors");
 const local = require("app-root-path").require;
-// const ssl = require("heroku-ssl-redirect");
 
 const fastify = require("fastify")({
   logger: {
@@ -26,7 +25,6 @@ const messageSlack = local("app/helpers/slack").default;
 //  P R O G R A M
 
 fastify
-  // .use(ssl())
   .use(cors())
   .register(require("fastify-compress"))
   .register(require("@inc/fastify-ws"))
@@ -39,19 +37,18 @@ fastify
   })
   .register(require("choo-ssr/fastify"), {
     app: require("./app")
+  })
+  .addHook("preHandler", (request, reply, next) => {
+    if (process.env.NODE_ENV !== "development") {
+      if (request.headers["x-forwarded-proto"] !== "https")
+        reply.redirect(302, `https://${request.raw.hostname}${request.raw.originalUrl}`);
+
+      else
+        next();
+    }
+
+    next();
   });
-
-fastify.addHook("preHandler", (request, reply, next) => {
-  if (process.env.NODE_ENV !== "development") {
-    if (request.headers["x-forwarded-proto"] !== "https")
-      reply.redirect(302, "https://" + request.raw.hostname + request.raw.originalUrl);
-
-    else
-      next();
-  }
-
-  next();
-});
 
 fastify.ready(err => {
   if (err) throw err;
@@ -73,7 +70,7 @@ fastify.ready(err => {
 const start = async() => {
   try {
     await fastify.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0");
-  } catch (err) {
+  } catch(err) {
     fastify.log.error(err);
     process.exit(1);
   }
