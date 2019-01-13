@@ -144,7 +144,7 @@ lbrycrd is the authoritative implementation of the LBRY [[blockchain]] protocol.
 
 An [[SDK]] for the LBRY protocol that can also be used independently. Distributed as a daemon or bundled directly, it contains a set of convenience methods for developing applications, and bundles an [[SPV]] wallet as well as implementation of the data network.
 
-See [the source code](https://github/lbryio/lbry) or [the API documentation](/api/sdk).
+See [the source code](https://github.com/lbryio/lbry) or [the API documentation](/api/sdk).
 
 ### LBRY Credits
 
