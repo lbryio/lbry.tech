@@ -10,7 +10,7 @@ We encourage the submission of changes and additions to this glossary.
 
 ### Blob
 
-A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.
+A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.  A *manifest* blob is also created to index the multiple content blobs that were created from the file.  A *stream* is the collection of all these blobs particlar to one publised file.
 
 ### Block
 
@@ -67,6 +67,10 @@ Transaction that has been included in the blockchain. Probability of transaction
 ### Confirmation Number
 
 Confirmation number is a measure of the probability that a transaction could be rejected from the *main chain*. "Zero confirmations" means that the transaction is *unconfirmed* (not in any block yet). One confirmation means that the transaction is included in the latest block in the main chain. Two confirmations means the transaction is included in the block right before the latest one. And so on. Probability of transaction being reversed (*"double spent"*) is diminishing exponentially with more blocks added "on top" of it.
+
+### Content Blob
+
+A blob that contains an encrypted & encoded chunk of the content file.  Every stream must have at least two blobs - the manifest blob and, at least, one content blob. 
 
 ### Dewey
 
@@ -185,6 +189,10 @@ A transaction that can be spent using M signatures when N public keys are requir
 ### Mainnet
 
 Main LBRY network and its blockchain. The term is mostly used in comparison to *testnet*.
+
+### Manifest
+
+A blob that contains information about all the other blobs in its stream (the content blobs), in JSON format.  Sometimes referred to as the "Stream Descriptor (SD) Blob,"  this blob lists each of the other blobs in the stream, in order, along with the filename for the content, and the cryptographic key needed to decode the content blobs (the stream key).
 
 ### Main Chain
 
@@ -320,11 +328,15 @@ Streaming media is multimedia that is constantly received by and presented to an
 
 ### Stream Descriptor (SD) Blob
 
-The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
+see *manifest*  The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
 
 ### Stream Hash
 
 A unique hash for a [[Stream]]. It is the sha384 hash of the file.
+
+### Stream Key
+
+Found in the *manifest*, this is the cryptographic key needed to decode the content blobs of a stream.
 
 ### Support (Claim Support)
 
