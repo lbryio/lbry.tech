@@ -72,3 +72,8 @@ hr {
 code {
   @include font-mono;
 }
+
+sub,
+sup {
+  font-size: 0.8rem;
+}
