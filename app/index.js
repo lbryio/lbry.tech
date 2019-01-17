@@ -73,7 +73,7 @@ server
 
 //  B E G I N
 
-server.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0", async() => {
+server.listen(8080, "0.0.0.0", async() => {
   process.env.NODE_ENV === "development" ?
     process.stdout.write(`\n— ${color.green("⚡")} ${server.server.address().port}\n`) :
     messageSlack({
