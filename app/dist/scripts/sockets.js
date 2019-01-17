@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; /* global document, location, WebSocket */
 
 
 

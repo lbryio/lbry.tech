@@ -1,4 +1,4 @@
-/* global define */
+/* global define, document, Element, window */
 
 /* ! Jets.js - v0.14.1 - 2018-06-22
 * http://NeXTs.github.com/Jets.js/

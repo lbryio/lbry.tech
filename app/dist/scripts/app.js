@@ -1,4 +1,4 @@
-/* global location, send, window */ "use strict";
+"use strict"; /* global document, history, location, navigator, send, window */
 
 
 
@@ -21,18 +21,6 @@ if (
   !/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent) &&
   document.querySelector(".component--glossary-toc-toggle")
 ) document.querySelector(".component--glossary-toc-toggle").classList.add("noncompliant-fix");
-
-
-
-if ( // Toggle beta message
-  localStorage.getItem("hide lbry alert") &&
-  localStorage.getItem("hide lbry alert") === "true" // cannot set Booleans for some reason
-) document.querySelector("#alert-beta").style.display = "none";
-
-document.querySelector("#close-alert").onclick = function() {
-  localStorage.setItem("hide lbry alert", true);
-  document.querySelector("#alert-beta").style.display = "none";
-};
 
 
 

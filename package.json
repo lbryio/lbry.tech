@@ -3,7 +3,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "@inc/fastify-ws": "^1.1.0",
-    "@octokit/rest": "^16.9.0",
+    "@octokit/rest": "^16.10.0",
     "@slack/client": "^4.8.0",
     "app-root-path": "^2.1.0",
     "async": "^2.6.1",
@@ -26,7 +26,7 @@
     "fastify-static": "^1.1.0",
     "front-matter": "^3.0.1",
     "fs-exists-sync": "^0.1.0",
-    "got": "^9.5.1",
+    "got": "^9.6.0",
     "graceful-fs": "^4.1.15",
     "make-promises-safe": "^4.0.0",
     "markdown-it": "^8.4.2",
@@ -82,14 +82,14 @@
   "scripts": {
     "css": "sass --load-path=node_modules --update app/sass:app/dist --style compressed",
     "format": "eslint '**/*.js' --fix --ignore-pattern '/app/dist/'",
-    "start": "npm run css && NODE_ENV=production node server",
+    "start": "npm run css && NODE_ENV=production node",
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./ --exclude fastify,prismjs",
     "test:lint": "standardx --verbose | snazzy",
     "test:sass": "sass-lint --config ./node_modules/@inc/sasslint-config/config.json --verbose --no-exit",
     "watch": "run-p watch:*",
     "watch:sass": "sass --load-path=node_modules --watch app/sass:app/dist --style compressed",
-    "watch:server": "NODE_ENV=development nodemon server --ignore 'public/'"
+    "watch:server": "NODE_ENV=development nodemon --ignore 'app/dist'"
   },
   "standardx": {
     "ignore": [
