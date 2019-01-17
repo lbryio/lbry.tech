@@ -1,8 +1,8 @@
 "use strict";
 
+import { require as local } from "app-root-path";
 
-
-//  E X P O R T
+const markdown = local("/app/components/markdown").default;
 
 export default () => `
   <div class="ecosystem__submodule reflector">
@@ -10,16 +10,7 @@ export default () => `
 
     <div class="ecosystem__submodule__description">
       <div class="ecosystem__submodule__markdown">
-        <h4 class="ecosystem__submodule__description__title">Overview</h4>
-        <p>A reflector cluster to accept LBRY content for hosting en masse, rehost the content, and make money on data fees (TODO). This code includes Go implementations of the LBRY peer protocol, reflector protocol, and DHT.</p>
-
-        <h4 class="ecosystem__submodule__description__title __connection">Connection to...</h4>
-        <p class="__connection-details"></p>
-
-        <h4 class="ecosystem__submodule__description__title">Source</h4>
-        <ul>
-          <li><a href="https://github.com/lbryio/reflector.go" title="reflector source code">https://github.com/lbryio/reflector.go</a></li>
-        </ul>
+        ${markdown("./documents/partials/overview/reflector.md")}
       </div>
 
       <ul class="__parents">

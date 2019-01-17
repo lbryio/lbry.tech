@@ -1,4 +1,4 @@
-_This section assumes "blockchain" already means something to you. If you're totally new, the key problem solved by blockhain is the ability for distributed, disparate entities to all agree on a rivalrous state of affairs. For a more comprehensive introduction to blockchain, try starting [here](https://lopp.net/bitcoin.html)_
+_This section assumes "blockchain" already means something to you. If you're new, the central problem solved by blockchain is the ability for distributed, disparate entities to all agree on a rivalrous state of affairs. For a thorough introduction to blockchain, start [here](https://lopp.net/bitcoin.html)_
 
 LBRY uses a public, proof-of-work blockchain that is very similar to Bitcoin. The blockchain is the foundation of the protocol stack.
 
@@ -10,7 +10,5 @@ The metadata contains information about the content, such as the title, creator,
 
 ### Additional Resources
 
-*   See the [Whitepaper](/whitepaper "Whitepaper") for a more comprehensive introduction to the LBRY blockchain.
-*   See the [Resources](/resources) for documentation about the LBRY blockchain, including its API.
-*   See [[Naming]] for learning more about LBRY URLs and how they work.
-*   See [[Identities]] for learning how the LBRY blockchain handles publisher identities.
+- The [Whitepaper](/whitepaper "Whitepaper") contains a comprehensive documentation of the LBRY blockchain.
+- [Resources](/resources) has documentation about using the LBRY blockchain, including its APIs.
