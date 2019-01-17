@@ -13,10 +13,6 @@ right = ripemd(intermediate[len(intermediate)/2:]) # and the right half
 proof = sha256(sha256(left + right))  # concatenate the two halves, and double-sha256() it again
 ```
 
-### Block Targeting
+### Block Targeting & Difficulty Adjustment
 
-_PR this_.
-
-### Difficulty Adjustment
-
-_PR this_.
+The targeted time of each Lbry block is 2.5 mintues (150 seconds).  More information and links to source code [here](https://spec.lbry.io/#consensus).
