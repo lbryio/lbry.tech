@@ -15,6 +15,16 @@ const redis = require("redis");
 const messageSlack = local("/app/helpers/slack");
 const relativeDate = local("/app/modules/relative-date");
 
+String.prototype.escape = function() {
+  const tagsToReplace = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;"
+  };
+
+  return this.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag);
+};
+
 //  R E D I S
 
 let client;
@@ -132,7 +142,7 @@ function generateEvent(event) {
             rel="noopener noreferrer"
             target="_blank"
             title="View this comment on GitHub"
-          >${event.payload.issue.title}</a></em> in
+          >${event.payload.issue.title.escape()}</a></em> in
         `;
       } else {
         return `
@@ -143,7 +153,7 @@ function generateEvent(event) {
             rel="noopener noreferrer"
             target="_blank"
             title="View this comment on GitHub"
-          >${event.payload.issue.title}</a></em> in
+          >${event.payload.issue.title.escape()}</a></em> in
         `;
       }
 
@@ -161,7 +171,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this issue on GitHub"
-        >${event.payload.issue.title}</a></em> in
+        >${event.payload.issue.title.escape()}</a></em> in
       `;
 
     case "PullRequestEvent":
@@ -178,7 +188,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this pull request on GitHub"
-        >${event.payload.pull_request.title}</a></em> in
+        >${event.payload.pull_request.title.escape()}</a></em> in
       `;
 
     case "PullRequestReviewCommentEvent":
@@ -195,7 +205,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this comment on GitHub"
-        >${event.payload.pull_request.title}</a></em> in
+        >${event.payload.pull_request.title.escape()}</a></em> in
       `;
 
     case "PushEvent":
