@@ -73,11 +73,29 @@ server
 
 //  B E G I N
 
-server.listen(8080, "0.0.0.0", async() => {
+const start = async() => {
+  try {
+    await server.listen(process.env.PORT || 8080, process.env.IP || "0.0.0.0");
+  } catch(err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+
   process.env.NODE_ENV === "development" ?
     process.stdout.write(`\n— ${color.green("⚡")} ${server.server.address().port}\n`) :
     messageSlack({
       message: `Server started at port \`${server.server.address().port}\``,
       title: "APP BOOT"
     });
-});
+};
+
+start();
+
+// server.listen(8080, "0.0.0.0", async() => {
+//   process.env.NODE_ENV === "development" ?
+//     process.stdout.write(`\n— ${color.green("⚡")} ${server.server.address().port}\n`) :
+//     messageSlack({
+//       message: `Server started at port \`${server.server.address().port}\``,
+//       title: "APP BOOT"
+//     });
+// });
