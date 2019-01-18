@@ -17,6 +17,7 @@ import websockets from "@inc/fastify-ws";
 
 import handleSocketMessages from "./sockets";
 import messageSlack from "./helpers/slack";
+import redirects from "./data/redirects.json";
 
 const server = fastify({
   logger: {
@@ -46,6 +47,9 @@ server
     app: require("./client")
   })
   .addHook("preHandler", (request, reply, next) => {
+    if (redirects[request.raw.originalUrl])
+      reply.redirect(301, redirects[request.raw.originalUrl]);
+
     if (process.env.NODE_ENV !== "development") {
       if (request.headers["x-forwarded-proto"] !== "https")
         reply.redirect(302, `https://${request.raw.hostname}${request.raw.originalUrl}`);

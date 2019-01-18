@@ -12,7 +12,7 @@ import raw from "choo/html/raw";
 //  U T I L S
 
 import markdown from "../components/markdown";
-import redirect404 from "../modules/redirect-404";
+import page404 from "./404";
 
 
 
@@ -23,7 +23,7 @@ export default (state, emit) => { // eslint-disable-line
   const path = `./documents/${partialPath}.md`;
 
   if (!fs.existsSync(path))
-    return redirect404(state);
+    return page404();
 
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
