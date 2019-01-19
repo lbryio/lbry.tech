@@ -288,6 +288,10 @@ The resolve API command returns all available information about a claim or chann
 
 Amount of newly generated LBRY credits that a *miner* may claim in a new block. The first transaction in the block allows a miner to claim currently allowed reward as well as all *transaction fees* from all transactions in the block. For security reasons, rewards cannot be *spent* before 100 blocks have been built on top of the current block.
 
+### Schema
+
+The schema defines the structure of the data (metadata) that is stored in claims in the LBRY blockchain.  See [Metadata](https://spec.lbry.io/#metadata) in the white paper, or [lbry.tech/resources/schema](https://lbry.tech/resources/schema) for more information.
+
 ### Script
 
 A compact Turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change any amounts being transferred. Amount is stored in a separate field in a *transaction output*.
