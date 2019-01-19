@@ -290,7 +290,7 @@ Amount of newly generated LBRY credits that a *miner* may claim in a new block. 
 
 ### Schema
 
-The schema defines the structure of the data (metadata) that is stored in claims in the LBRY blockchain.  See [Metadata](https://spec.lbry.io/#metadata) in the white paper, or [lbry.tech/resources/schema](https://lbry.tech/resources/schema) for more information.
+The schema defines the structure of the data (metadata) that is stored in claims in the LBRY blockchain.  See [Metadata](https://spec.lbry.io/#metadata) in the white paper, and [lbry.tech/resources/schema](https://lbry.tech/resources/schema) for more information.
 
 ### Script
 
