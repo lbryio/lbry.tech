@@ -72,5 +72,5 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 ### Other
 | Setting            | Format  | Default value | Sample Values                  | Description                                                                                                   |
 |--------------------|---------|---------------|--------------------------------|---------------------------------------------------------------------------------------------------------------|
-| components_to_skip | list    | []            | ['reflector','hash_announcer'] | Disabe components, [see entire list here](https://github.com/lbryio/lbry/wiki/Component-Dependencies-Table)   |
+| components_to_skip | list    | []            | ['reflector','hash_announcer'] | Disable components, [see entire list here](https://github.com/lbryio/lbry/wiki/Component-Dependencies-Table)   |
 | share_usage_data   | boolean | true          | false                          | Share analytics data                                                                                          |
