@@ -69,7 +69,7 @@
     "updates": "^6.0.3"
   },
   "engines": {
-    "node": "10.2.x"
+     "node": ">=10.2 <10.15.1"
   },
   "husky": {
     "hooks": {
