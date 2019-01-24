@@ -19,6 +19,9 @@ const config = local("/config");
 //  E X P O R T
 
 export default state => {
+  if (state.hideFooter) {
+    return "";
+  }
   return html`
     <section class="email-subscribe-container">
       ${emailSubscribe()}
