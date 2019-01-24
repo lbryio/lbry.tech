@@ -30,6 +30,11 @@ String.prototype.escape = function() {
 let client;
 
 if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
+  // new octokit({
+  //   auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
+  // });
+  // https://github.com/octokit/rest.js/issues/1207
+
   octokit.authenticate({
     type: "oauth",
     token: process.env.GITHUB_OAUTH_TOKEN
