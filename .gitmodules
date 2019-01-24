@@ -1,3 +1,0 @@
-[submodule "app/dist/type"]
-	path = app/dist/type
-	url = https://github.com/lbryio/typefaces
