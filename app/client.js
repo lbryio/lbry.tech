@@ -34,8 +34,8 @@ function main() {
   app.use(ssr());
 
   app.route("/", page(require("./views/home")));
-  app.route("/spec", page(require("./views/spec")));
   app.route("/api/*", page(require("./views/api")));
+  app.route("/spec", page(require("./views/spec")));
   app.route("/*", page(require("./views/redirect")));
 
   app.mount("html");
