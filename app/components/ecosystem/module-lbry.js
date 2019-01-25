@@ -1,8 +1,6 @@
 "use strict";
 
-import { require as local } from "app-root-path";
-
-const markdown = local("/app/components/markdown").default;
+import markdown from "../markdown";
 
 export default () => `
   <div class="ecosystem__module lbry">

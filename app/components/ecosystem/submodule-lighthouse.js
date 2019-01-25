@@ -1,8 +1,6 @@
 "use strict";
 
-import { require as local } from "app-root-path";
-
-const markdown = local("/app/components/markdown").default;
+import markdown from "../markdown";
 
 export default () => `
   <div class="ecosystem__submodule lighthouse">
@@ -10,7 +8,7 @@ export default () => `
 
     <div class="ecosystem__submodule__description">
       <div class="ecosystem__submodule__markdown">
-        ${markdown("./documents/partials/overview/lighthouse.md")}
+        ${markdown("./documents/partials/overview/lighthouse.md")}a
       </div>
 
       <ul class="__parents">
