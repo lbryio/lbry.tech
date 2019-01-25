@@ -21,10 +21,10 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 | Component | Language (Toolset) | What Is It
 --- | --- | ---
 | [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]].
-| [lbry-sdk](https://github.com/lbryio/lbry) | Python (Twisted) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. |
+| [lbry-sdk](https://github.com/lbryio/lbry) | Python (asyncio) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. |
 | [torba](https://github.com/lbryio/torba) | Python | An [[SPV]] (Simple Payment Verification) wallet. Bundled with [[lbry-sdk]]. |
-| [lbryumx](https://github.com/lbryio/lbryumx) | Protobuf, Python |  The wallet server used by [[torba]].
-| [lbry-schema](https://github.com/lbryio/lbryschema) | Protobuf, Python | Defines the structure of the metadata stored in the LBRY blockchain.
+| [wallet server](https://github.com/lbryio/lbry/tree/master/lbrynet/extras/wallet/server) | Protobuf, Python |  The wallet server used by [[torba]].
+| [schema](https://github.com/lbryio/lbry/tree/master/lbrynet/schema) | Protobuf, Python | Defines the structure of the metadata stored in the LBRY blockchain.
 
 ### Official Applications
 | Application | Language (Toolset) | What Is It

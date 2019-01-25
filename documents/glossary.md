@@ -12,7 +12,7 @@ We encourage the submission of changes and additions to this glossary.
 
 A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.  
 
-A [[manifest]] blob is also created to index the multiple content blobs that were created from the file.  A [[stream]] is the collection of all these blobs particlar to one published file.
+A [[manifest]] blob is also created to index the multiple content blobs that were created from the file.  A [[stream]] is the collection of all these blobs particlar to one published file.  See [Encoding](https://spec.lbry.io/#encoding) in the specification.
 
 ### Block
 
@@ -44,19 +44,19 @@ Creating a channel claim certificate allows you to group and identify claims bas
 
 ### Claim
 
-A claim (ClaimTrie) is the data structure which LBRY uses to store claims to names. It uses a trie to efficiently store all claimed names, which can then be hashed the same way a Merkle tree is hashed. The root hash of the ClaimTrie is stored in the block header of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie. [Read more](https://lbry.io/faq/claimtrie-implementation)
+A claim (ClaimTrie) is the data structure which LBRY uses to store claims to names. It uses a trie to efficiently store all claimed names, which can then be hashed the same way a Merkle tree is hashed. The root hash of the ClaimTrie is stored in the block header of each LBRY block, enabling nodes in the LBRY network to efficiently and securely validate the state of the ClaimTrie.  See [Stake & Claims](https://spec.lbry.io/#stakes) in the specification and [Read more](https://lbry.io/faq/claimtrie-implementation)
 
 ### Claim Deposit
 
-When creating a channel claim or publishing content onto the LBRY blockchain, a small amount LBC (or more) must be deposited to reserve the name space in the claimtrie. See our [naming documentation](https://lbry.io/faq/naming) for more information.
+When creating a channel claim or publishing content onto the LBRY blockchain, a small amount LBC (or more) must be deposited to reserve the name space in the claimtrie. See [Stake & Claims](https://spec.lbry.io/#stakes) in the specification and [naming documentation](https://lbry.io/faq/naming) for more information.
 
 ### Claim Sequence
 
-The claim sequence provides a way to determine which order a claim was created at a particular claim name and enables claim resolution via this modifier. If someone had the first claim at lbry://one, anyone could reference that claim as `lbry://one:1`. See [URI documentation](https://lbry.tech/resources/uri) for more details.
+The claim sequence provides a way to determine which order a claim was created at a particular claim name and enables claim resolution via this modifier. If someone had the first claim at lbry://one, anyone could reference that claim as `lbry://one:1`. See [Stake & Claims](https://spec.lbry.io/#stakes) in the specification and [URI documentation](https://lbry.tech/resources/uri) for more details.
 
 ### Claim Support
 
-A special type of transaction that includes claim information, a LBC address, and a LBC value. Supports to one's own address increase the bid value of a claim and can be revoked anytime. Supports to an outside address also increase the value, but can only be revoked by the receiver (tip mechanism).
+A special type of transaction that includes claim information, a LBC address, and a LBC value. Supports to one's own address increase the bid value of a claim and can be revoked anytime. Supports to an outside address also increase the value, but can only be revoked by the receiver (tip mechanism).  See [supports](https://spec.lbry.io/#supports) in the specification.
 
 ### Cold Storage
 
@@ -194,7 +194,7 @@ Main LBRY network and its blockchain. The term is mostly used in comparison to *
 
 ### Manifest
 
-A blob that contains information about all the other blobs in its stream (the content blobs), in JSON format.  Sometimes referred to as the [[Stream Descriptor (SD) Blob]],  this blob lists each of the other blobs in the stream, in order, along with the filename for the content, and the cryptographic key needed to decode the content blobs [[the stream key]].
+A blob that contains information about all the other blobs in its stream (the content blobs), in JSON format.  Sometimes referred to as the [[Stream Descriptor (SD) Blob]],  this blob lists each of the other blobs in the stream, in order, along with the filename for the content, and the cryptographic key needed to decode the content blobs [[the stream key]].  See [Content Blobs](https://spec.lbry.io/#content-blobs) in the specification.
 
 ### Main Chain
 
@@ -288,6 +288,10 @@ The resolve API command returns all available information about a claim or chann
 
 Amount of newly generated LBRY credits that a *miner* may claim in a new block. The first transaction in the block allows a miner to claim currently allowed reward as well as all *transaction fees* from all transactions in the block. For security reasons, rewards cannot be *spent* before 100 blocks have been built on top of the current block.
 
+### Schema
+
+The schema defines the structure of the data (metadata) that is stored in claims in the LBRY blockchain.  See [Metadata](https://spec.lbry.io/#metadata) in the white paper, and [lbry.tech/resources/schema](https://lbry.tech/resources/schema) for more information.
+
 ### Script
 
 A compact Turing-incomplete programming language used in transaction *inputs* and *outputs*. Scripts are interpreted by a Forth-like stack machine: each operation manipulates data on the stack. Most scripts follow the standard pattern and verify the digital *signature* provided in the transaction *input* against a *public key* provided in the previous transaction's *output*. Both signatures and public keys are provided using scripts. Scripts may contain complex conditions, but can never change any amounts being transferred. Amount is stored in a separate field in a *transaction output*.
@@ -326,11 +330,11 @@ SPV is an abbreviation for [[Simplified Payment Verification]].
 
 ### Stream
 
-Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams are associated with claim data in order to provide the capability to download files over a Peer to Peer network.
+Streaming media is multimedia that is constantly received by and presented to an end-user while being delivered by a provider. In LBRY, streams are associated with claim data in order to provide the capability to download files over a Peer to Peer network.  See [Streams](https://spec.lbry.io/#streams) in the specification.
 
 ### Stream Descriptor (SD) Blob
 
-see [[manifest]]  The initial blob of a stream, which contains encryption information as well as points to other blobs required for a stream.
+Same as [[manifest]]  The initial blob of a stream, it contains encryption information and points to other blobs required for the stream.
 
 ### Stream Hash
 
@@ -342,11 +346,11 @@ Found in the [[manifest]], this is the cryptographic key needed to decrypt the c
 
 ### Support (Claim Support)
 
-A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of support that is sent from one wallet to another, so that the receiver can send it to their own wallet.
+Same as [[Claim Support]].  A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of support that is sent from one wallet to another, so that the receiver can send it to their own wallet.
 
 ### Takeover Period
 
-In order to take over a claim at an existing vanity URL, the bid must be higher and the takeover period must pass. In simple terms, the longer the claim is held, the longer the takeover period. For each month held, a day is added to the takeover period for a maximum of 7 days. See [Claimtrie Bid States section here](https://lbry.io/faq/claimtrie-implementation) for more information.
+In order to take over a claim at an existing vanity URL, the bid must be higher and the takeover period must pass. In simple terms, the longer the claim is held, the longer the takeover period. For each month held, a day is added to the takeover period for a maximum of 7 days. See [controlling claims](https://spec.lbry.io/#controlling) in the specification, and [Claimtrie Bid States section here](https://lbry.io/faq/claimtrie-implementation) for more information.
 
 ### Target
 
