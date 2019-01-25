@@ -10,5 +10,5 @@
   "/resources/signing-claim": "/resources/claim-signing",
   "/resources/uri": "/spec#urls",
   "/tour": "/playground",
-  "/whitepaper": "https://spec.lbry.io"
+  "/whitepaper": "/spec"
 }
