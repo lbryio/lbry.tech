@@ -36,7 +36,7 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
     if (document.getElementById(element)) {
       elementOffset = document.getElementById(element).offsetTop - 74;
       window.scroll({ top: elementOffset, behavior: "smooth" });
-      history.replaceState({}, "", `#${element}`);    // Add hash to URL bar
+      history.replaceState({}, "", `#${element}`); // Add hash to URL bar
     }
   });
 });
