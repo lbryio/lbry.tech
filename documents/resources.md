@@ -6,8 +6,6 @@ title: Resources
 
 ## Additional Resources
 
-- [LBRY URIs](/resources/uri)
-- [LBRY Claim Metadata Schema](/resources/schema)
 - [LBRY Merkle Claim Trie](/resources/claimtrie)
 - [LBRY Consensus Algorithm](/resources/consensus)
 - [LBRY Glossary](/glossary)

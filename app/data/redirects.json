@@ -4,8 +4,11 @@
   "/api/lbrycrd": "/api/blockchain",
   "/api/protocol": "/api/sdk",
   "/play": "/playground",
-  "/tour": "/playground",
   "/repository-standards": "/resources/repository-standards",
+  "/resources/lbry-claimtrie": "/spec#claimtrie",
+  "/resources/schema": "/spec#metadata",
   "/resources/signing-claim": "/resources/claim-signing",
+  "/resources/uri": "/spec#urls",
+  "/tour": "/playground",
   "/whitepaper": "https://spec.lbry.io"
 }
