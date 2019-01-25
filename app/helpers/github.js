@@ -7,13 +7,14 @@
 const async = require("async");
 const color = require("colorette");
 const local = require("app-root-path").require;
-const octokit = require("@octokit/rest")();
+const Octokit = require("@octokit/rest");
 const redis = require("redis");
 
 //  U T I L S
 
 const messageSlack = local("/app/helpers/slack");
 const relativeDate = local("/app/modules/relative-date");
+let octokit;
 
 String.prototype.escape = function() {
   const tagsToReplace = {
@@ -30,14 +31,8 @@ String.prototype.escape = function() {
 let client;
 
 if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
-  // new octokit({
-  //   auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
-  // });
-  // https://github.com/octokit/rest.js/issues/1207
-
-  octokit.authenticate({
-    type: "oauth",
-    token: process.env.GITHUB_OAUTH_TOKEN
+  octokit = new Octokit({
+    auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
   });
 } else process.stdout.write(`${color.red("[missing]")} GitHub token`);
 

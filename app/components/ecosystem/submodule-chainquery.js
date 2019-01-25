@@ -1,6 +1,14 @@
 "use strict";
 
+
+
+//  U T I L
+
 import markdown from "../markdown";
+
+
+
+//  E X P O R T
 
 export default () => `
   <div class="ecosystem__submodule chainquery">
@@ -10,7 +18,7 @@ export default () => `
       <div class="ecosystem__submodule__markdown">
         ${markdown("./documents/partials/overview/chainquery.md")}
       </div>
-      
+
       <ul class="__parents">
         <li class="__parent green" data-action="open" data-target="applications">Applications</li>
         <li class="__parent red" data-action="open" data-target="lbrycrd">Blockchain</li>

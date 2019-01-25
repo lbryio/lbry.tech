@@ -1,6 +1,14 @@
 "use strict";
 
+
+
+//  U T I L
+
 import markdown from "../markdown";
+
+
+
+//  E X P O R T
 
 export default () => `
   <div class="ecosystem__submodule reflector">

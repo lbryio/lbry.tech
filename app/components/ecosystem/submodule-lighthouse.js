@@ -1,6 +1,14 @@
 "use strict";
 
+
+
+//  U T I L
+
 import markdown from "../markdown";
+
+
+
+//  E X P O R T
 
 export default () => `
   <div class="ecosystem__submodule lighthouse">
@@ -8,7 +16,7 @@ export default () => `
 
     <div class="ecosystem__submodule__description">
       <div class="ecosystem__submodule__markdown">
-        ${markdown("./documents/partials/overview/lighthouse.md")}a
+        ${markdown("./documents/partials/overview/lighthouse.md")}
       </div>
 
       <ul class="__parents">

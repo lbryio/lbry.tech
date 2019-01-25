@@ -1,6 +1,14 @@
 "use strict";
 
+
+
+//  U T I L
+
 import markdown from "../markdown";
+
+
+
+//  E X P O R T
 
 export default () => `
   <div class="ecosystem__module lbry">
@@ -17,7 +25,7 @@ export default () => `
         <span><a href="https://github.com/lbryio/types">lbryschema</a></span>
       </div>
     </h2>
-    
+
     <div class="ecosystem__module__details">
       ${markdown("./documents/partials/overview/lbrysdk.md")}
     </div>
