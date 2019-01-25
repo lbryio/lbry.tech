@@ -355,18 +355,17 @@
   margin-bottom: 2rem;
 
   .__close {
-    top: -0.7rem; right: -2rem;
+    width: 1.3rem;
+    top: -0.7rem; left: 0;
   }
 }
 
 .__parents {
-  top: 2rem; right: 4rem;
-
   font-size: 1.15rem;
   line-height: 1.33;
   list-style-type: none;
-  padding-right: 1rem;
-  position: absolute;
+  padding-left: 6.5rem;
+  position: relative;
   z-index: 1;
 
   &::before,
@@ -376,7 +375,7 @@
 
   &::before {
     @include font-serif;
-    top: 0.3rem; left: -3.4rem;
+    top: 0.3rem; left: 3rem;
 
     color: $lbry-gray-4;
     content: "back to";
@@ -387,10 +386,17 @@
 
   &::after {
     width: 2px; height: 100%;
-    top: 0; right: 0;
+    top: 0; left: 2rem;
 
     background-color: $lbry-gray-1;
     content: "";
+  }
+
+  .single & {
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 }
 

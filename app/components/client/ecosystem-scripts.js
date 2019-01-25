@@ -70,7 +70,7 @@ function open(ecosystemComponentClassName) {
 }
 
 function openSubmodule(ecosystemComponentClassName) {
-  if (!document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("on")) return; // do not activate unless submodule is ".on"
+  // if (!document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("on")) return; // do not activate unless submodule is ".on"
 
   document.querySelectorAll(".ecosystem__submodule").forEach(n => {
     n.classList.remove("active");
@@ -170,16 +170,22 @@ for (const subModule of subModules) {
 
 
 function setSubmoduleConnectionTitle(submoduleClass) {
-  if (document.getElementsByClassName(submoduleClass)[0].classList.contains("blue")) {
-    document.querySelector(`.${submoduleClass} .__parent.blue`).className += " active";
-  }
+  switch(true) {
+    case document.getElementsByClassName(submoduleClass)[0].classList.contains("blue"):
+      document.querySelector(`.${submoduleClass} .__parent.blue`).className += " active";
+      break;
 
-  if (document.getElementsByClassName(submoduleClass)[0].classList.contains("green")) {
-    document.querySelector(`.${submoduleClass} .__parent.green`).className += " active";
-  }
+    case document.getElementsByClassName(submoduleClass)[0].classList.contains("green"):
+      document.querySelector(`.${submoduleClass} .__parent.green`).className += " active";
+      break;
 
-  if (document.getElementsByClassName(submoduleClass)[0].classList.contains("red")) {
-    document.querySelector(`.${submoduleClass} .__parent.red`).className += " active";
+    case document.getElementsByClassName(submoduleClass)[0].classList.contains("red"):
+      document.querySelector(`.${submoduleClass} .__parent.red`).className += " active";
+      break;
+
+    default:
+      document.getElementsByClassName(submoduleClass)[0].classList.add("single");
+      break;
   }
 }
 
@@ -190,6 +196,7 @@ function resetClassesAndStorage() {
     n.classList.remove("green");
     n.classList.remove("on");
     n.classList.remove("red");
+    n.classList.remove("single");
   });
 
   document.querySelectorAll(".ecosystem__module").forEach(n => n.classList.remove("active"));
