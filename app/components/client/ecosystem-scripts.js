@@ -88,18 +88,6 @@ function openSubmodule(ecosystemComponentClassName) {
     case (ecosystemComponentClassName === "chainquery"):
       setSubmoduleConnectionTitle(ecosystemComponentClassName);
 
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("green")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of LBRY.
-        `;
-      }
-
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
-        `;
-      }
-
       document.getElementsByClassName("ecosystem")[0].className += " expand-left";
       document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
 
@@ -110,18 +98,6 @@ function openSubmodule(ecosystemComponentClassName) {
 
     case (ecosystemComponentClassName === "wallet"):
       setSubmoduleConnectionTitle(ecosystemComponentClassName);
-
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("blue")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY data network.
-        `;
-      }
-
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
-        `;
-      }
 
       document.getElementsByClassName("ecosystem")[0].className += " expand-left";
       document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
@@ -134,18 +110,6 @@ function openSubmodule(ecosystemComponentClassName) {
     case (ecosystemComponentClassName === "lighthouse"):
       setSubmoduleConnectionTitle(ecosystemComponentClassName);
 
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("green")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of LBRY.
-        `;
-      }
-
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("red")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY blockchain.
-        `;
-      }
-
       document.getElementsByClassName("ecosystem")[0].className += " expand-right";
       document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
 
@@ -156,12 +120,6 @@ function openSubmodule(ecosystemComponentClassName) {
 
     case (ecosystemComponentClassName === "reflector"):
       setSubmoduleConnectionTitle(ecosystemComponentClassName);
-
-      if (document.getElementsByClassName(ecosystemComponentClassName)[0].classList.contains("blue")) {
-        document.querySelector(`.${ecosystemComponentClassName} .__connection-details`).innerHTML = `
-          <strong>${ecosystemComponentClassName}</strong> is an application built on top of the LBRY data network.
-        `;
-      }
 
       document.getElementsByClassName("ecosystem")[0].className += " expand-right";
       document.getElementsByClassName(ecosystemComponentClassName)[0].className += " active";
@@ -213,17 +171,14 @@ for (const subModule of subModules) {
 
 function setSubmoduleConnectionTitle(submoduleClass) {
   if (document.getElementsByClassName(submoduleClass)[0].classList.contains("blue")) {
-    document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Data Network";
     document.querySelector(`.${submoduleClass} .__parent.blue`).className += " active";
   }
 
   if (document.getElementsByClassName(submoduleClass)[0].classList.contains("green")) {
-    document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Applications";
     document.querySelector(`.${submoduleClass} .__parent.green`).className += " active";
   }
 
   if (document.getElementsByClassName(submoduleClass)[0].classList.contains("red")) {
-    document.querySelector(`.${submoduleClass} .__connection`).innerHTML = "Connection to Blockchain";
     document.querySelector(`.${submoduleClass} .__parent.red`).className += " active";
   }
 }

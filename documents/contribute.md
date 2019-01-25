@@ -10,9 +10,9 @@ This is a guide for contributing to the code bases maintained by the LBRY organi
 
 Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as [appreciation](#appreciation).
 
-## Ecosystem Overview
+## Repository Overview
 
-Typical usage of LBRY does not involve a single piece of software, but several interacting components.
+Typical usage of LBRY does not involve a single piece of software, but several interacting components. If you're new to LBRY, our [Ecosystem Overview](/overview#ecosystem-overview) will teach you how various components interact.
 
 If you want to contribute to LBRY, there's definitely something for you! The first step is to figure out what project to work on.
 

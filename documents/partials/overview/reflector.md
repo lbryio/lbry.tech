@@ -1,0 +1,1 @@
+Reflectors are a special class of hosting servers that facilitate end-user publishing. A reflector server (or server cluster) can accept LBRY content for hosting en masse as well as earn blockchain tokens for data fees.

@@ -38,6 +38,10 @@ Chainquery provides a SQLized view of the LBRY blockchain. The model of Chainque
 
 Informal name for a portion of a *transaction output* that is returned to a sender as a "change" after spending that output. Since *transaction outputs* cannot be partially spent, one can spend 1 BTC out of 3 BTC output only be creating two new outputs: a "payment" output with 1 BTC sent to a payee address, and a "change" output with remaining 2 BTC (minus *transaction fees*) sent to the payer's addresses.
 
+### Channel
+
+A channel is a cryptographically signed pseudoymn used to provide identity on the LBRY network. For specific details, see the [Channels section](/whitepaper#channels) of the specification.
+
 ### Channel Claim Signature
 
 Creating a channel claim certificate allows you to group and identify claims based on an identity. A certificate is used to sign the claims and ensure uniqueness along with the claim ID. See [channel signing](https://lbry.tech/resources/signing-claim) for more information.
@@ -129,6 +133,10 @@ LBRY POW calculation uses three cryptographic hash functions: SHA-512, SHA-256 a
 ### Hashrate
 
 A measure of mining hardware performance expressed in hashes per second (GH/s). Click [here](https://www.tokens24.com/cryptopedia/basics/bitcoin-hash-rate) for more details.
+
+### Identity
+
+A synonym for [[channel]] and used interchangeably.
 
 ### Key
 
