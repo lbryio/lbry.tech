@@ -12,7 +12,7 @@ We encourage the submission of changes and additions to this glossary.
 
 A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.  
 
-A [[manifest]] blob is also created to index the multiple content blobs that were created from the file.  A [[stream]] is the collection of all these blobs particlar to one published file.  See [Encoding](https://spec.lbry.io/#encoding) in the specification.
+A [manifest](#manifest) blob is also created to index the multiple content blobs that were created from the file.  A [stream](#stream) is the collection of all these blobs particlar to one published file.  See [Encoding](https://spec.lbry.io/#encoding) in the specification.
 
 ### Block
 
@@ -152,11 +152,11 @@ The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
 ### lbrycrd
 
-lbrycrd is the authoritative implementation of the LBRY [[blockchain]] protocol. See [the source code](https://github.com/lbryio/lbrycrd), [the API](/api/blockchain), or [the whitepaper](/whitepaper).
+lbrycrd is the authoritative implementation of the LBRY [blockchain](#blockchain) protocol. See [the source code](https://github.com/lbryio/lbrycrd), [the API](/api/blockchain), or [the whitepaper](/whitepaper).
 
 ### lbry-sdk
 
-An [[SDK]] for the LBRY protocol that can also be used independently. Distributed as a daemon or bundled directly, it contains a set of convenience methods for developing applications, and bundles an [[SPV]] wallet as well as implementation of the data network.
+An [SDK](#sdk) for the LBRY protocol that can also be used independently. Distributed as a daemon or bundled directly, it contains a set of convenience methods for developing applications, and bundles an [SPV](#spv) wallet as well as implementation of the data network.
 
 See [the source code](https://github.com/lbryio/lbry) or [the API documentation](/api/sdk).
 
@@ -202,7 +202,7 @@ Main LBRY network and its blockchain. The term is mostly used in comparison to *
 
 ### Manifest
 
-A blob that contains information about all the other blobs in its stream (the content blobs), in JSON format.  Sometimes referred to as the [[Stream Descriptor (SD) Blob]],  this blob lists each of the other blobs in the stream, in order, along with the filename for the content, and the cryptographic key needed to decode the content blobs [[the stream key]].  See [Content Blobs](https://spec.lbry.io/#content-blobs) in the specification.
+A blob that contains information about all the other blobs in its stream (the content blobs), in JSON format.  Sometimes referred to as the [[Stream Descriptor (SD) Blob]],  this blob lists each of the other blobs in the stream, in order, along with the filename for the content, and the cryptographic key needed to decode the content blobs [the stream key](#stream-key). See [Content Blobs](https://spec.lbry.io/#content-blobs) in the specification.
 
 ### Main Chain
 
@@ -306,7 +306,7 @@ A compact Turing-incomplete programming language used in transaction *inputs* an
 
 ### SDK
 
-An abbreviation for Software Development Kit. [[lbry-sdk]] is an SDK for developing applications that use the LBRY protocol.
+An abbreviation for Software Development Kit. [lbry-sdk](#lbry-sdk) is an SDK for developing applications that use the LBRY protocol.
 
 ### Secret key
 
@@ -334,7 +334,7 @@ A transaction *output* can be spent only once: when another valid transaction ma
 
 ### SPV
 
-SPV is an abbreviation for [[Simplified Payment Verification]].
+SPV is an abbreviation for [Simplified Payment Verification](#simplified-payment-verification).
 
 ### Stream
 
@@ -342,19 +342,19 @@ Streaming media is multimedia that is constantly received by and presented to an
 
 ### Stream Descriptor (SD) Blob
 
-Same as [[manifest]]  The initial blob of a stream, it contains encryption information and points to other blobs required for the stream.
+Same as [manifest](#manifest) The initial blob of a stream, it contains encryption information and points to other blobs required for the stream.
 
 ### Stream Hash
 
-A unique hash for a [[Stream]]. It is the sha384 hash of the file.
+A unique hash for a [Stream](#stream). It is the sha384 hash of the file.
 
 ### Stream Key
 
-Found in the [[manifest]], this is the cryptographic key needed to decrypt the content blobs of a stream.
+Found in the [manifest](#manifest), this is the cryptographic key needed to decrypt the content blobs of a stream.
 
 ### Support (Claim Support)
 
-Same as [[Claim Support]].  A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of support that is sent from one wallet to another, so that the receiver can send it to their own wallet.
+Same as [Claim Support](#claim-support). A support is a wallet send transaction that includes claim information, which results in adding to a claim's effective amount. A tip is a special type of support that is sent from one wallet to another, so that the receiver can send it to their own wallet.
 
 ### Takeover Period
 
@@ -370,7 +370,7 @@ A set of parameters used for testing a LBRY network. Testnet is like *mainnet*, 
 
 ### Torba
 
-An [[SPV]] wallet for the LBRY [[blockchain]]. See the [source code](https://github.com/lbryio/torba).
+An [SPV](#spv) wallet for the LBRY [blockchain](#blockchain). See the [source code](https://github.com/lbryio/torba).
 
 ### Transaction
 
