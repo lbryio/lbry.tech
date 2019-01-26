@@ -78,6 +78,9 @@
   },
   "main": "server.js",
   "name": "lbry.tech",
+  "optionalDependencies": {
+    "win-node-env": "^0.4.0"
+  },
   "private": true,
   "scripts": {
     "css": "sass --load-path=node_modules --update app/sass:app/dist --style compressed",
@@ -96,8 +99,5 @@
       "app/dist"
     ]
   },
-  "version": "3.6.0",
-  "optionalDependencies": {
-    "win-node-env": "^0.4.0"
-  }
+  "version": "3.6.0"
 }
