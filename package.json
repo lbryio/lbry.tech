@@ -96,5 +96,8 @@
       "app/dist"
     ]
   },
-  "version": "3.6.0"
+  "version": "3.6.0",
+  "optionalDependencies": {
+    "win-node-env": "^0.4.0"
+  }
 }
