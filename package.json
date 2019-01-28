@@ -69,7 +69,7 @@
     "updates": "^6.2.1"
   },
   "engines": {
-    "node": "10.2.x"
+     "node": ">=10.2 <10.15.1"
   },
   "husky": {
     "hooks": {
@@ -84,7 +84,7 @@
   "private": true,
   "scripts": {
     "css": "sass --load-path=node_modules --update app/sass:app/dist --style compressed",
-    "format": "eslint '**/*.js' --fix --ignore-pattern '/app/dist/'",
+    "format": "eslint \"**/*.js\" --fix --ignore-pattern '/app/dist/'",
     "start": "npm run css && npm i && NODE_ENV=production node index.js",
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./ --exclude fastify,prismjs",
