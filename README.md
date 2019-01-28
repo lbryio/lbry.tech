@@ -34,14 +34,14 @@
 
 ## Local Installation
 
-### Npm
+### npm
 ```bash
 npm install
 ```
 
-### Alternatively Yarn
+### Yarn
 
-There is a yarn.lock file, you can thus use yarn to install a guaranteed working configuration of packages. This is generally a lot faster to install and more stable. Yarn as a cli is however not necessarily more stable than npm and as such it's optional. Install yarn here: https://yarnpkg.com/en/docs/install
+There is a yarn.lock file, you can thus use yarn to install a guaranteed working configuration of packages. This is generally a lot faster to install and more stable. Yarn as a CLI is not necessarily more stable than npm and as such, it's optional. Install yarn here: https://yarnpkg.com/en/docs/install
 
 Then 
 ```bash
