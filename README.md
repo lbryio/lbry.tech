@@ -32,21 +32,8 @@
 - **This repo will not run locally if you do not also have the LBRY app/daemon and the [web-daemon](https://github.com/lbryio/web-daemon) running.**
 - When running locally and completing the tipping example in Playground, the LBC donated to a creator comes from _your_ LBC balance. Otherwise, the example will fail. On production, the donated LBC comes from LBRY.
 
-## Local Installation
-
-### npm
-```bash
-npm install
-```
-
-### Yarn
-
-There is a yarn.lock file, you can thus use yarn to install a guaranteed working configuration of packages. This is generally a lot faster to install and more stable. Yarn as a CLI is not necessarily more stable than npm and as such, it's optional. Install yarn here: https://yarnpkg.com/en/docs/install
-
-Then 
-```bash
-yarn install
-```
+## Installation
+`npm i`
 
 ## Development
 `npm run watch` and visit [localhost:8080](http://localhost:8080)
