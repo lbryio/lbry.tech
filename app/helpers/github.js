@@ -4,16 +4,16 @@
 
 //  P A C K A G E S
 
-const async = require("async");
-const color = require("colorette");
-const local = require("app-root-path").require;
-const Octokit = require("@octokit/rest");
-const redis = require("redis");
+import async from "async";
+import color from "colorette";
+import Octokit from "@octokit/rest";
+import redis from "redis";
 
 //  U T I L S
 
-const messageSlack = local("/app/helpers/slack");
-const relativeDate = local("/app/modules/relative-date");
+import messageSlack from "@helper/slack";
+import relativeDate from "@module/relative-date";
+
 let octokit;
 
 String.prototype.escape = function() {
@@ -365,7 +365,8 @@ function updateGithubFeed() {
 //  H E L P E R
 
 function refToBranch(ref) {
-  if (ref) return ref.replace("refs/heads/", "");
+  if (ref)
+    return ref.replace("refs/heads/", "");
 }
 
 

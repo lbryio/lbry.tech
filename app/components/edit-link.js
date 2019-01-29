@@ -2,14 +2,13 @@
 
 
 
-//  I M P O R T S
+//  I M P O R T
 
 import html from "choo/html";
-import { require as local } from "app-root-path";
 
 //  U T I L
 
-const config = local("/config");
+import config from "@root/config";
 
 
 

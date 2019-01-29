@@ -9,9 +9,9 @@ import html from "choo/html";
 
 //  U T I L S
 
-import fetchMetadata from "./helpers/fetch-metadata";
-import { generateGitHubFeed } from "./helpers/github";
-import messageSlack from "./helpers/slack";
+import fetchMetadata from "@helper/fetch-metadata";
+import { generateGitHubFeed } from "@helper/github";
+import messageSlack from "@helper/slack";
 
 
 

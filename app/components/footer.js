@@ -2,17 +2,15 @@
 
 
 
-//  I M P O R T S
+//  I M P O R T
 
 import html from "choo/html";
-import { require as local } from "app-root-path";
 
 //  U T I L S
 
+import config from "@root/config";
 import editLink from "./edit-link";
 import emailSubscribe from "./email-subscribe";
-
-const config = local("/config");
 
 
 

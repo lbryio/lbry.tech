@@ -9,9 +9,10 @@ import exists from "fs-exists-sync";
 import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
+import markdownAnchor from "markdown-it-anchor";
+import markdownSup from "@module/markdown-it-sup";
 import path from "path";
 import raw from "choo/html/raw";
-import { require as local } from "app-root-path";
 
 //  U T I L S
 
@@ -19,8 +20,8 @@ const numberRegex = /^[0-9]/g;
 const md = require("markdown-it")({
   html: true,
   typographer: true
-}).use(local("/app/modules/markdown-it-sup"))
-  .use(require("markdown-it-anchor"), {
+}).use(markdownSup)
+  .use(markdownAnchor, {
     slugify: stringToSlugify => {
       let finalString = stringToSlugify
         .toLowerCase()

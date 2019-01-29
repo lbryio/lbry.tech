@@ -1,4 +1,12 @@
 {
+  "_moduleAliases": {
+    "@component": "app/components",
+    "@data": "app/data",
+    "@helper": "app/helpers",
+    "@module": "app/modules",
+    "@root": ".",
+    "@view": "app/views"
+  },
   "author": "LBRY Team",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
@@ -28,6 +36,7 @@
     "fs-exists-sync": "^0.1.0",
     "got": "^9.6.0",
     "graceful-fs": "^4.1.15",
+    "link-module-alias": "^1.1.6",
     "make-promises-safe": "^4.0.0",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.0.2",
@@ -85,6 +94,8 @@
   "scripts": {
     "css": "sass --load-path=node_modules --update app/sass:app/dist --style compressed",
     "format": "eslint '**/*.js' --fix --ignore-pattern '/app/dist/'",
+    "postinstall": "link-module-alias",
+    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "start": "npm run css && npm i && NODE_ENV=production node index.js",
     "test": "run-s test:*",
     "test:dependencies": "updates --update ./ --exclude fastify,prismjs",

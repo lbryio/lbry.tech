@@ -11,8 +11,8 @@ import ssr from "choo-ssr";
 
 //  U T I L S
 
-import head from "./components/head";
-import wrapper from "./components/wrapper";
+import head from "@component/head";
+import wrapper from "@component/wrapper";
 
 
 

@@ -10,9 +10,9 @@ import got from "got";
 
 //  U T I L S
 
-import headerBlockchain from "../components/api/header-blockchain";
-import headerSdk from "../components/api/header-sdk";
-import redirects from "../data/redirects.json";
+import headerBlockchain from "@component/api/header-blockchain";
+import headerSdk from "@component/api/header-sdk";
+import redirects from "@data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
