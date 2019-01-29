@@ -10,5 +10,5 @@ The metadata contains information about the content, such as the title, creator,
 
 ### Additional Resources
 
-- The [Whitepaper](/whitepaper "Whitepaper") contains a comprehensive documentation of the LBRY blockchain.
+- The [Specification](/spec "Specification") contains a comprehensive documentation of the LBRY blockchain and protocol.
 - [Resources](/resources) has documentation about using the LBRY blockchain, including its APIs.

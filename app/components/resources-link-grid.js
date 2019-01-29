@@ -12,9 +12,9 @@ import linkGrid from "./link-grid";
 
 export default () => linkGrid([{
   description: "Read the formal specification for LBRY.",
-  destination: "/whitepaper",
-  label: "Study the Paper",
-  title: "Whitepaper"
+  destination: "/spec",
+  label: "Study the Spec",
+  title: "LBRY Specification"
 }, {
   description: "Can you code, design, write or test? Join us!",
   destination: "/contribute",

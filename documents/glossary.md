@@ -40,7 +40,7 @@ Informal name for a portion of a *transaction output* that is returned to a send
 
 ### Channel
 
-A channel is a cryptographically signed pseudoymn used to provide identity on the LBRY network. For specific details, see the [Channels section](/whitepaper#channels) of the specification.
+A channel is a cryptographically signed pseudoymn used to provide identity on the LBRY network. For specific details, see the [Channels section](/spec#channels) of the specification.
 
 ### Channel Claim Signature
 
@@ -152,7 +152,7 @@ The currency code for 1 LBRY Credit (defined as 100 000 000 *deweys*).
 
 ### lbrycrd
 
-lbrycrd is the authoritative implementation of the LBRY [blockchain](#blockchain) protocol. See [the source code](https://github.com/lbryio/lbrycrd), [the API](/api/blockchain), or [the whitepaper](/whitepaper).
+lbrycrd is the authoritative implementation of the LBRY [blockchain](#blockchain) protocol. See [the source code](https://github.com/lbryio/lbrycrd), [the API](/api/blockchain), or [the formal specification](/spec).
 
 ### lbry-sdk
 

@@ -35,8 +35,8 @@ export default () => html`
     },
     {
       description: "Dig into the formal specification of the LBRY protocol.",
-      destination: "/whitepaper",
-      label: "Wisdom of the Whitepaper",
+      destination: "/spec",
+      label: "Study the Spec",
       title: "Learn By Reading"
     }
   ])}

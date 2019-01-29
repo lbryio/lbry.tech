@@ -10,7 +10,7 @@ Data network operations are provided by the [lbrysdk](https://github.com/lbryio/
 
 ### Additional Resources
 
-- The [Whitepaper](/whitepaper "Whitepaper") contains a comprehensive specification of data network operations.
+- The [Specification](/spec "Specification") contains a comprehensive specification of data network operations.
 - [Resources](/resources) has further documentation on the LBRY SDK, including its APIs.
 - [Build](/build) teaches you how to create your own app.
 - [Contribute](/contribute) guides you on how to improve the protocol itself.

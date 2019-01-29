@@ -31,6 +31,6 @@ Learn more about the specific components that make LBRY possible.
 ## Keep Diving
 
 - Explore live metadata and add your own blockchain entry in the [Playground](/playground).
-- Read the [whitepaper](/whitepaper) to know more about LBRY than the person who made this website.
+- Read the [specification](/spec) to know more about LBRY than the person who made this website.
 - Find API specifications and other learning materials in [Resources](/resources).
 - Learn how to [contribute to LBRY](/contribute) or [build your own application](/build).
