@@ -10,6 +10,6 @@
   "/resources/signing-claim": "/resources/claim-signing",
   "/resources/uri": "/spec#urls",
   "/tour": "/playground",
-  "/specification" : "/spec",
+  "/specification": "/spec",
   "/whitepaper": "/spec"
 }
