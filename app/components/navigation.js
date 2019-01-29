@@ -30,19 +30,7 @@ export default currentUrl => {
     {
       name: "Resources",
       title: "View LBRY resources",
-      url: "/resources",
-      children: [
-        {
-          name: "Blockchain API",
-          title: "Reference for the LBRY blockchain API",
-          url: "/api/blockchain"
-        },
-        {
-          name: "SDK API",
-          title: "Reference for the SDK API",
-          url: "/api/sdk"
-        }
-      ]
+      url: "/resources"
     },
     {
       name: "Community",
@@ -53,12 +41,10 @@ export default currentUrl => {
 
   return html`
     <nav class="navigation">
-      <ul class="inner-wrap">
-        <li class="navigation__item logo">
-          <a href="/" title="LBRY homepage">Home</a>
-        </li>
+      <div class="inner-wrap">
+        <a class="navigation__item logo" href="/" title="LBRY homepage">Home</a>
         ${links.map(link => renderLink(currentUrl, link))}
-      </ul>
+      </div>
     </nav>
   `;
 };
@@ -80,45 +66,11 @@ function renderLink(href, link) {
       break;
   }
 
-  if (link.children) {
-    const links = [];
-
-    links.push(html`
-      <li class="navigation__item parent${activeClass ? " active" : ""}">
-        <a
-          href="${link.url}"
-          title="${link.title}"
-        >${link.name}</a>
-        <ul>
-    `);
-
-    for (const child of link.children) {
-      links.push(html`
-        <li>
-          <a
-            href="${child.url}"
-            title="${child.title}"
-          >${child.name}</a>
-        </li>
-      `);
-    }
-
-    links.push(html`
-        </ul>
-      </li>
-    `);
-
-    return links.join("");
-  }
-
-  else {
-    return html`
-      <li class="navigation__item${activeClass ? " active" : ""}">
-        <a
-          href="${link.url}"
-          title="${link.title}"
-        >${link.name}</a>
-      </li>
-    `;
-  }
+  return html`
+    <a
+      class="navigation__item${activeClass ? " active" : ""}"
+      href="${link.url}"
+      title="${link.title}"
+    >${link.name}</a>
+  `;
 }
