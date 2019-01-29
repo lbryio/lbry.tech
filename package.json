@@ -13,7 +13,6 @@
     "@inc/fastify-ws": "^1.1.0",
     "@octokit/rest": "^16.13.1",
     "@slack/client": "^4.8.0",
-    "app-root-path": "^2.1.0",
     "async": "^2.6.1",
     "async-es": "^2.6.1",
     "choo": "^6.13.1",
