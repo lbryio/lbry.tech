@@ -19,7 +19,10 @@ import page404 from "./404";
 //  E X P O R T
 
 export default (state, emit) => { // eslint-disable-line
-  const partialPath = state.route === "resources/*" ? `resources/${state.params.wildcard}` : state.params.wildcard;
+  const partialPath = state.route === "resources/*" ?
+    `resources/${state.params.wildcard}` :
+    state.params.wildcard;
+
   const path = `./documents/${partialPath}.md`;
 
   if (!fs.existsSync(path))
@@ -46,13 +49,22 @@ export default (state, emit) => { // eslint-disable-line
   let pageScript = "";
 
   if (partialPath === "glossary")
-    pageScript = "<script>" + fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") + "</script>";
+    pageScript =
+      "<script>" +
+        fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") +
+      "</script>";
 
   if (partialPath === "overview")
-    pageScript = "<script>" + fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") + "</script>";
+    pageScript =
+      "<script>" +
+        fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") +
+      "</script>";
 
   if (partialPath === "playground")
-    pageScript = "<script>" + fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") + "</script>";
+    pageScript =
+      "<script>" +
+        fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") +
+      "</script>";
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">

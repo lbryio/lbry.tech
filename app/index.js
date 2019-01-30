@@ -61,7 +61,8 @@ server
     next();
   })
   .ready(err => {
-    if (err) throw err;
+    if (err)
+      throw err;
 
     server.ws.on("connection", socket => {
       socket.on("message", data => {

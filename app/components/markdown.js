@@ -9,6 +9,7 @@ import exists from "fs-exists-sync";
 import fm from "front-matter";
 import fs from "graceful-fs";
 import html from "choo/html";
+import m from "markdown-it";
 import markdownAnchor from "markdown-it-anchor";
 import markdownSup from "@module/markdown-it-sup";
 import path from "path";
@@ -17,7 +18,7 @@ import raw from "choo/html/raw";
 //  U T I L S
 
 const numberRegex = /^[0-9]/g;
-const md = require("markdown-it")({
+const md = m({
   html: true,
   typographer: true
 }).use(markdownSup)
@@ -32,7 +33,9 @@ const md = require("markdown-it")({
         .replace(/\)/g, "")
         .replace(/,/g, "");
 
-      if (finalString.match(numberRegex)) finalString = `_${finalString}`;
+      if (finalString.match(numberRegex))
+        finalString = `_${finalString}`;
+
       return finalString;
     }
   });

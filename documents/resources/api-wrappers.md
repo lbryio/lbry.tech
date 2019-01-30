@@ -1,6 +1,6 @@
 # API wrappers for the LBRY blockchain and protocol
 
-This document contains a comprehensive list of all available API wrappers for the LBRY protocol and blockchain. API wrappers allow for easier integration of the LBRY APIs into your codebase. They still require you to run either the [LBRY protocol](https://github.com/lbryio/lbry) or the [LBRY blockchain](https://github.com/lbryio/lbrycrd). 
+This document contains a comprehensive list of all available API wrappers for the LBRY protocol and blockchain. API wrappers allow for easier integration of the LBRY APIs into your codebase. They still require you to run either the [LBRY protocol](https://github.com/lbryio/lbry) or the [LBRY blockchain](https://github.com/lbryio/lbrycrd).
 
 Interested in creating one for a language not shown below? See our [bounties page](https://lbry.io/bounty/lbry-binding) for details.
 

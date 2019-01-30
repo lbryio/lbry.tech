@@ -10,9 +10,9 @@ We encourage the submission of changes and additions to this glossary.
 
 ### Blob
 
-A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.  
+A Binary Large Object (BLOB) is a collection of binary data stored as a single entity in a database management system. When files are uploaded to the LBRY peer to peer network, they are broken down into 2MB encrypted blobs which are then shared to other peers.
 
-A [manifest](#manifest) blob is also created to index the multiple content blobs that were created from the file.  A [stream](#stream) is the collection of all these blobs particlar to one published file.  See [Encoding](https://spec.lbry.io/#encoding) in the specification.
+A [manifest](#manifest) blob is also created to index the multiple content blobs that were created from the file.  A [stream](#stream) is the collection of all these blobs particlar to one published file. See [Encoding](https://spec.lbry.io/#encoding) in the specification.
 
 ### Block
 

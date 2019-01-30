@@ -16,7 +16,9 @@ import redirects from "@data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
+const sdkApi = process.env.NODE_ENV === "development" ?
+  "https://cdn.jsdelivr.net/gh/lbryio/lbry@generate_examples/docs/api.json" : // TODO: Remove when `generate_examples` is merged into master
+  "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
 
 
 
@@ -36,18 +38,25 @@ export default async(state) => {
 
     return asyncHtml`
       <div class="__slate">
-        <aside class="api__toc">
-          <div class="api__toc__search">
-            <input class="api__toc__search__field" id="input-search" placeholder="Search" type="search"/>
-            <div class="api__toc__search__clear" id="clear-search" title="Clear search query">&times;</div>
-            <ul class="api__toc__search__results"></ul>
+        <aside class="api-toc">
+          <div class="api-toc__search">
+            <input class="api-toc__search-field" id="input-search" placeholder="Search" type="search"/>
+            <div class="api-toc__search-clear" id="clear-search" title="Clear search query">&times;</div>
+            <ul class="api-toc__search-results"></ul>
           </div>
 
-          <ul class="api__toc__items" id="toc" role="navigation">${createApiSidebar(apiResponse)}</ul>
+          <ul class="api-toc__items" id="toc" role="navigation">${createApiSidebar(apiResponse)}</ul>
         </aside>
-        <section class="api__content">
-          ${createApiHeader(state.params.wildcard)}
-          <div class="api__documentation" id="toc-content">
+        <section class="api-content">
+          <div class="api-documentation" id="toc-content">
+            <div>&nbsp;</div>
+            <nav class="api-content__items">
+              <button class="api-content__item" id="toggle-curl" type="button">curl</button>
+              <button class="api-content__item" id="toggle-lbrynet" type="button">lbrynet</button>
+              <button class="api-content__item" id="toggle-python" type="button">python</button>
+            </nav>
+
+            ${createApiHeader(state.params.wildcard)}
             ${createApiContent(apiResponse)}
           </div>
         </section>
@@ -55,6 +64,10 @@ export default async(state) => {
 
       <script src="/assets/scripts/plugins/jets.js"></script>
       <script src="/assets/scripts/api.js"></script>
+
+      <script>
+        document.getElementById("toggle-curl").click();
+      </script>
     `;
   }
 
@@ -101,18 +114,17 @@ function createApiContent(apiDetails) {
       apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
-      <div class="api__content__body">
+      <div class="api-content__body">
         <h2 id="${apiDetail.name}">${apiDetail.name}</h2>
         <p>${apiDetail.description}</p>
 
-        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api__content__body__arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
+        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api-content__body-arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
 
-        <h3>Returns</h3>
-        <pre><code>${dedent(apiDetailsReturns)}</code></pre>
+        ${!apiDetail.examples || !apiDetail.examples.length ? (`<h3>Returns</h3><pre><code>${dedent(apiDetailsReturns)}</code></pre>`) : ""}
       </div>
 
-      <div class="api__content__example">
-        <pre><code>// example(s) for ${apiDetail.name} to come later</code></pre>
+      <div class="api-content__example">
+        ${apiDetail.examples && apiDetail.examples.length ? renderExamples(apiDetail.examples).join("") : `<pre><code>// example(s) for ${apiDetail.name} to come later</code></pre>`}
       </div>
     `);
   }
@@ -138,7 +150,7 @@ function createApiSidebar(apiDetails) {
 
   for (const apiDetail of apiDetails) {
     apiSidebar.push(`
-      <li class="api__toc__item">
+      <li class="api-toc__item">
         <a href="#${apiDetail.name}" title="Go to ${apiDetail.name} section">
           ${apiDetail.name}
         </a>
@@ -182,7 +194,7 @@ function renderArguments(args) {
 
   for (const arg of args) {
     argumentContent.push(`
-      <li class="api__content__body__argument">
+      <li class="api-content__body-argument">
         <div class="left">
           <strong>${arg.name}</strong><br/>
           ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
@@ -194,4 +206,22 @@ function renderArguments(args) {
   }
 
   return argumentContent;
+}
+
+function renderExamples(args) {
+  const exampleContent = [];
+
+  for (const arg of args) {
+    exampleContent.push(`
+      <h3>${arg.title}</h3><br/>
+      <pre data-api-example-type="curl"><code>${arg.curl}</code></pre>
+      <pre data-api-example-type="lbrynet"><code>${arg.lbrynet}</code></pre>
+      <pre data-api-example-type="python"><code>${arg.python}</code></pre>
+
+      <h3>Output</h3><br/>
+      <pre><code>${arg.output}</code></pre>
+    `);
+  }
+
+  return exampleContent;
 }

@@ -14,23 +14,49 @@ document.getElementById("input-search").value = "";
 // Activate search
 document.getElementById("input-search").addEventListener("keyup", () => {
   if (document.getElementById("input-search").value)
-    document.querySelector(".api__toc__search__clear").classList.add("active");
+    document.querySelector(".api-toc__search-clear").classList.add("active");
 
   else
-    document.querySelector(".api__toc__search__clear").classList.remove("active");
+    document.querySelector(".api-toc__search-clear").classList.remove("active");
 });
 
 // Cancel search
-document.querySelector(".api__toc__search__clear").addEventListener("click", () => {
+document.querySelector(".api-toc__search-clear").addEventListener("click", () => {
   document.getElementById("input-search").value = "";
-  document.querySelector(".api__toc__search__clear").classList.remove("active");
+  document.querySelector(".api-toc__search-clear").classList.remove("active");
   jets.destroy();
   reinitJets();
 });
 
 
 
-//  H E L P E R
+// Code toggles
+handleApiLanguageToggles("curl");
+handleApiLanguageToggles("lbrynet");
+handleApiLanguageToggles("python");
+
+
+
+//  H E L P E R S
+
+function handleApiLanguageToggles(language) {
+  document.getElementById(`toggle-${language}`).addEventListener("click", () => {
+    const codeExamples = document.querySelectorAll(`[data-api-example-type="${language}"]`);
+    const examples = document.querySelectorAll("[data-api-example-type]");
+    const toggles = document.querySelectorAll("*[id^='toggle-']");
+
+    for (const example of examples)
+      example.classList.remove("active");
+
+    for (const example of codeExamples)
+      example.classList.add("active");
+
+    for (const toggle of toggles)
+      toggle.classList.remove("active");
+
+    document.getElementById(`toggle-${language}`).classList.add("active");
+  });
+}
 
 function reinitJets() {
   jets = new Jets({

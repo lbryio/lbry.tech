@@ -5,7 +5,7 @@ title: Build
 ## THIS IS NOT DONE AT ALL AND IF YOU CONTINUE TO READ IT YOU MENTALLY ASSENT TO COMMITTING AT LEAST ONE CHANGE THAT MAKES IT BETTER
 
 ## Introduction
- 
+
 Want to build something on top of LBRY? This is the place to get started.
 
 At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
@@ -18,7 +18,7 @@ Want to build with us rather than on your own? Check out our [Contributing Guide
 - You want to build an application that contributes to the world's knowledge, or benefits from global, shared discovery.
 - You want to replace an existing centralized service related to digital content distribution with a decentralized or community-controlled one.
 - You want to build an application that is [[permissionless]] to interact with.
-- You want to further openness, freedom of information, and/or personal choice on the internet. 
+- You want to further openness, freedom of information, and/or personal choice on the internet.
 
 ### When Not to Use LBRY
 
@@ -29,7 +29,7 @@ Want to build with us rather than on your own? Check out our [Contributing Guide
 
 You can build many types of apps. Fat apps, short apps, tall apps, skinny apps!
 
-Most end-user applications will use the [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what facilities the SDK provides. 
+Most end-user applications will use the [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what facilities the SDK provides.
 
 Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](//github.com/lbryio/lbrycrd), the blockchain daemon, or [chainquery](//github.com/lbryio/lbrycrd), which parses blockchain data into SQL.
 
@@ -40,7 +40,7 @@ Let's look at some specific types of applications and the basic design for each.
 #### Full Web Applications
 
 By full web application, we mean a centrally-hosted web application that uses most or all of the suite of capabilities the LBRY protocol provides.
- 
+
 1. Pick your favorite language and stack and do your typical setup to get a "Hello World" application running.
 1. Install [lbry-sdk](//github.com/lbryio/lbry). (Docker images? Other convenient ways of doing this?)
 1. Bridging basics.
