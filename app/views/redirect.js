@@ -48,23 +48,31 @@ export default (state, emit) => { // eslint-disable-line
   // below should be refactored into components
   let pageScript = "";
 
-  if (partialPath === "glossary")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") +
-      "</script>";
+  switch(true) {
+    case partialPath === "glossary":
+      pageScript =
+        "<script>" +
+          fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") +
+        "</script>";
+      break;
 
-  if (partialPath === "overview")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") +
-      "</script>";
+    case partialPath === "overview":
+      pageScript =
+        "<script>" +
+          fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") +
+        "</script>";
+      break;
 
-  if (partialPath === "playground")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") +
-      "</script>";
+    case partialPath === "playground":
+      pageScript =
+        "<script>" +
+          fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") +
+        "</script>";
+      break;
+
+    default:
+      break;
+  }
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">

@@ -27,3 +27,10 @@ export default () => html`
     </section>
   </article>
 `;
+
+// TODO:
+// Provide flow where user logs in with GitHub:
+// - get access token
+// - show field for user to enter their wallet address
+// - send access token and wallet address to API
+// - parse response
