@@ -222,6 +222,8 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 }
 
 function playgroundResponseForExample3(source) {
+  document.querySelector("[data-action='execute claim']").disabled = true;
+
   return `
     <pre><code class="language-bash">
 <span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
