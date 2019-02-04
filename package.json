@@ -5,6 +5,7 @@
     "@helper": "app/helpers",
     "@module": "app/modules",
     "@root": ".",
+    "@socket": "app/sockets.js",
     "@view": "app/views"
   },
   "author": "LBRY Team",

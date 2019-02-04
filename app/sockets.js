@@ -18,7 +18,10 @@ import messageSlack from "@helper/slack";
 //  P R O G R A M
 
 export default (socket, action) => {
-  if (typeof socket !== "object" && typeof action !== "object") return;
+  if (typeof socket !== "object" && typeof action !== "object")
+    return;
+
+  action = JSON.parse(action);
 
   switch(true) {
     case action.message === "fetch metadata":
@@ -27,31 +30,31 @@ export default (socket, action) => {
 
     case action.message === "landed on homepage":
       generateGitHubFeed(result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#github-feed"
-        }));
+        });
       });
       break;
 
     case action.message === "landed on playground":
       generateContent(1, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
     case action.message === "request for playground, example 1":
       generateContent(1, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
@@ -61,11 +64,11 @@ export default (socket, action) => {
 
     case action.message === "request for playground, example 3":
       generateContent(3, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
@@ -85,15 +88,19 @@ export default (socket, action) => {
 function generateContent(exampleNumber, displayTrendingContent) {
   if (exampleNumber === 1) {
     return getTrendingContent().then(response => {
-      if (!response || !response.success || response.success !== true || !response.data) return "";
+      if (!response || !response.success || response.success !== true || !response.data)
+        return "";
 
       const rawContentCollection = [];
       const renderedContentCollection = [];
       const trendingContentData = response.data;
 
-      for (const data of trendingContentData) {
-        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
-      }
+      for (const data of trendingContentData)
+        rawContentCollection.push(fetchMetadata({
+          claim: data.url,
+          example: exampleNumber,
+          method: "resolve"
+        }));
 
       Promise.all(rawContentCollection).then(collection => {
         for (const part of collection) {
@@ -116,7 +123,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
                 </div>
               </section>
             `);
-          } catch (err) {
+          } catch(err) {
             return; // TODO: Return nice error message
           }
         }
@@ -315,19 +322,19 @@ function generateMemeCreator(socket) {
     </form>
   `;
 
-  return socket.send(JSON.stringify({
+  return send(socket, {
     example: 2,
     html: memeCreator,
     message: "updated html",
     selector: "#playground-loader"
-  }));
+  });
 }
 
 async function getTrendingContent() {
   try {
     const response = await got("https://api.lbry.io/file/list_trending");
     return JSON.parse(response.body); // eslint-disable-line padding-line-between-statements
-  } catch (error) {
+  } catch(error) {
     return error;
   }
 }
@@ -344,22 +351,24 @@ function makeImageSourceSecure(url) {
 async function newsletterSubscribe(data, socket) {
   const email = data.email;
 
-  if (!validateEmail(email)) return socket.send(JSON.stringify({
-    class: "error",
-    html: "Your email address is invalid",
-    message: "updated html",
-    selector: "#emailMessage"
-  }));
+  if (!validateEmail(email)) {
+    send(socket, {
+      class: "error",
+      html: "Your email address is invalid",
+      message: "updated html",
+      selector: "#emailMessage"
+    });
+  }
 
   try {
     await got.post(`https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`);
 
-    return socket.send(JSON.stringify({
+    return send(socket, {
       html: "Thank you! Please confirm subscription in your inbox.",
       message: "updated html",
       selector: "#emailMessage"
-    }));
-  } catch (error) {
+    });
+  } catch(error) {
     const response = JSON.parse(error.body);
 
     if (!response.success) {
@@ -369,12 +378,12 @@ async function newsletterSubscribe(data, socket) {
         `> _Cause: ${email} interacted with the form_\n`
       );
 
-      return socket.send(JSON.stringify({
+      return send(socket, {
         class: "error",
         html: response.error,
         message: "updated html",
         selector: "#emailMessage"
-      }));
+      });
     }
 
     messageSlack(
@@ -383,13 +392,17 @@ async function newsletterSubscribe(data, socket) {
       `> _Cause: ${email} interacted with the form_\n`
     );
 
-    return socket.send(JSON.stringify({
+    return send(socket, {
       class: "error",
       html: "Something is terribly wrong",
       message: "updated html",
       selector: "#emailMessage"
-    }));
+    });
   }
+}
+
+export function send(transport, data) {
+  return transport.send(JSON.stringify(data));
 }
 
 function validateEmail(email) {

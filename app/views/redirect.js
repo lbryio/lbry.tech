@@ -45,29 +45,23 @@ export default (state, emit) => { // eslint-disable-line
     state.lbry = customMetadata;
   }
 
-  // below should be refactored into components
   let pageScript = "";
 
   switch(true) {
+    case partialPath === "developer-program":
+      pageScript = renderClientScript("devprogram-scripts");
+      break;
+
     case partialPath === "glossary":
-      pageScript =
-        "<script>" +
-          fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") +
-        "</script>";
+      pageScript = renderClientScript("glossary-scripts");
       break;
 
     case partialPath === "overview":
-      pageScript =
-        "<script>" +
-          fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") +
-        "</script>";
+      pageScript = renderClientScript("ecosystem-scripts");
       break;
 
     case partialPath === "playground":
-      pageScript =
-        "<script>" +
-          fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") +
-        "</script>";
+      pageScript = renderClientScript("playground-scripts");
       break;
 
     default:
@@ -93,3 +87,15 @@ export default (state, emit) => { // eslint-disable-line
     </article>
   `;
 };
+
+
+
+//  H E L P E R
+
+function renderClientScript(clientScriptFileName) {
+  return `
+    <script>
+      ${fs.readFileSync((`${process.cwd()}/app/components/client/${clientScriptFileName}.js`), "utf-8")}
+    </script>
+  `;
+}

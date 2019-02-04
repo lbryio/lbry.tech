@@ -336,6 +336,15 @@ function generateUrl(type, event) {
   }
 }
 
+function getGitHubUserToken() {
+  // const clientWithAuth = new Octokit({
+  //   auth: `token ${GITHUB_APP_TOKEN}`
+  // });
+
+  // console.log(clientWithAuth);
+  // console.log("—————");
+}
+
 function updateGithubFeed() {
   octokit.activity.listPublicEventsForOrg({
     org: "lbryio",
@@ -377,5 +386,6 @@ export {
   generateEvent,
   generateGitHubFeed,
   generateUrl,
+  getGitHubUserToken,
   updateGithubFeed
 };

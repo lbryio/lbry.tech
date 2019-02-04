@@ -111,7 +111,8 @@ function debounce(func, wait, immediate) {
 
     const later = () => {
       timeout = null;
-      if (!immediate) func.apply(context, args);
+      if (!immediate)
+        func.apply(context, args);
     };
 
     const callNow = immediate && !timeout;
@@ -119,7 +120,8 @@ function debounce(func, wait, immediate) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
 
-    if (callNow) func.apply(context, args);
+    if (callNow)
+      func.apply(context, args);
   };
 }
 
@@ -139,7 +141,8 @@ function initializePlayground() {
 }
 
 function fetchMetadata(exampleNumber, data) {
-  if (!exampleNumber) return;
+  if (!exampleNumber)
+    return;
 
   switch(exampleNumber) {
     case 1:

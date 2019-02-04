@@ -26,6 +26,9 @@ if (
 
 // Smooth scroll
 document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  if (anchor.classList.contains("no-smooth")) // Ignore smooth scroll functionality
+    return;
+
   anchor.addEventListener("click", event => {
     event.preventDefault();
 
