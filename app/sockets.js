@@ -245,66 +245,72 @@ function generateMemeCreator(socket) {
     </div>
 
     <form class="playground-content__meme__editor">
-      <h2>Image Text</h2>
-
       <fieldset>
-        <label for="meme-top-line">Top line</label>
-        <input id="meme-top-line" name="meme-top-line" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.topLine.value}" required/>
+        <legend>Image Text</legend>
+
+        <fieldset-section>
+          <label for="meme-top-line">Top line</label>
+          <input id="meme-top-line" name="meme-top-line" placeholder="${memePlaceholderData.topLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.topLine.value}" required/>
+        </fieldset-section>
+
+        <fieldset-section>
+          <label for="meme-bottom-line">Bottom line</label>
+          <input id="meme-bottom-line" name="meme-bottom-line" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.bottomLine.value}" required/>
+        </fieldset-section>
       </fieldset>
 
       <fieldset>
-        <label for="meme-bottom-line">Bottom line</label>
-        <input id="meme-bottom-line" name="meme-bottom-line" placeholder="${memePlaceholderData.bottomLine.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.bottomLine.value}" required/>
-      </fieldset>
+        <legend>Metadata</legend>
 
-      <h2 class="__metadata">Metadata</h2>
+        <fieldset-section>
+          <label for="meme-title">Title</label>
+          <input id="meme-title" name="meme-title" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.title.value}" required/>
+        </fieldset-section>
 
-      <fieldset>
-        <label for="meme-title">Title</label>
-        <input id="meme-title" name="meme-title" placeholder="${memePlaceholderData.title.placeholder}" spellcheck="false" type="text" value="${memePlaceholderData.title.value}" required/>
-      </fieldset>
+        <fieldset-section>
+          <label for="meme-description">Description</label>
+          <textarea id="meme-description" name="meme-description" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" type="text" required>${memePlaceholderData.description.value}</textarea>
+        </fieldset-section>
 
-      <fieldset>
-        <label for="meme-description">Description</label>
-        <textarea id="meme-description" name="meme-description" placeholder="${memePlaceholderData.description.placeholder}" spellcheck="false" type="text" required>${memePlaceholderData.description.value}</textarea>
-      </fieldset>
+        <fieldset-section>
+          <label for="meme-language">Language</label>
+          <select id="meme-language" name="meme-language">
+            <option value="ar">Arabic</option>
+            <option value="zh">Chinese (Mandarin)</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="jp">Japanese</option>
+            <option value="ru">Russian</option>
+            <option value="es">Spanish</option>
+            <option value="">Not specified</option>
+          </select>
+        </fieldset-section>
 
-      <fieldset>
-        <label for="meme-language">Language</label>
-        <select id="meme-language" name="meme-language">
-          <option value="ar">Arabic</option>
-          <option value="zh">Chinese (Mandarin)</option>
-          <option value="en">English</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="jp">Japanese</option>
-          <option value="ru">Russian</option>
-          <option value="es">Spanish</option>
-          <option value="">Not specified</option>
-        </select>
-      </fieldset>
+        <fieldset-section>
+          <label for="meme-license">License</label>
+          <select id="meme-license" name="meme-license" required>
+            <option value="Public Domain">Public Domain</option>
+            <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
+            <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
+            <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
+            <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
+            <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
+            <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
+            <option value="None">None</option>
+          </select>
+        </fieldset-section>
 
-      <fieldset>
-        <label for="meme-license">License</label>
-        <select id="meme-license" name="meme-license" required>
-          <option value="Public Domain">Public Domain</option>
-          <option value="Creative Commons Attribution 4.0 International">Creative Commons Attribution 4.0 International</option>
-          <option value="Creative Commons Attribution-ShareAlike 4.0 International">Creative Commons Attribution-ShareAlike 4.0 International</option>
-          <option value="Creative Commons Attribution-NoDerivatives 4.0 International">Creative Commons Attribution-NoDerivatives 4.0 International</option>
-          <option value="Creative Commons Attribution-NonCommercial 4.0 International">Creative Commons Attribution-NonCommercial 4.0 International</option>
-          <option value="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</option>
-          <option value="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International</option>
-          <option value="None">None</option>
-        </select>
-      </fieldset>
+        <fieldset-section>
+          <checkbox-element>
+            <input id="meme-nsfw-flag" name="nsfw" type="checkbox">
+            <label for="meme-nsfw-flag">NSFW</label>
+            <checkbox-toggle/>
+          </checkbox-element>
 
-      <fieldset>
-        <label><input id="meme-nsfw-flag" name="nsfw" type="checkbox"/>NSFW</label>
-      </fieldset>
-
-      <fieldset>
-        <button data-action="upload image" class="button" type="button">Submit</button>
+          <button data-action="upload image" class="button" type="button">Submit</button>
+        </fieldset-section>
       </fieldset>
     </form>
   `;

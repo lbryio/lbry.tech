@@ -199,8 +199,7 @@ function getMemeInfo() { // TODO: Error handling
 
 function playgroundResponseForExample1(source) {
   return `
-    <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+    <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
 </code></pre>
 
@@ -211,10 +210,9 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 
 function playgroundResponseForExample2(source) {
   return `
-    <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+    <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${source.name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${source.description}", "title": "${source.title}", "language": "${source.language}", "license": "${source.license}", "nsfw": ${source.nsfw} }}}'</span> <span class="token url">http://localhost:5279    </span>
-    </code></pre>
+</code></pre>
 
     <div class="loader" id="temp-loader"></div>
     <div id="example2-result"></div>
@@ -225,10 +223,9 @@ function playgroundResponseForExample3(source) {
   document.querySelector("[data-action='execute claim']").disabled = true;
 
   return `
-    <pre><code class="language-bash">
-<span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
+    <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
 curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "claim_tip", "params": { "amount": "0.001", "claim_id": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
-    </code></pre>
+</code></pre>
 
     <div class="loader" id="temp-loader"></div>
     <div id="example3-result"></div>

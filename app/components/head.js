@@ -66,6 +66,8 @@ export default (state, emit) => {
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
     <link rel="mask-icon" href="/assets/favicon.svg" color="${config.meta.color}"/>
     <link rel="shortcut icon" href="/assets/favicon.ico"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@master/distr/fira_code.css"/>
     <link rel="stylesheet" href="/assets/bundle.css"/>
 
     <script src="/assets/scripts/sockets.js"></script>
