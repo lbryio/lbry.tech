@@ -35,7 +35,6 @@ function main() {
 
   app.route("/", page(require("./views/home")));
   app.route("/api/*", page(require("./views/api")));
-  app.route("/dev-program", page(require("./views/dev")));
   app.route("/spec", page(require("./views/spec")));
   app.route("/*", page(require("./views/redirect")));
 

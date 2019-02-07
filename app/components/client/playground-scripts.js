@@ -131,9 +131,9 @@ function initializePlayground() {
   document.querySelector("#fetch-claim-uri").focus();
   document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
-  send(JSON.stringify({
+  send({
     message: "landed on playground"
-  }));
+  });
 
   setTimeout(() => {
     document.querySelector(".playground-navigation__example:nth-child(1)").click();
@@ -146,12 +146,12 @@ function fetchMetadata(exampleNumber, data) {
 
   switch(exampleNumber) {
     case 1:
-      send(JSON.stringify({
+      send({
         claim: data,
         message: "fetch metadata",
         method: "resolve",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample1(data);
@@ -159,24 +159,24 @@ function fetchMetadata(exampleNumber, data) {
       break;
 
     case 2:
-      send(JSON.stringify({
+      send({
         data: data,
         message: "fetch metadata",
         method: "publish",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample2(getMemeInfo());
       document.getElementById("playground-loader").style.display = "none";
       break;
 
     case 3:
-      send(JSON.stringify({
+      send({
         claim: data,
         message: "fetch metadata",
         method: "claim_tip",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample3(data);
@@ -279,9 +279,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 
@@ -305,9 +305,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 
@@ -334,9 +334,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 

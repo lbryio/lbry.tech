@@ -10,7 +10,7 @@ import html from "choo/html";
 //  U T I L S
 
 import fetchMetadata from "@helper/fetch-metadata";
-import { generateGitHubFeed } from "@helper/github";
+import { generateGitHubFeed, getGitHubUserToken } from "@helper/github";
 import messageSlack from "@helper/slack";
 
 
@@ -21,9 +21,11 @@ export default (socket, action) => {
   if (typeof socket !== "object" && typeof action !== "object")
     return;
 
-  action = JSON.parse(action);
-
   switch(true) {
+    case action.message === "auth me with github":
+      getGitHubUserToken();
+      break;
+
     case action.message === "fetch metadata":
       fetchMetadata(action, socket);
       break;

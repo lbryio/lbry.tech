@@ -336,12 +336,21 @@ function generateUrl(type, event) {
   }
 }
 
-function getGitHubUserToken() {
+async function getGitHubUserToken() {
   // const clientWithAuth = new Octokit({
-  //   auth: `token ${GITHUB_APP_TOKEN}`
+  //   auth: `token ${process.env.GITHUB_APP_TOKEN}`
   // });
 
-  // console.log(clientWithAuth);
+  const result = await octokit.oauthAuthorizations.createAuthorization({ // eslint-disable-line no-unused-vars
+    client_id: process.env.GITHUB_APP_ID,
+    client_secret: process.env.GITHUB_APP_TOKEN,
+    note: "LBRY Developer Auth",
+    scopes: [
+      "public_repo"
+    ]
+  });
+
+  // console.log(result);
   // console.log("—————");
 }
 
@@ -355,8 +364,10 @@ function updateGithubFeed() {
       const eventString = JSON.stringify(item);
 
       client.zrank("events", eventString, (err, reply) => {
-        if (reply === null) client.zadd("events", item.id, eventString, callback);
-        else callback();
+        if (reply === null)
+          client.zadd("events", item.id, eventString, callback);
+        else
+          callback();
       });
     }, () => client.zremrangebyrank("events", 0, -51)); // Keep the latest 50 events
   })

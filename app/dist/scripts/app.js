@@ -63,10 +63,10 @@ document.querySelector("[data-action='subscribe to newsletter']").onclick = () =
 
   document.getElementById("emailMessage").classList.remove("error");
 
-  send(JSON.stringify({
+  send({
     email: email,
     message: "subscribe"
-  }));
+  });
 };
 
 
