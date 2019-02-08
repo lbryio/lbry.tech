@@ -27,7 +27,7 @@ main {
 
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
+  padding-top: 5rem;
 }
 
 .inner-wrap {
@@ -82,4 +82,13 @@ sup {
 sub {
   display: block;
   line-height: 1.55;
+}
+
+frame-viewer {
+  width: 100%; height: calc(100vh - 5rem);
+  display: block;
+
+  iframe {
+    width: 100%; height: 100%;
+  }
 }

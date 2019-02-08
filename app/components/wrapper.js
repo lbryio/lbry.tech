@@ -17,16 +17,22 @@ import navigation from "./navigation";
 
 export default children => (state, emit) => {
   return asyncHtml`
+    <header class="header">
+      <div class="inner-wrap">
+        ${navigation(state.href)}
+      </div>
+    </header>
+
     <main>
       <noscript>
         <p>LBRY is quite fancy and relies on a bit of JavaScript to do these fancy things.</p>
         <p>Please enable it, if you can.</p>
       </noscript>
 
-      ${navigation(state.href)}
       <aside class="flashes" id="flash-container"></aside>
       ${children.default(state, emit)}
-      ${footer(state, emit)}
     </main>
+
+    ${footer(state, emit)}
   `;
 };
