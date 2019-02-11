@@ -10,7 +10,7 @@ import html from "choo/html";
 //  U T I L S
 
 import fetchMetadata from "@helper/fetch-metadata";
-import { generateGitHubFeed, getGitHubUserToken } from "@helper/github";
+import { generateGitHubFeed } from "@helper/github";
 import messageSlack from "@helper/slack";
 
 
@@ -23,7 +23,7 @@ export default (socket, action) => {
 
   switch(true) {
     case action.message === "auth me with github":
-      getGitHubUserToken();
+      getGitHubUserToken(socket);
       break;
 
     case action.message === "fetch metadata":
@@ -329,6 +329,13 @@ function generateMemeCreator(socket) {
     html: memeCreator,
     message: "updated html",
     selector: "#playground-loader"
+  });
+}
+
+function getGitHubUserToken(socket) {
+  send(socket, {
+    message: "redirect",
+    url: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_APP_ID}`
   });
 }
 

@@ -1,4 +1,4 @@
-"use strict"; /* global document, location, WebSocket */
+"use strict"; /* global document, location, WebSocket, window */
 
 
 
@@ -25,6 +25,20 @@ function initializeWebSocketConnection() {
     const data = JSON.parse(socket.data);
 
     switch(true) {
+      case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
+        document.getElementById("flash-container").innerHTML =
+          `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;
+
+        setTimeout(() => {
+          document.getElementById("flash-container").innerHTML = "";
+        }, 2100);
+
+        break;
+
+      case data.message === "redirect":
+        window.location.href = data.url;
+        break;
+
       case data.message === "show result":
         if (!data.example)
           return;
@@ -80,16 +94,6 @@ function initializeWebSocketConnection() {
 
         if (document.querySelector(".playground"))
           document.querySelector(".playground").classList.remove("waiting");
-
-        break;
-
-      case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
-        document.getElementById("flash-container").innerHTML =
-          `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;
-
-        setTimeout(() => {
-          document.getElementById("flash-container").innerHTML = "";
-        }, 2100);
 
         break;
 

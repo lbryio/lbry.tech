@@ -336,24 +336,6 @@ function generateUrl(type, event) {
   }
 }
 
-async function getGitHubUserToken() {
-  // const clientWithAuth = new Octokit({
-  //   auth: `token ${process.env.GITHUB_APP_TOKEN}`
-  // });
-
-  const result = await octokit.oauthAuthorizations.createAuthorization({ // eslint-disable-line no-unused-vars
-    client_id: process.env.GITHUB_APP_ID,
-    client_secret: process.env.GITHUB_APP_TOKEN,
-    note: "LBRY Developer Auth",
-    scopes: [
-      "public_repo"
-    ]
-  });
-
-  // console.log(result);
-  // console.log("—————");
-}
-
 function updateGithubFeed() {
   octokit.activity.listPublicEventsForOrg({
     org: "lbryio",
@@ -397,6 +379,5 @@ export {
   generateEvent,
   generateGitHubFeed,
   generateUrl,
-  getGitHubUserToken,
   updateGithubFeed
 };
