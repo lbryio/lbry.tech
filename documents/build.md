@@ -7,10 +7,7 @@ description: Learn how to build your own app via LBRY in this comprehensive guid
 
 ## Introduction
 
-Want to build something on top of LBRY? This is the place to get started.
-
-At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
-[Overview](/overview) and the [spec](/spec) for more technical details. 
+Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](/overview) first.
 
 Want to build with us rather than on your own? Check out our [Contributing Guide](/contribute).
 
@@ -26,13 +23,46 @@ Want to build with us rather than on your own? Check out our [Contributing Guide
 - You want to privately distribute data or information. LBRY is designed for publishing and sharing information in an open fashion.
 - You want to do illegal things.
 
-## Application Basics
+Ready to get started? Let's build a [Hello Satoshi] app.
 
-You can build many types of apps. Fat apps, short apps, tall apps, skinny apps!
+If you want to read a more general overview on application building (or you don't want to use Electron), you can jump right to [Applications 101].
 
-Most end-user applications will use the [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what facilities the SDK provides.
+## Hello Satoshi
 
-Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](https://github.com/lbryio/lbrycrd), the blockchain daemon, or [chainquery](https://github.com/lbryio/chainquery), which parses blockchain data into SQL.
+This section will guide you creating a basic [Electron](https://electronjs.org/) application that calls to the LBRY network and renders an image returned by the network.
+
+(sentence about we're setting up electron app but there's lots of other ways to do stuff)
+
+### (The Steps)
+
+These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm).
+
+1. Setup the starter package.
+
+```
+git clone https://github.com/lbryio/electron-starter
+cd electron-starter
+npm install
+npm run dev
+```
+
+2. Make Your First Code Change
+
+(edit whatever.js to call get and render the video)
+
+### (You Did It!)
+
+This shows how easy it is to get up and running blah blah blah.
+
+(Segue)
+
+## Applications 101
+
+You can build many types of apps. Your app doesn't have to use Electron, nor does it have to be targeted at consumers, use a UI, or even fetch digital content at all! In this section, we'll look at the various components that you might use to build your app as well as specific categories of applications.
+
+Most applications will use [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what facilities the SDK provides.
+
+Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](https://github.com/lbryio/lbrycrd), the full-node blockchain daemon, or [chainquery](https://github.com/lbryio/chainquery), which parses blockchain data into SQL.
 
 Let's look at some specific types of applications and the basic design for each.
 
@@ -79,8 +109,8 @@ Check out [this video](https://spee.ch/6/lbry-electron-starter) for a brief over
 ```
 git clone https://github.com/lbryio/electron-starter
 cd electron-starter
-yarn
-yarn dev
+npm install
+npm run dev
 ```
 
 ##### Other Applications
