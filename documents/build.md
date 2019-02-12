@@ -129,7 +129,16 @@ You will still need to do steps 1 and 2 in the [Full Web Applications] section t
 
 The [official LBRY desktop app](https://github.com/lbryio/lbry-desktop) is built with electron. It is very easy to build with, and allows web developers to easily start creating "native" desktop applications. You can use a plain html document with a `<script>` tag, or build out a large web app. The official desktop app uses [React](https://reactjs.org/).
 
-Check out the [Hello Satoshi] section to get a basic electron app up and running using [electron-starter](https://github.com/lbryio/electron-starter). It has everything you need to search for and download files. [This video](https://spee.ch/6/lbry-electron-starter) gives a brief overview of the project. Or, If you just want the source code, go [here](https://github.com/lbryio/electron-starter).
+If you want to write an electron app, check out the [electron-starter project](https://github.com/lbryio/electron-starter) for a bare bones setup that is very similar to how [lbry-desktop](https://github.com/lbryio/lbry-desktop) is structured. It's also a simple way to explore the [SDK api](<(https://https://lbry.tech/api/sdk)>).
+
+Check out [this video](https://spee.ch/6/lbry-electron-starter) for a brief overview and guide to get it running. If you just want the source code, go [here](https://github.com/lbryio/electron-starter). Or, if you really really want to see it in action _now_, just paste these commands into your terminal:
+
+```
+git clone https://github.com/lbryio/electron-starter
+cd electron-starter
+npm install
+npm run dev
+```
 
 ##### Other Applications
 
