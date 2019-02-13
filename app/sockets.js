@@ -25,6 +25,8 @@ async function syncWithApi(data, socket) {
   try {
     let result = await got(`https://${apiUrl}/reward/new?github_token=${process.env.DEV_PROGRAM_OAUTH}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
 
+    // let result = await got(`https://${apiUrl}/reward/new?github_token=${data.code}&reward_type=github_developer&wallet_address=${data.address}`, { json: true }); // This SHOULD work but does not. `data.code` is what is received from GitHub when the developer is redirected back to .tech.
+
     result = result.body.data;
 
     return send(socket, {
