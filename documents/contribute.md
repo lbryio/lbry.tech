@@ -20,8 +20,8 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 
 | Component | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]].
-| [lbry-sdk](https://github.com/lbryio/lbry) | Python (asyncio) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. |
+| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]]. [Setup video tutorial available](/resources/setup-videos).
+| [lbry-sdk](https://github.com/lbryio/lbry) | Python (asyncio) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. [Setup video tutorial available](/resources/setup-videos). |
 | [torba](https://github.com/lbryio/torba) | Python | An [[SPV]] (Simple Payment Verification) wallet. Bundled with [[lbry-sdk]]. |
 | [wallet server](https://github.com/lbryio/lbry/tree/master/lbrynet/extras/wallet/server) | Protobuf, Python |  The wallet server used by [[torba]].
 | [schema](https://github.com/lbryio/lbry/tree/master/lbrynet/schema) | Protobuf, Python | Defines the structure of the metadata stored in the LBRY blockchain.
@@ -29,10 +29,10 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 ### Official Applications
 | Application | Language (Toolset) | What Is It
 --- | --- | ---
-| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY network for Windows, macOS, and Linux. [[lbry-desktop]] is built with [[lbry-sdk]]. |
-| [lbry-android](https://github.com/lbryio/lbry-android) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY network for Android. [[lbry-android]] is built with [[lbry-sdk]].
+| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY network for Windows, macOS, and Linux. [[lbry-desktop]] is built with [[lbry-sdk]]. [Setup video tutorial available](/resources/setup-videos). |
+| [lbry-android](https://github.com/lbryio/lbry-android) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY network for Android. [[lbry-android]] is built with [[lbry-sdk]]. [Setup video tutorial available](/resources/setup-videos).
 | [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between [[lbry-desktop]] and [[lbry-android]].
-| [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install.
+| [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install. 
 
 ### Websites
 | Domain | Language (Toolset) | What Is It
