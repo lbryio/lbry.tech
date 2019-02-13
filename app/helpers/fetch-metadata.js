@@ -290,7 +290,7 @@ function memePublishMessaging(source) {
 function tipCompletionMessaging(source) {
   return `
     <p class="playground__description success">
-      If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${source.result.txid}?address=${source.result.outputs[0].address}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+      If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.io/tx/${source.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
     </p><br/>
   `;
 }
