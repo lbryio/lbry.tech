@@ -13,9 +13,43 @@ import fetchMetadata from "@helper/fetch-metadata";
 import { generateGitHubFeed } from "@helper/github";
 import messageSlack from "@helper/slack";
 
+const apiUrl = process.env.NODE_ENV === "development" ?
+  process.env.REWARD_URL_TEST :
+  process.env.REWARD_URL;
+
 
 
 //  P R O G R A M
+
+async function syncWithApi(data, socket) {
+  try {
+    let result = await got(`https://${apiUrl}/reward/new?github_token=${process.env.DEV_PROGRAM_OAUTH}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
+
+    result = result.body.data;
+
+    return send(socket, {
+      html: `<p>Success! Your wallet has been credited with ${result.reward_amount} LBC.</p>`,
+      message: "updated html",
+      selector: "developer-program"
+    });
+  } catch(error) {
+    if (!error.body) {
+      return send(socket, {
+        html: "<p><strong>LBRY API is down. Please try again later.</strong></p>",
+        message: "updated html",
+        selector: "developer-program"
+      });
+    }
+
+    console.log(error.body); // eslint-disable-line no-console
+
+    return send(socket, {
+      html: "<p>This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
+      message: "updated html",
+      selector: "developer-program"
+    });
+  }
+}
 
 export default (socket, action) => {
   if (typeof socket !== "object" && typeof action !== "object")
@@ -24,6 +58,10 @@ export default (socket, action) => {
   switch(true) {
     case action.message === "auth me with github":
       getGitHubUserToken(socket);
+      break;
+
+    case action.message === "verify github auth":
+      syncWithApi(action, socket);
       break;
 
     case action.message === "fetch metadata":
@@ -335,7 +373,7 @@ function generateMemeCreator(socket) {
 function getGitHubUserToken(socket) {
   send(socket, {
     message: "redirect",
-    url: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_APP_ID}`
+    url: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_APP_ID}&scope=public_repo,user:email`
   });
 }
 

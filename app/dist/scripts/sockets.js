@@ -19,7 +19,7 @@ function checkWebSocketConnection() {
 function initializeWebSocketConnection() {
   ws = new WebSocket(location.origin.replace(/^http/, "ws"));
 
-  ws.onopen = () => console.log("WebSocket connection established"); // eslint-disable-line
+  // ws.onopen = () => console.log("WebSocket connection established"); // eslint-disable-line no-console
 
   ws.onmessage = socket => {
     const data = JSON.parse(socket.data);
