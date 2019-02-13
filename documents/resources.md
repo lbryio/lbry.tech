@@ -6,6 +6,7 @@ title: Resources
 
 ## Additional Resources
 
+- [Developer Setup Videos](/resources/setup-videos)
 - [LBRY Glossary](/glossary)
 - [LBRY Merkle Claim Trie](/resources/claimtrie)
 - [LBRY Consensus Algorithm](/resources/consensus)
