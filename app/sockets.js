@@ -17,41 +17,17 @@ const apiUrl = process.env.NODE_ENV === "development" ?
   process.env.REWARD_URL_TEST :
   process.env.REWARD_URL;
 
+const githubAppId = process.env.NODE_ENV === "development" ?
+  process.env.GITHUB_APP_ID_TEST :
+  process.env.GITHUB_APP_ID;
+
+const githubAppSecret = process.env.NODE_ENV === "development" ?
+  process.env.GITHUB_APP_SECRET_TEST :
+  process.env.GITHUB_APP_SECRET;
+
 
 
 //  P R O G R A M
-
-async function syncWithApi(data, socket) {
-  try {
-    let result = await got(`https://${apiUrl}/reward/new?github_token=${process.env.DEV_PROGRAM_OAUTH}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
-
-    // let result = await got(`https://${apiUrl}/reward/new?github_token=${data.code}&reward_type=github_developer&wallet_address=${data.address}`, { json: true }); // This SHOULD work but does not. `data.code` is what is received from GitHub when the developer is redirected back to .tech.
-
-    result = result.body.data;
-
-    return send(socket, {
-      html: `<p>Success! Your wallet has been credited with ${result.reward_amount} LBC.</p>`,
-      message: "updated html",
-      selector: "developer-program"
-    });
-  } catch(error) {
-    if (!error.body) {
-      return send(socket, {
-        html: "<p><strong>LBRY API is down. Please try again later.</strong></p>",
-        message: "updated html",
-        selector: "developer-program"
-      });
-    }
-
-    console.log(error.body); // eslint-disable-line no-console
-
-    return send(socket, {
-      html: "<p>This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
-      message: "updated html",
-      selector: "developer-program"
-    });
-  }
-}
 
 export default (socket, action) => {
   if (typeof socket !== "object" && typeof action !== "object")
@@ -375,7 +351,7 @@ function generateMemeCreator(socket) {
 function getGitHubUserToken(socket) {
   send(socket, {
     message: "redirect",
-    url: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_APP_ID}&scope=public_repo,user:email`
+    url: `https://github.com/login/oauth/authorize?client_id=${githubAppId}&scope=public_repo,user:email`
   });
 }
 
@@ -454,7 +430,59 @@ export function send(transport, data) {
   return transport.send(JSON.stringify(data));
 }
 
+async function syncWithApi(data, socket) {
+  const tokenResponse = await verifyGitHubToken(data.code);
+
+  if (tokenResponse === null) {
+    return send(socket, {
+      html: "<p><strong>There was an issue with accessing GitHub's API. Please try again later.</strong></p>",
+      message: "updated html",
+      selector: "developer-program"
+    });
+  }
+
+  try {
+    let result = await got(`https://${apiUrl}/reward/new?github_token=${tokenResponse}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
+
+    result = result.body.data;
+
+    return send(socket, {
+      html: `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p>`,
+      message: "updated html",
+      selector: "developer-program"
+    });
+  } catch(error) {
+    if (!error.body) {
+      return send(socket, {
+        html: "<p><strong>LBRY API is down. Please try again later.</strong></p>",
+        message: "updated html",
+        selector: "developer-program"
+      });
+    }
+
+    console.log(error.body); // eslint-disable-line no-console
+
+    return send(socket, {
+      html: "<p>This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
+      message: "updated html",
+      selector: "developer-program"
+    });
+  }
+}
+
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
   return emailRegex.test(String(email)); // eslint-disable-line padding-line-between-statements
+}
+
+async function verifyGitHubToken(code) {
+  try {
+    let result = await got.post(`https://github.com/login/oauth/access_token?client_id=${githubAppId}&client_secret=${githubAppSecret}&code=${code}`, { json: true });
+
+    result = result.body;
+    return result.access_token;
+  } catch(verificationError) {
+    console.log(verificationError.body); // eslint-disable-line no-console
+    return null;
+  }
 }
