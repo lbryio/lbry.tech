@@ -7,9 +7,9 @@ description: Learn how to build your own app via LBRY in this comprehensive guid
 
 ## Introduction
 
-Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](/overview) first.
+Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](/overview) first. If you would rather build with us, check out our [Contributing Guide](/contribute).
 
-Want to build with us rather than on your own? Check out our [Contributing Guide](/contribute).
+There are exactly 1,000,006 app ideas that could work on the LBRY network, but it doesn't make sense for _everything_ to be built on it.
 
 ### When to Use LBRY
 
@@ -29,38 +29,49 @@ If you want to read a more general overview on application building (or you don'
 
 ## Hello Satoshi
 
-This section will guide you creating a basic [Electron](https://electronjs.org/) application that calls to the LBRY network and renders an image returned by the network.
+This section will guide you through creating a basic [Electron](https://electronjs.org/) application that calls to the LBRY network and renders an image returned by the network.
 
-(sentence about we're setting up electron app but there's lots of other ways to do stuff)
+Electron is nice because it allows you to easily create web apps that don't rely on any centralized web servers, but you can absolutely use any tooling or language you would like.
 
-### (The Steps)
+### Let's Build It
 
-These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm).
+_These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm)._
 
-1. Setup the starter package.
+1. Download and build the [electron-starter](https://github.com/lbryio/electron-starter) app.
 
-```
-git clone https://github.com/lbryio/electron-starter
-cd electron-starter
-npm install
-npm run dev
-```
+   ```
+   git clone https://github.com/lbryio/electron-starter
+   cd electron-starter
+   npm install
+   npm run dev
+   ```
 
-2. Make Your First Code Change
+2. Type a word into the text input and click the button to [resove](https://lbry.tech/api/sdk#resolve) it. This fetches a [claim](https://lbry.tech/spec#claims), which is just a way of saying that it looks up some info about it like the title, thumbnail, and file type.
 
-(edit whatever.js to call get and render the video)
+   Try resolving `lbry://xxx`. ( <--- insert meme of choice here)
 
-### (You Did It!)
+3. Make Your First Code Change
 
-This shows how easy it is to get up and running blah blah blah.
+   Now that we have the metadata, lets [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment out these lines in the app's xxx.js file.
 
-(Segue)
+   ```
+   Some js
+   Sean still needs to update the project and add this.
+   ```
+
+   You should see a second button now, click it to get the file!
+
+### (You Did It! Some funny success message)
+
+The Hello Satoshi app isn't much to look at, but it shows how simple it is to connect to the LBRY network and download files!
+
+Unfortunately, for some reason most users seem to want more functionality in an app than typing into a box and looking at the json data returned. Let's check out how to build apps real people want to use in the next section.
 
 ## Applications 101
 
-You can build many types of apps. Your app doesn't have to use Electron, nor does it have to be targeted at consumers, use a UI, or even fetch digital content at all! In this section, we'll look at the various components that you might use to build your app as well as specific categories of applications.
+You can build many types of apps. Your app doesn't have to use Electron, nor does it have to be targeted at consumers, use a UI, or even fetch digital content at all! In this section, we'll look into the different types of apps you could build, and the different components needed to build anything you want.
 
-Most applications will use [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what facilities the SDK provides.
+Most applications will use [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what it can and can't do.
 
 Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](https://github.com/lbryio/lbrycrd), the full-node blockchain daemon, or [chainquery](https://github.com/lbryio/chainquery), which parses blockchain data into SQL.
 
@@ -72,11 +83,15 @@ Let's look at some specific types of applications and the basic design for each.
 
 By full web application, we mean a centrally-hosted web application that uses most or all of the suite of capabilities the LBRY protocol provides.
 
-1. Pick your favorite language and stack and do your typical setup to get a "Hello World" application running.
-1. Install [lbry-sdk](https://github.com/lbryio/lbry). You can keep this separate from your app, or install it as one of your dependencies. The LBRY desktop app installs it automatically after all the other dependencies are installed. See it in action [here](https://github.com/lbryio/lbry-desktop/blob/master/build/download-sdk.js).
-1. Once [lbry-sdk](https://github.com/lbryio/lbry) is installed, run `lbrynet start` at some point in your startup process.
-1. There are a number of [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages. Most of these have been created by community members! These allow you to easily send commands to the SDK in the language of your choice. If a wrapper for the language you would like to use doesn't exist, contact [someone?]. (All of the bounties we have on https://lbry.io/bounty/lbry-binding are claimed, should this be linked at all?)
-1. See [SDK Basics](#SDK-basics) for more info on using the API.
+To do this, we need [lbry-sdk](https://github.com/lbryio/lbry). You can download the latest version from the [releases page](https://github.com/lbryio/lbry/releases). Once that is downloaded, there are really only two steps to get it integrated into your app.
+
+1. Run `lbrynet start` in the directory you downloaded the SDK. This starts the API server and connects to the LBRY network.
+
+1. Setup an API wrapper to talk to the SDK.
+
+   There are a number of very simple [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages. Most of these have been created by community members! These allow you to easily send commands to the SDK in the language of your choice. If a wrapper for the language you would like to use doesn't exist, contact [someone?]. (All of the bounties we have on https://lbry.io/bounty/lbry-binding are claimed, should this be linked at all?)
+
+That's all it takes! Now you can read and write data to the LBRY network from your app. :)
 
 #### Blockchain Applications
 
@@ -94,28 +109,21 @@ Going through a centralized server can be safer (with added authentication), but
 
 #### Desktop Applications
 
-If you are looking for more decentralization, a full desktop app can achieve that. If that is not something you care about, there are still a number of features that are desirable over a traditional web application, with full access to the file system being one of those. This allows users to be in control of how they view their files, and if they want to help strengthen LBRY network through seeding.
+Desktop app's can offer greater anonyminity, better performance, and features that aren't possible with a regular web app.
 
-If you would like to create a desktop application, there are a few ways to do so.
+You will still need to do steps 1 and 2 in the [Full Web Applications] section to get the SDK running. Once that is done you can begin building an app that allows users to be fully in control of their data. They won't have to rely on third party services keeping anything secure, and they can choose to help strengthen LBRY network through seeding.
 
 ##### Electron Apps
 
-The [official LBRY desktop app](https://github.com/lbryio/lbry-desktop) is built with electron. It is very easy to build with, and allows web developers to easily start creating "native" desktop applications. You can use a plain html document with a `<script>` tag, or build out a large web app. The official desktop app uses React and Redux.
+The [official LBRY desktop app](https://github.com/lbryio/lbry-desktop) is built with electron. It is very easy to build with, and allows web developers to easily start creating "native" desktop applications. You can use a plain html document with a `<script>` tag, or build out a large web app. The official desktop app uses [React](https://reactjs.org/).
 
-If you want to write an electron app, check out the [electron-starter project](https://github.com/lbryio/electron-starter) for a bare bones setup that is very similar to how [lbry-desktop](https://github.com/lbryio/lbry-desktop) is structured. It's also a simple way to explore the [SDK api](<(https://https://lbry.tech/api/sdk)>).
-
-Check out [this video](https://spee.ch/6/lbry-electron-starter) for a brief overview and guide to get it running. If you just want the source code, go [here](https://github.com/lbryio/electron-starter). Or, if you really really want to see it in action _now_, just paste these commands into your terminal:
-
-```
-git clone https://github.com/lbryio/electron-starter
-cd electron-starter
-npm install
-npm run dev
-```
+Check out the [Hello Satoshi] section to get a basic electron app up and running using [electron-starter](https://github.com/lbryio/electron-starter). It has everything you need to search for and download files. [This video](https://spee.ch/6/lbry-electron-starter) gives a brief overview of the project. Or, If you just want the source code, go [here](https://github.com/lbryio/electron-starter).
 
 ##### Other Applications
 
-Who needs javascript? You can use any language to develop your own LBRY desktop application. Just use the SDK (see [SDK Basics](#SDK-basics)).
+Who needs javascript? If performance is your number one goal, you probably won't want to use Electron. You can use any language you want to build and app on LBRY. If your app can interact with an API server, then it can interact with the LBRY network.
+
+Check out the available [api wrappers](https://lbry.tech/resources/api-wrappers) if you are interested in building a non-electron desktop app. Or checkout the [section below] to learn how you can build something for mobile that interacts with the LBRY network.
 
 ### Mobile Applications
 
