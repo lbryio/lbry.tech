@@ -13,7 +13,7 @@ Contributors that provide accepted pull requests, well-specified issues, or assi
 
 ## Repository Overview
 
-Typical usage of LBRY does not involve a single piece of software, but several interacting components. If you're new to LBRY, our [Ecosystem Overview](/overview#ecosystem-overview) will teach you how various components interact.
+Typical usage of LBRY does not involve a single piece of software, but several interacting components. If you're new to LBRY, our [Ecosystem Overview](/overview#ecosystem-overview) will teach you how various components interact. For more technical details, see our [spec](/spec).
 
 If you want to contribute to LBRY, there's definitely something for you! The first step is to figure out what project to work on.
 
