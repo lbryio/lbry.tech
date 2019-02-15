@@ -1,5 +1,6 @@
 ---
-title: LBRY Glossary
+title: Glossary
+description: lbry.tech sometimes uses acronyms and fancy words. This glossary converts our jargon into clarity.
 ---
 
 This glossary will help you understand the exact meaning of LBRY and blockchain related terms.

@@ -1,4 +1,7 @@
-# LBRY Consensus Algorithm
+---
+title: Consensus Algorithm
+description: How does the LBRY blockchain achieve consensus? This resource page will explain. 
+---
 
 LBRY uses [proof of work](https://en.bitcoin.it/wiki/Proof_of_work) as a consensus mechanism, the same way that Bitcoin does.
 

@@ -1,4 +1,7 @@
-# Signing a claim
+---
+title: Claim Signing
+description: How does signing a claim (a publish) work in LBRY-land? This page explains in great detail. Seriously great detail. The greatest detail anyone has ever seen!
+---
 
 Reilly wants to publish _Terror on the Midway_ to the channel he claimed `lbry://@FleischerSuperman`. He picks the name "terroronthemidway", and fills in the information for the claim:
 

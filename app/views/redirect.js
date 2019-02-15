@@ -30,6 +30,8 @@ export default (state, emit) => { // eslint-disable-line
 
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
+  const title = markdownFileDetails.attributes.title;
+  const description = markdownFileDetails.attributes.description || "";
 
   if (markdownFileDetails.attributes.meta) {
     const customMetadata = {};
@@ -41,9 +43,15 @@ export default (state, emit) => { // eslint-disable-line
       }
     }
 
-    // below seems evil
+
     state.lbry = customMetadata;
   }
+
+  // below is evil, I just inherited it -- Jeremy
+  state.lbry = {
+    title: title,
+    description: description
+  };
 
   // below should be refactored into components
   let pageScript = "";
@@ -71,7 +79,7 @@ export default (state, emit) => { // eslint-disable-line
       <header class="page__header">
         <div class="page__header-wrap">
           <div class="inner-wrap">
-            <h1 class="page__header__title" itemprop="name headline">${markdownFileDetails.attributes.title}</h1>
+            <h1 class="page__header__title" itemprop="name headline">${title}</h1>
           </div>
         </div>
       </header>
