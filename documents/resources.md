@@ -1,5 +1,6 @@
 ---
 title: Resources
+description: Find the LBRY specification, API documentation, our Contributor's guide, and more in the Resources area.
 ---
 
 <ResourcesLinkGrid/>

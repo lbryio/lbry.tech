@@ -1,6 +1,10 @@
-# Regtest Setup
+---
+title: Regtest Setup
+description: Regtest is a parallel testing network for the LBRY blockchain. Learn how to use it in this resource article.
+--- 
 
-## Why use a regtest server
+## Why Use Regtest
+
 A regtest server provides for a way to instantly generate blocks so that transactions can be instantaneous, which ultimately means no waiting for confirmations from the blockchain. Also, it’s not a problem if you accidentally corrupt your wallet, since no real funds are lost! Delete the files and setup a new one.
 
 ## Setup

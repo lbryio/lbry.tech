@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: What *is* LBRY? Who *is* Satoshi? In this LBRY technology overview, one of those questions is answered thoroughly.
 ---
 
 ## Mission

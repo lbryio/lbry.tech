@@ -13,7 +13,7 @@ module.exports = exports = {
   },
   meta: {
     color: "#222",
-    description: "LBRY is a free, open, and community-run digital marketplace. Come check out our documentation and contribute!",
+    description: "LBRY is a free, open, and community-controlled digital goods marketplace. Learn about technical specifics, how to contribute, API specifications, and much more.",
     name: "LBRY",
     tagline: "We came from the future to help you save the Internet",
     title: "LBRY"

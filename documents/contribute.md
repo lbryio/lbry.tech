@@ -1,5 +1,6 @@
 ---
 title: Contributor's Guide
+description: Learn how to be a contributor to core and auxiliary LBRY components in this guide. Everything LBRY builds is open-source, be a part of it!
 ---
 
 ## Welcome to LBRY!
