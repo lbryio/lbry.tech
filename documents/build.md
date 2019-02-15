@@ -10,7 +10,7 @@ description: Learn how to build your own app via LBRY in this comprehensive guid
 Want to build something on top of LBRY? This is the place to get started.
 
 At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
-[Overview](/overview) first.
+[Overview](/overview) first and the [spec](/spec) for more technical details. 
 
 Want to build with us rather than on your own? Check out our [Contributing Guide](/contribute).
 
@@ -18,7 +18,7 @@ Want to build with us rather than on your own? Check out our [Contributing Guide
 
 - You want to build an application that contributes to the world's knowledge, or benefits from global, shared discovery.
 - You want to replace an existing centralized service related to digital content distribution with a decentralized or community-controlled one.
-- You want to build an application that is [[permissionless]] to interact with.
+- You want to build an application that is permissionless to interact with.
 - You want to further openness, freedom of information, and/or personal choice on the internet.
 
 ### When Not to Use LBRY
