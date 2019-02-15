@@ -6,21 +6,21 @@
 
 import html from "choo/html";
 
-//  U T I L S
+//  U T I L
 
 import config from "@root/config";
+
+
 
 //  E X P O R T
 
 export default (state, emit) => {
-
   const newMetadata = state.lbry;
   const description = newMetadata && newMetadata.description ? newMetadata.description : config.meta.description;
   const title = newMetadata && newMetadata.title ? newMetadata.title + " - lbry.tech" : "lbry.tech - " + config.meta.tagline;
 
   if (state.title !== title) emit(state.events.DOMTITLECHANGE, title);
   state.page = state.page || { };
-
 
   return html`
     <meta charset="utf-8"/>
