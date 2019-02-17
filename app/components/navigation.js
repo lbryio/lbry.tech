@@ -65,30 +65,46 @@ export default currentUrl => html`
       <drawer-wrap>
         <drawer-children>
           <drawer-child>
-            <a href="/glossary">
-              <strong>LBRY Glossary</strong>
-              <span>Get familiar with LBRY and blockchain related terms</span>
+            <a href="/spec">
+              <strong>LBRY Specification</strong>
+              <span>Read the formal specification for the LBRY protocol.</span>
             </a>
           </drawer-child>
 
+
           <drawer-child>
-            <a href="/spec">
-              <strong>LBRY Specification</strong>
-              <span>Read the formal specification for LBRY</span>
+            <a href="/api/sdk">
+              <strong>Contributor's Guide</strong>
+              <span>Contributing to LBRY is fun and easy. Learn how!</span>
             </a>
           </drawer-child>
+                    
+          <drawer-child>
+            <a href="/glossary">
+              <strong>LBRY Glossary</strong>
+              <span>Definitions and expanded references for common and obscure terms.</span>
+            </a>
+          </drawer-child>
+
 
           <drawer-child>
             <a href="/api/sdk">
               <strong>SDK APIs</strong>
-              <span>Method signatures and examples for lbry-sdk</span>
+              <span>Method signatures and examples for the LBRY SDK.</span>
             </a>
           </drawer-child>
 
           <drawer-child>
             <a href="/api/blockchain">
               <strong>Blockchain APIs</strong>
-              <span>Method signatures and examples for lbrycrd</span>
+              <span>Method signatures and examples for the LBRY blockchain.</span>
+            </a>
+          </drawer-child>
+          
+          <drawer-child>
+            <a href="/api/blockchain">
+              <strong>Additional Resources</strong>
+              <span>Find additional guides, howtos, and resource articles.</span>
             </a>
           </drawer-child>
         </drawer-children>
@@ -102,19 +118,35 @@ export default currentUrl => html`
 
       <drawer-wrap>
         <drawer-children>
+        
+          <drawer-child>
+            <a href="https://chat.lbry.io">
+              <strong>Developer Chat</strong>
+              <span>Join #dev and other channels in our Discord chat.</span>
+            </a>
+          </drawer-child>
+          
+          <drawer-child>
+            <a href="https://discourse.lbry.io">
+              <strong>Developer Forum</strong>
+              <span>Interact with community members and LBRY devs in the forum.</span>
+            </a>
+          </drawer-child>
+          
           <drawer-child>
             <a href="https://lbry.fund">
               <strong>Fund a Project</strong>
-              <span>How to to get some LBC for your latest idea or project</span>
+              <span>Get funding for your latest idea or project.</span>
             </a>
           </drawer-child>
 
           <drawer-child>
-            <a href="https://lbry.io/join-us">
-              <strong>Join Us</strong>
-              <span>Work with the LBRY team</span>
+            <a href="/community">
+              <strong>More Communities</strong>
+              <span>We're also on Reddit, Twitter, and Facebook.</span>
             </a>
           </drawer-child>
+          
         </drawer-children>
       </drawer-wrap>
     </drawer-section>
