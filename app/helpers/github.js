@@ -30,13 +30,13 @@ String.prototype.escape = function() {
 
 let client;
 
-if (typeof process.env.GITHUB_OAUTH_TOKEN !== "undefined") {
+if (process.env.GITHUB_OAUTH_TOKEN) {
   octokit = new Octokit({
     auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
   });
 } else process.stdout.write(`${color.red("[missing]")} GitHub token`);
 
-if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+if (process.env.REDISCLOUD_URL) {
   client = redis.createClient(process.env.REDISCLOUD_URL);
 
   client.on("error", redisError => {
@@ -258,7 +258,7 @@ function generateEvent(event) {
 }
 
 function generateGitHubFeed(displayGitHubFeed) {
-  if (typeof process.env.REDISCLOUD_URL !== "undefined") {
+  if (process.env.REDISCLOUD_URL) {
     client.zrevrange("events", 0, 9, (err, reply) => {
       if (err) return; // TODO: Render a div with nice error message
 

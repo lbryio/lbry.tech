@@ -2,13 +2,19 @@
 title: Developer Program
 ---
 
-When developing for LBRY, having LBC (LBRY credits) makes it easier to develop applications and interface with our APIs.
+LBRY offers a complimentary 100 LBC to qualified engineers to facilitate exploration, development, and testing.
 
-To qualify for free LBC you must:
+To qualify you must:
 
-- have a GitHub account, and
-- have a public PR (pull request) in the past year
+- Have a GitHub account prior to January 1st, 2018.
+- Have made a public pull request within the past year.
 
 <DeveloperProgram/>
 
-If you have not downloaded our SDK yet, [you should]() and generate a wallet address so we know where to send your LBC!
+(below here should be hidden until click)
+
+To receive your LBC, you'll need a wallet address. While graphical wallets are available, the recommended path for engineers is to:
+ 
+1. Download [the LBRY SDK](https://github/lbryio/lbry).
+1. Launch the command-line utility.
+1. Run the [`address_unused`](https://lbry.tech/api/sdk#address_unused) command.
