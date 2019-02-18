@@ -45,14 +45,9 @@ function handleApiLanguageToggles(language) {
     const examples = document.querySelectorAll("[data-api-example-type]");
     const toggles = document.querySelectorAll("*[id^='toggle-']");
 
-    for (const example of examples)
-      example.classList.remove("active");
-
-    for (const example of codeExamples)
-      example.classList.add("active");
-
-    for (const toggle of toggles)
-      toggle.classList.remove("active");
+    examples.forEach(example => example.classList.remove("active"));
+    codeExamples.forEach(example => example.classList.add("active"));
+    toggles.forEach(example => example.classList.remove("active"));
 
     document.getElementById(`toggle-${language}`).classList.add("active");
   });

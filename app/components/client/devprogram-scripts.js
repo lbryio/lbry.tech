@@ -19,6 +19,14 @@ if (window.location.search.includes("?code=")) {
         <button id="creditsAcquire" title="Get LBRY credits" type="button">Get credits</button>
       </input-submit>
     </form>
+
+    <p>To receive your LBC, you'll need a wallet address. While graphical wallets are available, the recommended path for engineers is to:</p>
+
+    <ol>
+      <li>Download <a href="https://github.com/lbryio/lbry">the LBRY SDK</a>.</li>
+      <li>Launch the command-line utility.</li>
+      <li>Run the <a href="https://lbry.tech/api/sdk#address_unused"><code>address_unused</code></a> command.</li>
+    </ol>
   `;
 
   history.replaceState({}, "", window.location.pathname); // clean up URL bar

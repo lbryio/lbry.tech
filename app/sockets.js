@@ -13,17 +13,15 @@ import fetchMetadata from "@helper/fetch-metadata";
 import { generateGitHubFeed } from "@helper/github";
 import messageSlack from "@helper/slack";
 
-const apiUrl = process.env.NODE_ENV === "development" ?
-  process.env.REWARD_URL_TEST :
-  process.env.REWARD_URL;
+let apiUrl = process.env.REWARD_URL;
+let githubAppId = process.env.GITHUB_APP_ID;
+let githubAppSecret = process.env.GITHUB_APP_SECRET;
 
-const githubAppId = process.env.NODE_ENV === "development" ?
-  process.env.GITHUB_APP_ID_TEST :
-  process.env.GITHUB_APP_ID;
-
-const githubAppSecret = process.env.NODE_ENV === "development" ?
-  process.env.GITHUB_APP_SECRET_TEST :
-  process.env.GITHUB_APP_SECRET;
+if (process.env.NODE_ENV === "development") {
+  apiUrl = process.env.REWARD_URL_TEST;
+  githubAppId = process.env.GITHUB_APP_ID_TEST;
+  githubAppSecret = process.env.GITHUB_APP_SECRET_TEST;
+}
 
 
 
