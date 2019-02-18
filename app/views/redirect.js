@@ -30,6 +30,8 @@ export default (state, emit) => { // eslint-disable-line
 
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
+  const title = markdownFileDetails.attributes.title;
+  const description = markdownFileDetails.attributes.description || "";
 
   if (markdownFileDetails.attributes.meta) {
     const customMetadata = {};
@@ -41,10 +43,16 @@ export default (state, emit) => { // eslint-disable-line
       }
     }
 
-    // below seems evil
     state.lbry = customMetadata;
   }
 
+  // below is evil, I just inherited it -- Jeremy
+  state.lbry = {
+    title: title,
+    description: description
+  };
+
+  // below should be refactored into components
   let pageScript = "";
 
   switch(true) {
