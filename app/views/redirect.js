@@ -81,7 +81,7 @@ export default (state, emit) => { // eslint-disable-line
       <header class="page__header">
         <div class="page__header-wrap">
           <div class="inner-wrap">
-            <h1 class="page__header__title" itemprop="name headline">${markdownFileDetails.attributes.title}</h1>
+            <h1 class="page__header__title" itemprop="name headline">${title}</h1>
           </div>
         </div>
       </header>

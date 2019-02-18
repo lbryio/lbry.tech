@@ -25,13 +25,13 @@ const sdkApi = process.env.NODE_ENV === "development" ?
 //  E X P O R T
 
 export default async(state) => {
-  // How to set custom metadata for this page
-  // state.lbry = {
-  //   description: "This is the API page for LBRY.tech",
-  //   "og:image": "/assets/media/images/carlsagan2.jpg",
-  //   "og:image:height": 300,
-  //   "og:image:width": 400
-  // };
+  // below is evil, I just inherited it -- Jeremy
+  const apilabel = state.params.wildcard == "sdk" ? "SDK" : state.params.wildcard.charAt(0).toLocaleUpperCase() + state.params.wildcard.substring(1);
+
+  state.lbry = {
+    title: apilabel + " API Documentation",
+    description: "See API documentation, signatures, and sample calls for the LBRY " + apilabel + " APIs."
+  };
 
   try {
     const apiResponse = await parseApiFile(state.params.wildcard);

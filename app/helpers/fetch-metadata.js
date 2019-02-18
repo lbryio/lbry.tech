@@ -276,7 +276,7 @@ function memePublishMessaging(source) {
 
       <br/><br/>
 
-      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${source.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/tx/${source.result.output.txid}?address=${source.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
 
       <br/><br/>
 

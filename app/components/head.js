@@ -6,52 +6,40 @@
 
 import html from "choo/html";
 
-//  U T I L S
+//  U T I L
 
 import config from "@root/config";
-let title = "";
 
 
 
 //  E X P O R T
 
 export default (state, emit) => {
-  switch(true) {
-    case (state.route !== "/" && state.params.wildcard):
-      title = `${state.params.wildcard.capitalize()} ∙ LBRY ∙ ${config.meta.tagline}`;
-      break;
-
-    case (state.route === "api"):
-      title = `API ∙ LBRY ∙ ${config.meta.tagline}`;
-      break;
-
-    default:
-      title = `LBRY ∙ ${config.meta.tagline}`;
-      break;
-  }
+  const newMetadata = state.lbry;
+  const description = newMetadata && newMetadata.description ? newMetadata.description : config.meta.description;
+  const title = newMetadata && newMetadata.title ? newMetadata.title + " - lbry.tech" : "lbry.tech - " + config.meta.tagline;
 
   if (state.title !== title) emit(state.events.DOMTITLECHANGE, title);
   state.page = state.page || { };
 
-  const newMetadata = state.lbry;
-
   return html`
     <meta charset="utf-8"/>
-    <title>${newMetadata && newMetadata.title ? newMetadata.title : title}</title>
+    <title>${title}</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="author" content="${config.meta.title}"/>
-    <meta name="description" content="${newMetadata && newMetadata.description ? newMetadata.description : config.meta.description}"/>
+    <meta name="description" content="${description}"/>
     <meta name="title" content="${config.meta.title}"/>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <!--/ Open Graph /-->
+    <meta property="og:title" content="${title}"/>
+    <meta property="og:description" content="${description}"/>
     <meta property="og:image" content="${newMetadata && newMetadata["og:image"] ? newMetadata["og:image"] : "/assets/media/images/og-image.png"}"/>
     <meta property="og:image:height" content="${newMetadata && newMetadata["og:image:height"] ? newMetadata["og:image:height"] : 720}"/>
     <meta property="og:image:width" content="${newMetadata && newMetadata["og:image:width"] ? newMetadata["og:image:width"] : 1280}"/>
     <meta property="og:locale" content="en_US"/>
-    <meta property="og:site_name" content="${config.meta.title}"/>
-    <meta property="og:title" content="${newMetadata && newMetadata.title ? newMetadata.title : title}"/>
+    <meta property="og:site_name" content="LBRY.tech"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://lbry.tech${state.href}"/>
 

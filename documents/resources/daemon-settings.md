@@ -1,6 +1,9 @@
-# Configurable settings for the LBRY daemon 
+---
+title: SDK Settings
+description: The daemon provided by the LBRY SDK has many settings. This resource lists them all and what they mean. Ready, set, settings! 
+--- 
 
-This document outlines how to configure daemon settings and what options are available. They can be found on the lbry GitHub repository in [conf.py](https://github.com/lbryio/lbry/blob/master/lbrynet/conf.py).
+This document outlines how to configure SDK daemon settings and what options are available. They can be found on the lbry GitHub repository in [conf.py](https://github.com/lbryio/lbry/blob/master/lbrynet/conf.py).
 
 ## Daemon settings configuration 
 
