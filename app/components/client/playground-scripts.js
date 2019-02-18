@@ -268,9 +268,7 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
@@ -294,9 +292,7 @@ const handleExamples = debounce(event => {
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
       document.getElementById("playground-url").style.display = "none";
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(2)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
@@ -323,9 +319,7 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(3)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
