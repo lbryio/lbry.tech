@@ -1,6 +1,5 @@
 .github-feed {
   border-bottom: 1px solid $lbry-gray-1;
-  border-left: 1px solid $lbry-gray-1;
   font-size: 0.8rem;
   grid-area: github;
   position: relative;
@@ -14,6 +13,7 @@
   }
 
   @media (min-width: 1001px) {
+    border-left: 1px solid $lbry-gray-1;
     padding-right: 10%;
     padding-bottom: 2rem;
     padding-left: 2rem;
@@ -119,11 +119,15 @@
 
     font-weight: 700;
     margin-bottom: 0.5rem;
+
+    @media (max-width: 700px) {
+      display: block;
+    }
   }
 
   > p:first-of-type {
     @media (max-width: 700px) {
-      box-shadow: 0 2px 5px $lbry-gray-1;
+      box-shadow: 0 2px 5px rgba($lbry-black, 0.05);
     }
 
     code {
@@ -157,6 +161,7 @@
       background-color: $lbry-white;
       border: 1px solid $lbry-gray-1;
       border-radius: 3px;
+      overflow-x: hidden;
       position: relative;
       white-space: normal;
     }

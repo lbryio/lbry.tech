@@ -34,7 +34,7 @@ if (process.env.GITHUB_OAUTH_TOKEN) {
   octokit = new Octokit({
     auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
   });
-} else process.stdout.write(`${color.red("[missing]")} GitHub token`);
+} else process.stdout.write(`${color.red("[missing]")} GitHub token\n`);
 
 if (process.env.REDISCLOUD_URL) {
   client = redis.createClient(process.env.REDISCLOUD_URL);
@@ -49,7 +49,7 @@ if (process.env.REDISCLOUD_URL) {
       )
     ;
   });
-} else process.stdout.write(`${color.red("[missing]")} Redis client URL`);
+} else process.stdout.write(`${color.red("[missing]")} Redis client URL\n`);
 
 
 
