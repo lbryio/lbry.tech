@@ -28,7 +28,7 @@ export default async(publishMetadata) => {
   try {
     const response = await got.put(queryUrl, options);
     return response.body; // eslint-disable-line padding-line-between-statements
-  } catch (error) {
+  } catch(error) {
     return error;
   }
 };

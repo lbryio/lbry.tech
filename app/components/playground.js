@@ -28,10 +28,10 @@ export default () => dedent`
 
 function example1() {
   return html`
-    <div class="playground-content__urlbar" id="playground-url">
+    <input-submit class="playground-content__urlbar" id="playground-url">
       <span>lbry://</span><input id="fetch-claim-uri" placeholder="&thinsp;Enter a LBRY address or select a video below" type="text"/>
       <button class="button" data-action="execute claim" type="button">Resolve</button>
-    </div>
+    </input-submit>
 
     <div class="playground-content__trends" id="playground-loader"></div>
     <div id="playground-results"></div>

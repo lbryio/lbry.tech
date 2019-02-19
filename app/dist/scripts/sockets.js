@@ -1,4 +1,4 @@
-"use strict"; /* global document, location, WebSocket */
+"use strict"; /* global document, location, WebSocket, window */
 
 
 
@@ -12,22 +12,36 @@ document.addEventListener("DOMContentLoaded", () => {
 let ws = null;
 
 function checkWebSocketConnection() {
-  if (!ws || ws.readyState === 3) initializeWebSocketConnection();
+  if (!ws || ws.readyState === 3)
+    initializeWebSocketConnection();
 }
 
 function initializeWebSocketConnection() {
   ws = new WebSocket(location.origin.replace(/^http/, "ws"));
 
-  ws.onopen = () => {
-    console.log("WebSocket connection established"); // eslint-disable-line
-  };
+  // ws.onopen = () => console.log("WebSocket connection established"); // eslint-disable-line no-console
 
   ws.onmessage = socket => {
     const data = JSON.parse(socket.data);
 
     switch(true) {
+      case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
+        document.getElementById("flash-container").innerHTML =
+          `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;
+
+        setTimeout(() => {
+          document.getElementById("flash-container").innerHTML = "";
+        }, 2100);
+
+        break;
+
+      case data.message === "redirect":
+        window.location.href = data.url;
+        break;
+
       case data.message === "show result":
-        if (!data.example) return;
+        if (!data.example)
+          return;
 
         document.querySelector(data.selector).innerHTML = data.html;
 
@@ -60,8 +74,8 @@ function initializeWebSocketConnection() {
         }
 
         if (data.example === 2) {
-          detectLanguageAndUpdate(); // eslint-disable-line
-          initCanvas(); // eslint-disable-line
+          detectLanguageAndUpdate(); // eslint-disable-line no-undef
+          initCanvas(); // eslint-disable-line no-undef
 
           setTimeout(() => {
             document.querySelector(".playground-content__meme__canvas__thumbnail").click();
@@ -83,36 +97,24 @@ function initializeWebSocketConnection() {
 
         break;
 
-      case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
-        document.getElementById("flash-container").innerHTML =
-          `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;
-
-        setTimeout(() => {
-          document.getElementById("flash-container").innerHTML = "";
-        }, 2100);
-
-        break;
-
       default:
-        console.log(data); // eslint-disable-line
+        console.log(data); // eslint-disable-line no-console
         break;
     }
   };
 
-  ws.onclose = () => {
-    console.log("WebSocket connection lost"); // eslint-disable-line
-    checkWebSocketConnection(); // reconnect now
-  };
+  ws.onclose = () => checkWebSocketConnection(); // reconnect now
 }
 
-function send(msg) { // eslint-disable-line
-  socketReady(ws, () => ws.send(msg));
+function send(msg) { // eslint-disable-line no-unused-vars
+  socketReady(ws, () => ws.send(JSON.stringify(msg)));
 }
 
 function socketReady(socket, callback) {
   setTimeout(() => {
     if (socket && socket.readyState === 1) {
-      if (callback !== undefined) callback();
+      if (callback !== undefined)
+        callback();
       return;
     }
 

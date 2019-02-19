@@ -1,0 +1,14 @@
+developer-program {
+  @extend %markdown;
+
+  .button {
+    margin: 1rem auto;
+    display: block;
+  }
+
+  small {
+    display: block;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+}

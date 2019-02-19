@@ -11,16 +11,16 @@ import stringifyObject from "stringify-object";
 
 //  U T I L S
 
-import randomString from "./random-string";
 import messageSlack from "./slack";
-
 import publishMeme from "./publish-meme";
+import randomString from "./random-string";
+import { send } from "@socket";
 import uploadImage from "./upload-image";
 
 const allowedQueryMethods = [
+  "claim_tip",
   "publish",
-  "resolve",
-  "claim_tip"
+  "resolve"
 ];
 
 const approvedContentIdsForTipping = [
@@ -60,11 +60,11 @@ export default async(data, socket) => {
   const resolveMethod = data.method;
 
   if (allowedQueryMethods.indexOf(resolveMethod) < 0) {
-    return socket.send(JSON.stringify({
+    return send(socket, {
       details: "Unallowed resolve method for tutorial",
       message: "notification",
       type: "error"
-    }));
+    });
   }
 
   body.authorization = process.env.LBRY_DAEMON_ACCESS_TOKEN;
@@ -77,7 +77,7 @@ export default async(data, socket) => {
     //  E X A M P L E
     case resolveMethod === "claim_tip":
       if (!approvedContentIdsForTipping.includes(claimAddress)) {
-        return socket.send(JSON.stringify({
+        return send(socket, {
           example: data.example,
           html: raw(`
             <h3>Response</h3>
@@ -85,7 +85,7 @@ export default async(data, socket) => {
           `),
           message: "show result",
           selector: `#example${data.example}-result`
-        }));
+        });
       }
 
       apiRequestMethod = "POST";
@@ -140,7 +140,7 @@ export default async(data, socket) => {
             "json"
           );
 
-          return socket.send(JSON.stringify({
+          return send(socket, {
             example: data.example,
             html: raw(`
               <h3>Response</h3>
@@ -149,15 +149,15 @@ export default async(data, socket) => {
             `),
             message: "show result",
             selector: `#example${data.example}-result`
-          }));
+          });
         }
 
         catch(memePublishError) {
-          socket.send(JSON.stringify({
+          send(socket, {
             details: "Meme publish failed",
             message: "notification",
             type: "error"
-          }));
+          });
 
           if (process.env.NODE_ENV !== "development") {
             messageSlack({
@@ -172,11 +172,11 @@ export default async(data, socket) => {
       }
 
       catch(imageUploadError) {
-        socket.send(JSON.stringify({
+        send(socket, {
           details: "Image upload failed",
           message: "notification",
           type: "error"
-        }));
+        });
 
         if (process.env.NODE_ENV !== "development") {
           messageSlack({
@@ -241,7 +241,7 @@ export default async(data, socket) => {
         "json"
       );
 
-      return socket.send(JSON.stringify({
+      return send(socket, {
         example: data.example,
         html: raw(`
           <h3>Response</h3>
@@ -250,7 +250,7 @@ export default async(data, socket) => {
         `),
         message: "show result",
         selector: `#example${data.example}-result`
-      }));
+      });
     }
 
     return response.body.result[Object.keys(response.body.result)[0]].claim;

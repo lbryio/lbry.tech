@@ -111,7 +111,8 @@ function debounce(func, wait, immediate) {
 
     const later = () => {
       timeout = null;
-      if (!immediate) func.apply(context, args);
+      if (!immediate)
+        func.apply(context, args);
     };
 
     const callNow = immediate && !timeout;
@@ -119,7 +120,8 @@ function debounce(func, wait, immediate) {
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
 
-    if (callNow) func.apply(context, args);
+    if (callNow)
+      func.apply(context, args);
   };
 }
 
@@ -129,9 +131,9 @@ function initializePlayground() {
   document.querySelector("#fetch-claim-uri").focus();
   document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
-  send(JSON.stringify({
+  send({
     message: "landed on playground"
-  }));
+  });
 
   setTimeout(() => {
     document.querySelector(".playground-navigation__example:nth-child(1)").click();
@@ -139,16 +141,17 @@ function initializePlayground() {
 }
 
 function fetchMetadata(exampleNumber, data) {
-  if (!exampleNumber) return;
+  if (!exampleNumber)
+    return;
 
   switch(exampleNumber) {
     case 1:
-      send(JSON.stringify({
+      send({
         claim: data,
         message: "fetch metadata",
         method: "resolve",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample1(data);
@@ -156,24 +159,24 @@ function fetchMetadata(exampleNumber, data) {
       break;
 
     case 2:
-      send(JSON.stringify({
+      send({
         data: data,
         message: "fetch metadata",
         method: "publish",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample2(getMemeInfo());
       document.getElementById("playground-loader").style.display = "none";
       break;
 
     case 3:
-      send(JSON.stringify({
+      send({
         claim: data,
         message: "fetch metadata",
         method: "claim_tip",
         example: exampleNumber
-      }));
+      });
 
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample3(data);
@@ -265,9 +268,7 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
@@ -276,9 +277,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 
@@ -291,9 +292,7 @@ const handleExamples = debounce(event => {
       document.getElementById("fetch-claim-uri").value = ""; // reset URL bar
       document.getElementById("playground-url").style.display = "none";
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(2)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
@@ -302,9 +301,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 
@@ -320,9 +319,7 @@ const handleExamples = debounce(event => {
       if (document.getElementById("playground-url").style.display === "none")
         document.getElementById("playground-url").removeAttribute("style");
 
-      for (const example of document.querySelectorAll(".playground-navigation__example"))
-        example.classList.remove("active");
-
+      document.querySelectorAll(".playground-navigation__example").forEach(example => example.classList.remove("active"));
       document.querySelector(".playground-navigation__example:nth-child(3)").classList.add("active");
 
       document.getElementById("playground-loader").innerHTML = "";
@@ -331,9 +328,9 @@ const handleExamples = debounce(event => {
       document.getElementById("playground-loader").removeAttribute("style");
       document.getElementById("playground-results").removeAttribute("style");
 
-      send(JSON.stringify({
+      send({
         message: `request for ${data.action}`
-      }));
+      });
 
       break;
 
