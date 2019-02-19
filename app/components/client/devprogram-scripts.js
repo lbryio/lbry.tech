@@ -20,12 +20,13 @@ if (window.location.search.includes("?code=")) {
       </input-submit>
     </form>
 
+    <h4>Need An Address?</h4>
     <p>To receive your LBC, you'll need a wallet address. While graphical wallets are available, the recommended path for engineers is to:</p>
 
     <ol>
-      <li>Download <a href="https://github.com/lbryio/lbry">the LBRY SDK</a>.</li>
-      <li>Launch the command-line utility.</li>
-      <li>Run the <a href="https://lbry.tech/api/sdk#address_unused"><code>address_unused</code></a> command.</li>
+      <li>Download <a href="https://github.com/lbryio/lbry/releases">the LBRY SDK</a>.</li>
+      <li>Launch the command-line utility (<code>./lbrynet start</code>).</li>
+      <li>Run <code>./lbrynet address list</code> and copy the <code>id</code> field.</li>
     </ol>
   `;
 
@@ -40,6 +41,6 @@ if (document.getElementById("creditsAcquire")) {
       message: "verify github auth"
     });
 
-    document.querySelector("developer-program").innerHTML = "<p><em>Awaiting response from internal LBRY API</em></p>";
+    document.querySelector("developer-program").innerHTML = "<p><em>Awaiting response from LBRY server...</em></p>";
   };
 }

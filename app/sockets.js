@@ -17,14 +17,6 @@ let apiUrl = process.env.REWARD_URL;
 let githubAppId = process.env.GITHUB_APP_ID;
 let githubAppSecret = process.env.GITHUB_APP_SECRET;
 
-if (process.env.NODE_ENV === "development") {
-  apiUrl = process.env.REWARD_URL_TEST;
-  githubAppId = process.env.GITHUB_APP_ID_TEST;
-  githubAppSecret = process.env.GITHUB_APP_SECRET_TEST;
-}
-
-
-
 //  P R O G R A M
 
 export default (socket, action) => {
@@ -461,7 +453,7 @@ async function syncWithApi(data, socket) {
     console.log(error.body); // eslint-disable-line no-console
 
     return send(socket, {
-      html: "<p>This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
+      html: "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
       message: "updated html",
       selector: "developer-program"
     });
