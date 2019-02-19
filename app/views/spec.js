@@ -18,9 +18,9 @@ export default state => {
   };
 
   return html`
-    <div style="width: 100%; height: calc(100vh - 4rem)">
-      <iframe id="spec" style="width: 100%; height: 100%;"></iframe>
-    </div>
+    <frame-viewer>
+      <iframe id="spec"></iframe>
+    </frame-viewer>
 
     <script>
       const specDomain = "https://spec.lbry.io";

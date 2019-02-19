@@ -18,6 +18,6 @@ export default () => html`
 
   <div class="api-content__intro">
     <p>You can find the repo for this API on GitHub:</p>
-    <pre><code>https://github.com/lbryio/lbry</code></pre>
+    <pre><code>https://github.com/lbryio/lbrycrd</code></pre>
   </div>
 `;
