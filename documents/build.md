@@ -48,18 +48,30 @@ _These steps require [npm](https://www.npmjs.com/). Learn how to install it [her
 
 2. Type a word into the text input and click the button to [resove](https://lbry.tech/api/sdk#resolve) it. This fetches a [claim](https://lbry.tech/spec#claims), which is just a way of saying that it looks up some info about it like the title, thumbnail, and file type.
 
-   Try resolving `lbry://xxx`. ( <--- insert meme of choice here)
+   Try resolving `lbry://bitconnect`.
 
 3. Make Your First Code Change
 
-   Now that we have the metadata, lets [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment out these lines in the app's xxx.js file.
+   Now that we have the metadata, lets [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment these lines in the app's [renderer/index.js](https://github.com/lbryio/electron-starter/blob/master/src/renderer/index.js) file.
 
    ```
-   Some js
-   Sean still needs to update the project and add this.
+    claimData.innerText = "Loading...";
+    Lbry.get({ uri: `lbry://${value}` })
+        .then(result => {
+            const filePath = result.download_path;
+            const image = document.createElement("img");
+
+            image.src = filePath;
+            imageWrapper.appendChild(image);
+
+            claimData.innerText = JSON.stringify(result, null, 2);
+        })
+        .catch(error => {
+            claimData.innerText = JSON.stringify(error, null, 2);
+        });
    ```
 
-   You should see a second button now, click it to get the file!
+   This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://bitconnect`.
 
 ### (You Did It! Some funny success message)
 
