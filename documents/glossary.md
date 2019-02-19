@@ -158,6 +158,12 @@ The combination of a transaction ID and an index which refers to a particular tr
 
 A node that is connected to the global network and is responding to protocol requests. LBRY is a peer-to-peer network, which means that nodes connect to each other to perform network operations. A single node may sometimes act as a client and sometimes as a server.
 
+### Permissionless
+
+A system is permissionless if it can be joined, interacted with, or used without the explicit authorization of any party, nor can any party revoke the ability to use the system. 
+
+An open system with no centralized control is permissionless. Examples include HTTP and Bitcoin.
+
 ### README
 
 A file included with each LBRY project that contains basic information about that project. More in (/resources/repository-standards).
