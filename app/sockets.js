@@ -437,7 +437,7 @@ async function syncWithApi(data, socket) {
     result = result.body.data;
 
     return send(socket, {
-      html: `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p>`,
+      html: `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p><p>You can see proof of this transaction on <a href="https://explorer.lbry.io/tx/${result.transaction_id}">our Blockain Explorer</a>.</p>`,
       message: "updated html",
       selector: "developer-program"
     });
