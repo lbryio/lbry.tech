@@ -3,8 +3,6 @@ title: Build
 description: Learn how to build your own app via LBRY in this comprehensive guide! The future of content freedom begins with you. *patriotic music plays*
 ---
 
-## THIS IS NOT DONE AT ALL AND IF YOU CONTINUE TO READ IT YOU MENTALLY ASSENT TO COMMITTING AT LEAST ONE CHANGE THAT MAKES IT BETTER
-
 ## Introduction
 
 Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](/overview) first. If you would rather build with us, check out our [Contributing Guide](/contribute).
@@ -23,9 +21,9 @@ There are exactly 1,000,006 app ideas that could work on the LBRY network, but i
 - You want to privately distribute data or information. LBRY is designed for publishing and sharing information in an open fashion.
 - You want to do illegal things.
 
-Ready to get started? Let's build a [Hello Satoshi] app.
+Ready to get started? Let's build a [Hello Satoshi](#hello-satoshi) app.
 
-If you want to read a more general overview on application building (or you don't want to use Electron), you can jump right to [Applications 101].
+If you want to read a more general overview on application building (or you don't want to use Electron), you can jump right to [Applications 101](#applications-101).
 
 ## Hello Satoshi
 
@@ -37,8 +35,10 @@ Electron is nice because it allows you to easily create web apps that don't rely
 
 _These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm)._
 
-1. Download and build the [electron-starter](https://github.com/lbryio/electron-starter) app.
+#### 1. Download and build the starter app
 
+[electron-starter](https://github.com/lbryio/electron-starter) is the `create-react-app` of LBRY application building.
+ 
    ```
    git clone https://github.com/lbryio/electron-starter
    cd electron-starter
@@ -46,13 +46,16 @@ _These steps require [npm](https://www.npmjs.com/). Learn how to install it [her
    npm run dev
    ```
 
-2. Type a word into the text input and click the button to [resove](https://lbry.tech/api/sdk#resolve) it. This fetches a [claim](https://lbry.tech/spec#claims), which is just a way of saying that it looks up some info about it like the title, thumbnail, and file type.
+#### 2. Verify the app works
+
+Type a word into the text input and click the button to [resove](https://lbry.tech/api/sdk#resolve) it. This performs a [[claim]] lookup, which retrieves metadata the title, thumbnail, and file type from the LBRY blockchain.
 
    Try resolving `lbry://bitconnect`.
+   Try resolving `lbry://doitlive`.
 
-3. Make Your First Code Change
+#### 3. Modify the code
 
-   Now that we have the metadata, lets [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment these lines in the app's [renderer/index.js](https://github.com/lbryio/electron-starter/blob/master/src/renderer/index.js) file.
+   Now that we have the metadata, let's [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment these lines in the app's [renderer/index.js](https://github.com/lbryio/electron-starter/blob/master/src/renderer/index.js) file.
 
    ```
     claimData.innerText = "Loading...";
@@ -73,11 +76,11 @@ _These steps require [npm](https://www.npmjs.com/). Learn how to install it [her
 
    This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://bitconnect`.
 
-### (You Did It! Some funny success message)
+### You Did It!
 
-The Hello Satoshi app isn't much to look at, but it shows how simple it is to connect to the LBRY network and download files!
+While our Hello Satoshi app isn't much to look at, it shows how simple it is to connect to the LBRY network and download files!
 
-Unfortunately, for some reason most users seem to want more functionality in an app than typing into a box and looking at the json data returned. Let's check out how to build apps real people want to use in the next section.
+Unfortunately, most users will want more functionality in an app than typing into a box and looking at the JSON data returned. Let's check out how to build apps real people want to use in the next section.
 
 ## Applications 101
 
