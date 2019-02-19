@@ -36,6 +36,10 @@ const approvedContentIdsForTipping = [
   "8a7401b88d5ed0376d98f16808194d4dcb05b284"
 ];
 
+const environment = process.env.NODE_ENV === "development" ?
+  "development" :
+  "production";
+
 //  P A C K A G E
 
 const loadLanguages = require("prismjs/components/");
@@ -163,7 +167,7 @@ export default async(data, socket) => {
             messageSlack({
               message: "```" + JSON.parse(JSON.stringify(memePublishError.error)) + "```",
               pretext: "_Someone is going through the Playground after a response has been parsed_",
-              title: "DAEMON ERROR"
+              title: `DAEMON ERROR | ${environment}`
             });
           }
 
@@ -182,7 +186,7 @@ export default async(data, socket) => {
           messageSlack({
             message: "```" + imageUploadError.status + "```",
             pretext: "_Someone attempted to upload a meme to the web daemon and it failed_",
-            title: "DAEMON ERROR"
+            title: `DAEMON ERROR | ${environment}`
           });
         }
 
@@ -260,7 +264,7 @@ export default async(data, socket) => {
     messageSlack({
       message: "```" + error + "```",
       pretext: "_Someone is going through the Playground and the daemon is not running_",
-      title: "DAEMON ERROR"
+      title: `DAEMON ERROR | ${environment}`
     });
   }
 };
