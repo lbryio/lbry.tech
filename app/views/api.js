@@ -49,7 +49,7 @@ export default async(state) => {
         </aside>
         <section class="api-content">
           <div class="api-documentation" id="toc-content">
-            <div>&nbsp;</div>
+            <div></div>
             <nav class="api-content__items">
               <button class="api-content__item" id="toggle-curl" type="button">curl</button>
               <button class="api-content__item" id="toggle-lbrynet" type="button">lbrynet</button>
