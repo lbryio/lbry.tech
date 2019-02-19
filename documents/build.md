@@ -10,7 +10,7 @@ description: Learn how to build your own app via LBRY in this comprehensive guid
 Want to build something on top of LBRY? This is the place to get started.
 
 At least, it's the place to get started so long as you have some idea of what LBRY _is_. If you don't, you should read the
-[Overview](/overview) first and the [spec](/spec) for more technical details. 
+[Overview](/overview) and the [spec](/spec) for more technical details. 
 
 Want to build with us rather than on your own? Check out our [Contributing Guide](/contribute).
 
