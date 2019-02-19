@@ -3,7 +3,7 @@ title: Merkle Claim Trie
 description: Publishes to the LBRY network get placed into a Merkle Claim Trie. Learn what that is and why trie is not a typo in this resource article. 
 ---
 
-This article will discuss how the data structures that organize claims by names work, proofs are generated/verified, and consensus on the state of the trie is represented.
+This article will discuss how the data structures that organize claims by names work, how proofs are generated/verified, and how consensus on the state of the trie is represented.
 
 For looking into how claims end up in the trie, [read this instead](/spec#claimtrie).
 
