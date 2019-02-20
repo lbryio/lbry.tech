@@ -6,7 +6,7 @@ LBRY offers a complimentary 100 LBC to qualified engineers to facilitate explora
 
 To qualify you must:
 
-- Have a GitHub account prior to January 1st, 2018.
-- Have made a public pull request within the past year.
+- have a GitHub account that is at least 90 days old and
+- have an active commit history
 
 This program will be active on 2019.02.21. Stay tuned!

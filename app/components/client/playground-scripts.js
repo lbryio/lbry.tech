@@ -125,19 +125,13 @@ function debounce(func, wait, immediate) {
   };
 }
 
-function initializePlayground() {
-  document.querySelector(".playground").classList.add("waiting");
-  document.querySelector("#fetch-claim-uri").value = "";
-  document.querySelector("#fetch-claim-uri").focus();
-  document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
-
-  send({
-    message: "landed on playground"
-  });
-
-  setTimeout(() => {
-    document.querySelector(".playground-navigation__example:nth-child(1)").click();
-  }, 300);
+function escapeHTML(content) {
+  return content.replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .replace(/\//g, "&#x2F;");
 }
 
 function fetchMetadata(exampleNumber, data) {
@@ -152,6 +146,8 @@ function fetchMetadata(exampleNumber, data) {
         method: "resolve",
         example: exampleNumber
       });
+
+      data = escapeHTML(data);
 
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample1(data);
@@ -178,6 +174,8 @@ function fetchMetadata(exampleNumber, data) {
         example: exampleNumber
       });
 
+      data = escapeHTML(data);
+
       document.getElementById("fetch-claim-uri").value = data;
       document.getElementById("playground-results").innerHTML = playgroundResponseForExample3(data);
       document.getElementById("playground-loader").style.display = "none";
@@ -198,6 +196,21 @@ function getMemeInfo() { // TODO: Error handling
     nsfw: document.getElementById("meme-nsfw-flag").checked,
     title: document.getElementById("meme-title").value
   };
+}
+
+function initializePlayground() {
+  document.querySelector(".playground").classList.add("waiting");
+  document.querySelector("#fetch-claim-uri").value = "";
+  document.querySelector("#fetch-claim-uri").focus();
+  document.querySelector(".playground-navigation__example:nth-child(1)").classList.add("active");
+
+  send({
+    message: "landed on playground"
+  });
+
+  setTimeout(() => {
+    document.querySelector(".playground-navigation__example:nth-child(1)").click();
+  }, 300);
 }
 
 function playgroundResponseForExample1(source) {
