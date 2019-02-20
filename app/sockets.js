@@ -455,7 +455,7 @@ async function syncWithApi(data, socket) {
     // TEMPORARY
     messageSlack(
       "\n" +
-      "> *DEVELOPER PROGRAM:* ```" + error.body + "```" + "\n" +
+      error +
       "> _Cause: NO IDEA_\n"
     );
     // TEMPORARY
