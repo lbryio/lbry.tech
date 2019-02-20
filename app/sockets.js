@@ -387,11 +387,10 @@ async function newsletterSubscribe(data, socket) {
     const response = JSON.parse(error.body);
 
     if (!response.success) {
-      messageSlack(
-        "\n" +
-        "> *NEWSLETTER ERROR:* ```" + response.error + "```" + "\n" +
-        `> _Cause: ${email} interacted with the form_\n`
-      );
+      messageSlack({
+        message: `via ${email}: ${response.error}`,
+        title: "NEWSLETTER ERROR"
+      });
 
       return send(socket, {
         class: "error",
@@ -401,11 +400,10 @@ async function newsletterSubscribe(data, socket) {
       });
     }
 
-    messageSlack(
-      "\n" +
-      "> *NEWSLETTER ERROR:* ```¯\\_(ツ)_/¯ This should be an unreachable error```" + "\n" +
-      `> _Cause: ${email} interacted with the form_\n`
-    );
+    messageSlack({
+      message: `via ${email} (strange error): ${response.error}`,
+      title: "NEWSLETTER ERROR"
+    });
 
     return send(socket, {
       class: "error",
@@ -454,7 +452,7 @@ async function syncWithApi(data, socket) {
 
     // TEMPORARY
     messageSlack({
-      message: error,
+      message: error.toString(), // let's see if I get the whole thing
       title: "DEVELOPER PROGRAM ERROR"
     });
     // TEMPORARY
