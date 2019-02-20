@@ -453,11 +453,10 @@ async function syncWithApi(data, socket) {
     console.log(error.body); // eslint-disable-line no-console
 
     // TEMPORARY
-    messageSlack(
-      "\n" +
-      error +
-      "> _Cause: NO IDEA_\n"
-    );
+    messageSlack({
+      message: error,
+      title: "DEVELOPER PROGRAM ERROR"
+    });
     // TEMPORARY
 
     return send(socket, {
