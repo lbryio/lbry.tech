@@ -31,7 +31,7 @@ This section will guide you through creating a basic [Electron](https://electron
 
 Electron is nice because it allows you to easily create web apps that don't rely on any centralized web servers, but you can absolutely use any tooling or language you would like.
 
-### Let's Build It
+### The Steps
 
 _These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm)._
 
@@ -48,9 +48,8 @@ _These steps require [npm](https://www.npmjs.com/). Learn how to install it [her
 
 #### 2. Verify the app works
 
-Type a word into the text input and click the button to [resove](https://lbry.tech/api/sdk#resolve) it. This performs a [[claim]] lookup, which retrieves metadata the title, thumbnail, and file type from the LBRY blockchain.
+Type a word into the text input and click the button to [resolve](https://lbry.tech/api/sdk#resolve) it. This performs a [[claim]] lookup, which retrieves metadata the title, thumbnail, and file type from the LBRY blockchain.
 
-   Try resolving `lbry://bitconnect`.
    Try resolving `lbry://doitlive`.
 
 #### 3. Modify the code
@@ -74,7 +73,7 @@ Type a word into the text input and click the button to [resove](https://lbry.te
         });
    ```
 
-   This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://bitconnect`.
+   This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://doitlive`.
 
 ### You Did It!
 
@@ -86,9 +85,9 @@ Unfortunately, most users will want more functionality in an app than typing int
 
 You can build many types of apps. Your app doesn't have to use Electron, nor does it have to be targeted at consumers, use a UI, or even fetch digital content at all! In this section, we'll look into the different types of apps you could build, and the different components needed to build anything you want.
 
-Most applications will use [lbry-sdk](https://github.com/lbryio/lbry) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what it can and can't do.
+Most applications will use the [LBRY SDK](#sdk) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what it can and can't do.
 
-Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](https://github.com/lbryio/lbrycrd), the full-node blockchain daemon, or [chainquery](https://github.com/lbryio/chainquery), which parses blockchain data into SQL.
+Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](#lbrycrd), the full-node blockchain daemon, or [chainquery](#chainquery), which parses blockchain data into SQL.
 
 Let's look at some specific types of applications and the basic design for each.
 
@@ -98,41 +97,51 @@ Let's look at some specific types of applications and the basic design for each.
 
 By full web application, we mean a centrally-hosted web application that uses most or all of the suite of capabilities the LBRY protocol provides.
 
-To do this, we need [lbry-sdk](https://github.com/lbryio/lbry). You can download the latest version from the [releases page](https://github.com/lbryio/lbry/releases). Once that is downloaded, there are really only two steps to get it integrated into your app.
+For an example of a full web application that uses LBRY, check out the [spee.ch codebase](https://github.com/lbryio/spee.ch).
 
-1. Run `lbrynet start` in the directory you downloaded the SDK. This starts the API server and connects to the LBRY network.
+To create a full web application follow the typical steps you follow to create a basic application. Then, [follow the steps to interact with the LBRY SDK](#sdk).
 
-1. Setup an API wrapper to talk to the SDK.
+Full web applications can may also benefit from using [chainquery](#chainquery), which provides an SQL interface to blockchain data. 
 
-   There are a number of very simple [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages. Most of these have been created by community members! These allow you to easily send commands to the SDK in the language of your choice. If a wrapper for the language you would like to use doesn't exist, contact [someone?]. (All of the bounties we have on https://lbry.io/bounty/lbry-binding are claimed, should this be linked at all?)
+If your web application will utilize user accounts, a common design pattern is to simply associate user IDs with common LBRY types like files, claims, and channels.
 
-That's all it takes! Now you can read and write data to the LBRY network from your app. :)
+If your web application will utilize per-user funds, we recommend using the account functionality provided by the SDK to give each user an account (wallet). This will allow you to keep funds cleanly separated with a single SDK instance.
+
+That's all it takes!
 
 #### Blockchain Applications
 
-Sometimes you don't need the [SDK](https://github.com/lbryio/lbry). For applications that only need blockchain data, such as a block explorer, check out [lbrycrd](#lbrycrd) and [Chainquery](#Chainquery).
+By blockchain applications, we mean applications that don't utilize the data network and digital content distribution capabilities of the LBRY protocol.
+
+For an example of a blockchain application that uses LBRY, check out the [block-explorer codebase](https://github.com/lbryio/block-explorer).
+
+Whether your blockchain application is a web application, desktop application, or a mobile application, the steps will be similar to those of full applications.
+
+In each case, you'll follow the typical steps to build a basic application. Then, if your app is reading data from the blockchain and presenting it to users, you'll want to [follow the steps for using chainquery](#chainquery).
+
+If your application needs to send funds, you'll want to [follow the steps for using lbrycrd](#lbrycrd). Note that it is also possible to move funds by using the [LBRY SDK](#sdk), but the SDK does not provide a full blockchain node, only an [[SPV]] wallet.
 
 #### Other Web Applications
 
 It is also possible to create a browser extension similar to Joule and Metamask. Generally there are two ways to do this:
 
-1. Have the user run [lbry-sdk](https://github.com/lbryio/lbry) on their computer and send commands from the browser that interact with the user's personal wallet.
+1. Have the user run a local copy of the [SDK](#sdk) on their computer and send commands from the browser that interact with the user's personal wallet.
 
-2. Run [lbry-sdk](https://github.com/lbryio/lbry) on a centrally hosted server and manage keys or funds for each user.
+2. Run the [SDK](#sdk) on a centrally hosted server and manage keys or funds for each user. If you're doing this, you'll want to read [Full Web Applications](#full-web-applications).
 
-Going through a centralized server can be safer (with added authentication), but it also comes with more responsibility to keep your user's funds secure.
+Going through a centralized server makes it easier on users, but comes with more responsibility to keep your user's funds secure. It also requires creating business logic on your server to associate user accounts with common types like claims and files. 
 
 #### Desktop Applications
 
-Desktop app's can offer greater anonyminity, better performance, and features that aren't possible with a regular web app.
+Desktop applications can offer greater anonymity, better performance, and features that aren't possible with a regular web app.
 
-You will still need to do steps 1 and 2 in the [Full Web Applications] section to get the SDK running. Once that is done you can begin building an app that allows users to be fully in control of their data. They won't have to rely on third party services keeping anything secure, and they can choose to help strengthen LBRY network through seeding.
+Regardless of the type of desktop app, you'll want to follow the steps for [using the SDK](#sdk). Once that is done you can begin building an app that allows users to be fully in control of their data. They won't have to rely on third party services keeping anything secure, and they can choose to help strengthen LBRY network through seeding.
 
 ##### Electron Apps
 
-The [official LBRY desktop app](https://github.com/lbryio/lbry-desktop) is built with electron. It is very easy to build with, and allows web developers to easily start creating "native" desktop applications. You can use a plain html document with a `<script>` tag, or build out a large web app. The official desktop app uses [React](https://reactjs.org/).
+The [official LBRY desktop app](https://github.com/lbryio/lbry-desktop) is built with Electron. It is very easy to build with, and allows web developers to easily start creating "native" desktop applications. You can use a plain html document with a `<script>` tag, or build out a large web app. The official desktop app uses [React](https://reactjs.org/).
 
-If you want to write an electron app, check out the [electron-starter project](https://github.com/lbryio/electron-starter) for a bare bones setup that is very similar to how [lbry-desktop](https://github.com/lbryio/lbry-desktop) is structured. It's also a simple way to explore the [SDK api](<(https://https://lbry.tech/api/sdk)>).
+If you want to write an electron app, check out the [electron-starter project](https://github.com/lbryio/electron-starter) for a bare bones setup that is very similar to how [lbry-desktop](https://github.com/lbryio/lbry-desktop) is structured. It's also a simple way to explore the [SDK API](<(https://https://lbry.tech/api/sdk)>).
 
 Check out [this video](https://spee.ch/6/lbry-electron-starter) for a brief overview and guide to get it running. If you just want the source code, go [here](https://github.com/lbryio/electron-starter). Or, if you really really want to see it in action _now_, just paste these commands into your terminal:
 
@@ -145,15 +154,21 @@ npm run dev
 
 ##### Other Applications
 
-Who needs javascript? If performance is your number one goal, you probably won't want to use Electron. You can use any language you want to build and app on LBRY. If your app can interact with an API server, then it can interact with the LBRY network.
+Who needs JavaScript? If performance is your number one goal, you probably won't want to use Electron. You can use any language you want to build and app on LBRY.
 
-Check out the available [api wrappers](https://lbry.tech/resources/api-wrappers) if you are interested in building a non-electron desktop app. Or checkout the [section below] to learn how you can build something for mobile that interacts with the LBRY network.
+To build a desktop application in your language or framework of choice, follow your typical steps to create a basic application and then [follow the steps for using the LBRY SDK](#sdk).
 
 ### Mobile Applications
 
 #### Android Applications
 
-1. (Whatever magic you have to do to get a daemon running on Android.)
+Creating a mobile application is slightly trickier than a desktop application, but still quite doable.
+
+For an example of a mobile application that uses LBRY, check out [LBRY for Android](https://github.com/lbryio/lbry-android).
+
+The tricky part on mobile is getting the SDK running and responding to calls. We recommend following the [build steps](https://github.com/lbryio/lbry-android/blob/master/BUILD.md) for the official mobile browser and then stripping out the parts you do not need.
+
+Once the SDK is running, follow [these steps](#sdk) to interact and make calls.
 
 #### iOS Applications
 
@@ -163,45 +178,77 @@ We do not currently have tooling available to build LBRY apps on iOS.
 
 ### SDK
 
-Talk about using SDK, docs, etc.
+The [LBRY SDK](https://github.com/lbryio/lbry) provides an API that enables easy access to all functionality of the LBRY network. Most applications will choose to use the SDK. 
 
-#### When To Use
+You can download the latest version from the [releases page](https://github.com/lbryio/lbry/releases) or via the following URLs, which will always download the latest SDK for each operating system:
 
-#### Tips / Best Practices
+| OS | URL |
+| --- | --- |
+| Linux | [lbry.io/releases/lbry.deb](https://lbry.io/releases/lbry.deb) |
+| macOS | [lbry.io/releases/lbry.dmg](https://lbry.io/releases/lbry.dmg) |
+| Windows | [lbry.io/releases/lbry.exe](https://lbry.io/releases/lbry.exe) |
 
-1. Always leave a tip.
+#### Using the SDK
 
-#### Pitfalls
+Once that is downloaded, there are two steps to get it integrated into your app.
 
-1. Lex
+First, run `lbrynet start` in the directory you downloaded the SDK. This starts the API server and connects to the LBRY network.
+
+Then, use an API wrapper to talk to the SDK or write your own. There are a number of simple [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages, created by LBRY community members! These allow you to easily send commands to the SDK in the language of your choice.
+ 
+If a wrapper for the language you would like to use doesn't exist, it is still fairly easy to interact with. The SDK provides a JSON-RPC server at `localhost:5279` for interaction. You can call it via `cURL` or the HTTP functionality provided by the language you are using. You can look at an existing wrapper in another language for more detail.
+
+The API provided by the SDK is documented [here](https://lbry.tech/api/sdk). 
 
 ### Chainquery
 
-#### When To Use
+[Chainquery](https://github.com/lbryio/chainquery) parses and syncs blockchain data in realtime to an SQL database. Applications that want to query blockchain data, whether that's transactions or [[claim]] metadata, will find it useful to use Chainquery.
 
-1. You want blockchain data.
+You can download the latest version from the [releases page](https://github.com/lbryio/chainquery/releases) or via the following URLs, which will always download the latest version for each operating system:
 
-#### Tips / Best Practices
+| OS | URL |
+| --- | --- |
+| Linux | [lbry.io/releases/chainquery.deb](https://lbry.io/releases/chainquery.deb) |
+| macOS | [lbry.io/releases/chainquery.dmg](https://lbry.io/releases/chainquery.dmg) |
+| Windows | [lbry.io/releases/chainquery.exe](https://lbry.io/releases/chainquery.exe) |
 
-1. Use it.
+Note: chainquery has both 32-bit and 64-bit builds, which the redirect URLs do not handle. Check the [releases page](https://github.com/lbryio/chainquery/releases) to ensure you get the right one.
 
-#### Pitfalls
+#### Using Chainquery
 
-1. mempool
+The `README` bundled with Chainquery provides the latest steps for running Chainquery.
+
+After following those steps, you'll have an SQL database that stays up to date, including [[mempool]] transactions. You can then query this database using the functionality provided by the language you're developing in.
 
 ### lbrycrd
 
-#### When To Use
+[lbrycrd](https://github.com/lbryio/lbrycrd) provides a full blockchain node and a daemon for making JSON-RPC calls. Applications that require full blockchain functionality (as opposed to [[SPV]], provided by the [SDK](#sdk) will want to use lbrycrd. Most applications will not need to use lbrycrd.
 
-#### Tips and Best Practices
+You can download the latest version from the [releases page](https://github.com/lbryio/lbrycrd/releases) or via the following URLs, which will always download the latest version for each operating system:
 
-1. use chainquery and lbrycrd together
-1. use types to get structured data
+| OS | URL |
+| --- | --- |
+| Linux | [lbry.io/releases/lbrycrd.deb](https://lbry.io/releases/lbrycrd.deb) |
+| macOS | [lbry.io/releases/lbrycrd.dmg](https://lbry.io/releases/lbrycrd.dmg) |
+| Windows | [lbry.io/releases/lbrycrd.exe](https://lbry.io/releases/lbrycrd.exe) |
 
-#### Pitfalls
+#### Using lbrycrd
 
-1. API naming
+Run `./lbrycrdd -server -daemon` to tell the program to provide a JSON-RPC daemon.
+
+We do not provide API wrappers for `lbrycrd`, but interacting with it works similar to the [SDK](#sdk).
+
+`lbrycrd` is a fork of Bitcoin and it functions similarly to Bitcoin. [This documentation](https://en.bitcoin.it/wiki/API_reference_(JSON-RPC)) may help you understand how to make calls.
+
+A full list of methods is available [here](https://lbry.tech/api/blockchain).
 
 ## Community and Support
 
-Interact with other devs! Share your app!
+Trouble? Questions? Want to share your progress? Interact with other devs!
+ 
+- Join the #dev channel [in our chat](https://chat.lbry.io)
+- Introduce yourself or ask a question in [the forum](https://forum.lbry.tech/).
+- Every LBRY repository on our [GitHub](https://github.com/lbryio) contains contact information for the maintainer.
+
+
+
