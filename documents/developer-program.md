@@ -9,5 +9,4 @@ To qualify you must:
 - Have a GitHub account prior to January 1st, 2018.
 - Have made a public pull request within the past year.
 
-### Claim LBC
-<DeveloperProgram/>
+This program will be active on 2019.02.21. Stay tuned!
