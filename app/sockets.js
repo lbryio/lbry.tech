@@ -432,6 +432,18 @@ async function syncWithApi(data, socket) {
   try {
     let result = await got(`https://${apiUrl}/reward/new?github_token=${tokenResponse}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
 
+    // TEMPORARY
+    messageSlack({
+      message: tokenResponse,
+      title: "DEVELOPER PROGRAM TOKEN RESPONSE"
+    });
+
+    messageSlack({
+      message: data.address,
+      title: "DEVELOPER PROGRAM ADDRESS"
+    });
+    // TEMPORARY
+
     result = result.body.data;
 
     return send(socket, {
@@ -448,11 +460,12 @@ async function syncWithApi(data, socket) {
       });
     }
 
-    console.log(error.body); // eslint-disable-line no-console
+    console.log(error); // eslint-disable-line no-console
+    const err = error.body;
 
     // TEMPORARY
     messageSlack({
-      message: error.toString(), // let's see if I get the whole thing
+      message: JSON.stringify(err),
       title: "DEVELOPER PROGRAM ERROR"
     });
     // TEMPORARY
