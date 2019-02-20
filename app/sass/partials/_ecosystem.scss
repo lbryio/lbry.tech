@@ -1,15 +1,27 @@
 .ecosystem {
-  display: grid;
   font-size: 1rem;
-  grid-gap: 1rem;
   margin-bottom: 2rem;
   padding-top: 1rem;
 
-  &:not(.expand-left):not(.expand-right) {
-    grid-template-columns: 144px auto 144px;
+  @media (min-width: 951px) {
+    display: grid;
+    grid-gap: 1rem;
+  }
 
-    .ecosystem__submodules {
-      padding-top: 2.5rem;
+  &:not(.expand-left):not(.expand-right) {
+    @media (min-width: 951px) {
+      grid-template-columns: 144px auto 144px;
+
+      .ecosystem__submodules {
+        padding-top: 2.5rem;
+      }
+    }
+
+    @media (max-width: 950px) {
+      .ecosystem__submodules {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 
@@ -20,16 +32,6 @@
     .ecosystem__submodule:not(.active) {
       display: none;
     }
-
-    .ecosystem__submodules:first-of-type { // TODO: Figure out how to write this in a way that doesn't override
-      @media (min-resolution: 96dpi) {
-        height: 383px;
-      }
-
-      @media (min-resolution: 192dpi) {
-        height: 378px;
-      }
-    }
   }
 
   &.expand-right {
@@ -39,16 +41,13 @@
     .ecosystem__submodule:not(.active) {
       display: none;
     }
+  }
+}
 
-    .ecosystem__submodules:last-of-type {
-      @media (min-resolution: 96dpi) {
-        height: 383px;
-      }
-
-      @media (min-resolution: 192dpi) {
-        height: 378px;
-      }
-    }
+.ecosystem__modules {
+  @media (max-width: 950px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 }
 
@@ -65,24 +64,35 @@
     position: relative;
 
     > div {
-      float: right;
       font-size: 1rem;
       padding-top: 1.95rem;
-      padding-right: 3rem;
       position: relative;
-      text-align: right;
+
+      @media (min-width: 951px) {
+        float: right;
+        padding-right: 3rem;
+        text-align: right;
+      }
 
       &::before {
         @include font-serif;
         width: 100%;
-        top: 0.9rem; right: 3rem;
+        top: 0.9rem;
 
         content: "key repositories";
         font-size: 80%;
         font-style: italic;
         opacity: 0.3;
         position: absolute;
-        text-align: right;
+
+        @media (min-width: 951px) {
+          right: 3rem;
+          text-align: right;
+        }
+
+        @media (max-width: 950px) {
+          left: 0;
+        }
       }
 
       span {
@@ -149,18 +159,28 @@
     }
 
     .__close {
-      top: 2rem;
-      transform: rotate(45deg);
+      transform: translateY(-0.25rem) rotate(45deg);
       z-index: 0;
+
+      @media (max-width: 950px) {
+        display: none;
+      }
     }
   }
 
   &.active {
-    padding: 1.9rem 2rem;
+    padding: 2rem;
 
     h2 {
-      font-size: 3rem;
       margin-bottom: 1rem;
+
+      @media (min-width: 951px) {
+        font-size: 3rem;
+      }
+
+      @media (max-width: 950px) {
+        font-size: 1.5rem;
+      }
 
       > span {
         cursor: default;
@@ -176,7 +196,7 @@
     }
 
     .__close {
-      top: 2.35rem;
+      transform: translateY(-0.25rem);
       z-index: 3;
     }
   }
@@ -280,7 +300,9 @@
   z-index: 2;
 
   &:not(:last-of-type) {
-    margin-bottom: 1rem;
+    @media (min-width: 951px) {
+      margin-bottom: 1rem;
+    }
   }
 
   &:not(.on):not(.active) {

@@ -96,9 +96,7 @@ export default () => html`
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      send(JSON.stringify({
-        "message": "landed on homepage"
-      }));
+      send({ message: "landed on homepage" });
     });
 
     document.getElementsByTagName("body")[0].classList.add("home"); // TODO: make this happen in components/layout

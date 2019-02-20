@@ -13,45 +13,56 @@ import fetchMetadata from "@helper/fetch-metadata";
 import { generateGitHubFeed } from "@helper/github";
 import messageSlack from "@helper/slack";
 
-
+let apiUrl = process.env.REWARD_URL;
+let githubAppId = process.env.GITHUB_APP_ID;
+let githubAppSecret = process.env.GITHUB_APP_SECRET;
 
 //  P R O G R A M
 
 export default (socket, action) => {
-  if (typeof socket !== "object" && typeof action !== "object") return;
+  if (typeof socket !== "object" && typeof action !== "object")
+    return;
 
   switch(true) {
+    case action.message === "auth me with github":
+      getGitHubUserToken(socket);
+      break;
+
+    case action.message === "verify github auth":
+      syncWithApi(action, socket);
+      break;
+
     case action.message === "fetch metadata":
       fetchMetadata(action, socket);
       break;
 
     case action.message === "landed on homepage":
       generateGitHubFeed(result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#github-feed"
-        }));
+        });
       });
       break;
 
     case action.message === "landed on playground":
       generateContent(1, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
     case action.message === "request for playground, example 1":
       generateContent(1, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
@@ -61,11 +72,11 @@ export default (socket, action) => {
 
     case action.message === "request for playground, example 3":
       generateContent(3, result => {
-        socket.send(JSON.stringify({
+        send(socket, {
           html: result,
           message: "updated html",
           selector: "#playground-loader"
-        }));
+        });
       });
       break;
 
@@ -85,15 +96,19 @@ export default (socket, action) => {
 function generateContent(exampleNumber, displayTrendingContent) {
   if (exampleNumber === 1) {
     return getTrendingContent().then(response => {
-      if (!response || !response.success || response.success !== true || !response.data) return "";
+      if (!response || !response.success || response.success !== true || !response.data)
+        return "";
 
       const rawContentCollection = [];
       const renderedContentCollection = [];
       const trendingContentData = response.data;
 
-      for (const data of trendingContentData) {
-        rawContentCollection.push(fetchMetadata({ claim: data.url, method: "resolve", example: exampleNumber }));
-      }
+      for (const data of trendingContentData)
+        rawContentCollection.push(fetchMetadata({
+          claim: data.url,
+          example: exampleNumber,
+          method: "resolve"
+        }));
 
       Promise.all(rawContentCollection).then(collection => {
         for (const part of collection) {
@@ -116,7 +131,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
                 </div>
               </section>
             `);
-          } catch (err) {
+          } catch(err) {
             return; // TODO: Return nice error message
           }
         }
@@ -315,19 +330,26 @@ function generateMemeCreator(socket) {
     </form>
   `;
 
-  return socket.send(JSON.stringify({
+  return send(socket, {
     example: 2,
     html: memeCreator,
     message: "updated html",
     selector: "#playground-loader"
-  }));
+  });
+}
+
+function getGitHubUserToken(socket) {
+  send(socket, {
+    message: "redirect",
+    url: `https://github.com/login/oauth/authorize?client_id=${githubAppId}&scope=public_repo,user:email`
+  });
 }
 
 async function getTrendingContent() {
   try {
     const response = await got("https://api.lbry.io/file/list_trending");
     return JSON.parse(response.body); // eslint-disable-line padding-line-between-statements
-  } catch (error) {
+  } catch(error) {
     return error;
   }
 }
@@ -344,22 +366,24 @@ function makeImageSourceSecure(url) {
 async function newsletterSubscribe(data, socket) {
   const email = data.email;
 
-  if (!validateEmail(email)) return socket.send(JSON.stringify({
-    class: "error",
-    html: "Your email address is invalid",
-    message: "updated html",
-    selector: "#emailMessage"
-  }));
+  if (!validateEmail(email)) {
+    send(socket, {
+      class: "error",
+      html: "Your email address is invalid",
+      message: "updated html",
+      selector: "#emailMessage"
+    });
+  }
 
   try {
     await got.post(`https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`);
 
-    return socket.send(JSON.stringify({
+    return send(socket, {
       html: "Thank you! Please confirm subscription in your inbox.",
       message: "updated html",
       selector: "#emailMessage"
-    }));
-  } catch (error) {
+    });
+  } catch(error) {
     const response = JSON.parse(error.body);
 
     if (!response.success) {
@@ -369,12 +393,12 @@ async function newsletterSubscribe(data, socket) {
         `> _Cause: ${email} interacted with the form_\n`
       );
 
-      return socket.send(JSON.stringify({
+      return send(socket, {
         class: "error",
         html: response.error,
         message: "updated html",
         selector: "#emailMessage"
-      }));
+      });
     }
 
     messageSlack(
@@ -383,16 +407,72 @@ async function newsletterSubscribe(data, socket) {
       `> _Cause: ${email} interacted with the form_\n`
     );
 
-    return socket.send(JSON.stringify({
+    return send(socket, {
       class: "error",
       html: "Something is terribly wrong",
       message: "updated html",
       selector: "#emailMessage"
-    }));
+    });
+  }
+}
+
+export function send(transport, data) {
+  return transport.send(JSON.stringify(data));
+}
+
+async function syncWithApi(data, socket) {
+  const tokenResponse = await verifyGitHubToken(data.code);
+
+  if (tokenResponse === null) {
+    return send(socket, {
+      html: "<p><strong>There was an issue with accessing GitHub's API. Please try again later.</strong></p>",
+      message: "updated html",
+      selector: "developer-program"
+    });
+  }
+
+  try {
+    let result = await got(`https://${apiUrl}/reward/new?github_token=${tokenResponse}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
+
+    result = result.body.data;
+
+    return send(socket, {
+      html: `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p><p>You can see proof of this transaction on <a href="https://explorer.lbry.io/tx/${result.transaction_id}">our Blockain Explorer</a>.</p>`,
+      message: "updated html",
+      selector: "developer-program"
+    });
+  } catch(error) {
+    if (!error.body) {
+      return send(socket, {
+        html: "<p><strong>LBRY API is down. Please try again later.</strong></p>",
+        message: "updated html",
+        selector: "developer-program"
+      });
+    }
+
+    console.log(error.body); // eslint-disable-line no-console
+
+    return send(socket, {
+      html: "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
+      message: "updated html",
+      selector: "developer-program"
+    });
   }
 }
 
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
   return emailRegex.test(String(email)); // eslint-disable-line padding-line-between-statements
+}
+
+async function verifyGitHubToken(code) {
+  try {
+    let result = await got.post(`https://github.com/login/oauth/access_token?client_id=${githubAppId}&client_secret=${githubAppSecret}&code=${code}`, { json: true });
+
+    result = result.body;
+    return result.access_token;
+  } catch(verificationError) {
+    console.log(verificationError.body); // eslint-disable-line no-console
+    return null;
+  }
 }

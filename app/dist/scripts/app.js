@@ -26,6 +26,9 @@ if (
 
 // Smooth scroll
 document.querySelectorAll("a[href^='#']").forEach(anchor => {
+  if (anchor.classList.contains("no-smooth")) // Ignore smooth scroll functionality
+    return;
+
   anchor.addEventListener("click", event => {
     event.preventDefault();
 
@@ -60,10 +63,10 @@ document.querySelector("[data-action='subscribe to newsletter']").onclick = () =
 
   document.getElementById("emailMessage").classList.remove("error");
 
-  send(JSON.stringify({
+  send({
     email: email,
     message: "subscribe"
-  }));
+  });
 };
 
 
@@ -87,6 +90,5 @@ function scrollToElementOnLoad() {
 
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
-
-  return emailRegex.test(String(email));
+  return emailRegex.test(String(email)); // eslint-disable-line padding-line-between-statements
 }

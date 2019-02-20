@@ -11,16 +11,16 @@ import stringifyObject from "stringify-object";
 
 //  U T I L S
 
-import randomString from "./random-string";
 import messageSlack from "./slack";
-
 import publishMeme from "./publish-meme";
+import randomString from "./random-string";
+import { send } from "@socket";
 import uploadImage from "./upload-image";
 
 const allowedQueryMethods = [
+  "claim_tip",
   "publish",
-  "resolve",
-  "claim_tip"
+  "resolve"
 ];
 
 const approvedContentIdsForTipping = [
@@ -35,6 +35,10 @@ const approvedContentIdsForTipping = [
   "758dd6497cdfc401ae1f25984738d024d47b50af",
   "8a7401b88d5ed0376d98f16808194d4dcb05b284"
 ];
+
+const environment = process.env.NODE_ENV === "development" ?
+  "development" :
+  "production";
 
 //  P A C K A G E
 
@@ -60,11 +64,11 @@ export default async(data, socket) => {
   const resolveMethod = data.method;
 
   if (allowedQueryMethods.indexOf(resolveMethod) < 0) {
-    return socket.send(JSON.stringify({
+    return send(socket, {
       details: "Unallowed resolve method for tutorial",
       message: "notification",
       type: "error"
-    }));
+    });
   }
 
   body.authorization = process.env.LBRY_DAEMON_ACCESS_TOKEN;
@@ -77,7 +81,7 @@ export default async(data, socket) => {
     //  E X A M P L E
     case resolveMethod === "claim_tip":
       if (!approvedContentIdsForTipping.includes(claimAddress)) {
-        return socket.send(JSON.stringify({
+        return send(socket, {
           example: data.example,
           html: raw(`
             <h3>Response</h3>
@@ -85,7 +89,7 @@ export default async(data, socket) => {
           `),
           message: "show result",
           selector: `#example${data.example}-result`
-        }));
+        });
       }
 
       apiRequestMethod = "POST";
@@ -140,7 +144,7 @@ export default async(data, socket) => {
             "json"
           );
 
-          return socket.send(JSON.stringify({
+          return send(socket, {
             example: data.example,
             html: raw(`
               <h3>Response</h3>
@@ -149,21 +153,21 @@ export default async(data, socket) => {
             `),
             message: "show result",
             selector: `#example${data.example}-result`
-          }));
+          });
         }
 
         catch(memePublishError) {
-          socket.send(JSON.stringify({
+          send(socket, {
             details: "Meme publish failed",
             message: "notification",
             type: "error"
-          }));
+          });
 
           if (process.env.NODE_ENV !== "development") {
             messageSlack({
               message: "```" + JSON.parse(JSON.stringify(memePublishError.error)) + "```",
               pretext: "_Someone is going through the Playground after a response has been parsed_",
-              title: "DAEMON ERROR"
+              title: `DAEMON ERROR | ${environment}`
             });
           }
 
@@ -172,17 +176,17 @@ export default async(data, socket) => {
       }
 
       catch(imageUploadError) {
-        socket.send(JSON.stringify({
+        send(socket, {
           details: "Image upload failed",
           message: "notification",
           type: "error"
-        }));
+        });
 
         if (process.env.NODE_ENV !== "development") {
           messageSlack({
             message: "```" + imageUploadError.status + "```",
             pretext: "_Someone attempted to upload a meme to the web daemon and it failed_",
-            title: "DAEMON ERROR"
+            title: `DAEMON ERROR | ${environment}`
           });
         }
 
@@ -241,7 +245,7 @@ export default async(data, socket) => {
         "json"
       );
 
-      return socket.send(JSON.stringify({
+      return send(socket, {
         example: data.example,
         html: raw(`
           <h3>Response</h3>
@@ -250,7 +254,7 @@ export default async(data, socket) => {
         `),
         message: "show result",
         selector: `#example${data.example}-result`
-      }));
+      });
     }
 
     return response.body.result[Object.keys(response.body.result)[0]].claim;
@@ -260,7 +264,7 @@ export default async(data, socket) => {
     messageSlack({
       message: "```" + error + "```",
       pretext: "_Someone is going through the Playground and the daemon is not running_",
-      title: "DAEMON ERROR"
+      title: `DAEMON ERROR | ${environment}`
     });
   }
 };
@@ -276,7 +280,7 @@ function memePublishMessaging(source) {
 
       <br/><br/>
 
-      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/address/${source.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.io/tx/${source.result.output.txid}?address=${source.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
 
       <br/><br/>
 

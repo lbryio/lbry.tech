@@ -3,8 +3,10 @@
 
 .glossary {
   main {
-    width: calc(100vw - 200px);
-    margin-left: 200px;
+    @media (min-width: 801px) {
+      width: calc(100vw - 200px);
+      margin-left: 200px;
+    }
   }
 
   .page__header-wrap,
@@ -30,6 +32,10 @@
   padding-left: 0 !important;
   position: fixed;
   z-index: 1;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 
   li {
     list-style-type: none !important;

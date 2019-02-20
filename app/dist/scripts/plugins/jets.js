@@ -224,7 +224,7 @@
   ;(function(doc, proto) {
     try {
       doc.querySelector(":scope body");
-    } catch (err) {
+    } catch(err) {
       ["querySelector", "querySelectorAll"].forEach(method => {
         const nativ = proto[method];
 

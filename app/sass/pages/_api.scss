@@ -1,10 +1,3 @@
-/*!
- * API Wrapper
- *
- * @class     .__slate
- * @selector  {::after}
-**/
-
 .__slate {
   width: 100%;
   height: 100%;
@@ -29,34 +22,20 @@
   }
 }
 
-
-/*!
- * API | Table of Contents
- *
- * @class     .api-toc
- * @class     .api-toc__search
- * @class     .api-toc__search-field
- *
- * @class     .api-toc__search-clear
- * @state     {.active}
- *
- * @class     .api-toc__items
- *
- * @class     .api-toc__item
- * @state     {:hover}
-**/
-
 .api-toc {
   width: 200px; height: calc(100vh - 5rem); // navigation is 5rem tall
   bottom: 0; left: 0;
 
   background-color: $lbry-white;
   border-right: 1px solid $lbry-gray-1;
-  // float: left;
   overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
   z-index: 3;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 }
 
 .api-toc__search {
@@ -68,6 +47,7 @@
   padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
 
   border-bottom: 1px solid $lbry-gray-1;
+  border-radius: 0; // TODO: Put this rule in components on inputs
   font-size: 0.8rem;
   line-height: 2rem;
 }
@@ -117,13 +97,28 @@
 }
 
 .api-content {
-  width: calc(100% - 200px);
-  float: right;
+  @media (min-width: 801px) {
+    width: calc(100% - 200px);
+    float: right;
+  }
 }
 
 .api-documentation {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+
+  @media (min-width: 1201px) {
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+  }
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+
+    div {
+      &:empty {
+        display: none;
+      }
+    }
+  }
 
   h1 {
     font-size: 1.5rem;
@@ -145,9 +140,23 @@
   p,
   ol,
   ul {
-    font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
+  }
+
+  ol,
+  ul {
+    @media (min-width: 801px) {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      font-size: 0.8rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
   }
 
   pre {
@@ -221,10 +230,12 @@
 
   .left {
     width: 30%;
-
-    border-right: 1px solid $lbry-gray-2;
     float: left;
     word-wrap: break-word;
+
+    @media (min-width: 801px) {
+      border-right: 1px solid $lbry-gray-2;
+    }
 
     span {
       color: $lbry-gray-3;
@@ -270,6 +281,9 @@
   color: $lbry-white;
   position: sticky;
   z-index: 10;
+
+  // GOOD OL' SAFARI
+  position: -webkit-sticky; // sass-lint:disable-line no-duplicate-properties
 }
 
 .api-content__item {

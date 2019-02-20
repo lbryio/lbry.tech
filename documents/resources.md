@@ -1,11 +1,13 @@
 ---
 title: Resources
+description: Find the LBRY specification, API documentation, our Contributor's guide, and more in the Resources area.
 ---
 
 <ResourcesLinkGrid/>
 
 ## Additional Resources
 
+- [Developer Setup Intro Videos](/resources/setup-videos)
 - [LBRY Glossary](/glossary)
 - [LBRY Merkle Claim Trie](/resources/claimtrie)
 - [LBRY Consensus Algorithm](/resources/consensus)

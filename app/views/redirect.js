@@ -30,6 +30,8 @@ export default (state, emit) => { // eslint-disable-line
 
   const markdownFile = fs.readFileSync(path, "utf-8");
   const markdownFileDetails = fm(markdownFile);
+  const title = markdownFileDetails.attributes.title;
+  const description = markdownFileDetails.attributes.description || "";
 
   if (markdownFileDetails.attributes.meta) {
     const customMetadata = {};
@@ -41,37 +43,45 @@ export default (state, emit) => { // eslint-disable-line
       }
     }
 
-    // below seems evil
     state.lbry = customMetadata;
   }
+
+  // below is evil, I just inherited it -- Jeremy
+  state.lbry = {
+    title: title,
+    description: description
+  };
 
   // below should be refactored into components
   let pageScript = "";
 
-  if (partialPath === "glossary")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/glossary-scripts.js`, "utf-8") +
-      "</script>";
+  switch(true) {
+    case partialPath === "developer-program":
+      pageScript = renderClientScript("devprogram-scripts");
+      break;
 
-  if (partialPath === "overview")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/ecosystem-scripts.js`, "utf-8") +
-      "</script>";
+    case partialPath === "glossary":
+      pageScript = renderClientScript("glossary-scripts");
+      break;
 
-  if (partialPath === "playground")
-    pageScript =
-      "<script>" +
-        fs.readFileSync(`${process.cwd()}/app/components/client/playground-scripts.js`, "utf-8") +
-      "</script>";
+    case partialPath === "overview":
+      pageScript = renderClientScript("ecosystem-scripts");
+      break;
+
+    case partialPath === "playground":
+      pageScript = renderClientScript("playground-scripts");
+      break;
+
+    default:
+      break;
+  }
 
   return html`
     <article class="page" itemtype="http://schema.org/BlogPosting">
       <header class="page__header">
         <div class="page__header-wrap">
           <div class="inner-wrap">
-            <h1 class="page__header__title" itemprop="name headline">${markdownFileDetails.attributes.title}</h1>
+            <h1 class="page__header__title" itemprop="name headline">${title}</h1>
           </div>
         </div>
       </header>
@@ -85,3 +95,15 @@ export default (state, emit) => { // eslint-disable-line
     </article>
   `;
 };
+
+
+
+//  H E L P E R
+
+function renderClientScript(clientScriptFileName) {
+  return `
+    <script>
+      ${fs.readFileSync((`${process.cwd()}/app/components/client/${clientScriptFileName}.js`), "utf-8")}
+    </script>
+  `;
+}

@@ -1,10 +1,16 @@
 pre {
-  padding: 2rem;
-
   line-height: 1.33;
   margin-bottom: 2rem;
   overflow-x: auto;
   overflow-y: hidden;
+
+  @media (min-width: 801px) {
+    padding: 2rem;
+  }
+
+  @media (max-width: 800px) {
+    padding: 1rem;
+  }
 
   &:not([class]),
   &.language-text {
