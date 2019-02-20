@@ -2,24 +2,7 @@ developer-program {
   @extend %markdown;
 
   input-submit {
-    // TODO: FIX THIS
-    // Entire block should not be here but something went wrong with the components
     padding-top: 0.5rem;
-
-    input {
-      padding-right: var(--spacing-s);
-      padding-left: var(--spacing-s);
-      transition: border 0.2s;
-    }
-
-    button {
-      background-color: $lbry-black;
-      border-color: $lbry-black;
-      color: $lbry-white;
-      padding-right: var(--spacing-m);
-      padding-left: var(--spacing-m);
-      transition: all 0.2s;
-    }
   }
 
   .button {

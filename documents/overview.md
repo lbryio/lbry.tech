@@ -9,7 +9,9 @@ What if anyone in the world could publish digital content, anyone else in the wo
 
 <MissionStatement/>
 
-That's a fancy sentence, so here's a plain one: we thought it'd be damn cool if there was a system that made it easy to discover and distribute as much of the world's information as possible but was owned and controlled by no one.
+That's a fancy sentence, so here's a plain one: we thought it'd be *damn **cool*** if there was a system that made it easy to discover and distribute as much of the world's information as possible but was owned and controlled by no one.
+
+If you agree with us, feel free to join our [Developer Program](/developer-program) and we'll set you up with 100 LBC to get started.
 
 <sub>^1(#footnote-1)^ In the information theoretic sense, LBRY facilitates distribution of all data, whether it be a video or a spreadsheet.</sub>
 

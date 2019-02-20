@@ -31,8 +31,13 @@ export default () => linkGrid([{
   label: "Learn To Contribute",
   title: "Contributor's Guide"
 }, {
-  description: "Want to build your own dApp or auxiliary service? Start here! ",
+  description: "Want to build your own dApp or auxiliary service? Start here!",
   destination: "/build",
   label: "Build An App",
   title: "Builder's Guide"
+}, {
+  description: "Jumpstart your LBRY development with 100 LBC, on us",
+  destination: "/developer-program",
+  label: "Get Credits",
+  title: "Developer Program"
 }]);
