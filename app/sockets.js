@@ -452,6 +452,14 @@ async function syncWithApi(data, socket) {
 
     console.log(error.body); // eslint-disable-line no-console
 
+    // TEMPORARY
+    messageSlack(
+      "\n" +
+      "> *DEVELOPER PROGRAM:* ```" + error.body + "```" + "\n" +
+      "> _Cause: NO IDEA_\n"
+    );
+    // TEMPORARY
+
     return send(socket, {
       html: "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
       message: "updated html",
