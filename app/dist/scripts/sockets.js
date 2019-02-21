@@ -22,9 +22,14 @@ function initializeWebSocketConnection() {
   // ws.onopen = () => console.log("WebSocket connection established"); // eslint-disable-line no-console
 
   ws.onmessage = socket => {
-    const data = JSON.parse(socket.data);
+    let data = JSON.parse(socket.data);
 
     switch(true) {
+      case data.message === "github token status":
+        data = data.data;
+        syncWithApi(data); // eslint-disable-line no-undef
+        break;
+
       case data.message === "notification": // TODO: Make work with appending so multiple notifications can be sent
         document.getElementById("flash-container").innerHTML =
           `<div class="flash active${data.type ? " " + data.type : ""}">${data.details}</div>`;

@@ -1,4 +1,4 @@
-"use strict"; /* global document, history, send, window */
+"use strict"; /* global document, fetch, history, send, window */
 
 
 
@@ -12,7 +12,7 @@ document.getElementById("get-started").onclick = event => {
 
 if (window.location.search.includes("?code=")) {
   document.querySelector("developer-program").innerHTML = `
-    <form>
+    <form onsubmit="return false;">
       <input-submit>
         <input id="walletAddress" placeholder="Your LBRY wallet address" type="text"/>
         <input id="oauthCode" type="hidden" value="${window.location.search.split("?code=").pop()}"/>
@@ -34,13 +34,63 @@ if (window.location.search.includes("?code=")) {
 }
 
 if (document.getElementById("creditsAcquire")) {
+  document.getElementById("walletAddress").addEventListener("keyup", event => {
+    const key = event.keyCode ? event.keyCode : event.which;
+
+    if (key === 13)
+      document.getElementById("creditsAcquire").click();
+  });
+
   document.getElementById("creditsAcquire").onclick = () => {
     send({
       address: document.getElementById("walletAddress").value,
       code: document.getElementById("oauthCode").value,
-      message: "verify github auth"
+      message: "verify github token"
     });
 
     document.querySelector("developer-program").innerHTML = "<p><em>Awaiting response from LBRY server...</em></p>";
   };
+}
+
+async function syncWithApi(data) { // eslint-disable-line no-unused-vars
+  const address = data.address;
+  const code = data.code;
+
+  if (code === null)
+    document.querySelector("developer-program").innerHTML =
+      "<p><strong>There was an issue with accessing GitHub's API. Please try again later.</strong></p>";
+
+  try {
+    // let result = await got(`https://${apiUrl}/reward/new?github_token=${code}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
+
+    let result = await fetch(`https://api.lbry.io/reward/new?github_token=${code}&reward_type=github_developer&wallet_address=${address}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: "no-cors"
+    }).then(response => {
+      console.log("————— response"); // eslint-disable-line no-console
+      console.log(response); // eslint-disable-line no-console
+      return response;
+    });
+
+    console.log("————— result"); // eslint-disable-line no-console
+    console.log(result); // eslint-disable-line no-console
+    // result = result.body.data;
+
+    // document.querySelector("developer-program").innerHTML =
+    //   `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p><p>You can see proof of this transaction on <a href="https://explorer.lbry.io/tx/${result.transaction_id}">our Blockain Explorer</a>.</p>`;
+  } catch(error) {
+    console.log(error); // eslint-disable-line no-console
+
+    if (!error.body) {
+      document.querySelector("developer-program").innerHTML =
+        "<p><strong>LBRY API is down. Please try again later.</strong></p>";
+    }
+
+    else {
+      document.querySelector("developer-program").innerHTML =
+        "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>";
+    }
+  }
 }
