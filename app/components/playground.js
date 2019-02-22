@@ -42,7 +42,7 @@ function example1() {
   `;
 }
 
-function navigation() { // TODO: Save tutorial position to localStorage
+function navigation() {
   return dedent`
     <li
       class="playground-navigation__example"

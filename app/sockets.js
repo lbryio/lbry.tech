@@ -13,9 +13,13 @@ import fetchMetadata from "@helper/fetch-metadata";
 import { generateGitHubFeed } from "@helper/github";
 import messageSlack from "@helper/slack";
 
-let apiUrl = process.env.REWARD_URL;
-let githubAppId = process.env.GITHUB_APP_ID;
-let githubAppSecret = process.env.GITHUB_APP_SECRET;
+const githubAppId = process.env.GITHUB_APP_ID;
+const githubAppSecret = process.env.GITHUB_APP_SECRET;
+
+// const githubAppId = process.env.GITHUB_APP_ID_TEST;
+// const githubAppSecret = process.env.GITHUB_APP_SECRET_TEST;
+
+
 
 //  P R O G R A M
 
@@ -28,8 +32,8 @@ export default (socket, action) => {
       getGitHubUserToken(socket);
       break;
 
-    case action.message === "verify github auth":
-      syncWithApi(action, socket);
+    case action.message === "verify github token":
+      verifyGitHubToken(action, socket);
       break;
 
     case action.message === "fetch metadata":
@@ -418,79 +422,33 @@ export function send(transport, data) {
   return transport.send(JSON.stringify(data));
 }
 
-async function syncWithApi(data, socket) {
-  const tokenResponse = await verifyGitHubToken(data.code);
-
-  if (tokenResponse === null) {
-    return send(socket, {
-      html: "<p><strong>There was an issue with accessing GitHub's API. Please try again later.</strong></p>",
-      message: "updated html",
-      selector: "developer-program"
-    });
-  }
-
-  try {
-    let result = await got(`https://${apiUrl}/reward/new?github_token=${tokenResponse}&reward_type=github_developer&wallet_address=${data.address}`, { json: true });
-
-    // TEMPORARY
-    messageSlack({
-      message: tokenResponse,
-      title: "DEVELOPER PROGRAM TOKEN RESPONSE"
-    });
-
-    messageSlack({
-      message: data.address,
-      title: "DEVELOPER PROGRAM ADDRESS"
-    });
-    // TEMPORARY
-
-    result = result.body.data;
-
-    return send(socket, {
-      html: `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p><p>You can see proof of this transaction on <a href="https://explorer.lbry.io/tx/${result.transaction_id}">our Blockain Explorer</a>.</p>`,
-      message: "updated html",
-      selector: "developer-program"
-    });
-  } catch(error) {
-    if (!error.body) {
-      return send(socket, {
-        html: "<p><strong>LBRY API is down. Please try again later.</strong></p>",
-        message: "updated html",
-        selector: "developer-program"
-      });
-    }
-
-    console.log(error); // eslint-disable-line no-console
-    const err = error.body;
-
-    // TEMPORARY
-    messageSlack({
-      message: JSON.stringify(err),
-      title: "DEVELOPER PROGRAM ERROR"
-    });
-    // TEMPORARY
-
-    return send(socket, {
-      html: "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>",
-      message: "updated html",
-      selector: "developer-program"
-    });
-  }
-}
-
 function validateEmail(email) {
   const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\\.,;:\s@"]{2,})$/i;
   return emailRegex.test(String(email)); // eslint-disable-line padding-line-between-statements
 }
 
-async function verifyGitHubToken(code) {
+async function verifyGitHubToken(data, socket) {
+  const code = data.code;
+
   try {
     let result = await got.post(`https://github.com/login/oauth/access_token?client_id=${githubAppId}&client_secret=${githubAppSecret}&code=${code}`, { json: true });
 
-    result = result.body;
-    return result.access_token;
+    const response = {
+      address: data.address,
+      code: result.body.access_token
+    };
+
+    return send(socket, {
+      data: response,
+      message: "github token status"
+    });
   } catch(verificationError) {
     console.log(verificationError.body); // eslint-disable-line no-console
-    return null;
+
+    return send(socket, {
+      details: verificationError.body,
+      message: "notification",
+      type: "error"
+    });
   }
 }
