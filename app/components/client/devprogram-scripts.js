@@ -64,7 +64,6 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
     .then(response => response.json())
     .then(result => {
       switch(true) {
-        case !result.success:
         case result.error === "this reward is limited to 1 per person":
           document.querySelector("developer-program").innerHTML =
             "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>";
@@ -78,6 +77,8 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
 
         default:
           console.log(data); // eslint-disable-line no-console
+          document.querySelector("developer-program").innerHTML =
+            "<p><strong>The LBRY API might be down. Please try again later.</strong></p>";
           break;
       }
     })
