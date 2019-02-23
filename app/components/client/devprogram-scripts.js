@@ -26,7 +26,7 @@ if (window.location.search.includes("?code=")) {
     <ol>
       <li>Download <a href="https://github.com/lbryio/lbry/releases">the LBRY SDK</a>.</li>
       <li>Launch the command-line utility (<code>./lbrynet start</code>).</li>
-      <li>Run <code>./lbrynet address list</code> and copy the <code>id</code> field.</li>
+      <li>Run <code>./lbrynet account list</code> and copy the <code>id</code> field.</li>
     </ol>
   `;
 
