@@ -23,7 +23,7 @@ export default state => {
     </frame-viewer>
 
     <script>
-      const specDomain = "https://spec.lbry.io";
+      const specDomain = "https://spec.lbry.com";
       const spec = document.getElementById("spec");
       spec.src = specDomain + window.location.hash;
 

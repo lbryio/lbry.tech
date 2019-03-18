@@ -18,4 +18,4 @@ proof = sha256(sha256(left + right))  # concatenate the two halves, and double-s
 
 ### Block Targeting & Difficulty Adjustment
 
-The targeted time of each Lbry block is 2.5 mintues (150 seconds).  More information and links to source code [here](https://spec.lbry.io/#consensus).
+The targeted time of each Lbry block is 2.5 mintues (150 seconds).  More information and links to source code [here](https://lbry.tech/spec#consensus).
