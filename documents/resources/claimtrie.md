@@ -52,7 +52,7 @@ print("leaf hash is {}".format(hexlify(hash_leaf(tx, nout, at_height)[::-1])))
 ## How is the root hash calculated?
 
 Let's start with a ClaimTrie holding a single claim.
-The claim is named `mindblown` and was included at block 102 with the same details as the last section. It's actually a real claim as [you can see in the block explorer](https://explorer.lbry.io/blocks/102). This block has the first claim ever, so the ClaimTrie was the simple case being explained in here.
+The claim is named `mindblown` and was included at block 102 with the same details as the last section. It's actually a real claim as [you can see in the block explorer](https://explorer.lbry.com/blocks/102). This block has the first claim ever, so the ClaimTrie was the simple case being explained in here.
 We start with the leaf hash:
 1. Hash the leaf hash using double sha-256.
 2. For each character of the name (nodes of the trie), the hash of a node is the double sha-256 of the node's character concatenated with the children hash.

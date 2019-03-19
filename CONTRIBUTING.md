@@ -1,6 +1,6 @@
 # Contributing
 
-This project follows the global contributing standards for all LBRY projects, to read those go [here](https://lbry.io/faq/contributing).
+This project follows the global contributing standards for all LBRY projects, to read those go [here](https://lbry.com/faq/contributing).
 
 You can contribute to this project by [creating a pull request](https://help.github.com/articles/creating-a-pull-request).
 

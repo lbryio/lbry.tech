@@ -65,7 +65,7 @@
     flex: 1;
   }
 
-  &:not(:first-of-type):not([href="http://localhost:8000"]):not([href="https://lbry.io"]) {
+  &:not(:first-of-type):not([href="http://localhost:8000"]):not([href="https://lbry.com"]) {
     &::after {
       width: 100%; height: 3px;
       left: 0;
@@ -96,13 +96,13 @@
     line-height: 4rem;
   }
 
-  &:not([href="http://localhost:8000"]):not([href="https://lbry.io"]) {
+  &:not([href="http://localhost:8000"]):not([href="https://lbry.com"]) {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
 
   &[href="http://localhost:8000"],
-  &[href="https://lbry.io"] {
+  &[href="https://lbry.com"] {
     color: $lbry-white;
     margin-right: 0.5rem;
     padding-right: 1rem;

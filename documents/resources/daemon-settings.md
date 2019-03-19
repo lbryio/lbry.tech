@@ -1,18 +1,18 @@
 ---
 title: SDK Settings
 description: The daemon provided by the LBRY SDK has many settings. This resource lists them all and what they mean. Ready, set, settings! 
---- 
+---
 
 This document outlines how to configure SDK daemon settings and what options are available. They can be found on the lbry GitHub repository in [conf.py](https://github.com/lbryio/lbry/blob/master/lbrynet/conf.py).
 
-## Daemon settings configuration 
+## Daemon settings configuration
 
-The easiest way to configure the settings is by editing the `daemon_settings.yml` file (may need to be created) that resides in the default [lbrynet directory](https://lbry.io/faq/lbry-directories). These settings can also be configured via the [settings_set](https://lbry.tech/api/sdk#settings_set) API call. The [settings_get](https://lbry.tech/api/sdk#settings_get) API call can be used to retrieve current values. Some values will require an SDK restart after being set via the API call. 
+The easiest way to configure the settings is by editing the `daemon_settings.yml` file (may need to be created) that resides in the default [lbrynet directory](https://lbry.com/faq/lbry-directories). These settings can also be configured via the [settings_set](https://lbry.tech/api/sdk#settings_set) API call. The [settings_get](https://lbry.tech/api/sdk#settings_get) API call can be used to retrieve current values. Some values will require an SDK restart after being set via the API call.
 
 Sample daemon_settings.yml file:
 ```
 tcp_port: 3335
-lbryum_servers: ['lbryumx1.lbry.io:50001','lbryumx2.lbry.io:50001']
+lbryum_servers: ['lbryumx1.lbry.com:50001','lbryumx2.lbry.com:50001']
 download_directory: 'c:\lbry\Downloads'
 use_upnp: false
 ```
@@ -25,7 +25,7 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 ### Files
 | Setting                | Format  | Default value                                        | Sample Values      | Description                                                                          |
 |------------------------|---------|------------------------------------------------------|--------------------|--------------------------------------------------------------------------------------|
-| data_dir               | string  | [varies by OS](https://lbry.io/faq/lbry-directories) | 'c:\lbry\lbrynet\' | Where to store the lbrynet folder, which includes blob files, logs and   config data |
+| data_dir               | string  | [varies by OS](https://lbry.com/faq/lbry-directories) | 'c:\lbry\lbrynet\' | Where to store the lbrynet folder, which includes blob files, logs and   config data |
 | delete_blobs_on_remove | boolean | true                                                 | false              | Delete blobs on a file_delete call?                                                  |
 | download_dir           | string  | local downloads folder                               | 'c:\lbry\lbrynet\' | Location of downloaded output files                                                  |
 
@@ -33,8 +33,8 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | Setting                       | Format  | Default value                                        | Sample Values                      | Description                                                                                       |
 |-------------------------------|---------|------------------------------------------------------|------------------------------------|---------------------------------------------------------------------------------------------------|
 | blockchain_name               | string  | 'lbrycrd_main'                                       | 'lbrycrd_regtest'                  | Blockchain network to connect to                                                                  |
-| lbryum_servers                | list    | ['lbryumx1.lbry.io:50001','lbryumx2.lbry.io:50001']  | ["mylbryum.lbry.io:50001]          | SPV wallet server address                                                                         |
-| wallet_dir                    | string  | [varies by OS](https://lbry.io/faq/lbry-directories) | 'c:\lbry\lbryum\'                  | Wallet data location                                                                              |
+| lbryum_servers                | list    | ['lbryumx1.lbry.com:50001','lbryumx2.lbry.com:50001']  | ["mylbryum.lbry.com:50001]          | SPV wallet server address                                                                         |
+| wallet_dir                    | string  | [varies by OS](https://lbry.com/faq/lbry-directories) | 'c:\lbry\lbryum\'                  | Wallet data location                                                                              |
 | max_key_fee                   | json    | {'currency': 'USD', 'amount': 50.0}                  | {'currency': 'LBC', 'amount': 5.0} | Max payment allowed for content                                                                   |
 | wallet                        | string  | 'lbryum'                                             | 'lbrycrd'                          | Choice of wallet software, SPV (lbryum) vs full node (lbrycrd). Currently   only lbryum supported |
 | use_keyring                   | boolean | false                                                | true                               | Store wallet password in keyring (not currently available)                                                                 |
@@ -49,13 +49,13 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | download_timeout           | integer | 30                        | 60                         | Time, in seconds, to allow download to get data blobs                              |
 | announce_head_blobs_only   | boolean | true                      | false                      | Only announce first data blob                                                      |
 | concurrent_blob_announcers | integer | 10                        | 0                          | Threads used in order to announce blobs. 0 means disabled                          |
-| known_dht_nodes            | list    | ['lbrynet1.lbry.io:4444'] | ['myDHT.lbry.io:4444']     | Bootstrap nodes for network connectivity                                           |
+| known_dht_nodes            | list    | ['lbrynet1.lbry.com:4444'] | ['myDHT.lbry.com:4444']     | Bootstrap nodes for network connectivity                                           |
 | max_connections_per_stream | integer | 5                         | 10                         | Threads used to download blobs                                                     |
 | seek_head_blob_first       | boolean | true                      | false                      | Search for first data blob after downloading sd blob                               |
 | tcp_port                   | integer | 3333                      | 3334                       | Port the SDK will listen on                                                        |
 | concurrent-reflector-uploads| integer | 5                        | 10                         | Connections to use while uploading data to reflector                               |
 | reflect_streams            | boolean | true                      | false                      | Send published data to reflector servers                                           |
-| reflector_servers          | list    | ['reflector.lbry.io']     | ['myreflector.lbry.io']    | Server data will be reflected to                                                   |
+| reflector_servers          | list    | ['reflector.lbry.com']     | ['myreflector.lbry.com']    | Server data will be reflected to                                                   |
 | fixed-peer-delay           | integer | 2                         | 5                          | Time, in mintues, to allow download from P2P before trying fixed peer              |
 | peer_connect_timeout       | integer | 30                        | 15                         | Time, in seconds, to allow download to find peers                                  |
 | node_rpc_timeout           | integer | 5                         | 10                         | Time, in seconds, to allow connection over DHT                                     |
