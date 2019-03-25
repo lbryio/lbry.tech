@@ -123,8 +123,8 @@ function generateContent(exampleNumber, displayTrendingContent) {
                   class="media__thumb"
                   data-action="choose claim"
                   data-claim-id="${part.name}"
-                  style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})">
-                </figure>
+                  ${part.value.stream.metadata.thumbnail.length ? `style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})"` : ""}
+                ></figure>
 
                 <div class="media__title">
                   ${part.value.stream.metadata.title}
@@ -359,6 +359,9 @@ async function getTrendingContent() {
 }
 
 function makeImageSourceSecure(url) {
+  if (!url || !url.length)
+    return url;
+
   const originalUrl = new URL(url);
 
   if (originalUrl.protocol !== "https")

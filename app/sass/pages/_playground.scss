@@ -250,6 +250,7 @@
   }
 
   .media__thumb {
+    background-image: linear-gradient(135deg, var(--lbry-teal-2), var(--lbry-blue-3) 100%);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
