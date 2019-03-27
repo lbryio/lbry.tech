@@ -86,8 +86,8 @@ export default () => html`
         <p>There's literally <a href="https://spee.ch/@lbrytech/dozens.mp4">12<sup>n</sup></a> of us.</p>
 
         <ul>
-          <li><a href="//chat.lbry.io" title="LBRY on Discord">Chat</a></li>
-          <li><a href="//discourse.lbry.io" title="LBRY on Discourse">Forum</a></li>
+          <li><a href="//chat.lbry.com" title="LBRY on Discord">Chat</a></li>
+          <li><a href="//discourse.lbry.com" title="LBRY on Discourse">Forum</a></li>
           <li><a href="//www.reddit.com/r/lbry" title="LBRY on Reddit">Reddit</a></li>
         </ul>
       </div>

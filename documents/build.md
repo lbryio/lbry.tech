@@ -184,9 +184,9 @@ You can download the latest version from the [releases page](https://github.com/
 
 | OS | URL |
 | --- | --- |
-| Linux | [lbry.io/releases/lbry.deb](https://lbry.io/releases/lbry.deb) |
-| macOS | [lbry.io/releases/lbry.dmg](https://lbry.io/releases/lbry.dmg) |
-| Windows | [lbry.io/releases/lbry.exe](https://lbry.io/releases/lbry.exe) |
+| Linux | [lbry.com/releases/lbry.deb](https://lbry.com/releases/lbry.deb) |
+| macOS | [lbry.com/releases/lbry.dmg](https://lbry.com/releases/lbry.dmg) |
+| Windows | [lbry.com/releases/lbry.exe](https://lbry.com/releases/lbry.exe) |
 
 #### Using the SDK
 
@@ -208,9 +208,9 @@ You can download the latest version from the [releases page](https://github.com/
 
 | OS | URL |
 | --- | --- |
-| Linux | [lbry.io/releases/chainquery.deb](https://lbry.io/releases/chainquery.deb) |
-| macOS | [lbry.io/releases/chainquery.dmg](https://lbry.io/releases/chainquery.dmg) |
-| Windows | [lbry.io/releases/chainquery.exe](https://lbry.io/releases/chainquery.exe) |
+| Linux | [lbry.com/releases/chainquery.deb](https://lbry.com/releases/chainquery.deb) |
+| macOS | [lbry.com/releases/chainquery.dmg](https://lbry.com/releases/chainquery.dmg) |
+| Windows | [lbry.com/releases/chainquery.exe](https://lbry.com/releases/chainquery.exe) |
 
 Note: chainquery has both 32-bit and 64-bit builds, which the redirect URLs do not handle. Check the [releases page](https://github.com/lbryio/chainquery/releases) to ensure you get the right one.
 
@@ -228,9 +228,9 @@ You can download the latest version from the [releases page](https://github.com/
 
 | OS | URL |
 | --- | --- |
-| Linux | [lbry.io/releases/lbrycrd.deb](https://lbry.io/releases/lbrycrd.deb) |
-| macOS | [lbry.io/releases/lbrycrd.dmg](https://lbry.io/releases/lbrycrd.dmg) |
-| Windows | [lbry.io/releases/lbrycrd.exe](https://lbry.io/releases/lbrycrd.exe) |
+| Linux | [lbry.com/releases/lbrycrd.deb](https://lbry.com/releases/lbrycrd.deb) |
+| macOS | [lbry.com/releases/lbrycrd.dmg](https://lbry.com/releases/lbrycrd.dmg) |
+| Windows | [lbry.com/releases/lbrycrd.exe](https://lbry.com/releases/lbrycrd.exe) |
 
 #### Using lbrycrd
 
@@ -246,7 +246,7 @@ A full list of methods is available [here](https://lbry.tech/api/blockchain).
 
 Trouble? Questions? Want to share your progress? Interact with other devs!
  
-- Join the #dev channel [in our chat](https://chat.lbry.io)
+- Join the #dev channel [in our chat](https://chat.lbry.com)
 - Introduce yourself or ask a question in [the forum](https://forum.lbry.tech/).
 - Every LBRY repository on our [GitHub](https://github.com/lbryio) contains contact information for the maintainer.
 

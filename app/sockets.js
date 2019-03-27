@@ -351,7 +351,7 @@ function getGitHubUserToken(socket) {
 
 async function getTrendingContent() {
   try {
-    const response = await got("https://api.lbry.io/file/list_trending");
+    const response = await got("https://api.lbry.com/file/list_trending");
     return JSON.parse(response.body); // eslint-disable-line padding-line-between-statements
   } catch(error) {
     return error;
@@ -383,7 +383,7 @@ async function newsletterSubscribe(data, socket) {
   }
 
   try {
-    await got.post(`https://api.lbry.io/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`);
+    await got.post(`https://api.lbry.com/list/subscribe?email=${encodeURIComponent(email)}&tag=developer`);
 
     return send(socket, {
       html: "Thank you! Please confirm subscription in your inbox.",

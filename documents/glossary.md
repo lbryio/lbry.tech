@@ -101,7 +101,7 @@ A node which can definitively decide whether a transaction is valid or not, with
 
 ### Genesis Block
 
-The first block in the blockchain. The genesis block is not mined, but is hard-coded into the protocol. It has no reference to a previous block. The LBRY genesis block was released on [28 Oct 2015](https://explorer.lbry.io/blocks/0). The first real block was mined was on [23 Jun 2016](https://explorer.lbry.io/blocks/1).
+The first block in the blockchain. The genesis block is not mined, but is hard-coded into the protocol. It has no reference to a previous block. The LBRY genesis block was released on [28 Oct 2015](https://explorer.lbry.com/blocks/0). The first real block was mined was on [23 Jun 2016](https://explorer.lbry.com/blocks/1).
 
 
 #### Hard Fork 

@@ -7,7 +7,7 @@ Paul Anthony Webb - Creator, Designer, and Developer
 
 /* THANKS */
 
-LBRY - https://lbry.io
+LBRY - https://lbry.com
 Viewers like you
 
 

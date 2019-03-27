@@ -1,7 +1,7 @@
 ---
 title: Repository Documentation Standards
 description: All repository documentation at LBRY complies with a single standard, outlined in this resource article.
---- 
+---
 
 This document outlines the standards for all public, open-source repositories used by LBRY.
 
@@ -51,7 +51,7 @@ This document exists to introduce a project to a new visitor. It may also serve 
 
 * A single header labeled "Contributing" should appear as an h2
 * This should be the same message: "Contributions to this project are welcome, encouraged, and compensated. For more details, see [CONTRIBUTING.md](*CONTRIBUTING.md*)”
-* If CONTRIBUTING.md does not exist in the project, it should link to [https://lbry.io/faq/contributing](https://lbry.io/faq/contributing) (soon to be lbry.tech/contributing)
+* If CONTRIBUTING.md does not exist in the project, it should link to [https://lbry.com/faq/contributing](https://lbry.com/faq/contributing) (soon to be lbry.tech/contributing)
 
 ### (Additional Headings)
 
@@ -65,12 +65,12 @@ This document exists to introduce a project to a new visitor. It may also serve 
 
 ### Security
 
-* "We take security seriously. Please contact [security@lbry.io](mailto:security@lbry.io) regarding any security issues. Our PGP key is [here](https://keybase.io/lbry/key.asc) if you need it."
+* "We take security seriously. Please contact [security@lbry.com](mailto:security@lbry.com) regarding any security issues. Our PGP key is [here](https://keybase.io/lbry/key.asc) if you need it."
 
 ### Contact
 
 * A single header labeled "Contact" should appear as an h2
-* This should be the same or a similar message to the following: "The primary contact for this project is [@XXX](https://github.com/@XXX) ([xxx@lbry.io](mailto:xxx@lbry.io))"
+* This should be the same or a similar message to the following: "The primary contact for this project is [@XXX](https://github.com/@XXX) ([xxx@lbry.com](mailto:xxx@lbry.com))"
 
 ### Additional Info and Links
 
@@ -84,7 +84,7 @@ This document explains anything a visitor would need to know to contribute to th
 This document should cover the following:
 
 * First, it should contain a single sentence: "This project follows the global contributing standards for all LBRY projects, to read those go < here >.”
-* A "Code Overview" section explaining some basic design choices and how to begin stepping through the code. An example would be explaining that Daemon.py is the primary entry point for the daemon code, and one can begin to trace through the code by looking for jsonrpc_xxx, where xxx is one of the api calls listed [here](https://lbry.io/api)
+* A "Code Overview" section explaining some basic design choices and how to begin stepping through the code. An example would be explaining that Daemon.py is the primary entry point for the daemon code, and one can begin to trace through the code by looking for jsonrpc_xxx, where xxx is one of the api calls listed [here](https://lbry.com/api)
 * A "Testing" section explaining how to run tests and stating that tests are necessary
 * Information on how to submit pull requests, and what to expect afterwards (e.g. a link to our [branching doc](https://github.com/lbryio/lbry/wiki/Branching-and-Merging), commands to run before submitting PR, tests must pass, changelog entry, etc). If you find this gets repetitive, it may be best to link to a global doc
 * Anything else a new visitor to a repository should know about contributing to that specific repository (linting, generating documentation, etc)

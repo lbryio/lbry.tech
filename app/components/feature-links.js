@@ -6,12 +6,12 @@
 
 const links = [
   {
-    href: "https://chat.lbry.io",
+    href: "https://chat.lbry.com",
     image: "https://spee.ch/b432346bfd641990f3dc3dbceda057b4ededa360/discord-bg.jpg",
     title: "Chat (Discord)"
   },
   {
-    href: "https://discourse.lbry.io",
+    href: "https://discourse.lbry.com",
     image: "https://spee.ch/e59dcbe6a533934eb82e73bb335b7e43cb8a9f7d/atmosphere.png",
     title: "Developer Forum"
   },
@@ -25,11 +25,11 @@ const links = [
     image: "https://spee.ch/2357ab1464bcbba3458f4eabdad9644bcfd6f491/lines.png",
     title: "Reddit"
   },
-  {
-    href: "https://lbry.io/join-us",
-    image: "https://spee.ch/6db68b3ebf22386fcd9d04237d11bfaff5ba2a95/minimalisticrubikcube.png",
-    title: "Join Our Team"
-  },
+  //   {
+  //     href: "https://lbry.com/join-us",
+  //     image: "https://spee.ch/6db68b3ebf22386fcd9d04237d11bfaff5ba2a95/minimalisticrubikcube.png",
+  //     title: "Join Our Team"
+  //   },
   {
     href: "https://twitter.com/lbryio",
     image: "https://spee.ch/9c38db124b85736adbcca48cdf34877d2110bbcd/GeoShapes.png",
