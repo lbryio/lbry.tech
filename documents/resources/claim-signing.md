@@ -16,7 +16,7 @@ Reilly wants to publish _Terror on the Midway_ to the channel he claimed `lbry:/
                 "licenseUrl": "",
                 "nsfw": false,
                 "preview": "",
-                "thumbnail": "https://s3.amazonaws.com/files.lbry.com/thumbnails/superman1940-thumb.png",
+                "thumbnail": "https://s3.amazonaws.com/files.lbry.io/thumbnails/superman1940-thumb.png",
                 "title": "Terror on the Midway - Superman Ep 9",
                 "version": "_0_1_0"
             },
@@ -99,7 +99,7 @@ Now he add this signature to the claim:
                 "licenseUrl": "",
                 "nsfw": false,
                 "preview": "",
-                "thumbnail": "https://s3.amazonaws.com/files.lbry.com/thumbnails/superman1940-thumb.png",
+                "thumbnail": "https://s3.amazonaws.com/files.lbry.io/thumbnails/superman1940-thumb.png",
                 "title": "Terror on the Midway - Superman Ep 9",
                 "version": "_0_1_0"
             },
