@@ -4,7 +4,7 @@ description: A simplified version of the Android build documentation to get up a
 ---
 
 ### Introduction
-If you would like to contribute to the Android app, but find the build documentation a little daunting, this guide lets you copy-paste your way to a successful APK build. 
+If you would like to contribute to the Android app, but find the build documentation a little daunting, this guide lets you copy-paste your way to a successful APK build.
 
 #### Estimated build time
 25 - 40 minutes (depending on Internet connection speeds)
@@ -24,7 +24,7 @@ sudo apt-get install -y curl ca-certificates software-properties-common gpg-agen
 sudo add-apt-repository ppa:deadsnakes/ppa -y && \
      curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt-get -y update && apt-get -y install autoconf autogen automake libtool libffi-dev \ 
+sudo apt-get -y update && apt-get -y install autoconf autogen automake libtool libffi-dev \
      build-essential python3.7 python3.7-dev python3.7-venv python3-pip ccache git libncurses5:i386 libstdc++6:i386 \
      libgtk2.0-0:i386 libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 python2.7-dev \
      python-pip openjdk-8-jdk unzip zlib1g-dev zlib1g:i386 m4 libc6-dev-i386 yarn gawk nodejs npm
@@ -64,7 +64,7 @@ tar -xvf ~/.buildozer/android/platform/android-sdk_r23-linux.tgz -C ~/.buildozer
 ### Step 5 of 10
 Install the react-native-cli npm package.
 ```
-sudo npm install -g react-native-cli 
+sudo npm install -g react-native-cli
 ```
 
 ### Step 6 of 10
@@ -77,14 +77,14 @@ wget -q 'https://eu.crystax.net/download/crystax-ndk-10.3.2-linux-x86_64.tar.xz'
 ```
 
 ### Step 7 of 10
-Clone the lbryio/lbry-android git repository and create your buildozer.spec file. The provide buildozer.spec.sample contains defaults provided you followed steps 1 through 5 exactly as described. You can also customise the spec file if you want to.  
+Clone the lbryio/lbry-android git repository and create your buildozer.spec file. The provide buildozer.spec.sample contains defaults provided you followed steps 1 through 5 exactly as described. You can also customise the spec file if you want to.
 ```
 git clone https://github.com/lbryio/lbry-android
 cd lbry-android
 cp buildozer.spec.sample buildozer.spec
 ```
 
-Step 8 of 10
+### Step 8 of 10
 Install the npm packages required for the app's React Native code.
 ```
 cd app
@@ -92,14 +92,14 @@ npm install
 cd ..
 ```
 
-Step 9 of 10
+### Step 9 of 10
 Copy a couple of required files from the repository for the build to be successful.
 ```
 cp scripts/build-target-python.sh ~/.buildozer/android/crystax-ndk-10.3.2/build/tools/build-target-python.sh
 cp scripts/mangled-glibc-syscalls.h ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-21/arch-arm/usr/include/crystax/bionic/libc/include/sys/mangled-glibc-syscalls.h
 ```
 
-Step 10 of 10
+### Step 10 of 10
 If you made it this far, you're finally ready to build the package! You just have to run a single command to generate the APK.
 ```
 buildozer android debug
