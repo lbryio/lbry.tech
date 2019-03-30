@@ -71,7 +71,7 @@ sudo npm install -g react-native-cli
 Install the Crystax NDK which is required for building Python 3.7 for the mobile app, and a number of native C / C++ modules and packages used by the app. Run the following commands to download and extract the NDK.
 ```
 wget 'https://www.crystax.net/download/crystax-ndk-10.3.2-linux-x86_64.tar.xz' -P ~/.buildozer/android/ && \
-  tar -xf ~/.buildozer/android/crystax-ndk-10.3.2-linux-x86_64.tar.xz -C ~/.buildozer/android/ && \
+  tar -xvf ~/.buildozer/android/crystax-ndk-10.3.2-linux-x86_64.tar.xz -C ~/.buildozer/android/ && \
   rm -rf ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-9 && \
   ln -s ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-21 ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-9
 ```
