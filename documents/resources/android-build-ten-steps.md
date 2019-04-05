@@ -49,12 +49,12 @@ The Android SDK needs to be setup for buildozer. This requires creating a few di
 ```
 mkdir -p ~/.buildozer/android/platform
 wget 'https://dl.google.com/android/android-sdk_r23-linux.tgz' -P ~/.buildozer/android/platform/ && \
-  wget 'https://dl.google.com/android/repository/platform-27_r01.zip' -P ~/.buildozer/android/platform/ && \
+  wget 'https://dl.google.com/android/repository/platform-28_r06.zip' -P ~/.buildozer/android/platform/ && \
   wget 'https://dl.google.com/android/repository/build-tools_r26.0.2-linux.zip' -P ~/.buildozer/android/platform/
 tar -xvf ~/.buildozer/android/platform/android-sdk_r23-linux.tgz -C ~/.buildozer/android/platform/ && \
   mv ~/.buildozer/android/platform/android-sdk-linux ~/.buildozer/android/platform/android-sdk-23 && \
-  unzip ~/.buildozer/android/platform/platform-27_r01.zip -d ~/.buildozer/android/platform/android-sdk-23/platforms && \
-  mv ~/.buildozer/android/platform/android-sdk-23/platforms/android-8.1.0 ~/.buildozer/android/platform/android-sdk-23/platforms/android-27 && \
+  unzip ~/.buildozer/android/platform/platform-28_r06.zip -d ~/.buildozer/android/platform/android-sdk-23/platforms && \
+  mv ~/.buildozer/android/platform/android-sdk-23/platforms/android-9 ~/.buildozer/android/platform/android-sdk-23/platforms/android-28 && \
   mkdir -p ~/.buildozer/android/platform/android-sdk-23/build-tools && \
   unzip ~/.buildozer/android/platform/build-tools_r26.0.2-linux.zip -d ~/.buildozer/android/platform/android-sdk-23/build-tools && \
   mkdir -p ~/.buildozer/android/platform/android-sdk-23/licenses && \
