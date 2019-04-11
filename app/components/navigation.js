@@ -13,7 +13,7 @@ import html from "choo/html";
 export default currentUrl => {
   const links = [
     {
-      name: "LBRY.io",
+      name: "LBRY.com",
       title: "Escape the techno scene",
       url: process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://lbry.com"
     },
