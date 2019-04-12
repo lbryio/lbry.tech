@@ -50,6 +50,8 @@ function slugify(stringToSlugify) {
     .replace(/\)/g, "")
     .replace(/,/g, "");
 
-  if (finalString.match(numberRegex)) finalString = `_${finalString}`;
+  if (finalString.match(numberRegex))
+    finalString = `_${finalString}`;
+
   return `#${finalString}`;
 }

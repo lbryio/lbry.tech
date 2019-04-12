@@ -51,7 +51,9 @@ export default () => {
   let imageLink = "";
 
   for (const link of links) {
-    if (link.image) imageLink = `<img alt="${link.title}" src="${link.image}"/>`;
+    if (link.image)
+      imageLink = `<img alt="${link.title}" src="${link.image}"/>`;
+
     renderedLinks.push(returnLinkTemplate(link.href, link.title, imageLink));
   }
 

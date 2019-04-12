@@ -77,7 +77,14 @@
   }
 }
 
-.api-toc__items {
+.api-toc__title {
+  padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+  opacity: 0.3;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.api-toc__commands {
   font-size: 0.8rem;
   line-height: 1.33;
   list-style-type: none;
@@ -85,7 +92,7 @@
   padding-bottom: 1rem;
 }
 
-.api-toc__item {
+.api-toc__command {
   &:hover {
     background-color: $lbry-gray-2;
   }
@@ -215,6 +222,8 @@
 }
 
 .api-content__body-argument {
+  display: flex;
+
   &:not(:last-of-type) {
     border-bottom: 1px solid $lbry-gray-2;
   }
