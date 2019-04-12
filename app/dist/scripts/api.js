@@ -1,10 +1,14 @@
-"use strict"; /* global document, Jets */
+"use strict"; /* global document, Jets, window */
 
 
 
 // Initiate search functionality
+const contentTag = window.location.pathname.split("/").pop() === "sdk" ?
+  ".api-toc__section" :
+  "#toc";
+
 let jets = new Jets({
-  contentTag: "#toc",
+  contentTag,
   searchTag: "#input-search"
 });
 
@@ -15,7 +19,6 @@ document.getElementById("input-search").value = "";
 document.getElementById("input-search").addEventListener("keyup", () => {
   if (document.getElementById("input-search").value)
     document.querySelector(".api-toc__search-clear").classList.add("active");
-
   else
     document.querySelector(".api-toc__search-clear").classList.remove("active");
 });
@@ -24,6 +27,7 @@ document.getElementById("input-search").addEventListener("keyup", () => {
 document.querySelector(".api-toc__search-clear").addEventListener("click", () => {
   document.getElementById("input-search").value = "";
   document.querySelector(".api-toc__search-clear").classList.remove("active");
+
   jets.destroy();
   reinitJets();
 });
@@ -55,7 +59,7 @@ function handleApiLanguageToggles(language) {
 
 function reinitJets() {
   jets = new Jets({
-    contentTag: "#toc",
+    contentTag,
     searchTag: "#input-search"
   });
 

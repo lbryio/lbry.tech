@@ -16,9 +16,7 @@ import redirects from "@data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = process.env.NODE_ENV === "development" ?
-  "https://cdn.jsdelivr.net/gh/lbryio/lbry@generate_examples/docs/api.json" : // TODO: Remove when `generate_examples` is merged into master
-  "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
+const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@api_doc_categories/docs/api.json";
 
 
 
@@ -26,7 +24,9 @@ const sdkApi = process.env.NODE_ENV === "development" ?
 
 export default async(state) => {
   // below is evil, I just inherited it -- Jeremy
-  const apilabel = state.params.wildcard == "sdk" ? "SDK" : state.params.wildcard.charAt(0).toLocaleUpperCase() + state.params.wildcard.substring(1);
+  const apilabel = state.params.wildcard === "sdk" ?
+    "SDK" :
+    state.params.wildcard.charAt(0).toLocaleUpperCase() + state.params.wildcard.substring(1);
 
   state.lbry = {
     title: apilabel + " API Documentation",
@@ -45,7 +45,9 @@ export default async(state) => {
             <ul class="api-toc__search-results"></ul>
           </div>
 
-          <ul class="api-toc__items" id="toc" role="navigation">${createApiSidebar(apiResponse)}</ul>
+          <ul class="api-toc__commands" id="toc" role="navigation">
+            ${apilabel === "SDK" ? createSdkSidebar(apiResponse) : createApiSidebar(apiResponse)}
+          </ul>
         </aside>
         <section class="api-content">
           <div class="api-documentation" id="toc-content">
@@ -57,7 +59,7 @@ export default async(state) => {
             </nav>
 
             ${createApiHeader(state.params.wildcard)}
-            ${createApiContent(apiResponse)}
+            ${apilabel === "SDK" ? createSdkContent(apiResponse) : createApiContent(apiResponse)}
           </div>
         </section>
       </div>
@@ -150,11 +152,74 @@ function createApiSidebar(apiDetails) {
 
   for (const apiDetail of apiDetails) {
     apiSidebar.push(`
-      <li class="api-toc__item">
+      <li class="api-toc__command">
         <a href="#${apiDetail.name}" title="Go to ${apiDetail.name} section">
           ${apiDetail.name}
         </a>
       </li>
+    `);
+  }
+
+  return apiSidebar;
+}
+
+function createSdkContent(apiDetails) {
+  const apiContent = [];
+  const sectionTitles = Object.keys(apiDetails);
+
+  for (const title of sectionTitles) {
+    const commands = apiDetails[title].commands;
+    const description = apiDetails[title].doc;
+
+    apiContent.push(
+      commands.length ?
+        commands.map(command => createSdkContentSections(title, description, command)).join("") :
+        ""
+    );
+  }
+
+  return apiContent;
+}
+
+function createSdkContentSections(sectionTitle, sectionDescription, sectionDetails) {
+  /*
+    <h2 id="${sectionTitle}">${sectionTitle}</h2>
+    <p>${sectionDescription}</p>
+    <hr/>
+  */
+
+  return `
+    <div class="api-content__body">
+      <h2 id="${sectionDetails.name}">${sectionDetails.name}</h2>
+      <p>${sectionDetails.description}</p>
+
+      <h3>Arguments</h3>
+      <ul class="api-content__body-arguments">
+        ${renderArguments(sectionDetails.arguments).join("")}
+      </ul>
+
+      <h3>Returns</h3>
+      <pre><code>${renderReturns(sectionDetails.returns)}</code></pre>
+    </div>
+
+    <div class="api-content__example">
+      ${renderExamples(sectionDetails.examples).join("")}
+    </div>
+  `;
+}
+
+function createSdkSidebar(apiDetails) {
+  const sectionTitles = Object.keys(apiDetails);
+  const apiSidebar = [];
+
+  for (const title of sectionTitles) {
+    const commands = apiDetails[title].commands;
+
+    apiSidebar.push(`
+      <ul class="api-toc__section">
+        <li class="api-toc__title">${title}</li>
+        ${(commands.map(command => `<li class="api-toc__command"><a href="#${command.name}" title="Go to ${command.name} section">${command.name}</a></li>`)).join("")}
+      </ul>
     `);
   }
 
@@ -192,6 +257,9 @@ async function parseApiFile(urlSlug) {
 function renderArguments(args) {
   const argumentContent = [];
 
+  if (!args || args.length === 0)
+    return argumentContent;
+
   for (const arg of args) {
     argumentContent.push(`
       <li class="api-content__body-argument">
@@ -211,6 +279,11 @@ function renderArguments(args) {
 function renderExamples(args) {
   const exampleContent = [];
 
+  if (!args || args.length === 0) {
+    exampleContent.push("<pre><code>// example(s) to come later</code></pre>");
+    return exampleContent;
+  }
+
   for (const arg of args) {
     exampleContent.push(`
       <h3>${arg.title}</h3><br/>
@@ -220,8 +293,19 @@ function renderExamples(args) {
 
       <h3>Output</h3><br/>
       <pre><code>${arg.output}</code></pre>
+      <hr/>
     `);
   }
 
   return exampleContent;
+}
+
+function renderReturns(args) {
+  let returnContent = [];
+
+  if (!args || args.length === 0)
+    return returnContent;
+
+  returnContent = dedent(JSON.parse(JSON.stringify(args)));
+  return returnContent;
 }
