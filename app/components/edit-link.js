@@ -8,7 +8,7 @@ import html from "choo/html";
 
 //  U T I L
 
-import config from "@root/config";
+import config from "~root/config";
 
 
 

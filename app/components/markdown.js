@@ -11,7 +11,7 @@ import fs from "graceful-fs";
 import html from "choo/html";
 import m from "markdown-it";
 import markdownAnchor from "markdown-it-anchor";
-import markdownSup from "@module/markdown-it-sup";
+import markdownSup from "~module/markdown-it-sup";
 import path from "path";
 import raw from "choo/html/raw";
 

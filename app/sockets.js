@@ -9,9 +9,9 @@ import html from "choo/html";
 
 //  U T I L S
 
-import fetchMetadata from "@helper/fetch-metadata";
-import { generateGitHubFeed } from "@helper/github";
-import messageSlack from "@helper/slack";
+import fetchMetadata from "~helper/fetch-metadata";
+import { generateGitHubFeed } from "~helper/github";
+import messageSlack from "~helper/slack";
 
 const githubAppId = process.env.GITHUB_APP_ID;
 const githubAppSecret = process.env.GITHUB_APP_SECRET;

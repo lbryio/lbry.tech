@@ -14,7 +14,7 @@ import stringifyObject from "stringify-object";
 import messageSlack from "./slack";
 import publishMeme from "./publish-meme";
 import randomString from "./random-string";
-import { send } from "@socket";
+import { send } from "~socket";
 import uploadImage from "./upload-image";
 
 const allowedQueryMethods = [

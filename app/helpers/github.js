@@ -11,8 +11,8 @@ import redis from "redis";
 
 //  U T I L S
 
-import messageSlack from "@helper/slack";
-import relativeDate from "@module/relative-date";
+import messageSlack from "~helper/slack";
+import relativeDate from "~module/relative-date";
 
 let octokit;
 

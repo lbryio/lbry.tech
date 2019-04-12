@@ -11,7 +11,7 @@ import raw from "choo/html/raw";
 
 //  U T I L S
 
-import markdown from "@component/markdown";
+import markdown from "~component/markdown";
 import page404 from "./404";
 
 

@@ -16,8 +16,8 @@ import websockets from "@inc/fastify-ws";
 //  U T I L S
 
 import handleSocketMessages from "./sockets";
-import messageSlack from "@helper/slack";
-import redirects from "@data/redirects.json";
+import messageSlack from "~helper/slack";
+import redirects from "~data/redirects.json";
 
 const server = fastify({
   logger: {

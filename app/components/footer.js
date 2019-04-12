@@ -8,7 +8,7 @@ import html from "choo/html";
 
 //  U T I L S
 
-import config from "@root/config";
+import config from "~root/config";
 import editLink from "./edit-link";
 import emailSubscribe from "./email-subscribe";
 

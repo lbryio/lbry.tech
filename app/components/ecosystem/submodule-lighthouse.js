@@ -4,7 +4,7 @@
 
 //  U T I L
 
-import markdown from "@component/markdown";
+import markdown from "~component/markdown";
 
 
 

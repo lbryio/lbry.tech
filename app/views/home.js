@@ -8,7 +8,7 @@ import html from "choo/html";
 
 //  U T I L
 
-import linkGrid from "@component/link-grid";
+import linkGrid from "~component/link-grid";
 
 
 
