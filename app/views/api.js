@@ -16,7 +16,7 @@ import redirects from "~data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@api_doc_categories/docs/api.json";
+const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
 
 
 
