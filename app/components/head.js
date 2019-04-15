@@ -43,8 +43,8 @@ export default (state, emit) => {
     <meta property="og:title" content="${title}"/>
     <meta property="og:description" content="${description}"/>
     <meta property="og:image" content="${newMetadata && newMetadata["og:image"] ? newMetadata["og:image"] : "/assets/media/images/og-image.png"}"/>
-    <meta property="og:image:height" content="${newMetadata && newMetadata["og:image:height"] ? newMetadata["og:image:height"] : 720}"/>
-    <meta property="og:image:width" content="${newMetadata && newMetadata["og:image:width"] ? newMetadata["og:image:width"] : 1280}"/>
+    <meta property="og:image:height" content="${newMetadata && newMetadata["og:image:height"] ? newMetadata["og:image:height"] : 1125}"/>
+    <meta property="og:image:width" content="${newMetadata && newMetadata["og:image:width"] ? newMetadata["og:image:width"] : 2000}"/>
     <meta property="og:locale" content="en_US"/>
     <meta property="og:site_name" content="LBRY.tech"/>
     <meta property="og:type" content="website"/>
