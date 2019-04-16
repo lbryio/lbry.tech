@@ -15,7 +15,7 @@ import headerSdk from "~component/api/header-sdk";
 import redirects from "~data/redirects.json";
 
 const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
-const cache = new Map();
+const cacheBump = new Map();
 const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
 
 
@@ -245,7 +245,7 @@ async function parseApiFile(urlSlug) {
   if (!apiFileLink)
     return Promise.reject(new Error("Failed to fetch API docs"));
 
-  const response = await got(apiFileLink, { cache: cache, json: true });
+  const response = await got(apiFileLink, { cache: cacheBump, json: true });
 
   try {
     return response.body;
