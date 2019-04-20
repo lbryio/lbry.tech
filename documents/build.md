@@ -154,7 +154,7 @@ npm run dev
 
 ##### Other Applications
 
-Who needs JavaScript? If performance is your number one goal, you probably won't want to use Electron. You can use any language you want to build and app on LBRY.
+Who needs JavaScript? If performance is your number one goal, you probably won't want to use Electron. You can use any language you want to build an app on LBRY.
 
 To build a desktop application in your language or framework of choice, follow your typical steps to create a basic application and then [follow the steps for using the LBRY SDK](#sdk).
 
