@@ -14,9 +14,9 @@ import headerBlockchain from "~component/api/header-blockchain";
 import headerSdk from "~component/api/header-sdk";
 import redirects from "~data/redirects.json";
 
-const blockchainApi = "https://cdn.jsdelivr.net/gh/lbryio/lbrycrd@master/contrib/devtools/generated/api_v1.json";
+const blockchainApi = "https://raw.githubusercontent.com/lbryio/lbrycrd/master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = "https://cdn.jsdelivr.net/gh/lbryio/lbry@master/docs/api.json";
+const sdkApi = "https://raw.githubusercontent.com/lbryio/lbry/master/docs/api.json";
 
 
 
