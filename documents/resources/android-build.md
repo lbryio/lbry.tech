@@ -1,22 +1,38 @@
 ---
-title: Build the LBRY Android app in 10 simple steps (or less)!
-description: A simplified version of the Android build documentation to get up and running as quickly as possible.
+title: Building the LBRY Android App
+description: Step-by-step build instructions for the LBRY Android App
 ---
 
 ### Introduction
-If you would like to contribute to the Android app, but find the build documentation a little daunting, this guide lets you copy-paste your way to a successful APK build.
+This guide provides step-by-step instructions to setup and build the [LBRY Android App](https://lbry.com/android) for development purposes. 
 
-#### Estimated build time
-25 - 40 minutes (depending on Internet connection speeds)
+#### Estimated Time
+25 - 40 minutes
 
-#### What do you need?
-* A computer running Ubuntu 18.04
-* Internet access to download modules and packages.
-* At least 15GB of free disk space.
-* Alternatively, Docker. You can skip steps 1 through 5 if you make use of the `lbry/android-base` Docker base image. Scroll down to Fast track if you would prefer to use Docker.
+#### Prerequisites
+- A computer running Linux with `apt` (otherwise, alter the package installation instructions accordingly)
+- At least 15GB of free disk space
+- Internet access
 
-### Step 1 of 10
-Install all the apt packages required by running the following commands. You can copy-paste directly to your terminal.
+### Environment Setup
+
+You can set up your environment via Docker or manually.
+
+#### Docker Environment Setup
+
+Use [Docker](https://docs.docker.com/install/) and start a container using the `lbry/android-base` image. Run:
+```
+docker run -it lbry/android-base:latest /bin/bash
+```
+
+When this is complete, continue to [Building the App](#building-the-app).
+
+#### Manual Environment Setup
+
+##### 1. Install Packages via Apt
+
+Install required system packages via `apt`:
+
 ```
 sudo dpkg --add-architecture i386
 sudo apt-get -y update
@@ -30,21 +46,26 @@ sudo apt-get -y update && apt-get -y install autoconf autogen automake libtool l
      python-pip openjdk-8-jdk unzip zlib1g-dev zlib1g:i386 m4 libc6-dev-i386 yarn gawk nodejs npm
 ```
 
-### Step 2 of 10
-Install a couple of packages using the Python package installer
+##### 2. Setup Python
+
+Install required Python packages:
+
 ```
 sudo -H pip install --upgrade cython==0.28.1 setuptools
 ```
 
-### Step 3 of 10
-Install buildozer, a tool for creating the apk package using the python for android toolcahin.
+##### 3. Setup Buildozer
+
+Install buildozer, a tool for creating the apk package using the python for android toolchain:
+
 ```
 git clone https://github.com/lbryio/buildozer.git
 cd buildozer && python2.7 setup.py install && cd ..
 ```
 
-### Step 4 of 10
-The Android SDK needs to be setup for buildozer. This requires creating a few directories and downloading a number of files. Run the following commands to create the buildozer directory, download the required archives and extract them into their proper destination folders.
+##### 4. Setup Android SDK
+
+The Android SDK needs to be setup for buildozer. This requires creating a few directories and downloading a number of files. Run the following commands to create the buildozer directory, download the required archives and extract them into their proper destination folders:
 
 ```
 mkdir -p ~/.buildozer/android/platform
@@ -61,14 +82,23 @@ tar -xvf ~/.buildozer/android/platform/android-sdk_r23-linux.tgz -C ~/.buildozer
   echo $'\nd56f5187479451eabf01fb78af6dfcb131a6481e' > ~/.buildozer/android/platform/android-sdk-23/licenses/android-sdk-license
 ```
 
-### Step 5 of 10
-Install the react-native-cli npm package.
+##### 5. Install React
+
+Install the react-native-cli npm package:
 ```
 sudo npm install -g react-native-cli
 ```
 
-### Step 6 of 10
-Install the Crystax NDK which is required for building Python 3.7 for the mobile app, and a number of native C / C++ modules and packages used by the app. Run the following commands to download and extract the NDK.
+When this is complete, continue to [Building the App](#building-the-app).
+
+### Building the App
+
+After [preparing your environment](#setup-environment), complete the steps below.
+
+##### 1. Install Crystax
+ 
+Crystax NDK is required for building Python 3.7 for the mobile app and a number of native C / C++ modules and packages used by the app. Run the following commands to download and extract the NDK:
+
 ```
 wget 'https://www.crystax.net/download/crystax-ndk-10.3.2-linux-x86_64.tar.xz' -P ~/.buildozer/android/ && \
   tar -xvf ~/.buildozer/android/crystax-ndk-10.3.2-linux-x86_64.tar.xz -C ~/.buildozer/android/ && \
@@ -76,40 +106,46 @@ wget 'https://www.crystax.net/download/crystax-ndk-10.3.2-linux-x86_64.tar.xz' -
   ln -s ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-21 ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-9
 ```
 
-### Step 7 of 10
-Clone the lbryio/lbry-android git repository and create your buildozer.spec file. The provide buildozer.spec.sample contains defaults provided you followed steps 1 through 5 exactly as described. You can also customise the spec file if you want to.
+##### 2. Clone and Configure the Repository
+
+Clone the lbryio/lbry-android git repository:
+
 ```
 git clone https://github.com/lbryio/lbry-android
 cd lbry-android
 cp buildozer.spec.sample buildozer.spec
 ```
 
-### Step 8 of 10
-Install the npm packages required for the app's React Native code.
+The provided `buildozer.spec.sample` contains defaults provided you followed the environment setup exactly as described. If you altered the steps for your environment or you're encountering build trouble, check `buildozer.spec` to ensure everything is pointing in the right places.
+
+##### 3. Install npm packages
+
+Install the npm packages required for the app's React Native code:
+
 ```
 cd app
 npm install
 cd ..
 ```
 
-### Step 9 of 10
-Copy a couple of required files from the repository for the build to be successful.
+##### 4. Copy Build Files
+
+Copy required files from the repository for the build to be successful:
 ```
 cp scripts/build-target-python.sh ~/.buildozer/android/crystax-ndk-10.3.2/build/tools/build-target-python.sh
 cp scripts/mangled-glibc-syscalls.h ~/.buildozer/android/crystax-ndk-10.3.2/platforms/android-21/arch-arm/usr/include/crystax/bionic/libc/include/sys/mangled-glibc-syscalls.h
 ```
 
-### Step 10 of 10
-If you made it this far, you're finally ready to build the package! You just have to run a single command to generate the APK.
+##### 5. Build the thing!
+
+You're finally ready to build the package! You just have to run a single command to generate the APK:
+
 ```
 buildozer android debug
 ```
 
-### Fast Track
-Install Docker and start a container using the `lbry/android-base` image, which is about 1.72GB in size. Run the following commands for Ubuntu and then follow steps 6 through 10 in the container's bash prompt.
-```
-sudo apt-get install docker-ce
-docker run -it lbry/android-base:latest /bin/bash
-```
+### All Set? Now Contribute!
 
-**Protip:** You can also make use of Docker to run your builds on macOS or Windows.
+Everything built at LBRY is open source.
+
+Check out [lbry-android](https://github.com/lbryio/lbry-android) on GitHub to find issues or read our [Contributor's Guide](/contribute) to learn more.
