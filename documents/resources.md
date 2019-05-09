@@ -16,4 +16,5 @@ description: Find the LBRY specification, API documentation, our Contributor's g
 - [LBRY SDK Configuration Settings](/resources/daemon-settings)
 - [Claim Signing](/resources/claim-signing)
 - [Regtest Setup](/resources/regtest-setup)
+- [LBRY Android App Build Steps](/resources/android-build)
 - [Lighthouse (search) API](https://lbryio.github.io/lighthouse)
