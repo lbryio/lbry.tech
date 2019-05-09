@@ -27,53 +27,54 @@ If you want to read a more general overview on application building (or you don'
 
 ## Hello Satoshi
 
-This section will guide you through creating a basic [Electron](https://electronjs.org/) application that calls to the LBRY network and renders an image returned by the network.
+This section will guide you through creating a basic [Electron](https://electronjs.org) application that calls to the LBRY network and renders an image returned by the network.
 
 Electron is nice because it allows you to easily create web apps that don't rely on any centralized web servers, but you can absolutely use any tooling or language you would like.
 
 ### The Steps
 
-_These steps require [npm](https://www.npmjs.com/). Learn how to install it [here](https://www.npmjs.com/get-npm)._
+_These steps require [npm](https://www.npmjs.com). Learn how to install it [here](https://www.npmjs.com/get-npm)._
 
 #### 1. Download and build the starter app
 
 [electron-starter](https://github.com/lbryio/electron-starter) is the `create-react-app` of LBRY application building.
- 
-   ```
-   git clone https://github.com/lbryio/electron-starter
-   cd electron-starter
-   npm install
-   npm run dev
-   ```
+
+```
+git clone https://github.com/lbryio/electron-starter
+cd electron-starter
+npm install
+npm run dev
+```
 
 #### 2. Verify the app works
 
 Type a word into the text input and click the button to [resolve](https://lbry.tech/api/sdk#resolve) it. This performs a [[claim]] lookup, which retrieves metadata the title, thumbnail, and file type from the LBRY blockchain.
 
-   Try resolving `lbry://doitlive`.
+Try resolving `lbry://doitlive`.
 
 #### 3. Modify the code
 
-   Now that we have the metadata, let's [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment these lines in the app's [renderer/index.js](https://github.com/lbryio/electron-starter/blob/master/src/renderer/index.js) file.
+Now that we have the metadata, let's [get](https://lbry.tech/api/sdk#get) the actual file! The code to do this is already there, just un-comment these lines in the app's [renderer/index.js](https://github.com/lbryio/electron-starter/blob/master/src/renderer/index.js) file.
 
-   ```
-    claimData.innerText = "Loading...";
-    Lbry.get({ uri: `lbry://${value}` })
-        .then(result => {
-            const filePath = result.download_path;
-            const image = document.createElement("img");
+```js
+claimData.innerText = "Loading...";
 
-            image.src = filePath;
-            imageWrapper.appendChild(image);
+Lbry.get({ uri: `lbry://${value}` })
+  .then(result => {
+    const filePath = result.download_path;
+    const image = document.createElement("img");
 
-            claimData.innerText = JSON.stringify(result, null, 2);
-        })
-        .catch(error => {
-            claimData.innerText = JSON.stringify(error, null, 2);
-        });
-   ```
+    image.src = filePath;
+    imageWrapper.appendChild(image);
 
-   This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://doitlive`.
+    claimData.innerText = JSON.stringify(result, null, 2);
+  })
+  .catch(error => {
+    claimData.innerText = JSON.stringify(error, null, 2);
+  });
+```
+
+This is the code that actually downloads a file. There are more robust ways to handle the download progress, but this will work fine for images. After you added that code back, try `get`ing `lbry://doitlive`.
 
 ### You Did It!
 
@@ -127,9 +128,9 @@ It is also possible to create a browser extension similar to Joule and Metamask.
 
 1. Have the user run a local copy of the [SDK](#sdk) on their computer and send commands from the browser that interact with the user's personal wallet.
 
-2. Run the [SDK](#sdk) on a centrally hosted server and manage keys or funds for each user. If you're doing this, you'll want to read [Full Web Applications](#full-web-applications).
+1. Run the [SDK](#sdk) on a centrally hosted server and manage keys or funds for each user. If you're doing this, you'll want to read [Full Web Applications](#full-web-applications).
 
-Going through a centralized server makes it easier on users, but comes with more responsibility to keep your user's funds secure. It also requires creating business logic on your server to associate user accounts with common types like claims and files. 
+Going through a centralized server makes it easier on users, but comes with more responsibility to keep your user's funds secure. It also requires creating business logic on your server to associate user accounts with common types like claims and files.
 
 #### Desktop Applications
 
@@ -178,7 +179,7 @@ We do not currently have tooling available to build LBRY apps on iOS.
 
 ### SDK
 
-The [LBRY SDK](https://github.com/lbryio/lbry) provides an API that enables easy access to all functionality of the LBRY network. Most applications will choose to use the SDK. 
+The [LBRY SDK](https://github.com/lbryio/lbry) provides an API that enables easy access to all functionality of the LBRY network. Most applications will choose to use the SDK.
 
 You can download the latest version from the [releases page](https://github.com/lbryio/lbry/releases) or via the following URLs, which will always download the latest SDK for each operating system:
 
@@ -195,10 +196,10 @@ Once that is downloaded, there are two steps to get it integrated into your app.
 First, run `lbrynet start` in the directory you downloaded the SDK. This starts the API server and connects to the LBRY network.
 
 Then, use an API wrapper to talk to the SDK or write your own. There are a number of simple [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages, created by LBRY community members! These allow you to easily send commands to the SDK in the language of your choice.
- 
+
 If a wrapper for the language you would like to use doesn't exist, it is still fairly easy to interact with. The SDK provides a JSON-RPC server at `localhost:5279` for interaction. You can call it via `cURL` or the HTTP functionality provided by the language you are using. You can look at an existing wrapper in another language for more detail.
 
-The API provided by the SDK is documented [here](https://lbry.tech/api/sdk). 
+The API provided by the SDK is documented [here](https://lbry.tech/api/sdk).
 
 ### Chainquery
 
@@ -245,10 +246,7 @@ A full list of methods is available [here](https://lbry.tech/api/blockchain).
 ## Community and Support
 
 Trouble? Questions? Want to share your progress? Interact with other devs!
- 
+
 - Join the #dev channel [in our chat](https://chat.lbry.com)
-- Introduce yourself or ask a question in [the forum](https://forum.lbry.tech/).
+- Introduce yourself or ask a question in [the forum](https://forum.lbry.tech).
 - Every LBRY repository on our [GitHub](https://github.com/lbryio) contains contact information for the maintainer.
-
-
-

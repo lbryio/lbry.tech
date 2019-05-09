@@ -35,6 +35,7 @@ document.querySelector(".api-toc__search-clear").addEventListener("click", () =>
 
 
 // Code toggles
+handleApiLanguageToggles("cli");
 handleApiLanguageToggles("curl");
 handleApiLanguageToggles("lbrynet");
 handleApiLanguageToggles("python");
@@ -44,6 +45,9 @@ handleApiLanguageToggles("python");
 //  H E L P E R S
 
 function handleApiLanguageToggles(language) {
+  if (!document.getElementById(`toggle-${language}`))
+    return;
+
   document.getElementById(`toggle-${language}`).addEventListener("click", () => {
     const codeExamples = document.querySelectorAll(`[data-api-example-type="${language}"]`);
     const examples = document.querySelectorAll("[data-api-example-type]");

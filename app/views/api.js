@@ -53,9 +53,7 @@ export default async(state) => {
           <div class="api-documentation" id="toc-content">
             <div></div>
             <nav class="api-content__items">
-              <button class="api-content__item" id="toggle-curl" type="button">curl</button>
-              <button class="api-content__item" id="toggle-lbrynet" type="button">lbrynet</button>
-              <button class="api-content__item" id="toggle-python" type="button">python</button>
+              ${renderToggles(apilabel === "SDK")}
             </nav>
 
             ${createApiHeader(state.params.wildcard)}
@@ -68,7 +66,10 @@ export default async(state) => {
       <script src="/assets/scripts/api.js"></script>
 
       <script>
-        document.getElementById("toggle-curl").click();
+        if (window.location.pathname === "/api/blockchain")
+          document.getElementById("toggle-cli").click();
+        else
+          document.getElementById("toggle-curl").click();
       </script>
     `;
   }
@@ -109,7 +110,7 @@ export default async(state) => {
 function createApiContent(apiDetails) {
   const apiContent = [];
 
-  for (const apiDetail of apiDetails) {
+  apiDetails.forEach(apiDetail => {
     let apiDetailsReturns = "";
 
     if (apiDetail.returns)
@@ -121,15 +122,14 @@ function createApiContent(apiDetails) {
         <p>${apiDetail.description}</p>
 
         ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api-content__body-arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
-
-        <h3>Returns</h3><pre><code>${dedent(apiDetailsReturns)}</code></pre>
+        ${apiDetail.returns ? `<h3>Returns</h3><pre><code>${dedent(apiDetailsReturns)}</code></pre>` : ""}
       </div>
 
       <div class="api-content__example">
         ${apiDetail.examples && apiDetail.examples.length ? renderExamples(apiDetail.examples).join("") : `<pre><code>// example(s) for ${apiDetail.name} to come later</code></pre>`}
       </div>
     `);
-  }
+  });
 
   return apiContent;
 }
@@ -150,7 +150,7 @@ function createApiHeader(slug) {
 function createApiSidebar(apiDetails) {
   const apiSidebar = [];
 
-  for (const apiDetail of apiDetails) {
+  apiDetails.forEach(apiDetail => {
     apiSidebar.push(`
       <li class="api-toc__command">
         <a href="#${apiDetail.name}" title="Go to ${apiDetail.name} section">
@@ -158,7 +158,7 @@ function createApiSidebar(apiDetails) {
         </a>
       </li>
     `);
-  }
+  });
 
   return apiSidebar;
 }
@@ -167,7 +167,7 @@ function createSdkContent(apiDetails) {
   const apiContent = [];
   const sectionTitles = Object.keys(apiDetails);
 
-  for (const title of sectionTitles) {
+  sectionTitles.forEach(title => {
     const commands = apiDetails[title].commands;
     const description = apiDetails[title].doc;
 
@@ -176,7 +176,7 @@ function createSdkContent(apiDetails) {
         commands.map(command => createSdkContentSections(title, description, command)).join("") :
         ""
     );
-  }
+  });
 
   return apiContent;
 }
@@ -206,7 +206,7 @@ function createSdkSidebar(apiDetails) {
   const sectionTitles = Object.keys(apiDetails);
   const apiSidebar = [];
 
-  for (const title of sectionTitles) {
+  sectionTitles.forEach(title => {
     const commands = apiDetails[title].commands;
 
     apiSidebar.push(`
@@ -215,7 +215,7 @@ function createSdkSidebar(apiDetails) {
         ${(commands.map(command => `<li class="api-toc__command"><a href="#${command.name}" title="Go to ${command.name} section">${command.name}</a></li>`)).join("")}
       </ul>
     `);
-  }
+  });
 
   return apiSidebar;
 }
@@ -254,7 +254,7 @@ function renderArguments(args) {
   if (!args || args.length === 0)
     return argumentContent;
 
-  for (const arg of args) {
+  args.forEach(arg => {
     argumentContent.push(`
       <li class="api-content__body-argument">
         <div class="left">
@@ -265,7 +265,7 @@ function renderArguments(args) {
         <div class="right">${typeof arg.description === "string" ? arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}</div>
       </li>
     `);
-  }
+  });
 
   return argumentContent;
 }
@@ -278,18 +278,21 @@ function renderExamples(args) {
     return exampleContent;
   }
 
-  for (const arg of args) {
+  args.forEach(arg => {
     exampleContent.push(`
-      <h3>${arg.title}</h3><br/>
-      <pre data-api-example-type="curl"><code>${arg.curl}</code></pre>
-      <pre data-api-example-type="lbrynet"><code>${arg.lbrynet}</code></pre>
-      <pre data-api-example-type="python"><code>${arg.python}</code></pre>
+      ${arg.title ? `<h3>${arg.title}</h3><br/>` : ""}
+      ${arg.cli ? `<pre data-api-example-type="cli"><code>${arg.cli}</code></pre>` : ""}
+      ${arg.curl ? `<pre data-api-example-type="curl"><code>${arg.curl}</code></pre>` : ""}
+      ${arg.lbrynet ? `<pre data-api-example-type="lbrynet"><code>${arg.lbrynet}</code></pre>` : ""}
+      ${arg.python ? `<pre data-api-example-type="python"><code>${arg.python}</code></pre>` : ""}
 
-      <h3>Output</h3><br/>
-      <pre><code>${arg.output}</code></pre>
-      <hr/>
+      ${arg.output ? `
+        <h3>Output</h3><br/>
+        <pre><code>${arg.output}</code></pre>
+        <hr/>
+      ` : ""}
     `);
-  }
+  });
 
   return exampleContent;
 }
@@ -302,4 +305,13 @@ function renderReturns(args) {
 
   returnContent = dedent(JSON.parse(JSON.stringify(args)));
   return returnContent;
+}
+
+function renderToggles(onSdkPage) {
+  return [
+    !onSdkPage ? "<button class='api-content__item' id='toggle-cli' type='button'>cli</button>" : "",
+    "<button class='api-content__item' id='toggle-curl' type='button'>curl</button>",
+    onSdkPage ? "<button class='api-content__item' id='toggle-lbrynet' type='button'>lbrynet</button>" : "",
+    onSdkPage ? "<button class='api-content__item' id='toggle-python' type='button'>python</button>" : ""
+  ];
 }
