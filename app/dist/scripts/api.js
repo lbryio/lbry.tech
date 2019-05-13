@@ -66,6 +66,6 @@ function reinitJets() {
     contentTag,
     searchTag: "#input-search"
   });
-
+ 
   document.getElementById("input-search").focus();
 }
