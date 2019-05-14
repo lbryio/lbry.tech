@@ -30,6 +30,14 @@ main {
   padding-top: 4rem;
 }
 
+.disable-scrolling {
+  top: 0; right: 0;
+  bottom: 0; left: 0;
+
+  overflow: hidden;
+  position: fixed;
+}
+
 .inner-wrap {
   max-width: 1200px;
   margin-right: auto;
@@ -85,7 +93,7 @@ sub {
 }
 
 frame-viewer {
-  width: 100%; height: calc(100vh - 4rem); // TODO: Update when new navigation is merged
+  width: 100%; height: calc(100vh - 4rem);
   display: block;
 
   iframe {

@@ -13,6 +13,7 @@
 .page__header {
   @include center;
   width: 100%;
+  top: 4rem;
 
   background-color: $lbry-black;
   background-position: center;
@@ -21,7 +22,11 @@
   color: $lbry-white;
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);
-  position: relative;
+  position: sticky;
+  z-index: 2;
+
+  // GOOD OL' SAFARI
+  position: -webkit-sticky; // sass-lint:disable-line no-duplicate-properties
 }
 
 .page__header__title {
@@ -38,6 +43,29 @@
     line-height: 1;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  @media (min-width: 801px) {
+    button {
+      display: none;
+    }
+  }
+
+  @media (max-width: 800px) {
+    button {
+      margin-right: 1rem; padding-right: 1rem;
+      position: relative;
+
+      &::after {
+        width: 1px; height: 100%;
+        top: 0; right: 0;
+
+        background-color: $lbry-white;
+        content: "";
+        opacity: 0.3;
+        position: absolute;
+      }
+    }
   }
 }
 

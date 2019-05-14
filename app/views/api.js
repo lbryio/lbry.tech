@@ -309,6 +309,7 @@ function renderReturns(args) {
 
 function renderToggles(onSdkPage) {
   return [
+    "<button class='api-content__item menu' id='toggle-menu'>menu</button>",
     !onSdkPage ? "<button class='api-content__item' id='toggle-cli' type='button'>cli</button>" : "",
     "<button class='api-content__item' id='toggle-curl' type='button'>curl</button>",
     onSdkPage ? "<button class='api-content__item' id='toggle-lbrynet' type='button'>lbrynet</button>" : "",

@@ -1,4 +1,4 @@
-"use strict"; /* global document, history, location, navigator, send, window */
+"use strict"; /* global document, history, location, send, window */
 
 
 
@@ -16,11 +16,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Browsers not Firefox do not yet support `text-orientation` and/or `writing-mode`
+// Menu toggle for Glossary
 if (
-  !/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent) &&
-  document.querySelector(".component--glossary-toc-toggle")
-) document.querySelector(".component--glossary-toc-toggle").classList.add("noncompliant-fix");
+  window.innerWidth <= 800 &&
+  window.location.pathname.split("/").pop() === "glossary"
+) {
+  document.querySelector(".page__header__title").insertAdjacentHTML("afterbegin", "<button id='toggle-menu'>Menu</button>");
+
+  document.getElementById("toggle-menu").addEventListener("click", () => {
+    document.querySelector(".component--glossary-toc").classList.toggle("active");
+    document.querySelector("body").classList.toggle("disable-scrolling");
+  });
+
+  // Handle menu toggle when clicking on commands
+  document.querySelectorAll(".component--glossary-toc a").forEach(keyword => {
+    keyword.addEventListener("click", () => {
+      document.querySelector("body").classList.remove("disable-scrolling");
+      document.querySelector(".component--glossary-toc").classList.remove("active");
+    });
+  });
+}
 
 
 
@@ -37,7 +52,7 @@ document.querySelectorAll("a[href^='#']").forEach(anchor => {
     let elementOffset;
 
     if (document.getElementById(element)) {
-      elementOffset = document.getElementById(element).offsetTop - 74;
+      elementOffset = document.getElementById(element).offsetTop - 150;
       window.scroll({ top: elementOffset, behavior: "smooth" });
       history.pushState({}, "", `#${element}`); // Add hash to URL bar
     }
@@ -81,7 +96,7 @@ function scrollToElementOnLoad() {
       let elementOffset;
 
       if (document.getElementById(element)) {
-        elementOffset = document.getElementById(element).offsetTop - 74;
+        elementOffset = document.getElementById(element).offsetTop - 150;
         window.scroll({ top: elementOffset, behavior: "smooth" });
       }
     }, 150);

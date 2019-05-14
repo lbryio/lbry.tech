@@ -32,6 +32,22 @@ document.querySelector(".api-toc__search-clear").addEventListener("click", () =>
   reinitJets();
 });
 
+// Handle menu toggle for mobile
+if (document.getElementById("toggle-menu")) {
+  document.getElementById("toggle-menu").addEventListener("click", () => {
+    document.querySelector("body").classList.toggle("disable-scrolling");
+    document.querySelector(".api-toc").classList.toggle("active");
+  });
+
+  // Handle menu toggle when clicking on commands
+  document.querySelectorAll(".api-toc__command a").forEach(command => {
+    command.addEventListener("click", () => {
+      document.querySelector("body").classList.remove("disable-scrolling");
+      document.querySelector(".api-toc").classList.remove("active");
+    });
+  });
+}
+
 
 
 // Code toggles
@@ -66,6 +82,6 @@ function reinitJets() {
     contentTag,
     searchTag: "#input-search"
   });
- 
+
   document.getElementById("input-search").focus();
 }
