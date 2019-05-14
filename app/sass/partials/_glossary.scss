@@ -41,7 +41,6 @@
     height: 100%;
     top: 0;
     padding-top: 9rem !important;
-    // padding-bottom: 4rem;
     transition: left 0.2s;
 
     -webkit-overflow-scrolling: touch;
@@ -54,10 +53,6 @@
       left: 0;
     }
   }
-
-  // @media (max-width: 800px) {
-  //   display: none;
-  // }
 
   li {
     list-style-type: none !important;
