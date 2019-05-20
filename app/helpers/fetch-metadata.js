@@ -18,7 +18,7 @@ import { send } from "~socket";
 import uploadImage from "./upload-image";
 
 const allowedQueryMethods = [
-  "claim_tip",
+  "support_create",
   "publish",
   "resolve"
 ];
@@ -79,7 +79,7 @@ export default async(data, socket) => {
   switch(true) {
     //  T I P
     //  E X A M P L E
-    case resolveMethod === "claim_tip":
+    case resolveMethod === "support_create":
       if (!approvedContentIdsForTipping.includes(claimAddress)) {
         return send(socket, {
           example: data.example,
@@ -95,6 +95,7 @@ export default async(data, socket) => {
       apiRequestMethod = "POST";
       body.amount = "0.001"; // Hardcoded tip amount
       body.claim_id = claimAddress;
+      body.tip = true;
 
       break;
 
@@ -109,11 +110,11 @@ export default async(data, socket) => {
       body.author = "lbry.tech";
       body.bid = "0.001"; // Hardcoded publish amount
       body.description = dataDetails.description;
-      body.language = dataDetails.language;
+      body.languages = [dataDetails.language];
       body.license = dataDetails.license;
       body.name = dataDetails.name + "-" + randomString(10);
-      body.nsfw = dataDetails.nsfw;
       body.title = dataDetails.title;
+      body.tags = dataDetails.tags;
 
       // Gotta let the blockchain know what to save
       body.file_path = dataDetails.file_path;
@@ -128,7 +129,7 @@ export default async(data, socket) => {
           switch(true) {
             case data.example === 2:
             case memePublishResponse.result:
-            case memePublishResponse.result.claim_address:
+            case memePublishResponse.result.outputs[0].address:
               explorerNotice = memePublishMessaging(memePublishResponse);
               break;
 
@@ -280,11 +281,11 @@ function memePublishMessaging(source) {
 
       <br/><br/>
 
-      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.com/tx/${source.result.output.txid}?address=${source.result.claim_address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+      To see Proof of Work (lol) that your meme is on the LBRY blockchain, <a href="https://explorer.lbry.com/tx/${source.result.outputs[0].txid}?address=${source.result.outputs[0].address}" rel="noopener noreferrer" target="_blank" title="Your meme, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
 
       <br/><br/>
 
-      You can also check out your meme (once the transaction is confirmed) on <a href="https://open.lbry.com/${source.result.lbrytech_claim_name}#${source.result.claim_id}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">LBRY</a> or <a href="https://spee.ch/${source.result.claim_id}/${source.result.lbrytech_claim_name}" rel="noopener noreferrer" target="_blank" title="Your meme, on spee.ch">Spee.ch</a>!
+      You can also check out your meme (once the transaction is confirmed) on <a href="https://open.lbry.com/${source.result.lbrytech_claim_name}#${source.result.outputs[0].claim_id}" rel="noopener noreferrer" target="_blank" title="Your meme, on LBRY">LBRY</a> or <a href="https://spee.ch/${source.result.outputs[0].claim_id}/${source.result.lbrytech_claim_name}" rel="noopener noreferrer" target="_blank" title="Your meme, on spee.ch">Spee.ch</a>!
     </p>
 
     <br/>
@@ -294,8 +295,7 @@ function memePublishMessaging(source) {
 function tipCompletionMessaging(source) {
   return `
     <p class="playground__description success">
-      If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.com/tx/${source.result.txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
+      If you want proof of the tip you just gave on behalf of LBRY, <a href="https://explorer.lbry.com/tx/${source.result.outputs[0].txid}" rel="noopener noreferrer" target="_blank" title="Your tip, on our blockchain explorer">check it out</a> on our blockchain explorer! Please note that it may take a couple minutes for the transaction to be confirmed.
     </p><br/>
   `;
 }
-

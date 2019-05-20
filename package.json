@@ -12,10 +12,10 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@inc/fastify-ws": "^1.1.0",
-    "@octokit/rest": "^16.25.4",
+    "@octokit/rest": "^16.26.0",
     "@slack/client": "^5.0.1",
-    "async": "^2.6.2",
-    "async-es": "^2.6.2",
+    "async": "^3.0.0",
+    "async-es": "^3.0.0",
     "choo": "^6.13.3",
     "choo-async": "^0.1.1",
     "choo-devtools": "^2.5.1",
