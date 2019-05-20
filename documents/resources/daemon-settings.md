@@ -46,16 +46,17 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | cache_time                 | integer | 150                       | 90                         | How long to keep resolve data in cache                                             |
 | data_rate                  | float   | 0.0001                    | 0.05                       | What LBC rate, per MB, to offer DHT data at (currently disabled in the protocol)   |
 | udp_port                   | integer | 4444                      | 4445                       | UDP port used to announce blobs                                                    |
-| download_timeout           | integer | 30                        | 60                         | Time, in seconds, to allow download to get data blobs                              |
+| download_timeout           | integer | 30                        | 60                         | Time, in seconds, to allow get call to resolve and get initial blobs               |
+| blob_download_timeout      | integer | 30                        | 60                         | Time, in seconds, to allow download to get next blob                               |
 | announce_head_blobs_only   | boolean | true                      | false                      | Only announce first data blob                                                      |
 | concurrent_blob_announcers | integer | 10                        | 0                          | Threads used in order to announce blobs. 0 means disabled                          |
-| known_dht_nodes            | list    | ['lbrynet1.lbry.com:4444'] | ['myDHT.lbry.com:4444']     | Bootstrap nodes for network connectivity                                           |
-| max_connections_per_stream | integer | 5                         | 10                         | Threads used to download blobs                                                     |
+| known_dht_nodes            | list    | ['lbrynet1.lbry.com:4444'] | ['myDHT.lbry.com:4444']     | Bootstrap nodes for network connectivity                                         |
+| max_connections_per_download | integer | 5                         | 10                         | Threads used to download blobs                                                     |
 | seek_head_blob_first       | boolean | true                      | false                      | Search for first data blob after downloading sd blob                               |
 | tcp_port                   | integer | 3333                      | 3334                       | Port the SDK will listen on                                                        |
-| concurrent-reflector-uploads| integer | 5                        | 10                         | Connections to use while uploading data to reflector                               |
+| concurrent_reflector_uploads| integer | 5                        | 10                         | Connections to use while uploading data to reflector                               |
 | reflect_streams            | boolean | true                      | false                      | Send published data to reflector servers                                           |
-| reflector_servers          | list    | ['reflector.lbry.com']     | ['myreflector.lbry.com']    | Server data will be reflected to                                                   |
+| reflector_servers          | list    | ['reflector.lbry.com']    | ['myreflector.lbry.com']   | Server data will be reflected to                                                 |
 | fixed-peer-delay           | integer | 2                         | 5                          | Time, in mintues, to allow download from P2P before trying fixed peer              |
 | peer_connect_timeout       | integer | 30                        | 15                         | Time, in seconds, to allow download to find peers                                  |
 | node_rpc_timeout           | integer | 5                         | 10                         | Time, in seconds, to allow connection over DHT                                     |
