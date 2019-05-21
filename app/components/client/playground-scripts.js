@@ -170,7 +170,7 @@ function fetchMetadata(exampleNumber, data) {
       send({
         claim: data,
         message: "fetch metadata",
-        method: "claim_tip",
+        method: "support_create",
         example: exampleNumber
       });
 
@@ -193,7 +193,7 @@ function getMemeInfo() { // TODO: Error handling
     language: document.getElementById("meme-language").value,
     license: document.getElementById("meme-license").value,
     name: document.getElementById("meme-title").value,
-    nsfw: document.getElementById("meme-nsfw-flag").checked,
+    tags: document.getElementById("meme-nsfw-flag").checked ? "mature" : "[]",
     title: document.getElementById("meme-title").value
   };
 }
@@ -216,7 +216,7 @@ function initializePlayground() {
 function playgroundResponseForExample1(source) {
   return `
     <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "uri": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "resolve", "params": { "urls": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
 </code></pre>
 
     <div class="loader" id="temp-loader"></div>
@@ -227,7 +227,7 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 function playgroundResponseForExample2(source) {
   return `
     <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${source.name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${source.description}", "title": "${source.title}", "language": "${source.language}", "license": "${source.license}", "nsfw": ${source.nsfw} }}}'</span> <span class="token url">http://localhost:5279    </span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "publish", "params": { "name": "${source.name}", "file_path": "ABSOLUTE_PATH_TO_MEDIA_ON_YOUR_COMPUTER", "bid": "0.001", "metadata": { "description": "${source.description}", "title": "${source.title}", "languages": "${source.language}", "license": "${source.license}", "tags": ${source.tags} }}}'</span> <span class="token url">http://localhost:5279    </span>
 </code></pre>
 
     <div class="loader" id="temp-loader"></div>
@@ -240,7 +240,7 @@ function playgroundResponseForExample3(source) {
 
   return `
     <pre><code class="language-bash"><span class="token comment"># With the LBRY app/daemon running locally, you can use this in your Terminal</span>
-curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "claim_tip", "params": { "amount": "0.001", "claim_id": "${source}" }}'</span> <span class="token url">http://localhost:5279    </span>
+curl --header <span class="token string">"Content-Type: application/json"</span> --data <span class="token string">'{ "method": "support_create", "params": { "amount": "0.001", "claim_id": "${source}", "--tip" }}'</span> <span class="token url">http://localhost:5279    </span>
 </code></pre>
 
     <div class="loader" id="temp-loader"></div>

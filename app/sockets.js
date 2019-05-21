@@ -123,11 +123,11 @@ function generateContent(exampleNumber, displayTrendingContent) {
                   class="media__thumb"
                   data-action="choose claim"
                   data-claim-id="${part.name}"
-                  ${part.value.stream.metadata.thumbnail.length ? `style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})"` : ""}
+                  ${part.value.thumbnail.url.length ? `style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})"` : ""}
                 ></figure>
 
                 <div class="media__title">
-                  ${part.value.stream.metadata.title}
+                  ${part.value.title}
                 </div>
 
                 <div class="media__subtitle">
@@ -169,14 +169,14 @@ function generateContent(exampleNumber, displayTrendingContent) {
     const renderedContentCollection = [];
 
     for (const url of approvedUrls)
-      rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: exampleNumber }));
+      rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: 1 }));
 
     return Promise.all(rawContentCollection).then(collection => {
       for (const part of collection) {
         if (
           part &&
           part.value &&
-          part.value.stream.metadata.thumbnail &&
+          part.value.thumbnail.url &&
           part.channel_name
         ) {
           renderedContentCollection.push(`
@@ -186,11 +186,11 @@ function generateContent(exampleNumber, displayTrendingContent) {
                 data-action="choose claim"
                 data-claim-id="${part.claim_id}"
                 data-name=${part.name}
-                style="background-image: url(${makeImageSourceSecure(part.value.stream.metadata.thumbnail)})">
+                style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})">
               </figure>
 
               <div class="media__title">
-                ${part.value.stream.metadata.title}
+                ${part.value.title}
               </div>
 
               <div class="media__subtitle">
