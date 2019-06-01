@@ -22,11 +22,7 @@
   color: $lbry-white;
   padding-right: env(safe-area-inset-right);
   padding-left: env(safe-area-inset-left);
-  position: sticky;
   z-index: 2;
-
-  // GOOD OL' SAFARI
-  position: -webkit-sticky; // sass-lint:disable-line no-duplicate-properties
 }
 
 .page__header__title {
