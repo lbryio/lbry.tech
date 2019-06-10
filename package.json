@@ -12,23 +12,23 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@inc/fastify-ws": "^1.1.0",
-    "@octokit/rest": "^16.26.0",
+    "@octokit/rest": "^16.28.0",
     "@slack/client": "^5.0.1",
-    "async": "^3.0.0",
-    "async-es": "^3.0.0",
+    "async": "^3.0.1",
+    "async-es": "^3.0.1",
     "choo": "^6.13.3",
     "choo-async": "^0.1.1",
     "choo-devtools": "^2.5.1",
     "choo-ssr": "^0.2.1",
     "choo-websocket": "^2.0.0",
-    "colorette": "^1.0.7",
+    "colorette": "^1.0.8",
     "cors": "^2.8.5",
     "cron": "^1.7.1",
     "date-format-lite": "^17.7.0",
     "decamelize": "^3.2.0",
     "dedent": "^0.7.0",
     "dotenv": "^8.0.0",
-    "fastify": "~2.3.0",
+    "fastify": "~2.4.1",
     "fastify-compress": "^0.10.0",
     "fastify-helmet": "^3.0.0",
     "fastify-static": "^2.4.0",
@@ -39,7 +39,7 @@
     "link-module-alias": "^1.2.0",
     "make-promises-safe": "^5.0.0",
     "markdown-it": "^8.4.2",
-    "markdown-it-anchor": "^5.0.2",
+    "markdown-it-anchor": "^5.2.4",
     "prismjs": "^1.15.0",
     "redis": "^2.8.0",
     "slack-node": "^0.1.8",
@@ -49,7 +49,7 @@
   "description": "Documentation for the LBRY protocol and associated projects",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
+    "@babel/core": "^7.4.5",
     "@babel/plugin-external-helpers": "7.2.0",
     "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/plugin-proposal-decorators": "7.4.4",
@@ -60,22 +60,22 @@
     "@babel/plugin-proposal-throw-expressions": "7.2.0",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
     "@babel/plugin-syntax-import-meta": "7.2.0",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "@inc/eslint-config": "^1.1.3",
     "@inc/sasslint-config": "^2019.5.7",
     "@lbry/color": "^1.1.1",
-    "@lbry/components": "^2.7.1",
+    "@lbry/components": "^2.7.2",
     "eslint": "^5.16.0",
-    "husky": "^2.3.0",
-    "nodemon": "^1.19.0",
+    "husky": "^2.4.0",
+    "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
-    "pino-pretty": "^3.0.0",
-    "sass": "^1.20.1",
+    "pino-pretty": "^3.1.0",
+    "sass": "^1.21.0",
     "sass-lint": "^1.13.1",
     "snazzy": "^8.0.0",
     "standardx": "^3.0.1",
-    "updates": "^8.0.3"
+    "updates": "^8.1.0"
   },
   "engines": {
     "node": "10.2.x"
@@ -110,5 +110,5 @@
       "app/dist"
     ]
   },
-  "version": "5.3.0"
+  "version": "5.3.1"
 }
