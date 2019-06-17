@@ -4,7 +4,7 @@ description: Step-by-step build instructions for the LBRY Android App
 ---
 
 ### Introduction
-This guide provides step-by-step instructions to setup and build the [LBRY Android App](https://lbry.com/android) for development purposes. 
+This guide provides step-by-step instructions to setup and build the [LBRY Android App](https://lbry.com/android) for development purposes.
 
 #### Estimated Time
 25 - 40 minutes
@@ -96,7 +96,7 @@ When this is complete, continue to [Building the App](#building-the-app).
 After [preparing your environment](#setup-environment), complete the steps below.
 
 ##### 1. Install Crystax
- 
+
 Crystax NDK is required for building Python 3.7 for the mobile app and a number of native C / C++ modules and packages used by the app. Run the following commands to download and extract the NDK:
 
 ```
@@ -114,17 +114,19 @@ Clone the lbryio/lbry-android git repository:
 git clone https://github.com/lbryio/lbry-android
 cd lbry-android
 cp buildozer.spec.sample buildozer.spec
+cp p4a/pythonforandroid/bootstraps/lbry/templates/google-services.sample.json p4a/pythonforandroid/bootstraps/lbry/templates/google-services.json
 ```
 
 The provided `buildozer.spec.sample` contains defaults provided you followed the environment setup exactly as described. If you altered the steps for your environment or you're encountering build trouble, check `buildozer.spec` to ensure everything is pointing in the right places.
 
 ##### 3. Install npm packages
 
-Install the npm packages required for the app's React Native code:
+Install the npm packages required for the app's React Native code, and create the app bundle:
 
 ```
 cd app
 npm install
+./bundle.sh
 cd ..
 ```
 
