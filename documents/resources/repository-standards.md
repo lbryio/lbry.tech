@@ -86,7 +86,7 @@ This document should cover the following:
 * First, it should contain a single sentence: "This project follows the global contributing standards for all LBRY projects, to read those go < here >.”
 * A "Code Overview" section explaining some basic design choices and how to begin stepping through the code. An example would be explaining that Daemon.py is the primary entry point for the daemon code, and one can begin to trace through the code by looking for jsonrpc_xxx, where xxx is one of the api calls listed [here](https://lbry.com/api)
 * A "Testing" section explaining how to run tests and stating that tests are necessary
-* Information on how to submit pull requests, and what to expect afterwards (e.g. a link to our [branching doc](https://github.com/lbryio/lbry/wiki/Branching-and-Merging), commands to run before submitting PR, tests must pass, changelog entry, etc). If you find this gets repetitive, it may be best to link to a global doc
+* Information on how to submit pull requests, and what to expect afterwards (e.g. a link to our [branching doc](https://github.com/lbryio/lbry-sdk/wiki/Branching-and-Merging), commands to run before submitting PR, tests must pass, changelog entry, etc). If you find this gets repetitive, it may be best to link to a global doc
 * Anything else a new visitor to a repository should know about contributing to that specific repository (linting, generating documentation, etc)
 
 ## LICENSE

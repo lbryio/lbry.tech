@@ -128,7 +128,7 @@ The SDK is three things:
 - components that are not part of the spec but are useful for developing applications using the protocol
 - a daemon that participates in the LBRY data network and provides an API for interacting with the protocol
 
-See [the source code](https://github.com/lbryio/lbry) or [the API documentation](/api/sdk).
+See [the source code](https://github.com/lbryio/lbry-sdk) or [the API documentation](/api/sdk).
 
 ### LBRY Credits
 
@@ -218,7 +218,7 @@ A parallel LBRY blockchain, used for testing and development. Testnet is like [m
 
 ### Torba
 
-An [SPV](#spv) wallet for the [blockchain](#blockchain). See the [source code](https://github.com/lbryio/torba).
+An [SPV](#spv) wallet for the [blockchain](#blockchain). See the [source code](https://github.com/lbryio/lbry-sdk).
 
 ### Transaction
 

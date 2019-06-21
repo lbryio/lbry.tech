@@ -98,7 +98,7 @@ Alternatively, you can create a file `touch ~/.lbryum/config` and paste the foll
 
 ### lbry
 
-Download source from [here](https://github.com/lbryio/lbry/releases), and run the following inside the environment:
+Download source from [here](https://github.com/lbryio/lbry-sdk/releases), and run the following inside the environment:
 ```bash
 cd lbry
 pip2 install -r requirements.txt

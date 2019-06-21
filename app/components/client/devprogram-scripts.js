@@ -24,7 +24,7 @@ if (window.location.search.includes("?code=")) {
     <p>To receive your LBC, you'll need a wallet address. While graphical wallets are available, the recommended path for engineers is to:</p>
 
     <ol>
-      <li>Download <a href="https://github.com/lbryio/lbry/releases">the LBRY SDK</a>.</li>
+      <li>Download <a href="https://github.com/lbryio/lbry-sdk/releases">the LBRY SDK</a>.</li>
       <li>Launch the command-line utility (<code>./lbrynet start</code>).</li>
       <li>Run <code>./lbrynet address unused</code> and copy the <code>id</code> field.</li>
     </ol>
