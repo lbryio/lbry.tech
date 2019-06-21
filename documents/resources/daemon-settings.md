@@ -3,7 +3,7 @@ title: SDK Settings
 description: The daemon provided by the LBRY SDK has many settings. This resource lists them all and what they mean. Ready, set, settings! 
 ---
 
-This document outlines how to configure SDK daemon settings and what options are available. They can be found on the lbry GitHub repository in [conf.py](https://github.com/lbryio/lbry/blob/master/lbrynet/conf.py).
+This document outlines how to configure SDK daemon settings and what options are available. They can be found on the lbry GitHub repository in [conf.py](https://github.com/lbryio/lbry-sdk/blob/master/lbry/lbry/conf.py).
 
 ## Daemon settings configuration
 
@@ -68,10 +68,10 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | Setting        | Format  | Default value | Sample Values      | Description                                                                                                                      |
 |----------------|---------|---------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | allowed_origin | string  | ''            | '*' or   localhost | IP address to allow API requests from                                                                                            |
-| use_auth_http  | boolean | false         | true               | See [authentication instructions](https://github.com/lbryio/lbry/blob/master/lbrynet/daemon/auth/server.py#L179)   for details   |
+| use_auth_http  | boolean | false         | true               | See [authentication instructions](https://github.com/lbryio/lbry-sdk/blob/master/lbrynet/daemon/auth/server.py#L179)   for details   |
 
 ### Other
 | Setting            | Format  | Default value | Sample Values                  | Description                                                                                                   |
 |--------------------|---------|---------------|--------------------------------|---------------------------------------------------------------------------------------------------------------|
-| components_to_skip | list    | []            | ['reflector','hash_announcer'] | Disable components, [see entire list here](https://github.com/lbryio/lbry/wiki/Component-Dependencies-Table)  |
+| components_to_skip | list    | []            | ['reflector','hash_announcer'] | Disable components, [see entire list here](https://github.com/lbryio/lbry-sdk/wiki/Component-Dependencies-Table)  |
 | share_usage_data   | boolean | true          | false                          | Share analytics data                                                                                          |

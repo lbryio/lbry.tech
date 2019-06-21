@@ -21,7 +21,7 @@ export default () => `
       </span>
 
       <div>
-        <span><a href="https://github.com/lbryio/lbry">lbrysdk</a></span>
+        <span><a href="https://github.com/lbryio/lbry-sdk">lbrysdk</a></span>
         <span><a href="https://github.com/lbryio/types">lbryschema</a></span>
       </div>
     </h2>

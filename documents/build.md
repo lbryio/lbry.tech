@@ -179,9 +179,9 @@ We do not currently have tooling available to build LBRY apps on iOS.
 
 ### SDK
 
-The [LBRY SDK](https://github.com/lbryio/lbry) provides an API that enables easy access to all functionality of the LBRY network. Most applications will choose to use the SDK.
+The [LBRY SDK](https://github.com/lbryio/lbry-sdk) provides an API that enables easy access to all functionality of the LBRY network. Most applications will choose to use the SDK.
 
-You can download the latest version from the [releases page](https://github.com/lbryio/lbry/releases) or via the following URLs, which will always download the latest SDK for each operating system:
+You can download the latest version from the [releases page](https://github.com/lbryio/lbry-sdk/releases) or via the following URLs, which will always download the latest SDK for each operating system:
 
 | OS | URL |
 | --- | --- |

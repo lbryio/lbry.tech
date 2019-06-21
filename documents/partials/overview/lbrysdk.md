@@ -6,7 +6,7 @@ At this level:
 - [Data referenced by metadata](/spec#data) is accessed and distributed via a peer-to-peer network.
 - [Identities](/spec#channels) are created, signed, and validated.
 
-Data network operations are provided by the [lbrysdk](https://github.com/lbryio/lbry). This SDK also provides local wallet functionality and a set of APIs to facilitate building applications.
+Data network operations are provided by the [lbrysdk](https://github.com/lbryio/lbry-sdk). This SDK also provides local wallet functionality and a set of APIs to facilitate building applications.
 
 ### Additional Resources
 

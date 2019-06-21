@@ -16,7 +16,7 @@ import redirects from "~data/redirects.json";
 
 const blockchainApi = "https://raw.githubusercontent.com/lbryio/lbrycrd/master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = "https://raw.githubusercontent.com/lbryio/lbry/master/docs/api.json";
+const sdkApi = "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/lbry/docs/api.json";
 
 
 
