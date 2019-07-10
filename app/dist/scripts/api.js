@@ -60,6 +60,10 @@ handleApiLanguageToggles("python");
 
 //  H E L P E R S
 
+function changeDocumentationVersion(value) {
+  console.log(value);
+}
+
 function handleApiLanguageToggles(language) {
   if (!document.getElementById(`toggle-${language}`))
     return;

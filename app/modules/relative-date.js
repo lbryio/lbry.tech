@@ -4,7 +4,7 @@
 
 //  P R O G R A M
 
-const relativeDate = (undefined => {
+const relativeDate = (() => {
   const SECOND = 1000;
   const MINUTE = 60 * SECOND;
   const HOUR = 60 * MINUTE;
@@ -53,6 +53,5 @@ const relativeDate = (undefined => {
 
 //  E X P O R T
 
-if (typeof module !== "undefined" && module.exports) {
+if (typeof module !== "undefined" && module.exports)
   module.exports = exports = relativeDate;
-}
