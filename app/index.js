@@ -22,7 +22,20 @@ import redirects from "~data/redirects.json";
 const server = fastify({
   logger: {
     level: "warn",
-    prettyPrint: process.env.NODE_ENV === "development" ? true : false
+    prettyPrint: process.env.NODE_ENV === "development" ? true : false,
+    redact: ["req.headers.authorization"],
+    serializers: {
+      req(req) {
+        return {
+          headers: req.headers,
+          hostname: req.hostname,
+          method: req.method,
+          remoteAddress: req.ip,
+          remotePort: req.connection.remotePort,
+          url: req.url
+        };
+      }
+    }
   }
 });
 

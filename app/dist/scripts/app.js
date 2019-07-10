@@ -4,6 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   scrollToElementOnLoad();
+  initializeSmoothScroll();
 
   // Automatically open external links in new tabs
   document.querySelectorAll("a[href^=http]").forEach(anchor => {
@@ -39,25 +40,27 @@ if (
 
 
 
-// Smooth scroll
-document.querySelectorAll("a[href^='#']").forEach(anchor => {
-  if (anchor.classList.contains("no-smooth")) // Ignore smooth scroll functionality
-    return;
+function initializeSmoothScroll() {
+  // Smooth scroll
+  document.querySelectorAll("a[href^='#']").forEach(anchor => {
+    if (anchor.classList.contains("no-smooth")) // Ignore smooth scroll functionality
+      return;
 
-  anchor.addEventListener("click", event => {
-    event.preventDefault();
+    anchor.addEventListener("click", event => {
+      event.preventDefault();
 
-    const element = event.target.href.split("#").pop()
-      .toLowerCase();
-    let elementOffset;
+      const element = event.target.href.split("#").pop()
+        .toLowerCase();
+      let elementOffset;
 
-    if (document.getElementById(element)) {
-      elementOffset = document.getElementById(element).offsetTop - 150;
-      window.scroll({ top: elementOffset, behavior: "smooth" });
-      history.pushState({}, "", `#${element}`); // Add hash to URL bar
-    }
+      if (document.getElementById(element)) {
+        elementOffset = document.getElementById(element).offsetTop - 150;
+        window.scroll({ top: elementOffset, behavior: "smooth" });
+        history.pushState({}, "", `#${element}`); // Add hash to URL bar
+      }
+    });
   });
-});
+}
 
 // Newsletter
 document.getElementById("emailAddress").addEventListener("keyup", event => {
@@ -87,6 +90,20 @@ document.querySelector("[data-action='subscribe to newsletter']").onclick = () =
 
 
 //  H E L P E R S
+
+function runScriptsInDynamicallyInsertedHTML(element, elementHTML) { // eslint-disable-line no-unused-vars
+  element.innerHTML = elementHTML;
+
+  Array.from(element.querySelectorAll("script")).forEach(oldScript => {
+    const newScript = document.createElement("script");
+
+    Array.from(oldScript.attributes)
+      .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+
+    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+}
 
 function scrollToElementOnLoad() {
   if (window.location.href.includes("#")) {

@@ -1,67 +1,37 @@
-"use strict"; /* global document, Jets, window */
+"use strict"; /* global document, Jets, send, window */
 
 
+
+// NOTE:
+// We declare `contentTag` and `jets` with `var` here so
+// when a visitor toggles the API page version, they are
+// not incorrectly declared multiple times via `let || const`
 
 // Initiate search functionality
-const contentTag = window.location.pathname.split("/").pop() === "sdk" ?
+if (!contentTag)
+  var contentTag;
+
+contentTag = window.location.pathname.split("/").pop() === "sdk" ?
   ".api-toc__section" :
   "#toc";
 
-let jets = new Jets({
+if (!jets)
+  var jets;
+
+jets = new Jets({
   contentTag,
   searchTag: "#input-search"
 });
-
-// Reset search on page load
-document.getElementById("input-search").value = "";
-
-// Activate search
-document.getElementById("input-search").addEventListener("keyup", () => {
-  if (document.getElementById("input-search").value)
-    document.querySelector(".api-toc__search-clear").classList.add("active");
-  else
-    document.querySelector(".api-toc__search-clear").classList.remove("active");
-});
-
-// Cancel search
-document.querySelector(".api-toc__search-clear").addEventListener("click", () => {
-  document.getElementById("input-search").value = "";
-  document.querySelector(".api-toc__search-clear").classList.remove("active");
-
-  jets.destroy();
-  reinitJets();
-});
-
-// Handle menu toggle for mobile
-if (document.getElementById("toggle-menu")) {
-  document.getElementById("toggle-menu").addEventListener("click", () => {
-    document.querySelector("body").classList.toggle("disable-scrolling");
-    document.querySelector(".api-toc").classList.toggle("active");
-  });
-
-  // Handle menu toggle when clicking on commands
-  document.querySelectorAll(".api-toc__command a").forEach(command => {
-    command.addEventListener("click", () => {
-      document.querySelector("body").classList.remove("disable-scrolling");
-      document.querySelector(".api-toc").classList.remove("active");
-    });
-  });
-}
-
-
-
-// Code toggles
-handleApiLanguageToggles("cli");
-handleApiLanguageToggles("curl");
-handleApiLanguageToggles("lbrynet");
-handleApiLanguageToggles("python");
 
 
 
 //  H E L P E R S
 
-function changeDocumentationVersion(value) {
-  console.log(value);
+function changeDocumentationVersion(desiredVersion) { // eslint-disable-line no-unused-vars
+  send({
+    message: "view different documentation version",
+    version: desiredVersion
+  });
 }
 
 function handleApiLanguageToggles(language) {
@@ -79,6 +49,50 @@ function handleApiLanguageToggles(language) {
 
     document.getElementById(`toggle-${language}`).classList.add("active");
   });
+}
+
+function initializeApiFunctionality() { // eslint-disable-line no-unused-vars
+  // Reset search on page load
+  document.getElementById("input-search").value = "";
+
+  // Activate search
+  document.getElementById("input-search").addEventListener("keyup", () => {
+    if (document.getElementById("input-search").value)
+      document.querySelector(".api-toc__search-clear").classList.add("active");
+    else
+      document.querySelector(".api-toc__search-clear").classList.remove("active");
+  });
+
+  // Cancel search
+  document.querySelector(".api-toc__search-clear").addEventListener("click", () => {
+    document.getElementById("input-search").value = "";
+    document.querySelector(".api-toc__search-clear").classList.remove("active");
+
+    jets.destroy();
+    reinitJets();
+  });
+
+  // Handle menu toggle for mobile
+  if (document.getElementById("toggle-menu")) {
+    document.getElementById("toggle-menu").addEventListener("click", () => {
+      document.querySelector("body").classList.toggle("disable-scrolling");
+      document.querySelector(".api-toc").classList.toggle("active");
+    });
+
+    // Handle menu toggle when clicking on commands
+    document.querySelectorAll(".api-toc__command a").forEach(command => {
+      command.addEventListener("click", () => {
+        document.querySelector("body").classList.remove("disable-scrolling");
+        document.querySelector(".api-toc").classList.remove("active");
+      });
+    });
+  }
+
+  // Code toggles
+  handleApiLanguageToggles("cli");
+  handleApiLanguageToggles("curl");
+  handleApiLanguageToggles("lbrynet");
+  handleApiLanguageToggles("python");
 }
 
 function reinitJets() {

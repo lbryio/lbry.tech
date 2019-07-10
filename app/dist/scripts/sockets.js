@@ -1,4 +1,4 @@
-"use strict"; /* global document, location, WebSocket, window */
+"use strict"; /* global document, initializeSmoothScroll, location, runScriptsInDynamicallyInsertedHTML, WebSocket, window */
 
 
 
@@ -42,6 +42,26 @@ function initializeWebSocketConnection() {
 
       case data.message === "redirect":
         window.location.href = data.url;
+        break;
+
+      case data.message === "replace html":
+        // create placeholder
+        var placeholder = document.createElement("div");
+        placeholder.setAttribute("id", "__placeholder"); // eslint-disable-line padding-line-between-statements
+        document.querySelector(data.selector).insertAdjacentElement("afterend", placeholder);
+
+        // remove original element
+        document.querySelector(data.selector).remove();
+
+        // add new element and remove placeholder
+        document.getElementById("__placeholder").insertAdjacentHTML("afterend", data.html);
+        document.getElementById("__placeholder").remove();
+
+        // make our scripts work
+        runScriptsInDynamicallyInsertedHTML(document.querySelector(data.selector), document.querySelector(data.selector).innerHTML);
+
+        // make smooth scroll work on our new content
+        initializeSmoothScroll();
         break;
 
       case data.message === "show result":

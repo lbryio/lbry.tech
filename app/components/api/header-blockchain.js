@@ -10,9 +10,9 @@ import html from "choo/html";
 
 //  E X P O R T
 
-export default () => html`
+export default version => html`
   <div class="api-content__body">
-    <h2>lbrycrd APIs</h2>
+    <h2>lbrycrd ${version}</h2>
     <p>Methods and signatures provided by the <a href="/glossary#lbrycrd">lbrycrd</a> blockchain daemon are documented below. To build, download, or run lbrycrd, see the project <a href="https://github.com/lbryio/lbrycrd/blob/master/README.md">README</a>.</p>
   </div>
 

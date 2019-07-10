@@ -9,6 +9,7 @@ import html from "choo/html";
 
 //  U T I L S
 
+import apiPage from "~view/api";
 import fetchMetadata from "~helper/fetch-metadata";
 import { generateGitHubFeed } from "~helper/github";
 import messageSlack from "~helper/slack";
@@ -23,7 +24,7 @@ const githubAppSecret = process.env.GITHUB_APP_SECRET;
 
 //  P R O G R A M
 
-export default (socket, action) => {
+export default async(socket, action) => {
   if (typeof socket !== "object" && typeof action !== "object")
     return;
 
@@ -86,6 +87,21 @@ export default (socket, action) => {
 
     case action.message === "subscribe":
       newsletterSubscribe(action, socket);
+      break;
+
+    case action.message === "view different documentation version":
+      send(socket, {
+        element: "div",
+        html: await apiPage({
+          params: {
+            wildcard: action.version.split("-")[0]
+          },
+          tag: action.version.split("-")[1]
+        }),
+        message: "replace html",
+        parentElement: "main",
+        selector: ".__slate"
+      });
       break;
 
     default:
@@ -434,7 +450,7 @@ async function verifyGitHubToken(data, socket) {
   const code = data.code;
 
   try {
-    let result = await got.post(`https://github.com/login/oauth/access_token?client_id=${githubAppId}&client_secret=${githubAppSecret}&code=${code}`, { json: true });
+    const result = await got.post(`https://github.com/login/oauth/access_token?client_id=${githubAppId}&client_secret=${githubAppSecret}&code=${code}`, { json: true });
 
     const response = {
       address: data.address,

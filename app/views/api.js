@@ -32,28 +32,30 @@ const octokit = new Octokit({
 //  E X P O R T
 
 export default async(state) => {
-  state.lbry = {
-    title: "API Documentation",
-    description: "See API documentation, signatures, and sample calls for the LBRY APIs."
-  };
-
+  const { tag } = state;
   const { wildcard } = state.params;
 
   const repository = wildcard === "sdk" ?
     "lbry-sdk" :
     "lbrycrd";
 
+  state.lbry = {
+    title: tag ? tag + " API Documentation" : "API Documentation",
+    description: "See API documentation, signatures, and sample calls for the LBRY APIs."
+  };
+
   const tags = await getTags(repository);
 
   try {
-    const apiResponse = await parseApiFile({ repo: repository, tag: tags[0] });
+    const apiResponse = await parseApiFile({ repo: repository, tag: tag ? tag : tags[0] });
 
     return asyncHtml`
       <div class="__slate">
         <aside class="api-toc">
           <select class="api-toc__select" onchange="changeDocumentationVersion(value);">
-            ${renderVersionSelector(wildcard, tags)}
+            ${renderVersionSelector(wildcard, tags, tag)}
           </select>
+
           <div class="api-toc__search">
             <input class="api-toc__search-field" id="input-search" placeholder="Search" type="search"/>
             <div class="api-toc__search-clear" id="clear-search" title="Clear search query">&times;</div>
@@ -64,28 +66,32 @@ export default async(state) => {
             ${wildcard === "sdk" ? createSdkSidebar(apiResponse) : createApiSidebar(apiResponse)}
           </ul>
         </aside>
+
         <section class="api-content">
           <div class="api-documentation" id="toc-content">
             <div></div>
+
             <nav class="api-content__items">
               ${renderCodeLanguageToggles(wildcard)}
             </nav>
 
-            ${createApiHeader(wildcard)}
+            ${createApiHeader(wildcard, tag ? tag : tags[0])}
             ${wildcard === "sdk" ? createSdkContent(apiResponse) : createApiContent(apiResponse)}
           </div>
         </section>
+
+        <script src="/assets/scripts/plugins/jets.js"></script>
+        <script src="/assets/scripts/api.js"></script>
+
+        <script>
+          initializeApiFunctionality();
+
+          if (window.location.pathname === "/api/blockchain")
+            document.getElementById("toggle-cli").click();
+          else
+            document.getElementById("toggle-curl").click();
+        </script>
       </div>
-
-      <script src="/assets/scripts/plugins/jets.js"></script>
-      <script src="/assets/scripts/api.js"></script>
-
-      <script>
-        if (window.location.pathname === "/api/blockchain")
-          document.getElementById("toggle-cli").click();
-        else
-          document.getElementById("toggle-curl").click();
-      </script>
     `;
   }
 
@@ -149,13 +155,13 @@ function createApiContent(apiDetails) {
   return apiContent;
 }
 
-function createApiHeader(slug) {
+function createApiHeader(slug, apiVersion) {
   switch(slug) {
     case "blockchain":
-      return headerBlockchain();
+      return headerBlockchain(apiVersion);
 
     case "sdk":
-      return headerSdk();
+      return headerSdk(apiVersion);
 
     default:
       break;
@@ -368,14 +374,35 @@ function renderReturns(args) {
   return returnContent;
 }
 
-function renderVersionSelector(pageSlug, versions) {
+function renderVersionSelector(pageSlug, versions, desiredTag) {
   const options = [
     "<option disabled>Select a version</option>"
   ];
 
+  let optionIndex = 0;
+
+  // console.log("————————");
+  // console.log(desiredTag);
+  // console.log("————————");
+
   versions.forEach(version => {
-    options.push(`<option value="${pageSlug}-${version}">${version}</option>`);
+    optionIndex++;
+    let selectedOption = false;
+
+    if (desiredTag && desiredTag === version)
+      selectedOption = true;
+    else if (optionIndex === 1)
+      selectedOption = true;
+
+    // if (selectedOption === true)
+    //   console.log(pageSlug, version);
+
+    options.push(
+      `<option value="${pageSlug}-${version}"${selectedOption ? " selected" : ""}>${version}</option>`
+    );
   });
+
+  // console.log(options);
 
   return options;
 }
