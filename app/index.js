@@ -26,11 +26,6 @@ const server = fastify({
     redact: ["req.headers.authorization"],
     serializers: {
       req(req) {
-        // TODO: Figure out how to trigger this to test
-        // It is annoying to see in development
-        if (req.err && req.err.message.includes("Premature close"))
-          return {};
-
         return {
           headers: req.headers,
           hostname: req.hostname,

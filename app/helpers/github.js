@@ -16,16 +16,6 @@ import relativeDate from "~module/relative-date";
 
 let octokit;
 
-// String.prototype.escape = function() {
-//   const tagsToReplace = {
-//     "&": "&amp;",
-//     "<": "&lt;",
-//     ">": "&gt;"
-//   };
-
-//   return this.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag);
-// };
-
 //  R E D I S
 
 let client;
