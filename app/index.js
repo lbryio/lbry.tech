@@ -22,7 +22,7 @@ import redirects from "~data/redirects.json";
 const server = fastify({
   logger: {
     level: "warn",
-    prettyPrint: process.env.NODE_ENV === "development" ? true : false,
+    prettyPrint: process.env.NODE_ENV === "development",
     redact: ["req.headers.authorization"],
     serializers: {
       req(req) {

@@ -16,15 +16,15 @@ import relativeDate from "~module/relative-date";
 
 let octokit;
 
-String.prototype.escape = function() {
-  const tagsToReplace = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;"
-  };
+// String.prototype.escape = function() {
+//   const tagsToReplace = {
+//     "&": "&amp;",
+//     "<": "&lt;",
+//     ">": "&gt;"
+//   };
 
-  return this.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag);
-};
+//   return this.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag);
+// };
 
 //  R E D I S
 
@@ -142,7 +142,7 @@ function generateEvent(event) {
             rel="noopener noreferrer"
             target="_blank"
             title="View this comment on GitHub"
-          >${event.payload.issue.title.escape()}</a></em> in
+          >${escapeSpecialCharacters(event.payload.issue.title)}</a></em> in
         `;
       } else {
         return `
@@ -153,7 +153,7 @@ function generateEvent(event) {
             rel="noopener noreferrer"
             target="_blank"
             title="View this comment on GitHub"
-          >${event.payload.issue.title.escape()}</a></em> in
+          >${escapeSpecialCharacters(event.payload.issue.title)}</a></em> in
         `;
       }
 
@@ -171,7 +171,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this issue on GitHub"
-        >${event.payload.issue.title.escape()}</a></em> in
+        >${escapeSpecialCharacters(event.payload.issue.title)}</a></em> in
       `;
 
     case "PullRequestEvent":
@@ -188,7 +188,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this pull request on GitHub"
-        >${event.payload.pull_request.title.escape()}</a></em> in
+        >${escapeSpecialCharacters(event.payload.pull_request.title)}</a></em> in
       `;
 
     case "PullRequestReviewCommentEvent":
@@ -205,7 +205,7 @@ function generateEvent(event) {
           rel="noopener noreferrer"
           target="_blank"
           title="View this comment on GitHub"
-        >${event.payload.pull_request.title.escape()}</a></em> in
+        >${escapeSpecialCharacters(event.payload.pull_request.title)}</a></em> in
       `;
 
     case "PushEvent":
@@ -346,6 +346,9 @@ function updateGithubFeed() {
       const eventString = JSON.stringify(item);
 
       client.zrank("events", eventString, (err, reply) => {
+        if (err)
+          return;
+
         if (reply === null)
           client.zadd("events", item.id, eventString, callback);
         else
@@ -365,6 +368,16 @@ function updateGithubFeed() {
 
 
 //  H E L P E R
+
+function escapeSpecialCharacters(contentToEscape) {
+  const tagsToReplace = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;"
+  };
+
+  return contentToEscape.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag);
+}
 
 function refToBranch(ref) {
   if (ref)

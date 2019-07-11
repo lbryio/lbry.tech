@@ -124,12 +124,13 @@ function generateContent(exampleNumber, displayTrendingContent) {
       const renderedContentCollection = [];
       const trendingContentData = response.data;
 
-      for (const data of trendingContentData)
+      for (const data of trendingContentData) {
         rawContentCollection.push(fetchMetadata({
           claim: data.url,
           example: exampleNumber,
           method: "resolve"
         }));
+      }
 
       Promise.all(rawContentCollection).then(collection => {
         for (const part of collection) {

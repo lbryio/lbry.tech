@@ -16,16 +16,20 @@ function superscript(state, silent) {
   const max = state.posMax;
   const start = state.pos;
   let found;
-  let content;
   let token;
 
-  if (state.src.charCodeAt(start) !== 0x5E/* ^ */) return false;
-  if (silent) return false; // do not run pairs in validation mode
-  if (start + 2 >= max) return false;
+  if (state.src.charCodeAt(start) !== 0x5E/* ^ */)
+    return false;
+
+  if (silent)
+    return false; // do not run pairs in validation mode
+
+  if (start + 2 >= max)
+    return false;
 
   state.pos = start + 1;
 
-  while (state.pos < max) {
+  while(state.pos < max) {
     if (state.src.charCodeAt(state.pos) === 0x5E/* ^ */) {
       found = true;
       break;
@@ -39,7 +43,7 @@ function superscript(state, silent) {
     return false;
   }
 
-  content = state.src.slice(start + 1, state.pos);
+  const content = state.src.slice(start + 1, state.pos);
 
   // do not allow unescaped spaces/newlines inside
   if (content.match(/(^|[^\\])(\\\\)*\s/)) {
@@ -59,16 +63,14 @@ function superscript(state, silent) {
 
   if (content.match(regexForIds)) {
     const theLink = supText.match(regexForIds)[0].replace("(#", "").replace(")", "");
-
-    token.attrPush([ "id", theLink ]);
+    token.attrPush(["id", theLink]); // eslint-disable-line padding-line-between-statements
   }
 
   token = state.push("text", "", 0);
 
   if (content.match(regexForIds)) {
     const theText = supText.match(regexForTextBeforeLink)[0];
-
-    token.content = theText;
+    token.content = theText; // eslint-disable-line padding-line-between-statements
   } else token.content = supText;
 
   token = state.push("sup_close", "sup", -1);
@@ -84,6 +86,6 @@ function superscript(state, silent) {
 
 //  E X P O R T
 
-module.exports = exports = function sup_plugin(md) {
+module.exports = exports = function sup_plugin(md) { // eslint-disable-line camelcase
   md.inline.ruler.after("emphasis", "sup", superscript);
 };

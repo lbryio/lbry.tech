@@ -68,11 +68,3 @@ export default (state, emit) => {
     <script src="/assets/scripts/sockets.js"></script>
   `;
 };
-
-
-
-//  H E L P E R
-
-String.prototype.capitalize = function() {
-  return this.charAt(0).toUpperCase() + this.slice(1);
-};

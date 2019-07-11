@@ -45,9 +45,10 @@ export default async(state) => {
   };
 
   const tags = await getTags(repository);
+  const currentTag = tag.length ? tag : tags[0];
 
   try {
-    const apiResponse = await parseApiFile({ repo: repository, tag: tag ? tag : tags[0] });
+    const apiResponse = await parseApiFile({ repo: repository, tag: currentTag });
 
     return asyncHtml`
       <div class="__slate">
@@ -75,7 +76,7 @@ export default async(state) => {
               ${renderCodeLanguageToggles(wildcard)}
             </nav>
 
-            ${createApiHeader(wildcard, tag ? tag : tags[0])}
+            ${createApiHeader(wildcard, currentTag)}
             ${wildcard === "sdk" ? createSdkContent(apiResponse) : createApiContent(apiResponse)}
           </div>
         </section>
@@ -93,9 +94,7 @@ export default async(state) => {
         </script>
       </div>
     `;
-  }
-
-  catch(error) {
+  } catch(error) {
     const redirectUrl = redirects[state.href];
 
     return asyncHtml`
@@ -326,7 +325,7 @@ function renderArguments(args) {
       <li class="api-content__body-argument">
         <div class="left">
           <strong>${arg.name}</strong><br/>
-          ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
+          ${arg.is_required === true ? "" : "<span>optional</span>"}<span>${arg.type}</span>
         </div>
 
         <div class="right">${typeof arg.description === "string" ? arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}</div>
