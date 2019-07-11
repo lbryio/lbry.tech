@@ -45,7 +45,7 @@ export default async(state) => {
   };
 
   const tags = await getTags(repository);
-  const currentTag = tag.length ? tag : tags[0];
+  const currentTag = tag && tag.length ? tag : tags[0];
 
   try {
     const apiResponse = await parseApiFile({ repo: repository, tag: currentTag });
