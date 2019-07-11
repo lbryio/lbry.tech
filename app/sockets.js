@@ -89,6 +89,7 @@ export default async(socket, action) => {
       newsletterSubscribe(action, socket);
       break;
 
+
     case action.message === "view different documentation version":
       send(socket, {
         element: "div",

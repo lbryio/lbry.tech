@@ -381,10 +381,6 @@ function renderVersionSelector(pageSlug, versions, desiredTag) {
 
   let optionIndex = 0;
 
-  // console.log("————————");
-  // console.log(desiredTag);
-  // console.log("————————");
-
   versions.forEach(version => {
     optionIndex++;
     let selectedOption = false;
@@ -394,15 +390,10 @@ function renderVersionSelector(pageSlug, versions, desiredTag) {
     else if (optionIndex === 1)
       selectedOption = true;
 
-    // if (selectedOption === true)
-    //   console.log(pageSlug, version);
-
     options.push(
       `<option value="${pageSlug}-${version}"${selectedOption ? " selected" : ""}>${version}</option>`
     );
   });
-
-  // console.log(options);
 
   return options;
 }

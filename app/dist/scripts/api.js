@@ -93,6 +93,15 @@ function initializeApiFunctionality() { // eslint-disable-line no-unused-vars
   handleApiLanguageToggles("curl");
   handleApiLanguageToggles("lbrynet");
   handleApiLanguageToggles("python");
+
+  // Ensure version selector shows correct version, even on page reloads
+  const currentValue = document.querySelector(".api-content__body h2").textContent.split(/\s/g).pop();
+  const { children } = document.querySelector(".api-toc__select");
+
+  for (const child of children) {
+    if (currentValue === child.text)
+      document.querySelector(".api-toc__select").selectedIndex = child.index;
+  }
 }
 
 function reinitJets() {
