@@ -55,10 +55,10 @@ export default async(data, socket) => {
   let dataDetails = "";
   let explorerNotice = "";
 
-  if (data.example === 1 && !data.claim || !data.method) return;
+  if (data.example === 1 && (!data.claim || !data.method)) return;
   if (data.example === 2 && !data.data) return;
   if (data.example === 2) dataDetails = data.data; // file upload
-  if (data.example === 3 && !data.claim || !data.method) return;
+  if (data.example === 3 && (!data.claim || !data.method)) return;
 
   const claimAddress = data.claim;
   const resolveMethod = data.method;
@@ -155,9 +155,7 @@ export default async(data, socket) => {
             message: "show result",
             selector: `#example${data.example}-result`
           });
-        }
-
-        catch(memePublishError) {
+        } catch(memePublishError) {
           send(socket, {
             details: "Meme publish failed",
             message: "notification",
@@ -174,9 +172,7 @@ export default async(data, socket) => {
 
           return;
         }
-      }
-
-      catch(imageUploadError) {
+      } catch(imageUploadError) {
         send(socket, {
           details: "Image upload failed",
           message: "notification",
@@ -259,9 +255,7 @@ export default async(data, socket) => {
     }
 
     return response.body.result[Object.keys(response.body.result)[0]].claim;
-  }
-
-  catch(error) {
+  } catch(error) {
     messageSlack({
       message: "```" + error + "```",
       pretext: "_Someone is going through the Playground and the daemon is not running_",

@@ -37,7 +37,7 @@ export default (state, emit) => { // eslint-disable-line
     const customMetadata = {};
 
     for (const key in markdownFileDetails.attributes.meta) {
-      if (markdownFileDetails.attributes.meta.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(markdownFileDetails.attributes.meta, key)) {
         customMetadata[Object.keys(markdownFileDetails.attributes.meta[key])[0]] =
           markdownFileDetails.attributes.meta[key][Object.keys(markdownFileDetails.attributes.meta[key])[0]];
       }

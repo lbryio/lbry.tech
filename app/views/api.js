@@ -7,6 +7,7 @@
 import asyncHtml from "choo-async/html";
 import dedent from "dedent";
 import got from "got";
+import Octokit from "@octokit/rest";
 
 //  U T I L S
 
@@ -14,31 +15,48 @@ import headerBlockchain from "~component/api/header-blockchain";
 import headerSdk from "~component/api/header-sdk";
 import redirects from "~data/redirects.json";
 
-const blockchainApi = "https://raw.githubusercontent.com/lbryio/lbrycrd/master/contrib/devtools/generated/api_v1.json";
 const cache = new Map();
-const sdkApi = "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/lbry/docs/api.json";
+const filePathBlockchain = "/contrib/devtools/generated/api_v1.json";
+const filePathSdk = "/lbry/docs/api.json";
+const rawGitHubBase = "https://raw.githubusercontent.com/lbryio/";
+
+if (!process.env.GITHUB_OAUTH_TOKEN) // No point in rendering this page
+  throw new Error("Missing GitHub token");
+
+const octokit = new Octokit({
+  auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
+});
 
 
 
 //  E X P O R T
 
 export default async(state) => {
-  // below is evil, I just inherited it -- Jeremy
-  const apilabel = state.params.wildcard === "sdk" ?
-    "SDK" :
-    state.params.wildcard.charAt(0).toLocaleUpperCase() + state.params.wildcard.substring(1);
+  const { tag } = state;
+  const { wildcard } = state.params;
+
+  const repository = wildcard === "sdk" ?
+    "lbry-sdk" :
+    "lbrycrd";
 
   state.lbry = {
-    title: apilabel + " API Documentation",
-    description: "See API documentation, signatures, and sample calls for the LBRY " + apilabel + " APIs."
+    title: tag ? tag + " API Documentation" : "API Documentation",
+    description: "See API documentation, signatures, and sample calls for the LBRY APIs."
   };
 
+  const tags = await getTags(repository);
+  const currentTag = tag.length ? tag : tags[0];
+
   try {
-    const apiResponse = await parseApiFile(state.params.wildcard);
+    const apiResponse = await parseApiFile({ repo: repository, tag: currentTag });
 
     return asyncHtml`
       <div class="__slate">
         <aside class="api-toc">
+          <select class="api-toc__select" onchange="changeDocumentationVersion(value);">
+            ${renderVersionSelector(wildcard, tags, tag)}
+          </select>
+
           <div class="api-toc__search">
             <input class="api-toc__search-field" id="input-search" placeholder="Search" type="search"/>
             <div class="api-toc__search-clear" id="clear-search" title="Clear search query">&times;</div>
@@ -46,35 +64,37 @@ export default async(state) => {
           </div>
 
           <ul class="api-toc__commands" id="toc" role="navigation">
-            ${apilabel === "SDK" ? createSdkSidebar(apiResponse) : createApiSidebar(apiResponse)}
+            ${wildcard === "sdk" ? createSdkSidebar(apiResponse) : createApiSidebar(apiResponse)}
           </ul>
         </aside>
+
         <section class="api-content">
           <div class="api-documentation" id="toc-content">
             <div></div>
+
             <nav class="api-content__items">
-              ${renderToggles(apilabel === "SDK")}
+              ${renderCodeLanguageToggles(wildcard)}
             </nav>
 
-            ${createApiHeader(state.params.wildcard)}
-            ${apilabel === "SDK" ? createSdkContent(apiResponse) : createApiContent(apiResponse)}
+            ${createApiHeader(wildcard, currentTag)}
+            ${wildcard === "sdk" ? createSdkContent(apiResponse) : createApiContent(apiResponse)}
           </div>
         </section>
+
+        <script src="/assets/scripts/plugins/jets.js"></script>
+        <script src="/assets/scripts/api.js"></script>
+
+        <script>
+          initializeApiFunctionality();
+
+          if (window.location.pathname === "/api/blockchain")
+            document.getElementById("toggle-cli").click();
+          else
+            document.getElementById("toggle-curl").click();
+        </script>
       </div>
-
-      <script src="/assets/scripts/plugins/jets.js"></script>
-      <script src="/assets/scripts/api.js"></script>
-
-      <script>
-        if (window.location.pathname === "/api/blockchain")
-          document.getElementById("toggle-cli").click();
-        else
-          document.getElementById("toggle-curl").click();
-      </script>
     `;
-  }
-
-  catch(error) {
+  } catch(error) {
     const redirectUrl = redirects[state.href];
 
     return asyncHtml`
@@ -134,13 +154,13 @@ function createApiContent(apiDetails) {
   return apiContent;
 }
 
-function createApiHeader(slug) {
+function createApiHeader(slug, apiVersion) {
   switch(slug) {
     case "blockchain":
-      return headerBlockchain();
+      return headerBlockchain(apiVersion);
 
     case "sdk":
-      return headerSdk();
+      return headerSdk(apiVersion);
 
     default:
       break;
@@ -220,24 +240,70 @@ function createSdkSidebar(apiDetails) {
   return apiSidebar;
 }
 
-async function parseApiFile(urlSlug) {
-  let apiFileLink;
+async function getTags(repositoryName) {
+  const { data } = await octokit.repos.listTags({
+    owner: "lbryio",
+    repo: repositoryName
+  });
+
+  const tags = [];
+
+  // NOTE:
+  // The versioning in our repos do not make sense so extra
+  // exclusion code is needed to make this work.
+  //
+  // Documentation is only available after specific versions.
 
   switch(true) {
-    case (urlSlug === "blockchain"):
-      apiFileLink = blockchainApi;
+    case repositoryName === "lbry-sdk":
+      data.forEach(tag => {
+        if (
+          tag.name >= "v0.38.0" &&
+          tag.name !== "v0.38.0rc7" &&
+          tag.name !== "v0.38.0rc6" &&
+          tag.name !== "v0.38.0rc5" &&
+          tag.name !== "v0.38.0rc4" &&
+          tag.name !== "v0.38.0rc3" &&
+          tag.name !== "v0.38.0rc2" &&
+          tag.name !== "v0.38.0rc1"
+        ) tags.push(tag.name);
+      });
       break;
 
-    case (urlSlug === "sdk"):
-      apiFileLink = sdkApi;
+    case repositoryName === "lbrycrd":
+      data.forEach(tag => {
+        if (
+          tag.name >= "v0.17.1.0" &&
+          tag.name !== "v0.3.16" &&
+          tag.name !== "v0.3.15" &&
+          tag.name !== "v0.3-osx" &&
+          tag.name !== "v0.2-alpha"
+        ) tags.push(tag.name);
+      });
       break;
 
     default:
       break;
   }
 
-  if (!apiFileLink)
-    return Promise.reject(new Error("Failed to fetch API docs"));
+  return tags;
+}
+
+async function parseApiFile({ repo, tag }) {
+  let apiFileLink = `${rawGitHubBase}${repo}/${tag}`;
+
+  switch(true) {
+    case (repo === "lbrycrd"):
+      apiFileLink = `${apiFileLink}${filePathBlockchain}`;
+      break;
+
+    case (repo === "lbry-sdk"):
+      apiFileLink = `${apiFileLink}${filePathSdk}`;
+      break;
+
+    default:
+      return Promise.reject(new Error("Failed to fetch API docs"));
+  }
 
   const response = await got(apiFileLink, { cache, json: true });
 
@@ -259,7 +325,7 @@ function renderArguments(args) {
       <li class="api-content__body-argument">
         <div class="left">
           <strong>${arg.name}</strong><br/>
-          ${arg.is_required === true ? "" : "<span>optional</span>" }<span>${arg.type}</span>
+          ${arg.is_required === true ? "" : "<span>optional</span>"}<span>${arg.type}</span>
         </div>
 
         <div class="right">${typeof arg.description === "string" ? arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}</div>
@@ -307,7 +373,33 @@ function renderReturns(args) {
   return returnContent;
 }
 
-function renderToggles(onSdkPage) {
+function renderVersionSelector(pageSlug, versions, desiredTag) {
+  const options = [
+    "<option disabled>Select a version</option>"
+  ];
+
+  let optionIndex = 0;
+
+  versions.forEach(version => {
+    optionIndex++;
+    let selectedOption = false;
+
+    if (desiredTag && desiredTag === version)
+      selectedOption = true;
+    else if (optionIndex === 1)
+      selectedOption = true;
+
+    options.push(
+      `<option value="${pageSlug}-${version}"${selectedOption ? " selected" : ""}>${version}</option>`
+    );
+  });
+
+  return options;
+}
+
+function renderCodeLanguageToggles(pageSlug) {
+  const onSdkPage = pageSlug === "sdk";
+
   return [
     "<button class='api-content__item menu' id='toggle-menu'>menu</button>",
     !onSdkPage ? "<button class='api-content__item' id='toggle-cli' type='button'>cli</button>" : "",

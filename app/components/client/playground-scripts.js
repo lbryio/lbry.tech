@@ -249,11 +249,11 @@ curl --header <span class="token string">"Content-Type: application/json"</span>
 }
 
 const handleExamples = debounce(event => {
-  let exampleNumber;
+  const exampleNumber = parseInt(document.querySelector(".playground-navigation__example.active").dataset.example || 0);
   const data = event.dataset;
 
-  if (!parseInt(document.querySelector(".playground-navigation__example.active").dataset.example)) return;
-  exampleNumber = parseInt(document.querySelector(".playground-navigation__example.active").dataset.example);
+  if (!exampleNumber || exampleNumber === 0)
+    return;
 
   switch(data.action) {
     case "choose claim":
@@ -398,9 +398,9 @@ function updateCanvas(imageSource) {
   if (imageSource) {
     ctx.drawImage(imageSource, 0, 0, canvasWidth, canvasHeight);
     img.src = imageSource.src;
-  } else {
+  } else
     ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
-  }
+
 
   positionCanvasText(ctx, canvasHeight, canvasWidth);
 }

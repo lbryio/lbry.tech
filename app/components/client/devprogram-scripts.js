@@ -56,9 +56,10 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
   const address = data.address;
   const code = data.code;
 
-  if (code === null)
+  if (code === null) {
     document.querySelector("developer-program").innerHTML =
       "<p><strong>There was an issue with accessing GitHub's API. Please try again later.</strong></p>";
+  }
 
   fetch(`https://api.lbry.com/reward/new?github_token=${code}&reward_type=github_developer&wallet_address=${address}`)
     .then(response => response.json())

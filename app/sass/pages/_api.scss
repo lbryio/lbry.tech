@@ -55,18 +55,27 @@
   }
 }
 
-.api-toc__search {
-  position: relative;
-}
-
+.api-toc__select,
 .api-toc__search-field {
   width: 100%;
-  padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
 
   border-top: none;
   border-right: none;
   border-bottom: 1px solid $lbry-gray-1;
   border-left: none;
+}
+
+.api-toc__select {
+  background-position-x: 95%;
+}
+
+.api-toc__search {
+  position: relative;
+}
+
+.api-toc__search-field {
+  padding: 0.25rem calc(2rem + 4px) 0.25rem 0.75rem;
+
   border-radius: 0; // TODO: Put this rule in components on inputs
   font-size: 0.8rem;
   line-height: 2rem;
