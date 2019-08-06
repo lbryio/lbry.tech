@@ -62,7 +62,9 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | node_rpc_timeout           | integer | 5                         | 10                         | Time, in seconds, to allow connection over DHT                                     |
 | network_interface          | string  | 0:0:0:0                   | 127.0.0.1                  | Interface to use for the DHT and blob exchange                                     |
 | use_upnp                   | boolean | true                      | false                      | Attempt external port mapping via UPnP                                             |
-
+| streaming_get              | boolean | false                     | true                       | Allow calling localhost:5280/get/claimname requests                                       |
+| save_files                 | boolean | true                      | false                      | Save files with each download                                            |
+| save_blobs                 | boolean | true                      | false                      | Save blobs with each download                                            |
 ### Security
 
 | Setting        | Format  | Default value | Sample Values      | Description                                                                                                                      |
