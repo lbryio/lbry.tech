@@ -137,7 +137,6 @@ function generateContent(exampleNumber, displayTrendingContent) {
       Promise.all(rawContentCollection)
         .then(collection => {
           for (const part of collection) {
-            console.log(part.value.tags);
             if (part.value.tags.includes("mature"))
               continue;
             try {
