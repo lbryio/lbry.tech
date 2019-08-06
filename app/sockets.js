@@ -13,6 +13,7 @@ import apiPage from "~view/api";
 import fetchMetadata from "~helper/fetch-metadata";
 import { generateGitHubFeed } from "~helper/github";
 import messageSlack from "~helper/slack";
+import { URL } from "url";
 
 const githubAppId = process.env.GITHUB_APP_ID;
 const githubAppSecret = process.env.GITHUB_APP_SECRET;
@@ -125,6 +126,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
       const trendingContentData = response.data;
 
       for (const data of trendingContentData) {
+        console.log(data);
         rawContentCollection.push(fetchMetadata({
           claim: data.url,
           example: exampleNumber,
@@ -132,10 +134,14 @@ function generateContent(exampleNumber, displayTrendingContent) {
         }));
       }
 
-      Promise.all(rawContentCollection).then(collection => {
-        for (const part of collection) {
-          try {
-            renderedContentCollection.push(`
+      Promise.all(rawContentCollection)
+        .then(collection => {
+          for (const part of collection) {
+            console.log(part.value.tags);
+            if (part.value.tags.includes("mature"))
+              continue;
+            try {
+              renderedContentCollection.push(`
               <section class="playground-content__trend">
                 <figure
                   class="media__thumb"
@@ -153,19 +159,20 @@ function generateContent(exampleNumber, displayTrendingContent) {
                 </div>
               </section>
             `);
-          } catch(err) {
-            return; // TODO: Return nice error message
+            } catch(err) {
+              console.error(err);
+              return; // TODO: Return nice error message
+            }
           }
-        }
 
-        renderedContentCollection.push(`
+          renderedContentCollection.push(`
           <script>
             document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 1']").dataset.description
           </script>
         `);
 
-        displayTrendingContent(renderedContentCollection.join(""));
-      });
+          displayTrendingContent(renderedContentCollection.join(""));
+        });
     });
   }
 
