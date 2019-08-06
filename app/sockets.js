@@ -126,7 +126,6 @@ function generateContent(exampleNumber, displayTrendingContent) {
       const trendingContentData = response.data;
 
       for (const data of trendingContentData) {
-        console.log(data);
         rawContentCollection.push(fetchMetadata({
           claim: data.url,
           example: exampleNumber,
