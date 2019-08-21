@@ -136,27 +136,28 @@ function generateContent(exampleNumber, displayTrendingContent) {
       Promise.all(rawContentCollection)
         .then(collection => {
           for (const part of collection) {
-            if (part.value.tags.includes("mature"))
+            if (part.value.tags && part.value.tags.includes("mature"))
               continue;
+
             try {
               renderedContentCollection.push(`
-              <section class="playground-content__trend">
-                <figure
-                  class="media__thumb"
-                  data-action="choose claim"
-                  data-claim-id="${part.name}"
-                  ${part.value.thumbnail.url.length ? `style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})"` : ""}
-                ></figure>
+                <section class="playground-content__trend">
+                  <figure
+                    class="media__thumb"
+                    data-action="choose claim"
+                    data-claim-id="${part.name}"
+                    ${part.value.thumbnail.url.length ? `style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})"` : ""}
+                  ></figure>
 
-                <div class="media__title">
-                  ${part.value.title}
-                </div>
+                  <div class="media__title">
+                    ${part.value.title}
+                  </div>
 
-                <div class="media__subtitle">
-                  ${part.channel_name}
-                </div>
-              </section>
-            `);
+                  <div class="media__subtitle">
+                    ${part.signing_channel.name || "Anon"}
+                  </div>
+                </section>
+              `);
             } catch(err) {
               console.error(err);
               return; // TODO: Return nice error message
@@ -170,6 +171,10 @@ function generateContent(exampleNumber, displayTrendingContent) {
         `);
 
           displayTrendingContent(renderedContentCollection.join(""));
+        })
+        .catch(error => {
+          console.error(error);
+          return null;
         });
     });
   }
@@ -199,8 +204,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
         if (
           part &&
           part.value &&
-          part.value.thumbnail.url &&
-          part.channel_name
+          part.value.thumbnail.url
         ) {
           renderedContentCollection.push(`
             <section class="playground-content__trend">
@@ -217,7 +221,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
               </div>
 
               <div class="media__subtitle">
-                ${part.channel_name}
+                ${part.signing_channel.name || "Anon"}
               </div>
             </section>
           `);

@@ -265,6 +265,7 @@
 }
 
 .playground-content__urlbar {
+  height: 2.5rem;
   border: 1px solid $lbry-gray-1;
   display: flex;
   margin-bottom: 1rem;
@@ -289,6 +290,7 @@
 
   input {
     width: calc(100% - 9.5rem);
+    border: none;
     font-size: 1rem;
 
     &::placeholder {
@@ -299,12 +301,12 @@
 
   span {
     @include no-user-select;
-    width: 3.5rem;
+    width: 3.5rem; height: 2.5rem;
 
     color: $lbry-gray-4;
     cursor: default;
     font-size: 1rem;
-    line-height: 2rem;
+    line-height: 2.4;
     text-align: right;
   }
 }

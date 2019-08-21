@@ -254,7 +254,11 @@ export default async(data, socket) => {
       });
     }
 
-    return response.body.result[Object.keys(response.body.result)[0]].claim;
+    // console.log("——");
+    // console.log(response.body.result[Object.keys(response.body.result)[0]]);
+    // console.log("——");
+
+    return response.body.result[Object.keys(response.body.result)[0]];
   } catch(error) {
     messageSlack({
       message: "```" + error + "```",
