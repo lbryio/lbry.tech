@@ -42,7 +42,8 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 ### Network 
 | Setting                    | Format  | Default value             | Sample Values              | Description                                                                        |
 |----------------------------|---------|---------------------------|----------------------------|------------------------------------------------------------------------------------|
-| api                        | string  | localhost:5279            | 0:0:0:0:5280               | IP address and port the SDK API will listen on                                     |
+| api                        | string  | localhost:5279            | 0:0:0:0:5280               | IP address and port the SDK API will listen on     |
+| streaming_server           | string  | localhost:5280            | 0:0:0:0:5280               | IP address and port the media/streaming server will listen on   | 
 | cache_time                 | integer | 150                       | 90                         | How long to keep resolve data in cache                                             |
 | data_rate                  | float   | 0.0001                    | 0.05                       | What LBC rate, per MB, to offer DHT data at (currently disabled in the protocol)   |
 | udp_port                   | integer | 4444                      | 4445                       | UDP port used to announce blobs                                                    |
