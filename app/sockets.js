@@ -136,9 +136,10 @@ function generateContent(exampleNumber, displayTrendingContent) {
       Promise.all(rawContentCollection)
         .then(collection => {
           for (const part of collection) {
-            if (part.value.tags && part.value.tags.includes("mature"))
+            if (part && part.value.tags && part.value.tags.includes("mature"))
               continue;
-
+            if (part === undefined)
+              continue;
             try {
               renderedContentCollection.push(`
                 <section class="playground-content__trend">
@@ -154,7 +155,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
                   </div>
 
                   <div class="media__subtitle">
-                    ${part.signing_channel.name || "Anon"}
+                    ${part.signing_channel ? part.signing_channel.name : "Anon"}
                   </div>
                 </section>
               `);
