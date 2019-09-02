@@ -260,6 +260,7 @@ export default async(data, socket) => {
 
     return response.body.result[Object.keys(response.body.result)[0]];
   } catch(error) {
+    console.error(error);
     messageSlack({
       message: "```" + error + "```",
       pretext: "_Someone is going through the Playground and the daemon is not running_",
