@@ -41,6 +41,10 @@ The sequence number of a block in the blockchain. The first block is at height 0
 
 An open, distributed ledger that records transactions in a verifiable and change-resistant way. The LBRY blockchain serves as an index of the content available on the network, a payment system and record of purchases for priced content, and a source if cryptographic publisher identities.
 
+### Canonical URL
+
+Similar to the [Short URL](#short-url) but for claims that are signed by channels, both the channel Short URL and claim Short URL are returned (i.e. lbry://@LBRY-Social#d/two#f. A canonical URL will change if the channel is updated, therefore its less permanent than a Short URL which is less permanent than the [Permanent URL](https://spec.lbry.com/#urls).
+
 ### Chainquery
 
 A tool that stores blockchain data in an SQL database, keeps the database up-to-date as the blockchain grows, and provides an API to access the data using standard SQL queries. 
@@ -172,7 +176,7 @@ A file included with each LBRY project that contains basic information about tha
 
 A long-running node that accepts blobs for upload and rehosts them on the network.
 
-### Resolve (or URL Resolution)
+### Resolve (or URL Resolution) {#resolve}
 
 The process of translating a URL into the associated claim ID and metadata. See [Resolution](/spec#resolution) for details.
 
@@ -183,6 +187,10 @@ A definition of the structure of the metadata that is stored in claims in the bl
 ### Simplified Payment Verification
 
 A scheme to validate transactions without storing the whole blockchain.
+
+### Short URL
+
+The shortest [URL](https://spec.lbry.com/#urls), not including the [channel](#channel), that will [resolve](#resolve) to the correct claim (i.e. lbry://cats#c, returning lbry://cats#ca43e2b6db155177564e574b09dfedc7588816ef or lbry://@cats#0 returning lbry://@cats#0893dbed95307c4b27aadbcb1cc6cb593810b3f9). This is determined on a first come, first serve basis on claim id collisions. A short URL with more than one identifier may change to include only a single identifier if the previous claim, which had the single identifier, is deleted. 
 
 ### SPV
 
