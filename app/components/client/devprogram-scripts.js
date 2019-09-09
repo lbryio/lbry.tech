@@ -64,26 +64,30 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
   fetch(`https://api.lbry.com/reward/new?github_token=${code}&reward_type=github_developer&wallet_address=${address}`)
     .then(response => response.json())
     .then(result => {
+      console.log(result);
+
       switch(true) {
         case result.error === "this reward is limited to 1 per person":
           document.querySelector("developer-program").innerHTML =
             "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>";
-          break;
+          return;
 
         case result.success:
           result = result.data;
           document.querySelector("developer-program").innerHTML =
             `<p><strong>Success!</strong> Your wallet has been credited with ${result.reward_amount} LBC.</p><p>We have a great reference for the <a href="/api/sdk">LBRY SDK here</a> to help you get started.</p><p>You can see proof of this transaction on <a href="https://explorer.lbry.com/tx/${result.transaction_id}">our Blockchain Explorer</a>.</p>`;
-          break;
+          return;
 
         default:
-          console.log(data); // eslint-disable-line no-console
+          console.info(data); // eslint-disable-line no-console
           document.querySelector("developer-program").innerHTML =
             "<p><strong>The LBRY API might be down. Please try again later.</strong></p>";
-          break;
+          return;
       }
     })
-    .catch(() => {
+    .catch(error => {
+      console.error(error);
+
       // Idk what the error would be (probably a 500) so let's just have this message
       document.querySelector("developer-program").innerHTML =
         "<p><strong>LBRY API is down. Please try again later.</strong></p>";

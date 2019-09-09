@@ -15,11 +15,11 @@ import { generateGitHubFeed } from "~helper/github";
 import messageSlack from "~helper/slack";
 import { URL } from "url";
 
-const githubAppId = process.env.GITHUB_APP_ID;
-const githubAppSecret = process.env.GITHUB_APP_SECRET;
+// const githubAppId = process.env.GITHUB_APP_ID;
+// const githubAppSecret = process.env.GITHUB_APP_SECRET;
 
-// const githubAppId = process.env.GITHUB_APP_ID_TEST;
-// const githubAppSecret = process.env.GITHUB_APP_SECRET_TEST;
+const githubAppId = process.env.GITHUB_APP_ID_TEST;
+const githubAppSecret = process.env.GITHUB_APP_SECRET_TEST;
 
 
 
