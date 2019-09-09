@@ -64,12 +64,15 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
   fetch(`https://api.lbry.com/reward/new?github_token=${code}&reward_type=github_developer&wallet_address=${address}`)
     .then(response => response.json())
     .then(result => {
-      console.log(result);
-
       switch(true) {
         case result.error === "this reward is limited to 1 per person":
           document.querySelector("developer-program").innerHTML =
             "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>";
+          return;
+
+        case result.error:
+          document.querySelector("developer-program").innerHTML =
+            `<p>${result.error}</p>`;
           return;
 
         case result.success:
@@ -81,7 +84,7 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
         default:
           console.info(data); // eslint-disable-line no-console
           document.querySelector("developer-program").innerHTML =
-            "<p><strong>The LBRY API might be down. Please try again later.</strong></p>";
+            "<p><strong>No success or error was received so the LBRY API might be down.<br/>Please try again later.</strong></p>";
           return;
       }
     })
