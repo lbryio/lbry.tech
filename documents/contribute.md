@@ -68,7 +68,7 @@ Several hundred extremely good-looking, wise and moral people, as well as our CT
 
 Web and application designers are requested to be able to work directly on CSS in the project they'd be contributing to. Please follow the [Coding](#coding) instructions for any website or application you want to improve.
 
-We're happy to provide assistance if you're used to working in HTMl and CSS but are having trouble getting started. Check out [our chat](https://chat.lbry.com) or [our forum](https://discourse.lbry.com).
+We're happy to provide assistance if you're used to working in HTML and CSS but are having trouble getting started. Check out [our chat](https://chat.lbry.com) or [our forum](https://discourse.lbry.com).
 
 ## Writing
 
