@@ -65,12 +65,12 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
     .then(response => response.json())
     .then(result => {
       switch(true) {
-        case result.error === "this reward is limited to 1 per person":
+        case result.error === "This reward is limited to 1 per person":
           document.querySelector("developer-program").innerHTML =
             "<p>You have already claimed this reward. This reward is limited to <strong>ONE</strong> per person. Your enthusiasm is appreciated.</p>";
           return;
 
-        case result.error:
+        case Boolean(result.error):
           document.querySelector("developer-program").innerHTML =
             `<p>${result.error}</p>`;
           return;
