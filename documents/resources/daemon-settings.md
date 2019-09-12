@@ -66,13 +66,6 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | streaming_get              | boolean | false                     | true                       | Allow calling localhost:5280/get/claimname requests                                       |
 | save_files                 | boolean | true                      | false                      | Save files with each download                                            |
 | save_blobs                 | boolean | true                      | false                      | Save blobs with each download                                            |
-### Security
-
-| Setting        | Format  | Default value | Sample Values      | Description                                                                                                                      |
-|----------------|---------|---------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| allowed_origin | string  | ''            | '*' or   localhost | IP address to allow API requests from                                                                                            |
-| use_auth_http  | boolean | false         | true               | See [authentication instructions](https://github.com/lbryio/lbry-sdk/blob/master/lbrynet/daemon/auth/server.py#L179)   for details   |
-
 ### Other
 | Setting            | Format  | Default value | Sample Values                  | Description                                                                                                   |
 |--------------------|---------|---------------|--------------------------------|---------------------------------------------------------------------------------------------------------------|
