@@ -4,7 +4,7 @@
 
 //  P A C K A G E S
 
-import color from "colorette";
+import * as color from "colorette";
 import compress from "fastify-compress";
 import cors from "cors";
 import fastify from "fastify";

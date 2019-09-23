@@ -44,7 +44,8 @@
     "redis": "^2.8.0",
     "slack-node": "^0.1.8",
     "socket.io": "^2.2.0",
-    "stringify-object": "^3.3.0"
+    "stringify-object": "^3.3.0",
+    "request": "latest"
   },
   "description": "Documentation for the LBRY protocol and associated projects",
   "devDependencies": {

@@ -11,6 +11,7 @@ import html from "choo/html";
 
 import apiPage from "~view/api";
 import fetchMetadata from "~helper/fetch-metadata";
+import lbrytvAPI from "~helper/lbrytv-sdk";
 import { generateGitHubFeed } from "~helper/github";
 import messageSlack from "~helper/slack";
 import { URL } from "url";
@@ -117,31 +118,32 @@ export default async(socket, action) => {
 
 function generateContent(exampleNumber, displayTrendingContent) {
   if (exampleNumber === 1) {
-    return getTrendingContent().then(response => {
-      if (!response || !response.success || response.success !== true || !response.data)
-        return "";
+    return getTrendingContent()
+      .then(response => {
+        if (!response || !response.success || response.success !== true || !response.data)
+          return "";
 
-      const rawContentCollection = [];
-      const renderedContentCollection = [];
-      const trendingContentData = response.data;
+        const rawContentCollection = [];
+        const renderedContentCollection = [];
+        const trendingContentData = response.data;
 
-      for (const data of trendingContentData) {
-        rawContentCollection.push(fetchMetadata({
-          claim: data.url,
-          example: exampleNumber,
-          method: "resolve"
-        }));
-      }
+        for (const data of trendingContentData) {
+          rawContentCollection.push(fetchMetadata({
+            claim: data.url,
+            example: exampleNumber,
+            method: "resolve"
+          }));
+        }
 
-      Promise.all(rawContentCollection)
-        .then(collection => {
-          for (const part of collection) {
-            if (part && part.value.tags && part.value.tags.includes("mature"))
-              continue;
-            if (part === undefined)
-              continue;
-            try {
-              renderedContentCollection.push(`
+        Promise.all(rawContentCollection)
+          .then(collection => {
+            for (const part of collection) {
+              if (part && part.value.tags && part.value.tags.includes("mature"))
+                continue;
+              if (part === undefined)
+                continue;
+              try {
+                renderedContentCollection.push(`
                 <section class="playground-content__trend">
                   <figure
                     class="media__thumb"
@@ -159,25 +161,25 @@ function generateContent(exampleNumber, displayTrendingContent) {
                   </div>
                 </section>
               `);
-            } catch(err) {
-              console.error(err);
-              return; // TODO: Return nice error message
+              } catch(err) {
+                console.error(err);
+                return; // TODO: Return nice error message
+              }
             }
-          }
 
-          renderedContentCollection.push(`
+            renderedContentCollection.push(`
           <script>
             document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 1']").dataset.description
           </script>
         `);
 
-          displayTrendingContent(renderedContentCollection.join(""));
-        })
-        .catch(error => {
-          console.error(error);
-          return null;
-        });
-    });
+            displayTrendingContent(renderedContentCollection.join(""));
+          })
+          .catch(error => {
+            console.error(error);
+            return null;
+          });
+      });
   }
 
   if (exampleNumber === 3) {
@@ -193,50 +195,49 @@ function generateContent(exampleNumber, displayTrendingContent) {
       "minecraft-in-real-life-iron-man#758dd6497cdfc401ae1f25984738d024d47b50af",
       "ethan-shows-kyle-warframe-skyvault#8a7401b88d5ed0376d98f16808194d4dcb05b284"
     ];
-
-    const rawContentCollection = [];
     const renderedContentCollection = [];
 
-    for (const url of approvedUrls)
-      rawContentCollection.push(fetchMetadata({ claim: url, method: "resolve", example: 1 }));
+    lbrytvAPI.resolve(approvedUrls)
+      .then(resolveResponse => {
+        if (resolveResponse != null) {
+          let responses = Object.values(resolveResponse);
 
-    return Promise.all(rawContentCollection).then(collection => {
-      for (const part of collection) {
-        if (
-          part &&
-          part.value &&
-          part.value.thumbnail.url
-        ) {
-          renderedContentCollection.push(`
-            <section class="playground-content__trend">
-              <figure
-                class="media__thumb"
-                data-action="choose claim"
-                data-claim-id="${part.claim_id}"
-                data-name=${part.name}
-                style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})">
-              </figure>
+          for (let r in responses) {
+            let part = responses[r];
 
-              <div class="media__title">
-                ${part.value.title}
-              </div>
-
-              <div class="media__subtitle">
-                ${part.signing_channel.name || "Anon"}
-              </div>
-            </section>
-          `);
+            if (part.value && part.value.thumbnail.url) {
+              renderedContentCollection.push(`
+                  <section class="playground-content__trend">
+                    <figure
+                      class="media__thumb"
+                      data-action="choose claim"
+                      data-claim-id="${part.claim_id}"
+                      data-name=${part.name}
+                      style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})">
+                    </figure>
+      
+                    <div class="media__title">
+                      ${part.value.title}
+                    </div>
+      
+                    <div class="media__subtitle">
+                      ${part.signing_channel.name || "Anon"}
+                    </div>
+                  </section>
+                `);
+            }
+          }
         }
-      }
-
-      renderedContentCollection.push(`
-        <script>
-          document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 3']").dataset.description
-        </script>
-      `);
-
-      displayTrendingContent(renderedContentCollection.join(""));
-    });
+        renderedContentCollection.push(`
+            <script>
+              document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 3']").dataset.description
+            </script>
+          `);
+        displayTrendingContent(renderedContentCollection.join(""));
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 }
 
