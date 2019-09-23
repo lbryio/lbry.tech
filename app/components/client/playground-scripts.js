@@ -257,7 +257,7 @@ const handleExamples = debounce(event => {
 
   switch(data.action) {
     case "choose claim":
-      fetchMetadata(exampleNumber, data.claimId);
+      fetchMetadata(exampleNumber, `${data.name}#${data.claimId}`);
 
       if (document.querySelector(".playground-navigation__example:nth-child(3)").classList.contains("active"))
         document.getElementById("fetch-claim-uri").value = event.dataset.name + "#" + event.dataset.claimId;

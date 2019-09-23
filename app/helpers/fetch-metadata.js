@@ -13,6 +13,8 @@ import stringifyObject from "stringify-object";
 
 import messageSlack from "./slack";
 import publishMeme from "./publish-meme";
+import lbrytvAPI from "~helper/lbrytv-sdk";
+
 import randomString from "./random-string";
 import { send } from "~socket";
 import uploadImage from "./upload-image";
@@ -76,10 +78,10 @@ export default async(data, socket) => {
 
 
 
-  switch(true) {
+  switch(resolveMethod) {
     //  T I P
     //  E X A M P L E
-    case resolveMethod === "support_create":
+    case "support_create":
       if (!approvedContentIdsForTipping.includes(claimAddress)) {
         return send(socket, {
           example: data.example,
@@ -103,7 +105,7 @@ export default async(data, socket) => {
 
     //  P U B L I S H
     //  E X A M P L E
-    case resolveMethod === "publish":
+    case  "publish":
       apiRequestMethod = "PUT";
 
       // Required for publishing
@@ -194,10 +196,36 @@ export default async(data, socket) => {
 
     //  R E S O L V E
     //  E X A M P L E
-    case resolveMethod === "resolve":
+    case "resolve":
       apiRequestMethod = "GET";
       body.uri = claimAddress;
+      try {
+        let resolveResponse = await lbrytvAPI.resolve([claimAddress]);
 
+        if (socket) {
+          const renderedCode = prism.highlight(
+            stringifyObject(resolveResponse, { indent: "  ", singleQuotes: false }),
+            prism.languages.json,
+            "json"
+          );
+
+          return send(socket, {
+            example: data.example,
+            html: raw(`
+          <h3>Response</h3>
+          ${explorerNotice}
+          <pre><code class="language-json">${renderedCode}</code></pre>
+        `),
+            message: "show result",
+            selector: `#example${data.example}-result`
+          });
+        }
+      } catch(error) {
+        messageSlack({
+          message: "```" + error + "```",
+          title: "DAEMON ERROR: resolve"
+        });
+      }
       break;
 
 
