@@ -118,66 +118,54 @@ export default async(socket, action) => {
 
 function generateContent(exampleNumber, displayTrendingContent) {
   if (exampleNumber === 1) {
-    return getTrendingContent()
+    return lbrytvAPI.getTrending()
       .then(response => {
-        if (!response || !response.success || response.success !== true || !response.data)
-          return "";
-
-        const rawContentCollection = [];
         const renderedContentCollection = [];
-        const trendingContentData = response.data;
+        const urlsToResolve = [];
 
-        for (const data of trendingContentData) {
-          rawContentCollection.push(fetchMetadata({
-            claim: data.url,
-            example: exampleNumber,
-            method: "resolve"
-          }));
-        }
+        response.forEach(r =>{
+          urlsToResolve.push(r.canonical_url);
+        });
+        lbrytvAPI.resolve(urlsToResolve)
+          .then(resolveResponse => {
+            if (resolveResponse !== null) {
+              let responses = Object.values(resolveResponse);
 
-        Promise.all(rawContentCollection)
-          .then(collection => {
-            for (const part of collection) {
-              if (part && part.value.tags && part.value.tags.includes("mature"))
-                continue;
-              if (part === undefined)
-                continue;
-              try {
-                renderedContentCollection.push(`
-                <section class="playground-content__trend">
-                  <figure
-                    class="media__thumb"
-                    data-action="choose claim"
-                    data-claim-id="${part.name}"
-                    ${part.value.thumbnail.url.length ? `style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})"` : ""}
-                  ></figure>
+              for (let r in responses) {
+                let part = responses[r];
 
-                  <div class="media__title">
-                    ${part.value.title}
-                  </div>
-
-                  <div class="media__subtitle">
-                    ${part.signing_channel ? part.signing_channel.name : "Anon"}
-                  </div>
-                </section>
-              `);
-              } catch(err) {
-                console.error(err);
-                return; // TODO: Return nice error message
+                if (part.value && part.value.thumbnail.url) {
+                  renderedContentCollection.push(`
+                  <section class="playground-content__trend">
+                    <figure
+                      class="media__thumb"
+                      data-action="choose claim"
+                      data-claim-id="${part.claim_id}"
+                      data-name=${part.name}
+                      style="background-image: url(${makeImageSourceSecure(part.value.thumbnail.url)})">
+                    </figure>
+      
+                    <div class="media__title">
+                      ${part.value.title || "Untitled"}
+                    </div>
+      
+                    <div class="media__subtitle">
+                      ${part.signing_channel ? part.signing_channel.name : "Anon"}
+                    </div>
+                  </section>
+                `);
+                }
               }
             }
-
             renderedContentCollection.push(`
-          <script>
-            document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 1']").dataset.description
-          </script>
-        `);
-
+            <script>
+              document.getElementById("playground-example-description").innerHTML = document.querySelector("[data-action='playground, example 1']").dataset.description
+            </script>
+          `);
             displayTrendingContent(renderedContentCollection.join(""));
           })
           .catch(error => {
             console.error(error);
-            return null;
           });
       });
   }
@@ -199,7 +187,7 @@ function generateContent(exampleNumber, displayTrendingContent) {
 
     lbrytvAPI.resolve(approvedUrls)
       .then(resolveResponse => {
-        if (resolveResponse != null) {
+        if (resolveResponse !== null) {
           let responses = Object.values(resolveResponse);
 
           for (let r in responses) {
@@ -217,11 +205,11 @@ function generateContent(exampleNumber, displayTrendingContent) {
                     </figure>
       
                     <div class="media__title">
-                      ${part.value.title}
+                      ${part.value.title || "Untitled"}
                     </div>
       
                     <div class="media__subtitle">
-                      ${part.signing_channel.name || "Anon"}
+                      ${part.signing_channel ? part.signing_channel.name : "Anon"}
                     </div>
                   </section>
                 `);
@@ -376,15 +364,6 @@ function getGitHubUserToken(socket) {
     message: "redirect",
     url: `https://github.com/login/oauth/authorize?client_id=${githubAppId}&scope=public_repo,user:email`
   });
-}
-
-async function getTrendingContent() {
-  try {
-    const response = await got("https://api.lbry.com/file/list_trending");
-    return JSON.parse(response.body); // eslint-disable-line padding-line-between-statements
-  } catch(error) {
-    return error;
-  }
 }
 
 function makeImageSourceSecure(url) {
