@@ -57,7 +57,7 @@ Several hundred extremely good-looking, wise and moral people, as well as our CT
 ### How To Contribute Code
 
 1. **Join the Community**. By joining our [chat](https://chat.lbry.com) or our [forum](https://discourse.lbry.com), you can interact with other developers when you have questions, ideas, or problems.
-1. **Identify the component you want to work on**. LBRY has code bases that deal with everything from cryptography and distributed systems to end-user graphic user-interfaces. We use Python, JavaScript, C++, Go, and more. See [ecosystem overview](#ecosystem-overview) to find the right project.
+1. **Identify the component you want to work on**. LBRY has code bases that deal with everything from cryptography and distributed systems to end-user graphic user-interfaces. We use Python, JavaScript, C++, Go, and more. See [ecosystem overview](/overview#ecosystem-overview) to find the right project.
 1. **Get set up.** Each repo has a [[README]] with clear instructions on how to get the repo up and running properly. Thanks, [Repository Standards](https://lbry.tech/resources/repository-standards)!
 1. **Find something to work on**. All actively developed repositories should have issues tagged "Good First Issues" specifically for new contributors. You are also welcome to work on something not currently filed if you have your own idea. Additionally, all repositories have contact information for the maintainer if you have trouble finding an issue to work on.
 1. **Abide coding and commit standards**. Any specific information necessary to know in this regard should be in the project [[README]].
@@ -74,7 +74,7 @@ We're happy to provide assistance if you're used to working in HTML and CSS but 
 
 Most written content, and especially all technical writing, is checked into source control. To improve content we've written or add new content:
 
-1. Identify which website or application it is in (see the [overview](#ecosystem-overview)).
+1. Identify which website or application it is in (see the [overview](/overview#ecosystem-overview)).
 1. Search for a quoted phrase of the content you want to change (or use the same technique to identify the folder to create a new document in).
 1. Edit the content via the GitHub interface and submit it as a pull request.
 
@@ -105,7 +105,7 @@ If you're about to raise an issue because you've found a problem with LBRY, or y
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 Guidelines for bug reports:
 
-1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
+1. **Identify the correct repo**. See [ecosystem overview](/overview#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
 2. **Check if the issue exists**. Please do a quick search to see if the issue has been reported (or fixed), including closed tickets.
 3. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Santa _loves_ people who follow it.
 
@@ -115,7 +115,7 @@ Well-specified bug reports save developers lots of time and are [appreciated](#a
 
 Feature requests are welcome. Before you submit one be sure to:
 
-1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview).
+1. **Identify the correct repo**. See [ecosystem overview](/overview#ecosystem-overview).
 2. **Use the Github Issues search** and check the feature hasn't already been requested. Be sure to include closed tickets.
 3. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
 4. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
