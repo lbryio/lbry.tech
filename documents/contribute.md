@@ -7,7 +7,7 @@ description: Learn how to be a contributor to core and auxiliary LBRY components
 
 Interested in working on the LBRY protocol, an official LBRY app, or other LBRY infrastructure? Awesome! This guide will get you started.
 
-This is a guide for contributing to the code bases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
+This is a guide for contributing to the codebases maintained by the LBRY organization by [Coding](#coding), [Designing](#designing), [Writing](#writing), and [Testing](#testing).
 
 Contributors that provide accepted pull requests, well-specified issues, or assist in testing and quality assurance typically receive LBC tokens as [appreciation](#appreciation).
 
@@ -21,7 +21,7 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 
 | Component | Language (Toolset) | What Is It | Intro Video
 --- | --- | --- | ---
-| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly, and instead bundle [[lbry-sdk]]. | [Video](/resources/video-lbrycrd)
+| [lbrycrd](https://github.com/lbryio/lbrycrd) | C++ | A full node for the LBRY blockchain, including a standalone wallet. Used by miners and some applications. Most consumer applications do not bundle [[lbrycrd]] directly and instead bundle [[lbry-sdk]]. | [Video](/resources/video-lbrycrd)
 | [lbry-sdk](https://github.com/lbryio/lbry-sdk) | Python (asyncio) | A daemon that can be used directly or to develop other applications. Provides convenience [APIs](/api/sdk), bundles an SPV wallet ([[torba]]), and contains an implementation of the LBRY data network. | [Video](/resources/video-lbrysdk)
 | [torba](https://github.com/lbryio/lbry-sdk) | Python | An [[SPV]] (Simple Payment Verification) wallet. Bundled with [[lbry-sdk]]. 
 | [wallet server](https://github.com/lbryio/lbry-sdk/tree/master/lbry/lbry/wallet/server) | Protobuf, Python |  The wallet server used by [[torba]]. | |
@@ -45,7 +45,7 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 ### Auxiliary Services and Applications
 | Domain | Language (Toolset) | What Is It
 --- | --- | ---
-| [chainquery](https://github.com/lbryio/chainquery) | Go | A utility for parsing, extracting, and updating the LBRY blockchain into structured SQL data. Used by several internal tools and useful for 3rd-party application development.
+| [chainquery](https://github.com/lbryio/chainquery) | Go | A utility for parsing, extracting and updating the LBRY blockchain into structured SQL data. Used by several internal tools and useful for 3rd-party application development.
 | [lighthouse](https://github.com/lbryio/lighthouse) | JavaScript, ElasticSearch | A search service for the LBRY blockchain.
 | [wunderbot](https://github.com/lbryio/lbry-wunderbot) | JavaScript (Node) | A chatbot used by the LBRY discord.
 | [block-explorer](https://github.com/lbryio/block-explorer) | PHP (vanilla) | A blockchain explorer for the LBRY blockchain.
@@ -57,7 +57,7 @@ Several hundred extremely good-looking, wise and moral people, as well as our CT
 ### How To Contribute Code
 
 1. **Join the Community**. By joining our [chat](https://chat.lbry.com) or our [forum](https://discourse.lbry.com), you can interact with other developers when you have questions, ideas, or problems.
-1. **Identify the component you want to work on**. LBRY has code bases that deal with everything from cryptography and distributed systems to end-user graphic user-interfaces. We use Python, JavaScript, C++, Go, and more. See [ecosystem overview](#ecosystem-overview) to find the right project.
+1. **Identify the component you want to work on**. LBRY has code bases that deal with everything from cryptography and distributed systems to end-user graphical user-interfaces. We use Python, JavaScript, C++, Go, and more. See [ecosystem overview](#ecosystem-overview) to find the right project.
 1. **Get set up.** Each repo has a [[README]] with clear instructions on how to get the repo up and running properly. Thanks, [Repository Standards](https://lbry.tech/resources/repository-standards)!
 1. **Find something to work on**. All actively developed repositories should have issues tagged "Good First Issues" specifically for new contributors. You are also welcome to work on something not currently filed if you have your own idea. Additionally, all repositories have contact information for the maintainer if you have trouble finding an issue to work on.
 1. **Abide coding and commit standards**. Any specific information necessary to know in this regard should be in the project [[README]].
@@ -72,7 +72,7 @@ We're happy to provide assistance if you're used to working in HTML and CSS but 
 
 ## Writing
 
-Most written content, and especially all technical writing, is checked into source control. To improve content we've written or add new content:
+Most written content, and especially all technical writing, is checked into source control. To improve content we've written or to add new content:
 
 1. Identify which website or application it is in (see the [overview](#ecosystem-overview)).
 1. Search for a quoted phrase of the content you want to change (or use the same technique to identify the folder to create a new document in).
