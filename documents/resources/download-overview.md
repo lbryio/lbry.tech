@@ -33,7 +33,7 @@ For this example, we will use claimID `d9317ac7842f88ba442fee749c4f834353c24206`
 
 ## Parse the Metadata
 
-Perform a `getclaimbyid` call to lbrycrd using the claimID for the claim you want to look up. You should get a response with some parameters. The `value` parameter contains the claim contents as a protobuf-encoded binary string. Decode the value using the protobuf definitions in [lbryio/types](https://github.com/lbryio/types/tree/master/proto). You will get a Claim object.
+Perform a `getclaimbyid` call to lbrycrd using the claimID for the claim you want to look up. You should get a response with some parameters. The `value` parameter contains the claim contents as a protobuf-encoded binary string. Decode the value using the protobuf definitions in [lbryio/types](https://github.com/lbryio/types/tree/master/v2/proto). You will get a Claim object.
 
 
 ## Get the SD Hash
