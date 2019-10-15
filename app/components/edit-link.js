@@ -27,7 +27,7 @@ export default pagePath => {
       break;
 
     case "/api/blockchain":
-      githubUrl = "https://github.com/lbryio/lbrycrd/blob/add_api_docs_scripts/contrib/devtools/generated/api_v1.json";
+      githubUrl = "https://github.com/lbryio/lbrycrd/blob/master/contrib/devtools/generated/api_v1.json";
       break;
 
     case "/api/sdk":
