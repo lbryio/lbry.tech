@@ -5,7 +5,7 @@ description: Learn how to build your own app via LBRY in this comprehensive guid
 
 ## Introduction
 
-Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](/overview) first. If you would rather build with us, check out our [Contributing Guide](/contribute).
+Want to build something on top of LBRY? This is the place to get started. If this is your first introduction to LBRY, you should read the [Overview](./overview.md) first. If you would rather build with us, check out our [Contributing Guide](./contribute.md).
 
 There are exactly 1,000,006 app ideas that could work on the LBRY network, but it doesn't make sense for _everything_ to be built on it.
 
@@ -86,7 +86,7 @@ Unfortunately, most users will want more functionality in an app than typing int
 
 You can build many types of apps. Your app doesn't have to use Electron, nor does it have to be targeted at consumers, use a UI, or even fetch digital content at all! In this section, we'll look into the different types of apps you could build, and the different components needed to build anything you want.
 
-Most applications will use the [LBRY SDK](#sdk) as a way of accessing and communicating with the LBRY network. A look at the [APIs](/api/sdk) provided by the SDK will help you understand what it can and can't do.
+Most applications will use the [LBRY SDK](#sdk) as a way of accessing and communicating with the LBRY network. A look at the [APIs](https://lbry.tech/api/sdk) provided by the SDK will help you understand what it can and can't do.
 
 Some applications do not need to access content available on the network (e.g. a wallet-only app, or a blockchain visualizer). These applications might use [lbrycrd](#lbrycrd), the full-node blockchain daemon, or [chainquery](#chainquery), which parses blockchain data into SQL.
 
@@ -195,7 +195,7 @@ Once that is downloaded, there are two steps to get it integrated into your app.
 
 First, run `lbrynet start` in the directory you downloaded the SDK. This starts the API server and connects to the LBRY network.
 
-Then, use an API wrapper to talk to the SDK or write your own. There are a number of simple [api wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages, created by LBRY community members! These allow you to easily send commands to the SDK in the language of your choice.
+Then, use an API wrapper to talk to the SDK or write your own. There are a number of simple [API wrappers](https://lbry.tech/resources/api-wrappers) available in several different languages, created by LBRY community members! These allow you to easily send commands to the SDK in the language of your choice.
 
 If a wrapper for the language you would like to use doesn't exist, it is still fairly easy to interact with. The SDK provides a JSON-RPC server at `localhost:5279` for interaction. You can call it via `cURL` or the HTTP functionality provided by the language you are using. You can look at an existing wrapper in another language for more detail.
 
