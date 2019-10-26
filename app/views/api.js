@@ -246,7 +246,7 @@ async function getTags(repositoryName) {
     repo: repositoryName
   });
 
-  const tags = [];
+  const tags = ["master"];
 
   // NOTE:
   // The versioning in our repos do not make sense so extra
