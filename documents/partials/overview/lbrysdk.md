@@ -2,7 +2,7 @@ While the blockchain is the innovation that makes LBRY _possible_, the [Data Net
 
 At this level:
 
-- [Metadata](/spec#metadata] stored in the blockchain is interpreted and validated.
+- [Metadata](/spec#metadata) stored in the blockchain is interpreted and validated.
 - [Data referenced by metadata](/spec#data) is accessed and distributed via a peer-to-peer network.
 - [Identities](/spec#channels) are created, signed, and validated.
 
