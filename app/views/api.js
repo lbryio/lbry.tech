@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 //  I M P O R T S
 
 import asyncHtml from "choo-async/html";
@@ -20,24 +18,17 @@ const filePathBlockchain = "/contrib/devtools/generated/api_v1.json";
 const filePathSdk = "/lbry/docs/api.json";
 const rawGitHubBase = "https://raw.githubusercontent.com/lbryio/";
 
-if (!process.env.GITHUB_OAUTH_TOKEN) // No point in rendering this page
-  throw new Error("Missing GitHub token");
-
 const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
 });
 
-
-
 //  E X P O R T
 
-export default async(state) => {
+export default async state => {
   const { tag } = state;
   const { wildcard } = state.params;
 
-  const repository = wildcard === "sdk" ?
-    "lbry-sdk" :
-    "lbrycrd";
+  const repository = wildcard === "sdk" ? "lbry-sdk" : "lbrycrd";
 
   state.lbry = {
     title: tag ? tag + " API Documentation" : "API Documentation",
@@ -123,8 +114,6 @@ export default async(state) => {
   }
 };
 
-
-
 //  H E L P E R S
 
 function createApiContent(apiDetails) {
@@ -133,20 +122,33 @@ function createApiContent(apiDetails) {
   apiDetails.forEach(apiDetail => {
     let apiDetailsReturns = "";
 
-    if (apiDetail.returns)
-      apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
+    if (apiDetail.returns) apiDetailsReturns = JSON.parse(JSON.stringify(apiDetail.returns));
 
     apiContent.push(`
       <div class="api-content__body">
         <h2 id="${apiDetail.name}">${apiDetail.name}</h2>
         <p>${apiDetail.description}</p>
 
-        ${apiDetail.arguments.length ? `<h3>Arguments</h3><ul class="api-content__body-arguments">${renderArguments(apiDetail.arguments).join("")}</ul>` : ""}
-        ${apiDetail.returns ? `<h3>Returns</h3><pre><code>${dedent(apiDetailsReturns)}</code></pre>` : ""}
+        ${
+  apiDetail.arguments.length ?
+    `<h3>Arguments</h3><ul class="api-content__body-arguments">${renderArguments(
+      apiDetail.arguments
+    ).join("")}</ul>` :
+    ""
+}
+        ${
+  apiDetail.returns ?
+    `<h3>Returns</h3><pre><code>${dedent(apiDetailsReturns)}</code></pre>` :
+    ""
+}
       </div>
 
       <div class="api-content__example">
-        ${apiDetail.examples && apiDetail.examples.length ? renderExamples(apiDetail.examples).join("") : `<pre><code>// example(s) for ${apiDetail.name} to come later</code></pre>`}
+        ${
+  apiDetail.examples && apiDetail.examples.length ?
+    renderExamples(apiDetail.examples).join("") :
+    `<pre><code>// example(s) for ${apiDetail.name} to come later</code></pre>`
+}
       </div>
     `);
   });
@@ -232,7 +234,12 @@ function createSdkSidebar(apiDetails) {
     apiSidebar.push(`
       <ul class="api-toc__section">
         <li class="api-toc__title">${title}</li>
-        ${(commands.map(command => `<li class="api-toc__command"><a href="#${command.name}" title="Go to ${command.name} section">${command.name}</a></li>`)).join("")}
+        ${commands
+    .map(
+      command =>
+        `<li class="api-toc__command"><a href="#${command.name}" title="Go to ${command.name} section">${command.name}</a></li>`
+    )
+    .join("")}
       </ul>
     `);
   });
@@ -266,7 +273,8 @@ async function getTags(repositoryName) {
           tag.name !== "v0.38.0rc3" &&
           tag.name !== "v0.38.0rc2" &&
           tag.name !== "v0.38.0rc1"
-        ) tags.push(tag.name);
+        )
+          tags.push(tag.name);
       });
       break;
 
@@ -278,7 +286,8 @@ async function getTags(repositoryName) {
           tag.name !== "v0.3.15" &&
           tag.name !== "v0.3-osx" &&
           tag.name !== "v0.2-alpha"
-        ) tags.push(tag.name);
+        )
+          tags.push(tag.name);
       });
       break;
 
@@ -293,11 +302,11 @@ async function parseApiFile({ repo, tag }) {
   let apiFileLink = `${rawGitHubBase}${repo}/${tag}`;
 
   switch(true) {
-    case (repo === "lbrycrd"):
+    case repo === "lbrycrd":
       apiFileLink = `${apiFileLink}${filePathBlockchain}`;
       break;
 
-    case (repo === "lbry-sdk"):
+    case repo === "lbry-sdk":
       apiFileLink = `${apiFileLink}${filePathSdk}`;
       break;
 
@@ -317,8 +326,7 @@ async function parseApiFile({ repo, tag }) {
 function renderArguments(args) {
   const argumentContent = [];
 
-  if (!args || args.length === 0)
-    return argumentContent;
+  if (!args || args.length === 0) return argumentContent;
 
   args.forEach(arg => {
     argumentContent.push(`
@@ -328,7 +336,11 @@ function renderArguments(args) {
           ${arg.is_required === true ? "" : "<span>optional</span>"}<span>${arg.type}</span>
         </div>
 
-        <div class="right">${typeof arg.description === "string" ? arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") : ""}</div>
+        <div class="right">${
+  typeof arg.description === "string" ?
+    arg.description.replace(/</g, "&lt;").replace(/>/g, "&gt;") :
+    ""
+}</div>
       </li>
     `);
   });
@@ -352,11 +364,15 @@ function renderExamples(args) {
       ${arg.lbrynet ? `<pre data-api-example-type="lbrynet"><code>${arg.lbrynet}</code></pre>` : ""}
       ${arg.python ? `<pre data-api-example-type="python"><code>${arg.python}</code></pre>` : ""}
 
-      ${arg.output ? `
+      ${
+  arg.output ?
+    `
         <h3>Output</h3><br/>
         <pre><code>${arg.output}</code></pre>
         <hr/>
-      ` : ""}
+      ` :
+    ""
+}
     `);
   });
 
@@ -366,17 +382,14 @@ function renderExamples(args) {
 function renderReturns(args) {
   let returnContent = [];
 
-  if (!args || args.length === 0)
-    return returnContent;
+  if (!args || args.length === 0) return returnContent;
 
   returnContent = dedent(JSON.parse(JSON.stringify(args)));
   return returnContent;
 }
 
 function renderVersionSelector(pageSlug, versions, desiredTag) {
-  const options = [
-    "<option disabled>Select a version</option>"
-  ];
+  const options = ["<option disabled>Select a version</option>"];
 
   let optionIndex = 0;
 
@@ -384,13 +397,13 @@ function renderVersionSelector(pageSlug, versions, desiredTag) {
     optionIndex++;
     let selectedOption = false;
 
-    if (desiredTag && desiredTag === version)
-      selectedOption = true;
-    else if (optionIndex === 1)
-      selectedOption = true;
+    if (desiredTag && desiredTag === version) selectedOption = true;
+    else if (optionIndex === 1) selectedOption = true;
 
     options.push(
-      `<option value="${pageSlug}-${version}"${selectedOption ? " selected" : ""}>${version}</option>`
+      `<option value="${pageSlug}-${version}"${
+        selectedOption ? " selected" : ""
+      }>${version}</option>`
     );
   });
 
@@ -402,9 +415,15 @@ function renderCodeLanguageToggles(pageSlug) {
 
   return [
     "<button class='api-content__item menu' id='toggle-menu'>menu</button>",
-    !onSdkPage ? "<button class='api-content__item' id='toggle-cli' type='button'>cli</button>" : "",
+    !onSdkPage ?
+      "<button class='api-content__item' id='toggle-cli' type='button'>cli</button>" :
+      "",
     "<button class='api-content__item' id='toggle-curl' type='button'>curl</button>",
-    onSdkPage ? "<button class='api-content__item' id='toggle-lbrynet' type='button'>lbrynet</button>" : "",
-    onSdkPage ? "<button class='api-content__item' id='toggle-python' type='button'>python</button>" : ""
+    onSdkPage ?
+      "<button class='api-content__item' id='toggle-lbrynet' type='button'>lbrynet</button>" :
+      "",
+    onSdkPage ?
+      "<button class='api-content__item' id='toggle-python' type='button'>python</button>" :
+      ""
   ];
 }
