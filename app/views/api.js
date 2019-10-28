@@ -20,9 +20,6 @@ const filePathBlockchain = "/contrib/devtools/generated/api_v1.json";
 const filePathSdk = "/lbry/docs/api.json";
 const rawGitHubBase = "https://raw.githubusercontent.com/lbryio/";
 
-if (!process.env.GITHUB_OAUTH_TOKEN) // No point in rendering this page
-  throw new Error("Missing GitHub token");
-
 const octokit = new Octokit({
   auth: `token ${process.env.GITHUB_OAUTH_TOKEN}`
 });
