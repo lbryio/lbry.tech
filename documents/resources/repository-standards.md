@@ -101,4 +101,4 @@ A template for issues should exist to guide users in correctly filing them.
 
 ## Style and Formatting Notes
 
-- Rely on autowrap instead of manually breaking up paragraphs with carriage return.
+- Rely on autowrap instead of manually breaking up paragraphs with a carriage return.
