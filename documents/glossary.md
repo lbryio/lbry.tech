@@ -43,7 +43,7 @@ An open, distributed ledger that records transactions in a verifiable and change
 
 ### Canonical URL
 
-Similar to the [Short URL](#short-url) but for claims that are signed by channels, both the channel Short URL and claim Short URL are returned (i.e. lbry://@LBRY-Social#d/two#f. A canonical URL will change if the channel is updated, therefore its less permanent than a Short URL which is less permanent than the [Permanent URL](https://spec.lbry.com/#urls).
+Similar to the [Short URL](#short-url), but will include the channel for but for claims that are signed by channels. The canonical URL is generally the recommend URL to use when linking LBRY URLs or displaying URLs to users. Note that it is rarely possible for the canonical URL to change to a shorter version when a competeting channel or claim is abandoned, but even if this happens, older canonical URLs will still work.
 
 ### Chainquery
 
