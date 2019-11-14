@@ -16,7 +16,7 @@ let resolve = function(urls) {
   return new Promise(function(resolve, reject) {
     let options = {
       method: "POST",
-      url: "https://api.lbry.tv/api/proxy",
+      url: "https://api.lbry.tv/api/v1/proxy",
       headers:
         {
           "Content-Type": "application/json"
@@ -54,7 +54,7 @@ let getTrending = function() {
   return new Promise(function(resolve, reject) {
     let options = {
       method: "POST",
-      url: "https://api.lbry.tv/api/proxy",
+      url: "https://api.lbry.tv/api/v1/proxy",
       headers:
         {
           "Content-Type": "application/json"
@@ -106,6 +106,7 @@ let getTrending = function() {
         return reject("DAEMON ERROR: trending");
       } else
         return resolve(daemonResponse.result.items);
+
 
     });
   });
