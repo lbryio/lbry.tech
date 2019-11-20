@@ -25,7 +25,6 @@
 
 
 ## Prerequisites
-- [lbry/web-daemon](https://github.com/lbryio/web-daemon)
 - [Node](https://nodejs.org) (version >= 10)
 
 ## Notes
