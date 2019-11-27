@@ -18,3 +18,4 @@ description: Find the LBRY specification, API documentation, our Contributor's g
 - [Regtest Setup](/resources/regtest-setup)
 - [LBRY Android App Build Steps](/resources/android-build)
 - [Lighthouse (search) API](https://lbryio.github.io/lighthouse)
+- [Run Your Own Wallet Server](/resources/wallet-server)
