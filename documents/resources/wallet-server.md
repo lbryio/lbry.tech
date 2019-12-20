@@ -5,7 +5,7 @@ This guide will walk you through the process of setting up a LBRY wallet server.
 **note:** This is early-stage stuff. You may encounter unexpected issues. Please be patient and don't hesitate to [reach out for help](#get-in-touch).
 
 
-### Provision a fresh server
+## Start With A Fresh Server
 
 We recommend a dual-core server with at least 8GB RAM, 50GB disk, and a fresh Ubuntu 18.04 install. 
 
@@ -13,6 +13,8 @@ I tested this guide on AWS using a `t3.large` instance and the `ami-07d0cf3af287
 
 Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd uses to communicate to other nodes. 50001 is the wallet server RPC port.
 
+
+## Set Up Docker
 
 ### Install Docker & Docker Compose
 ```
@@ -27,10 +29,13 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Download our docker-compose.yml
+
 You can see it [here](https://github.com/lbryio/lbry-sdk/blob/master/docker/docker-compose-wallet-server.yml).
 ```
 curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-compose-wallet-server.yml" -o docker-compose.yml
 ```
+
+## Turn It On
 
 ### Start the servers
 ```
@@ -60,6 +65,35 @@ echo '{"id":1,"method":"server.version"}' | timeout 1 curl telnet://localhost:50
 ```
 
 You should see a response like `{"jsonrpc": "2.0", "result": ["0.46.1", "0.0"], "id": 1}`. If you do, congratulations! You've set up your own wallet server.
+
+
+## Maintenance
+
+### Stopping and Restarting
+
+Use the usual docker-compose commands (`start`, `stop`, `pause`, etc) to control the servers. Run `docker-compose --help` to see the
+options.
+
+
+### Updating
+
+To update to the latest wallet server release, run the following:
+```
+docker pull lbry/wallet-server:latest-release
+docker-compose down
+docker-compose up --detach
+```
+
+### Resyncing
+
+From time to time, we'll release an update that requires erasing the wallet server database and recreating it from scratch. The process is
+similar to an update, but causes the server to be down for much longer. Here's how to do it:
+```
+docker pull lbry/wallet-server:latest-release
+docker-compose down
+docker volume rm "$(whoami)_wallet_server"
+WALLET_SERVER_SNAPSHOT_URL= docker-compose up --detach
+```
 
 ## Get in touch
 
