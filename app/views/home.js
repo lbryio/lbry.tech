@@ -83,7 +83,7 @@ export default () => html`
     <section class="community">
       <div class="inner-wrap">
         <h3>Community</h3>
-        <p>There's literally <a href="https://spee.ch/@lbrytech/dozens.mp4">12<sup>n</sup></a> of us.</p>
+        <p>There's literally <a href="https://lbry.tv/@lbrytech:1/dozens:e">12n</a> of us.</p>
 
         <ul>
           <li><a href="//chat.lbry.com" title="LBRY on Discord">Chat</a></li>
