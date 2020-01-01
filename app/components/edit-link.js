@@ -31,7 +31,7 @@ export default pagePath => {
       break;
 
     case "/api/sdk":
-      githubUrl = "https://github.com/lbryio/lbry-sdk/blob/master/lbry/docs/api.json";
+      githubUrl = "https://github.com/lbryio/lbry-sdk/blob/master/docs/api.json";
       break;
 
     default:

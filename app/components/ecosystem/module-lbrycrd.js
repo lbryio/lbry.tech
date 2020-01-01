@@ -22,8 +22,7 @@ export default () => `
 
       <div>
         <span><a href="https://github.com/lbryio/lbrycrd">lbrycrd</a></span>
-        <span><a href="https://github.com/lbryio/torba">torba</a></span>
-        <span><a href="https://github.com/lbryio/lbryumx">lbryumx</a></span>
+        <span><a href="https://github.com/lbryio/lbry-sdk">SDK</a></span>
       </div>
     </h2>
 
