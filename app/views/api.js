@@ -17,7 +17,7 @@ import redirects from "~data/redirects.json";
 
 const cache = new Map();
 const filePathBlockchain = "/contrib/devtools/generated/api_v1.json";
-const filePathSdk = "/lbry/docs/api.json";
+const filePathSdk = "/docs/api.json";
 const rawGitHubBase = "https://raw.githubusercontent.com/lbryio/";
 
 const octokit = new Octokit({
@@ -254,16 +254,7 @@ async function getTags(repositoryName) {
   switch(true) {
     case repositoryName === "lbry-sdk":
       data.forEach(tag => {
-        if (
-          tag.name >= "v0.38.0" &&
-          tag.name !== "v0.38.0rc7" &&
-          tag.name !== "v0.38.0rc6" &&
-          tag.name !== "v0.38.0rc5" &&
-          tag.name !== "v0.38.0rc4" &&
-          tag.name !== "v0.38.0rc3" &&
-          tag.name !== "v0.38.0rc2" &&
-          tag.name !== "v0.38.0rc1"
-        ) tags.push(tag.name);
+        if (tag.name >= "v0.52.0") tags.push(tag.name);
       });
       break;
 
