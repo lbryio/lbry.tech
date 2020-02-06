@@ -103,7 +103,7 @@ If you're about to raise an issue because you've found a problem with LBRY, or y
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 Guidelines for bug reports:
 
-1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
+1. **Identify the correct repo**. See [repository overview](#repository-overview). While it's okay if you get this wrong, it's a big help to us if you get it right.
 2. **Check if the issue exists**. Please do a quick search to see if the issue has been reported (or fixed), including closed tickets.
 3. **Follow the instructions** - When you open an issue inside of GitHub, each repo contains a template for how to create a good bug report. Santa _loves_ people who follow it.
 
@@ -113,7 +113,7 @@ Well-specified bug reports save developers lots of time and are [appreciated](#a
 
 Feature requests are welcome. Before you submit one be sure to:
 
-1. **Identify the correct repo**. See [ecosystem overview](#ecosystem-overview).
+1. **Identify the correct repo**. See [repository overview](#repository-overview).
 2. **Use the Github Issues search** and check the feature hasn't already been requested. Be sure to include closed tickets.
 3. **Consider whether it's feasible** for us to tackle this feature in the next 6-12 months. The LBRY team is currently stretched thin just adding basic functionality. If this is a nice to have rather than a need, it is probably more clutter than helpful.
 4. **Make a strong case** to convince the project's leaders of the merits of this feature. Please provide as much detail and context as possible. This means explaining the use case and why it is likely to be common.
