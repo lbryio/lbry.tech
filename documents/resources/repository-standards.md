@@ -50,7 +50,7 @@ This document exists to introduce a project to a new visitor. It may also serve 
 ### Contributing
 
 * A single header labeled "Contributing" should appear as an h2
-* This should be the same message: "Contributions to this project are welcome, encouraged, and compensated. For more details, see [CONTRIBUTING.md](*CONTRIBUTING.md*)”
+* This should be the same message: "Contributions to this project are welcome, encouraged, and compensated. For more details, see *[CONTRIBUTING.md](CONTRIBUTING.md)*.”
 * If CONTRIBUTING.md does not exist in the project, it should link to [https://lbry.com/faq/contributing](https://lbry.com/faq/contributing) (soon to be lbry.tech/contributing)
 
 ### (Additional Headings)
