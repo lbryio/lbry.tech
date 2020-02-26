@@ -83,7 +83,7 @@ let getTrending = function() {
               channel_ids: [],
               not_channel_ids: [],
               not_tags: ["porn", "nsfw", "mature", "xxx"],
-              order_by: ["trending_global", "trending_mixed"]
+              order_by: ["trending_group", "trending_mixed"]
             }
         },
       json: true
@@ -103,7 +103,7 @@ let getTrending = function() {
           message: "```" + daemonResponse.error + "```",
           title: "DAEMON ERROR: trending"
         });
-        return reject("DAEMON ERROR: trending");
+        return reject(JSON.stringify(daemonResponse));
       } else
         return resolve(daemonResponse.result.items);
 
