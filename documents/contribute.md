@@ -28,7 +28,7 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 ### Official Applications
 | Application | Language (Toolset) | What Is It | Intro Video
 --- | --- | --- | ---
-| [lbry-desktop](https://github.com/lbryio/lbry-desktop) | JavaScript (ReactJS, Electron) | A graphical browser for the LBRY network for Windows, macOS, and Linux. [[lbry-desktop]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbrydesktop)
+| [lbry-desktop](https://github.com/lbryio/lbry-desktop) (and lbry.tv) | JavaScript (ReactJS, Electron) | A desktop browser for the LBRY network for Windows, macOS, and Linux as well as a web interface on lbry.tv. [[lbry-desktop]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbrydesktop)
 | [lbry-android](https://github.com/lbryio/lbry-android) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY network for Android. [[lbry-android]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbryandroid)
 | [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between [[lbry-desktop]] and [[lbry-android]]. | |
 | [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install. | |
