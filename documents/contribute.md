@@ -76,6 +76,10 @@ Most written content, and especially all technical writing, is checked into sour
 1. Search for a quoted phrase of the content you want to change (or use the same technique to identify the folder to create a new document in).
 1. Edit the content via the GitHub interface and submit it as a pull request.
 
+### Translating
+
+Translation work is primarily organized through the [LBRY Foundation](https://lbry.org). For the current instructions on participating, see [their article](http://wiki.lbry.org/Translations).
+
 ## Testing
 
 If you want to contribute without getting directly into the code, one of the best ways you can contribute is testing.
