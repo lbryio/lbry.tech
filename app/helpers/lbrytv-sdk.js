@@ -1,20 +1,16 @@
 "use strict";
+import messageSlack from "./slack";
 const request = require("request");
 
-import messageSlack from "./slack";
 
 
-let addSupport = function() {
-  return;
-};
+const addSupport = function() {};
 
-let publish = function() {
-  return;
-};
+const publish = function() {};
 
-let resolve = function(urls) {
+const resolve = function(urls) {
   return new Promise(function(resolve, reject) {
-    let options = {
+    const options = {
       method: "POST",
       url: "https://api.lbry.tv/api/v1/proxy",
       headers:
@@ -34,7 +30,7 @@ let resolve = function(urls) {
           message: "```" + error + "```",
           title: "DAEMON ERROR: resolve"
         });
-        return reject("DAEMON ERROR: resolve");
+        return reject(new Error("DAEMON ERROR: resolve"));
       }
 
       if (Object.prototype.hasOwnProperty.call(daemonResponse, "error")) {
@@ -42,17 +38,16 @@ let resolve = function(urls) {
           message: "```" + daemonResponse.error + "```",
           title: "DAEMON ERROR: resolve"
         });
-        return reject("DAEMON ERROR: resolve");
+        return reject(new Error("DAEMON ERROR: resolve"));
       } else
         return resolve(daemonResponse.result);
-
     });
   });
 };
 
-let getTrending = function() {
+const getTrending = function() {
   return new Promise(function(resolve, reject) {
-    let options = {
+    const options = {
       method: "POST",
       url: "https://api.lbry.tv/api/v1/proxy",
       headers:
@@ -95,7 +90,7 @@ let getTrending = function() {
           message: "```" + error + "```",
           title: "DAEMON ERROR: trending"
         });
-        return reject("DAEMON ERROR: trending");
+        return reject(new Error("DAEMON ERROR: trending"));
       }
 
       if (Object.prototype.hasOwnProperty.call(daemonResponse, "error")) {
@@ -106,8 +101,6 @@ let getTrending = function() {
         return reject(JSON.stringify(daemonResponse));
       } else
         return resolve(daemonResponse.result.items);
-
-
     });
   });
 };

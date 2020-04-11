@@ -85,7 +85,6 @@ function syncWithApi(data) { // eslint-disable-line no-unused-vars
           console.info(data); // eslint-disable-line no-console
           document.querySelector("developer-program").innerHTML =
             "<p><strong>No success or error was received so the LBRY API might be down.<br/>Please try again later.</strong></p>";
-          return;
       }
     })
     .catch(error => {

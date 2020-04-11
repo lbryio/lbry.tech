@@ -123,16 +123,16 @@ function generateContent(exampleNumber, displayTrendingContent) {
         const renderedContentCollection = [];
         const urlsToResolve = [];
 
-        response.forEach(r =>{
+        response.forEach(r => {
           urlsToResolve.push(r.canonical_url);
         });
         lbrytvAPI.resolve(urlsToResolve)
           .then(resolveResponse => {
             if (resolveResponse !== null) {
-              let responses = Object.values(resolveResponse);
+              const responses = Object.values(resolveResponse);
 
-              for (let r in responses) {
-                let part = responses[r];
+              for (const r in responses) {
+                const part = responses[r];
 
                 if (part.value && part.value.thumbnail.url) {
                   renderedContentCollection.push(`
@@ -188,10 +188,10 @@ function generateContent(exampleNumber, displayTrendingContent) {
     lbrytvAPI.resolve(approvedUrls)
       .then(resolveResponse => {
         if (resolveResponse !== null) {
-          let responses = Object.values(resolveResponse);
+          const responses = Object.values(resolveResponse);
 
-          for (let r in responses) {
-            let part = responses[r];
+          for (const r in responses) {
+            const part = responses[r];
 
             if (part.value && part.value.thumbnail.url) {
               renderedContentCollection.push(`
