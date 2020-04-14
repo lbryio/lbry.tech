@@ -105,7 +105,7 @@ export default async(data, socket) => {
 
     //  P U B L I S H
     //  E X A M P L E
-    case  "publish":
+    case "publish":
       apiRequestMethod = "PUT";
 
       // Required for publishing
@@ -200,7 +200,7 @@ export default async(data, socket) => {
       apiRequestMethod = "GET";
       body.uri = claimAddress;
       try {
-        let resolveResponse = await lbrytvAPI.resolve([claimAddress]);
+        const resolveResponse = await lbrytvAPI.resolve([claimAddress]);
 
         if (socket) {
           const renderedCode = prism.highlight(
