@@ -60,4 +60,4 @@ We take security seriously. Please contact [security@lbry.com](mailto:security@l
 [Our PGP key is here](https://keybase.io/lbry/key.asc) if you need it.
 
 ## Contact
-The primary contact for this project is [Paul Anthony Webb](https://github.com/NetOperatorWibby) (paul+github@lbry.com).
+The primary contact for this project is [Thomas Zarebczan](https://github.com/tzarebczan) (tom+github@lbry.com).
