@@ -11,7 +11,7 @@ We encourage the submission of changes and additions to this glossary.
 
 ### Blob
 
-The smallest unit of data in LBRY. Each blob is referenced by its [blob hash](#blob-hash), a SHA-384 hash of the blob contents. When files are uploaded to LBRY, they are split into blobs, which are then shared with other peers. See [Encoding](/spec#encoding) for more details.
+The smallest unit of data in LBRY. Each blob is referenced by its [blob hash](#blob-hash), an SHA-384 hash of the blob contents. When files are uploaded to LBRY, they are split into blobs, which are then shared with other peers. See [Encoding](/spec#encoding) for more details.
 
 ### Blob Exchange Protocol
 
@@ -39,7 +39,7 @@ The sequence number of a block in the blockchain. The first block is at height 0
 
 ### Blockchain
 
-An open, distributed ledger that records transactions in a verifiable and change-resistant way. The LBRY blockchain serves as an index of the content available on the network, a payment system and record of purchases for priced content, and a source if cryptographic publisher identities.
+An open, distributed ledger that records transactions in a verifiable and change-resistant way. The LBRY blockchain serves as an index of the content available on the network, a payment system and record of purchases for priced content, and a source of cryptographic publisher identities.
 
 ### Canonical URL
 
@@ -114,7 +114,7 @@ A change to the consensus rules such that a block that would have been considere
 
 ### Hashrate
 
-A measure of mining hardware performance expressed in hashes per second (GH/s). Click [here](https://www.tokens24.com/cryptopedia/basics/bitcoin-hash-rate) for more details.
+A measure of mining hardware performance expressed in hashes per second (H/s). Click [here](https://www.tokens24.com/cryptopedia/basics/bitcoin-hash-rate) for more details.
 
 ### LBC
 
@@ -238,5 +238,5 @@ The fee paid to a miner for including a transaction in a block. Miners are incen
 
 ### Wallet
 
-An application or a service that stores private keys and generates and signs transactions. Wallets do not store LBRY credits themselves (those are recorded as transactions in the global blockchain). "Storing LBC" usually means storing the private keys that control the credits.
+An application or a service that stores private keys and generates and signs transactions. Wallets do not store LBRY Credits themselves (those are recorded as transactions in the global blockchain). "Storing LBC" usually means storing the private keys that control the credits.
 
