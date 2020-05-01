@@ -72,7 +72,7 @@ Reilly decodes and combines the claim address, the serialized claim value, and t
     005a001a41080110011a309b70337f51fe9a4481504059b4220ad4f87378d59ecc87bd924c3f0f23da9442b9f75ffc091b65deefe92477a86a31ea2209766964
     656f2f6d70342996b9a087c18456402b57cba6085b2a8fcc136d
 
-Then he takes the sha256 of the combined string, giving:
+Then he takes the SHA256 of the combined string, giving:
 
     dea44974ace1893f304cae4073af06a7a6cbb209f97cf8ad5f322216f044304e
 
