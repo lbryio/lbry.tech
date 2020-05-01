@@ -5,7 +5,7 @@ description: How does the LBRY blockchain achieve consensus? This resource page 
 
 LBRY uses [proof of work](https://en.bitcoin.it/wiki/Proof_of_work) as a [consensus mechanism](/spec#consensus), the same way that Bitcoin does.
 
-LBRY has differences in hash function, block targeting, and difficult adjustment.
+LBRY has differences in hash function, block targeting, and difficulty adjustment.
 
 ### Hash Mechanism
 
@@ -18,4 +18,4 @@ proof = sha256(sha256(left + right))  # concatenate the two halves, and double-s
 
 ### Block Targeting & Difficulty Adjustment
 
-The targeted time of each Lbry block is 2.5 mintues (150 seconds).  More information and links to source code [here](https://lbry.tech/spec#consensus).
+The targeted time of each LBRY block is 2.5 mintues (150 seconds).  More information and links to source code [here](https://lbry.tech/spec#consensus).
