@@ -12,7 +12,7 @@ The easiest way to configure the settings is by editing the `daemon_settings.yml
 Sample daemon_settings.yml file:
 ```
 tcp_port: 3335
-lbryum_servers: ['lbryumx1.lbry.com:50001','lbryumx2.lbry.com:50001']
+lbryum_servers: ['spv11.lbry.com:50001','spv19.lbry.com:50001']
 download_directory: 'c:\lbry\Downloads'
 use_upnp: false
 ```
@@ -33,7 +33,7 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | Setting                       | Format  | Default value                                        | Sample Values                      | Description                                                                                       |
 |-------------------------------|---------|------------------------------------------------------|------------------------------------|---------------------------------------------------------------------------------------------------|
 | blockchain_name               | string  | 'lbrycrd_main'                                       | 'lbrycrd_regtest'                  | Blockchain network to connect to                                                                  |
-| lbryum_servers                | list    | ['lbryumx1.lbry.com:50001','lbryumx2.lbry.com:50001']  | ["mylbryum.lbry.com:50001]          | SPV wallet server address                                                                         |
+| lbryum_servers                | list    | ['spv11.lbry.com:50001','spv19.lbry.com:50001']  | ["mylbryum.lbry.com:50001]          | SPV wallet server address(Default servers are spv11-spv19)                                                                         |
 | wallet_dir                    | string  | [varies by OS](https://lbry.com/faq/lbry-directories) | 'c:\lbry\lbryum\'                  | Wallet data location                                                                              |
 | max_key_fee                   | json    | {'currency': 'USD', 'amount': 50.0}                  | {'currency': 'LBC', 'amount': 5.0} | Max payment allowed for content                                                                   |
 | wallet                        | string  | 'lbryum'                                             | 'lbrycrd'                          | Choice of wallet software, SPV (lbryum) vs full node (lbrycrd). Currently   only lbryum supported |
