@@ -25,6 +25,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io && \
 sudo systemctl enable docker && sudo systemctl start docker && \
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
 sudo chmod +x /usr/local/bin/docker-compose
+sudo usermod -aG docker $USER
 
 ```
 
@@ -39,7 +40,7 @@ curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-
 
 ### Start the servers
 ```
-sudo docker-compose up --detach
+docker-compose up --detach
 ```
 
 ### Check that everything worked
@@ -47,7 +48,7 @@ sudo docker-compose up --detach
 The first time you start the wallet server, it will take a few minutes to download a recent snapshot of the database and extract it. You can follow the progress with
 
 ```
-sudo docker-compose logs --follow
+docker-compose logs --follow
 ```
 
 After the wallet server has caught up, it will bind to port 50001 and start responding to requests. You can check if this happened by running
