@@ -31,7 +31,7 @@ const links = [
   //     title: "Join Our Team"
   //   },
   {
-    href: "https://twitter.com/lbryio",
+    href: "https://twitter.com/LBRYcom",
     image: "https://spee.ch/9c38db124b85736adbcca48cdf34877d2110bbcd/GeoShapes.png",
     title: "Twitter"
   },
