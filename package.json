@@ -40,7 +40,7 @@
     "make-promises-safe": "^5.0.0",
     "markdown-it": "^9.0.1",
     "markdown-it-anchor": "^5.2.4",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.23.0",
     "redis": "^2.8.0",
     "slack-node": "^0.1.8",
     "socket.io": "^2.2.0",
