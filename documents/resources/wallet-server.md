@@ -7,12 +7,50 @@ This guide will walk you through the process of setting up a LBRY wallet server.
 
 ## Start With A Fresh Server
 
-We recommend a dual-core server with at least 8GB RAM, 50GB disk, and a fresh Ubuntu 18.04 install. 
-
-I tested this guide on AWS using a `t3.large` instance and the `ami-07d0cf3af28718ef8` image. If you're using AWS, create your instance in the us-east-2 (Ohio) region. That's where our snapshots are stored, so downloading them will be faster for you.
+We recommend a dual-core server with at least 16GB RAM, 100GB disk, and a fresh Ubuntu 18.04 install. Memory usage is flexible. 32 GB works best, but 16 GB is enough for a few clients.
 
 Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd uses to communicate to other nodes. 50001 is the wallet server RPC port.
 
+## Install lbrycrd
+
+### Download and setup
+Download the [latest release of lbrycrd](https://github.com/lbryio/lbrycrd/releases/latest).
+
+Then, create a folder on your home directory called `.lbrycrd` and save the following to `.lbrycrd/lbrycrd.conf`:
+```
+txindex=1
+server=1
+daemon=1
+rpcuser=<pick a username>
+rpcpassword=<pick a password>
+dustrelayfee=0.00000001
+rpcworkqueue=128
+```
+Please remember to pick a username and password. This will be set later on the wallet server so it can connect.
+
+## Create a service
+In order to run it, do `./lbrycrd` and its done. However, this might be tricky and its best to use a systemd/initd service.
+
+If you don't know how to create a service, there is a great [write-up on ArchWiki](https://wiki.archlinux.org/index.php/systemd#Running_services_after_the_network_is_up) about it. 
+
+Deciding to use systemd, `lbrycrdd.service` would look like:
+```
+[Unit]
+Description="LBRYcrd daemon"
+After=network.target
+
+[Service]
+ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd"
+User=<your_user>
+Group=<your_user_group>
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Starting is done via `sudo service lbrycrdd start
 
 ## Set Up Docker
 
@@ -34,6 +72,26 @@ sudo usermod -aG docker $USER
 You can see it [here](https://github.com/lbryio/lbry-sdk/blob/master/docker/docker-compose-wallet-server.yml).
 ```
 curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-compose-wallet-server.yml" -o docker-compose.yml
+```
+
+## Configure it
+
+### Create a configuration file
+
+On the same folder that `docker-compose.yml` is in, add file named `wallet-server-env` with your confs (edit them if necessary):
+```
+BANDWIDTH_LIMIT=100000000000000000000  # deprecated. leave it high until its removed
+BLOCKING_CHANNEL_IDS=e60ec3cf8aa653a0d340b74391de2ba8b3e64825  # channel used for blocking bad content, if you don`t have one it is recommended to keep this one.
+FILTERING_CHANNEL_IDS=23a194b05fbbedab63e8db6c9de6d21a8c08c219 # channel used for filtering results from claim search. Also recommended to leave it default
+MAX_SEND=1000000000000000000  # deprecated. leave it high until its removed
+MAX_SUBS=1000000000000  # deprecated. leave it high until its removed
+#PROMETHEUS_PORT=2112  # if you use Grafana, uncomment this line and open 2112 on firewall to collect metrics
+QUERY_TIMEOUT_MS=3000  # how long search queries allowed to run before cancelling, in milliseconds
+TRENDING_ALGORITHMS=variable_decay  # which algorithm to use for trending. Check SDK documentation if you want to add yours or leave it default.
+
+# do not edit those unless you want to handle DMCA and content blocking yourself
+FILTERING_CHANNEL_IDS=770bd7ecba84fd2f7607fb15aedd2b172c2e153f 95e5db68a3101df19763f3a5182e4b12ba393ee8                                                     
+BLOCKING_CHANNEL_IDS=dd687b357950f6f271999971f43c785e8067c3a9 06871aa438032244202840ec59a469b303257cad b4a2528f436eca1bf3bf3e10ff3f98c57bd6c4c6 e4e230b131082f6b10c8f7994bbb83f29e8e6fb9
 ```
 
 ## Turn It On
