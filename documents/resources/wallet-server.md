@@ -50,7 +50,7 @@ KillMode=process
 WantedBy=multi-user.target
 ```
 
-Starting is done via `sudo service lbrycrdd start
+Starting is done via `sudo service lbrycrdd start`
 
 ## Set Up Docker
 
