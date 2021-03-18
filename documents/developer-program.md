@@ -8,6 +8,7 @@ To qualify you must:
 
 - have a GitHub account that is at least 90 days old and
 - have an active commit history (10+ **public** commits in last 90 days)
+- have at least 1 commit in the past 30 days
 
 ### Claim LBC
 <DeveloperProgram/>
