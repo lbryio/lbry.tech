@@ -2,7 +2,7 @@
 title: Developer Program
 ---
 
-LBRY offers a complimentary 100 LBC to qualified engineers to facilitate exploration, development, and testing.
+LBRY offers a complimentary 25 LBC to qualified engineers to facilitate exploration, development, and testing.
 
 To qualify you must:
 
