@@ -2,13 +2,4 @@
 title: Developer Program
 ---
 
-LBRY offers a complimentary 25 LBC to qualified engineers to facilitate exploration, development, and testing.
-
-To qualify you must:
-
-- have a GitHub account that is at least 90 days old and
-- have an active commit history (10+ **public** commits in last 90 days)
-- have at least 1 commit in the past 30 days
-
-### Claim LBC
-<DeveloperProgram/>
+This has been disabled at the request of GitHub. We're exploring alternative mechanisms to validate that you are a developer.
