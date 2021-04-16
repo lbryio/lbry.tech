@@ -111,6 +111,14 @@ echo '{"id":1,"method":"server.version"}' | timeout 1 curl telnet://localhost:50
 You should see a response like `{"jsonrpc": "2.0", "result": ["0.46.1", "0.0"], "id": 1}`. If you do, congratulations! You've set up your own wallet server.
 
 
+To check Elastic search, there are two commands you can use: 
+
+```
+curl localhost:9200 # get Elastic status
+
+curl localhost:9200/claims/_count # check how many claims have been synced to Elastic
+```
+
 ## Maintenance
 
 ### Stopping and Restarting
