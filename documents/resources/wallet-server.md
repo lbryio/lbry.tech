@@ -21,19 +21,20 @@ Then, create a folder on your home directory called `.lbrycrd` and save the foll
 txindex=1
 server=1
 daemon=1
-rpcuser=<pick a username>
-rpcpassword=<pick a password>
+rpcuser=lbry
+rpcpassword=lbry
 dustrelayfee=0.00000001
 rpcworkqueue=128
 ```
-Please remember to pick a username and password. This will be set later on the wallet server so it can connect.
 
-## Create a service
-In order to run it, do `./lbrycrd` and its done. However, this might be tricky and its best to use a systemd/initd service.
+Feel free to change the `rpcuser` or `rpcpassword`. If you do, you'll have to update the `DAEMON_URL` variable later on (in the docker-compose.yml file) to match the user/password you chose.
 
-If you don't know how to create a service, there is a great [write-up on ArchWiki](https://wiki.archlinux.org/index.php/systemd#Running_services_after_the_network_is_up) about it. 
+## Create a service (optional)
 
-Deciding to use systemd, `lbrycrdd.service` would look like:
+You can run lbrycrdd directly using `./lbrycrdd`. However, we recommend creatinga systemd service to manage the process for you.
+
+Create a file at `/etc/systemd/system/lbrycrdd.service` with the following contents:
+
 ```
 [Unit]
 Description="LBRYcrd daemon"
@@ -50,7 +51,9 @@ KillMode=process
 WantedBy=multi-user.target
 ```
 
-Starting is done via `sudo service lbrycrdd start`
+Then run `sudo systemctl daemon-reload`.
+
+Now you can start and stop lbrycrd with `sudo service lbrycrdd start` and `sudo service lbrycrdd stop`.
 
 ## Set Up Docker
 
@@ -74,25 +77,7 @@ You can see it [here](https://github.com/lbryio/lbry-sdk/blob/master/docker/dock
 curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-compose-wallet-server.yml" -o docker-compose.yml
 ```
 
-## Configure it
-
-### Create a configuration file
-
-On the same folder that `docker-compose.yml` is in, add file named `wallet-server-env` with your confs (edit them if necessary):
-```
-BANDWIDTH_LIMIT=100000000000000000000  # deprecated. leave it high until its removed
-BLOCKING_CHANNEL_IDS=e60ec3cf8aa653a0d340b74391de2ba8b3e64825  # channel used for blocking bad content, if you don`t have one it is recommended to keep this one.
-FILTERING_CHANNEL_IDS=23a194b05fbbedab63e8db6c9de6d21a8c08c219 # channel used for filtering results from claim search. Also recommended to leave it default
-MAX_SEND=1000000000000000000  # deprecated. leave it high until its removed
-MAX_SUBS=1000000000000  # deprecated. leave it high until its removed
-#PROMETHEUS_PORT=2112  # if you use Grafana, uncomment this line and open 2112 on firewall to collect metrics
-QUERY_TIMEOUT_MS=3000  # how long search queries allowed to run before cancelling, in milliseconds
-TRENDING_ALGORITHMS=variable_decay  # which algorithm to use for trending. Check SDK documentation if you want to add yours or leave it default.
-
-# do not edit those unless you want to handle DMCA and content blocking yourself
-FILTERING_CHANNEL_IDS=770bd7ecba84fd2f7607fb15aedd2b172c2e153f 95e5db68a3101df19763f3a5182e4b12ba393ee8                                                     
-BLOCKING_CHANNEL_IDS=dd687b357950f6f271999971f43c785e8067c3a9 06871aa438032244202840ec59a469b303257cad b4a2528f436eca1bf3bf3e10ff3f98c57bd6c4c6 e4e230b131082f6b10c8f7994bbb83f29e8e6fb9
-```
+Make sure the user and password in the `DAEMON_URL` variable (the `lbry@lbry` part) in this docker-compose.yml matches thes user/password in your `~/.lbrycrd/lbrycrd.conf` file.
 
 ## Turn It On
 
