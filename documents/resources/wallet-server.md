@@ -7,12 +7,53 @@ This guide will walk you through the process of setting up a LBRY wallet server.
 
 ## Start With A Fresh Server
 
-We recommend a dual-core server with at least 8GB RAM, 50GB disk, and a fresh Ubuntu 18.04 install. 
-
-I tested this guide on AWS using a `t3.large` instance and the `ami-07d0cf3af28718ef8` image. If you're using AWS, create your instance in the us-east-2 (Ohio) region. That's where our snapshots are stored, so downloading them will be faster for you.
+We recommend a dual-core server with at least 16GB RAM, 100GB disk, and a fresh Ubuntu 18.04 install. Memory usage is flexible. 32 GB works best, but 16 GB is enough for a few clients.
 
 Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd uses to communicate to other nodes. 50001 is the wallet server RPC port.
 
+## Install lbrycrd
+
+### Download and setup
+Download the [latest release of lbrycrd](https://github.com/lbryio/lbrycrd/releases/latest).
+
+Then, create a folder on your home directory called `.lbrycrd` and save the following to `.lbrycrd/lbrycrd.conf`:
+```
+txindex=1
+server=1
+daemon=1
+rpcuser=lbry
+rpcpassword=lbry
+dustrelayfee=0.00000001
+rpcworkqueue=128
+```
+
+Feel free to change the `rpcuser` or `rpcpassword`. If you do, you'll have to update the `DAEMON_URL` variable later on (in the docker-compose.yml file) to match the user/password you chose.
+
+## Create a service (optional)
+
+You can run lbrycrdd directly using `./lbrycrdd`. However, we recommend creatinga systemd service to manage the process for you.
+
+Create a file at `/etc/systemd/system/lbrycrdd.service` with the following contents:
+
+```
+[Unit]
+Description="LBRYcrd daemon"
+After=network.target
+
+[Service]
+ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd"
+User=<your_user>
+Group=<your_user_group>
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then run `sudo systemctl daemon-reload`.
+
+Now you can start and stop lbrycrd with `sudo service lbrycrdd start` and `sudo service lbrycrdd stop`.
 
 ## Set Up Docker
 
@@ -35,6 +76,8 @@ You can see it [here](https://github.com/lbryio/lbry-sdk/blob/master/docker/dock
 ```
 curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-compose-wallet-server.yml" -o docker-compose.yml
 ```
+
+Make sure the user and password in the `DAEMON_URL` variable (the `lbry@lbry` part) in this docker-compose.yml matches thes user/password in your `~/.lbrycrd/lbrycrd.conf` file.
 
 ## Turn It On
 
@@ -67,6 +110,14 @@ echo '{"id":1,"method":"server.version"}' | timeout 1 curl telnet://localhost:50
 
 You should see a response like `{"jsonrpc": "2.0", "result": ["0.46.1", "0.0"], "id": 1}`. If you do, congratulations! You've set up your own wallet server.
 
+
+To check Elastic search, there are two commands you can use: 
+
+```
+curl localhost:9200 # get Elastic status
+
+curl localhost:9200/claims/_count # check how many claims have been synced to Elastic
+```
 
 ## Maintenance
 
