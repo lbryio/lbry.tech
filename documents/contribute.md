@@ -29,16 +29,16 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 | Application | Language (Toolset) | What Is It | Intro Video
 --- | --- | --- | ---
 | [lbry-desktop](https://github.com/lbryio/lbry-desktop) (and lbry.tv) | JavaScript (ReactJS, Electron) | A desktop browser for the LBRY network for Windows, macOS, and Linux as well as a web interface on lbry.tv. [[lbry-desktop]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbrydesktop)
-| [lbry-android](https://github.com/lbryio/lbry-android) | JavaScript (ReactNative), Python (kivy) | A graphical browser for the LBRY network for Android. [[lbry-android]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbryandroid)
+| [lbry-android](https://github.com/lbryio/lbry-android) | Java | A graphical browser for the LBRY network for Android. [[lbry-android]] uses [[lbry-sdk]] to interact with the network. | [Video](/resources/video-lbryandroid)
+| [odysee-ios](https://github.com/lbryio/odysee-ios) | Swift | The Odysee IOS app. | |
 | [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between [[lbry-desktop]] and [[lbry-android]]. | |
-| [spee.ch](https://github.com/lbryio/spee.ch) | JavaScript (Node, ReactJS, Express) | A web-based host for free LBRY content. Usable directly as a content link dump site or as a customized, standalone install. | |
+| [lbrytv](https://github.com/lbryio/lbrytv) | Go | An API server for https://lbry.tv and https://odysee.com that reimplements some of the SDK APIs. | |
 
 ### Websites
 | Domain | Language (Toolset) | What Is It
 --- | --- | ---
 | [lbry.tech](https://github.com/lbryio/lbry.tech) | JavaScript (Node, Choo) | You're on it.
 | [lbry.com](https://github.com/lbryio/lbry.com) | PHP (vanilla) | A website for LBRY end-users and creators.
-| [lbry.fund](https://github.com/lbryio/lbry.fund) | HTML | A website for receiving funding from LBRY, Inc.
 
 ### Auxiliary Services and Applications
 | Domain | Language (Toolset) | What Is It
@@ -90,7 +90,7 @@ A number of our code bases ([[lbrycrd]], [[lbry-sdk]], all applications, more...
 
 - "Watch" the repo on GitHub. You will receive an email with release notes whenever a release candidate is out and you can [raise an issue](#raising-issues).
 - Join the #early-testing channel in our [chat](https://chat.lbry.com).
-- For the hardcore, run master from source and/or the latest builds from [build.lbry.com](http://build.lbry.com).
+- For the hardcore, run master from source and/or the latest builds from [build.lbry.io](http://build.lbry.io).
 
 Opening well-specified issues against release candidates or master builds is extremely useful in helping us create quality software.
 
