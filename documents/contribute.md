@@ -44,7 +44,7 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 | Domain | Language (Toolset) | What Is It
 --- | --- | ---
 | [chainquery](https://github.com/lbryio/chainquery) | Go | A utility for parsing, extracting, and updating the LBRY blockchain into structured SQL data. Used by several internal tools and useful for 3rd-party application development.
-| [lighthouse](https://github.com/lbryio/lighthouse) | JavaScript, ElasticSearch | A search service for the LBRY blockchain.
+| [lighthouse](https://github.com/lbryio/lighthouse) | Go, ElasticSearch | A search service for the LBRY blockchain.
 | [wunderbot](https://github.com/lbryio/lbry-wunderbot) | JavaScript (Node) | A chatbot used by the LBRY discord.
 | [block-explorer](https://github.com/lbryio/block-explorer) | PHP (vanilla) | A blockchain explorer for the LBRY blockchain.
 
