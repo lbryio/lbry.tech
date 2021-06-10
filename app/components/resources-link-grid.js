@@ -35,9 +35,4 @@ export default () => linkGrid([{
   destination: "/build",
   label: "Build An App",
   title: "Builder's Guide"
-}, {
-  description: "Jumpstart your LBRY development with 100 LBC, on us",
-  destination: "/developer-program",
-  label: "Get Credits",
-  title: "Developer Program"
 }]);
