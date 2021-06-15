@@ -1,4 +1,7 @@
-Hosting your own LBRY Web Instance
+---
+title: Hosting your own LBRY Web Instance
+description: Setting up an app instance as a webpage.
+---
 ----
 
 ## Preparing the SDK
