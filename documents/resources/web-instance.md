@@ -5,7 +5,22 @@ description: Setting up an app instance as a webpage.
 ----
 
 ## Preparing the SDK
+
+
+### Using pre-built docker image
+
+TODO: use official images
+
+This image comes with `save_blobs` and `save_files` to `false`, so it won't use disk. 
+```
+docker run -d -p <external RPC port>:5279 -p <external streaming port>:5280 vshyba/websdk
+
 ### Building your own image
+
+Clone the SDK repo:
+```
+git clone https://github.com/lbryio/lbry-sdk.git
+```
 
 Create a config.yaml file and modify as you need. This is a good start:
 ```
@@ -27,15 +42,6 @@ Now move the config file to `docker/webconf.yaml` and run:
 docker build -f docker/Dockerfile.web -t <your dockerhub username>/<project name, like 'websdk'> .
 docker push <dockerhub username/project name>
 ```
-
-
-### Using pre-built docker image
-
-TODO: use official images
-
-This image comes with `save_blobs` and `save_files` to `false`, so it won't use disk. 
-```
-docker run -d -p <external RPC port>:5279 -p <external streaming port>:5280 vshyba/websdk
 ```
 
 ## Webapp
