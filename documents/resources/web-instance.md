@@ -2,27 +2,59 @@
 title: Hosting your own LBRY Web Instance
 description: Setting up an app instance as a webpage.
 ---
-----
 
-## Preparing the SDK
+Run your own instance of https://lbry.tv using Docker images.
 
 
-### Using pre-built docker image
+## Run the SDK
 
-TODO: use official images
+The LBRY SDK provides RPC and streaming endpoints to interact with the LBRY network. Web users will connect to it directly, so it must be web-accessible. You may have to open ports on your firewall.
 
-This image comes with `save_blobs` and `save_files` to `false`, so it won't use disk. 
 ```
-docker run -d -p <external RPC port>:5279 -p <external streaming port>:5280 vshyba/websdk
+docker run -d -p 5279:5279 -p 5280:5280 vshyba/websdk
+```
 
-### Building your own image
+This image will not save files to disk. It has the `save_blobs` and `save_files` config options set to `false`. If you want to save files, see [Building your own SDK image](#building-your-own-sdk-image) below.
+
+
+## Run the web app
+
+Clone and install the app as described in the [lbry-desktop repo README](https://github.com/lbryio/lbry-desktop).
+If you want to customize it further, follow the extra steps in `Customize the web app` section. Otherwise:
+
+```
+git clone https://github.com/lbryio/lbry-desktop.git
+yarn
+cp .env.defaults .env
+```
+
+Configure .env with the following settings. They must match the SDK ports in the previous section.
+```
+WEB_SERVER_PORT=8080
+SDK_API_PATH=http://localhost:5279
+LBRY_WEB_API=http://localhost:5279
+LBRY_WEB_STREAMING_API=http://localhost:5280
+LBRY_API_URL=http://disabled-api/
+LBRY_WEB_BUFFER_API=https://disabled
+```
+
+Compile and run
+```
+NODE_ENV=production yarn compile:web
+nodejs web/index.js
+```
+
+
+## Building your own SDK image
+
+If you want to customize the SDK settings, you can 
 
 Clone the SDK repo:
 ```
 git clone https://github.com/lbryio/lbry-sdk.git
 ```
 
-Create a config.yaml file and modify as you need. This is a good start:
+Create a `docker/webconf.yaml` file and modify as you need. This is a good start:
 ```
 allowed_origin: "*"
 max_key_fee: "0.0 USD"
@@ -35,40 +67,13 @@ download_dir: /tmp
 wallet_dir: /tmp
 ```
 
-Note that it is required to have `streaming_server` and `api` set to public IPs. Or at least the same network where the app will be served.
+Note that it is required to have `streaming_server` and `api` set to user-accessible IPs. If you want this to be accessible on the open web, that means setting  them to `0.0.0.0`.
 
-Now move the config file to `docker/webconf.yaml` and run:
+
+To build the image, run:
 ```
 docker build -f docker/Dockerfile.web -t <your dockerhub username>/<project name, like 'websdk'> .
 docker push <dockerhub username/project name>
 ```
-```
 
-## Webapp
 
-Clone and install the app as described in the [lbry-desktop repo README](https://github.com/lbryio/lbry-desktop).
-If you want to customize it further, follow the extra steps in `Customize the web app` section. Otherwise:
-```
-git clone https://github.com/lbryio/lbry-desktop.git
-yarn
-cp .env.defaults .env
-```
-
-Configure .env as you need. This is a sample:
-```
-SDK_API_PATH=http://<SDK IP>:<SDK RPC PORT>/
-...
-WEB_SERVER_PORT=<web port>
-LBRY_API_URL=http://disabled-api/
-LBRY_WEB_API=http://<SDK IP>:<SDK RPC PORT>
-LBRY_WEB_STREAMING_API=http://<SDK IP>:<SDK STREAMING PORT>
-LBRY_WEB_BUFFER_API=https://disabled
-...
-customize UI and other values as needed
-```
-
-Compile and run:
-```
-NODE_ENV=production yarnpkg compile:web
-nodejs web/index.js
-```
