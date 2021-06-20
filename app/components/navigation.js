@@ -33,6 +33,11 @@ export default currentUrl => {
       url: "/resources"
     },
     {
+      name: "Tutorials",
+      title: "LBRY Tutorials",
+      url: "/tutorials"
+    },
+    {
       name: "Community",
       title: "Interact with LBRY",
       url: "/community"
