@@ -2,6 +2,12 @@
 title: Tutorials
 description: Learn how to setup, use, deploy, and develop with LBRY.
 ---
+# LBRY Programming Tutorials
+
+## Tutorial #1 - "Hello Satoshi!"
+Learn how to [create and modify a simple LBRY electron application](/tutorial-hellosatoshi) we'll call "[Hello Satoshi](/tutorial-hellosatoshi)".
+
+---
 
 # Setup your Development Environment
 
