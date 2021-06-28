@@ -19,3 +19,4 @@ description: Find the LBRY specification, API documentation, our Contributor's g
 - [LBRY Android App Build Steps](/resources/android-build)
 - [Lighthouse (search) API](https://github.com/lbryio/lighthouse)
 - [Run Your Own Wallet Server](/resources/wallet-server)
+- [Run Your Own lbry.tv](/resources/web-instance)
