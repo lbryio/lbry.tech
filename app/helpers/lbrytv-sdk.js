@@ -12,7 +12,7 @@ const resolve = function(urls) {
   return new Promise(function(resolve, reject) {
     const options = {
       method: "POST",
-      url: "https://api.lbry.tv/api/v1/proxy",
+      url: "https://api.na-backend.odysee.com/api/v1/proxy",
       headers:
         {
           "Content-Type": "application/json"
@@ -49,7 +49,7 @@ const getTrending = function() {
   return new Promise(function(resolve, reject) {
     const options = {
       method: "POST",
-      url: "https://api.lbry.tv/api/v1/proxy",
+      url: "https://api.na-backend.odysee.com/api/v1/proxy",
       headers:
         {
           "Content-Type": "application/json"
@@ -77,7 +77,7 @@ const getTrending = function() {
                   "technology"],
               channel_ids: [],
               not_channel_ids: [],
-              not_tags: ["porn", "nsfw", "mature", "xxx"],
+              not_tags: ["porn", "porno", "nsfw", "mature", "xxx", "sex", "creampie", "blowjob", "handjob", "vagina", "boobs", "big boobs", "big dick", "pussy", "cumshot", "anal", "hard fucking", "ass", "fuck", "hentai"]],
               order_by: ["trending_group", "trending_mixed"]
             }
         },
