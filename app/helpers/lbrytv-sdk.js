@@ -77,7 +77,7 @@ const getTrending = function() {
                   "technology"],
               channel_ids: [],
               not_channel_ids: [],
-              not_tags: ["porn", "porno", "nsfw", "mature", "xxx", "sex", "creampie", "blowjob", "handjob", "vagina", "boobs", "big boobs", "big dick", "pussy", "cumshot", "anal", "hard fucking", "ass", "fuck", "hentai"]],
+              not_tags: ["porn", "porno", "nsfw", "mature", "xxx", "sex", "creampie", "blowjob", "handjob", "vagina", "boobs", "big boobs", "big dick", "pussy", "cumshot", "anal", "hard fucking", "ass", "fuck", "hentai"],
               order_by: ["trending_group", "trending_mixed"]
             }
         },
