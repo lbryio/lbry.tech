@@ -180,6 +180,23 @@ function generateEvent(event) {
           title="View this pull request on GitHub"
         >${escapeSpecialCharacters(event.payload.pull_request.title)}</a></em> in
       `;
+      
+    case "PullRequestReviewEvent":
+      return `
+        <strong><a
+          href="${generateUrl("actor", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Visit ${event.actor.login}'s profile on GitHub"
+        >${event.actor.display_login}</a></strong> reviewed pull request
+
+        <em><a
+          href="${generateUrl("pull_request", event)}"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="View this review on GitHub"
+        >${escapeSpecialCharacters(event.payload.pull_request.title)}</a></em> in
+      `;
 
     case "PullRequestReviewCommentEvent":
       return `
