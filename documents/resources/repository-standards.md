@@ -65,7 +65,7 @@ This document exists to introduce a project to a new visitor. It may also serve 
 
 ### Security
 
-* "We take security seriously. Please contact [security@lbry.com](mailto:security@lbry.com) regarding any security issues. Our PGP key is [here](https://keybase.io/lbry/key.asc) if you need it."
+* "We take security seriously. Please contact [security@lbry.com](mailto:security@lbry.com) regarding any security issues. Our PGP key is [here](https://lbry.com/faq/pgp-key) if you need it."
 
 ### Contact
 
