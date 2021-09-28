@@ -30,3 +30,10 @@ After installing, just:
 ```bash
 python scripts/dht_node.py
 ```
+
+### Checking if it is working
+From another machine with the SDK installed, run:
+```bash
+python scripts/dht_node.py --bootstrap_node your-server-domain-here.com:4444
+```
+After 10-20 seconds, you should see more than 0 peers on the log messages. If that is not the case, check firewall on the bootstrap node and see if it is reachable.
