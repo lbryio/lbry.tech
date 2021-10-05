@@ -31,7 +31,7 @@
     "fastify": "~2.7.1",
     "fastify-compress": "^0.10.0",
     "fastify-helmet": "^3.0.1",
-    "fastify-static": "^2.5.0",
+    "fastify-static": "^4.2.4",
     "front-matter": "^3.0.2",
     "fs-exists-sync": "^0.1.0",
     "got": "^9.6.0",
