@@ -7,7 +7,7 @@ This guide will walk you through the process of setting up a LBRY wallet server.
 
 ## Start With A Fresh Server
 
-We recommend a dual-core server with at least 16GB RAM, 100GB disk, and a fresh Ubuntu 18.04 install. Memory usage is flexible. 32 GB works best, but 16 GB is enough for a few clients.
+We recommend a quad-core server with at least 16GB RAM, 200GB disk, and a fresh Ubuntu 18.04 install. Memory usage is flexible. 32 GB works best, but 16 GB is enough for a few clients.
 
 Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd uses to communicate to other nodes. 50001 is the wallet server RPC port.
 
@@ -24,7 +24,6 @@ daemon=1
 rpcuser=lbry
 rpcpassword=lbry
 dustrelayfee=0.00000001
-rpcworkqueue=128
 ```
 
 Feel free to change the `rpcuser` or `rpcpassword`. If you do, you'll have to update the `DAEMON_URL` variable later on (in the docker-compose.yml file) to match the user/password you chose.
@@ -55,6 +54,8 @@ Then run `sudo systemctl daemon-reload`.
 
 Now you can start and stop lbrycrd with `sudo service lbrycrdd start` and `sudo service lbrycrdd stop`.
 
+You can watch the lbrycrd log with `tail -f ~/.lbrycrd/debug.log`
+
 ## Set Up Docker
 
 ### Install Docker & Docker Compose
@@ -67,21 +68,58 @@ sudo systemctl enable docker && sudo systemctl start docker && \
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
 sudo chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker $USER
-
 ```
 
-### Download our docker-compose.yml
+### Download our example docker-compose.yml
 
 You can see it [here](https://github.com/lbryio/lbry-sdk/blob/master/docker/docker-compose-wallet-server.yml).
 ```
 curl -L "https://raw.githubusercontent.com/lbryio/lbry-sdk/master/docker/docker-compose-wallet-server.yml" -o docker-compose.yml
 ```
 
-Make sure the user and password in the `DAEMON_URL` variable (the `lbry@lbry` part) in this docker-compose.yml matches thes user/password in your `~/.lbrycrd/lbrycrd.conf` file.
+Make sure the user and password in the `DAEMON_URL` variable (the `lbry@lbry` part) in this docker-compose.yml matches the user/password in your `~/.lbrycrd/lbrycrd.conf` file.
+
+### Download snapshots for elasticsearch and the wallet server (optional)
+
+You can skip the initial sync by starting from a snapshot. The following will download a snapshot of the elasticsearch volume and move it into the default location for docker volumes on ubuntu, on other systems you may need to adjust the path used here. Note: snapshot heights must be the same. The tars can be deleted after setting the volumes up.
+
+```bash
+SNAPSHOT_HEIGHT="1049658"
+ES_VOLUME_PATH="/var/lib/docker/volumes/${USER}_es01"
+ES_SNAPSHOT_TAR_NAME="es_snapshot_${SNAPSHOT_HEIGHT}.tar"
+ES_SNAPSHOT_URL="https://snapshots.lbry.com/hub/${ES_SNAPSHOT_TAR_NAME}"
+
+wget $ES_SNAPSHOT_URL
+echo "decompressing elasticsearch snapshot"
+tar -xf $ES_SNAPSHOT_TAR_NAME
+sudo chown -R $USER:root "snapshot_es_${SNAPSHOT_HEIGHT}"
+sudo chmod -R 775 "snapshot_es_${SNAPSHOT_HEIGHT}"
+sudo mkdir -p $ES_VOLUME_PATH
+sudo rm -rf "${ES_VOLUME_PATH}/_data"
+sudo mv "snapshot_es_${SNAPSHOT_HEIGHT}" "${ES_VOLUME_PATH}/_data"
+```
+
+The following will download the wallet server docker volume and move it into place as well.
+
+```bash
+echo "fetching wallet server snapshot"
+SNAPSHOT_HEIGHT="1049658"
+HUB_VOLUME_PATH="/var/lib/docker/volumes/${USER}_wallet_server"
+SNAPSHOT_TAR_NAME="wallet_server_snapshot_${SNAPSHOT_HEIGHT}.tar"
+SNAPSHOT_URL="https://snapshots.lbry.com/hub/${SNAPSHOT_TAR_NAME}"
+
+wget $SNAPSHOT_URL
+tar -xf $SNAPSHOT_TAR_NAME
+sudo mkdir -p $HUB_VOLUME_PATH
+sudo rm -rf "${HUB_VOLUME_PATH}/_data"
+sudo chown -R 999:999 "snapshot_${SNAPSHOT_HEIGHT}"
+sudo mv "snapshot_${SNAPSHOT_HEIGHT}" "${HUB_VOLUME_PATH}/_data"
+```
 
 ## Turn It On
 
 ### Start the servers
+
 ```
 docker-compose up --detach
 ```
@@ -111,7 +149,7 @@ echo '{"id":1,"method":"server.version"}' | timeout 1 curl telnet://localhost:50
 You should see a response like `{"jsonrpc": "2.0", "result": ["0.46.1", "0.0"], "id": 1}`. If you do, congratulations! You've set up your own wallet server.
 
 
-To check Elastic search, there are two commands you can use: 
+To check Elastic search, there are two commands you can use:
 
 ```
 curl localhost:9200 # get Elastic status
@@ -142,7 +180,7 @@ From time to time, we'll release an update that requires recreating one of the d
 The process is similar to an update, but causes the server to be down for much longer.
 
 #### Main database
-Holds the raw blockchain data and takes many hours (can take a day or two) to resync from scratch, so be sure to have a snapshot or try that last.
+Holds the raw blockchain data and takes several days to resync from scratch, so be sure to have a snapshot or try that last.
 
 ```
 docker pull lbry/wallet-server:latest-release
@@ -152,8 +190,7 @@ WALLET_SERVER_SNAPSHOT_URL= docker-compose up --detach
 ```
 
 #### Elasticsearch
-ES does the indexing of claims from the main database. It should take around 30 minutes to resync on a fast machine.
-
+ES does the indexing of claims from the main database. It should take around 6 hours to resync on a fast machine.
 
 ```
 docker pull lbry/wallet-server:latest-release
