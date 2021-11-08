@@ -30,9 +30,9 @@ If you want to contribute to LBRY, there's definitely something for you! The fir
 --- | --- | --- | ---
 | [lbry-desktop](https://github.com/lbryio/lbry-desktop) (and lbry.tv) | JavaScript (ReactJS, Electron) | A desktop browser for the LBRY network for Windows, macOS, and Linux as well as a web interface on lbry.tv. [[lbry-desktop]] is built with [[lbry-sdk]]. | [Video](/resources/video-lbrydesktop)
 | [lbry-android](https://github.com/lbryio/lbry-android) | Java | A graphical browser for the LBRY network for Android. [[lbry-android]] uses [[lbry-sdk]] to interact with the network. | [Video](/resources/video-lbryandroid)
+| [odysee-api](https://github.com/lbryio/odysee-api) | Go | An API server for https://odysee.com that reimplements some of the SDK APIs. | |
 | [odysee-ios](https://github.com/lbryio/odysee-ios) | Swift | The Odysee IOS app. | |
 | [lbry-redux](https://github.com/lbryio/lbry-redux) | JavaScript (Redux) | A common codebase for shared Redux logic between [[lbry-desktop]] and [[lbry-android]]. | |
-| [lbrytv](https://github.com/lbryio/lbrytv) | Go | An API server for https://lbry.tv and https://odysee.com that reimplements some of the SDK APIs. | |
 
 ### Websites
 | Domain | Language (Toolset) | What Is It
