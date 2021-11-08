@@ -15,7 +15,6 @@ description: Find the LBRY specification, API documentation, our Contributor's g
 - [API Wrappers](/resources/api-wrappers)
 - [LBRY SDK Configuration Settings](/resources/daemon-settings)
 - [Claim Signing](/resources/claim-signing)
-- [Regtest Setup](/resources/regtest-setup)
 - [LBRY Android App Build Steps](/resources/android-build)
 - [Lighthouse (search) API](https://github.com/lbryio/lighthouse)
 - [Run Your Own Wallet Server](/resources/wallet-server)
