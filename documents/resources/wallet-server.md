@@ -40,7 +40,9 @@ Description="LBRYcrd daemon"
 After=network.target
 
 [Service]
-ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd"
+ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd" -pid="/home/<your_user>/pid"
+Type=Forking
+PIDFile=/home/<your_user>/.lbrycrd/pid
 User=<your_user>
 Group=<your_user_group>
 Restart=on-failure
