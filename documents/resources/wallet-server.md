@@ -1,22 +1,33 @@
-# How To Run Your Own Wallet Server
+# How To Run Your Own Hub Server
 
-This guide will walk you through the process of setting up a LBRY wallet server. This involves provisioning a web server and setting up some services (docker, lbrycrd, and the wallet server). At the end, you'll have your own connection to the LBRY network.
+This guide will walk you through the process of setting up a LBRY hub server. This involves provisioning a web server and setting up some services (docker, lbrycrd, and the wallet server). At the end, you'll have your own connection to the LBRY network.
 
-**note:** This is early-stage stuff. You may encounter unexpected issues. Please be patient and don't hesitate to [reach out for help](#get-in-touch).
+**note:** This is early-stage stuff. You may encounter unexpected issues. Please be patient and don't hesitate to [reach out for help](#get-in-touch).  
+  
+**note2:** Setting up the hub-server doesn't require much time itself. But to get everything synced up, will take multiple days. To speed up the process use snapshots mentioned later in this guide.
 
 
 ## Start With A Fresh Server
-
-We recommend a quad-core server with at least 16GB RAM, 200GB disk, and a fresh Ubuntu 18.04 install. Memory usage is flexible. 32 GB works best, but 16 GB is enough for a few clients.
+Hardware requirements vary between versions. Having following hardware should let you get started. For best perfomance use 32 GB of RAM. But recommended values should be enough for few clients.
+##### For latest version 17.3.3
+- 4-core CPU
+- 22 GB RAM
+- 320 GB Storage
+##### For pre-release 17.4.6
+- 4-core CPU
+- 16 GB RAM (Possible to get running under 10 GB following this guide, but more is strongly recommended and possible necessary as LBRY grows)
+- 320 GB Storage(SSD) (At the end of 2021 the storage used by whole hub-server is around 273 GB, of which 145 GB is used by lbrycrd)
 
 Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd uses to communicate to other nodes. 50001 is the wallet server RPC port.
 
 ## Install lbrycrd
 
 ### Download and setup
-Download the [latest release of lbrycrd](https://github.com/lbryio/lbrycrd/releases/latest).
+Download the version of yout choice:  
+[latest release of lbrycrd 17.3.3](https://github.com/lbryio/lbrycrd/releases/latest).  
+[pre-release of lbrycrd 17.4.6](https://github.com/lbryio/lbrycrd/releases/tag/v0.17.4.6) (Check the additional info from the release page)
 
-Then, create a folder on your home directory called `.lbrycrd` and save the following to `.lbrycrd/lbrycrd.conf`:
+Extract the .zip to the directory of your choice(in this guide we use `/home/$USER`). Then, create a folder on your home directory called `.lbrycrd` and save the following to `.lbrycrd/lbrycrd.conf`:
 ```
 txindex=1
 server=1
@@ -28,11 +39,13 @@ dustrelayfee=0.00000001
 
 Feel free to change the `rpcuser` or `rpcpassword`. If you do, you'll have to update the `DAEMON_URL` variable later on (in the docker-compose.yml file) to match the user/password you chose.
 
+To speed up the sync, you can find the blockchain snapshots from [here](https://snapshots.lbry.com/blockchain/), and extract the snapshot to the `.lbrycrd` folder. (In case you need to clean up the `.lbrycrd`, don't delete your `.lbrycrd/lbrycrd.conf` file)
+
 ## Create a service (optional)
 
-You can run lbrycrdd directly using `./lbrycrdd`. However, we recommend creatinga systemd service to manage the process for you.
+You can run lbrycrdd directly using `./lbrycrdd`. However, we recommend creating a systemd service to manage the process for you.
 
-Create a file at `/etc/systemd/system/lbrycrdd.service` with the following contents:
+Create a file at `/etc/systemd/system/lbrycrdd.service` with the following contents(overwrite the values in `<>`, including the angle brackets themself):
 
 ```
 [Unit]
@@ -56,9 +69,11 @@ Now you can start and stop lbrycrd with `sudo service lbrycrdd start` and `sudo 
 
 You can watch the lbrycrd log with `tail -f ~/.lbrycrd/debug.log`
 
+The different pieces of hub server(we only got one piece at the moment) can be started/stopped in any order. This is a good time to start lbrycrdd, it will keep syncing up on the background.
+
 ## Set Up Docker
 
-### Install Docker & Docker Compose
+### Install Docker & Docker Compose (needed for wallet_server and elasticsearch)
 ```
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common && \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
@@ -81,8 +96,15 @@ Make sure the user and password in the `DAEMON_URL` variable (the `lbry@lbry` pa
 
 ### Download snapshots for elasticsearch and the wallet server (optional)
 
-You can skip the initial sync by starting from a snapshot. The following will download a snapshot of the elasticsearch volume and move it into the default location for docker volumes on ubuntu, on other systems you may need to adjust the path used here. Note: snapshot heights must be the same. The tars can be deleted after setting the volumes up.
+You can also skip the initial sync for wallet_server(different from lbrycrd) by starting from a snapshot. The following sripts are made for ubuntu, on other systems you may need to adjust the path used here. Snapshot heights **must** be the same. The tars can be deleted after setting the volumes up.
 
+**note:** Following script snippets may only work for height 1049658. Process is similar for other heights, but the name and path in snapshots may vary a bit.
+If you run into errors and need to move files manually, use the following paths as an example for ES and wallet_server:
+```
+/var/lib/docker/volumes/${USER}_es01/_data/nodes/0/<more-directories>
+/var/lib/docker/volumes/${USER}_wallet_server/_data/lbry-leveldb/<.ldb-files>
+```
+The following will download the ElasticSearch docker volume and move it into place.
 ```bash
 SNAPSHOT_HEIGHT="1049658"
 ES_VOLUME_PATH="/var/lib/docker/volumes/${USER}_es01"
@@ -138,7 +160,7 @@ After the wallet server has caught up, it will bind to port 50001 and start resp
 sudo netstat -tlpn | grep 50001
 ```
 
-If there is no output, the port is ont bound yet and the server is still catching up. Check the logs for more info.
+If there is no output, the port is not bound yet and the server is still catching up. Check the logs for more info.
 
 After the wallet server is ready, check that it responds to basic RPC calls:
 
