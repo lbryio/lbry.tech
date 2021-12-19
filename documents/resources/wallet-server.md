@@ -8,7 +8,7 @@ This guide will walk you through the process of setting up a LBRY hub server. Th
 
 
 ## Start With A Fresh Server
-Hardware requirements vary between versions. Having following hardware should let you get started. For best perfomance use 32 GB of RAM. But recommended values should be enough for few clients.
+Hardware requirements vary between versions. Having following hardware and a fresh Ubuntu 18.04 install should let you get started. For best perfomance use 32 GB of RAM. But recommended values should be enough for few clients.
 ##### For latest version 17.3.3
 - 4-core CPU
 - 22 GB RAM
