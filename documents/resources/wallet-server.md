@@ -9,11 +9,11 @@ This guide will walk you through the process of setting up a LBRY hub server. Th
 
 ## Start With A Fresh Server
 Hardware requirements vary between versions. Having following hardware and a fresh Ubuntu 18.04 install should let you get started. For best perfomance use 32 GB of RAM. But recommended values should be enough for few clients.
-##### For latest version 17.3.3
+##### For latest version v0.17.3.3
 - 4-core CPU
 - 22 GB RAM
 - 320 GB Storage
-##### For pre-release 17.4.6
+##### For pre-release v0.17.4.6
 - 4-core CPU
 - 16 GB RAM (Possible to get running under 10 GB following this guide, but more is strongly recommended and possible necessary as LBRY grows)
 - 320 GB Storage(SSD) (At the end of 2021 the storage used by whole hub-server is around 273 GB, of which 145 GB is used by lbrycrd)
@@ -23,9 +23,9 @@ Make sure your firewall has ports 9246 and 50001 open. 9246 is the port lbrycrd 
 ## Install lbrycrd
 
 ### Download and setup
-Download the version of yout choice:  
-[latest release of lbrycrd 17.3.3](https://github.com/lbryio/lbrycrd/releases/latest).  
-[pre-release of lbrycrd 17.4.6](https://github.com/lbryio/lbrycrd/releases/tag/v0.17.4.6) (Check the additional info from the release page)
+Download the version of your choice:  
+[latest release of lbrycrd v0.17.3.3](https://github.com/lbryio/lbrycrd/releases/latest)  
+[pre-release of lbrycrd v0.17.4.6](https://github.com/lbryio/lbrycrd/releases/tag/v0.17.4.6) (Check the additional info from the release page)
 
 Extract the .zip to the directory of your choice(in this guide we use `/home/$USER`). Then, create a folder on your home directory called `.lbrycrd` and save the following to `.lbrycrd/lbrycrd.conf`:
 ```
