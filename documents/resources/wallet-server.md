@@ -40,13 +40,19 @@ Description="LBRYcrd daemon"
 After=network.target
 
 [Service]
-ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd" -pid="/home/<your_user>/pid"
+ExecStart=/home/<your_user>/lbrycrdd -datadir="/home/<your_user>/.lbrycrd" -pid="/run/lbrycrdd/lbrycrdd.pid"
+# Creates /run/lbrycrdd
+RuntimeDirectory=lbrycrdd
 Type=Forking
-PIDFile=/home/<your_user>/.lbrycrd/pid
-User=<your_user>
-Group=<your_user_group>
+PIDFile=/run/lbrycrdd/lbrycrdd.pid
 Restart=on-failure
-KillMode=process
+
+# hardening
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+PrivateDevices=true
+MemoryDenyWriteExecute=true
 
 [Install]
 WantedBy=multi-user.target
