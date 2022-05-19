@@ -16,20 +16,30 @@ The first priority when seeding content is making sure there is a way for other 
 In order to troubleshoot reachability, we start by checking your configuration for the UDP and TCP ports. By default, they will both be set to 4444. Those can be found on the configuration under the keys `udp_port` and `tcp_port`. Please set them both to the same value as this helps connectivity trough [hole punching](https://en.wikipedia.org/wiki/Hole_punching_(networking)) and ease of management.
 
 ### Checking for reachability
-Some websites that can provide a generic way to check are:
+There are some websites providing generic ways to check ports, like:
 - https://www.portcheckers.com/
 - https://portchecker.co/check
 
-Also, there is a tool hosted by Madiator, a community member, which can properly check if the correct protocols are exposed. Sometimes the mapping works for TCP but not UDP or the other way around and this tool can identify which one is broken.
+However, checking the port does not check if LBRY P2P protocol is working behind it. For a better check, we can use a tool hosted by Madiator, a community member.
 - To test for UDP (DHT): http://test.madiator.com:60666/dht/<your `udp_port`>
 - To test for TCP (P2P): http://test.madiator.com:60666/p2p/<your `tcp_port`>
 
-As a last resource, if you need to test a remote machine, from a local SDK try:
+As a last resource to test a remote machine DHT service, from a local SDK try:
 ```bash
 lbrynet peer ping <DHT node id> <IP> <port>
 ```
 
 To find out what the `DHT node id` is, on the target machine run `lbrynet status` and look for `node_id` .
+
+### I am unreachable. What now?
+
+VPN users: check with your provider if they feature port forwarding. There are guides specific to each one, like [this one from Mullvad](https://mullvad.net/en/help/port-forwarding-and-mullvad/).
+
+Domestic routers: there are websites like [this one](https://portforward.com/how-to-port-forward/) providing information on popular router models. Unfortunately, this document would be huge if we added port forwarding instructions for every router/firewall.
+
+Servers: check if your firewall is blocking the SDK ports. For ufw on Linux, this is `sudo ufw allow <port>`.
+
+If you still have trouble figuring that out, don't be shy, [ask the LBRY community on Discord!](https://chat.lbry.com/)
 
 ## Content blobs storage settings
 
