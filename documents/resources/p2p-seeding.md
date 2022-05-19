@@ -49,7 +49,7 @@ Files in LBRY are composed by `content blobs`, which can be seen as chunks of bi
 
 ### Setting up storage space control
 
-By default, content blobs are kept indefinitely as long as the files are still in your SDK. If you wish to allocate a space limit for content blobs and let the SDK decide what to delete, set `blob_storage_limit` to a value in megabytes.
+By default, content blobs are kept as long as the files are still in your file list. If you wish to allocate a space limit for content blobs and let the SDK decide what to delete, set `blob_storage_limit` to a value in megabytes.
 
 This won't delete your downloads from the file list. Instead, it deletes content blobs associated with older files as space for newer blobs is requested.
 
