@@ -6,7 +6,7 @@ description: Setting up a tracker for use with LBRY P2P.
 *Warning: Unfortunately, some hosting providers explicitly forbids running a tracker in the ToS. Check with your ISP or VPS before running one yourself.*
 
 The main difference from this guide to any other BitTorrent tracker guide is that it contains optional instructions for configuring a default peer IP fallback from a reflector node in the LBRY network.
-The software we are going to use is a [fork of chihaya](https://github.com/shyba/chihaya) with support for this optional feature of using default peer IPs.
+The software we are going to use is a [fork of chihaya](https://github.com/lbryio/tracker) with support for this optional feature of using default peer IPs.
 
 # Configuration
 A default configuration can be found at `dist/example_config.yaml`.
@@ -15,7 +15,7 @@ This is an example for an UDP server running on 6969 with metrics enabled. Remem
 Also, "fixed peers" prehook is enabled with default IPs. This will include reflector on responses. Discard the section to disable it or ask around on Discord for different servers. Enabling it helps as a fallback for content with no seeds.
 ```
 ---
-chihaya:
+tracker:
   announce_interval: "30m"
   min_announce_interval: "15m"
   metrics_addr: "0.0.0.0:6880"
@@ -53,7 +53,7 @@ In order to define a tracker service and let Docker Compose manage it, create a 
 version: "3"
 services:
   tracker:
-    image: vshyba/chihaya
+    image: lbry/tracker
     command: --config /config/conf.yml
     volumes:
       - .:/config
@@ -73,8 +73,8 @@ To stop:
 
 ## Building the containter (optional)
 A Dockerfile is provided within the repo. To build the container locally, run this command on the same directory the repo was cloned:
-`sudo docker build -f Dockerfile . -t some_name/chihaya:latest`
-It will produce an image called `some_name/chihaya`, which can be used in the Docker Compose section.
+`sudo docker build -f Dockerfile . -t some_name/tracker:latest`
+It will produce an image called `some_name/tracker`, which can be used in the Docker Compose section.
 
 # Running from source as a service
 
@@ -84,8 +84,8 @@ This section assumes Go language compiler to be installed. If that is not the ca
 
 ## Cloning and compiling
 ```bash
-git clone https://github.com/shyba/chihaya.git
-cd chihaya
+git clone https://github.com/lbryio/tracker.git
+cd tracker
 go build ./cmd/chihaya
 ./chihaya --help
 ```
@@ -108,18 +108,18 @@ After=network.target
 Type=simple
 #User=chihaya
 #Group=chihaya
-WorkingDirectory=/home/user/github/chihaya
-ExecStart=/home/user/github/chihaya/chihaya --config dist/example_config.yaml
+WorkingDirectory=/home/user/github/tracker
+ExecStart=/home/user/github/tracker/chihaya --config dist/example_config.yaml
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
 
-To try it, change `/home/user/github/chihaya` to where the code was cloned and run:
+To try it, change `/home/user/github/tracker` to where the code was cloned and run:
 ```bash=
 mkdir -p ~/.config/systemd/user
-# PASTE FILE IN ~/.config/systemd/user/chihaya.service
-systemctl --user enable chihaya
-systemctl --user start chihaya
-systemctl --user status chihaya
+# PASTE FILE IN ~/.config/systemd/user/tracker.service
+systemctl --user enable tracker
+systemctl --user start tracker
+systemctl --user status tracker
 ```
