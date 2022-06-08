@@ -54,7 +54,7 @@ Configuration options are organized by their respective areas: Files, Wallet, Ne
 | known_dht_nodes            | list    | ['lbrynet1.lbry.com:4444'] | ['myDHT.lbry.com:4444']     | Bootstrap nodes for network connectivity                                         |
 | max_connections_per_download | integer | 5                         | 10                         | Threads used to download blobs                                                     |
 | seek_head_blob_first       | boolean | true                      | false                      | Search for first data blob after downloading sd blob                               |
-| tcp_port                   | integer | 3333                      | 3334                       | Port the SDK will listen on                                                        |
+| tcp_port                   | integer | 4444                      | 3334                       | Port the SDK will listen on                                                        |
 | concurrent_reflector_uploads| integer | 5                        | 10                         | Connections to use while uploading data to reflector                               |
 | reflect_streams            | boolean | true                      | false                      | Send published data to reflector servers                                           |
 | reflector_servers          | list    | ['reflector.lbry.com']    | ['myreflector.lbry.com']   | Server data will be reflected to                                                 |
