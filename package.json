@@ -34,7 +34,7 @@
     "fastify-static": "^2.5.0",
     "front-matter": "^3.0.2",
     "fs-exists-sync": "^0.1.0",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "graceful-fs": "^4.2.1",
     "link-module-alias": "^1.2.0",
     "make-promises-safe": "^5.0.0",
