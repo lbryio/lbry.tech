@@ -76,7 +76,7 @@
     "sass-lint": "^1.13.1",
     "snazzy": "^8.0.0",
     "standardx": "^4.0.0",
-    "updates": "^8.5.1"
+    "updates": "^13.2.8"
   },
   "engines": {
     "node": "10.2.x"
