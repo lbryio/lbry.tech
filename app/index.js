@@ -11,7 +11,7 @@ import fastify from "fastify";
 import helmet from "fastify-helmet";
 import ssr from "choo-ssr/fastify";
 import statik from "fastify-static";
-import websockets from "@inc/fastify-ws";
+import websockets from "fastify-ws";
 
 //  U T I L S
 
@@ -62,14 +62,6 @@ server
   .addHook("preHandler", (request, reply, next) => {
     if (redirects[request.raw.originalUrl])
       reply.redirect(301, redirects[request.raw.originalUrl]);
-
-    if (process.env.NODE_ENV !== "development") {
-      if (request.headers["x-forwarded-proto"] !== "https")
-        reply.redirect(302, `https://${request.raw.hostname}${request.raw.originalUrl}`);
-
-      else
-        next();
-    }
 
     next();
   })
